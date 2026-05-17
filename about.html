@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>关于 AMEFYS — 文斗 1v9，全球无敌手</title>
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Top nav — copy of index.html for consistency */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.15) inset, 0 4px 12px rgba(124,92,235,0.35); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+
+  /* Page layout */
+  .page {
+    max-width: 1080px; margin: 0 auto; padding: 80px 24px 60px;
+  }
+
+  /* Hero with avatar */
+  .hero-about {
+    text-align: center; margin-bottom: 64px;
+  }
+  .hero-avatar {
+    width: 110px; height: 110px; margin: 0 auto 24px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #1c1830, #0a0a14);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 12px 40px rgba(124,92,235,0.25);
+  }
+  .hero-avatar svg { width: 70%; height: 70%; }
+  .hero-about h1 {
+    font-size: 44px; letter-spacing: -1.2px; font-weight: 700;
+    margin: 0 0 14px;
+  }
+  .hero-about p {
+    font-size: 15px; color: var(--text-2); margin: 0; line-height: 1.6;
+  }
+
+  /* Contact cards — 2x2 grid on desktop, 1col on mobile */
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; margin-bottom: 56px;
+  }
+  .contact-card {
+    padding: 24px; border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 0.5px solid var(--hairline);
+    transition: border-color .15s, transform .15s;
+  }
+  .contact-card:hover {
+    border-color: var(--hairline-strong);
+    transform: translateY(-2px);
+  }
+  .contact-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .contact-icon {
+    width: 36px; height: 36px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .contact-icon.wechat { background: rgba(7,193,96,0.15); color: #07c160; }
+  .contact-icon.douyin { background: rgba(255,42,109,0.15); color: #ff2a6d; }
+  .contact-icon.email  { background: rgba(91,140,255,0.15); color: #5b8cff; }
+  .contact-icon.github { background: rgba(255,255,255,0.08); color: #f3f3f6; }
+  .contact-label {
+    font-size: 15px; font-weight: 600;
+  }
+  .contact-id {
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.2px;
+    color: var(--text);
+    word-break: break-all;
+    margin-bottom: 6px;
+  }
+  .contact-id a { color: inherit; }
+  .contact-id a:hover { color: var(--violet); }
+  .contact-sub {
+    font-size: 12.5px; color: var(--text-3);
+  }
+  .qr-thumbs {
+    margin-top: 14px;
+    border-top: 0.5px solid var(--hairline);
+    padding-top: 14px;
+    text-align: center;
+  }
+  .qr-thumbs img {
+    width: 140px; height: 140px; object-fit: contain;
+    border-radius: 8px;
+    background: #fff;
+    padding: 6px;
+    display: block;
+    margin: 0 auto;
+  }
+  .qr-caption {
+    font-size: 11.5px; color: var(--text-3);
+    margin-top: 8px;
+  }
+
+  /* Letter */
+  .letter {
+    padding: 36px 40px;
+    border-radius: var(--r-xl);
+    background: linear-gradient(180deg, rgba(167,139,250,0.05), rgba(167,139,250,0.02));
+    border: 0.5px solid var(--hairline);
+    margin-bottom: 48px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(235,235,245,0.86);
+  }
+  .letter .salute {
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .letter p {
+    margin: 0 0 18px;
+    text-indent: 2em;
+  }
+  .letter .sign {
+    text-align: right;
+    color: var(--text-2);
+    margin-top: 28px;
+    font-style: italic;
+  }
+  .letter em.hl {
+    color: var(--violet);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* Coffee CTA */
+  .coffee-row {
+    text-align: center;
+    margin: 0 0 24px;
+  }
+  .btn-coffee {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 48px; padding: 0 28px; border-radius: 24px;
+    background: #34d399; color: #0a0a14;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
+    text-decoration: none; border: 0; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(52,211,153,0.35);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-coffee:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(52,211,153,0.5);
+  }
+  .coffee-hint {
+    font-size: 11.5px; color: var(--text-3);
+    margin-top: 12px;
+  }
+
+  /* Coffee tip modal — opens on btn-coffee click with the WeChat tip QR. */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(8, 9, 13, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 100;
+    animation: fadeIn 140ms ease-out;
+  }
+  .modal-backdrop.is-open { display: flex; }
+  .modal-card {
+    background: var(--bg-2);
+    border: 0.5px solid var(--hairline-strong);
+    border-radius: var(--r-xl);
+    padding: 36px 40px 30px;
+    max-width: 360px; width: 88%;
+    text-align: center;
+    position: relative;
+    animation: zoomIn 180ms cubic-bezier(.2,.9,.3,1.1);
+  }
+  .modal-close {
+    position: absolute; top: 12px; right: 14px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 0; color: var(--text-2);
+    font-size: 16px; line-height: 1; cursor: pointer;
+    transition: background .12s, color .12s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+  .modal-card h3 {
+    font-size: 19px; font-weight: 700; letter-spacing: -0.3px;
+    margin: 0 0 8px;
+  }
+  .modal-card .modal-sub {
+    font-size: 13px; color: var(--text-2); margin: 0 0 24px;
+  }
+  .modal-qr {
+    background: #fff; padding: 12px; border-radius: 12px;
+    margin: 0 auto 18px;
+    width: 240px;
+  }
+  .modal-qr img { width: 100%; height: auto; display: block; }
+  .modal-footnote {
+    font-size: 11.5px; color: var(--text-3);
+    line-height: 1.55;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes zoomIn { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* Footer */
+  footer {
+    max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-about h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .letter { padding: 24px 22px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-mark"></span>AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">四大特性</a>
+        <a href="/#assist">实时助手</a>
+        <a href="/#trash">文斗 1v9</a>
+        <a href="/#faction">阵营氛围</a>
+        <a href="/#i18n">多语言</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/about.html" data-active="true">关于</a>
+      </div>
+      <div class="actions">
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="hero-about">
+      <div class="hero-avatar">
+        <!-- Brand mark — same glyph as installer icon -->
+        <svg viewBox="0 0 1024 1024" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9a7dff"/>
+              <stop offset="100%" stop-color="#5B3AE0"/>
+            </linearGradient>
+          </defs>
+          <path d="M512 240 L744 730 L649 730 L512 429 L374 730 L280 730 Z" fill="url(#ag)"/>
+          <rect x="376" y="566" width="280" height="72" rx="16" fill="#fff" opacity="0.94"/>
+        </svg>
+      </div>
+      <h1>聊聊 AMEFYS</h1>
+      <p><strong>文斗 1 v 9，全球无敌手！<strong></p>
+    </div>
+    <!-- Letter -->
+    <div class="letter">
+      <div class="salute"><em class="hl">亲爱的刀斯林们：</em></div>
+      <p>您是否是混迹刀圈的老 Dota 2 玩家？是否无数次苦于双手跟不上大脑的速度，在对局文斗时急得抓耳挠腮？是否也曾混迹欧服、东南亚服，无数次被外语队友骂得云里雾里、对面三家用俄语凑队不知道说什么、想回敬却打不出对应语言？ </p>
+      <p>这些尴尬场景，我们经历过太多次。相信大家都急需这样一款一旦使用之后就可以：<em class="hl">文斗1 v 9，全球无敌手！</em> 的DOTA 贾维斯！官方付费助手做了一部分，可那应该是 <em class="hl">每个人都能用</em> 的东西，而不是付费墙后面的特权！</p>
+      <p>我希望 AMEFYS 成为每个 Dota 玩家的标配 —— 不管你打中文、俄语、葡语还是越南语，<em class="hl">"文斗 1 v 9"</em> 都是平等的。</p>
+      <p>AMEFYS 还在不断迭代、进化！您的每一条微信消息、每一条 issue、每一封邮件、每一条抖音评论，我们都会认真对待。</p>
+      <p>—— 这是 AMEFYS 之所以能存在的方式。</p>
+      <p>一切的起点，源自曾经的热爱！源自曾经 CN Dota 的辉煌！</p>
+      <p>依然记得曾经 wings 的回马枪！依然记得 CN Dota，best dota！的久久回响！</p>
+      <p>虽然我们已走得太远，希望曾经的舍我其谁的梦想都不曾被遗忘！</p>
+      <p>最后，也衷心的希望大家不论在游戏还是生活、在世界的任何地方都可以：<em class="hl">文斗1v9，全球无敌手！</em></p>
+      <div class="sign">—— <em class="hl">AMEFYS</em> 敬上</div>
+    </div>
+    <!-- Contact cards -->
+    <div class="contact-grid">
+      <!-- WeChat -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon wechat">
+            <!-- WeChat speech bubble glyph -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M8.5 2C4.36 2 1 4.91 1 8.5c0 2.07 1.13 3.91 2.86 5.1L3 17l3.4-1.7c.66.13 1.36.2 2.1.2.2 0 .39 0 .58-.02-.04-.32-.08-.64-.08-.98 0-3.31 3.13-6 7-6 .27 0 .53.02.8.05C16.16 5.4 12.8 2 8.5 2zM6 7.5a.9.9 0 110 1.8.9.9 0 010-1.8zm5 0a.9.9 0 110 1.8.9.9 0 010-1.8z"/>
+              <path d="M23 14.5c0-2.76-2.91-5-6.5-5S10 11.74 10 14.5s2.91 5 6.5 5c.61 0 1.2-.06 1.76-.18L21 21l-.7-2.1c1.65-.9 2.7-2.5 2.7-4.4zM14.5 13.4a.7.7 0 110 1.4.7.7 0 010-1.4zm4 0a.7.7 0 110 1.4.7.7 0 010-1.4z"/>
+            </svg>
+          </div>
+          <div class="contact-label">微信</div>
+        </div>
+        <div class="contact-id">fakerqtter</div>
+        <div class="contact-sub">添加请备注：AMEFYS</div>
+        <div class="qr-thumbs">
+          <img src="assets/qr-wechat.svg" alt="微信二维码 amefys" loading="lazy">
+          <div class="qr-caption">扫码加好友</div>
+        </div>
+      </div>
+
+      <!-- Douyin -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon douyin">
+            <!-- Douyin note glyph -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.59 5.78a5.42 5.42 0 01-3.7-1.43A5.42 5.42 0 0114.45 1H10.9v14.8a3.16 3.16 0 11-3.16-3.16c.18 0 .36.02.53.05V9.12a6.74 6.74 0 105.18 6.56V8.36a8.94 8.94 0 005.13 1.6V6.4a5.46 5.46 0 01-.99-.62z"/>
+            </svg>
+          </div>
+          <div class="contact-label">抖音</div>
+        </div>
+        <div class="contact-id">@Amefys</div>
+        <div class="contact-sub">抖音号：67517850605</div>
+        <div class="qr-thumbs">
+          <img src="assets/qr-douyin.svg" alt="抖音二维码 @Amefys" loading="lazy">
+          <div class="qr-caption">扫码关注</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon email">
+            <!-- Email envelope -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m3 7 9 7 9-7"/>
+            </svg>
+          </div>
+          <div class="contact-label">邮箱</div>
+        </div>
+        <div class="contact-id"><a href="mailto:fakerqtter@gmail.com">fakerqtter@gmail.com</a></div>
+        <div class="contact-sub">点击发送邮件 · 24h 内回复</div>
+        <div class="qr-thumbs">
+          <div style="height: 140px; display: flex; align-items: center; justify-content: center; color: var(--text-3); font-size: 12.5px; text-align: center; padding: 0 16px;">
+            写信告诉我<br>你想要的功能 / 遇到的 bug<br>每一条都会认真看
+          </div>
+        </div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon github">
+            <!-- GitHub mark -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.27-5.24-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.96 10.96 0 015.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.15c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
+            </svg>
+          </div>
+          <div class="contact-label">GitHub</div>
+        </div>
+        <div class="contact-id"><a href="https://github.com/fakerqtter" target="_blank" rel="noopener">fakerqtter</a></div>
+        <div class="contact-sub">提 issue · 看源码 · star 仓库</div>
+        <div class="qr-thumbs">
+          <div style="height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--text-3); font-size: 12.5px; text-align: center; padding: 0 16px;">
+            <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet); font-weight: 600; font-size: 13px;">→ 提交 Issue</a>
+            <a href="https://github.com/amefys/web" target="_blank" rel="noopener" style="color: var(--text-2);">github.com/amefys/web</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee CTA -->
+    <div class="coffee-row">
+      <button type="button" class="btn-coffee" id="btn-coffee">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5C19 16.5 12 21 12 21z"/>
+        </svg>
+        请作者喝杯咖啡
+      </button>
+      <div class="coffee-hint">微信扫码 · 让 AMEFYS 多活一阵子</div>
+    </div>
+
+  </div>
+
+  <!-- Coffee tip modal -->
+  <div class="modal-backdrop" id="coffee-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="coffee-close" aria-label="关闭">×</button>
+      <h3>感谢你的支持 💚</h3>
+      <p class="modal-sub">每一杯咖啡，都是 AMEFYS 多写一个 fix 的动力</p>
+      <div class="modal-qr">
+        <img src="assets/qr-tip.svg" alt="微信打赏二维码">
+      </div>
+      <div class="modal-footnote">微信扫码 → 长按识别 → 任意金额<br>留言告诉我你最希望加的功能，下个版本我尽量优先</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/about.html">关于</a>
+      <a href="mailto:fakerqtter@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe'
+      : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+
+  // Coffee tip modal — click button opens, click backdrop / × / Esc closes.
+  // Leading semicolon below is defensive — without it the parser glues the
+  // two IIFEs together and tries to call the first one's return value with
+  // the second IIFE expression as an argument.
+  ;(function () {
+    var btn = document.getElementById('btn-coffee')
+    var modal = document.getElementById('coffee-modal')
+    var closeBtn = document.getElementById('coffee-close')
+    if (!btn || !modal) {
+      console.warn('[amefys] coffee modal: anchor or modal not found', {
+        btn: !!btn, modal: !!modal, closeBtn: !!closeBtn
+      })
+      return
+    }
+    function openModal() {
+      modal.classList.add('is-open')
+      modal.setAttribute('aria-hidden', 'false')
+      document.body.style.overflow = 'hidden'
+    }
+    function dismissModal() {
+      modal.classList.remove('is-open')
+      modal.setAttribute('aria-hidden', 'true')
+      document.body.style.overflow = ''
+    }
+    btn.addEventListener('click', openModal)
+    if (closeBtn) closeBtn.addEventListener('click', dismissModal)
+    modal.addEventListener('click', function (e) {
+      // Click outside the card closes
+      if (e.target === modal) dismissModal()
+    })
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) dismissModal()
+    })
+  })()
+</script>
+
+</body></html>
