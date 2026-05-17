@@ -1,0 +1,1319 @@
+<!DOCTYPE html><html lang="zh"><head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMEFYS — 文斗 1v9，全球无敌手</title>
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --radiant: #3DBE8A;
+    --dire: #D9534F;
+    --warn: #F0A23C;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  /* ── Top nav (Apple-style) ───────────────────────────────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    box-shadow: 0 0 12px rgba(167,139,250,0.5); }
+  .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; gap: 12px; align-items: center; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill {
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+
+  /* ── Hero (DOTA2-style dark vignette + atmospheric backdrop) ─── */
+  .hero {
+    position: relative; min-height: 760px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(124,92,235,0.35), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(217,83,79,0.18), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 0% 0%, rgba(61,190,138,0.16), transparent 70%),
+      linear-gradient(180deg, #06070b 0%, #0a0c12 60%, #06070b 100%);
+    overflow: hidden;
+    text-align: center;
+    padding: 100px 24px 0;
+  }
+  /* Atmospheric backdrop SVG layer */
+  .hero-backdrop {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0.85;
+  }
+  .hero-backdrop svg { width: 100%; height: 100%; display: block; }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 90px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 90px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  /* Floating particles */
+  @keyframes float-up {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-200px) translateX(20px); opacity: 0; }
+  }
+  .hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .particle { position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: var(--violet); box-shadow: 0 0 8px var(--violet);
+    animation: float-up 8s linear infinite; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 11px; border-radius: 999px;
+    background: rgba(167,139,250,0.12); color: var(--violet);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+    border: 0.5px solid rgba(167,139,250,0.3);
+    margin-bottom: 22px;
+    position: relative; z-index: 1;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px var(--violet); }
+  .hero h1 {
+    font-size: 84px; line-height: 0.98; letter-spacing: -2.4px;
+    font-weight: 700; margin: 0 0 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #c7c4e1 70%, #8b88a3 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    position: relative; z-index: 1;
+  }
+  .hero h1 em { font-style: normal; background: linear-gradient(135deg, #b39df9, #7C5CEB); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p.lead {
+    max-width: 620px; margin: 0 auto 32px;
+    font-size: 19px; color: var(--text-2); letter-spacing: -0.1px;
+    position: relative; z-index: 1;
+  }
+  .cta-row { display: inline-flex; gap: 12px; position: relative; z-index: 1; }
+  .btn-cta {
+    height: 44px; padding: 0 22px; border-radius: 22px;
+    border: 0; font-weight: 600; font-size: 14px;
+    transition: transform .12s, box-shadow .12s, background .12s;
+  }
+  .btn-cta.primary {
+    background: linear-gradient(180deg, #9374f6 0%, #7C5CEB 100%); color: #fff;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(124,92,235,0.45);
+  }
+  .btn-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(124,92,235,0.6); }
+  .btn-cta.ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 0.5px solid var(--hairline-strong); }
+  .btn-cta.ghost:hover { background: rgba(255,255,255,0.1); }
+  .platforms { margin-top: 18px; font-size: 11.5px; color: var(--text-3); letter-spacing: 0.4px; position: relative; z-index: 1; }
+
+  /* App preview window */
+  .preview-wrap { position: relative; margin: 70px auto 0; max-width: 1080px; padding: 0 24px; z-index: 1; }
+  .preview {
+    position: relative; aspect-ratio: 16 / 10; border-radius: 18px;
+    background: linear-gradient(180deg, #16171e 0%, #0e1016 100%);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.1), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(124,92,235,0.18);
+    overflow: hidden;
+  }
+  .preview::before { /* Glow under */
+    content: ''; position: absolute; left: 10%; right: 10%; bottom: -40px; height: 120px;
+    background: radial-gradient(ellipse, rgba(124,92,235,0.55), transparent 70%); filter: blur(30px); z-index: -1;
+  }
+  .titlebar { height: 30px; background: rgba(255,255,255,0.04); border-bottom: 0.5px solid var(--hairline);
+    display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+  .tl { width: 11px; height: 11px; border-radius: 50%; }
+  .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
+  .preview-body { display: grid; grid-template-columns: 200px 1fr 320px; height: calc(100% - 30px); }
+  .pv-side { padding: 16px 12px; border-right: 0.5px solid var(--hairline);
+    background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 4px; }
+  .pv-side .p-row { padding: 7px 10px; border-radius: 8px; font-size: 12px; color: var(--text-2);
+    display: flex; align-items: center; gap: 8px; }
+  .pv-side .p-row.active { background: rgba(167,139,250,0.16); color: #fff; }
+  .pv-side .p-glyph { width: 14px; height: 14px; border-radius: 4px; background: rgba(255,255,255,0.12); }
+  .pv-side .p-row.active .p-glyph { background: var(--violet); }
+  .pv-main { padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .pv-h { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; }
+  .pv-sub { font-size: 11px; color: var(--text-3); }
+  .pv-card {
+    background: rgba(255,255,255,0.04); border: 0.5px solid var(--hairline);
+    border-radius: 12px; padding: 14px;
+  }
+  .pv-card.accent { background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(124,92,235,0.06));
+    border: 0.5px solid rgba(167,139,250,0.3); }
+  .item-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 10px; }
+  .item { aspect-ratio: 1; border-radius: 6px;
+    background: linear-gradient(135deg, rgba(120,120,140,0.4), rgba(40,40,52,0.5));
+    border: 0.5px solid var(--hairline); display: flex; align-items: center; justify-content: center;
+    font-family: ui-monospace, monospace; font-size: 8px; color: var(--text-3); }
+  .item.active { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); border: 1.5px solid var(--violet);
+    box-shadow: 0 0 0 3px rgba(167,139,250,0.2); color: #fff; }
+  .pv-right { padding: 16px; border-left: 0.5px solid var(--hairline); display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.16); }
+  .chat-bubble { padding: 9px 12px; border-radius: 12px; font-size: 11.5px; }
+  .chat-bubble .raw { color: var(--text); }
+  .chat-bubble .tr { color: var(--text-2); margin-top: 3px; font-size: 11px; }
+  .chat-bubble.them { background: rgba(255,255,255,0.05); border: 0.5px solid var(--hairline); }
+  .chat-bubble.me { background: var(--violet-deep); align-self: flex-end; max-width: 80%; }
+  .chat-bubble.me .tr { color: rgba(255,255,255,0.78); }
+  .who { font-size: 10px; color: var(--text-3); margin-bottom: 3px; font-weight: 600; }
+
+  /* ── Section scaffolding ─────────────────────────────────────── */
+  section { padding: 120px 24px; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--violet); text-transform: uppercase; margin-bottom: 14px; }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--violet); }
+  h2.section-title {
+    font-size: 56px; line-height: 1.04; letter-spacing: -1.4px;
+    font-weight: 700; margin: 0 0 16px; max-width: 720px;
+  }
+  .section-lead { font-size: 19px; color: var(--text-2); max-width: 600px; line-height: 1.5; margin: 0; }
+
+  /* Feature grid (Apple bento style) */
+  .bento {
+    margin-top: 60px;
+    display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: auto auto;
+    gap: 16px;
+  }
+  .bento-card {
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 100%);
+    border: 0.5px solid var(--hairline);
+    border-radius: 22px; padding: 32px; min-height: 360px;
+  }
+  .bento-card.span-col { grid-column: 1 / -1; }
+  .bento-h { font-size: 28px; line-height: 1.1; letter-spacing: -0.6px; font-weight: 700; margin: 0 0 10px; }
+  .bento-h em { font-style: normal; color: var(--violet); }
+  .bento-p { font-size: 14px; color: var(--text-2); margin: 0; max-width: 440px; }
+  .bento-art { position: absolute; right: 28px; bottom: 24px; }
+
+  /* Flow / pipeline strip */
+  .pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 60px; }
+  .pipe-card {
+    background: var(--bg-3); border: 0.5px solid var(--hairline);
+    border-radius: 16px; padding: 22px; min-height: 200px; position: relative;
+  }
+  .pipe-num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--violet); letter-spacing: 1px; }
+  .pipe-h { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin: 14px 0 6px; }
+  .pipe-p { font-size: 12.5px; color: var(--text-2); margin: 0; line-height: 1.55; }
+
+  /* Faction / split section (DOTA2 inspired without copying) */
+  .split {
+    margin-top: 70px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .split-card {
+    border-radius: 22px; padding: 36px;
+    border: 0.5px solid var(--hairline);
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    position: relative; overflow: hidden; min-height: 280px;
+  }
+  .split-card.violet::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(167,139,250,0.22), transparent 60%);
+  }
+  .split-card.emerald::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(52,211,153,0.18), transparent 60%);
+  }
+  .split-card .label { position: relative; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-3); }
+  .split-card.violet .label { color: var(--violet); }
+  .split-card.emerald .label { color: var(--emerald); }
+  .split-card h3 { position: relative; font-size: 32px; line-height: 1.1; letter-spacing: -0.8px; margin: 12px 0 10px; }
+  .split-card p { position: relative; font-size: 14px; color: var(--text-2); margin: 0; max-width: 360px; }
+  .split-stat { position: relative; margin-top: 28px; display: flex; gap: 28px; }
+  .stat .v { font-size: 36px; font-weight: 700; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
+  .stat .v em { font-style: normal; color: var(--violet); }
+  .stat.em .v em { color: var(--emerald); }
+  .stat .l { font-size: 11px; color: var(--text-3); letter-spacing: 0.6px; }
+
+  /* Spec table */
+  .spec-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 0.5px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+  .spec-cell { padding: 24px; border-right: 0.5px solid var(--hairline); border-bottom: 0.5px solid var(--hairline); }
+  .spec-cell:nth-child(4n) { border-right: 0; }
+  .spec-cell:nth-last-child(-n+4) { border-bottom: 0; }
+  .spec-cell .l { font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); font-weight: 700; }
+  .spec-cell .v { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin-top: 8px; }
+  .spec-cell .s { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+
+  /* Translate showcase */
+  .translate-demo {
+    margin-top: 60px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 0.5px solid var(--hairline);
+    border-radius: 26px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .translate-left { padding: 56px 48px; display: flex; flex-direction: column; justify-content: center; }
+  .translate-right {
+    padding: 40px; background:
+      repeating-linear-gradient(45deg, rgba(217,160,80,0.05) 0 2px, rgba(40,30,20,0.7) 2px 18px),
+      radial-gradient(circle at 30% 40%, rgba(200,100,40,0.18), transparent 50%), #0a0807;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lang-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .lang-tag { padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06);
+    border: 0.5px solid var(--hairline); font-size: 11.5px; color: var(--text-2); font-weight: 500; }
+  .lang-tag.on { background: rgba(167,139,250,0.18); border-color: rgba(167,139,250,0.4); color: var(--violet); }
+
+  .overlay-mock {
+    width: 320px; border-radius: 14px;
+    background: rgba(20,20,26,0.86); backdrop-filter: blur(30px) saturate(180%);
+    border: 0.5px solid var(--hairline-strong);
+    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .om-head { padding: 10px 12px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; gap: 8px; font-size: 11px; }
+  .om-head .mark { width: 12px; height: 12px; border-radius: 4px; background: var(--violet); }
+  .om-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  /* Pricing */
+  .pricing { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .price-card {
+    border: 0.5px solid var(--hairline); border-radius: 22px; padding: 32px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); position: relative;
+  }
+  .price-card.feature { border: 0.5px solid rgba(167,139,250,0.5);
+    background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2)); }
+  .price-card .plan { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); }
+  .price-card.feature .plan { color: var(--violet); }
+  .price-card .amount { font-size: 56px; font-weight: 700; letter-spacing: -1.4px; margin: 14px 0 4px; font-variant-numeric: tabular-nums; }
+  .price-card .amount small { font-size: 14px; color: var(--text-3); font-weight: 500; letter-spacing: 0; }
+  .price-card .note { font-size: 12.5px; color: var(--text-2); margin: 0 0 24px; }
+  .price-card ul { list-style: none; padding: 0; margin: 0 0 28px; }
+  .price-card li { font-size: 13px; padding: 7px 0; color: var(--text-2); display: flex; align-items: center; gap: 10px; }
+  .price-card li::before { content: ''; width: 14px; height: 14px; border-radius: 7px;
+    background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline);
+    background-image: linear-gradient(45deg, transparent 45%, var(--text-2) 45% 55%, transparent 55%),
+                      linear-gradient(-45deg, transparent 45%, var(--text-2) 45% 55%, transparent 55%);
+    background-size: 8px 8px; background-repeat: no-repeat; background-position: center;
+  }
+  .price-card.feature li::before { background-color: rgba(167,139,250,0.16); border-color: rgba(167,139,250,0.4); }
+  .price-card .btn-buy {
+    width: 100%; height: 40px; border-radius: 20px; border: 0.5px solid var(--hairline-strong);
+    background: rgba(255,255,255,0.06); color: var(--text); font-size: 13px; font-weight: 600;
+  }
+  .price-card.feature .btn-buy { background: var(--violet-deep); border: 0; color: #fff;
+    box-shadow: 0 6px 20px rgba(124,92,235,0.4); }
+
+  /* FAQ */
+  .faq { margin-top: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  details {
+    border-bottom: 0.5px solid var(--hairline); padding: 22px 4px; cursor: pointer;
+  }
+  summary { list-style: none; display: flex; align-items: center; justify-content: space-between;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.2px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 22px; color: var(--text-2); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { font-size: 14px; color: var(--text-2); margin: 14px 0 0; line-height: 1.6; }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center; padding: 140px 24px;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(124,92,235,0.32), transparent 70%),
+      linear-gradient(180deg, #06070b, #0a0c12);
+    border-top: 0.5px solid var(--hairline);
+  }
+  .final-cta h2 { font-size: 72px; line-height: 1; letter-spacing: -1.8px; font-weight: 700; margin: 0 auto 20px; max-width: 800px;
+    background: linear-gradient(180deg, #fff, #b39df9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .final-cta p { font-size: 17px; color: var(--text-2); max-width: 560px; margin: 0 auto 32px; }
+
+  /* Footer */
+  footer { padding: 56px 24px 80px; border-top: 0.5px solid var(--hairline); background: var(--bg-2); }
+  .ft-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 40px; }
+  .ft-col h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); margin: 0 0 14px; }
+  .ft-col a { display: block; font-size: 13px; color: var(--text-2); padding: 4px 0; }
+  .ft-col a:hover { color: var(--text); }
+  .ft-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .ft-brand .brand-mark { width: 22px; height: 22px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep)); }
+  .ft-tag { font-size: 12px; color: var(--text-3); max-width: 240px; line-height: 1.6; }
+  .ft-bot { max-width: 1080px; margin: 48px auto 0; padding-top: 24px; border-top: 0.5px solid var(--hairline);
+    display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); }
+  .ft-legal a { color: var(--text-3); margin-left: 18px; }
+  .ft-legal a:hover { color: var(--text-2); }
+
+  /* Responsive */
+  /* i18n section */
+  .i18n-hero { margin-top: 60px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px; }
+  .i18n-card { background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); border: 0.5px solid var(--hairline); border-radius: 22px; padding: 32px; min-height: 480px; position: relative; overflow: hidden; }
+  .i18n-card.onboard { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,162,60,0.16), transparent 60%), linear-gradient(180deg, var(--bg-3), var(--bg-2)); border-color: rgba(240,162,60,0.25); }
+  .lang-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 18px; }
+  .lang-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; font-size: 12.5px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--hairline); }
+  .lang-item .flag { width: 22px; height: 16px; border-radius: 3px; flex-shrink: 0; font-size: 11px; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, monospace; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); }
+  .lang-item .name { font-weight: 600; }
+  .lang-item .native { color: var(--text-3); font-size: 11px; margin-left: auto; }
+  .lang-item.selected { background: rgba(240,162,60,0.14); border-color: rgba(240,162,60,0.45); }
+  .lang-item.selected .native { color: var(--warn); }
+  /* Settings mock */
+  .settings-mock { background: rgba(20,22,28,0.92); border: 0.5px solid var(--hairline-strong); border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5); margin-top: 18px; }
+  .settings-mock .sm-head { height: 28px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; padding: 0 10px; gap: 6px; }
+  .settings-mock .sm-head .tl { width: 9px; height: 9px; border-radius: 50%; }
+  .settings-mock .sm-body { display: grid; grid-template-columns: 130px 1fr; min-height: 280px; }
+  .settings-mock .sm-side { background: rgba(255,255,255,0.02); border-right: 0.5px solid var(--hairline); padding: 10px 6px; display: flex; flex-direction: column; gap: 2px; }
+  .settings-mock .sm-side .row { padding: 6px 10px; border-radius: 6px; font-size: 11px; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
+  .settings-mock .sm-side .row.active { background: rgba(240,162,60,0.14); color: #fff; }
+  .settings-mock .sm-side .glyph { width: 10px; height: 10px; border-radius: 3px; background: rgba(255,255,255,0.12); }
+  .settings-mock .sm-side .row.active .glyph { background: var(--warn); }
+  .settings-mock .sm-main { padding: 18px 18px 14px; }
+  .settings-mock .sm-h { font-size: 13px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 14px; }
+  .settings-mock .sm-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 0.5px solid var(--hairline); }
+  .settings-mock .sm-row:last-child { border-bottom: 0; }
+  .settings-mock .sm-label { font-size: 11.5px; color: var(--text-2); }
+  .settings-mock .sm-dropdown { background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline-strong); border-radius: 6px; padding: 5px 10px; font-size: 11px; color: var(--text); display: flex; align-items: center; gap: 8px; min-width: 160px; }
+  .settings-mock .sm-dropdown.active { background: rgba(240,162,60,0.14); border-color: rgba(240,162,60,0.4); }
+  .settings-mock .sm-dropdown::after { content: '▾'; margin-left: auto; color: var(--text-3); }
+  .settings-mock .sm-toggle { width: 28px; height: 16px; border-radius: 8px; background: var(--warn); position: relative; }
+  .settings-mock .sm-toggle::after { content: ''; position: absolute; top: 2px; left: 14px; width: 12px; height: 12px; background: #fff; border-radius: 50%; }
+  .settings-mock .sm-toggle.off { background: rgba(255,255,255,0.1); }
+  .settings-mock .sm-toggle.off::after { left: 2px; }
+  .lang-coverage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 60px; }
+  .lang-chip { padding: 14px 16px; border-radius: 12px; background: var(--bg-3); border: 0.5px solid var(--hairline); }
+  .lang-chip .num { font-size: 28px; font-weight: 700; letter-spacing: -0.6px; font-variant-numeric: tabular-nums; color: var(--warn); }
+  .lang-chip .lab { font-size: 11px; color: var(--text-3); letter-spacing: 0.6px; text-transform: uppercase; margin-top: 4px; }
+
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 56px; letter-spacing: -1.4px; }
+    .pillar-grid { grid-template-columns: 1fr 1fr !important; }
+    .i18n-hero { grid-template-columns: 1fr; }
+    .lang-coverage-strip { grid-template-columns: 1fr 1fr; }
+    .hero p.lead { font-size: 16px; }
+    .preview-body { grid-template-columns: 1fr; }
+    .pv-side, .pv-right { display: none; }
+    .bento { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .spec-grid { grid-template-columns: 1fr 1fr; }
+    .spec-cell:nth-child(4n) { border-right: 0.5px solid var(--hairline); }
+    .spec-cell:nth-child(2n) { border-right: 0; }
+    .translate-demo { grid-template-columns: 1fr; }
+    .pricing { grid-template-columns: 1fr; }
+    h2.section-title { font-size: 38px; letter-spacing: -1px; }
+    .final-cta h2 { font-size: 44px; letter-spacing: -1.2px; }
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body style="">
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#"><span class="brand-mark"></span>AMEFYS</a>
+      <div class="links">
+        <a href="#pillars">四大特性</a>
+        <a href="#assist">实时助手</a>
+        <a href="#trash">文斗 1v9</a>
+        <a href="#faction">阵营氛围</a>
+        <a href="#i18n">多语言</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div class="actions">
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill" href="https://github.com/amefys/web/releases/latest" target="_blank" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <!-- Atmospheric backdrop: silhouetted hero figures + cityscape arena -->
+    <div class="hero-backdrop">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="skyGlow" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#7C5CEB" stop-opacity="0.35"></stop>
+            <stop offset="50%" stop-color="#A78BFA" stop-opacity="0.15"></stop>
+            <stop offset="100%" stop-color="#06070b" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id="radiantGlow" x1="0" x2="1" y1="0.5" y2="0.5">
+            <stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.25"></stop>
+            <stop offset="100%" stop-color="#3DBE8A" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id="direGlow" x1="1" x2="0" y1="0.5" y2="0.5">
+            <stop offset="0%" stop-color="#D9534F" stop-opacity="0.22"></stop>
+            <stop offset="100%" stop-color="#D9534F" stop-opacity="0"></stop>
+          </linearGradient>
+          <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.4"></stop>
+            <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <!-- Sky atmosphere -->
+        <rect width="1600" height="900" fill="url(#skyGlow)"></rect>
+        <!-- Faction glows on sides -->
+        <rect x="0" y="0" width="700" height="900" fill="url(#radiantGlow)"></rect>
+        <rect x="900" y="0" width="700" height="900" fill="url(#direGlow)"></rect>
+        <!-- Moon -->
+        <circle cx="1280" cy="180" r="120" fill="url(#moonGlow)"></circle>
+        <circle cx="1280" cy="180" r="34" fill="#d8d2f5" opacity="0.65"></circle>
+        <!-- Far mountain ridge (dire side) -->
+        <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0a0a14" opacity="0.85"></path>
+        <!-- Far mountain ridge (radiant side) -->
+        <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.85"></path>
+        <!-- Mid silhouettes: ancient towers / pillars -->
+        <g opacity="0.7">
+          <!-- Radiant ancient (left) -->
+          <polygon points="180,540 230,540 240,420 220,400 220,360 235,360 235,340 175,340 175,360 190,360 190,400 170,420" fill="#0c1814"></polygon>
+          <rect x="195" y="480" width="20" height="60" fill="#0e1c16"></rect>
+          <!-- Smaller pillar -->
+          <polygon points="320,560 360,560 365,470 350,460 350,440 335,440 335,460 320,470" fill="#0c1814"></polygon>
+          <!-- Dire ancient (right) -->
+          <polygon points="1380,540 1450,540 1460,400 1440,380 1455,360 1455,340 1395,340 1395,360 1410,380 1390,400" fill="#140a0c"></polygon>
+          <rect x="1402" y="470" width="26" height="70" fill="#180c10"></rect>
+          <!-- Dire pillar -->
+          <polygon points="1240,560 1280,560 1284,470 1270,460 1270,440 1255,440 1255,460 1240,470" fill="#140a0c"></polygon>
+        </g>
+        <!-- Hero silhouettes - foreground (recognizable DOTA archetypes) -->
+        <g opacity="0.88">
+
+          <!-- HERO 1: AXE-style berserker (far left, Radiant) -->
+          <g transform="translate(160,580)">
+            <!-- Bulky body with shoulders -->
+            <path d="M-44,40 Q-50,30 -40,20 L40,20 Q50,30 44,40 L42,80 L46,150 L36,220 L-36,220 L-46,150 L-42,80 Z" fill="#08120e"></path>
+            <!-- Mohawk head -->
+            <ellipse cx="0" cy="6" rx="14" ry="16" fill="#0a1410"></ellipse>
+            <path d="M-2,-12 L2,-12 L6,-22 L0,-26 L-6,-22 Z" fill="#0a1410"></path>
+            <!-- Two-handed axe (over shoulder) -->
+            <rect x="-3" y="-30" width="3" height="180" fill="#16241c" transform="rotate(18 0 60)"></rect>
+            <path d="M-30,-30 L18,-50 L26,-32 L0,-12 Z" fill="#0c1a14" transform="rotate(18 0 60)"></path>
+            <!-- Emerald rim -->
+            <path d="M-44,40 L-46,150 L-36,220" stroke="#3DBE8A" stroke-width="0.8" fill="none" opacity="0.4"></path>
+            <circle cx="0" cy="6" r="2" fill="#3DBE8A" opacity="0.5"></circle>
+          </g>
+
+          <!-- HERO 2: TEMPLAR-style polearm wielder (left-center, Radiant) -->
+          <g transform="translate(360,560)">
+            <!-- Slim caped figure -->
+            <path d="M-22,30 Q-32,140 -26,220 L0,210 L26,220 Q32,140 22,30 Z" fill="#06100c"></path>
+            <path d="M-16,30 L16,30 L20,140 L14,220 L-14,220 L-20,140 Z" fill="#0a1812"></path>
+            <ellipse cx="0" cy="14" rx="10" ry="13" fill="#0a1410"></ellipse>
+            <!-- Tall halberd / glaive -->
+            <rect x="28" y="-40" width="2.5" height="280" fill="#1a2820"></rect>
+            <path d="M28,-40 L36,-60 L26,-58 L22,-44 Z" fill="#1a2820"></path>
+            <path d="M28,-44 L20,-30 L26,-22 Z" fill="#1a2820"></path>
+            <path d="M-22,30 L-20,140 L-14,220" stroke="#3DBE8A" stroke-width="0.6" fill="none" opacity="0.35"></path>
+          </g>
+
+          <!-- HERO 3: INVOKER-style robed caster (center) -->
+          <g transform="translate(800,560)">
+            <!-- Long robes -->
+            <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"></path>
+            <path d="M-22,40 L22,40 L26,150 L18,230 L-18,230 L-26,150 Z" fill="#0a0a14"></path>
+            <!-- Hood pulled back / pointed cowl -->
+            <path d="M-22,40 Q-30,10 -18,-4 L0,-12 L18,-4 Q30,10 22,40 Z" fill="#06060c"></path>
+            <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"></ellipse>
+            <!-- Three orbs floating around (quas/wex/exort feel) -->
+            <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.7"></circle>
+            <circle cx="-46" cy="60" r="11" fill="#3DBE8A" opacity="0.18"></circle>
+            <circle cx="46" cy="40" r="6" fill="#A78BFA" opacity="0.75"></circle>
+            <circle cx="46" cy="40" r="11" fill="#A78BFA" opacity="0.2"></circle>
+            <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.7"></circle>
+            <circle cx="0" cy="-30" r="13" fill="#F0A23C" opacity="0.18"></circle>
+            <!-- Robe trim glow -->
+            <path d="M-44,40 Q-58,150 -48,230" stroke="#A78BFA" stroke-width="0.6" fill="none" opacity="0.35"></path>
+          </g>
+
+          <!-- HERO 4: JUGGERNAUT-style dual-blade swordsman (right-center, Dire side) -->
+          <g transform="translate(1180,580)">
+            <!-- Crouched stance silhouette -->
+            <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"></path>
+            <!-- Mask head with horns -->
+            <ellipse cx="0" cy="8" rx="13" ry="15" fill="#0c0810"></ellipse>
+            <path d="M-12,-2 L-18,-12 L-10,-6 Z M12,-2 L18,-12 L10,-6 Z" fill="#0c0810"></path>
+            <!-- Dual curved blades -->
+            <path d="M-30,40 Q-60,80 -70,140 L-66,142 Q-56,84 -28,46 Z" fill="#1a1424"></path>
+            <path d="M30,40 Q60,80 70,140 L66,142 Q56,84 28,46 Z" fill="#1a1424"></path>
+            <!-- Violet rim light along edges -->
+            <path d="M-32,40 L-34,160 L-24,220" stroke="#A78BFA" stroke-width="0.8" fill="none" opacity="0.45"></path>
+            <path d="M32,40 L34,160 L24,220" stroke="#A78BFA" stroke-width="0.8" fill="none" opacity="0.45"></path>
+          </g>
+
+          <!-- HERO 5: PUDGE-style hooked bruiser (far right, Dire) -->
+          <g transform="translate(1430,600)">
+            <!-- Round belly silhouette -->
+            <path d="M-50,50 Q-60,120 -54,200 Q-30,220 0,220 Q30,220 54,200 Q60,120 50,50 Q40,30 0,28 Q-40,30 -50,50 Z" fill="#0c0810"></path>
+            <!-- Small head -->
+            <ellipse cx="0" cy="14" rx="13" ry="14" fill="#0a060e"></ellipse>
+            <!-- Hook (chain extending up-right) -->
+            <path d="M40,30 L70,-20 L96,-44 Q104,-50 100,-58 Q96,-66 86,-62 L80,-56" stroke="#1a1424" stroke-width="3" fill="none" stroke-linecap="round"></path>
+            <circle cx="86" cy="-58" r="4" fill="#1a1424"></circle>
+            <!-- Glow drips / chain shimmer -->
+            <circle cx="60" cy="0" r="1.5" fill="#A78BFA" opacity="0.7"></circle>
+            <circle cx="80" cy="-30" r="1.2" fill="#A78BFA" opacity="0.6"></circle>
+            <path d="M-50,50 Q-54,200 -30,220" stroke="#A78BFA" stroke-width="0.7" fill="none" opacity="0.4"></path>
+            <path d="M50,50 Q54,200 30,220" stroke="#A78BFA" stroke-width="0.7" fill="none" opacity="0.4"></path>
+          </g>
+
+          <!-- Faint background creep figures (smaller) -->
+          <g opacity="0.55">
+            <ellipse cx="540" cy="690" rx="14" ry="34" fill="#08120e"></ellipse>
+            <ellipse cx="600" cy="700" rx="12" ry="28" fill="#08120e"></ellipse>
+            <ellipse cx="1000" cy="690" rx="14" ry="34" fill="#0c0810"></ellipse>
+            <ellipse cx="1060" cy="700" rx="12" ry="28" fill="#0c0810"></ellipse>
+          </g>
+        </g>
+        <!-- Esports arena crowd silhouette / city floor at very bottom -->
+        <g opacity="0.6">
+          <rect x="0" y="780" width="1600" height="120" fill="#02030680"></rect>
+          <!-- Audience pinpricks (esports stage) -->
+          <g fill="#A78BFA" opacity="0.6">
+            <circle cx="100" cy="820" r="1.2"></circle><circle cx="160" cy="824" r="1"></circle><circle cx="220" cy="818" r="1.4"></circle>
+            <circle cx="290" cy="826" r="1"></circle><circle cx="360" cy="822" r="1.2"></circle><circle cx="430" cy="828" r="1"></circle>
+            <circle cx="500" cy="820" r="1.4"></circle><circle cx="570" cy="826" r="1"></circle><circle cx="640" cy="822" r="1.2"></circle>
+            <circle cx="710" cy="828" r="1"></circle><circle cx="780" cy="820" r="1.2"></circle><circle cx="860" cy="824" r="1.4"></circle>
+            <circle cx="930" cy="822" r="1"></circle><circle cx="1000" cy="828" r="1.2"></circle><circle cx="1070" cy="820" r="1"></circle>
+            <circle cx="1140" cy="826" r="1.4"></circle><circle cx="1210" cy="822" r="1"></circle><circle cx="1280" cy="828" r="1.2"></circle>
+            <circle cx="1350" cy="820" r="1"></circle><circle cx="1420" cy="826" r="1.4"></circle><circle cx="1490" cy="822" r="1"></circle>
+          </g>
+          <!-- Stage edge glow -->
+          <line x1="0" y1="800" x2="1600" y2="800" stroke="#A78BFA" stroke-width="0.5" opacity="0.4"></line>
+        </g>
+        <!-- Dust motes / embers -->
+        <g fill="#A78BFA" opacity="0.5">
+          <circle cx="450" cy="280" r="1"></circle><circle cx="620" cy="200" r="0.8"></circle>
+          <circle cx="780" cy="340" r="1.2"></circle><circle cx="920" cy="240" r="0.8"></circle>
+          <circle cx="1100" cy="320" r="1"></circle><circle cx="1180" cy="220" r="0.8"></circle>
+          <circle cx="380" cy="380" r="0.8"></circle><circle cx="540" cy="420" r="1"></circle>
+          <circle cx="700" cy="460" r="0.8"></circle><circle cx="1020" cy="440" r="1"></circle>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-grid"></div>
+    <div class="hero-particles">
+      <span class="particle" style="left:8%;animation-delay:0s;"></span>
+      <span class="particle" style="left:18%;animation-delay:1.2s;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></span>
+      <span class="particle" style="left:32%;animation-delay:3s;"></span>
+      <span class="particle" style="left:48%;animation-delay:0.6s;"></span>
+      <span class="particle" style="left:62%;animation-delay:2.4s;"></span>
+      <span class="particle" style="left:74%;animation-delay:4s;background:var(--dire);box-shadow:0 0 8px var(--dire);"></span>
+      <span class="particle" style="left:86%;animation-delay:1.8s;"></span>
+      <span class="particle" style="left:94%;animation-delay:5s;"></span>
+    </div>
+    <div class="hero-eyebrow"><span class="dot"></span>完全免费 · 不卖广告</div>
+    <h1>文斗 <em>1v9</em>，<br>全球<em>无敌手</em>！</h1>
+    <p class="lead">堪比官方付费助手的实时出装与时机建议，永久免费。你打中文，对面看俄语；俄罗斯队友怒喷，你看到熟悉的母语——一键回敬，AMEFYS 自动翻译并粘贴到 DOTA 聊天框。界面随天辉 / 夜魇阵营实时切换氛围。</p>
+    <div class="cta-row">
+      <a class="btn-cta primary" href="https://github.com/amefys/web/releases/latest" target="_blank" rel="noopener">免费下载</a>
+      <a class="btn-cta ghost" href="#" rel="noopener">观看 60 秒演示 →</a>
+    </div>
+    <div class="platforms">macOS 13+ · Windows 11 · 永久免费 · 无内购 · 无广告</div>
+
+    <div class="preview-wrap">
+      <div class="preview">
+        <div class="titlebar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
+        <div class="preview-body">
+          <aside class="pv-side">
+            <div class="p-row"><span class="p-glyph"></span>首页</div>
+            <div class="p-row active"><span class="p-glyph"></span>游戏中</div>
+            <div class="p-row"><span class="p-glyph"></span>历史对局</div>
+            <div class="p-row"><span class="p-glyph"></span>资料库</div>
+            <div class="p-row"><span class="p-glyph"></span>设置</div>
+            <div style="flex:1"></div>
+            <div style="font-size:10px;color:var(--text-3);padding:8px 10px;letter-spacing:.6px;text-transform:uppercase;">登录为</div>
+            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;">
+              <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#1a1a22);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">AM</div>
+              <div style="font-size:11.5px;font-weight:600;">ame</div>
+            </div>
+          </aside>
+          <main class="pv-main">
+            <div style="display:flex;align-items:flex-end;justify-content:space-between;">
+              <div>
+                <div class="pv-h">敌法师 · Lv 13 · 21:28</div>
+                <div class="pv-sub">对线期 · 天辉中路 · GPM 642</div>
+              </div>
+              <div style="font-size:11px;color:var(--violet);font-weight:600;letter-spacing:.6px;">主推 · 置信 92%</div>
+            </div>
+            <div class="pv-card accent">
+              <div style="display:flex;gap:14px;align-items:center;">
+                <div class="item active" style="width:54px;height:54px;font-size:10px;">MAN</div>
+                <div style="min-width:0;">
+                  <div style="font-size:15px;font-weight:700;letter-spacing:-.3px;">幻影法袍</div>
+                  <div style="font-size:11.5px;color:var(--text-2);margin-top:3px;">驱散 + 分身吃伤害，克制对方控制链。</div>
+                </div>
+                <div style="margin-left:auto;text-align:right;">
+                  <div style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;">4 600</div>
+                  <div style="font-size:10px;color:var(--text-3);">缺口 1 248g · 约 2:10</div>
+                </div>
+              </div>
+              <div class="item-grid">
+                <div class="item">PMS</div><div class="item">RIN</div><div class="item">BOOT</div>
+                <div class="item">BFR</div><div class="item active">MAN</div><div class="item">··</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="pv-card">
+                <div style="font-size:10px;letter-spacing:.8px;color:var(--text-3);font-weight:700;text-transform:uppercase;">下一件备选</div>
+                <div style="margin-top:8px;font-size:13px;font-weight:600;">黑皇杖</div>
+                <div style="font-size:11px;color:var(--text-2);margin-top:2px;">基于自身状态的防守装。</div>
+              </div>
+              <div class="pv-card">
+                <div style="font-size:10px;letter-spacing:.8px;color:var(--text-3);font-weight:700;text-transform:uppercase;">推荐时机</div>
+                <div style="margin-top:8px;font-size:13px;font-weight:600;">22:30 ± 30s</div>
+                <div style="font-size:11px;color:var(--text-2);margin-top:2px;">早于全国均值 1:42。</div>
+              </div>
+            </div>
+          </main>
+          <aside class="pv-right">
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">实时翻译</div>
+            <div class="chat-bubble them">
+              <div class="who">Yatoro · 🇷🇺</div>
+              <div class="raw">AM пуш мид сейчас, помогите!</div>
+              <div class="tr">AM 现在推中路，帮忙！</div>
+            </div>
+            <div class="chat-bubble them">
+              <div class="who">miposika · 🇮🇩</div>
+              <div class="raw">beli BKB sekarang</div>
+              <div class="tr">现在出 BKB</div>
+            </div>
+            <div class="chat-bubble me">
+              <div class="raw">我 30s 后到，先撤</div>
+              <div class="tr">I'll arrive in 30s, fall back first</div>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;">
+              <span class="lang-tag">集合中路</span>
+              <span class="lang-tag">先撤</span>
+              <span class="lang-tag">推塔</span>
+              <span class="lang-tag">?</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Three pillars strip -->
+  <section id="pillars" style="padding: 90px 24px; border-top: 0.5px solid var(--hairline); background: linear-gradient(180deg, transparent, rgba(167,139,250,0.03));">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="pillar-grid">
+        <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--emerald);">01 / FREE FOREVER</div>
+          <div class="pipe-h">完全免费的实时助手</div>
+          <p class="pipe-p">出装建议、时机提示、英雄计数 —— 功能完全对齐官方付费助手，0 内购、0 广告、0 限时。</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(217,83,79,0.4); background: linear-gradient(180deg, rgba(217,83,79,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--dire);">02 / TRASH-TALK 1v9</div>
+          <div class="pipe-h">文斗 1 vs 9，全球无障碍</div>
+          <p class="pipe-p">不再被骂得云里雾里。9 国语言双向实时互译，你打母语，敌人看母语，骂战不掉一拍。</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--violet);">03 / FACTION-AWARE</div>
+          <div class="pipe-h">界面随阵营实时切换</div>
+          <p class="pipe-p">天辉时翡翠绿日光感；夜魇时辉夜紫月光感。氛围实时贴合你所在的一方，而不是固定皮肤。</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(240,162,60,0.4); background: linear-gradient(180deg, rgba(240,162,60,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--warn);">04 / 12 LANGUAGES</div>
+          <div class="pipe-h">软件 UI 12 国语言</div>
+          <p class="pipe-p">软件本体、术语、文档、官网全部本地化。从巴西雨林到东南亚网吧，每个 DOTA 玩家都能用母语开局。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Assistant feature (renamed) -->
+  <section id="assist">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 01 · 完全免费的实时助手</div>
+      <h2 class="section-title">官方付费助手能做的，<br>这里 <em style="color:var(--emerald);font-style:normal;">¥0</em> 给你。</h2>
+      <p class="section-lead">主推 / Top 3 / 时间线 / 反制四视图，置信度、缺口金币、出现时机一应俱全。通过 Valve 官方 GSI 接口，1Hz 同步对局状态——所有功能永久免费，不卖会员、不卖广告、不卖你的对局数据。</p>
+
+      <div class="bento">
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>装备建议</div>
+          <h3 class="bento-h">主推 · <em>Top 3</em> · 时间线 · 反制</h3>
+          <p class="bento-p">每条建议都附置信度、缺口金币、出现时机；你也可以切换到时间线模式查看 0–60 分钟的完整出装路径。</p>
+          <div class="bento-art" style="display:flex;gap:10px;align-items:center;">
+            <div class="item active" style="width:64px;height:64px;font-size:11px;">MAN</div>
+            <div class="item" style="width:50px;height:50px;font-size:10px;">BKB</div>
+            <div class="item" style="width:42px;height:42px;font-size:9px;">BFR</div>
+            <div class="item" style="width:36px;height:36px;font-size:8px;">·</div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>悬浮窗</div>
+          <h3 class="bento-h">游戏内浮在<br>所有窗口之上。</h3>
+          <p class="bento-p">⌥⇧D 一键收起。团战时自动半透明 30%，不挡视野、不打断节奏。</p>
+          <div class="bento-art" style="right: -40px; bottom: -20px;">
+            <div class="overlay-mock" style="transform: scale(0.7); transform-origin: bottom right;">
+              <div class="om-head"><span class="mark"></span>AMEFYS · 21:28</div>
+              <div class="om-body">
+                <div class="chat-bubble them" style="background:rgba(255,255,255,0.04);">
+                  <div class="who">topson · EN</div>
+                  <div class="raw">on my way, gather mid</div>
+                  <div class="tr">我马上到，中路集合</div>
+                </div>
+                <div class="chat-bubble me" style="align-self:flex-end;">
+                  <div class="raw">先撤</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card span-col" style="min-height: 320px; padding: 40px;">
+          <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:60px;height:100%;">
+            <div>
+              <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>对局复盘</div>
+              <h3 class="bento-h">每一局都被<em>认真记下</em>。</h3>
+              <p class="bento-p">经济曲线、关键事件、AI 复盘要点、装备命中率全部本地归档；30 天本地缓存，云端按需同步。</p>
+              <div style="margin-top:24px;display:flex;gap:24px;">
+                <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;">198</div><div style="font-size:11px;color:var(--text-3);">本月对局</div></div>
+                <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--radiant);">61<small style="font-size:14px;font-weight:500;color:var(--text-3);">%</small></div><div style="font-size:11px;color:var(--text-3);">30 天胜率</div></div>
+                <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--violet);">+317</div><div style="font-size:11px;color:var(--text-3);">建议命中分</div></div>
+              </div>
+            </div>
+            <div style="position:relative;">
+              <svg viewBox="0 0 400 200" width="100%" style="display:block;">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.4"></stop>
+                    <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M0,160 C40,150 60,140 80,130 S140,80 180,90 S260,40 300,50 S380,20 400,30 L400,200 L0,200 Z" fill="url(#g1)"></path>
+                <path d="M0,160 C40,150 60,140 80,130 S140,80 180,90 S260,40 300,50 S380,20 400,30" fill="none" stroke="#A78BFA" stroke-width="2"></path>
+                <path d="M0,170 C40,165 60,168 80,158 S140,140 180,150 S260,120 300,130 S380,110 400,118" fill="none" stroke="rgba(217,83,79,0.6)" stroke-width="1.5" stroke-dasharray="4 4"></path>
+                <text x="0" y="14" font-family="ui-monospace,monospace" font-size="9" fill="rgba(235,235,245,0.4)">GOLD ADVANTAGE · LIVE</text>
+                <text x="370" y="195" font-family="ui-monospace,monospace" font-size="9" fill="rgba(235,235,245,0.4)" text-anchor="end">38:12</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Translate showcase / Trash-talk -->
+  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(167,139,250,0.04), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>特性 02 · 文斗 1 vs 9</div>
+      <h2 class="section-title">他骂俄语。<br>你听<em style="color:var(--dire);font-style:normal;">中文</em>。<br>回敬一句，<em style="color:var(--dire);font-style:normal;">他懂</em>。</h2>
+      <p class="section-lead">9 国语言双向实时互译，端到端延迟 &lt; 600ms。基于 Valve 官方 GSI 推送的聊天事件实时翻译队友与全频道发言。回敬时一键完成「翻译 → 写入剪贴板 → 唤起 DOTA 聊天框 → 粘贴 → 回车」全自动链路；批量发送间隔可在 100ms – 10s 间自定义。文斗不再单方面被动挨骂——这是公平的国际局。</p>
+
+      <div class="translate-demo">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>支持的语言</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">中 · 英 · 俄 · 西 · 葡 · 印尼 · 马来 · 越 · 泰</div>
+          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
+            本地词典即时翻译战术口令（"gank"、"smoke"、"BKB"），云端模型处理上下文与脏话语气。
+            支持骂战常用语包：俄、巴、东南亚特色俚语全收录。
+          </div>
+          <div class="lang-row">
+            <span class="lang-tag on">中 ⇄ EN</span>
+            <span class="lang-tag on">中 ⇄ RU</span>
+            <span class="lang-tag on">中 ⇄ ES</span>
+            <span class="lang-tag on">中 ⇄ PT</span>
+            <span class="lang-tag">中 ⇄ ID</span>
+            <span class="lang-tag">中 ⇄ MS</span>
+            <span class="lang-tag">中 ⇄ VI</span>
+            <span class="lang-tag">中 ⇄ TH</span>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark"></span>
+              <span style="font-weight:700;">AMEFYS</span>
+              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">21:28 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div class="chat-bubble them"><div class="who">Yatoro · 🇷🇺 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
+              <div class="chat-bubble them"><div class="who">topson · 🇺🇸 → 中</div><div class="raw">on my way, gather mid</div><div class="tr">我马上到，中路集合</div></div>
+              <div class="chat-bubble them"><div class="who">miposika · 🇮🇩 → 中</div><div class="raw">beli BKB sekarang</div><div class="tr">现在出 BKB</div></div>
+              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">ame · 中 → EN</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works pipeline -->
+  <section id="pipeline">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>工作方式</div>
+      <h2 class="section-title">四个步骤，<br>从启动到出装。</h2>
+      <p class="section-lead">无需任何反作弊豁免：AMEFYS 仅使用 Valve 官方公开的 Game State Integration 接口读取对局状态，仅通过 DOTA 内置的聊天框热键（Enter / Shift+Enter + 剪贴板粘贴）回发消息，所有键入与玩家手动操作完全等价。绝不读取游戏进程内存，绝不修改客户端文件，绝不拦截网络流量。</p>
+
+      <div class="pipeline">
+        <div class="pipe-card">
+          <div class="pipe-num">01 / 启动</div>
+          <div class="pipe-h">登录账号</div>
+          <p class="pipe-p">邮箱 / 微信 / Facebook / GitHub 任选其一。30 天免登录，密钥保存在系统安全区。Supabase 云端同步可选，本地优先。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">02 / 接入</div>
+          <div class="pipe-h">启用 GSI</div>
+          <p class="pipe-p">AMEFYS 自动检测 Steam / 蒸汽平台安装目录并一键写入 GSI 配置；在 DOTA 2 启动选项加入 <code>-gamestateintegration</code> 即可激活推送（Valve 2022 起的默认要求）。所有数据在本地处理。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">03 / 实时</div>
+          <div class="pipe-h">同步对局</div>
+          <p class="pipe-p">自己英雄的等级 / 经济 / 装备 / 技能以 1Hz 推送给推荐引擎；聊天事件由 GSI provider 实时推送后调用多 provider 翻译（火山 / Azure / 阿里 / Claude / OpenAI / Gemini，可自选 BYO Key）。正式天梯仅可获得自己视角数据（Valve 反作弊限制）。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">04 / 决策</div>
+          <div class="pipe-h">给出建议</div>
+          <p class="pipe-p">主推 / Top3 / 时间线 / 反制四种视图随时切换。建议附带置信度，永远不替你做选择。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faction split (DOTA2 inspired) -->
+  <section id="faction" style="background: var(--bg-2);">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 03 · 阵营氛围实时切换</div>
+      <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--violet);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
+      <p class="section-lead">不只是换个皮肤。AMEFYS 在你被分配到天辉时切换为翡翠绿日光氛围，分配到夜魇时切换为辉夜紫月光氛围——背景纹理、强调色、悬浮窗轮廓全部跟随，让助手永远像是「我方」。</p>
+
+      <div class="split">
+        <div class="split-card emerald">
+          <div class="label">RADIANT · 天辉 · 翡翠绿日光</div>
+          <h3>明亮、温暖、向上压制。</h3>
+          <p>分配到天辉时整个 UI 切到翡翠绿强调，背景泛起日光纹理，悬浮窗轮廓更柔和——让你在压制时手感更顺。</p>
+
+          <!-- in-product preview · radiant -->
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(52,211,153,0.3);background:linear-gradient(180deg,rgba(20,30,24,0.9),rgba(8,14,11,0.9));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(52,211,153,0.7);font-family:ui-monospace,monospace;letter-spacing:.6px;">RADIANT · 12:08</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;box-shadow:0 0 0 3px rgba(52,211,153,0.18);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BFR</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">狂战斧 · 主推</div>
+                  <div style="font-size:10px;color:rgba(52,211,153,0.85);">置信 94% · 缺口 420g</div>
+                </div>
+              </div>
+              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> 自身节奏稳，建议侵略推塔
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#34D399,#10B981);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.18);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat em"><div class="v"><em>+1.4k</em></div><div class="l">复盘 · 10 分钟均经济差</div></div>
+            <div class="stat em"><div class="v"><em>62%</em></div><div class="l">推塔成功率</div></div>
+          </div>
+        </div>
+        <div class="split-card violet">
+          <div class="label">DIRE · 夜魇 · 辉夜紫月色</div>
+          <h3>幽暗、深沉、伺机反打。</h3>
+          <p>分配到夜魇时切到辉夜紫强调，背景泛起月光纹理，建议引擎基于自己的状态偏向防守装备与撤退提示。</p>
+
+          <!-- in-product preview · dire -->
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">黑皇杖 · 防守</div>
+                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">置信 91% · 缺口 880g</div>
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#A78BFA;font-weight:700;">自己 BKB</span> 冷却 38s · Roshan 推算 ≈ 11:20
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat"><div class="v"><em>42%</em></div><div class="l">复盘 · 逆风转胜率</div></div>
+            <div class="stat"><div class="v"><em>BKB</em></div><div class="l">优先防守装提示</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- i18n / Multi-language -->
+  <section id="i18n" style="background: linear-gradient(180deg, transparent, rgba(240,162,60,0.04), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>特性 04 · 软件 12 国语言</div>
+      <h2 class="section-title">从巴西雨林到东南亚网吧，<br>每个 DOTA 玩家<br>都能用<em style="color:var(--warn);font-style:normal;">母语</em>开局。</h2>
+      <p class="section-lead">UI 不是唯一被翻译的。<strong style="color:var(--warn);">英雄名、装备名、分路 / 位置、决策提示信息、技能描述、复盘词包</strong>同步本地化——12 种语言覆盖 DOTA 2 主要服务器。中文里看「黑皇杖 · 4 号位 · 防守推塔」，英文里看「BKB · Soft Support · Defend tower」，俄语里看「Чёрный Скипетр · Поддержка · Защита башни」。</p>
+
+      <div class="i18n-hero">
+        <!-- LEFT: First-launch language picker -->
+        <div class="i18n-card onboard">
+          <div class="eyebrow" style="margin-bottom:10px;color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>首次启动 · 引导</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">Choose your language<br><span style="color:var(--text-2);font-size:18px;font-weight:500;">选择你的语言 · Выберите язык</span></div>
+          <p style="font-size:13px;color:var(--text-2);margin:14px 0 0;">检测到你的系统语言为 <strong style="color:var(--warn);">简体中文</strong>。点击确认，或选择其他语言：</p>
+          <div class="lang-list">
+            <div class="lang-item selected"><span class="flag">中</span><span class="name">简体中文</span><span class="native">默认</span></div>
+            <div class="lang-item"><span class="flag">繁</span><span class="name">繁體中文</span><span class="native">繁中</span></div>
+            <div class="lang-item"><span class="flag">EN</span><span class="name">English</span><span class="native">English</span></div>
+            <div class="lang-item"><span class="flag">RU</span><span class="name">Русский</span><span class="native">Русский</span></div>
+            <div class="lang-item"><span class="flag">ES</span><span class="name">Español</span><span class="native">Español</span></div>
+            <div class="lang-item"><span class="flag">PT</span><span class="name">Português</span><span class="native">BR</span></div>
+            <div class="lang-item"><span class="flag">ID</span><span class="name">B. Indonesia</span><span class="native">Indonesia</span></div>
+            <div class="lang-item"><span class="flag">MS</span><span class="name">B. Melayu</span><span class="native">Melayu</span></div>
+            <div class="lang-item"><span class="flag">VI</span><span class="name">Tiếng Việt</span><span class="native">Việt</span></div>
+            <div class="lang-item"><span class="flag">TH</span><span class="name">ภาษาไทย</span><span class="native">ไทย</span></div>
+            <div class="lang-item"><span class="flag">JA</span><span class="name">日本語</span><span class="native">日本語</span></div>
+            <div class="lang-item"><span class="flag">KO</span><span class="name">한국어</span><span class="native">한국어</span></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:24px;">
+            <button class="btn-cta primary" style="background:linear-gradient(180deg,#F0B25C,#D9893A);box-shadow:0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 6px 20px rgba(217,137,58,0.4);height:38px;padding:0 18px;font-size:13px;border-radius:19px;">确认 · Continue</button>
+            <button class="btn-cta ghost" style="height:38px;padding:0 18px;font-size:13px;border-radius:19px;">跟随系统语言</button>
+          </div>
+        </div>
+
+        <!-- RIGHT: Settings page with dropdown -->
+        <div class="i18n-card">
+          <div class="eyebrow" style="margin-bottom:10px;"><span class="bar"></span>设置 · 偏好</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">设置里随时切换。</div>
+          <p style="font-size:13px;color:var(--text-2);margin:14px 0 0;max-width:380px;">语言、地区数字格式、术语风格独立配置；切换无需重启，整个 UI 在 200ms 内完成重绘。</p>
+
+          <div class="settings-mock">
+            <div class="sm-head">
+              <span class="tl" style="background:#ff5f57;"></span>
+              <span class="tl" style="background:#febc2e;"></span>
+              <span class="tl" style="background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:10px;color:var(--text-3);font-family:ui-monospace,monospace;">AMEFYS · 偏好</span>
+            </div>
+            <div class="sm-body">
+              <div class="sm-side">
+                <div class="row"><span class="glyph"></span>账号</div>
+                <div class="row"><span class="glyph"></span>对局</div>
+                <div class="row"><span class="glyph"></span>悬浮窗</div>
+                <div class="row"><span class="glyph"></span>翻译</div>
+                <div class="row active"><span class="glyph"></span>语言与地区</div>
+                <div class="row"><span class="glyph"></span>快捷键</div>
+                <div class="row"><span class="glyph"></span>关于</div>
+              </div>
+              <div class="sm-main">
+                <div class="sm-h">语言与地区</div>
+                <div class="sm-row">
+                  <span class="sm-label">界面语言</span>
+                  <span class="sm-dropdown active">中 简体中文</span>
+                </div>
+                <div class="sm-row">
+                  <span class="sm-label">术语风格</span>
+                  <span class="sm-dropdown">中文圈昵称（黑皇杖）</span>
+                </div>
+                <div class="sm-row">
+                  <span class="sm-label">数字格式</span>
+                  <span class="sm-dropdown">1,234 / 56:78</span>
+                </div>
+                <div class="sm-row">
+                  <span class="sm-label">字体优化</span>
+                  <span class="sm-toggle"></span>
+                </div>
+                <div class="sm-row">
+                  <span class="sm-label">跟随系统语言</span>
+                  <span class="sm-toggle off"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:11px;color:var(--text-3);margin-top:14px;line-height:1.5;">术语风格可单独切换：装备「BKB / 黑皇杖 / Чёрный Скипетр」三种命名互不冲突，按个人习惯混用。</p>
+        </div>
+      </div>
+
+      <!-- Game data localization showcase -->
+      <div style="margin-top: 60px;">
+        <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>同一条决策 · 三个语言</div>
+        <h3 style="font-size:32px;line-height:1.1;letter-spacing:-0.7px;margin:14px 0 12px;font-weight:700;">英雄名、装备名、位置、提示词——<br>都跟着语言走。</h3>
+        <p style="font-size:14px;color:var(--text-2);margin:0 0 28px;max-width:620px;">同一条决策卡片在三种语言下的渲染。所有文本均从官方语言包读取，数字、缩写、位置、状态机提示全部走 i18n。</p>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+          <div style="background:rgba(20,22,28,0.72);border:0.5px solid rgba(240,162,60,0.3);border-radius:14px;overflow:hidden;">
+            <div style="padding:8px 12px;border-bottom:0.5px solid var(--hairline);display:flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:10px;color:var(--warn);letter-spacing:.6px;">
+              <span style="width:18px;height:13px;border-radius:2px;background:rgba(240,162,60,0.2);border:0.5px solid rgba(240,162,60,0.4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">中</span>
+              简体中文 · zh-CN
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);">
+                <span>敌法师 · 1 号位 · 中路</span>
+                <span style="color:var(--warn);font-variant-numeric:tabular-nums;">21:28</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,#F0B25C,#D9893A);border:1.5px solid #F0B25C;font-family:ui-monospace,monospace;font-size:9px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">魔思</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13px;font-weight:700;">幻影法袍 · 主推</div>
+                  <div style="font-size:11px;color:rgba(240,162,60,0.85);">置信 92% · 缺口 1 248g</div>
+                </div>
+              </div>
+              <div style="background:rgba(240,162,60,0.08);border:0.5px solid rgba(240,162,60,0.25);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">驱散控制链，清装备势。</div>
+            </div>
+          </div>
+          <div style="background:rgba(20,22,28,0.72);border:0.5px solid var(--hairline);border-radius:14px;overflow:hidden;">
+            <div style="padding:8px 12px;border-bottom:0.5px solid var(--hairline);display:flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:10px;color:var(--text-2);letter-spacing:.6px;">
+              <span style="width:18px;height:13px;border-radius:2px;background:rgba(255,255,255,0.06);border:0.5px solid var(--hairline);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">EN</span>
+              English · en-US
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);">
+                <span>Anti-Mage · Pos 1 · Mid Lane</span>
+                <span style="font-variant-numeric:tabular-nums;">21:28</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,#9374f6,#7C5CEB);border:1.5px solid #A78BFA;font-family:ui-monospace,monospace;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">MAN</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13px;font-weight:700;">Manta Style · Top pick</div>
+                  <div style="font-size:11px;color:rgba(167,139,250,0.85);">Conf 92% · Need 1,248g</div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">Dispel control chain, sustain DPS.</div>
+            </div>
+          </div>
+          <div style="background:rgba(20,22,28,0.72);border:0.5px solid var(--hairline);border-radius:14px;overflow:hidden;">
+            <div style="padding:8px 12px;border-bottom:0.5px solid var(--hairline);display:flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:10px;color:var(--text-2);letter-spacing:.6px;">
+              <span style="width:18px;height:13px;border-radius:2px;background:rgba(255,255,255,0.06);border:0.5px solid var(--hairline);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">RU</span>
+              Русский · ru-RU
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);">
+                <span>Анти-Маг · Поз. 1 · Центр</span>
+                <span style="font-variant-numeric:tabular-nums;">21:28</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;font-family:ui-monospace,monospace;font-size:9px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">Манта</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:13px;font-weight:700;line-height:1.2;">Манта-стайл · Основной</div>
+                  <div style="font-size:11px;color:rgba(52,211,153,0.85);">Увер. 92% · Нужно 1 248g</div>
+                </div>
+              </div>
+              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">Снять контроль, выживать в драке.</div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text-3);margin-top:14px;line-height:1.55;">位置 / 分路术语（1-5 / Carry-Mid-Off-Soft-Hard）、决策动词（清控 / dispel / снять）、以及复盘中出现的「gank、smoke、抱团」都有官方译名。</p>
+      </div>
+
+      <!-- coverage stat strip -->
+      <div class="lang-coverage-strip">
+        <div class="lang-chip"><div class="num">12</div><div class="lab">UI 语言</div></div>
+        <div class="lang-chip"><div class="num">124</div><div class="lab">英雄 · 装备 · 技能名</div></div>
+        <div class="lang-chip"><div class="num">3</div><div class="lab">术语风格 / 语言</div></div>
+        <div class="lang-chip"><div class="num">200ms</div><div class="lab">切换重绘</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spec grid -->
+  <section>
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>规格</div>
+      <h2 class="section-title">透明，且<br>值得信任。</h2>
+      <p class="section-lead">所有数据流向公开可查；本地优先；可一键导出或彻底清除。</p>
+      <div class="spec-grid">
+        <div class="spec-cell"><div class="l">延迟</div><div class="v">&lt; 600 ms</div><div class="s">从 GSI 推送到 UI 呈现</div></div>
+        <div class="spec-cell"><div class="l">同步频率</div><div class="v">1 Hz</div><div class="s">游戏状态 / 5s 截图节流</div></div>
+        <div class="spec-cell"><div class="l">数据驻留</div><div class="v">本地优先</div><div class="s">默认仅本机；云端按需</div></div>
+        <div class="spec-cell"><div class="l">合规性</div><div class="v">GSI + 日志</div><div class="s">不读内存 · 不注入进程</div></div>
+        <div class="spec-cell"><div class="l">英雄覆盖</div><div class="v">全 124 位</div><div class="s">Crownfall 平衡补丁</div></div>
+        <div class="spec-cell"><div class="l">UI 语言</div><div class="v">12 种</div><div class="s">中简 · 中繁 · EN · RU · ES · PT · ID · MS · VI · TH · JA · KO</div></div>
+        <div class="spec-cell"><div class="l">体积</div><div class="v">42 MB</div><div class="s">macOS Universal · Windows x64</div></div>
+        <div class="spec-cell"><div class="l">登录</div><div class="v">4 种方式</div><div class="s">邮箱 · 微信 · Facebook · GitHub</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" style="background: var(--bg-2);">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>价格</div>
+      <h2 class="section-title">简单。透明。<br>随时取消。</h2>
+
+      <div class="pricing">
+        <div class="price-card">
+          <div class="plan">FREE</div>
+          <div class="amount">¥0<small> /永久</small></div>
+          <p class="note">入门必备。每天可用基础推荐 + 翻译。</p>
+          <ul>
+            <li>主推装备建议</li>
+            <li>聊天翻译（每日 200 条）</li>
+            <li>历史对局保留 7 天</li>
+            <li>本地账号</li>
+          </ul>
+          <a class="btn-buy" href="https://github.com/amefys/web/releases/latest" target="_blank" rel="noopener">免费下载</a>
+        </div>
+        <div class="price-card feature">
+          <div class="plan">PRO</div>
+          <div class="amount">¥38<small> /月</small></div>
+          <p class="note">为认真打天梯的人设计。年付 ¥328。</p>
+          <ul>
+            <li>四种推荐视图（主推 / Top3 / 时间线 / 反制）</li>
+            <li>翻译无限 · 9 种聊天语言· 12 种 UI</li>
+            <li>云端历史对局无限</li>
+            <li>AI 复盘 · 每日 5 次</li>
+            <li>多设备同步</li>
+          </ul>
+          <button class="btn-buy">7 天免费试用</button>
+        </div>
+        <div class="price-card">
+          <div class="plan">TEAM</div>
+          <div class="amount">¥168<small> /月</small></div>
+          <p class="note">5 人战队席位。共享教练面板与回放笔记。</p>
+          <ul>
+            <li>所有 PRO 特性</li>
+            <li>共享战队历史与笔记</li>
+            <li>教练复盘视图</li>
+            <li>对手研究包</li>
+          </ul>
+          <button class="btn-buy">联系销售</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="eyebrow" style="text-align: center; display: flex; justify-content: center;"><span class="bar"></span>常见问题</div>
+      <h2 class="section-title" style="text-align:center;margin-left:auto;margin-right:auto;">关于 AMEFYS<br>你想知道的。</h2>
+      <div class="faq">
+        <details open="">
+          <summary>AMEFYS 这个名字是怎么来的？</summary>
+          <p style="border-width: 0px; border-style: solid; letter-spacing: 0px;">来自 DOTA 圈一个流传已久的梗：<span style="color: rgb(167, 139, 250); letter-spacing: 0px;">AME</span> + <span style="color: rgb(167, 139, 250);">FY</span> + <span style="color: rgb(167, 139, 250);">Somethings</span>。</p><p style="border-width: 0px; border-style: solid;"><span style="color: rgb(167, 139, 250);">AME</span>：取自中国战队的核心 Carry 选手别名<br><span style="color: rgb(167, 139, 250);">FY</span>：取自老一代 4 号位传奇别名<br><span style="color: rgb(167, 139, 250);">Somethings</span>："那些东西"</p>
+        </details>
+        <details open="">
+          <summary>使用 AMEFYS 会被 Valve 封号吗？</summary>
+          <p>不会。AMEFYS 仅使用 Valve 官方提供的 Game State Integration 公共接口读取对局状态（启动选项需加 <code>-gamestateintegration</code>，Valve 2022 起的默认要求）。回发消息走 DOTA 内置聊天框热键 + 剪贴板粘贴，与玩家手动操作完全等价：不读取游戏内存、不修改客户端文件、不拦截网络流量、不发出任何官方 API 之外的指令。</p>
+        </details>
+        <details>
+          <summary>正式天梯能看到敌方装备 / 队友经济 / 小地图位置吗？</summary>
+          <p>不能。这是 Valve 反作弊设计的限制：正式对局中 GSI 只推送「自己英雄」相关数据。AMEFYS 不会绕过此限制，所有建议均基于你自己的状态 + 选英雄阶段已公开的双方阵容。观战 / 教程 / Demo 模式下可以拿到完整数据。</p>
+        </details>
+        <details>
+          <summary>翻译能自动发送回游戏吗？</summary>
+          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。</p>
+        </details>
+        <details open="">
+          <summary>翻译是云端处理还是本地？</summary>
+          <p>默认为混合模式：常见战术口令由本地小模型即时翻译；超过 8 个词的长句送云端处理。完全离线模式可在设置中开启，但会牺牲部分准确度。</p>
+        </details>
+        <details>
+          <summary>支持中国大陆账号吗？</summary>
+          <p>支持。完美兰国服、Steam 国际服、东南亚服均可使用。微信登录与翻译云端走国内节点，延迟 &lt; 80ms。</p>
+        </details>
+        <details>
+          <summary>对电脑配置有要求吗？</summary>
+          <p>无额外要求。AMEFYS 占用资源极低（&lt; 200MB 内存），与 DOTA 2 同时运行的帧数损失 &lt; 1%。</p>
+        </details>
+        <details>
+          <summary>取消订阅后历史数据会丢失吗？</summary>
+          <p>不会。所有本地数据完整保留；云端数据保留 90 天，期间可随时导出或恢复订阅。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <h2>文斗 1v9，<br>全球<em>无敌手</em>。</h2>
+    <p>免费下载 AMEFYS，用 7 分钟完成首次配置，从下一场对局起感受变化。</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a class="btn-cta primary" href="https://github.com/amefys/web/releases/latest/download/AMEFYS.dmg" rel="noopener">macOS 下载</a>
+      <a class="btn-cta ghost" href="https://github.com/amefys/web/releases/latest/download/AMEFYS-Setup.exe" rel="noopener">Windows 下载</a>
+    </div>
+    <div class="platforms" style="margin-top:18px;">macOS 13+ · Windows 11 · 42 MB</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-col">
+        <div class="ft-brand"><div class="brand-mark"></div><div style="font-weight:700;font-size:15px;letter-spacing:-.3px;">AMEFYS</div></div>
+        <div class="ft-tag">文斗 1v9，全球无敌手。<br>DOTA 2 免费实时决策助手。</div>
+      </div>
+      <div class="ft-col">
+        <h5>产品</h5>
+        <a href="#features">特性</a>
+        <a href="#translate">翻译</a>
+        <a href="#pricing">价格</a>
+        <a href="#">更新日志</a>
+        <a href="#">路线图</a>
+      </div>
+      <div class="ft-col">
+        <h5>资源</h5>
+        <a href="#">文档</a>
+        <a href="#">英雄数据库</a>
+        <a href="#">装备数据库</a>
+        <a href="#">开发者 API</a>
+      </div>
+      <div class="ft-col">
+        <h5>公司</h5>
+        <a href="#">关于</a>
+        <a href="#">博客</a>
+        <a href="#">招聘</a>
+        <a href="#">媒体资源</a>
+      </div>
+      <div class="ft-col">
+        <h5>支持</h5>
+        <a href="#">帮助中心</a>
+        <a href="#">联系我们</a>
+        <a href="#">状态</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+      <div class="ft-legal">
+        <a href="#">隐私</a>
+        <a href="#">条款</a>
+        <a href="#">Cookie</a>
+        <a href="#">中文 / 简体</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+</body></html>

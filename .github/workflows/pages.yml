@@ -1,0 +1,44 @@
+name: Deploy GitHub Pages
+
+# Publishes the static site at the repo root to GitHub Pages. Triggered
+# on every push to main (any change to index.html, CNAME, assets/, etc.)
+# and lets the new amefys/web release workflow (which runs in this same
+# repo whenever the installer artifacts land) re-deploy the page without
+# extra plumbing — the release upload commits nothing here, so this
+# workflow is effectively a "deploy on content change" hook.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Repo root contains index.html + CNAME; nothing to build.
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
