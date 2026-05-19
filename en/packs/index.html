@@ -105,6 +105,45 @@
   .howto-text code { font-family: ui-monospace, monospace; font-size: 12px;
     background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; }
 
+  /* Leaderboard band — hidden until /p/stats.json resolves */
+  .leaderboard {
+    display: none;
+    margin: 0 0 24px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, rgba(240,162,60,0.10), rgba(244,114,182,0.10));
+    border: 0.5px solid var(--hairline);
+    align-items: center; gap: 14px;
+    font-size: 13px;
+  }
+  .leaderboard[data-active='true'] { display: flex; }
+  .leaderboard-icon { font-size: 18px; }
+  .leaderboard-label { color: var(--warn); font-weight: 700; letter-spacing: .4px; flex-shrink: 0; }
+  .leaderboard-list { display: flex; flex-wrap: wrap; gap: 10px; color: var(--text-2); }
+  .leaderboard-list a { color: var(--text); font-weight: 600; }
+  .leaderboard-list a:hover { color: var(--violet); }
+  .leaderboard-list .lb-medal { margin-right: 4px; }
+  .leaderboard-list .lb-count { color: var(--text-3); font-size: 11.5px; margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+  /* Rank-medal badge — JS sets data-rank on top-3 cards */
+  .pack-card[data-rank] { border-color: rgba(240,162,60,0.45); }
+  .pack-card[data-rank='1'] { border-color: rgba(240,162,60,0.7); box-shadow: 0 0 0 0.5px rgba(240,162,60,0.45) inset, 0 12px 32px rgba(240,162,60,0.18); }
+  .rank-medal {
+    position: absolute;
+    top: 14px; right: 14px;
+    height: 26px; padding: 0 10px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, var(--warn), #d97706);
+    color: #fff;
+    font-size: 11px; font-weight: 800; letter-spacing: .4px;
+    display: none; align-items: center; gap: 4px;
+    box-shadow: 0 4px 12px rgba(240,162,60,0.35);
+    z-index: 2;
+  }
+  .pack-card[data-rank] .rank-medal { display: inline-flex; }
+  .pack-card[data-rank='2'] .rank-medal { background: linear-gradient(135deg, #c0c0c0, #94a3b8); box-shadow: 0 4px 12px rgba(148,163,184,0.35); }
+  .pack-card[data-rank='3'] .rank-medal { background: linear-gradient(135deg, #b8732b, #8b4513); box-shadow: 0 4px 12px rgba(184,115,43,0.35); }
+
   .pack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
   .pack-card {
     position: relative;
@@ -255,8 +294,15 @@
       </div>
     </div>
 
+    <!-- Top-3 leaderboard — populated by JS once /p/stats.json resolves -->
+    <div class="leaderboard" id="leaderboard" data-active="false">
+      <span class="leaderboard-icon" aria-hidden="true">🔥</span>
+      <span class="leaderboard-label">Hot downloads this week</span>
+      <div class="leaderboard-list" id="lb-list"></div>
+    </div>
+
     <div class="pack-grid">
-      <article class="pack-card" data-tone="essentials">
+      <article class="pack-card" data-tone="essentials" data-pack-slug="essentials"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Essentials · Greetings &amp; Manners</h3>
           <span class="pack-badge">Essentials</span>
@@ -279,7 +325,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="cn-tactics">
+      <article class="pack-card" data-tone="cn-tactics" data-pack-slug="cn-tactics"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Tactical Commands · 中文</h3>
           <span class="pack-badge">Tactics</span>
@@ -302,7 +348,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="intl-en">
+      <article class="pack-card" data-tone="intl-en" data-pack-slug="intl-en"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">International · English</h3>
           <span class="pack-badge">International</span>
@@ -325,7 +371,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="banter-cn">
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="banter-cn"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Banter Classics · 中文</h3>
           <span class="pack-badge">★ Viral</span>
@@ -350,7 +396,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="numbers">
+      <article class="pack-card" data-tone="numbers" data-pack-slug="numbers-meme"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Number Memes · Universal</h3>
           <span class="pack-badge">Meme</span>
@@ -374,7 +420,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="timings">
+      <article class="pack-card" data-tone="timings" data-pack-slug="timings"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Timings · High-MMR Pack</h3>
           <span class="pack-badge">Power user</span>
@@ -398,7 +444,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="ru">
+      <article class="pack-card" data-tone="ru" data-pack-slug="ru-friendly"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">Russian · Friendly Vocabulary</h3>
           <span class="pack-badge">CIS region</span>
@@ -423,7 +469,7 @@
         </div>
       </article>
 
-      <article class="pack-card" data-tone="sea">
+      <article class="pack-card" data-tone="sea" data-pack-slug="sea-international"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">SEA · South-East Asia Mix</h3>
           <span class="pack-badge">SEA</span>
@@ -457,5 +503,74 @@
   <footer class="footer">
     <div>© 2026 AMEFYS · MIT · Not affiliated with Valve / DOTA 2</div>
   </footer>
+
+  <script>
+    /*
+     * Pack download tracking + leaderboard. See ZH version for full
+     * commentary — same code, EN labels.
+     */
+    (function () {
+      const MEDALS = { 1: '🥇', 2: '🥈', 3: '🥉' }
+      const SLUG_TO_NAME = {
+        'essentials': 'Essentials',
+        'cn-tactics': 'CN Tactics',
+        'intl-en': 'International',
+        'banter-cn': 'Banter',
+        'numbers-meme': 'Number Memes',
+        'timings': 'Timings',
+        'ru-friendly': 'Russian',
+        'sea-international': 'SEA'
+      }
+
+      function fireBeacon(slug) {
+        if (!slug) return
+        try {
+          fetch('/p/track?p=' + encodeURIComponent(slug), { keepalive: true }).catch(() => {})
+        } catch (_) { /* ignore — beacon is best-effort */ }
+      }
+
+      document.querySelectorAll('.pack-card[data-pack-slug] .btn-download').forEach((a) => {
+        const card = a.closest('.pack-card')
+        const slug = card.getAttribute('data-pack-slug')
+        a.addEventListener('click', () => fireBeacon(slug))
+      })
+
+      fetch('/p/stats.json')
+        .then((r) => r.ok ? r.json() : null)
+        .then((data) => {
+          if (!data || !data.counts) return
+          const counts = data.counts
+          const ranked = Object.entries(counts)
+            .filter(([, n]) => n > 0)
+            .sort((a, b) => b[1] - a[1])
+          if (ranked.length === 0) return
+          ranked.slice(0, 3).forEach(([slug, n], i) => {
+            const card = document.querySelector('.pack-card[data-pack-slug="' + slug + '"]')
+            if (!card) return
+            card.setAttribute('data-rank', String(i + 1))
+            const medal = card.querySelector('.rank-medal')
+            if (medal) medal.textContent = MEDALS[i + 1] + ' ' + (n >= 1000 ? (n / 1000).toFixed(1) + 'k' : n)
+          })
+          const list = document.getElementById('lb-list')
+          if (list) {
+            ranked.slice(0, 3).forEach(([slug, n], i) => {
+              const a = document.createElement('a')
+              a.href = '#' + slug
+              a.innerHTML = '<span class="lb-medal">' + MEDALS[i + 1] + '</span>' +
+                            (SLUG_TO_NAME[slug] || slug) +
+                            '<span class="lb-count">' + n + '</span>'
+              a.addEventListener('click', (e) => {
+                e.preventDefault()
+                const card = document.querySelector('.pack-card[data-pack-slug="' + slug + '"]')
+                if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' })
+              })
+              list.appendChild(a)
+            })
+            document.getElementById('leaderboard').setAttribute('data-active', 'true')
+          }
+        })
+        .catch(() => { /* worker not deployed yet — silent */ })
+    })()
+  </script>
 </body>
 </html>
