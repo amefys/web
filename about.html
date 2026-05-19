@@ -63,6 +63,26 @@
   }
   .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
 
+  /* Language switcher */
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline);
+  }
+  .lang-switch a {
+    color: var(--text-3);
+    transition: color .12s;
+    padding: 0 2px;
+  }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
   /* Page layout */
   .page {
     max-width: 1080px; margin: 0 auto; padding: 80px 24px 60px;
@@ -289,6 +309,11 @@
         <a href="/about.html" data-active="true">关于</a>
       </div>
       <div class="actions">
+        <div class="lang-switch">
+          <a href="/about.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="/en/about.html">EN</a>
+        </div>
         <a class="btn-text" href="#">登录</a>
         <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
       </div>

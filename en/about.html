@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About AMEFYS — Trash-talk 1v9. Anywhere on Earth.</title>
+<link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Top nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.15) inset, 0 4px 12px rgba(124,92,235,0.35); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+
+  /* Language switcher */
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline);
+  }
+  .lang-switch a { color: var(--text-3); transition: color .12s; padding: 0 2px; }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  /* Page layout */
+  .page { max-width: 1080px; margin: 0 auto; padding: 80px 24px 60px; }
+
+  /* Hero with avatar */
+  .hero-about { text-align: center; margin-bottom: 64px; }
+  .hero-avatar {
+    width: 110px; height: 110px; margin: 0 auto 24px;
+    border-radius: 26px;
+    background: linear-gradient(135deg, #1c1830, #0a0a14);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 12px 40px rgba(124,92,235,0.25);
+  }
+  .hero-avatar svg { width: 70%; height: 70%; }
+  .hero-about h1 {
+    font-size: 44px; letter-spacing: -1.2px; font-weight: 700;
+    margin: 0 0 14px;
+  }
+  .hero-about p {
+    font-size: 15px; color: var(--text-2); margin: 0; line-height: 1.6;
+  }
+
+  /* Contact cards */
+  .contact-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; margin-bottom: 56px;
+  }
+  .contact-card {
+    padding: 24px; border-radius: var(--r-lg);
+    background: var(--surface);
+    border: 0.5px solid var(--hairline);
+    transition: border-color .15s, transform .15s;
+  }
+  .contact-card:hover {
+    border-color: var(--hairline-strong);
+    transform: translateY(-2px);
+  }
+  .contact-head {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 18px;
+  }
+  .contact-icon {
+    width: 36px; height: 36px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .contact-icon.discord { background: rgba(88,101,242,0.16); color: #5865f2; }
+  .contact-icon.x       { background: rgba(255,255,255,0.06); color: #f3f3f6; }
+  .contact-icon.email   { background: rgba(91,140,255,0.15); color: #5b8cff; }
+  .contact-icon.github  { background: rgba(255,255,255,0.08); color: #f3f3f6; }
+  .contact-label { font-size: 15px; font-weight: 600; }
+  .contact-id {
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.2px;
+    color: var(--text);
+    word-break: break-all;
+    margin-bottom: 6px;
+  }
+  .contact-id a { color: inherit; }
+  .contact-id a:hover { color: var(--violet); }
+  .contact-sub { font-size: 12.5px; color: var(--text-3); }
+  .contact-stub {
+    height: 140px;
+    margin-top: 14px;
+    border-top: 0.5px solid var(--hairline);
+    padding-top: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-3); font-size: 12.5px;
+    text-align: center; padding-left: 16px; padding-right: 16px;
+    line-height: 1.55;
+  }
+
+  /* Letter */
+  .letter {
+    padding: 36px 40px;
+    border-radius: var(--r-xl);
+    background: linear-gradient(180deg, rgba(167,139,250,0.05), rgba(167,139,250,0.02));
+    border: 0.5px solid var(--hairline);
+    margin-bottom: 48px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(235,235,245,0.86);
+  }
+  .letter .salute { font-weight: 600; color: var(--text); margin-bottom: 18px; }
+  .letter p { margin: 0 0 18px; }
+  .letter .sign {
+    text-align: right;
+    color: var(--text-2);
+    margin-top: 28px;
+    font-style: italic;
+  }
+  .letter em.hl {
+    color: var(--violet);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* Coffee CTA */
+  .coffee-row { text-align: center; margin: 0 0 24px; }
+  .btn-coffee {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 48px; padding: 0 28px; border-radius: 24px;
+    background: #34d399; color: #0a0a14;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
+    text-decoration: none; border: 0; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(52,211,153,0.35);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-coffee:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(52,211,153,0.5);
+  }
+  .coffee-hint { font-size: 11.5px; color: var(--text-3); margin-top: 12px; }
+
+  /* Footer */
+  footer {
+    max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero-about h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .letter { padding: 24px 22px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/en/"><span class="brand-mark"></span>AMEFYS</a>
+      <div class="links">
+        <a href="/en/#pillars">Features</a>
+        <a href="/en/#assist">Assistant</a>
+        <a href="/en/#trash">Trash-talk 1v9</a>
+        <a href="/en/#faction">Faction-aware</a>
+        <a href="/en/#i18n">Languages</a>
+        <a href="/en/#faq">FAQ</a>
+        <a href="/en/about.html" data-active="true">About</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="/about.html">中文</a>
+          <span class="sep">·</span>
+          <a href="/en/about.html" aria-current="page">EN</a>
+        </div>
+        <a class="btn-text" href="#">Sign in</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">Free download</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="hero-about">
+      <div class="hero-avatar">
+        <svg viewBox="0 0 1024 1024" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#9a7dff"/>
+              <stop offset="100%" stop-color="#5B3AE0"/>
+            </linearGradient>
+          </defs>
+          <path d="M512 240 L744 730 L649 730 L512 429 L374 730 L280 730 Z" fill="url(#ag)"/>
+          <rect x="376" y="566" width="280" height="72" rx="16" fill="#fff" opacity="0.94"/>
+        </svg>
+      </div>
+      <h1>About AMEFYS</h1>
+      <p><strong>Trash-talk 1v9. Anywhere on Earth.</strong></p>
+    </div>
+
+    <!-- Letter (EN-community-tailored) -->
+    <div class="letter">
+      <div class="salute"><em class="hl">Hey Dota lifers,</em></div>
+
+      <p>If you've been queueing for Dota 2 long enough that <strong>Na'Vi's fountain hook</strong> still gives you chills, that <strong>Alliance's TI3 rat doto</strong> made you laugh and cry, that <strong>OG's back-to-back TI8/TI9 underdog run</strong> is the single greatest sports story you've ever watched — you and we are on the same page.</p>
+
+      <p>You also know the other side of that fairy tale. You queue into EU East at 2 AM, and three of your teammates start spamming Cyrillic <em>before the horn even sounds</em>. You queue into US East and the Peruvians from SA bridging up the ping flame in Spanish from minute one. You queue into SEA and read "ez mid feeder" in Bahasa Indonesia, in Vietnamese, in Tagalog. <em class="hl">You can hear the tone, you can't read the words, and you can't fire back in their language.</em> So you mute and lose.</p>
+
+      <p>We thought about Dota Plus. It's <strong>built by Valve</strong>, it's <strong>good</strong> at item suggestions, and it costs <em>real money every month</em>. Then you check the official ranked translation toggle and… there isn't one. <strong>Dota Plus is a paywall in front of features that everyone deserves.</strong></p>
+
+      <p>So we built <em class="hl">AMEFYS</em>. Every paid feature of the official coach — item picks, timing windows, hero counters, post-match takeaways — completely free, forever. <strong>Real-time chat translation</strong> in 9 languages — type English, hit one button, your reply lands in the Russian guy's chat in Cyrillic before he's done flaming. <strong>A UI that shifts mood</strong> with your side: emerald daylight when you draw Radiant, lavender moonlight when you load into Dire. The assistant always feels like your team.</p>
+
+      <p>Dota 2 is the deepest game on the planet. It's also <strong>15 years old</strong>. The community is content-creator-rich — BSJ doing Crusader-to-Immortal hero spotlights, Purge with the unmatched essay-length analyses, Wagamama drafting fundamentals from the Riki era. Their craft is why we have a community at all in 2026.</p>
+
+      <p>AMEFYS is our love letter back to that community: <em class="hl">a free coach for every pub player</em>. Hindi-speaking solo carry in Mumbai, Quechua-speaking pos 4 in Lima, Turkish stack at 4 AM, Filipino esports house grinding ranked at Cebu — all on the same footing, finally.</p>
+
+      <p>We're a tiny team and AMEFYS will only get better through the people using it. Every <strong>GitHub issue</strong> you file, every <strong>Discord message</strong> you post, every <strong>"hey can you add X"</strong> email — gets read. That's the only reason this exists.</p>
+
+      <p>And whatever side of the map fate gives you next match — radiant top lane, dire safe lane, mid against a five-time Top 10 immortal in your shotcalling channel: <em class="hl">trash-talk 1v9, anywhere on Earth.</em></p>
+
+      <div class="sign">— <em class="hl">AMEFYS</em>, with love from a Dota pub somewhere</div>
+    </div>
+
+    <!-- Contact cards -->
+    <div class="contact-grid">
+      <!-- Discord -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon discord">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.317 4.369A19.7 19.7 0 0 0 16.18 3a.07.07 0 0 0-.073.034c-.176.308-.371.71-.508 1.025a18.4 18.4 0 0 0-5.205 0 9.7 9.7 0 0 0-.516-1.025.07.07 0 0 0-.074-.034 19.6 19.6 0 0 0-4.142 1.37.07.07 0 0 0-.03.027C2.553 8.045 1.879 11.633 2.213 15.177a.08.08 0 0 0 .031.054 19.8 19.8 0 0 0 5.93 2.95.08.08 0 0 0 .083-.028 14 14 0 0 0 1.21-1.93.07.07 0 0 0-.041-.099 13 13 0 0 1-1.852-.86.07.07 0 0 1-.008-.118c.124-.092.249-.188.367-.285a.07.07 0 0 1 .073-.01c3.927 1.764 8.18 1.764 12.061 0a.07.07 0 0 1 .074.009c.119.097.243.194.368.286a.07.07 0 0 1-.006.118 12 12 0 0 1-1.853.859.07.07 0 0 0-.04.1c.36.687.766 1.341 1.211 1.93a.08.08 0 0 0 .083.027 19.7 19.7 0 0 0 5.937-2.95.08.08 0 0 0 .03-.053c.399-4.097-.668-7.658-2.821-10.81a.06.06 0 0 0-.03-.028zM8.02 13.062c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.958-2.38 2.157-2.38 1.21 0 2.176 1.076 2.157 2.38 0 1.311-.957 2.38-2.157 2.38m7.974 0c-1.181 0-2.157-1.069-2.157-2.38 0-1.312.958-2.38 2.157-2.38 1.21 0 2.176 1.076 2.157 2.38 0 1.311-.948 2.38-2.157 2.38"/>
+            </svg>
+          </div>
+          <div class="contact-label">Discord</div>
+        </div>
+        <div class="contact-id"><a href="#" rel="noopener">discord.gg/amefys</a></div>
+        <div class="contact-sub">Bug reports · feature requests · pub stories</div>
+        <div class="contact-stub">Hang out with the dev team and<br>other Dota players using AMEFYS<br>across NA / EU / SA / SEA.</div>
+      </div>
+
+      <!-- X / Twitter -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon x">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </div>
+          <div class="contact-label">X / Twitter</div>
+        </div>
+        <div class="contact-id"><a href="https://twitter.com/amefys_app" target="_blank" rel="noopener">@amefys_app</a></div>
+        <div class="contact-sub">Updates · patch notes · meta takes</div>
+        <div class="contact-stub">Daily-ish updates: new hero data,<br>patch coverage, ranked queue gossip.<br>DMs open for partnership / press.</div>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m3 7 9 7 9-7"/>
+            </svg>
+          </div>
+          <div class="contact-label">Email</div>
+        </div>
+        <div class="contact-id"><a href="mailto:hello@amefys.com">hello@amefys.com</a></div>
+        <div class="contact-sub">We reply within 24 hours</div>
+        <div class="contact-stub">Tell us the feature you want most<br>or the bug you keep hitting —<br>every email is read by a human.</div>
+      </div>
+
+      <!-- GitHub -->
+      <div class="contact-card">
+        <div class="contact-head">
+          <div class="contact-icon github">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.27-5.24-5.67 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.17a10.96 10.96 0 015.74 0c2.19-1.48 3.15-1.17 3.15-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.38-5.25 5.66.41.35.78 1.05.78 2.12v3.15c0 .31.21.66.79.55C20.21 21.39 23.5 17.08 23.5 12c0-6.35-5.15-11.5-11.5-11.5z"/>
+            </svg>
+          </div>
+          <div class="contact-label">GitHub</div>
+        </div>
+        <div class="contact-id"><a href="https://github.com/amefys" target="_blank" rel="noopener">github.com/amefys</a></div>
+        <div class="contact-sub">File issues · star the repo · read the source</div>
+        <div class="contact-stub">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet); font-weight: 600; font-size: 13px;">→ Open an issue</a>
+            <a href="https://github.com/amefys" target="_blank" rel="noopener" style="color: var(--text-2);">Browse all repositories</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coffee CTA -->
+    <div class="coffee-row">
+      <a class="btn-coffee" href="https://buymeacoffee.com/amefys" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5C19 16.5 12 21 12 21z"/>
+        </svg>
+        Buy us a coffee
+      </a>
+      <div class="coffee-hint">Every coffee keeps AMEFYS shipping the next bug fix.</div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 AMEFYS · Not affiliated with Valve / DOTA 2</div>
+    <div>
+      <a href="/en/">Home</a>
+      <a href="/en/about.html">About</a>
+      <a href="mailto:hello@amefys.com">Contact</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe'
+      : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>
