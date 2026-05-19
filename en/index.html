@@ -49,9 +49,8 @@
     font-size: 12.5px; font-weight: 500;
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
-  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
-    box-shadow: 0 0 12px rgba(167,139,250,0.5); }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
   .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; }
   .nav .links a:hover { color: var(--text); }
   .nav .actions { display: flex; gap: 12px; align-items: center; }
@@ -407,13 +406,14 @@
   <!-- Top Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html"><span class="brand-mark"></span>AMEFYS</a>
+      <a class="brand" href="index.html"><img class="brand-mark" src="../assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
         <a href="#pillars">Features</a>
-        <a href="#assist">Assistant</a>
         <a href="#trash">Trash-talk 1v9</a>
-        <a href="#faction">Faction-aware</a>
+        <a href="#assist">Assistant</a>
+        <a href="#skins">Skins</a>
         <a href="#i18n">Languages</a>
+        <a href="#faction">Faction</a>
         <a href="#faq">FAQ</a>
         <a href="about.html">About</a>
       </div>
@@ -490,7 +490,7 @@
     </div>
     <div class="platforms">macOS 13+ · Windows 11 · free forever · no IAP · no ads</div>
 
-    <div class="preview-wrap">
+    <div class="preview-wrap" style="position:relative;">
       <div class="preview">
         <div class="titlebar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
         <div class="preview-body">
@@ -508,12 +508,33 @@
             </div>
           </aside>
           <main class="pv-main">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;">
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(167,139,250,0.07);border:0.5px solid rgba(167,139,250,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">Level</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">Lv 13</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(52,211,153,0.07);border:0.5px solid rgba(52,211,153,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">GPM</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--emerald);">642</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(240,162,60,0.07);border:0.5px solid rgba(240,162,60,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">XPM</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--warn);">+12%</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(217,83,79,0.07);border:0.5px solid rgba(217,83,79,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">KDA</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">6/1/4</div>
+              </div>
+            </div>
+
             <div style="display:flex;align-items:flex-end;justify-content:space-between;">
               <div>
-                <div class="pv-h">Anti-Mage · Lv 13 · 21:28</div>
-                <div class="pv-sub">Laning phase · Radiant mid · GPM 642</div>
+                <div class="pv-h">Anti-Mage · 21:28</div>
+                <div class="pv-sub">Laning phase · Radiant mid · Top pick · Conf 92%</div>
               </div>
-              <div style="font-size:11px;color:var(--violet);font-weight:600;letter-spacing:.6px;">Top pick · Conf 92%</div>
+              <div style="font-size:10px;color:var(--emerald);font-weight:700;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;gap:6px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></span>GSI · 1Hz
+              </div>
             </div>
             <div class="pv-card accent">
               <div style="display:flex;gap:14px;align-items:center;">
@@ -546,56 +567,206 @@
             </div>
           </main>
           <aside class="pv-right">
-            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">Live translation</div>
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">Themes</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg, var(--violet), var(--violet-deep));border:1.5px solid var(--violet);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">Default<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.7);">violet</span></div>
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#0a0e1a);border:0.5px solid rgba(6,182,212,0.4);font-size:9.5px;font-weight:700;color:#06b6d4;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;font-family:ui-monospace,monospace;">CYBER<span style="font-size:8.5px;font-weight:500;color:rgba(6,182,212,0.7);">neon HUD</span></div>
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#f472b6,#A78BFA);border:0.5px solid rgba(255,255,255,0.2);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">Glass<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.75);font-style:italic;">liquid fog</span></div>
+              <div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);font-size:9.5px;font-weight:600;color:var(--text-3);letter-spacing:.3px;display:flex;align-items:center;justify-content:center;">+</div>
+            </div>
+
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:4px;">Live translation</div>
             <div class="chat-bubble them">
               <div class="who">Yatoro · 🇷🇺</div>
-              <div class="raw">AM пуш мид сейчас, помогите!</div>
-              <div class="tr">AM push mid now, need help!</div>
-            </div>
-            <div class="chat-bubble them">
-              <div class="who">miposika · 🇮🇩</div>
-              <div class="raw">beli BKB sekarang</div>
-              <div class="tr">buy BKB now</div>
+              <div class="raw">AM пуш мид сейчас!</div>
+              <div class="tr">AM push mid now!</div>
             </div>
             <div class="chat-bubble me">
               <div class="raw">arriving in 30s, fall back first</div>
               <div class="tr">30s 后到，先撤</div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;">
-              <span class="lang-tag">Group mid</span>
-              <span class="lang-tag">Fall back</span>
-              <span class="lang-tag">Push tower</span>
+              <span class="lang-tag on">GG</span>
+              <span class="lang-tag on">Fall back</span>
+              <span class="lang-tag on">Push tower</span>
               <span class="lang-tag">?</span>
             </div>
           </aside>
         </div>
       </div>
+
+      <!-- Floating overlay window — pinned over the game during live matches -->
+      <div aria-hidden="true" style="position:absolute;right:-20px;bottom:-30px;width:230px;border-radius:14px;background:rgba(8,9,13,0.92);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:0.5px solid rgba(167,139,250,0.35);box-shadow:0 24px 64px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.06) inset, 0 0 32px rgba(167,139,250,0.18);overflow:hidden;z-index:2;">
+        <div style="padding:8px 12px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;font-size:10px;">
+          <span style="width:10px;height:10px;border-radius:3px;background:var(--violet);"></span>
+          <span style="font-weight:700;letter-spacing:.3px;">Overlay · Always on top</span>
+          <span style="margin-left:auto;color:var(--emerald);font-family:ui-monospace,monospace;font-size:9px;">LIVE</span>
+        </div>
+        <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));border:1px solid var(--violet);font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">MAN</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;font-weight:700;color:#fff;">Manta Style</div>
+              <div style="font-size:9.5px;color:var(--text-3);">Top pick · Need 1,248g</div>
+            </div>
+          </div>
+          <div style="height:1px;background:rgba(255,255,255,0.06);"></div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="font-size:9px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;font-weight:700;">Events</div>
+            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--emerald);font-weight:700;">21:28</span> · Kill +1 (mid)</div>
+            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--warn);font-weight:700;">22:14</span> · Roshan ETA ≈ 25:10</div>
+          </div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;">
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.36);color:var(--emerald);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">GG</span>
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.36);color:var(--violet);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">NP</span>
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);color:var(--text-2);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">Block ▸</span>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- Four pillars strip -->
+  <!-- Six pillars strip -->
   <section id="pillars" style="padding: 90px 24px; border-top: 0.5px solid var(--hairline); background: linear-gradient(180deg, transparent, rgba(167,139,250,0.03));">
     <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="pillar-grid">
-        <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--emerald);">01 / FREE FOREVER</div>
-          <div class="pipe-h">A live coach that costs $0</div>
-          <p class="pipe-p">Item picks, timing windows, counter intel — feature-parity with the paid coach overlays. Zero IAP. Zero ads. Zero "limited-time" gates.</p>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;" class="pillar-grid">
         <div class="pipe-card" style="border-color: rgba(217,83,79,0.4); background: linear-gradient(180deg, rgba(217,83,79,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--dire);">02 / TRASH-TALK 1v9</div>
+          <div class="pipe-num" style="color:var(--dire);">01 / TRASH-TALK 1v9</div>
           <div class="pipe-h">Never get flamed in a language you don't read</div>
-          <p class="pipe-p">9-language real-time two-way translation. You read English; they read Russian; nobody misses a beat in the chat war.</p>
+          <p class="pipe-p">9-language real-time translation + one-tap reply packs: single-line or block-sequenced. You read English; they read Russian; nobody misses a beat.</p>
         </div>
-        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--violet);">03 / FACTION-AWARE</div>
-          <div class="pipe-h">UI shifts with your side</div>
-          <p class="pipe-p">Emerald daylight when you load into Radiant. Lavender moonlight when you draw Dire. The mood follows you — not a static skin.</p>
+        <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--emerald);">02 / FREE FOREVER</div>
+          <div class="pipe-h">A live coach that costs $0</div>
+          <p class="pipe-p">Live match telemetry, item picks, timing windows, counter intel — feature-parity with the paid coach overlays. Zero IAP. Zero ads. Zero "limited-time" gates.</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(6,182,212,0.4); background: linear-gradient(180deg, rgba(6,182,212,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:#06b6d4;">03 / MULTI-SKIN</div>
+          <div class="pipe-h">Three full skin packs</div>
+          <p class="pipe-p">Default + Cyberpunk + Liquid Glass. Each pack rebuilds background, typography, card corners, and motion. Your pick syncs across devices.</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(240,162,60,0.4); background: linear-gradient(180deg, rgba(240,162,60,0.08), var(--bg-2));">
           <div class="pipe-num" style="color:var(--warn);">04 / 12 LANGUAGES</div>
           <div class="pipe-h">Full UI in 12 languages</div>
           <p class="pipe-p">The app, the terminology, the docs, this site — all localised. From the Amazon to South-East Asian internet cafés, every Dota player picks in their native tongue.</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--violet);">05 / FACTION-AWARE</div>
+          <div class="pipe-h">UI shifts with your side</div>
+          <p class="pipe-p">Emerald daylight when you load into Radiant. Lavender moonlight when you draw Dire. The mood follows you — not a static skin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trash-talk / Translate -->
+  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(217,83,79,0.04), rgba(52,211,153,0.04), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>Feature 01 · Trash-talk 1v9 · Translate + One-tap reply</div>
+      <h2 class="section-title">They flame Russian.<br>You read <em style="color:var(--dire);font-style:normal;">English</em>.<br><em style="color:var(--emerald);font-style:normal;">One tap</em>, full reply sent.</h2>
+      <p class="section-lead">Nine languages, real-time, end-to-end under 600 ms. The reply path is one click: tap a chip → translate → write clipboard → bring up the Dota chat box → paste → enter. GG / GLHF / NP / WP fire a single line; <strong style="color:var(--emerald);">block</strong> chips push N lines in order with a 100ms – 10s configurable gap. Beyond the presets, build unlimited custom packs and trade them as portable JSON. The chat war is no longer one-sided — finally a fair international match.</p>
+
+      <div class="translate-demo">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Languages supported</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">EN · 中 · RU · ES · PT · ID · MS · VI · TH</div>
+          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
+            A local dictionary handles tactical callouts ("gank", "smoke", "BKB") instantly. The cloud model takes care of context and tone — including <em>slurs</em>. Bundled phrase packs covering Russian / Brazilian / SEA flame culture.
+          </div>
+          <div class="lang-row">
+            <span class="lang-tag on">EN ⇄ RU</span>
+            <span class="lang-tag on">EN ⇄ ES</span>
+            <span class="lang-tag on">EN ⇄ PT</span>
+            <span class="lang-tag on">EN ⇄ 中</span>
+            <span class="lang-tag">EN ⇄ ID</span>
+            <span class="lang-tag">EN ⇄ MS</span>
+            <span class="lang-tag">EN ⇄ VI</span>
+            <span class="lang-tag">EN ⇄ TH</span>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark"></span>
+              <span style="font-weight:700;">AMEFYS</span>
+              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">21:28 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div class="chat-bubble them"><div class="who">Yatoro · 🇷🇺 → EN</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM push mid now!</div></div>
+              <div class="chat-bubble them"><div class="who">midone · 🇲🇾 → EN</div><div class="raw">defend rax, im coming</div><div class="tr">defend rax, I'm coming</div></div>
+              <div class="chat-bubble them"><div class="who">miposika · 🇮🇩 → EN</div><div class="raw">beli BKB sekarang</div><div class="tr">buy BKB now</div></div>
+              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">ame · EN → RU</div><div class="raw">arriving in 30s, fall back first</div><div class="tr">прибуду через 30 сек, отступайте</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick-reply subsection: presets + block sequence -->
+      <div class="translate-demo" style="margin-top:40px;">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;color:var(--emerald);"><span class="bar" style="background:var(--emerald);"></span>One-tap quick replies</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">5 built-in · infinite custom</div>
+          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
+            GG / GLHF / NP / WP ship as single-line chips out of the box, plus a "default block" that demonstrates the sequenced-send path. New chips pick between <strong style="color:#fff;">single</strong> (one line) and <strong style="color:#fff;">block</strong> (1 – N lines).
+          </div>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">Tap the chip</strong> from the overlay — no typing required.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">Auto pipeline</strong>: clipboard → bring DOTA chat to focus → paste → Enter. Milliseconds per line.</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">Import / export</strong>: pack format is portable JSON — version-controllable, shareable, and survives a re-install.</div>
+            </div>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark" style="background:var(--emerald);"></span>
+              <span style="font-weight:700;">AMEFYS · Quick Replies</span>
+              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">31:08 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GG</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GLHF</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">NP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">WP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:linear-gradient(135deg, var(--emerald), #10B981);border:0.5px solid rgba(52,211,153,0.6);color:#062;font-size:12.5px;font-weight:700;letter-spacing:.2px;cursor:default;box-shadow:0 0 0 3px rgba(52,211,153,0.18);">Default block ▸</button>
+              </div>
+
+              <div style="margin-top:14px;padding:12px;border-radius:10px;background:rgba(52,211,153,0.05);border:0.5px solid rgba(52,211,153,0.18);">
+                <div style="font-size:10.5px;color:var(--emerald);font-weight:700;letter-spacing:.8px;margin-bottom:8px;">▸ BLOCK QUEUE · 3 lines · 200ms gap</div>
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:var(--emerald);color:#000;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">✓</span>
+                    <span style="color:var(--text);">gl hf, may the better team win</span>
+                    <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;font-size:9.5px;">sent</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:var(--emerald);color:#000;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">✓</span>
+                    <span style="color:var(--text);">support cores please &lt;3</span>
+                    <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;font-size:9.5px;">sent</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:rgba(52,211,153,0.3);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">▸</span>
+                    <span style="color:var(--text);">I can do this all day!</span>
+                    <span style="margin-left:auto;color:var(--emerald);font-family:ui-monospace,monospace;font-size:9.5px;">sending…</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:10px;display:flex;gap:8px;font-size:11px;color:var(--text-3);">
+                <span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);">↓ Import .amefys-replies.json</span>
+                <span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);">↑ Export</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -604,7 +775,7 @@
   <!-- Assistant feature -->
   <section id="assist">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>Feature 01 · Free Real-time Coach</div>
+      <div class="eyebrow"><span class="bar"></span>Feature 02 · Free Real-time Coach</div>
       <h2 class="section-title">Everything Dota Plus charges for,<br>here for <em style="color:var(--emerald);font-style:normal;">$0</em>.</h2>
       <p class="section-lead">Top pick · Top 3 · Timeline · Counter — four views, with confidence scores, gold gaps, and timing windows. Synced over Valve's official Game State Integration at 1 Hz. Every feature is free forever — we don't sell tiers, we don't sell ads, we don't sell your match data.</p>
 
@@ -675,50 +846,6 @@
     </div>
   </section>
 
-  <!-- Trash-talk / Translate -->
-  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(167,139,250,0.04), transparent);">
-    <div class="container">
-      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>Feature 02 · Trash-talk 1v9</div>
-      <h2 class="section-title">They flame Russian.<br>You read <em style="color:var(--dire);font-style:normal;">English</em>.<br>You hit back; <em style="color:var(--dire);font-style:normal;">they get it</em>.</h2>
-      <p class="section-lead">Nine languages, real-time, end-to-end under 600 ms. Chat events come straight out of Valve's GSI push and get translated as they arrive. To respond, one button does it all: translate → write clipboard → bring up the Dota chat box → paste → enter. Batch interval is configurable from 100 ms to 10 s. The chat war is no longer one-sided — finally a fair international match.</p>
-
-      <div class="translate-demo">
-        <div class="translate-left">
-          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Languages supported</div>
-          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">EN · 中 · RU · ES · PT · ID · MS · VI · TH</div>
-          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
-            A local dictionary handles tactical callouts ("gank", "smoke", "BKB") instantly. The cloud model takes care of context and tone — including <em>slurs</em>. Bundled phrase packs covering Russian / Brazilian / SEA flame culture.
-          </div>
-          <div class="lang-row">
-            <span class="lang-tag on">EN ⇄ RU</span>
-            <span class="lang-tag on">EN ⇄ ES</span>
-            <span class="lang-tag on">EN ⇄ PT</span>
-            <span class="lang-tag on">EN ⇄ 中</span>
-            <span class="lang-tag">EN ⇄ ID</span>
-            <span class="lang-tag">EN ⇄ MS</span>
-            <span class="lang-tag">EN ⇄ VI</span>
-            <span class="lang-tag">EN ⇄ TH</span>
-          </div>
-        </div>
-        <div class="translate-right">
-          <div class="overlay-mock">
-            <div class="om-head">
-              <span class="mark"></span>
-              <span style="font-weight:700;">AMEFYS</span>
-              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">21:28 LIVE</span>
-            </div>
-            <div class="om-body">
-              <div class="chat-bubble them"><div class="who">Yatoro · 🇷🇺 → EN</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM push mid now!</div></div>
-              <div class="chat-bubble them"><div class="who">midone · 🇲🇾 → EN</div><div class="raw">defend rax, im coming</div><div class="tr">defend rax, I'm coming</div></div>
-              <div class="chat-bubble them"><div class="who">miposika · 🇮🇩 → EN</div><div class="raw">beli BKB sekarang</div><div class="tr">buy BKB now</div></div>
-              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">ame · EN → RU</div><div class="raw">arriving in 30s, fall back first</div><div class="tr">прибуду через 30 сек, отступайте</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- How it works pipeline -->
   <section id="pipeline">
     <div class="container">
@@ -751,86 +878,60 @@
     </div>
   </section>
 
-  <!-- Faction split -->
-  <section id="faction" style="background: var(--bg-2);">
+  <!-- Multi-skin support -->
+  <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(6,182,212,0.04), rgba(244,114,182,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>Feature 03 · Faction-aware UI</div>
-      <h2 class="section-title">Radiant <em style="color:var(--emerald);font-style:normal;">daylight</em>,<br>Dire <em style="color:var(--violet);font-style:normal;">moonlight</em>,<br>UI follows you.</h2>
-      <p class="section-lead">Not just a skin. When you load into Radiant, AMEFYS shifts to emerald daylight — when you're on Dire, it flips to lavender moonlight. Backdrop texture, accent colour, overlay outline — they all follow your side, so the assistant always feels like <em>your team</em>.</p>
+      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>Feature 03 · Multi-skin engine</div>
+      <h2 class="section-title">More than a <em style="color:var(--violet);font-style:normal;">color swap</em>.<br>A whole <em style="color:#06b6d4;font-style:normal;">new soul</em>.</h2>
+      <p class="section-lead">On top of the default theme, AMEFYS ships two complete skin packs: <strong style="color:#06b6d4;">Cyberpunk</strong> and <strong style="color:#A78BFA;">Liquid Glass</strong>. Each pack rebuilds the UI at two layers — design tokens (color, type, radius) plus a decoration layer (background, card corners, overlays, motion). Your pick syncs to the cloud so every device looks identical.</p>
 
       <div class="split">
-        <div class="split-card emerald">
-          <div class="label">RADIANT · EMERALD DAYLIGHT</div>
-          <h3>Bright, warm, on the press.</h3>
-          <p>Radiant flips the whole UI to emerald accents and washes the backdrop with daylight texture; overlay outlines soften — the rhythm of pushing feels right.</p>
+        <!-- CYBERPUNK CARD -->
+        <div class="split-card" style="background:#0a0e1a;border-color:rgba(6,182,212,0.4);">
+          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(6,182,212,0.08) 19px, rgba(6,182,212,0.08) 20px),repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(244,114,182,0.06) 19px, rgba(244,114,182,0.06) 20px);"></div>
+          <div style="position:absolute;left:0;right:0;top:38%;height:1px;background:linear-gradient(90deg, transparent, #06b6d4, transparent);box-shadow:0 0 8px #06b6d4;"></div>
 
-          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(52,211,153,0.3);background:linear-gradient(180deg,rgba(20,30,24,0.9),rgba(8,14,11,0.9));">
-            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
-              <span style="margin-left:auto;font-size:9px;color:rgba(52,211,153,0.7);font-family:ui-monospace,monospace;letter-spacing:.6px;">RADIANT · 12:08</span>
-            </div>
-            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
-              <div style="display:flex;gap:8px;align-items:center;">
-                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;box-shadow:0 0 0 3px rgba(52,211,153,0.18);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BFR</div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;font-weight:700;color:#fff;">Battlefury · Top pick</div>
-                  <div style="font-size:10px;color:rgba(52,211,153,0.85);">Conf 94% · Need 420g</div>
-                </div>
-              </div>
-              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
-                <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> tempo solid — press the tower
-              </div>
-              <div style="display:flex;gap:4px;">
-                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#34D399,#10B981);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.18);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.12);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+          <div class="label" style="position:relative;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">CYBERPUNK · NEON HIGH-CONTRAST</div>
+          <h3 style="position:relative;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0;">Neon cuts.<br>Scan beams.<br>Hex grid.</h3>
+          <p style="position:relative;">Rajdhani display + JetBrains Mono numerics. Cards cut with clip-path polygons. A 1-pixel scan beam sweeps the UI periodically. Hex-grid background pattern. Motion is gated behind [data-effects='full'] and always honors prefers-reduced-motion.</p>
+
+          <div style="position:relative;margin-top:24px;clip-path:polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);background:linear-gradient(180deg, rgba(6,182,212,0.08), rgba(244,114,182,0.06));border:1px solid #06b6d4;padding:14px;">
+            <div style="font-size:9px;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;margin-bottom:8px;">▌ DASHBOARD :: CONNECTED</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div style="width:38px;height:38px;clip-path:polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);background:linear-gradient(135deg, #06b6d4, #f472b6);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:8px;font-weight:700;color:#000;display:flex;align-items:center;justify-content:center;">BKB</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;color:#06b6d4;letter-spacing:.5px;">BLACK_KING_BAR</div>
+                <div style="font-size:9px;color:#f472b6;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.8px;">CONF=0.94 · GAP=420G</div>
               </div>
             </div>
           </div>
 
-          <div class="split-stat">
-            <div class="stat em"><div class="v"><em>+1.4k</em></div><div class="l">Avg 10-min lead</div></div>
-            <div class="stat em"><div class="v"><em>62%</em></div><div class="l">Tower push success</div></div>
+          <div class="split-stat" style="position:relative;">
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">2077</em></div><div class="l">Visual reference · neon HUD</div></div>
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">60fps</em></div><div class="l">GPU-composited motion</div></div>
           </div>
         </div>
-        <div class="split-card violet">
-          <div class="label">DIRE · LAVENDER MOONLIGHT</div>
-          <h3>Dim, deep, waiting to counter.</h3>
-          <p>Dire shifts the accent to lavender and washes the backdrop with moonlight; the recommendation engine leans toward defensive items and well-timed retreat cues.</p>
 
-          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
-            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
-              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
-            </div>
-            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
-              <div style="display:flex;gap:8px;align-items:center;">
-                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;font-weight:700;color:#fff;">BKB · Defensive</div>
-                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">Conf 91% · Need 880g</div>
-                </div>
-              </div>
-              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
-                <span style="color:#A78BFA;font-weight:700;">Own BKB</span> cooldown 38s · Rosh est. ≈ 11:20
-              </div>
-              <div style="display:flex;gap:4px;">
-                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+        <!-- LIQUID GLASS CARD -->
+        <div class="split-card" style="background:radial-gradient(60% 40% at 20% 20%, rgba(244,114,182,0.18), transparent), radial-gradient(60% 40% at 80% 30%, rgba(167,139,250,0.18), transparent), radial-gradient(60% 40% at 30% 80%, rgba(96,165,250,0.16), transparent), radial-gradient(60% 40% at 80% 80%, rgba(52,211,153,0.14), transparent), #0e1018;border-color:rgba(255,255,255,0.18);">
+          <div class="label" style="position:relative;color:#fbcfe8;">LIQUID GLASS · SOFT REFLECTIVE FOG</div>
+          <h3 style="position:relative;font-family:'Newsreader',serif;font-style:italic;font-weight:400;letter-spacing:-1px;">Drifting light,<br>multi-layer fog,<br>breathing mood.</h3>
+          <p style="position:relative;">Five-color radial mesh with a 28s drift loop. Three reflective layers stacked into every card. Newsreader serif headings + Geist sans body. Light mode auto-inverts the overlay text. Motion respects prefers-reduced-motion.</p>
+
+          <div style="position:relative;margin-top:24px;border-radius:18px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:0.5px solid rgba(255,255,255,0.2);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3);">
+            <div style="font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:.4px;margin-bottom:8px;">Dashboard · Connected</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg, #f472b6, #A78BFA);border:0.5px solid rgba(255,255,255,0.3);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">BKB</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-family:'Newsreader',serif;font-size:14px;font-style:italic;color:#fff;">Black King Bar</div>
+                <div style="font-size:10.5px;color:rgba(255,255,255,0.65);">Conf 94% · gap 420g</div>
               </div>
             </div>
           </div>
 
-          <div class="split-stat">
-            <div class="stat"><div class="v"><em>42%</em></div><div class="l">Comeback winrate</div></div>
-            <div class="stat"><div class="v"><em>BKB</em></div><div class="l">Defensive item priority</div></div>
+          <div class="split-stat" style="position:relative;">
+            <div class="stat"><div class="v" style="font-family:'Newsreader',serif;font-style:italic;"><em style="color:#A78BFA;">visionOS</em></div><div class="l">Design reference</div></div>
+            <div class="stat"><div class="v"><em style="color:#A78BFA;">3 layers</em></div><div class="l">Reflective fog stack</div></div>
           </div>
         </div>
       </div>
@@ -999,6 +1100,92 @@
     </div>
   </section>
 
+  <!-- Faction split -->
+  <section id="faction" style="background: var(--bg-2);">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>Feature 05 · Faction-aware UI</div>
+      <h2 class="section-title">Radiant <em style="color:var(--emerald);font-style:normal;">daylight</em>,<br>Dire <em style="color:var(--violet);font-style:normal;">moonlight</em>,<br>UI follows you.</h2>
+      <p class="section-lead">Not just a skin. When you load into Radiant, AMEFYS shifts to emerald daylight — when you're on Dire, it flips to lavender moonlight. Backdrop texture, accent colour, overlay outline — they all follow your side, so the assistant always feels like <em>your team</em>.</p>
+
+      <div class="split">
+        <div class="split-card emerald">
+          <div class="label">RADIANT · EMERALD DAYLIGHT</div>
+          <h3>Bright, warm, on the press.</h3>
+          <p>Radiant flips the whole UI to emerald accents and washes the backdrop with daylight texture; overlay outlines soften — the rhythm of pushing feels right.</p>
+
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(52,211,153,0.3);background:linear-gradient(180deg,rgba(20,30,24,0.9),rgba(8,14,11,0.9));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(52,211,153,0.7);font-family:ui-monospace,monospace;letter-spacing:.6px;">RADIANT · 12:08</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;box-shadow:0 0 0 3px rgba(52,211,153,0.18);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BFR</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">Battlefury · Top pick</div>
+                  <div style="font-size:10px;color:rgba(52,211,153,0.85);">Conf 94% · Need 420g</div>
+                </div>
+              </div>
+              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> tempo solid — press the tower
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#34D399,#10B981);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.18);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat em"><div class="v"><em>+1.4k</em></div><div class="l">Avg 10-min lead</div></div>
+            <div class="stat em"><div class="v"><em>62%</em></div><div class="l">Tower push success</div></div>
+          </div>
+        </div>
+        <div class="split-card violet">
+          <div class="label">DIRE · LAVENDER MOONLIGHT</div>
+          <h3>Dim, deep, waiting to counter.</h3>
+          <p>Dire shifts the accent to lavender and washes the backdrop with moonlight; the recommendation engine leans toward defensive items and well-timed retreat cues.</p>
+
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">BKB · Defensive</div>
+                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">Conf 91% · Need 880g</div>
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#A78BFA;font-weight:700;">Own BKB</span> cooldown 38s · Rosh est. ≈ 11:20
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat"><div class="v"><em>42%</em></div><div class="l">Comeback winrate</div></div>
+            <div class="stat"><div class="v"><em>BKB</em></div><div class="l">Defensive item priority</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Spec grid -->
   <section>
     <div class="container">
@@ -1026,9 +1213,7 @@
       <div class="faq">
         <details open="">
           <summary>Where does the name "AMEFYS" come from?</summary>
-          <p style="border-width: 0px; border-style: solid; letter-spacing: 0px;">It's a tribute to two legendary Chinese Dota pros plus a playful "somethings":
-          <span style="color: rgb(167, 139, 250);">AME</span> + <span style="color: rgb(167, 139, 250);">FY</span> + <span style="color: rgb(167, 139, 250);">Somethings</span>.</p>
-          <p style="border-width: 0px; border-style: solid;"><span style="color: rgb(167, 139, 250);">AME</span> — the alias of a legendary Chinese carry player<br><span style="color: rgb(167, 139, 250);">FY</span> — the alias of a legendary Chinese pos 4 player<br><span style="color: rgb(167, 139, 250);">Somethings</span> — "those somethings" 😄. The name is our tribute to the golden era of CN Dota that any Dota lifer will recognise.</p>
+          <p>It's a tribute from the Dota community: <span style="color:var(--violet);">AME</span> + <span style="color:var(--violet);">FY</span> + <span style="color:var(--violet);">Somethings</span>.</p>
         </details>
         <details open="">
           <summary>Will using AMEFYS get me VAC-banned?</summary>

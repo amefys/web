@@ -43,9 +43,8 @@
     font-size: 12.5px; font-weight: 500;
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
-  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.15) inset, 0 4px 12px rgba(124,92,235,0.35); }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
   .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
   .nav .links a:hover { color: var(--text); }
   .nav .links a[data-active="true"] { color: var(--text); }
@@ -298,15 +297,16 @@
   <!-- Top Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="/"><span class="brand-mark"></span>AMEFYS</a>
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
-        <a href="/#pillars">四大特性</a>
-        <a href="/#assist">实时助手</a>
-        <a href="/#trash">文斗 1v9</a>
-        <a href="/#faction">阵营氛围</a>
-        <a href="/#i18n">多语言</a>
-        <a href="/#faq">常见问题</a>
-        <a href="/about.html" data-active="true">关于</a>
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="index.html#i18n">多语言</a>
+        <a href="index.html#faction">阵营氛围</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html" data-active="true">关于</a>
       </div>
       <div class="actions">
         <div class="lang-switch">
@@ -431,7 +431,7 @@
         <div class="contact-sub">提 issue · 看源码 · star 仓库</div>
         <div class="qr-thumbs">
           <div style="height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--text-3); font-size: 12.5px; text-align: center; padding: 0 16px;">
-            <a href="https://github.com/amefys/amefys/issues" target="_blank" rel="noopener" style="color: var(--violet); font-weight: 600; font-size: 13px;">→ 提交 Issue</a>
+            <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet); font-weight: 600; font-size: 13px;">→ 提交 Issue</a>
             <a href="https://github.com/amefys" target="_blank" rel="noopener" style="color: var(--text-2);">github.com/amefys</a>
           </div>
         </div>
@@ -468,8 +468,8 @@
   <footer>
     <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
     <div>
-      <a href="/">首页</a>
-      <a href="/about.html">关于</a>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
       <a href="mailto:amefys@gmail.com">联系</a>
     </div>
   </footer>

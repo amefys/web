@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AMEFYS — 文斗 1v9，全球无敌手</title>
-<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
-<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-<link rel="apple-touch-icon" href="/assets/icon-512.png">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
 <style>
   :root {
     --bg: #08090d;
@@ -49,9 +49,8 @@
     font-size: 12.5px; font-weight: 500;
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
-  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
-    box-shadow: 0 0 12px rgba(167,139,250,0.5); }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); display: block; }
   .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; }
   .nav .links a:hover { color: var(--text); }
   .nav .actions { display: flex; gap: 12px; align-items: center; }
@@ -459,15 +458,16 @@
   <!-- Top Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="#"><span class="brand-mark"></span>AMEFYS</a>
+      <a class="brand" href="#"><img class="brand-mark" src="assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
-        <a href="#pillars">四大特性</a>
-        <a href="#assist">实时助手</a>
+        <a href="#pillars">五大特性</a>
         <a href="#trash">文斗 1v9</a>
-        <a href="#faction">阵营氛围</a>
+        <a href="#assist">实时助手</a>
+        <a href="#skins">多主题</a>
         <a href="#i18n">多语言</a>
+        <a href="#faction">阵营氛围</a>
         <a href="#faq">常见问题</a>
-        <a href="/about.html">关于</a>
+        <a href="about.html">关于</a>
       </div>
       <div class="actions">
         <div class="lang-switch">
@@ -665,7 +665,7 @@
     </div>
     <div class="platforms">macOS 13+ · Windows 11 · 永久免费 · 无内购 · 无广告</div>
 
-    <div class="preview-wrap">
+    <div class="preview-wrap" style="position:relative;">
       <div class="preview">
         <div class="titlebar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
         <div class="preview-body">
@@ -683,12 +683,34 @@
             </div>
           </aside>
           <main class="pv-main">
+            <!-- Live match telemetry strip -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;">
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(167,139,250,0.07);border:0.5px solid rgba(167,139,250,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">等级</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">Lv 13</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(52,211,153,0.07);border:0.5px solid rgba(52,211,153,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">GPM</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--emerald);">642</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(240,162,60,0.07);border:0.5px solid rgba(240,162,60,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">XPM</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--warn);">+12%</div>
+              </div>
+              <div style="padding:10px 12px;border-radius:10px;background:rgba(217,83,79,0.07);border:0.5px solid rgba(217,83,79,0.22);">
+                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">KDA</div>
+                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">6/1/4</div>
+              </div>
+            </div>
+
             <div style="display:flex;align-items:flex-end;justify-content:space-between;">
               <div>
-                <div class="pv-h">敌法师 · Lv 13 · 21:28</div>
-                <div class="pv-sub">对线期 · 天辉中路 · GPM 642</div>
+                <div class="pv-h">敌法师 · 21:28</div>
+                <div class="pv-sub">对线期 · 天辉中路 · 主推 · 置信 92%</div>
               </div>
-              <div style="font-size:11px;color:var(--violet);font-weight:600;letter-spacing:.6px;">主推 · 置信 92%</div>
+              <div style="font-size:10px;color:var(--emerald);font-weight:700;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;gap:6px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></span>GSI · 1Hz
+              </div>
             </div>
             <div class="pv-card accent">
               <div style="display:flex;gap:14px;align-items:center;">
@@ -721,28 +743,61 @@
             </div>
           </main>
           <aside class="pv-right">
-            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">实时翻译</div>
+            <!-- Settings · skin selector preview -->
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">主题</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg, var(--violet), var(--violet-deep));border:1.5px solid var(--violet);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">默认<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.7);">violet</span></div>
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#0a0e1a);border:0.5px solid rgba(6,182,212,0.4);font-size:9.5px;font-weight:700;color:#06b6d4;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;font-family:ui-monospace,monospace;">CYBER<span style="font-size:8.5px;font-weight:500;color:rgba(6,182,212,0.7);">霓虹切角</span></div>
+              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#f472b6,#A78BFA);border:0.5px solid rgba(255,255,255,0.2);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">玻璃<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.75);font-style:italic;">液态光斑</span></div>
+              <div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);font-size:9.5px;font-weight:600;color:var(--text-3);letter-spacing:.3px;display:flex;align-items:center;justify-content:center;">+</div>
+            </div>
+
+            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:4px;">实时翻译</div>
             <div class="chat-bubble them">
               <div class="who">Yatoro · 🇷🇺</div>
-              <div class="raw">AM пуш мид сейчас, помогите!</div>
-              <div class="tr">AM 现在推中路，帮忙！</div>
-            </div>
-            <div class="chat-bubble them">
-              <div class="who">miposika · 🇮🇩</div>
-              <div class="raw">beli BKB sekarang</div>
-              <div class="tr">现在出 BKB</div>
+              <div class="raw">AM пуш мид сейчас!</div>
+              <div class="tr">AM 现在推中路！</div>
             </div>
             <div class="chat-bubble me">
               <div class="raw">我 30s 后到，先撤</div>
               <div class="tr">I'll arrive in 30s, fall back first</div>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;">
-              <span class="lang-tag">集合中路</span>
-              <span class="lang-tag">先撤</span>
-              <span class="lang-tag">推塔</span>
+              <span class="lang-tag on">GG</span>
+              <span class="lang-tag on">先撤</span>
+              <span class="lang-tag on">推塔</span>
               <span class="lang-tag">?</span>
             </div>
           </aside>
+        </div>
+      </div>
+
+      <!-- Floating overlay window — pinned over the game during live matches -->
+      <div aria-hidden="true" style="position:absolute;right:-20px;bottom:-30px;width:230px;border-radius:14px;background:rgba(8,9,13,0.92);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:0.5px solid rgba(167,139,250,0.35);box-shadow:0 24px 64px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.06) inset, 0 0 32px rgba(167,139,250,0.18);overflow:hidden;z-index:2;">
+        <div style="padding:8px 12px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;font-size:10px;">
+          <span style="width:10px;height:10px;border-radius:3px;background:var(--violet);"></span>
+          <span style="font-weight:700;letter-spacing:.3px;">悬浮窗 · 始终置顶</span>
+          <span style="margin-left:auto;color:var(--emerald);font-family:ui-monospace,monospace;font-size:9px;">LIVE</span>
+        </div>
+        <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));border:1px solid var(--violet);font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">MAN</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;font-weight:700;color:#fff;">幻影法袍</div>
+              <div style="font-size:9.5px;color:var(--text-3);">主推 · 缺 1 248g</div>
+            </div>
+          </div>
+          <div style="height:1px;background:rgba(255,255,255,0.06);"></div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="font-size:9px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;font-weight:700;">事件</div>
+            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--emerald);font-weight:700;">21:28</span> · 击杀 +1（敌中）</div>
+            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--warn);font-weight:700;">22:14</span> · Roshan 推算 ≈ 25:10</div>
+          </div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;">
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.36);color:var(--emerald);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">GG</span>
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.36);color:var(--violet);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">NP</span>
+            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);color:var(--text-2);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">块 ▸</span>
+          </div>
         </div>
       </div>
     </div>
@@ -751,26 +806,145 @@
   <!-- Three pillars strip -->
   <section id="pillars" style="padding: 90px 24px; border-top: 0.5px solid var(--hairline); background: linear-gradient(180deg, transparent, rgba(167,139,250,0.03));">
     <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="pillar-grid">
-        <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--emerald);">01 / FREE FOREVER</div>
-          <div class="pipe-h">完全免费的实时助手</div>
-          <p class="pipe-p">出装建议、时机提示、英雄计数 —— 功能完全对齐官方付费助手，0 内购、0 广告、0 限时。</p>
-        </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;" class="pillar-grid">
         <div class="pipe-card" style="border-color: rgba(217,83,79,0.4); background: linear-gradient(180deg, rgba(217,83,79,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--dire);">02 / TRASH-TALK 1v9</div>
+          <div class="pipe-num" style="color:var(--dire);">01 / TRASH-TALK 1v9</div>
           <div class="pipe-h">文斗 1 vs 9，全球无障碍</div>
-          <p class="pipe-p">不再被骂得云里雾里。9 国语言双向实时互译，你打母语，敌人看母语，骂战不掉一拍。</p>
+          <p class="pipe-p">9 国双向实时互译 + 一键回复包：单条直发 / 多条按序连发。你打母语，敌人看母语，骂战不掉一拍。</p>
         </div>
-        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--violet);">03 / FACTION-AWARE</div>
-          <div class="pipe-h">界面随阵营实时切换</div>
-          <p class="pipe-p">天辉时翡翠绿日光感；夜魇时辉夜紫月光感。氛围实时贴合你所在的一方，而不是固定皮肤。</p>
+        <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--emerald);">02 / FREE FOREVER</div>
+          <div class="pipe-h">完全免费的实时助手</div>
+          <p class="pipe-p">实时对局数据、出装建议、时机提示、英雄计数 —— 功能对齐官方付费助手，0 内购、0 广告、0 限时。</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(6,182,212,0.4); background: linear-gradient(180deg, rgba(6,182,212,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:#06b6d4;">03 / MULTI-SKIN</div>
+          <div class="pipe-h">多主题皮肤切换</div>
+          <p class="pipe-p">默认 + Cyberpunk + Liquid Glass 三套完整皮肤。背景、字体、卡片切角、动效一并替换，皮肤设置同步上云。</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(240,162,60,0.4); background: linear-gradient(180deg, rgba(240,162,60,0.08), var(--bg-2));">
           <div class="pipe-num" style="color:var(--warn);">04 / 12 LANGUAGES</div>
           <div class="pipe-h">软件 UI 12 国语言</div>
           <p class="pipe-p">软件本体、术语、文档、官网全部本地化。从巴西雨林到东南亚网吧，每个 DOTA 玩家都能用母语开局。</p>
+        </div>
+        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--violet);">05 / FACTION-AWARE</div>
+          <div class="pipe-h">界面随阵营实时切换</div>
+          <p class="pipe-p">天辉时翡翠绿日光感；夜魇时辉夜紫月光感。氛围实时贴合你所在的一方，而不是固定皮肤。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Translate showcase / Trash-talk + Quick replies -->
+  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(217,83,79,0.04), rgba(52,211,153,0.04), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>特性 01 · 文斗 1 vs 9 · 翻译 + 一键回复</div>
+      <h2 class="section-title">他骂俄语。<br>你听<em style="color:var(--dire);font-style:normal;">中文</em>。<br><em style="color:var(--emerald);font-style:normal;">一键</em>回他一整段。</h2>
+      <p class="section-lead">9 国语言双向实时互译，端到端延迟 &lt; 600ms。回敬走「点一下标签 → 翻译 → 写入剪贴板 → 唤起 DOTA 聊天框 → 粘贴 → 回车」全自动链路：GG / GLHF / NP / WP 单条直发，<strong style="color:var(--emerald);">消息块</strong>按 100ms – 10s 间隔依次推入聊天框。预设之外可建无限组自定义包，按 portable JSON 导入 / 导出与社区互通。文斗不再单方面被动挨骂——这是公平的国际局。</p>
+
+      <div class="translate-demo">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>支持的语言</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">中 · 英 · 俄 · 西 · 葡 · 印尼 · 马来 · 越 · 泰</div>
+          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
+            本地词典即时翻译战术口令（"gank"、"smoke"、"BKB"），云端模型处理上下文与脏话语气。
+            支持骂战常用语包：俄、巴、东南亚特色俚语全收录。
+          </div>
+          <div class="lang-row">
+            <span class="lang-tag on">中 ⇄ EN</span>
+            <span class="lang-tag on">中 ⇄ RU</span>
+            <span class="lang-tag on">中 ⇄ ES</span>
+            <span class="lang-tag on">中 ⇄ PT</span>
+            <span class="lang-tag">中 ⇄ ID</span>
+            <span class="lang-tag">中 ⇄ MS</span>
+            <span class="lang-tag">中 ⇄ VI</span>
+            <span class="lang-tag">中 ⇄ TH</span>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark"></span>
+              <span style="font-weight:700;">AMEFYS</span>
+              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">21:28 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div class="chat-bubble them"><div class="who">Yatoro · 🇷🇺 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
+              <div class="chat-bubble them"><div class="who">topson · 🇺🇸 → 中</div><div class="raw">on my way, gather mid</div><div class="tr">我马上到，中路集合</div></div>
+              <div class="chat-bubble them"><div class="who">miposika · 🇮🇩 → 中</div><div class="raw">beli BKB sekarang</div><div class="tr">现在出 BKB</div></div>
+              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">ame · 中 → EN</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick-reply subsection: presets + block sequence -->
+      <div class="translate-demo" style="margin-top:40px;">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;color:var(--emerald);"><span class="bar" style="background:var(--emerald);"></span>一键快捷回复</div>
+          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">5 个内置 · 无限自定义</div>
+          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
+            内置 GG / GLHF / NP / WP 单条标签，加一个「默认消息块」演示连发链路。新建标签时选 <strong style="color:#fff;">single</strong>（单条）或 <strong style="color:#fff;">block</strong>（消息块），block 类型可塞 1 – N 条文案。
+          </div>
+          <div style="margin-top:24px;display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">点标签</strong>触发：悬浮窗一键调用，不用打字。</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">自动链路</strong>：写入剪贴板 → 唤起 DOTA 聊天框 → 粘贴 → 回车，毫秒级完成。</div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;">
+              <div style="width:24px;height:24px;border-radius:6px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.4);color:var(--emerald);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</div>
+              <div style="font-size:13px;color:var(--text-2);line-height:1.5;"><strong style="color:#fff;">导入 / 导出</strong>：包格式 portable JSON，跨设备同步、社区分享、版本控制都可以。</div>
+            </div>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark" style="background:var(--emerald);"></span>
+              <span style="font-weight:700;">AMEFYS · 快捷回复</span>
+              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">31:08 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GG</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GLHF</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">NP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">WP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:linear-gradient(135deg, var(--emerald), #10B981);border:0.5px solid rgba(52,211,153,0.6);color:#062;font-size:12.5px;font-weight:700;letter-spacing:.2px;cursor:default;box-shadow:0 0 0 3px rgba(52,211,153,0.18);">默认消息块 ▸</button>
+              </div>
+
+              <div style="margin-top:14px;padding:12px;border-radius:10px;background:rgba(52,211,153,0.05);border:0.5px solid rgba(52,211,153,0.18);">
+                <div style="font-size:10.5px;color:var(--emerald);font-weight:700;letter-spacing:.8px;margin-bottom:8px;">▸ BLOCK 队列 · 3 条 · 间隔 200ms</div>
+                <div style="display:flex;flex-direction:column;gap:6px;">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:var(--emerald);color:#000;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">✓</span>
+                    <span style="color:var(--text);">amefys = ame + fy + somethings</span>
+                    <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;font-size:9.5px;">已发送</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:var(--emerald);color:#000;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">✓</span>
+                    <span style="color:var(--text);">文斗1v9，全球无敌手！</span>
+                    <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;font-size:9.5px;">已发送</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:11.5px;">
+                    <span style="width:14px;height:14px;border-radius:50%;background:rgba(52,211,153,0.3);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;">▸</span>
+                    <span style="color:var(--text);">I can do this all day!</span>
+                    <span style="margin-left:auto;color:var(--emerald);font-family:ui-monospace,monospace;font-size:9.5px;">发送中…</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:10px;display:flex;gap:8px;font-size:11px;color:var(--text-3);">
+                <span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);">↓ 导入 .amefys-replies.json</span>
+                <span style="padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);">↑ 导出</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -779,7 +953,7 @@
   <!-- Assistant feature (renamed) -->
   <section id="assist">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>特性 01 · 完全免费的实时助手</div>
+      <div class="eyebrow"><span class="bar"></span>特性 02 · 完全免费的实时助手</div>
       <h2 class="section-title">官方付费助手能做的，<br>这里 <em style="color:var(--emerald);font-style:normal;">¥0</em> 给你。</h2>
       <p class="section-lead">主推 / Top 3 / 时间线 / 反制四视图，置信度、缺口金币、出现时机一应俱全。通过 Valve 官方 GSI 接口，1Hz 同步对局状态——所有功能永久免费，不卖会员、不卖广告、不卖你的对局数据。</p>
 
@@ -850,51 +1024,6 @@
     </div>
   </section>
 
-  <!-- Translate showcase / Trash-talk -->
-  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(167,139,250,0.04), transparent);">
-    <div class="container">
-      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>特性 02 · 文斗 1 vs 9</div>
-      <h2 class="section-title">他骂俄语。<br>你听<em style="color:var(--dire);font-style:normal;">中文</em>。<br>回敬一句，<em style="color:var(--dire);font-style:normal;">他懂</em>。</h2>
-      <p class="section-lead">9 国语言双向实时互译，端到端延迟 &lt; 600ms。基于 Valve 官方 GSI 推送的聊天事件实时翻译队友与全频道发言。回敬时一键完成「翻译 → 写入剪贴板 → 唤起 DOTA 聊天框 → 粘贴 → 回车」全自动链路；批量发送间隔可在 100ms – 10s 间自定义。文斗不再单方面被动挨骂——这是公平的国际局。</p>
-
-      <div class="translate-demo">
-        <div class="translate-left">
-          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>支持的语言</div>
-          <div style="font-size:24px;font-weight:700;letter-spacing:-.4px;line-height:1.2;">中 · 英 · 俄 · 西 · 葡 · 印尼 · 马来 · 越 · 泰</div>
-          <div style="font-size:13.5px;color:var(--text-2);margin-top:14px;line-height:1.55;">
-            本地词典即时翻译战术口令（"gank"、"smoke"、"BKB"），云端模型处理上下文与脏话语气。
-            支持骂战常用语包：俄、巴、东南亚特色俚语全收录。
-          </div>
-          <div class="lang-row">
-            <span class="lang-tag on">中 ⇄ EN</span>
-            <span class="lang-tag on">中 ⇄ RU</span>
-            <span class="lang-tag on">中 ⇄ ES</span>
-            <span class="lang-tag on">中 ⇄ PT</span>
-            <span class="lang-tag">中 ⇄ ID</span>
-            <span class="lang-tag">中 ⇄ MS</span>
-            <span class="lang-tag">中 ⇄ VI</span>
-            <span class="lang-tag">中 ⇄ TH</span>
-          </div>
-        </div>
-        <div class="translate-right">
-          <div class="overlay-mock">
-            <div class="om-head">
-              <span class="mark"></span>
-              <span style="font-weight:700;">AMEFYS</span>
-              <span style="margin-left:auto;color:var(--text-3);font-family:ui-monospace,monospace;">21:28 LIVE</span>
-            </div>
-            <div class="om-body">
-              <div class="chat-bubble them"><div class="who">Yatoro · 🇷🇺 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
-              <div class="chat-bubble them"><div class="who">topson · 🇺🇸 → 中</div><div class="raw">on my way, gather mid</div><div class="tr">我马上到，中路集合</div></div>
-              <div class="chat-bubble them"><div class="who">miposika · 🇮🇩 → 中</div><div class="raw">beli BKB sekarang</div><div class="tr">现在出 BKB</div></div>
-              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">ame · 中 → EN</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- How it works pipeline -->
   <section id="pipeline">
     <div class="container">
@@ -927,88 +1056,60 @@
     </div>
   </section>
 
-  <!-- Faction split (DOTA2 inspired) -->
-  <section id="faction" style="background: var(--bg-2);">
+  <!-- Multi-skin support -->
+  <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(6,182,212,0.04), rgba(244,114,182,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>特性 03 · 阵营氛围实时切换</div>
-      <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--violet);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
-      <p class="section-lead">不只是换个皮肤。AMEFYS 在你被分配到天辉时切换为翡翠绿日光氛围，分配到夜魇时切换为辉夜紫月光氛围——背景纹理、强调色、悬浮窗轮廓全部跟随，让助手永远像是「我方」。</p>
+      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>特性 03 · 多主题皮肤</div>
+      <h2 class="section-title">不只是<em style="color:var(--violet);font-style:normal;">换个颜色</em>。<br>整套界面，<em style="color:#06b6d4;font-style:normal;">换个灵魂</em>。</h2>
+      <p class="section-lead">默认主题之外，AMEFYS 内置两套完整皮肤：<strong style="color:#06b6d4;">Cyberpunk</strong> 与 <strong style="color:#A78BFA;">Liquid Glass</strong>。每一套都是 token + decoration 双层重塑——背景纹理、字体、卡片切角、悬浮窗轮廓、动效一并替换。皮肤设置同步上云，多设备一致。</p>
 
       <div class="split">
-        <div class="split-card emerald">
-          <div class="label">RADIANT · 天辉 · 翡翠绿日光</div>
-          <h3>明亮、温暖、向上压制。</h3>
-          <p>分配到天辉时整个 UI 切到翡翠绿强调，背景泛起日光纹理，悬浮窗轮廓更柔和——让你在压制时手感更顺。</p>
+        <!-- CYBERPUNK CARD -->
+        <div class="split-card" style="background:#0a0e1a;border-color:rgba(6,182,212,0.4);">
+          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(6,182,212,0.08) 19px, rgba(6,182,212,0.08) 20px),repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(244,114,182,0.06) 19px, rgba(244,114,182,0.06) 20px);"></div>
+          <div style="position:absolute;left:0;right:0;top:38%;height:1px;background:linear-gradient(90deg, transparent, #06b6d4, transparent);box-shadow:0 0 8px #06b6d4;"></div>
 
-          <!-- in-product preview · radiant -->
-          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(52,211,153,0.3);background:linear-gradient(180deg,rgba(20,30,24,0.9),rgba(8,14,11,0.9));">
-            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
-              <span style="margin-left:auto;font-size:9px;color:rgba(52,211,153,0.7);font-family:ui-monospace,monospace;letter-spacing:.6px;">RADIANT · 12:08</span>
-            </div>
-            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
-              <div style="display:flex;gap:8px;align-items:center;">
-                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;box-shadow:0 0 0 3px rgba(52,211,153,0.18);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BFR</div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;font-weight:700;color:#fff;">狂战斧 · 主推</div>
-                  <div style="font-size:10px;color:rgba(52,211,153,0.85);">置信 94% · 缺口 420g</div>
-                </div>
-              </div>
-              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
-                <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> 自身节奏稳，建议侵略推塔
-              </div>
-              <div style="display:flex;gap:4px;">
-                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#34D399,#10B981);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.18);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.12);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+          <div class="label" style="position:relative;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">CYBERPUNK · 赛博朋克 · 霓虹高对比</div>
+          <h3 style="position:relative;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0;">霓虹切角。<br>扫描光束。<br>六边网格。</h3>
+          <p style="position:relative;">Rajdhani 标题字体 + JetBrains Mono 数字字体；卡片用 clip-path 多边形切角；扫描光束周期性掠过 UI；六边形网格背景纹理。动效在 [data-effects='full'] 下开启，遵守 prefers-reduced-motion。</p>
+
+          <div style="position:relative;margin-top:24px;clip-path:polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);background:linear-gradient(180deg, rgba(6,182,212,0.08), rgba(244,114,182,0.06));border:1px solid #06b6d4;padding:14px;">
+            <div style="font-size:9px;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;margin-bottom:8px;">▌ DASHBOARD :: CONNECTED</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div style="width:38px;height:38px;clip-path:polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);background:linear-gradient(135deg, #06b6d4, #f472b6);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:8px;font-weight:700;color:#000;display:flex;align-items:center;justify-content:center;">BKB</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;color:#06b6d4;letter-spacing:.5px;">BLACK_KING_BAR</div>
+                <div style="font-size:9px;color:#f472b6;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.8px;">CONF=0.94 · GAP=420G</div>
               </div>
             </div>
           </div>
 
-          <div class="split-stat">
-            <div class="stat em"><div class="v"><em>+1.4k</em></div><div class="l">复盘 · 10 分钟均经济差</div></div>
-            <div class="stat em"><div class="v"><em>62%</em></div><div class="l">推塔成功率</div></div>
+          <div class="split-stat" style="position:relative;">
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">2077</em></div><div class="l">视觉关键词 · 高对比霓虹</div></div>
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">60fps</em></div><div class="l">动效流畅 · GPU 合成</div></div>
           </div>
         </div>
-        <div class="split-card violet">
-          <div class="label">DIRE · 夜魇 · 辉夜紫月色</div>
-          <h3>幽暗、深沉、伺机反打。</h3>
-          <p>分配到夜魇时切到辉夜紫强调，背景泛起月光纹理，建议引擎基于自己的状态偏向防守装备与撤退提示。</p>
 
-          <!-- in-product preview · dire -->
-          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
-            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
-              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
-              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
-              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
-            </div>
-            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
-              <div style="display:flex;gap:8px;align-items:center;">
-                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
-                <div style="flex:1;min-width:0;">
-                  <div style="font-size:12px;font-weight:700;color:#fff;">黑皇杖 · 防守</div>
-                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">置信 91% · 缺口 880g</div>
-                </div>
-              </div>
-              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
-                <span style="color:#A78BFA;font-weight:700;">自己 BKB</span> 冷却 38s · Roshan 推算 ≈ 11:20
-              </div>
-              <div style="display:flex;gap:4px;">
-                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+        <!-- LIQUID GLASS CARD -->
+        <div class="split-card" style="background:radial-gradient(60% 40% at 20% 20%, rgba(244,114,182,0.18), transparent), radial-gradient(60% 40% at 80% 30%, rgba(167,139,250,0.18), transparent), radial-gradient(60% 40% at 30% 80%, rgba(96,165,250,0.16), transparent), radial-gradient(60% 40% at 80% 80%, rgba(52,211,153,0.14), transparent), #0e1018;border-color:rgba(255,255,255,0.18);">
+          <div class="label" style="position:relative;color:#fbcfe8;">LIQUID GLASS · 液态玻璃 · 柔和反射</div>
+          <h3 style="position:relative;font-family:'Newsreader','Source Han Serif SC','Songti SC',serif;font-style:italic;font-weight:400;letter-spacing:-1px;">流动光斑，<br>多层模糊，<br>呼吸感氛围。</h3>
+          <p style="position:relative;">5 色径向网格背景 + 28 秒缓慢漂移；3 层反射叠加的雾玻璃卡片；Newsreader 衬线 + Geist 无衬线双字体；亮色模式下 overlay 文字自动反色适配。动效同样遵守 prefers-reduced-motion。</p>
+
+          <div style="position:relative;margin-top:24px;border-radius:18px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:0.5px solid rgba(255,255,255,0.2);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3);">
+            <div style="font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:.4px;margin-bottom:8px;">仪表盘 · 已连接</div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg, #f472b6, #A78BFA);border:0.5px solid rgba(255,255,255,0.3);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">BKB</div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-family:'Newsreader','Source Han Serif SC',serif;font-size:14px;font-style:italic;color:#fff;">Black King Bar</div>
+                <div style="font-size:10.5px;color:rgba(255,255,255,0.65);">置信 94% · 缺口 420g</div>
               </div>
             </div>
           </div>
 
-          <div class="split-stat">
-            <div class="stat"><div class="v"><em>42%</em></div><div class="l">复盘 · 逆风转胜率</div></div>
-            <div class="stat"><div class="v"><em>BKB</em></div><div class="l">优先防守装提示</div></div>
+          <div class="split-stat" style="position:relative;">
+            <div class="stat"><div class="v" style="font-family:'Newsreader','Source Han Serif SC',serif;font-style:italic;"><em style="color:#A78BFA;">visionOS</em></div><div class="l">设计语言参考</div></div>
+            <div class="stat"><div class="v"><em style="color:#A78BFA;">3 层</em></div><div class="l">反射叠加 · 雾玻璃</div></div>
           </div>
         </div>
       </div>
@@ -1181,6 +1282,94 @@
     </div>
   </section>
 
+  <!-- Faction split (DOTA2 inspired) -->
+  <section id="faction" style="background: var(--bg-2);">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 05 · 阵营氛围实时切换</div>
+      <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--violet);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
+      <p class="section-lead">不只是换个皮肤。AMEFYS 在你被分配到天辉时切换为翡翠绿日光氛围，分配到夜魇时切换为辉夜紫月光氛围——背景纹理、强调色、悬浮窗轮廓全部跟随，让助手永远像是「我方」。</p>
+
+      <div class="split">
+        <div class="split-card emerald">
+          <div class="label">RADIANT · 天辉 · 翡翠绿日光</div>
+          <h3>明亮、温暖、向上压制。</h3>
+          <p>分配到天辉时整个 UI 切到翡翠绿强调，背景泛起日光纹理，悬浮窗轮廓更柔和——让你在压制时手感更顺。</p>
+
+          <!-- in-product preview · radiant -->
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(52,211,153,0.3);background:linear-gradient(180deg,rgba(20,30,24,0.9),rgba(8,14,11,0.9));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(52,211,153,0.7);font-family:ui-monospace,monospace;letter-spacing:.6px;">RADIANT · 12:08</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#34D399,#10B981);border:1.5px solid #34D399;box-shadow:0 0 0 3px rgba(52,211,153,0.18);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BFR</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">狂战斧 · 主推</div>
+                  <div style="font-size:10px;color:rgba(52,211,153,0.85);">置信 94% · 缺口 420g</div>
+                </div>
+              </div>
+              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> 自身节奏稳，建议侵略推塔
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#34D399,#10B981);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.18);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(52,211,153,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat em"><div class="v"><em>+1.4k</em></div><div class="l">复盘 · 10 分钟均经济差</div></div>
+            <div class="stat em"><div class="v"><em>62%</em></div><div class="l">推塔成功率</div></div>
+          </div>
+        </div>
+        <div class="split-card violet">
+          <div class="label">DIRE · 夜魇 · 辉夜紫月色</div>
+          <h3>幽暗、深沉、伺机反打。</h3>
+          <p>分配到夜魇时切到辉夜紫强调，背景泛起月光纹理，建议引擎基于自己的状态偏向防守装备与撤退提示。</p>
+
+          <!-- in-product preview · dire -->
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
+            <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
+              <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
+            </div>
+            <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12px;font-weight:700;color:#fff;">黑皇杖 · 防守</div>
+                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">置信 91% · 缺口 880g</div>
+                </div>
+              </div>
+              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+                <span style="color:#A78BFA;font-weight:700;">自己 BKB</span> 冷却 38s · Roshan 推算 ≈ 11:20
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="split-stat">
+            <div class="stat"><div class="v"><em>42%</em></div><div class="l">复盘 · 逆风转胜率</div></div>
+            <div class="stat"><div class="v"><em>BKB</em></div><div class="l">优先防守装提示</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Spec grid -->
   <section>
     <div class="container">
@@ -1208,7 +1397,7 @@
       <div class="faq">
         <details open="">
           <summary>AMEFYS 这个名字是怎么来的？</summary>
-          <p style="border-width: 0px; border-style: solid; letter-spacing: 0px;">来自 DOTA 圈一个流传已久的梗：<span style="color: rgb(167, 139, 250); letter-spacing: 0px;">AME</span> + <span style="color: rgb(167, 139, 250);">FY</span> + <span style="color: rgb(167, 139, 250);">Somethings</span>。</p><p style="border-width: 0px; border-style: solid;"><span style="color: rgb(167, 139, 250);">AME</span>：取自中国战队的核心 Carry 选手别名<br><span style="color: rgb(167, 139, 250);">FY</span>：取自老一代 4 号位传奇别名<br><span style="color: rgb(167, 139, 250);">Somethings</span>："那些东西" 😄</p>
+          <p>来自 DOTA 圈一个流传已久的梗：<span style="color:var(--violet);">AME</span> + <span style="color:var(--violet);">FY</span> + <span style="color:var(--violet);">Somethings</span>。</p>
         </details>
         <details open="">
           <summary>使用 AMEFYS 会被 Valve 封号吗？</summary>
@@ -1260,7 +1449,7 @@
         <h5>产品</h5>
         <a href="#pillars">特性</a>
         <a href="#trash">翻译</a>
-        <a href="/about.html">关于</a>
+        <a href="about.html">关于</a>
         <a href="https://github.com/amefys/web/releases" rel="noopener">更新日志</a>
         <a href="#">路线图</a>
       </div>
@@ -1273,7 +1462,7 @@
       </div>
       <div class="ft-col">
         <h5>公司</h5>
-        <a href="/about.html">关于</a>
+        <a href="about.html">关于</a>
         <a href="#">博客</a>
         <a href="#">招聘</a>
         <a href="#">媒体资源</a>
@@ -1281,7 +1470,7 @@
       <div class="ft-col">
         <h5>支持</h5>
         <a href="#">帮助中心</a>
-        <a href="/about.html">联系我们</a>
+        <a href="about.html">联系我们</a>
         <a href="#">状态</a>
         <a href="#">Discord</a>
       </div>
