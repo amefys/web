@@ -660,7 +660,7 @@
     <p class="lead">堪比官方付费助手的实时出装与时机建议，永久免费。你打中文，对面看俄语；俄罗斯队友怒喷，你看到熟悉的母语——一键回敬，AMEFYS 自动翻译并粘贴到 DOTA 聊天框。界面随天辉 / 夜魇阵营实时切换氛围。</p>
     <div class="cta-row">
       <a class="btn-cta primary js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
-      <a class="btn-cta ghost" href="#" rel="noopener">观看 60 秒演示 →</a>
+      <a class="btn-cta ghost" href="#demo" data-open-demo rel="noopener">观看 60 秒演示 →</a>
     </div>
     <div class="platforms">macOS 13+ · Windows 11 · 永久免费 · 无内购 · 无广告</div>
 
@@ -1518,6 +1518,84 @@
       nodes[i].setAttribute('href', target)
       nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
     }
+  })()
+</script>
+
+<!-- Demo video modal -->
+<style>
+  .demo-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
+  .demo-modal[data-open='true'] { display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .demo-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: zoom-out;
+  }
+  .demo-modal-card {
+    position: relative;
+    width: min(1080px, 100%);
+    max-height: 88vh;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(255,255,255,0.1) inset;
+  }
+  .demo-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 88vh;
+    background: #000;
+  }
+  .demo-modal-close {
+    position: absolute; top: 14px; right: 14px;
+    z-index: 2;
+    width: 36px; height: 36px;
+    border-radius: 50%; border: 0;
+    background: rgba(0,0,0,0.55); color: #fff;
+    font-size: 22px; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .12s;
+  }
+  .demo-modal-close:hover { background: rgba(0,0,0,0.85); }
+</style>
+<div class="demo-modal" id="demo-modal" data-open="false" role="dialog" aria-modal="true" aria-label="演示视频">
+  <div class="demo-modal-backdrop" data-close></div>
+  <div class="demo-modal-card">
+    <button type="button" class="demo-modal-close" data-close aria-label="关闭">×</button>
+    <video class="demo-video" id="demo-video"
+           preload="metadata" playsinline controls>
+      <source src="https://amefys.com/dl/demo-v1/amefys-demo.MP4" type="video/mp4">
+    </video>
+  </div>
+</div>
+<script>
+  (function () {
+    var modal = document.getElementById('demo-modal')
+    var video = document.getElementById('demo-video')
+    if (!modal || !video) return
+
+    function open(ev) {
+      if (ev) ev.preventDefault()
+      modal.setAttribute('data-open', 'true')
+      document.body.style.overflow = 'hidden'
+      try { video.currentTime = 0; var p = video.play(); if (p && p.catch) p.catch(function () {}) } catch (_) {}
+    }
+    function close() {
+      modal.setAttribute('data-open', 'false')
+      document.body.style.overflow = ''
+      try { video.pause() } catch (_) {}
+    }
+
+    var triggers = document.querySelectorAll('[data-open-demo]')
+    for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', open)
+    var closers = modal.querySelectorAll('[data-close]')
+    for (var j = 0; j < closers.length; j++) closers[j].addEventListener('click', close)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') close()
+    })
   })()
 </script>
 
