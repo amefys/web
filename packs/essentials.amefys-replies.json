@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "礼貌局基础 · Essentials",
+  "description": "每个 Dota 玩家都该有的基础礼仪：GG / GLHF / WP / Sorry / Thanks。一个包覆盖 90% 局内常用礼貌用语。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567000,
+  "items": [
+    { "type": "single", "label": "GG", "messages": ["gg"] },
+    { "type": "single", "label": "GLHF", "messages": ["gl hf"] },
+    { "type": "single", "label": "WP", "messages": ["wp"] },
+    { "type": "single", "label": "TY", "messages": ["ty"] },
+    { "type": "single", "label": "Sorry", "messages": ["sry my bad"] },
+    { "type": "single", "label": "GH", "messages": ["gh"] },
+    { "type": "single", "label": "WB", "messages": ["wb"] },
+    { "type": "single", "label": "Cancel", "messages": ["cancel cancel"] },
+    { "type": "single", "label": "NP", "messages": ["no problem"] },
+    {
+      "type": "block",
+      "label": "开局问候 · Opener",
+      "messages": ["gl hf", "may the best team win", "let's go!"]
+    },
+    {
+      "type": "block",
+      "label": "局末 GG · Closer",
+      "messages": ["gg", "wp all", "well played both teams"]
+    },
+    {
+      "type": "block",
+      "label": "诚恳道歉",
+      "messages": ["sorry guys", "my bad", "won't happen again"]
+    }
+  ]
+}

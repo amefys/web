@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "name": "International · English",
+  "description": "Push / fall back / smoke gank — tactical callouts for US / EU / SEA pubs. Compact phrasing your stack will actually read in time.",
+  "author": "AMEFYS",
+  "createdAt": 1715234567002,
+  "items": [
+    { "type": "single", "label": "?", "messages": ["?"] },
+    { "type": "single", "label": "??", "messages": ["??"] },
+    { "type": "single", "label": "gj", "messages": ["gj"] },
+    { "type": "single", "label": "brb", "messages": ["brb"] },
+    { "type": "single", "label": "push mid", "messages": ["push mid"] },
+    { "type": "single", "label": "fall back", "messages": ["fall back"] },
+    { "type": "single", "label": "group up", "messages": ["group up"] },
+    { "type": "single", "label": "defend base", "messages": ["defend base"] },
+    { "type": "single", "label": "smoke gank", "messages": ["smoke gank now"] },
+    { "type": "single", "label": "all in mid", "messages": ["all in mid"] },
+    { "type": "single", "label": "my bad", "messages": ["my bad"] },
+    { "type": "single", "label": "gh", "messages": ["gh"] },
+    {
+      "type": "block",
+      "label": "Opener",
+      "messages": ["gl hf", "let's stack lanes", "push mid early"]
+    },
+    {
+      "type": "block",
+      "label": "Roshan callout",
+      "messages": ["rosh now", "group up", "check aegis timer"]
+    },
+    {
+      "type": "block",
+      "label": "Closer",
+      "messages": ["gg wp", "had fun", "ggwp all"]
+    }
+  ]
+}

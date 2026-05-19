@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "SEA · 东南亚混合",
+  "description": "印尼 / 马来 / 越南 / 泰语 — 东南亚服跨语种用语精选，加 EN 通用战术指令。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567007,
+  "items": [
+    { "type": "single", "label": "salam (印尼好)", "messages": ["salam"] },
+    { "type": "single", "label": "terima kasih (谢)", "messages": ["terima kasih"] },
+    { "type": "single", "label": "maaf (对不起)", "messages": ["maaf"] },
+    { "type": "single", "label": "saya bantu (我帮)", "messages": ["saya bantu"] },
+    { "type": "single", "label": "selamat (越南好)", "messages": ["xin chào"] },
+    { "type": "single", "label": "push tower", "messages": ["push tower"] },
+    { "type": "single", "label": "gank top", "messages": ["gank top"] },
+    { "type": "single", "label": "?", "messages": ["?"] },
+    { "type": "single", "label": "gg", "messages": ["gg"] },
+    {
+      "type": "block",
+      "label": "SEA opener",
+      "messages": ["gl hf", "let's stack lanes", "mid go aggro"]
+    },
+    {
+      "type": "block",
+      "label": "SEA closer",
+      "messages": ["gg wp", "sampai jumpa", "until next time"]
+    }
+  ]
+}

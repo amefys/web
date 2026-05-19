@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "name": "战术指挥 · 中文",
+  "description": "集合 / 推塔 / 抱团 / 防守 — 国服天梯路人局的战术快捷指令，让队友秒懂你的节奏。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567001,
+  "items": [
+    { "type": "single", "label": "集合中路", "messages": ["集合中路"] },
+    { "type": "single", "label": "抱团推塔", "messages": ["抱团推塔"] },
+    { "type": "single", "label": "先撤", "messages": ["先撤先撤"] },
+    { "type": "single", "label": "等大", "messages": ["等大招冷却"] },
+    { "type": "single", "label": "留烟", "messages": ["留烟雾"] },
+    { "type": "single", "label": "切后排", "messages": ["切后排"] },
+    { "type": "single", "label": "防守", "messages": ["防守！"] },
+    { "type": "single", "label": "BKB 进场", "messages": ["BKB 进场切人"] },
+    { "type": "single", "label": "守家", "messages": ["守家守家"] },
+    { "type": "single", "label": "?", "messages": ["?"] },
+    {
+      "type": "block",
+      "label": "推一波",
+      "messages": ["集合中路", "抱团推塔", "等大开团", "BKB 进场切后排"]
+    },
+    {
+      "type": "block",
+      "label": "防 Roshan",
+      "messages": ["敌人在打肉山！", "集合防守", "注意 Aegis 时间", "防偷家"]
+    },
+    {
+      "type": "block",
+      "label": "翻盘指挥",
+      "messages": ["还有机会！", "抱团守家", "等装备 + 大招", "一波翻盘！"]
+    }
+  ]
+}

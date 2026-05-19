@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>快捷回复包 · AMEFYS</title>
+<meta name="description" content="社区精选 Dota 2 快捷回复包：礼貌局 / 战术指挥 / 文斗经典 / 数字梗 / 关键时机 / 俄语 / 东南亚。一键导入到 AMEFYS。">
+<link rel="icon" type="image/svg+xml" href="../assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --dire: #D9534F;
+    --warn: #F0A23C;
+    --cyan: #06b6d4;
+    --pink: #f472b6;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Top nav — same as index.html */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline);
+  }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; transition: color .12s; }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+
+  /* Page */
+  .page { max-width: 1080px; margin: 0 auto; padding: 72px 24px 80px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--violet); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--violet); }
+  h1 { font-size: 56px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin: 0 0 18px; }
+  h1 em { font-style: normal; background: linear-gradient(135deg, #b39df9, #7C5CEB); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: 18px; color: var(--text-2); max-width: 640px; line-height: 1.55; margin: 0; }
+
+  /* How-to box */
+  .howto {
+    margin: 56px 0 64px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(167,139,250,0.06), rgba(167,139,250,0.02));
+    border: 0.5px solid var(--hairline);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .howto-step {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .howto-num {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(167,139,250,0.16); color: var(--violet);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .howto-text { font-size: 13.5px; line-height: 1.5; color: var(--text); }
+  .howto-text code { font-family: ui-monospace, monospace; font-size: 12px;
+    background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; }
+
+  /* Pack grid */
+  .pack-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+  }
+  .pack-card {
+    position: relative;
+    padding: 28px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 0.5px solid var(--hairline);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .15s, border-color .15s;
+  }
+  .pack-card:hover { transform: translateY(-2px); border-color: var(--hairline-strong); }
+  .pack-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none; opacity: 0.7;
+  }
+  .pack-card[data-tone='essentials']::before { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card[data-tone='cn-tactics']::before  { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(167,139,250,0.14), transparent 60%); }
+  .pack-card[data-tone='intl-en']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(96,165,250,0.16), transparent 60%); }
+  .pack-card[data-tone='banter-cn']::before   { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(244,114,182,0.18), transparent 60%); }
+  .pack-card[data-tone='numbers']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(240,162,60,0.14), transparent 60%); }
+  .pack-card[data-tone='timings']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(6,182,212,0.16), transparent 60%); }
+  .pack-card[data-tone='ru']::before          { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.14), transparent 60%); }
+  .pack-card[data-tone='sea']::before         { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card > * { position: relative; }
+
+  .pack-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+  .pack-title {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 0;
+  }
+  .pack-badge {
+    flex-shrink: 0;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid var(--hairline-strong);
+  }
+  .pack-card[data-tone='essentials'] .pack-badge { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+  .pack-card[data-tone='cn-tactics'] .pack-badge  { color: var(--violet); border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.1); }
+  .pack-card[data-tone='intl-en'] .pack-badge     { color: #60a5fa; border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.1); }
+  .pack-card[data-tone='banter-cn'] .pack-badge   { color: var(--pink); border-color: rgba(244,114,182,0.45); background: rgba(244,114,182,0.12); }
+  .pack-card[data-tone='numbers'] .pack-badge     { color: var(--warn); border-color: rgba(240,162,60,0.4); background: rgba(240,162,60,0.1); }
+  .pack-card[data-tone='timings'] .pack-badge     { color: var(--cyan); border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.1); }
+  .pack-card[data-tone='ru'] .pack-badge          { color: var(--dire); border-color: rgba(217,83,79,0.4); background: rgba(217,83,79,0.1); }
+  .pack-card[data-tone='sea'] .pack-badge         { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+
+  .pack-desc {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .pack-chips {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.18);
+    border: 0.5px solid var(--hairline);
+  }
+  .pack-chip {
+    height: 22px;
+    padding: 0 10px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid var(--hairline);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+  }
+  .pack-chip.block {
+    background: rgba(52,211,153,0.12);
+    border-color: rgba(52,211,153,0.4);
+    color: var(--emerald);
+  }
+  .pack-chip.more {
+    color: var(--text-3);
+    border-style: dashed;
+  }
+  .pack-meta {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11.5px; color: var(--text-3); margin-top: auto;
+    padding-top: 6px;
+  }
+  .pack-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); }
+  .pack-actions { display: flex; gap: 10px; }
+  .btn-download {
+    flex: 1;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--violet-deep);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-download:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .btn-view {
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-2);
+    font-size: 12.5px;
+    border: 0.5px solid var(--hairline-strong);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color .12s, border-color .12s;
+  }
+  .btn-view:hover { color: var(--text); border-color: rgba(255,255,255,0.35); }
+
+  /* Contribute footer */
+  .contribute {
+    margin-top: 80px;
+    padding: 36px 40px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(244,114,182,0.08), rgba(167,139,250,0.06));
+    border: 0.5px solid var(--hairline);
+    text-align: center;
+  }
+  .contribute h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px; }
+  .contribute p { color: var(--text-2); font-size: 14px; margin: 0 0 18px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+
+  /* Footer */
+  .footer { border-top: 0.5px solid var(--hairline); padding: 32px 24px; margin-top: 80px; text-align: center; font-size: 12px; color: var(--text-3); }
+  .footer a { color: var(--text-2); }
+  .footer a:hover { color: var(--text); }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 36px; letter-spacing: -1px; }
+    .pack-grid { grid-template-columns: 1fr; }
+    .howto { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../index.html"><img class="brand-mark" src="../assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="../index.html#pillars">五大特性</a>
+        <a href="../index.html#trash">文斗 1v9</a>
+        <a href="../index.html#assist">实时助手</a>
+        <a href="index.html" data-active="true">回复包</a>
+        <a href="../index.html#faq">常见问题</a>
+        <a href="../about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="index.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="../en/packs/index.html">EN</a>
+        </div>
+        <a class="btn-pill" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="eyebrow"><span class="bar"></span>社区精选 · 8 个包 · MIT 开源</div>
+    <h1>一键<em>下载</em>，<br>把社区语料塞进悬浮窗。</h1>
+    <p class="lead">8 个由 AMEFYS 团队 + 玩家社区共同维护的快捷回复包：礼貌局 / 战术指挥 / 文斗经典 / 数字梗 / 关键时机 / 俄语 / 东南亚。下载 → 导入 → 在悬浮窗点一下就发完。</p>
+
+    <div class="howto">
+      <div class="howto-step">
+        <div class="howto-num">1</div>
+        <div class="howto-text"><strong>下载</strong>任意 <code>.amefys-replies.json</code>。</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">2</div>
+        <div class="howto-text">AMEFYS → 设置 → <strong>快捷回复</strong>。</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">3</div>
+        <div class="howto-text">点 <strong>导入</strong>，选刚才下的 JSON。</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">4</div>
+        <div class="howto-text">悬浮窗 → 快捷回复 → 点 chip 即发。</div>
+      </div>
+    </div>
+
+    <div class="pack-grid">
+      <!-- Pack 1: Essentials -->
+      <article class="pack-card" data-tone="essentials">
+        <div class="pack-head">
+          <h3 class="pack-title">礼貌局基础 · Essentials</h3>
+          <span class="pack-badge">基础</span>
+        </div>
+        <p class="pack-desc">每个 Dota 玩家都该有的基础礼仪。GG / GLHF / WP / Sorry / Thanks 一站式覆盖 90% 局内常用礼貌用语。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">GG</span>
+          <span class="pack-chip">GLHF</span>
+          <span class="pack-chip">WP</span>
+          <span class="pack-chip">TY</span>
+          <span class="pack-chip">Sorry</span>
+          <span class="pack-chip block">▸ 开局问候</span>
+          <span class="pack-chip block">▸ 局末 GG</span>
+          <span class="pack-chip block">▸ 道歉</span>
+        </div>
+        <div class="pack-meta">9 单条 · 3 消息块 <span class="dot"></span> 1.0 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="essentials.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="essentials.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 2: CN Tactics -->
+      <article class="pack-card" data-tone="cn-tactics">
+        <div class="pack-head">
+          <h3 class="pack-title">战术指挥 · 中文</h3>
+          <span class="pack-badge">战术</span>
+        </div>
+        <p class="pack-desc">集合 / 推塔 / 抱团 / 防守 — 国服天梯路人局的战术快捷指令，让队友秒懂你的节奏。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">集合中路</span>
+          <span class="pack-chip">抱团推塔</span>
+          <span class="pack-chip">先撤</span>
+          <span class="pack-chip">等大</span>
+          <span class="pack-chip">切后排</span>
+          <span class="pack-chip block">▸ 推一波</span>
+          <span class="pack-chip block">▸ 防 Roshan</span>
+          <span class="pack-chip block">▸ 翻盘指挥</span>
+        </div>
+        <div class="pack-meta">10 单条 · 3 消息块 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="cn-tactics.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="cn-tactics.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 3: International EN -->
+      <article class="pack-card" data-tone="intl-en">
+        <div class="pack-head">
+          <h3 class="pack-title">International · English</h3>
+          <span class="pack-badge">国际</span>
+        </div>
+        <p class="pack-desc">Push / fall back / smoke gank — tactical callouts for US / EU / SEA pubs. Compact phrasing your stack will actually read in time.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">gj</span>
+          <span class="pack-chip">push mid</span>
+          <span class="pack-chip">fall back</span>
+          <span class="pack-chip">smoke gank</span>
+          <span class="pack-chip block">▸ Opener</span>
+          <span class="pack-chip block">▸ Roshan callout</span>
+          <span class="pack-chip block">▸ Closer</span>
+        </div>
+        <div class="pack-meta">12 单条 · 3 消息块 <span class="dot"></span> 1.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="intl-en.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="intl-en.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 4: Banter CN ★ VIRAL -->
+      <article class="pack-card" data-tone="banter-cn">
+        <div class="pack-head">
+          <h3 class="pack-title">文斗经典 · 中文喷子合集</h3>
+          <span class="pack-badge">★ 裂变</span>
+        </div>
+        <p class="pack-desc">海王 / 演员 / 烟雾弹 / 你已经不适合这个版本了 / amefys 三连 — 文斗 1v9 必备语料库。社交流量裂变核心包。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">海王</span>
+          <span class="pack-chip">演员</span>
+          <span class="pack-chip">烟雾弹</span>
+          <span class="pack-chip">这都能输</span>
+          <span class="pack-chip">回家放学</span>
+          <span class="pack-chip">不适合版本</span>
+          <span class="pack-chip block">▸ AMEFYS 三连</span>
+          <span class="pack-chip block">▸ 经典语录嘲讽</span>
+          <span class="pack-chip block">▸ 自嘲反讽</span>
+        </div>
+        <div class="pack-meta">12 单条 · 3 消息块 <span class="dot"></span> 1.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="banter-cn.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="banter-cn.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 5: Numbers Meme -->
+      <article class="pack-card" data-tone="numbers">
+        <div class="pack-head">
+          <h3 class="pack-title">数字梗 · 高级嘲讽</h3>
+          <span class="pack-badge">梗包</span>
+        </div>
+        <p class="pack-desc">? / 555 / 666 / 644 / 966 / 1288 / 1000-7 — Dota 圈最高级的嘲讽用数字说话。全球玩家通用，跨语言无障碍。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">555</span>
+          <span class="pack-chip">666</span>
+          <span class="pack-chip">644</span>
+          <span class="pack-chip">966</span>
+          <span class="pack-chip">1288</span>
+          <span class="pack-chip">1000-7</span>
+          <span class="pack-chip block">▸ 互喷数字</span>
+          <span class="pack-chip block">▸ 假装平衡</span>
+        </div>
+        <div class="pack-meta">9 单条 · 2 消息块 <span class="dot"></span> 0.9 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="numbers-meme.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="numbers-meme.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 6: Timings -->
+      <article class="pack-card" data-tone="timings">
+        <div class="pack-head">
+          <h3 class="pack-title">关键时机 · 高分段必备</h3>
+          <span class="pack-badge">实用</span>
+        </div>
+        <p class="pack-desc">BKB / Refresher / Roshan / Aegis / Rapier / 买活 — 关键时机的快速 callout。高分段团战节奏不靠语音也能打。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">BKB ready</span>
+          <span class="pack-chip">Aegis 4min</span>
+          <span class="pack-chip">Roshan 1min</span>
+          <span class="pack-chip">Rapier dropped</span>
+          <span class="pack-chip">大招冷却</span>
+          <span class="pack-chip">买活准备</span>
+          <span class="pack-chip block">▸ Roshan 警报</span>
+          <span class="pack-chip block">▸ 团战准备</span>
+          <span class="pack-chip block">▸ 翻盘窗口</span>
+        </div>
+        <div class="pack-meta">9 单条 · 3 消息块 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="timings.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="timings.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 7: Russian -->
+      <article class="pack-card" data-tone="ru">
+        <div class="pack-head">
+          <h3 class="pack-title">Russian · 友好俄区</h3>
+          <span class="pack-badge">俄区</span>
+        </div>
+        <p class="pack-desc">давай / идём / хорошо / пушим — 完美兰国服跨服匹配无障碍交流。只收录战术 + 友好用语，无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">давай</span>
+          <span class="pack-chip">идём</span>
+          <span class="pack-chip">хорошо</span>
+          <span class="pack-chip">пушим топ</span>
+          <span class="pack-chip">назад</span>
+          <span class="pack-chip">спасибо</span>
+          <span class="pack-chip">гг</span>
+          <span class="pack-chip block">▸ 俄区开局</span>
+          <span class="pack-chip block">▸ 俄区战术</span>
+          <span class="pack-chip block">▸ 俄区收场</span>
+        </div>
+        <div class="pack-meta">10 单条 · 3 消息块 <span class="dot"></span> 1.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="ru-friendly.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="ru-friendly.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <!-- Pack 8: SEA -->
+      <article class="pack-card" data-tone="sea">
+        <div class="pack-head">
+          <h3 class="pack-title">SEA · 东南亚混合</h3>
+          <span class="pack-badge">东南亚</span>
+        </div>
+        <p class="pack-desc">印尼 / 马来 / 越南 / 泰语 — 东南亚服跨语种用语精选，加 EN 通用战术指令。打 SEA 服必备。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">salam</span>
+          <span class="pack-chip">terima kasih</span>
+          <span class="pack-chip">maaf</span>
+          <span class="pack-chip">saya bantu</span>
+          <span class="pack-chip">xin chào</span>
+          <span class="pack-chip">push tower</span>
+          <span class="pack-chip block">▸ SEA opener</span>
+          <span class="pack-chip block">▸ SEA closer</span>
+        </div>
+        <div class="pack-meta">9 单条 · 2 消息块 <span class="dot"></span> 1.0 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="sea-international.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="sea-international.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Contribute CTA -->
+    <section class="contribute">
+      <h2>有更骚的语料？发包给我们</h2>
+      <p>所有的包都是 MIT 开源。在 GitHub 提 PR 加一份你的 <code>.amefys-replies.json</code>，被收录到画廊后，包名下会标记你的署名。</p>
+      <a class="btn-pill" href="https://github.com/amefys/web/tree/main/packs" target="_blank" rel="noopener">在 GitHub 上提 PR →</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2026 AMEFYS · MIT · 不隶属于 Valve / DOTA 2</div>
+  </footer>
+</body>
+</html>

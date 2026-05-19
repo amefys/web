@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "name": "Russian · 友好俄区",
+  "description": "давай / идём / хорошо / пушим — 完美兰国服无障碍交流。只收录战术 + 友好用语，无脏话。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567006,
+  "items": [
+    { "type": "single", "label": "давай (走起)", "messages": ["давай!"] },
+    { "type": "single", "label": "идём (出发)", "messages": ["идём"] },
+    { "type": "single", "label": "стоп (停)", "messages": ["стоп"] },
+    { "type": "single", "label": "хорошо (好)", "messages": ["хорошо"] },
+    { "type": "single", "label": "пушим топ", "messages": ["пушим топ"] },
+    { "type": "single", "label": "пушим мид", "messages": ["пушим мид"] },
+    { "type": "single", "label": "назад (后退)", "messages": ["назад!"] },
+    { "type": "single", "label": "спасибо", "messages": ["спасибо"] },
+    { "type": "single", "label": "gg", "messages": ["гг"] },
+    { "type": "single", "label": "ничего", "messages": ["ничего страшного"] },
+    {
+      "type": "block",
+      "label": "俄区开局",
+      "messages": ["давай", "идём вместе", "gl hf"]
+    },
+    {
+      "type": "block",
+      "label": "俄区战术",
+      "messages": ["пушим мид", "возьмём Roshan", "защита базы"]
+    },
+    {
+      "type": "block",
+      "label": "俄区收场",
+      "messages": ["гг", "было весело", "до встречи"]
+    }
+  ]
+}

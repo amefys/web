@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "name": "文斗经典 · 中文喷子合集",
+  "description": "海王 / 演员 / 烟雾弹 / 你已经不适合这个版本了 / amefys 三连 — 文斗 1v9 必备语料库。社交流量裂变核心包。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567003,
+  "items": [
+    { "type": "single", "label": "?", "messages": ["?"] },
+    { "type": "single", "label": "??", "messages": ["??"] },
+    { "type": "single", "label": "???", "messages": ["???"] },
+    { "type": "single", "label": "海王", "messages": ["海王上线"] },
+    { "type": "single", "label": "牛逼", "messages": ["牛逼"] },
+    { "type": "single", "label": "演员", "messages": ["演员请退场"] },
+    { "type": "single", "label": "烟雾弹", "messages": ["这位是烟雾弹"] },
+    { "type": "single", "label": "这都能输", "messages": ["这都能输"] },
+    { "type": "single", "label": "666", "messages": ["666"] },
+    { "type": "single", "label": "回家放学", "messages": ["该回家放学了"] },
+    { "type": "single", "label": "不适合版本", "messages": ["你已经不适合这个版本了"] },
+    { "type": "single", "label": "下棋去", "messages": ["别打了下棋去吧"] },
+    {
+      "type": "block",
+      "label": "AMEFYS 三连",
+      "messages": [
+        "amefys = ame + fy + somethings",
+        "文斗1v9，全球无敌手！",
+        "I can do this all day!"
+      ]
+    },
+    {
+      "type": "block",
+      "label": "经典语录嘲讽",
+      "messages": [
+        "世界亚军你们好",
+        "三个打一个被反杀，你会不会玩",
+        "你已经不适合这个版本了"
+      ]
+    },
+    {
+      "type": "block",
+      "label": "自嘲反讽",
+      "messages": ["兄弟救救我", "我自闭了", "这局认输，下一把翻盘"]
+    }
+  ]
+}

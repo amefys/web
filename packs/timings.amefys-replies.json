@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "关键时机 · 高分段必备",
+  "description": "BKB / Refresher / Roshan / Aegis / Rapier / 买活 — 关键时机的快速 callout。高分段团战节奏不靠语音也能打。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567005,
+  "items": [
+    { "type": "single", "label": "BKB ready", "messages": ["BKB ready"] },
+    { "type": "single", "label": "Refresher ready", "messages": ["Refresher ready"] },
+    { "type": "single", "label": "Aegis 4min", "messages": ["Aegis 还有 4 分钟"] },
+    { "type": "single", "label": "Roshan 1min", "messages": ["肉山 1 分钟"] },
+    { "type": "single", "label": "Rapier dropped", "messages": ["Rapier 掉了！抢！"] },
+    { "type": "single", "label": "大招冷却", "messages": ["我大招冷却完毕"] },
+    { "type": "single", "label": "烟雾在路", "messages": ["烟雾在路上"] },
+    { "type": "single", "label": "买活准备", "messages": ["买活准备"] },
+    { "type": "single", "label": "不能买活", "messages": ["我不能买活"] },
+    {
+      "type": "block",
+      "label": "Roshan 警报",
+      "messages": ["敌人在打肉山", "集合防守", "注意 Aegis 时间", "防偷家"]
+    },
+    {
+      "type": "block",
+      "label": "团战准备",
+      "messages": ["BKB ready", "大招冷却完毕", "抱团进场", "集火切后排"]
+    },
+    {
+      "type": "block",
+      "label": "翻盘窗口",
+      "messages": ["我有大招", "买活准备", "30 秒后开团"]
+    }
+  ]
+}

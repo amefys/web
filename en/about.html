@@ -43,9 +43,8 @@
     font-size: 12.5px; font-weight: 500;
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
-  .nav .brand-mark { width: 18px; height: 18px; border-radius: 5px;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.15) inset, 0 4px 12px rgba(124,92,235,0.35); }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
   .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
   .nav .links a:hover { color: var(--text); }
   .nav .links a[data-active="true"] { color: var(--text); }
@@ -211,13 +210,13 @@
   <!-- Top Nav -->
   <nav class="nav">
     <div class="nav-inner">
-      <a class="brand" href="index.html"><span class="brand-mark"></span>AMEFYS</a>
+      <a class="brand" href="index.html"><img class="brand-mark" src="../assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
         <a href="index.html#pillars">Features</a>
-        <a href="index.html#assist">Assistant</a>
         <a href="index.html#trash">Trash-talk 1v9</a>
-        <a href="index.html#faction">Faction-aware</a>
-        <a href="index.html#i18n">Languages</a>
+        <a href="index.html#assist">Assistant</a>
+        <a href="index.html#skins">Skins</a>
+        <a href="packs/index.html">Packs</a>
         <a href="index.html#faq">FAQ</a>
         <a href="about.html" data-active="true">About</a>
       </div>

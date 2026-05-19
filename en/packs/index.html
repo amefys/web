@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quick-Reply Packs · AMEFYS</title>
+<meta name="description" content="Community-curated Dota 2 quick-reply packs: essentials / tactics / banter / number-memes / timings / Russian / SEA. One-click import into AMEFYS.">
+<link rel="icon" type="image/svg+xml" href="../../assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="../../assets/favicon.ico">
+<link rel="apple-touch-icon" href="../../assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --dire: #D9534F;
+    --warn: #F0A23C;
+    --cyan: #06b6d4;
+    --pink: #f472b6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline);
+  }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; transition: color .12s; }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+
+  .page { max-width: 1080px; margin: 0 auto; padding: 72px 24px 80px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--violet); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--violet); }
+  h1 { font-size: 56px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.05; margin: 0 0 18px; }
+  h1 em { font-style: normal; background: linear-gradient(135deg, #b39df9, #7C5CEB); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: 18px; color: var(--text-2); max-width: 640px; line-height: 1.55; margin: 0; }
+
+  .howto {
+    margin: 56px 0 64px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(167,139,250,0.06), rgba(167,139,250,0.02));
+    border: 0.5px solid var(--hairline);
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .howto-step { display: flex; flex-direction: column; gap: 8px; }
+  .howto-num {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: rgba(167,139,250,0.16); color: var(--violet);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .howto-text { font-size: 13.5px; line-height: 1.5; color: var(--text); }
+  .howto-text code { font-family: ui-monospace, monospace; font-size: 12px;
+    background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; }
+
+  .pack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .pack-card {
+    position: relative;
+    padding: 28px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 0.5px solid var(--hairline);
+    display: flex; flex-direction: column; gap: 14px;
+    transition: transform .15s, border-color .15s;
+  }
+  .pack-card:hover { transform: translateY(-2px); border-color: var(--hairline-strong); }
+  .pack-card::before {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none; opacity: 0.7;
+  }
+  .pack-card[data-tone='essentials']::before { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card[data-tone='cn-tactics']::before  { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(167,139,250,0.14), transparent 60%); }
+  .pack-card[data-tone='intl-en']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(96,165,250,0.16), transparent 60%); }
+  .pack-card[data-tone='banter-cn']::before   { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(244,114,182,0.18), transparent 60%); }
+  .pack-card[data-tone='numbers']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(240,162,60,0.14), transparent 60%); }
+  .pack-card[data-tone='timings']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(6,182,212,0.16), transparent 60%); }
+  .pack-card[data-tone='ru']::before          { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.14), transparent 60%); }
+  .pack-card[data-tone='sea']::before         { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card > * { position: relative; }
+
+  .pack-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+  .pack-title { font-size: 22px; font-weight: 700; letter-spacing: -0.4px; margin: 0; }
+  .pack-badge {
+    flex-shrink: 0; padding: 4px 10px; border-radius: 999px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase;
+    color: var(--text);
+    background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline-strong);
+  }
+  .pack-card[data-tone='essentials'] .pack-badge { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+  .pack-card[data-tone='cn-tactics'] .pack-badge  { color: var(--violet); border-color: rgba(167,139,250,0.4); background: rgba(167,139,250,0.1); }
+  .pack-card[data-tone='intl-en'] .pack-badge     { color: #60a5fa; border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.1); }
+  .pack-card[data-tone='banter-cn'] .pack-badge   { color: var(--pink); border-color: rgba(244,114,182,0.45); background: rgba(244,114,182,0.12); }
+  .pack-card[data-tone='numbers'] .pack-badge     { color: var(--warn); border-color: rgba(240,162,60,0.4); background: rgba(240,162,60,0.1); }
+  .pack-card[data-tone='timings'] .pack-badge     { color: var(--cyan); border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.1); }
+  .pack-card[data-tone='ru'] .pack-badge          { color: var(--dire); border-color: rgba(217,83,79,0.4); background: rgba(217,83,79,0.1); }
+  .pack-card[data-tone='sea'] .pack-badge         { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+
+  .pack-desc { font-size: 13.5px; color: var(--text-2); line-height: 1.55; margin: 0; }
+  .pack-chips {
+    display: flex; flex-wrap: wrap; gap: 5px;
+    padding: 12px; border-radius: 10px;
+    background: rgba(0,0,0,0.18); border: 0.5px solid var(--hairline);
+  }
+  .pack-chip {
+    height: 22px; padding: 0 10px; border-radius: 11px;
+    background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline);
+    color: var(--text); font-size: 11px; font-weight: 600;
+    display: inline-flex; align-items: center;
+  }
+  .pack-chip.block { background: rgba(52,211,153,0.12); border-color: rgba(52,211,153,0.4); color: var(--emerald); }
+  .pack-meta {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 11.5px; color: var(--text-3); margin-top: auto; padding-top: 6px;
+  }
+  .pack-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-3); }
+  .pack-actions { display: flex; gap: 10px; }
+  .btn-download {
+    flex: 1; height: 36px; border-radius: 10px;
+    background: var(--violet-deep); color: #fff;
+    font-size: 13px; font-weight: 600;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-download:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .btn-view {
+    height: 36px; padding: 0 14px; border-radius: 10px;
+    background: transparent; color: var(--text-2);
+    font-size: 12.5px;
+    border: 0.5px solid var(--hairline-strong);
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color .12s, border-color .12s;
+  }
+  .btn-view:hover { color: var(--text); border-color: rgba(255,255,255,0.35); }
+
+  .contribute {
+    margin-top: 80px;
+    padding: 36px 40px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(244,114,182,0.08), rgba(167,139,250,0.06));
+    border: 0.5px solid var(--hairline);
+    text-align: center;
+  }
+  .contribute h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px; }
+  .contribute p { color: var(--text-2); font-size: 14px; margin: 0 0 18px; max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+
+  .footer { border-top: 0.5px solid var(--hairline); padding: 32px 24px; margin-top: 80px; text-align: center; font-size: 12px; color: var(--text-3); }
+  .footer a { color: var(--text-2); }
+  .footer a:hover { color: var(--text); }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 36px; letter-spacing: -1px; }
+    .pack-grid { grid-template-columns: 1fr; }
+    .howto { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../index.html"><img class="brand-mark" src="../../assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="../index.html#pillars">Features</a>
+        <a href="../index.html#trash">Trash-talk 1v9</a>
+        <a href="../index.html#assist">Assistant</a>
+        <a href="index.html" data-active="true">Packs</a>
+        <a href="../index.html#faq">FAQ</a>
+        <a href="../about.html">About</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="../../packs/index.html">中文</a>
+          <span class="sep">·</span>
+          <a href="index.html" aria-current="page">EN</a>
+        </div>
+        <a class="btn-pill" href="https://github.com/amefys/web/releases/latest" rel="noopener">Free download</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="eyebrow"><span class="bar"></span>Community-curated · 8 packs · MIT open-source</div>
+    <h1>One-click <em>download</em>,<br>community language packed in.</h1>
+    <p class="lead">Eight quick-reply packs maintained by the AMEFYS team plus the player community: essentials, tactical commands, classic banter, number-memes, timings, Russian and SEA. Download → import → tap a chip in the overlay.</p>
+
+    <div class="howto">
+      <div class="howto-step">
+        <div class="howto-num">1</div>
+        <div class="howto-text"><strong>Download</strong> any <code>.amefys-replies.json</code>.</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">2</div>
+        <div class="howto-text">In AMEFYS → Settings → <strong>Quick Replies</strong>.</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">3</div>
+        <div class="howto-text">Click <strong>Import</strong> and pick the JSON file.</div>
+      </div>
+      <div class="howto-step">
+        <div class="howto-num">4</div>
+        <div class="howto-text">In the overlay → Quick Replies → tap chips to send.</div>
+      </div>
+    </div>
+
+    <div class="pack-grid">
+      <article class="pack-card" data-tone="essentials">
+        <div class="pack-head">
+          <h3 class="pack-title">Essentials · Greetings &amp; Manners</h3>
+          <span class="pack-badge">Essentials</span>
+        </div>
+        <p class="pack-desc">The basics every Dota player should have. GG / GLHF / WP / Sorry / Thanks — covers 90% of in-game social comms in one pack.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">GG</span>
+          <span class="pack-chip">GLHF</span>
+          <span class="pack-chip">WP</span>
+          <span class="pack-chip">TY</span>
+          <span class="pack-chip">Sorry</span>
+          <span class="pack-chip block">▸ Opener</span>
+          <span class="pack-chip block">▸ Closer</span>
+          <span class="pack-chip block">▸ Apology</span>
+        </div>
+        <div class="pack-meta">9 single · 3 block <span class="dot"></span> 1.0 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/essentials.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/essentials.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="cn-tactics">
+        <div class="pack-head">
+          <h3 class="pack-title">Tactical Commands · 中文</h3>
+          <span class="pack-badge">Tactics</span>
+        </div>
+        <p class="pack-desc">Group / push / fall-back / defend — tactical callouts in Mandarin for the CN ranked ladder. Lets your stack read your tempo instantly.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">集合中路</span>
+          <span class="pack-chip">抱团推塔</span>
+          <span class="pack-chip">先撤</span>
+          <span class="pack-chip">等大</span>
+          <span class="pack-chip">切后排</span>
+          <span class="pack-chip block">▸ 推一波</span>
+          <span class="pack-chip block">▸ 防 Roshan</span>
+          <span class="pack-chip block">▸ 翻盘指挥</span>
+        </div>
+        <div class="pack-meta">10 single · 3 block <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/cn-tactics.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/cn-tactics.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="intl-en">
+        <div class="pack-head">
+          <h3 class="pack-title">International · English</h3>
+          <span class="pack-badge">International</span>
+        </div>
+        <p class="pack-desc">Push / fall back / smoke gank — tactical callouts for US / EU / SEA pubs. Compact phrasing your stack will actually read in time.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">gj</span>
+          <span class="pack-chip">push mid</span>
+          <span class="pack-chip">fall back</span>
+          <span class="pack-chip">smoke gank</span>
+          <span class="pack-chip block">▸ Opener</span>
+          <span class="pack-chip block">▸ Roshan callout</span>
+          <span class="pack-chip block">▸ Closer</span>
+        </div>
+        <div class="pack-meta">12 single · 3 block <span class="dot"></span> 1.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/intl-en.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/intl-en.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn">
+        <div class="pack-head">
+          <h3 class="pack-title">Banter Classics · 中文</h3>
+          <span class="pack-badge">★ Viral</span>
+        </div>
+        <p class="pack-desc">海王 / 演员 / 烟雾弹 / "you're no longer suitable for this patch" / amefys triple-combo — the CN trash-talk vocabulary. Designed to spread.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">海王</span>
+          <span class="pack-chip">演员</span>
+          <span class="pack-chip">烟雾弹</span>
+          <span class="pack-chip">这都能输</span>
+          <span class="pack-chip">回家放学</span>
+          <span class="pack-chip">不适合版本</span>
+          <span class="pack-chip block">▸ AMEFYS 三连</span>
+          <span class="pack-chip block">▸ 经典语录嘲讽</span>
+          <span class="pack-chip block">▸ 自嘲反讽</span>
+        </div>
+        <div class="pack-meta">12 single · 3 block <span class="dot"></span> 1.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/banter-cn.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/banter-cn.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="numbers">
+        <div class="pack-head">
+          <h3 class="pack-title">Number Memes · Universal</h3>
+          <span class="pack-badge">Meme</span>
+        </div>
+        <p class="pack-desc">? / 555 / 666 / 644 / 966 / 1288 / 1000-7 — the highest-form Dota taunt is just numbers. Crosses every language barrier.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">?</span>
+          <span class="pack-chip">555</span>
+          <span class="pack-chip">666</span>
+          <span class="pack-chip">644</span>
+          <span class="pack-chip">966</span>
+          <span class="pack-chip">1288</span>
+          <span class="pack-chip">1000-7</span>
+          <span class="pack-chip block">▸ 互喷数字</span>
+          <span class="pack-chip block">▸ 假装平衡</span>
+        </div>
+        <div class="pack-meta">9 single · 2 block <span class="dot"></span> 0.9 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/numbers-meme.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/numbers-meme.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="timings">
+        <div class="pack-head">
+          <h3 class="pack-title">Timings · High-MMR Pack</h3>
+          <span class="pack-badge">Power user</span>
+        </div>
+        <p class="pack-desc">BKB / Refresher / Roshan / Aegis / Rapier / buyback — fast callouts for the timing windows that decide teamfights. Plays without voice.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">BKB ready</span>
+          <span class="pack-chip">Aegis 4min</span>
+          <span class="pack-chip">Roshan 1min</span>
+          <span class="pack-chip">Rapier dropped</span>
+          <span class="pack-chip">大招冷却</span>
+          <span class="pack-chip">买活准备</span>
+          <span class="pack-chip block">▸ Roshan alert</span>
+          <span class="pack-chip block">▸ Teamfight prep</span>
+          <span class="pack-chip block">▸ Comeback window</span>
+        </div>
+        <div class="pack-meta">9 single · 3 block <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/timings.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/timings.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="ru">
+        <div class="pack-head">
+          <h3 class="pack-title">Russian · Friendly Vocabulary</h3>
+          <span class="pack-badge">CIS region</span>
+        </div>
+        <p class="pack-desc">давай / идём / хорошо / пушим — friendly Russian tactical vocab for cross-server pubs against CIS players. Tactics + manners only, no profanity.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">давай</span>
+          <span class="pack-chip">идём</span>
+          <span class="pack-chip">хорошо</span>
+          <span class="pack-chip">пушим топ</span>
+          <span class="pack-chip">назад</span>
+          <span class="pack-chip">спасибо</span>
+          <span class="pack-chip">гг</span>
+          <span class="pack-chip block">▸ Opener</span>
+          <span class="pack-chip block">▸ Tactics</span>
+          <span class="pack-chip block">▸ Closer</span>
+        </div>
+        <div class="pack-meta">10 single · 3 block <span class="dot"></span> 1.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/ru-friendly.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/ru-friendly.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="sea">
+        <div class="pack-head">
+          <h3 class="pack-title">SEA · South-East Asia Mix</h3>
+          <span class="pack-badge">SEA</span>
+        </div>
+        <p class="pack-desc">Indonesian / Malay / Vietnamese / Thai — curated phrases for SEA-server matches, plus English tactical commands.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">salam</span>
+          <span class="pack-chip">terima kasih</span>
+          <span class="pack-chip">maaf</span>
+          <span class="pack-chip">saya bantu</span>
+          <span class="pack-chip">xin chào</span>
+          <span class="pack-chip">push tower</span>
+          <span class="pack-chip block">▸ SEA opener</span>
+          <span class="pack-chip block">▸ SEA closer</span>
+        </div>
+        <div class="pack-meta">9 single · 2 block <span class="dot"></span> 1.0 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/sea-international.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/sea-international.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+    </div>
+
+    <section class="contribute">
+      <h2>Got better lines? Send us a pack</h2>
+      <p>All packs are MIT-licensed. Submit a PR on GitHub adding your own <code>.amefys-replies.json</code> and the gallery will credit you.</p>
+      <a class="btn-pill" href="https://github.com/amefys/web/tree/main/packs" target="_blank" rel="noopener">Open a PR on GitHub →</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© 2026 AMEFYS · MIT · Not affiliated with Valve / DOTA 2</div>
+  </footer>
+</body>
+</html>

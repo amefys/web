@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "数字梗 · 高级嘲讽",
+  "description": "? / 555 / 666 / 644 / 966 / 1288 / 1000-7 — Dota 圈最高级的嘲讽用数字说话。全球玩家通用，跨语言无障碍。",
+  "author": "AMEFYS",
+  "createdAt": 1715234567004,
+  "items": [
+    { "type": "single", "label": "?", "messages": ["?"] },
+    { "type": "single", "label": "??", "messages": ["??"] },
+    { "type": "single", "label": "555", "messages": ["555555"] },
+    { "type": "single", "label": "666", "messages": ["666"] },
+    { "type": "single", "label": "644", "messages": ["644"] },
+    { "type": "single", "label": "966", "messages": ["966"] },
+    { "type": "single", "label": "1288", "messages": ["1288"] },
+    { "type": "single", "label": "1000-7", "messages": ["1000-7"] },
+    { "type": "single", "label": "9k MMR", "messages": ["9k MMR detected"] },
+    {
+      "type": "block",
+      "label": "双方互喷数字",
+      "messages": ["644", "966", "1288"]
+    },
+    {
+      "type": "block",
+      "label": "假装平衡",
+      "messages": ["55-55 最多了", "不能再均衡了", "都是好局"]
+    }
+  ]
+}
