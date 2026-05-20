@@ -448,6 +448,78 @@
       <div class="coffee-hint">让 AMEFYS 走得更远</div>
     </div>
 
+    <!-- ──────────────  隐私 & 合规  ────────────── -->
+    <section class="compliance" id="compliance" style="margin-top: 80px; padding-top: 56px; border-top: 0.5px solid var(--hairline);">
+      <div style="text-align: center; margin-bottom: 44px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(52,211,153,0.08); border: 0.5px solid rgba(52,211,153,0.25); font-size: 11px; color: var(--emerald); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald);"></span>合规白皮书
+        </div>
+        <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">透明，且<em class="hl" style="font-style: normal;">可验证</em>。</h2>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">所有承诺都对应代码路径，任何人可独立审计。完整合规白皮书见 <a href="https://github.com/amefys/amefys/blob/main/docs/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">docs/COMPLIANCE.md</a>。</p>
+      </div>
+
+      <!-- 4-card compliance grid -->
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(52,211,153,0.06), rgba(52,211,153,0.02)); border: 0.5px solid rgba(52,211,153,0.18);">
+          <div style="font-size: 11px; color: var(--emerald); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔒 Valve 合规红线</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">零反作弊豁免，零灰色操作</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>❌ 不读游戏进程内存</li>
+            <li>❌ 不修改游戏文件 / 不注入 DLL</li>
+            <li>❌ 不拦截游戏网络流量</li>
+            <li>❌ 不显示敌方隐藏信息（雾内单位、技能 CD）</li>
+            <li>✅ 仅用 Valve 官方 <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">-gamestateintegration</code> 接口读对局</li>
+            <li>✅ 仅用游戏内置 keybind + 剪贴板发消息</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(167,139,250,0.06), rgba(167,139,250,0.02)); border: 0.5px solid rgba(167,139,250,0.20);">
+          <div style="font-size: 11px; color: var(--violet); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">📦 数据默认本地</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">本地优先，云同步可选</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li><strong style="color: var(--text);">本地永驻</strong>：对局数据、聊天历史、翻译缓存、应用日志（SQLite）</li>
+            <li><strong style="color: var(--text);">登录后可选同步</strong>：用户偏好、自定义快捷回复包、对局元数据（Supabase + RLS）</li>
+            <li><strong style="color: var(--text);">绝不上传</strong>：聊天原文、翻译结果、应用日志、API Key</li>
+            <li>一键清除本地数据 / 删除账号（云端 RLS 级联）</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(240,162,60,0.06), rgba(240,162,60,0.02)); border: 0.5px solid rgba(240,162,60,0.20);">
+          <div style="font-size: 11px; color: var(--warn); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔑 第三方 API Key</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">进系统 keychain，永不入库</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>Claude / OpenAI / DeepL / 火山 / 阿里 / Gemini 的 API Key 由 <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">safeStorage</code> 加密后存系统 Keychain</li>
+            <li>永不进入 SQLite、日志、Supabase、Sentry 或任何文件</li>
+            <li>随时可在设置中查看 / 编辑 / 删除</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(96,165,250,0.06), rgba(96,165,250,0.02)); border: 0.5px solid rgba(96,165,250,0.20);">
+          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 独立可验证</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">代码 + 流量都能查</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>源码 MIT，<a href="https://github.com/amefys/amefys" target="_blank" rel="noopener" style="color: var(--violet);">github.com/amefys/amefys</a> 可 grep / 编译复现</li>
+            <li>用 mitmproxy 可独立抓包验证出站连接清单</li>
+            <li>CI workflow 公开，构建产物的来源可追溯</li>
+            <li>对外联系：<a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 工作日内响应</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Third-party services strip -->
+      <div style="margin-top: 28px; padding: 18px 22px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 0.5px solid var(--hairline);">
+        <div style="font-size: 11px; color: var(--text-3); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px;">第三方服务清单 · 出站连接</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12.5px; color: var(--text-2); line-height: 1.5;">
+          <div><strong style="color: var(--text);">Supabase</strong><br>用户认证 + 云同步<br>仅登录且开启同步时</div>
+          <div><strong style="color: var(--text);">Sentry</strong><br>匿名错误堆栈收集<br>仅崩溃时；可关闭</div>
+          <div><strong style="color: var(--text);">OpenDota API</strong><br>英雄 / 装备元数据<br>仅 CI 数据生成时</div>
+          <div><strong style="color: var(--text);">用户自选 LLM</strong><br>翻译 + 复盘生成<br>仅配置 API Key 时</div>
+          <div><strong style="color: var(--text);">GitHub Releases</strong><br>分发 + 自动更新<br>仅下载 / 更新时</div>
+          <div><strong style="color: var(--text);">Cloudflare</strong><br>amefys.com /dl/* 反代<br>仅点击下载时</div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <!-- Coffee tip modal -->

@@ -355,6 +355,76 @@
       <div class="coffee-hint">Every coffee keeps AMEFYS shipping the next bug fix.</div>
     </div>
 
+    <!-- ──────────────  Privacy & Compliance  ────────────── -->
+    <section class="compliance" id="compliance" style="margin-top: 80px; padding-top: 56px; border-top: 0.5px solid var(--hairline);">
+      <div style="text-align: center; margin-bottom: 44px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(52,211,153,0.08); border: 0.5px solid rgba(52,211,153,0.25); font-size: 11px; color: var(--emerald); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald);"></span>Compliance white paper
+        </div>
+        <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">Transparent &amp; <em class="hl" style="font-style: normal;">auditable</em>.</h2>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">Every claim maps to a code path. Anyone can audit independently. Full white paper at <a href="https://github.com/amefys/amefys/blob/main/docs/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">docs/COMPLIANCE.md</a>.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(52,211,153,0.06), rgba(52,211,153,0.02)); border: 0.5px solid rgba(52,211,153,0.18);">
+          <div style="font-size: 11px; color: var(--emerald); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔒 Valve red lines</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">Zero anti-cheat exemption, zero grey-area work</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>❌ No game memory reads</li>
+            <li>❌ No file mods / DLL injection</li>
+            <li>❌ No network interception</li>
+            <li>❌ Never reveal hidden-vision info (fogged units, cooldowns)</li>
+            <li>✅ Read match state ONLY via Valve's <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">-gamestateintegration</code></li>
+            <li>✅ Send chat ONLY via the game's keybind + clipboard paste</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(167,139,250,0.06), rgba(167,139,250,0.02)); border: 0.5px solid rgba(167,139,250,0.20);">
+          <div style="font-size: 11px; color: var(--violet); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">📦 Local-first data</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">Local-first, cloud sync opt-in</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li><strong style="color: var(--text);">Local SQLite (always)</strong>: match data, chat history, translation cache, app logs</li>
+            <li><strong style="color: var(--text);">Cloud opt-in</strong>: settings, custom quick-reply packs, match metadata (Supabase + RLS)</li>
+            <li><strong style="color: var(--text);">Never uploaded</strong>: chat originals, translation outputs, app logs, API keys</li>
+            <li>One-click wipe local data / delete account (cloud RLS cascade)</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(240,162,60,0.06), rgba(240,162,60,0.02)); border: 0.5px solid rgba(240,162,60,0.20);">
+          <div style="font-size: 11px; color: var(--warn); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔑 Third-party API keys</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">In your OS keychain, never in our DB</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>Claude / OpenAI / DeepL / Volcano / Aliyun / Gemini API keys are encrypted via <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">safeStorage</code> and stored in your OS keychain</li>
+            <li>Never enter SQLite, logs, Supabase, Sentry, or any file</li>
+            <li>View / edit / delete anytime in Settings</li>
+          </ul>
+        </div>
+
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(96,165,250,0.06), rgba(96,165,250,0.02)); border: 0.5px solid rgba(96,165,250,0.20);">
+          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 Independently auditable</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">Source &amp; traffic both verifiable</h3>
+          <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
+            <li>MIT source at <a href="https://github.com/amefys/amefys" target="_blank" rel="noopener" style="color: var(--violet);">github.com/amefys/amefys</a> — grep / re-build it</li>
+            <li>Outgoing connections list verifiable with mitmproxy</li>
+            <li>CI workflow public — build artifacts traceable</li>
+            <li>Contact: <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 business days response</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; padding: 18px 22px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 0.5px solid var(--hairline);">
+        <div style="font-size: 11px; color: var(--text-3); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px;">Third-party services · outgoing connections</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12.5px; color: var(--text-2); line-height: 1.5;">
+          <div><strong style="color: var(--text);">Supabase</strong><br>Auth + cloud sync<br>Only when logged in &amp; sync on</div>
+          <div><strong style="color: var(--text);">Sentry</strong><br>Anonymous error stacks<br>Crash only · can be disabled</div>
+          <div><strong style="color: var(--text);">OpenDota API</strong><br>Hero / item metadata<br>CI data prep only</div>
+          <div><strong style="color: var(--text);">User-chosen LLM</strong><br>Translation + match recap<br>Only with your API key</div>
+          <div><strong style="color: var(--text);">GitHub Releases</strong><br>Distribution + auto-update<br>Only on download / update</div>
+          <div><strong style="color: var(--text);">Cloudflare</strong><br>amefys.com /dl/* proxy<br>Only on download click</div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <!-- Footer -->
