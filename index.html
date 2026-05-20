@@ -451,6 +451,476 @@
     .final-cta h2 { font-size: 44px; letter-spacing: -1.2px; }
     .ft-grid { grid-template-columns: 1fr 1fr; }
   }
+
+  /* ─────────────────────────────────────────────────────────────────
+     Hero carousel — 5 slides, replaces the single static preview.
+     Class names are all prefixed `hc-` to avoid collisions with the
+     existing .preview, .pv-*, .stage, .slide-* class space below.
+     ───────────────────────────────────────────────────────────────── */
+  .hc-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 0.5px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(124,92,235,0.16);
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+  .hc-carousel:active { cursor: grabbing; }
+  .hc-track {
+    display: flex;
+    width: 500%;   /* 5 slides */
+    height: 100%;
+    transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+    will-change: transform;
+  }
+  .hc-track[data-dragging='true'] { transition: none; }
+  .hc-slide {
+    width: 20%;         /* 100% / 5 */
+    height: 100%;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Common slide chrome (eyebrow / title / sub / dots / stage-tag) */
+  .hc-eyebrow {
+    position: absolute; top: 36px; left: 44px; z-index: 5;
+    display: flex; align-items: center; gap: 10px;
+    color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0,0,0,0.5);
+  }
+  .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--violet); }
+  .hc-title {
+    position: absolute; top: 74px; left: 44px; z-index: 5;
+    color: #fff;
+    font-size: 44px; font-weight: 700; letter-spacing: -1.2px;
+    line-height: 1.05; max-width: 540px; margin: 0;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .hc-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hc-sub {
+    position: absolute; top: 240px; left: 44px; z-index: 5;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px; line-height: 1.55; max-width: 460px; margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .hc-stage-tag {
+    position: absolute; bottom: 76px; left: 44px; z-index: 5;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 10px; border-radius: 999px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    font-size: 10.5px; color: rgba(255,255,255,0.85);
+  }
+  .hc-stage-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+
+  /* Carousel arrows */
+  .hc-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    color: #fff;
+    font-size: 22px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .12s, transform .12s;
+  }
+  .hc-arrow:hover { background: rgba(0,0,0,0.7); transform: translateY(-50%) scale(1.08); }
+  .hc-arrow.prev { left: 16px; }
+  .hc-arrow.next { right: 16px; }
+
+  /* Dots — bottom center */
+  .hc-dots {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 10;
+    display: flex; gap: 8px;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.40);
+    backdrop-filter: blur(12px);
+  }
+  .hc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    border: 0;
+    cursor: pointer;
+    transition: width .25s, background .25s;
+    padding: 0;
+  }
+  .hc-dot[data-active='true'] {
+    width: 24px; border-radius: 4px;
+    background: rgba(255,255,255,0.95);
+  }
+
+  /* Callouts (shared) */
+  .hc-callout { position: absolute; z-index: 4; display: flex; gap: 8px; align-items: flex-start; pointer-events: none; }
+  .hc-callout-card {
+    padding: 9px 12px; border-radius: 11px;
+    background: rgba(0,0,0,0.62);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    max-width: 200px;
+  }
+  .hc-callout-card .key {
+    color: var(--accent, var(--violet));
+    font-size: 9.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 3px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .hc-callout-card .key .num {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent, var(--violet)); color: #fff;
+    font-size: 9.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hc-callout-card .body { font-size: 11.5px; color: rgba(255,255,255,0.92); line-height: 1.4; }
+  .hc-callout-card .body kbd {
+    display: inline-block; padding: 1px 4px; border-radius: 4px;
+    background: rgba(255,255,255,0.16); border: 0.5px solid rgba(255,255,255,0.25);
+    font-family: ui-monospace, monospace; font-size: 10px; color: #fff; margin: 0 1px;
+  }
+  .hc-callout .arr {
+    flex-shrink: 0; width: 32px; height: 1.5px;
+    background: linear-gradient(90deg, var(--accent, var(--violet)), transparent);
+    position: relative; top: 7px;
+  }
+  .hc-callout .arr::after {
+    content: ''; position: absolute; right: -1px; top: -3.5px;
+    border: 4px solid transparent; border-left-color: var(--accent, var(--violet));
+  }
+  .hc-callout.flip { flex-direction: row-reverse; }
+  .hc-callout.flip .arr { background: linear-gradient(90deg, transparent, var(--accent, var(--violet))); transform: rotate(180deg); }
+
+  /* ──── Slide 1 · main UI basics ──── */
+  .hc-slide-1 {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(167,139,250,0.18), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(96,165,250,0.12), transparent 60%),
+      linear-gradient(180deg, #0c0d12, #08090d);
+  }
+  .hc-app {
+    position: absolute; top: 50%; right: 5%; transform: translateY(-50%);
+    width: 50%; max-width: 600px; aspect-ratio: 16/12;
+    border-radius: 14px;
+    background: #14161e;
+    border: 0.5px solid rgba(255,255,255,0.10);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    overflow: hidden;
+    display: grid; grid-template-rows: 28px 1fr;
+    z-index: 3;
+  }
+  .hc-app-titlebar {
+    display: flex; align-items: center; gap: 7px; padding: 0 12px;
+    background: rgba(0,0,0,0.4);
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .hc-app-titlebar i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .hc-app-body { display: grid; grid-template-columns: 130px 1fr; min-height: 0; }
+  .hc-app-side {
+    background: rgba(0,0,0,0.22);
+    border-right: 0.5px solid rgba(255,255,255,0.06);
+    padding: 12px 6px; display: flex; flex-direction: column; gap: 2px;
+    font-size: 11.5px;
+  }
+  .hc-app-side .row { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 7px; color: rgba(255,255,255,0.65); }
+  .hc-app-side .row[data-active='true'] { background: rgba(167,139,250,0.16); color: #fff; }
+  .hc-app-side .glyph { width: 12px; height: 12px; border-radius: 3px; background: rgba(255,255,255,0.14); }
+  .hc-app-side .row[data-active='true'] .glyph { background: var(--violet); }
+  .hc-app-main { padding: 14px; display: flex; flex-direction: column; gap: 11px; }
+  .hc-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .hc-tile { padding: 8px 10px; border-radius: 8px; background: rgba(167,139,250,0.08); border: 0.5px solid rgba(167,139,250,0.20); }
+  .hc-tile .l { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: .6px; text-transform: uppercase; }
+  .hc-tile .v { font-size: 16px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+  .hc-card { padding: 11px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-card h5 { margin: 0 0 8px; font-size: 9.5px; letter-spacing: .8px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700; }
+  .hc-mrow { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); font-size: 11px; }
+  .hc-mrow:last-child { border-bottom: 0; }
+  .hc-mrow .h { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#4f46e5,#1e1b4b); color: #fff; font-size: 8px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hc-mrow .n { flex: 1; color: #fff; }
+  .hc-mrow .w { color: var(--emerald); font-weight: 700; }
+  .hc-mrow .l { color: var(--dire); font-weight: 700; }
+  .hc-mrow .t { color: rgba(255,255,255,0.4); font-family: ui-monospace, monospace; font-size: 10px; }
+  .hc-slide-1 { --accent: var(--violet); }
+  .hc-slide-1 .hc-eyebrow .bar { background: var(--violet); }
+
+  /* ──── Slide 2 · overlay over game ──── */
+  .hc-slide-2 {
+    background:
+      radial-gradient(60% 50% at 18% 22%, rgba(244,114,182,0.20), transparent 60%),
+      radial-gradient(60% 50% at 78% 32%, rgba(167,139,250,0.20), transparent 60%),
+      radial-gradient(60% 50% at 28% 80%, rgba(96,165,250,0.18), transparent 60%),
+      radial-gradient(60% 50% at 82% 80%, rgba(52,211,153,0.16), transparent 60%),
+      #0a0c14;
+  }
+  .hc-slide-2 .hc-title {
+    font-family: 'Newsreader','Source Han Serif SC','Songti SC',serif;
+    font-style: italic;
+  }
+  .hc-slide-2 .hc-title em { background: linear-gradient(135deg, #fbcfe8, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-2 .hc-eyebrow .bar { background: #f472b6; }
+  .hc-slide-2 { --accent: #f472b6; }
+  .hc-game-bg { position: absolute; inset: 0; z-index: 0; filter: blur(8px) brightness(0.72) saturate(0.85); transform: scale(1.08); }
+  .hc-game-bg svg { width: 100%; height: 100%; display: block; }
+  .hc-game-tint {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(60% 50% at 18% 22%, rgba(244,114,182,0.20), transparent 60%),
+      radial-gradient(60% 50% at 50% 50%, rgba(0,0,0,0.35), transparent 70%),
+      linear-gradient(180deg, rgba(8,9,13,0.25) 0%, rgba(8,9,13,0.5) 100%);
+  }
+  .hc-hud { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; z-index: 1; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85)); pointer-events: none; }
+  .hc-hud .row { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; gap: 5px; }
+  .hc-hud .slot { width: 32px; height: 24px; border-radius: 3px; background: linear-gradient(180deg, rgba(167,139,250,0.32), rgba(124,92,235,0.12)); border: 0.5px solid rgba(255,255,255,0.18); }
+  .hc-hud .slot.empty { background: rgba(0,0,0,0.45); border-color: rgba(255,255,255,0.08); }
+  .hc-hud .clock { position: absolute; left: 20px; bottom: 14px; color: rgba(255,255,255,0.8); font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
+  .hc-hud .team { position: absolute; bottom: 16px; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 800; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
+  .hc-hud .team.r { left: 24%; color: #3DBE8A; }
+  .hc-hud .team.d { right: 24%; color: #D9534F; }
+
+  .hc-overlay-win {
+    position: absolute; top: 50%; right: 6%; transform: translateY(-50%);
+    width: 320px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 0.5px solid rgba(255,255,255,0.24);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 18px 60px rgba(0,0,0,0.55);
+    overflow: hidden;
+    z-index: 3;
+  }
+  .hc-overlay-win::before { content: ''; position: absolute; inset: 0 0 50% 0; background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent); pointer-events: none; border-radius: 20px 20px 0 0; }
+  .hc-ow-titlebar {
+    position: relative;
+    height: 34px; padding: 0 10px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .hc-ow-brand { width: 16px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); box-shadow: 0 0 8px rgba(167,139,250,0.5); }
+  .hc-ow-titlebar strong { font-weight: 700; color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 13.5px; }
+  .hc-ow-titlebar small { margin-left: auto; color: rgba(255,255,255,0.6); font-size: 10px; font-family: ui-monospace, monospace; }
+  .hc-ow-opacity-btn {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: linear-gradient(135deg, #f472b6, var(--violet));
+    border: 0.5px solid #f472b6;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 2px rgba(244,114,182,0.18);
+  }
+  .hc-ow-opacity-btn svg { width: 11px; height: 11px; }
+  .hc-ow-opacity-panel {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 12px;
+    background: rgba(244,114,182,0.10);
+    border-bottom: 0.5px solid rgba(244,114,182,0.18);
+  }
+  .hc-ow-opacity-panel .lbl { font-size: 9.5px; color: rgba(255,255,255,0.8); letter-spacing: .5px; text-transform: uppercase; font-weight: 700; }
+  .hc-ow-opacity-panel .track { flex: 1; height: 4px; background: rgba(255,255,255,0.14); border-radius: 2px; position: relative; }
+  .hc-ow-opacity-panel .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 76%; background: linear-gradient(90deg, #f472b6, var(--violet)); border-radius: 2px; }
+  .hc-ow-opacity-panel .thumb { position: absolute; left: 76%; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .hc-ow-opacity-panel .val { font-size: 10.5px; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; width: 28px; text-align: right; }
+  .hc-ow-opacity-panel .x { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,0.35); color: rgba(255,255,255,0.85); border: 0; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .hc-ow-tabs { display: flex; padding: 4px 8px 0; gap: 4px; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-ow-tab { flex: 1; height: 24px; border-radius: 7px 7px 0 0; background: transparent; border: 0; color: rgba(255,255,255,0.5); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .hc-ow-tab[data-active='true'] { background: rgba(255,255,255,0.15); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.22); }
+  .hc-ow-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 7px; }
+  .hc-bubble { padding: 6px 9px; border-radius: 10px; font-size: 10.5px; line-height: 1.4; }
+  .hc-bubble.them { background: rgba(255,255,255,0.12); align-self: flex-start; max-width: 92%; }
+  .hc-bubble.me { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); align-self: flex-end; max-width: 92%; color: #fff; box-shadow: 0 4px 10px rgba(124,92,235,0.35); }
+  .hc-bubble .who { font-size: 8.5px; color: rgba(255,255,255,0.65); font-weight: 700; letter-spacing: .3px; margin-bottom: 1px; }
+  .hc-bubble .raw { color: rgba(255,255,255,0.92); }
+  .hc-bubble .tr { color: rgba(255,255,255,0.6); font-size: 9.5px; margin-top: 1px; font-style: italic; font-family: 'Newsreader',serif; }
+  .hc-bubble.me .tr { color: rgba(255,255,255,0.85); }
+  .hc-radial-zone { position: relative; height: 158px; margin-top: 4px; }
+  .hc-radial { position: absolute; right: -8px; top: 0; width: 150px; height: 150px; z-index: 4; pointer-events: none; }
+  .hc-radial svg { width: 100%; height: 100%; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); }
+  .hc-radial .bp { fill: rgba(0,0,0,0.55); stroke: rgba(255,255,255,0.30); stroke-width: 0.5; }
+  .hc-radial .sec { fill: rgba(255,255,255,0.12); stroke: rgba(255,255,255,0.22); stroke-width: 0.5; }
+  .hc-radial .sec[data-active='true'] { fill: rgba(244,114,182,0.50); stroke: #f472b6; stroke-width: 1.2; }
+  .hc-radial .lbl { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; font-size: 12px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+  .hc-radial .cdot { fill: rgba(255,255,255,0.35); }
+  .hc-radial-tail { position: absolute; right: 56px; bottom: -2px; width: 0; height: 0; border: 6px solid transparent; border-top-color: rgba(255,255,255,0.30); z-index: 4; }
+  .hc-qr-row { display: flex; gap: 4px; flex-wrap: wrap; }
+  .hc-qr-chip { height: 22px; padding: 0 9px; border-radius: 11px; background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.18); color: #fff; font-size: 10px; font-weight: 600; display: inline-flex; align-items: center; }
+  .hc-qr-chip.hot { background: linear-gradient(135deg, #f472b6, var(--violet)); color: #fff; border-color: #f472b6; box-shadow: 0 0 0 3px rgba(244,114,182,0.22); font-weight: 800; margin-left: auto; }
+  .hc-block-q { margin-top: 2px; padding: 8px 10px; border-radius: 10px; background: rgba(52,211,153,0.10); border: 0.5px solid rgba(52,211,153,0.22); }
+  .hc-block-q h6 { margin: 0 0 5px; font-size: 8.5px; color: var(--emerald); font-weight: 700; letter-spacing: .7px; }
+  .hc-block-q .row { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: rgba(255,255,255,0.88); margin-bottom: 2px; }
+  .hc-block-q .row:last-child { margin-bottom: 0; }
+  .hc-block-q .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--emerald); color: #062; font-size: 7.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hc-block-q .row.pending .dot { background: rgba(52,211,153,0.35); color: #fff; }
+  .hc-block-q .row .t { margin-left: auto; color: rgba(255,255,255,0.5); font-size: 8.5px; font-family: ui-monospace, monospace; }
+  .hc-ow-input { display: flex; align-items: center; gap: 5px; padding: 6px 4px 2px; border-top: 0.5px solid rgba(255,255,255,0.06); margin-top: 3px; }
+  .hc-ow-input .field { flex: 1; height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(0,0,0,0.30); border: 0.5px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.55); font-size: 10px; display: flex; align-items: center; }
+  .hc-ow-input .send { height: 26px; padding: 0 10px; border-radius: 13px; background: var(--violet-deep); color: #fff; font-size: 10px; font-weight: 700; border: 0; box-shadow: 0 4px 12px rgba(124,92,235,0.4); display: flex; align-items: center; }
+
+  /* ──── Slide 3 · multi-theme ──── */
+  .hc-slide-3 { background: linear-gradient(90deg, #0a0e1a 0%, #0a0e1a 33%, #0c0d12 33%, #0c0d12 66%, #0e1018 66%, #0e1018 100%); }
+  .hc-slide-3 .hc-title em { background: linear-gradient(135deg, #06b6d4, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-3 .hc-eyebrow .bar { background: #06b6d4; }
+  .hc-slide-3 { --accent: #06b6d4; }
+  .hc-3split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .hc-3pane { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hc-3pane.cy {
+    background-image:
+      repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(6,182,212,0.08) 19px, rgba(6,182,212,0.08) 20px),
+      repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(244,114,182,0.06) 19px, rgba(244,114,182,0.06) 20px);
+  }
+  .hc-3pane.cy::after { content: ''; position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); box-shadow: 0 0 8px #06b6d4; }
+  .hc-3pane.df { background: radial-gradient(circle at 50% 30%, rgba(167,139,250,0.10), transparent 60%); border-left: 0.5px solid rgba(255,255,255,0.06); border-right: 0.5px solid rgba(255,255,255,0.06); }
+  .hc-3pane.gl { background: radial-gradient(60% 50% at 30% 30%, rgba(244,114,182,0.22), transparent 60%), radial-gradient(60% 50% at 70% 70%, rgba(167,139,250,0.24), transparent 60%); }
+  .hc-3pane .label { position: absolute; top: 24px; left: 24px; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
+  .hc-3pane.cy .label { color: #06b6d4; font-family: ui-monospace, monospace; }
+  .hc-3pane.df .label { color: var(--violet); }
+  .hc-3pane.gl .label { color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 16px; font-weight: 400; letter-spacing: -0.2px; }
+  .hc-3card { width: 75%; max-width: 220px; padding: 16px; border-radius: 14px; z-index: 3; }
+  .hc-3card.cy {
+    background: linear-gradient(180deg, rgba(6,182,212,0.10), rgba(244,114,182,0.06));
+    border: 1px solid #06b6d4;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+  .hc-3card.cy h4 { font-family: ui-monospace, monospace; color: #06b6d4; font-size: 13px; margin: 0 0 4px; letter-spacing: 1.4px; font-weight: 700; }
+  .hc-3card.cy .s { font-family: ui-monospace, monospace; color: #f472b6; font-size: 9px; letter-spacing: .8px; margin-bottom: 12px; }
+  .hc-3card.cy .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.cy .icn { width: 38px; height: 38px; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); background: linear-gradient(135deg, #06b6d4, #f472b6); color: #000; font-family: ui-monospace, monospace; font-weight: 800; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.cy .meta strong { display: block; font-family: ui-monospace, monospace; color: #06b6d4; font-size: 11px; letter-spacing: .5px; }
+  .hc-3card.cy .meta span { color: #f472b6; font-size: 9.5px; font-family: ui-monospace, monospace; letter-spacing: .7px; }
+  .hc-3card.cy .br { display: flex; gap: 3px; }
+  .hc-3card.cy .br span { flex: 1; height: 7px; }
+  .hc-3card.cy .br span:nth-child(1) { background: linear-gradient(135deg, #06b6d4, #f472b6); }
+  .hc-3card.cy .br span:nth-child(2) { background: rgba(6,182,212,0.3); }
+  .hc-3card.cy .br span:nth-child(3) { background: rgba(6,182,212,0.12); }
+  .hc-3card.cy .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
+  .hc-3card.df { background: linear-gradient(180deg, rgba(36,37,46,0.92), rgba(28,28,34,0.92)); border: 0.5px solid rgba(255,255,255,0.10); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+  .hc-3card.df h4 { color: #fff; font-size: 14px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.2px; }
+  .hc-3card.df .s { color: rgba(235,235,245,0.62); font-size: 10.5px; margin-bottom: 12px; }
+  .hc-3card.df .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.df .icn { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff; font-size: 9.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(167,139,250,0.18); }
+  .hc-3card.df .meta strong { display: block; color: #fff; font-size: 12px; font-weight: 700; }
+  .hc-3card.df .meta span { color: rgba(235,235,245,0.62); font-size: 10.5px; }
+  .hc-3card.df .br { display: flex; gap: 4px; }
+  .hc-3card.df .br span { flex: 1; height: 7px; border-radius: 3.5px; }
+  .hc-3card.df .br span:nth-child(1) { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); }
+  .hc-3card.df .br span:nth-child(2) { background: rgba(167,139,250,0.28); }
+  .hc-3card.df .br span:nth-child(3) { background: rgba(167,139,250,0.15); }
+  .hc-3card.df .br span:nth-child(4) { background: rgba(255,255,255,0.05); }
+  .hc-3card.gl { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 0.5px solid rgba(255,255,255,0.20); box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3); }
+  .hc-3card.gl h4 { font-family: 'Newsreader',serif; font-style: italic; font-weight: 400; color: #fff; font-size: 16px; margin: 0 0 5px; letter-spacing: -0.3px; }
+  .hc-3card.gl .s { color: rgba(255,255,255,0.6); font-size: 10.5px; margin-bottom: 12px; }
+  .hc-3card.gl .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.gl .icn { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #f472b6, var(--violet)); border: 0.5px solid rgba(255,255,255,0.3); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.gl .meta strong { display: block; font-family: 'Newsreader',serif; font-style: italic; color: #fff; font-size: 13px; }
+  .hc-3card.gl .meta span { color: rgba(255,255,255,0.65); font-size: 10.5px; }
+  .hc-3card.gl .br { display: flex; gap: 4px; }
+  .hc-3card.gl .br span { flex: 1; height: 8px; border-radius: 4px; }
+  .hc-3card.gl .br span:nth-child(1) { background: linear-gradient(135deg, #f472b6, var(--violet)); }
+  .hc-3card.gl .br span:nth-child(2) { background: rgba(167,139,250,0.3); }
+  .hc-3card.gl .br span:nth-child(3) { background: rgba(167,139,250,0.18); }
+  .hc-3card.gl .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
+  .hc-3arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.7); border: 0.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 4; }
+  .hc-3arrow.a1 { left: calc(33.333% - 14px); }
+  .hc-3arrow.a2 { left: calc(66.666% - 14px); }
+
+  /* ──── Slide 4 · GSI real-time ──── */
+  .hc-slide-4 {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(52,211,153,0.18), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(167,139,250,0.15), transparent 60%),
+      linear-gradient(180deg, #0a0d10, #08090d);
+  }
+  .hc-slide-4 .hc-title em { background: linear-gradient(135deg, var(--emerald), #10B981); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-4 .hc-eyebrow .bar { background: var(--emerald); }
+  .hc-slide-4 { --accent: var(--emerald); }
+  .hc-gsi { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
+  .hc-gsi-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+  .hc-gsi-tile { padding: 11px 12px; border-radius: 11px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.10); }
+  .hc-gsi-tile.lvl { background: rgba(167,139,250,0.10); border-color: rgba(167,139,250,0.30); }
+  .hc-gsi-tile.gpm { background: rgba(52,211,153,0.10); border-color: rgba(52,211,153,0.30); }
+  .hc-gsi-tile.xpm { background: rgba(240,162,60,0.10); border-color: rgba(240,162,60,0.30); }
+  .hc-gsi-tile.kda { background: rgba(217,83,79,0.08); border-color: rgba(217,83,79,0.30); }
+  .hc-gsi-tile .l { font-size: 9.5px; color: rgba(255,255,255,0.5); letter-spacing: .7px; text-transform: uppercase; }
+  .hc-gsi-tile .v { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; margin-top: 2px; }
+  .hc-gsi-tile.gpm .v { color: var(--emerald); }
+  .hc-gsi-tile.xpm .v { color: var(--warn); }
+  .hc-gsi-main { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, rgba(167,139,250,0.12), rgba(124,92,235,0.05)); border: 0.5px solid rgba(167,139,250,0.30); }
+  .hc-gsi-main .head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .hc-gsi-main .av { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(135deg, #4f46e5, #1e1b4b); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .hc-gsi-main .head .n { flex: 1; }
+  .hc-gsi-main .head .nm { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
+  .hc-gsi-main .head .sb { color: rgba(255,255,255,0.6); font-size: 11px; }
+  .hc-gsi-main .conf { padding: 5px 9px; border-radius: 999px; background: rgba(52,211,153,0.18); color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: .5px; }
+  .hc-gsi-main .rec { display: flex; gap: 11px; align-items: center; padding: 9px 0; border-top: 0.5px solid rgba(255,255,255,0.06); }
+  .hc-gsi-main .rec .ic { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .hc-gsi-main .rec .nm { color: #fff; font-size: 13px; font-weight: 700; }
+  .hc-gsi-main .rec .ds { color: rgba(255,255,255,0.6); font-size: 10.5px; }
+  .hc-gsi-main .rec .sts { margin-left: auto; text-align: right; }
+  .hc-gsi-main .rec .sts .gp { color: #fff; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hc-gsi-main .rec .sts .tm { color: rgba(255,255,255,0.5); font-size: 9.5px; font-family: ui-monospace, monospace; }
+  .hc-pulse { padding: 10px 12px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-pulse .h { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .hc-pulse .h .d { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+  .hc-pulse .h .l { color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+  .hc-pulse .h .r { margin-left: auto; color: rgba(255,255,255,0.5); font-size: 9.5px; font-family: ui-monospace, monospace; }
+  .hc-pulse .chart { display: flex; gap: 2.5px; align-items: flex-end; height: 32px; }
+  .hc-pulse .chart span { flex: 1; background: linear-gradient(180deg, var(--emerald), rgba(52,211,153,0.2)); border-radius: 2px; }
+
+  /* ──── Slide 5 · low resource ──── */
+  .hc-slide-5 {
+    background:
+      radial-gradient(circle at 70% 30%, rgba(240,162,60,0.18), transparent 60%),
+      radial-gradient(circle at 30% 70%, rgba(52,211,153,0.12), transparent 60%),
+      linear-gradient(180deg, #0a0d10, #08090d);
+  }
+  .hc-slide-5 .hc-title em { background: linear-gradient(135deg, var(--warn), var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-5 .hc-eyebrow .bar { background: var(--warn); }
+  .hc-slide-5 { --accent: var(--warn); }
+  .hc-res { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
+  .hc-res-big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hc-res-met { padding: 18px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 0.5px solid rgba(255,255,255,0.12); }
+  .hc-res-met .l { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: .7px; text-transform: uppercase; font-weight: 700; }
+  .hc-res-met .v { display: flex; align-items: baseline; gap: 3px; font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; color: #fff; font-variant-numeric: tabular-nums; margin: 3px 0 5px; }
+  .hc-res-met .v small { font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.6); }
+  .hc-res-met .sp { display: flex; gap: 2px; align-items: flex-end; height: 26px; }
+  .hc-res-met .sp span { flex: 1; border-radius: 1px; background: var(--emerald); opacity: 0.65; }
+  .hc-res-met.cpu .v { color: var(--emerald); }
+  .hc-res-met.mem .v { color: var(--warn); }
+  .hc-res-met.mem .sp span { background: var(--warn); }
+  .hc-res-vs { padding: 12px 14px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-res-vs h5 { margin: 0 0 8px; font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
+  .hc-res-vs .row { display: flex; align-items: center; gap: 10px; padding: 4px 0; font-size: 11.5px; }
+  .hc-res-vs .name { width: 120px; color: #fff; }
+  .hc-res-vs .bar { flex: 1; height: 7px; border-radius: 3.5px; background: rgba(255,255,255,0.06); overflow: hidden; }
+  .hc-res-vs .bar > span { display: block; height: 100%; border-radius: 3.5px; }
+  .hc-res-vs .val { width: 76px; text-align: right; color: rgba(255,255,255,0.85); font-family: ui-monospace, monospace; font-size: 10.5px; }
+  .hc-res-vs .row.us .name { color: var(--emerald); font-weight: 700; }
+  .hc-res-vs .row.us .bar > span { background: linear-gradient(90deg, var(--emerald), #10B981); width: 12%; }
+  .hc-res-vs .row.them1 .bar > span { background: linear-gradient(90deg, var(--warn), #d97706); width: 36%; }
+  .hc-res-vs .row.them2 .bar > span { background: linear-gradient(90deg, var(--dire), #b91c1c); width: 72%; }
+  .hc-res-vs .row.us .val { color: var(--emerald); }
+
+  /* Mobile — narrower carousel */
+  @media (max-width: 720px) {
+    .hc-title { font-size: 28px; letter-spacing: -0.8px; }
+    .hc-sub { font-size: 12px; max-width: 280px; top: 170px; }
+    .hc-eyebrow { font-size: 10px; }
+    .hc-arrow { width: 32px; height: 32px; font-size: 18px; }
+    .hc-arrow.prev { left: 8px; }
+    .hc-arrow.next { right: 8px; }
+  }
 </style>
 </head>
 <body style="">
@@ -665,138 +1135,300 @@
     <div class="platforms">macOS 13+ · Windows 11 · 永久免费 · 无内购 · 无广告</div>
 
     <div class="preview-wrap" style="position:relative;">
-      <div class="preview">
-        <div class="titlebar"><span class="tl r"></span><span class="tl y"></span><span class="tl g"></span></div>
-        <div class="preview-body">
-          <aside class="pv-side">
-            <div class="p-row"><span class="p-glyph"></span>首页</div>
-            <div class="p-row active"><span class="p-glyph"></span>游戏中</div>
-            <div class="p-row"><span class="p-glyph"></span>历史对局</div>
-            <div class="p-row"><span class="p-glyph"></span>资料库</div>
-            <div class="p-row"><span class="p-glyph"></span>设置</div>
-            <div style="flex:1"></div>
-            <div style="font-size:10px;color:var(--text-3);padding:8px 10px;letter-spacing:.6px;text-transform:uppercase;">登录为</div>
-            <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;">
-              <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--violet),#1a1a22);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">AM</div>
-              <div style="font-size:11.5px;font-weight:600;">ame</div>
-            </div>
-          </aside>
-          <main class="pv-main">
-            <!-- Live match telemetry strip -->
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:4px;">
-              <div style="padding:10px 12px;border-radius:10px;background:rgba(167,139,250,0.07);border:0.5px solid rgba(167,139,250,0.22);">
-                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">等级</div>
-                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">Lv 13</div>
-              </div>
-              <div style="padding:10px 12px;border-radius:10px;background:rgba(52,211,153,0.07);border:0.5px solid rgba(52,211,153,0.22);">
-                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">GPM</div>
-                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--emerald);">642</div>
-              </div>
-              <div style="padding:10px 12px;border-radius:10px;background:rgba(240,162,60,0.07);border:0.5px solid rgba(240,162,60,0.22);">
-                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">XPM</div>
-                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--warn);">+12%</div>
-              </div>
-              <div style="padding:10px 12px;border-radius:10px;background:rgba(217,83,79,0.07);border:0.5px solid rgba(217,83,79,0.22);">
-                <div style="font-size:9.5px;color:var(--text-3);letter-spacing:.8px;text-transform:uppercase;">KDA</div>
-                <div style="font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#fff;">6/1/4</div>
-              </div>
-            </div>
+      <div class="hc-carousel" data-hc>
+        <div class="hc-track" data-hc-track>
 
-            <div style="display:flex;align-items:flex-end;justify-content:space-between;">
-              <div>
-                <div class="pv-h">敌法师 · 21:28</div>
-                <div class="pv-sub">对线期 · 天辉中路 · 主推 · 置信 92%</div>
-              </div>
-              <div style="font-size:10px;color:var(--emerald);font-weight:700;letter-spacing:.6px;text-transform:uppercase;display:flex;align-items:center;gap:6px;">
-                <span style="width:6px;height:6px;border-radius:50%;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></span>GSI · 1Hz
+          <!-- ═══════════ SLIDE 1 · 主界面 ═══════════ -->
+          <div class="hc-slide hc-slide-1" data-slide="0">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 01 · 桌面应用</div>
+            <h2 class="hc-title">不是网页，<br>是<em>真桌面应用</em>。</h2>
+            <p class="hc-sub">macOS + Windows 双平台原生包，离线可用。4 大模块 + 完整 Settings + 多账号登录。</p>
+            <div class="hc-app">
+              <div class="hc-app-titlebar"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="hc-app-body">
+                <aside class="hc-app-side">
+                  <div class="row"><span class="glyph"></span>首页</div>
+                  <div class="row" data-active="true"><span class="glyph"></span>游戏中</div>
+                  <div class="row"><span class="glyph"></span>历史对局</div>
+                  <div class="row"><span class="glyph"></span>资料库</div>
+                  <div class="row"><span class="glyph"></span>设置</div>
+                </aside>
+                <main class="hc-app-main">
+                  <div class="hc-tiles">
+                    <div class="hc-tile"><div class="l">本月</div><div class="v">198</div></div>
+                    <div class="hc-tile"><div class="l">胜率</div><div class="v" style="color:var(--emerald)">61%</div></div>
+                    <div class="hc-tile"><div class="l">命中</div><div class="v" style="color:var(--violet)">+317</div></div>
+                    <div class="hc-tile"><div class="l">时长</div><div class="v">42h</div></div>
+                  </div>
+                  <div class="hc-card">
+                    <h5>最近对局</h5>
+                    <div class="hc-mrow"><div class="h">AM</div><div class="n">敌法师 · 中路</div><div class="w">胜</div><div class="t">28:12</div></div>
+                    <div class="hc-mrow"><div class="h" style="background:linear-gradient(135deg,#d9534f,#7f1d1d)">PA</div><div class="n">幻影刺客 · 优势路</div><div class="l">负</div><div class="t">42:48</div></div>
+                    <div class="hc-mrow"><div class="h" style="background:linear-gradient(135deg,#3dbe8a,#065f46)">SF</div><div class="n">影魔 · 中路</div><div class="w">胜</div><div class="t">35:01</div></div>
+                  </div>
+                </main>
               </div>
             </div>
-            <div class="pv-card accent">
-              <div style="display:flex;gap:14px;align-items:center;">
-                <div class="item active" style="width:54px;height:54px;font-size:10px;">MAN</div>
-                <div style="min-width:0;">
-                  <div style="font-size:15px;font-weight:700;letter-spacing:-.3px;">幻影法袍</div>
-                  <div style="font-size:11.5px;color:var(--text-2);margin-top:3px;">驱散 + 分身吃伤害，克制对方控制链。</div>
+            <div class="hc-callout flip" style="top:14%;right:46%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>4 大模块</div><div class="body">首页 / 游戏中 / 历史对局 / 资料库——一键导航。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:46%;right:52%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>实时数据</div><div class="body">本月对局 · 胜率 · 命中分 · 时长，看板式呈现。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:14%;right:52%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>多账号 + 设置</div><div class="body">邮箱 / 微信 / GitHub 登录，密钥进系统安全区。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>Default 主题 · 主界面</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 2 · Glass 悬浮窗（over 游戏画面） ═══════════ -->
+          <div class="hc-slide hc-slide-2" data-slide="1">
+            <div class="hc-game-bg">
+              <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="hcSkyG" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#7C5CEB" stop-opacity="0.35"/><stop offset="50%" stop-color="#A78BFA" stop-opacity="0.15"/><stop offset="100%" stop-color="#06070b" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="hcRadG" x1="0" x2="1" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.30"/><stop offset="100%" stop-color="#3DBE8A" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="hcDirG" x1="1" x2="0" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#D9534F" stop-opacity="0.28"/><stop offset="100%" stop-color="#D9534F" stop-opacity="0"/></linearGradient>
+                  <radialGradient id="hcMoonG" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0.45"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+                </defs>
+                <rect width="1600" height="900" fill="#0a0c14"/>
+                <rect width="1600" height="900" fill="url(#hcSkyG)"/>
+                <rect x="0" y="0" width="700" height="900" fill="url(#hcRadG)"/>
+                <rect x="900" y="0" width="700" height="900" fill="url(#hcDirG)"/>
+                <circle cx="1280" cy="180" r="120" fill="url(#hcMoonG)"/>
+                <circle cx="1280" cy="180" r="34" fill="#d8d2f5" opacity="0.7"/>
+                <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0a0a14" opacity="0.9"/>
+                <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.9"/>
+                <g opacity="0.95">
+                  <g transform="translate(360,580)">
+                    <path d="M-22,30 Q-32,140 -26,220 L0,210 L26,220 Q32,140 22,30 Z" fill="#06100c"/>
+                    <ellipse cx="0" cy="14" rx="10" ry="13" fill="#0a1410"/>
+                    <rect x="28" y="-40" width="2.5" height="280" fill="#1a2820"/>
+                  </g>
+                  <g transform="translate(800,560)">
+                    <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"/>
+                    <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"/>
+                    <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.85"/>
+                    <circle cx="46" cy="40" r="6" fill="#A78BFA" opacity="0.85"/>
+                    <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.85"/>
+                  </g>
+                  <g transform="translate(1180,580)">
+                    <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"/>
+                    <ellipse cx="0" cy="8" rx="13" ry="15" fill="#0c0810"/>
+                  </g>
+                </g>
+                <g opacity="0.65"><circle cx="700" cy="640" r="60" fill="#F0A23C" opacity="0.25"/><circle cx="900" cy="660" r="50" fill="#A78BFA" opacity="0.30"/></g>
+              </svg>
+            </div>
+            <div class="hc-game-tint"></div>
+            <div class="hc-hud">
+              <div class="clock">21:28</div>
+              <div class="team r">28</div>
+              <div class="team d">31</div>
+              <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot empty"></div></div>
+            </div>
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 02 · 悬浮窗</div>
+            <h2 class="hc-title">浮在游戏之上，<br>像<em>一层雾玻璃</em>。</h2>
+            <p class="hc-sub">聊天翻译、一键回复、圆盘选频道、透明度调节——所有操作不离开游戏窗口。</p>
+
+            <div class="hc-overlay-win">
+              <div class="hc-ow-titlebar">
+                <span class="hc-ow-brand"></span>
+                <strong>AMEFYS</strong>
+                <small>LIVE · 21:28</small>
+                <button class="hc-ow-opacity-btn" aria-label="透明度">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 A10 10 0 0 1 12 22 Z"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+              </div>
+              <div class="hc-ow-opacity-panel">
+                <span class="lbl">透明度</span>
+                <div class="track"><span class="fill"></span><span class="thumb"></span></div>
+                <span class="val">76%</span>
+                <button class="x" aria-label="关闭">×</button>
+              </div>
+              <div class="hc-ow-tabs">
+                <button class="hc-ow-tab" data-active="true">聊天 · 翻译</button>
+                <button class="hc-ow-tab">英雄 · 装备</button>
+                <button class="hc-ow-tab">事件</button>
+              </div>
+              <div class="hc-ow-body">
+                <div class="hc-bubble them"><div class="who">Yatoro · 🇷🇺 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
+                <div class="hc-bubble me"><div class="who">ame · 中 → EN</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
+                <div class="hc-radial-zone">
+                  <div class="hc-radial">
+                    <svg viewBox="-100 -100 200 200">
+                      <circle class="bp" cx="0" cy="0" r="88"></circle>
+                      <path class="sec" data-active="true" d="M -26 -15 L -76.2 -44 A 88 88 0 0 1 76.2 -44 L 26 -15 A 30 30 0 0 0 -26 -15 Z"></path>
+                      <path class="sec" d="M 26 -15 L 76.2 -44 A 88 88 0 0 1 0 88 L 0 30 A 30 30 0 0 0 26 -15 Z"></path>
+                      <path class="sec" d="M 0 30 L 0 88 A 88 88 0 0 1 -76.2 -44 L -26 -15 A 30 30 0 0 0 0 30 Z"></path>
+                      <circle class="cdot" cx="0" cy="0" r="6"></circle>
+                      <text class="lbl" x="0" y="-59">全频道</text>
+                      <text class="lbl" x="-51" y="29.5">队伍</text>
+                      <text class="lbl" x="51" y="29.5">小队</text>
+                    </svg>
+                  </div>
+                  <span class="hc-radial-tail" aria-hidden="true"></span>
                 </div>
-                <div style="margin-left:auto;text-align:right;">
-                  <div style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;">4 600</div>
-                  <div style="font-size:10px;color:var(--text-3);">缺口 1 248g · 约 2:10</div>
+                <div class="hc-qr-row">
+                  <span class="hc-qr-chip">GG</span><span class="hc-qr-chip">GLHF</span><span class="hc-qr-chip">NP</span><span class="hc-qr-chip">WP</span>
+                  <span class="hc-qr-chip hot">默认消息块 ▸</span>
+                </div>
+                <div class="hc-block-q">
+                  <h6>▸ BLOCK · 3 条 · 200ms</h6>
+                  <div class="row"><span class="dot">✓</span><span>amefys = ame + fy + somethings</span><span class="t">已发送</span></div>
+                  <div class="row pending"><span class="dot">▸</span><span>文斗1v9，全球无敌手！</span><span class="t">发送中…</span></div>
+                </div>
+                <div class="hc-ow-input"><div class="field">回复（自动翻译）</div><button class="send">发送</button></div>
+              </div>
+            </div>
+
+            <div class="hc-callout flip" style="top:8%;right:30%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>一键唤起</div><div class="body">按 <kbd>⌥</kbd> <kbd>⇧</kbd> <kbd>D</kbd> 收 / 出。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:9%;right:6%;"><div class="hc-callout-card"><div class="key"><span class="num">5</span>透明度</div><div class="body">点 🌗 展开 slider，0–100% 任调。</div></div><span class="arr"></span></div>
+            <div class="hc-callout" style="top:34%;left:38%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">2</span>9 国翻译</div><div class="body">中 · EN · RU · ES · PT · ID · MS · VI · TH，&lt; 600ms。</div></div></div>
+            <div class="hc-callout" style="top:54%;left:6%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">4</span>圆盘选频道</div><div class="body">点 hot chip 时 radial 上方弹出三扇区。</div></div></div>
+            <div class="hc-callout" style="bottom:20%;left:6%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">3</span>消息块连发</div><div class="body">「默认消息块」按 100ms–10s 连发 N 条。</div></div></div>
+
+            <div class="hc-stage-tag"><span class="dot"></span>Liquid Glass · 悬浮在游戏画面之上</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 3 · 多主题 ═══════════ -->
+          <div class="hc-slide hc-slide-3" data-slide="2">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 03 · 多主题</div>
+            <h2 class="hc-title" style="text-align:center;left:50%;transform:translateX(-50%);top:32px;max-width:none;">同一个面板，<em>三种灵魂</em>。</h2>
+            <div class="hc-3split">
+              <div class="hc-3pane cy">
+                <div class="label">▌ CYBERPUNK</div>
+                <div class="hc-3card cy">
+                  <h4>BLACK_KING_BAR</h4>
+                  <div class="s">CONF=0.94 · GAP=420G</div>
+                  <div class="ir"><div class="icn">BKB</div><div class="meta"><strong>BKB · 主推</strong><span>NEXT_BUY 22:30</span></div></div>
+                  <div class="br"><span></span><span></span><span></span><span></span></div>
                 </div>
               </div>
-              <div class="item-grid">
-                <div class="item">PMS</div><div class="item">RIN</div><div class="item">BOOT</div>
-                <div class="item">BFR</div><div class="item active">MAN</div><div class="item">··</div>
+              <div class="hc-3pane df">
+                <div class="label">DEFAULT</div>
+                <div class="hc-3card df">
+                  <h4>黑皇杖 · 主推</h4>
+                  <div class="s">置信 94% · 缺口 420g</div>
+                  <div class="ir"><div class="icn">BKB</div><div class="meta"><strong>主推 Top 1</strong><span>22:30 ± 30s 完成</span></div></div>
+                  <div class="br"><span></span><span></span><span></span><span></span></div>
+                </div>
               </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-              <div class="pv-card">
-                <div style="font-size:10px;letter-spacing:.8px;color:var(--text-3);font-weight:700;text-transform:uppercase;">下一件备选</div>
-                <div style="margin-top:8px;font-size:13px;font-weight:600;">黑皇杖</div>
-                <div style="font-size:11px;color:var(--text-2);margin-top:2px;">基于自身状态的防守装。</div>
+              <div class="hc-3pane gl">
+                <div class="label">Liquid Glass</div>
+                <div class="hc-3card gl">
+                  <h4>Black King Bar</h4>
+                  <div class="s">置信 94% · 缺 420g</div>
+                  <div class="ir"><div class="icn">BKB</div><div class="meta"><strong>主推</strong><span>22:30 ± 30s 完成</span></div></div>
+                  <div class="br"><span></span><span></span><span></span><span></span></div>
+                </div>
               </div>
-              <div class="pv-card">
-                <div style="font-size:10px;letter-spacing:.8px;color:var(--text-3);font-weight:700;text-transform:uppercase;">推荐时机</div>
-                <div style="margin-top:8px;font-size:13px;font-weight:600;">22:30 ± 30s</div>
-                <div style="font-size:11px;color:var(--text-2);margin-top:2px;">早于全国均值 1:42。</div>
-              </div>
+              <div class="hc-3arrow a1" aria-hidden="true">→</div>
+              <div class="hc-3arrow a2" aria-hidden="true">→</div>
             </div>
-          </main>
-          <aside class="pv-right">
-            <!-- Settings · skin selector preview -->
-            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;">主题</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg, var(--violet), var(--violet-deep));border:1.5px solid var(--violet);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">默认<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.7);">violet</span></div>
-              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#0a0e1a);border:0.5px solid rgba(6,182,212,0.4);font-size:9.5px;font-weight:700;color:#06b6d4;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;font-family:ui-monospace,monospace;">CYBER<span style="font-size:8.5px;font-weight:500;color:rgba(6,182,212,0.7);">霓虹切角</span></div>
-              <div style="padding:8px;border-radius:8px;background:linear-gradient(135deg,#f472b6,#A78BFA);border:0.5px solid rgba(255,255,255,0.2);font-size:9.5px;font-weight:700;color:#fff;letter-spacing:.3px;display:flex;flex-direction:column;gap:2px;">玻璃<span style="font-size:8.5px;font-weight:500;color:rgba(255,255,255,0.75);font-style:italic;">液态光斑</span></div>
-              <div style="padding:8px;border-radius:8px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);font-size:9.5px;font-weight:600;color:var(--text-3);letter-spacing:.3px;display:flex;align-items:center;justify-content:center;">+</div>
-            </div>
+            <div class="hc-callout flip" style="top:13%;right:30%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>3 套完整皮肤</div><div class="body">Default + Cyberpunk + Glass，重做背景 / 字体 / 切角 / 动效。</div></div><span class="arr"></span></div>
+            <div class="hc-callout" style="bottom:24%;left:4%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">2</span>Cyberpunk</div><div class="body">霓虹切角 + 扫描光束 + 六边网格 + Mono 字体。</div></div></div>
+            <div class="hc-callout flip" style="bottom:24%;right:4%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>Liquid Glass</div><div class="body">5 色径向网格 + 28s 漂移 + 雾玻璃 + 衬线斜体。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>主题切换演示 · 一键切换 · 云同步</div>
+          </div>
 
-            <div style="font-size:10px;color:var(--text-3);font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-top:4px;">实时翻译</div>
-            <div class="chat-bubble them">
-              <div class="who">Yatoro · 🇷🇺</div>
-              <div class="raw">AM пуш мид сейчас!</div>
-              <div class="tr">AM 现在推中路！</div>
+          <!-- ═══════════ SLIDE 4 · GSI 实时 ═══════════ -->
+          <div class="hc-slide hc-slide-4" data-slide="3">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 04 · GSI 实时</div>
+            <h2 class="hc-title">Valve 官方接口，<br><em>1Hz</em> 同步对局。</h2>
+            <p class="hc-sub">实时获取英雄状态、经济、装备、技能。出装引擎给主推 / Top3 / 时间线 / 反制四视图。</p>
+            <div class="hc-gsi">
+              <div class="hc-gsi-tiles">
+                <div class="hc-gsi-tile lvl"><div class="l">Level</div><div class="v">13</div></div>
+                <div class="hc-gsi-tile gpm"><div class="l">GPM</div><div class="v">642</div></div>
+                <div class="hc-gsi-tile xpm"><div class="l">XPM</div><div class="v">+12%</div></div>
+                <div class="hc-gsi-tile kda"><div class="l">KDA</div><div class="v">6/1/4</div></div>
+              </div>
+              <div class="hc-gsi-main">
+                <div class="head">
+                  <div class="av">AM</div>
+                  <div class="n"><div class="nm">敌法师 · 21:28</div><div class="sb">对线期 · 天辉中路 · 主推</div></div>
+                  <div class="conf">置信 94%</div>
+                </div>
+                <div class="rec">
+                  <div class="ic">MAN</div>
+                  <div><div class="nm">幻影法袍</div><div class="ds">驱散 + 分身吃伤害</div></div>
+                  <div class="sts"><div class="gp">缺 1 248g</div><div class="tm">22:30 ± 30s</div></div>
+                </div>
+              </div>
+              <div class="hc-pulse">
+                <div class="h"><span class="d"></span><span class="l">GSI Pulse · LIVE</span><span class="r">1 Hz · last 30s</span></div>
+                <div class="chart">
+                  <span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span>
+                  <span style="height:62%"></span><span style="height:58%"></span><span style="height:70%"></span>
+                  <span style="height:65%"></span><span style="height:72%"></span><span style="height:68%"></span>
+                  <span style="height:80%"></span><span style="height:75%"></span><span style="height:78%"></span>
+                  <span style="height:85%"></span><span style="height:82%"></span><span style="height:88%"></span>
+                  <span style="height:84%"></span><span style="height:90%"></span><span style="height:86%"></span>
+                  <span style="height:92%"></span><span style="height:88%"></span><span style="height:95%"></span>
+                  <span style="height:92%"></span><span style="height:98%"></span><span style="height:94%"></span>
+                  <span style="height:100%"></span><span style="height:96%"></span><span style="height:88%"></span>
+                  <span style="height:82%"></span><span style="height:76%"></span><span style="height:70%"></span>
+                </div>
+              </div>
             </div>
-            <div class="chat-bubble me">
-              <div class="raw">我 30s 后到，先撤</div>
-              <div class="tr">I'll arrive in 30s, fall back first</div>
-            </div>
-            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;">
-              <span class="lang-tag on">GG</span>
-              <span class="lang-tag on">先撤</span>
-              <span class="lang-tag on">推塔</span>
-              <span class="lang-tag">?</span>
-            </div>
-          </aside>
-        </div>
-      </div>
+            <div class="hc-callout flip" style="top:13%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>Valve 官方 GSI</div><div class="body">公开接口 <kbd>-gamestateintegration</kbd>，0 反作弊豁免。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:36%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>1Hz 同步</div><div class="body">等级 / GPM / XPM / KDA 每秒推送。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:30%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>124 英雄覆盖</div><div class="body">主推 / Top3 / 时间线 / 反制四视图。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:8%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">4</span>置信 + 缺口</div><div class="body">每条建议附置信度、缺口金币、出现时机。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>GSI · 1Hz Live</div>
+          </div>
 
-      <!-- Floating overlay window — pinned over the game during live matches -->
-      <div aria-hidden="true" style="position:absolute;right:-20px;bottom:-30px;width:230px;border-radius:14px;background:rgba(8,9,13,0.92);backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);border:0.5px solid rgba(167,139,250,0.35);box-shadow:0 24px 64px rgba(0,0,0,0.5), 0 0 0 0.5px rgba(255,255,255,0.06) inset, 0 0 32px rgba(167,139,250,0.18);overflow:hidden;z-index:2;">
-        <div style="padding:8px 12px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;font-size:10px;">
-          <span style="width:10px;height:10px;border-radius:3px;background:var(--violet);"></span>
-          <span style="font-weight:700;letter-spacing:.3px;">悬浮窗 · 始终置顶</span>
-          <span style="margin-left:auto;color:var(--emerald);font-family:ui-monospace,monospace;font-size:9px;">LIVE</span>
-        </div>
-        <div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;gap:8px;align-items:center;">
-            <div style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));border:1px solid var(--violet);font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">MAN</div>
-            <div style="flex:1;min-width:0;">
-              <div style="font-size:11px;font-weight:700;color:#fff;">幻影法袍</div>
-              <div style="font-size:9.5px;color:var(--text-3);">主推 · 缺 1 248g</div>
+          <!-- ═══════════ SLIDE 5 · 低功耗 ═══════════ -->
+          <div class="hc-slide hc-slide-5" data-slide="4">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 05 · 低功耗</div>
+            <h2 class="hc-title">几乎感觉不到，<br>它在<em>跑着</em>。</h2>
+            <p class="hc-sub">桌面端 + 悬浮窗 + 1Hz GSI 同步，仍维持 CPU 1.5% / 内存 80MB。不偷帧率。</p>
+            <div class="hc-res">
+              <div class="hc-res-big">
+                <div class="hc-res-met cpu">
+                  <div class="l">CPU 占用 · 待机</div>
+                  <div class="v">1.5<small>%</small></div>
+                  <div class="sp">
+                    <span style="height:35%"></span><span style="height:42%"></span><span style="height:38%"></span>
+                    <span style="height:45%"></span><span style="height:40%"></span><span style="height:48%"></span>
+                    <span style="height:36%"></span><span style="height:44%"></span><span style="height:39%"></span>
+                    <span style="height:42%"></span><span style="height:45%"></span><span style="height:40%"></span>
+                    <span style="height:38%"></span><span style="height:41%"></span><span style="height:44%"></span>
+                    <span style="height:37%"></span><span style="height:42%"></span><span style="height:39%"></span>
+                  </div>
+                </div>
+                <div class="hc-res-met mem">
+                  <div class="l">内存常驻</div>
+                  <div class="v">80<small>MB</small></div>
+                  <div class="sp">
+                    <span style="height:75%"></span><span style="height:76%"></span><span style="height:74%"></span>
+                    <span style="height:75%"></span><span style="height:77%"></span><span style="height:76%"></span>
+                    <span style="height:75%"></span><span style="height:74%"></span><span style="height:75%"></span>
+                    <span style="height:76%"></span><span style="height:75%"></span><span style="height:74%"></span>
+                    <span style="height:75%"></span><span style="height:76%"></span><span style="height:75%"></span>
+                    <span style="height:74%"></span><span style="height:75%"></span><span style="height:76%"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="hc-res-vs">
+                <h5>同类工具内存占用对比</h5>
+                <div class="row us"><div class="name">AMEFYS</div><div class="bar"><span></span></div><div class="val">80 MB</div></div>
+                <div class="row them1"><div class="name">官方 Dota Plus</div><div class="bar"><span></span></div><div class="val">~240 MB</div></div>
+                <div class="row them2"><div class="name">Discord overlay</div><div class="bar"><span></span></div><div class="val">~480 MB</div></div>
+              </div>
             </div>
+            <div class="hc-callout flip" style="top:16%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>1.5% CPU</div><div class="body">M1 Mac / 12 代 i5 实测。团战峰值 ≤ 4%。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:42%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>80 MB RAM</div><div class="body">常驻 + GSI + Overlay 全开。比 Dota Plus 省 ~67%。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:14%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>0 帧率影响</div><div class="body">GSI 是官方推送，Overlay 用 GPU 合成层不阻塞渲染。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>性能基线</div>
           </div>
-          <div style="height:1px;background:rgba(255,255,255,0.06);"></div>
-          <div style="display:flex;flex-direction:column;gap:4px;">
-            <div style="font-size:9px;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;font-weight:700;">事件</div>
-            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--emerald);font-weight:700;">21:28</span> · 击杀 +1（敌中）</div>
-            <div style="font-size:10px;color:var(--text-2);"><span style="color:var(--warn);font-weight:700;">22:14</span> · Roshan 推算 ≈ 25:10</div>
-          </div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;">
-            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(52,211,153,0.12);border:0.5px solid rgba(52,211,153,0.36);color:var(--emerald);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">GG</span>
-            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(167,139,250,0.12);border:0.5px solid rgba(167,139,250,0.36);color:var(--violet);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">NP</span>
-            <span style="height:22px;padding:0 10px;border-radius:11px;background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);color:var(--text-2);font-size:10px;font-weight:700;display:inline-flex;align-items:center;">块 ▸</span>
-          </div>
+
+        </div>
+
+        <!-- Carousel controls -->
+        <button class="hc-arrow prev" data-hc-prev aria-label="上一张">‹</button>
+        <button class="hc-arrow next" data-hc-next aria-label="下一张">›</button>
+        <div class="hc-dots" data-hc-dots>
+          <button class="hc-dot" data-hc-go="0" data-active="true" aria-label="第 1 张"></button>
+          <button class="hc-dot" data-hc-go="1" aria-label="第 2 张"></button>
+          <button class="hc-dot" data-hc-go="2" aria-label="第 3 张"></button>
+          <button class="hc-dot" data-hc-go="3" aria-label="第 4 张"></button>
+          <button class="hc-dot" data-hc-go="4" aria-label="第 5 张"></button>
         </div>
       </div>
     </div>
@@ -1596,6 +2228,99 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') close()
     })
+  })()
+</script>
+
+<!-- Hero carousel controller -->
+<script>
+  (function () {
+    var root = document.querySelector('[data-hc]')
+    if (!root) return
+    var track = root.querySelector('[data-hc-track]')
+    var slides = track.querySelectorAll('.hc-slide')
+    var dots = root.querySelectorAll('[data-hc-go]')
+    var prev = root.querySelector('[data-hc-prev]')
+    var next = root.querySelector('[data-hc-next]')
+    var total = slides.length
+    if (!total) return
+
+    var current = 0
+    var AUTOPLAY = 6000
+    var timer = null
+    var dragging = false
+    var dragStartX = 0
+    var dragDelta = 0
+
+    function goTo(i, suppressAutoplay) {
+      current = ((i % total) + total) % total
+      track.style.transform = 'translateX(-' + (current * (100 / total)) + '%)'
+      for (var k = 0; k < dots.length; k++) {
+        dots[k].setAttribute('data-active', k === current ? 'true' : 'false')
+      }
+      if (!suppressAutoplay) restart()
+    }
+    function step(delta) { goTo(current + delta) }
+    function start() { stop(); timer = setInterval(function () { goTo(current + 1, true) }, AUTOPLAY) }
+    function stop() { if (timer) { clearInterval(timer); timer = null } }
+    function restart() { stop(); start() }
+
+    // Click handlers
+    for (var i = 0; i < dots.length; i++) {
+      (function (idx) { dots[idx].addEventListener('click', function () { goTo(idx) }) })(i)
+    }
+    if (prev) prev.addEventListener('click', function () { step(-1) })
+    if (next) next.addEventListener('click', function () { step(1) })
+
+    // Hover pause
+    root.addEventListener('mouseenter', stop)
+    root.addEventListener('mouseleave', start)
+
+    // Keyboard ←/→ when hero is in viewport
+    document.addEventListener('keydown', function (e) {
+      var rect = root.getBoundingClientRect()
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return
+      if (e.key === 'ArrowLeft') { step(-1); e.preventDefault() }
+      else if (e.key === 'ArrowRight') { step(1); e.preventDefault() }
+    })
+
+    // Pointer drag — track follows finger; commit on release past threshold
+    function onPointerDown(e) {
+      if (e.button !== undefined && e.button !== 0) return
+      // Don't capture drags that start on a button — let the click flow.
+      if (e.target && (e.target.closest('button') || e.target.closest('[data-hc-go]'))) return
+      dragging = true
+      dragStartX = e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0)
+      dragDelta = 0
+      track.setAttribute('data-dragging', 'true')
+      stop()
+      try { root.setPointerCapture && e.pointerId != null && root.setPointerCapture(e.pointerId) } catch (_) {}
+    }
+    function onPointerMove(e) {
+      if (!dragging) return
+      var x = e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0)
+      dragDelta = x - dragStartX
+      var widthPct = (dragDelta / root.clientWidth) * (100 / total)
+      track.style.transform = 'translateX(calc(-' + (current * (100 / total)) + '% + ' + widthPct + '%))'
+    }
+    function onPointerUp() {
+      if (!dragging) return
+      track.setAttribute('data-dragging', 'false')
+      var threshold = root.clientWidth * 0.15
+      if (dragDelta < -threshold) goTo(current + 1)
+      else if (dragDelta > threshold) goTo(current - 1)
+      else goTo(current) // snap back
+      dragging = false
+      dragDelta = 0
+      start()
+    }
+    root.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('pointermove', onPointerMove)
+    document.addEventListener('pointerup', onPointerUp)
+    document.addEventListener('pointercancel', onPointerUp)
+
+    // Init
+    goTo(0, true)
+    start()
   })()
 </script>
 
