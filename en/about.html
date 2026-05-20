@@ -361,8 +361,8 @@
         <div style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(52,211,153,0.08); border: 0.5px solid rgba(52,211,153,0.25); font-size: 11px; color: var(--emerald); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 700;">
           <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald);"></span>Compliance white paper
         </div>
-        <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">Transparent &amp; <em class="hl" style="font-style: normal;">auditable</em>.</h2>
-        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">Every claim maps to a code path. Anyone can audit independently. Full white paper at <a href="https://github.com/amefys/amefys/blob/main/docs/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">docs/COMPLIANCE.md</a>.</p>
+        <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">Transparent &amp; <em class="hl" style="font-style: normal;">verifiable</em>.</h2>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">The application code is under active commercial development (not currently public), but every compliance claim is verifiable via network traffic and filesystem behaviour. Full white paper at <a href="https://github.com/amefys/web/blob/main/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">COMPLIANCE.md</a>.</p>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
@@ -401,13 +401,13 @@
         </div>
 
         <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(96,165,250,0.06), rgba(96,165,250,0.02)); border: 0.5px solid rgba(96,165,250,0.20);">
-          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 Independently auditable</div>
-          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">Source &amp; traffic both verifiable</h3>
+          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 Behaviour-verifiable</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">No source needed — traffic tells the story</h3>
           <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
-            <li>MIT source at <a href="https://github.com/amefys/amefys" target="_blank" rel="noopener" style="color: var(--violet);">github.com/amefys/amefys</a> — grep / re-build it</li>
-            <li>Outgoing connections list verifiable with mitmproxy</li>
-            <li>CI workflow public — build artifacts traceable</li>
-            <li>Contact: <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 business days response</li>
+            <li>Run mitmproxy / Wireshark and verify outbound connections — Supabase / Sentry / your chosen LLM; <strong style="color: var(--text);">never</strong> Steam / Dota 2 servers</li>
+            <li>Use <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">fs_usage</code> / Process Monitor to verify file I/O — Dota 2 client files are never touched</li>
+            <li>Audit requests &amp; compliance questions: <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 business days response</li>
+            <li>Application source is currently closed (commercial dev stage); we reserve the option to open it in the future</li>
           </ul>
         </div>
       </div>

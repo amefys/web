@@ -455,7 +455,7 @@
           <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald);"></span>合规白皮书
         </div>
         <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">透明，且<em class="hl" style="font-style: normal;">可验证</em>。</h2>
-        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">所有承诺都对应代码路径，任何人可独立审计。完整合规白皮书见 <a href="https://github.com/amefys/amefys/blob/main/docs/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">docs/COMPLIANCE.md</a>。</p>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">应用代码当前处于商业开发阶段（暂未开源），但所有合规承诺可通过网络流量与文件系统行为独立验证。完整合规白皮书见 <a href="https://github.com/amefys/web/blob/main/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">COMPLIANCE.md</a>。</p>
       </div>
 
       <!-- 4-card compliance grid -->
@@ -495,13 +495,13 @@
         </div>
 
         <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(96,165,250,0.06), rgba(96,165,250,0.02)); border: 0.5px solid rgba(96,165,250,0.20);">
-          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 独立可验证</div>
-          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">代码 + 流量都能查</h3>
+          <div style="font-size: 11px; color: #60a5fa; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">🔍 行为可验证</div>
+          <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">不靠源码，流量也查得清</h3>
           <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
-            <li>源码 MIT，<a href="https://github.com/amefys/amefys" target="_blank" rel="noopener" style="color: var(--violet);">github.com/amefys/amefys</a> 可 grep / 编译复现</li>
-            <li>用 mitmproxy 可独立抓包验证出站连接清单</li>
-            <li>CI workflow 公开，构建产物的来源可追溯</li>
-            <li>对外联系：<a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 工作日内响应</li>
+            <li>用 mitmproxy / Wireshark 可独立抓包验证出站连接 —— 应看到 Supabase / Sentry / 用户配的 LLM，<strong style="color: var(--text);">不应</strong>看到 Steam / Dota 2 服务器</li>
+            <li>用 <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">fs_usage</code> / Process Monitor 监控文件读写 —— 不会触碰 Dota 2 客户端文件</li>
+            <li>合规咨询 / 审计请求：<a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 工作日内响应</li>
+            <li>核心代码当前未开源（商业开发期），保留未来按需开放的可能</li>
           </ul>
         </div>
       </div>
