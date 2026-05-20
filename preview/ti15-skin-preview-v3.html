@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TI15 Skin v3 · Live Match Center · AMEFYS</title>
+<style>
+  :root {
+    --bg-0: #06090F;
+    --bg-1: #0B1322;
+    --bg-2: #14213F;
+    --surface: rgba(11, 19, 34, 0.78);
+    --hairline: rgba(212, 175, 55, 0.20);
+    --hairline-strong: rgba(212, 175, 55, 0.42);
+    --text: #F2E9D2;
+    --text-2: rgba(242, 233, 210, 0.74);
+    --text-3: rgba(242, 233, 210, 0.46);
+    --gold: #D4AF37;
+    --gold-light: #F4E29A;
+    --gold-deep: #A8841F;
+    --cn-red: #C8102E;
+    --jade: #27A567;
+    --radiant: #6FCF8B;
+    --dire: #D9534F;
+    --font-stack: -apple-system, "SF Pro Display", "PingFang SC", "Source Han Sans SC", sans-serif;
+    --font-serif: "Cormorant Garamond", "Cinzel", "Songti SC", serif;
+    --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg-0);
+    color: var(--text);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ────────────────────────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    height: 52px;
+    background: rgba(6, 9, 15, 0.92);
+    border-bottom: 0.5px solid var(--hairline);
+    backdrop-filter: blur(20px);
+  }
+  .topbar-inner {
+    max-width: 1600px; margin: 0 auto; height: 100%; padding: 0 24px;
+    display: flex; align-items: center; gap: 24px;
+    font-size: 12.5px;
+  }
+  .topbar a { color: var(--text-2); text-decoration: none; }
+  .topbar a:hover { color: var(--gold); }
+  .topbar .brand-mark {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    color: #1A1308; font-weight: 800;
+    display: grid; place-items: center;
+    box-shadow: 0 0 12px rgba(212,175,55,0.40);
+  }
+  .topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); }
+  .topbar .sep { width: 1px; height: 18px; background: var(--hairline); }
+  .topbar .live {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border-radius: 4px;
+    background: rgba(217, 83, 79, 0.16);
+    color: var(--dire); font-weight: 800; font-size: 10.5px;
+    letter-spacing: 1.2px; text-transform: uppercase;
+  }
+  .topbar .live::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--dire);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.30; }
+  }
+  .topbar .spacer { flex: 1; }
+  .topbar .countdown-inline {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--text-2);
+  }
+  .countdown-inline .label { color: var(--text-3); letter-spacing: 0.8px; text-transform: uppercase; font-size: 10px; }
+  .countdown-inline .v { color: var(--gold-light); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* ── Hero strip — compact ───────────────────────────────────── */
+  .hero-strip {
+    position: relative;
+    padding: 40px 32px 56px;
+    background:
+      radial-gradient(ellipse 50% 80% at 50% 100%, rgba(212,175,55,0.18) 0%, transparent 70%),
+      linear-gradient(180deg, #0B1322 0%, #06090F 100%);
+    border-bottom: 0.5px solid var(--hairline);
+    overflow: hidden;
+  }
+  /* Skyline silhouette in hero strip */
+  .hero-strip::before {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: 0; height: 80px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 80' fill='%2314213F' preserveAspectRatio='xMidYEnd meet'><path d='M180 80 L180 30 L184 30 L184 22 L188 22 L188 14 L186 10 L194 4 L202 10 L200 14 L204 14 L204 22 L208 22 L208 30 L216 30 L216 80 Z'/><circle cx='194' cy='30' r='5' fill='%2314213F'/><path d='M320 80 L320 22 L326 22 L326 10 L334 10 L334 22 L340 22 L340 80 Z'/><path d='M420 80 L420 30 L428 30 L428 18 L436 18 L436 12 L444 12 L444 18 L452 18 L452 30 L460 30 L460 80 Z'/><path d='M540 80 L540 24 L548 18 L552 8 L556 18 L564 24 L564 80 Z'/><path d='M660 80 L660 44 L676 44 L676 30 L692 30 L692 44 L708 44 L708 80 Z'/><path d='M780 80 L780 48 L800 48 L800 32 L820 32 L820 48 L840 48 L840 80 Z'/><path d='M900 80 L900 50 L920 50 L920 36 L940 36 L940 50 L960 50 L960 80 Z'/><path d='M1020 80 L1020 52 L1040 52 L1040 38 L1060 38 L1060 52 L1080 52 L1080 80 Z'/><path d='M1140 80 L1140 54 L1160 54 L1160 40 L1180 40 L1180 54 L1200 54 L1200 80 Z'/><path d='M1260 80 L1260 58 L1280 58 L1280 44 L1300 44 L1300 58 L1320 58 L1320 80 Z'/><path d='M1380 80 L1380 60 L1400 60 L1400 48 L1420 48 L1420 60 L1440 60 L1440 80 Z'/></svg>") no-repeat center bottom / 1600px 80px;
+    opacity: 0.45;
+    pointer-events: none;
+  }
+  .hero-strip-inner {
+    position: relative; z-index: 1;
+    max-width: 1600px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 260px 1fr 260px;
+    gap: 40px; align-items: center;
+  }
+  .hero-aegis-mini {
+    width: 90px; height: 110px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160' fill='none' stroke='%23D4AF37' stroke-width='0.8'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'><stop offset='0%25' stop-color='%23F4E29A'/><stop offset='100%25' stop-color='%23A8841F'/></linearGradient></defs><path d='M60 4 L108 26 L108 86 Q108 124 60 154 Q12 124 12 86 L12 26 Z' fill='url(%23g)' fill-opacity='0.25'/><path d='M60 4 L108 26 L108 86 Q108 124 60 154 Q12 124 12 86 L12 26 Z'/><path d='M60 16 L96 34 L96 84 Q96 116 60 142 Q24 116 24 84 L24 34 Z'/><circle cx='60' cy='80' r='12' fill='url(%23g)' fill-opacity='0.5'/><circle cx='60' cy='80' r='12'/><circle cx='60' cy='80' r='4' fill='%23F4E29A'/><text x='60' y='46' font-family='Cinzel, Times, serif' font-size='10' font-weight='800' fill='%23D4AF37' text-anchor='middle' letter-spacing='0.5'>TI15</text><path d='M48 4 L48 -4 L54 2 L60 -4 L66 2 L72 -4 L72 4'/></svg>") no-repeat center / contain;
+    filter: drop-shadow(0 0 20px rgba(212,175,55,0.55));
+    margin: 0 auto;
+  }
+
+  .hero-title-mid {
+    text-align: center;
+  }
+  .hero-title-mid .eyebrow {
+    font-size: 10px; letter-spacing: 3.5px; font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .hero-title-mid .title {
+    font-family: var(--font-serif);
+    font-size: 44px; font-weight: 800; letter-spacing: 0.5px;
+    line-height: 1.0;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 60%, var(--gold-deep) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .hero-title-mid .sub {
+    font-size: 12px; color: var(--text-3); letter-spacing: 0.8px;
+  }
+
+  /* Big countdown clock (right side of hero-strip) */
+  .hero-clock {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 16px;
+    background: rgba(11, 19, 34, 0.65);
+    border: 0.5px solid var(--hairline);
+    border-radius: 12px;
+  }
+  .hc-cell { text-align: center; min-width: 0; }
+  .hc-num {
+    font-family: var(--font-mono);
+    font-size: 26px; font-weight: 700; line-height: 1;
+    color: var(--gold-light);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 12px rgba(212,175,55,0.40);
+  }
+  .hc-label {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--text-3); margin-top: 6px; font-weight: 700;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1 } 50% { opacity: 0.45 } }
+  @media (prefers-reduced-motion: reduce) {
+    .topbar .live::before, .hero-strip::after { animation: none !important; }
+  }
+
+  /* ── Live ticker ────────────────────────────────────────────── */
+  .ticker {
+    height: 34px;
+    background: linear-gradient(90deg, rgba(217,83,79,0.16) 0%, rgba(11,19,34,0.78) 30%, rgba(11,19,34,0.78) 100%);
+    border-bottom: 0.5px solid var(--hairline);
+    display: flex; align-items: center;
+    overflow: hidden; white-space: nowrap;
+    font-size: 12px; color: var(--text-2);
+    padding-left: 24px;
+  }
+  .ticker-label {
+    background: var(--dire);
+    color: #fff;
+    padding: 6px 12px; border-radius: 4px;
+    font-weight: 800; font-size: 10.5px; letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  .ticker-track {
+    display: inline-flex; gap: 32px;
+    animation: ticker-scroll 30s linear infinite;
+  }
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ticker-item { display: inline-flex; align-items: center; gap: 8px; }
+  .ticker-item .team { color: var(--text); font-weight: 600; }
+  .ticker-item .winner { color: var(--gold); font-weight: 700; }
+  .ticker-item .score { font-family: var(--font-mono); color: var(--text-2); }
+  .ticker-item .cn { color: var(--cn-red); }
+
+  /* ── Main 3-column layout ───────────────────────────────────── */
+  .center {
+    max-width: 1600px; margin: 0 auto;
+    padding: 32px 32px 40px;
+    display: grid;
+    grid-template-columns: 300px 1fr 300px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* Column panel */
+  .panel {
+    background: var(--surface);
+    border: 0.5px solid var(--hairline);
+    border-radius: 14px;
+    backdrop-filter: blur(16px);
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .panel-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-weight: 700; color: var(--gold);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel-title::before {
+    content: ""; width: 4px; height: 12px; border-radius: 1px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  }
+  .panel-meta { font-size: 11px; color: var(--text-3); }
+
+  /* ── LEFT: upcoming schedule ────────────────────────────────── */
+  .schedule-list { padding: 4px 0; }
+  .schedule-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    column-gap: 14px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 0.5px dashed var(--hairline);
+    cursor: pointer;
+    transition: background 120ms;
+  }
+  .schedule-item:hover { background: rgba(212,175,55,0.04); }
+  .schedule-item:last-child { border-bottom: 0; }
+  .schedule-time {
+    font-family: var(--font-mono);
+    font-size: 11px; color: var(--gold-light); font-weight: 700;
+    text-align: center;
+    background: rgba(212,175,55,0.08);
+    border-radius: 4px; padding: 4px 6px;
+  }
+  .schedule-pair {
+    display: flex; flex-direction: column; gap: 4px;
+    font-size: 13px; min-width: 0;
+  }
+  .schedule-team {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--text);
+  }
+  .schedule-team.cn { color: var(--gold-light); font-weight: 700; }
+  .mini-logo {
+    width: 22px; height: 22px; border-radius: 5px;
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+  }
+  .schedule-bo {
+    font-size: 10.5px; font-weight: 700; color: var(--text-3);
+    background: rgba(255,255,255,0.04);
+    border: 0.5px solid var(--hairline);
+    padding: 2px 6px; border-radius: 4px;
+  }
+
+  /* ── CENTER: live match stage ───────────────────────────────── */
+  .live-stage {
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.10) 0%, transparent 70%),
+      var(--surface);
+    border: 0.5px solid var(--hairline-strong);
+    border-radius: 14px;
+    padding: 36px 40px;
+    backdrop-filter: blur(20px);
+    position: relative; overflow: hidden;
+  }
+  .live-stage::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+  }
+  .live-stage-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .live-stage-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    color: var(--dire); text-transform: uppercase;
+  }
+  .live-stage-label::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--dire);
+    box-shadow: 0 0 10px var(--dire);
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  .live-stage-game {
+    font-family: var(--font-mono);
+    font-size: 12px; color: var(--text-2);
+  }
+  .live-stage-game .v { color: var(--gold-light); font-weight: 700; }
+
+  .face-row {
+    display: grid;
+    grid-template-columns: 1fr 140px 1fr;
+    gap: 32px; align-items: center;
+    margin-bottom: 36px;
+  }
+  .face-team {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 14px;
+  }
+  .face-team-logo {
+    width: 96px; height: 96px; border-radius: 18px;
+    display: grid; place-items: center;
+    font-family: var(--font-serif);
+    font-size: 40px; font-weight: 800;
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05) inset;
+  }
+  .face-team-name {
+    font-family: var(--font-serif);
+    font-size: 22px; font-weight: 800; letter-spacing: 0.4px;
+    color: var(--text);
+  }
+  .face-team-meta { font-size: 11px; color: var(--text-3); letter-spacing: 1px; text-transform: uppercase; }
+  .face-score-block {
+    text-align: center;
+  }
+  .face-score {
+    font-family: var(--font-serif);
+    font-size: 56px; font-weight: 800; line-height: 1;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    display: flex; gap: 18px; align-items: center; justify-content: center;
+  }
+  .face-score .s-cn { color: var(--gold); text-shadow: 0 0 18px rgba(212,175,55,0.5); }
+  .face-score .s-sep { color: var(--gold); font-size: 32px; opacity: 0.6; padding-bottom: 8px; }
+  .face-game {
+    font-size: 11px; letter-spacing: 1.5px; font-weight: 700;
+    color: var(--gold); text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  .live-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--hairline);
+  }
+  .live-stat {
+    text-align: center;
+    padding: 4px 0;
+  }
+  .live-stat-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1.2px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 8px;
+  }
+  .live-stat-row {
+    display: flex; justify-content: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    color: var(--text);
+  }
+  .live-stat-row .l { color: var(--cn-red); font-weight: 800; }
+  .live-stat-row .r { color: var(--text-2); }
+  .live-stat-row .vs { color: var(--text-3); font-size: 11px; align-self: center; }
+
+  /* Pick stage — uses Valve public CDN portraits */
+  .pick-stage {
+    margin-top: 28px;
+    padding: 20px 24px; border-radius: 12px;
+    background: rgba(6, 9, 15, 0.5);
+    border: 0.5px solid var(--hairline);
+  }
+  .pick-stage-head {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .pick-stage-head .pick-side-label {
+    font-size: 10px; color: var(--text-3); letter-spacing: 1.2px;
+  }
+  .pick-stage-head .pick-side-label.cn { color: var(--gold); }
+  .pick-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px; align-items: center;
+  }
+  .picks {
+    display: flex; gap: 8px;
+  }
+  .picks.right { justify-content: flex-end; }
+  .hero-pick {
+    width: 64px; height: 36px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #2A1A12, #0E0908) center/cover no-repeat;
+    /* Hero portrait set inline via style attr — gradient is the fallback */
+    border: 0.5px solid var(--hairline);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 150ms, box-shadow 200ms;
+  }
+  .hero-pick:hover { transform: translateY(-2px) scale(1.03); }
+  .hero-pick::after {
+    /* Bottom-of-tile shadow gradient so hero-name label (title attr) reads on hover */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.50) 100%);
+    pointer-events: none;
+  }
+  .hero-pick.cn-pick {
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 10px rgba(212,175,55,0.45);
+  }
+  .hero-pick.banned {
+    filter: grayscale(0.85) brightness(0.55);
+    border-color: var(--dire);
+  }
+  .hero-pick.banned::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(135deg, transparent 47%, var(--dire) 49%, var(--dire) 51%, transparent 53%);
+    z-index: 2; pointer-events: none;
+  }
+  .pick-vs {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 1px;
+  }
+
+  /* ── Key items live timeline (below picks) ─────────────────── */
+  .items-stage {
+    margin-top: 18px;
+    padding: 18px 22px; border-radius: 12px;
+    background: rgba(6, 9, 15, 0.5);
+    border: 0.5px solid var(--hairline);
+  }
+  .items-stage-head {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .items-stage-head::before {
+    content: ""; width: 4px; height: 10px; border-radius: 1px;
+    background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  }
+  .items-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .item-icon {
+    position: relative;
+    width: 52px; height: 38px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #1F1812, #0A0706) center/cover no-repeat;
+    border: 0.5px solid var(--hairline);
+    transition: transform 150ms;
+  }
+  .item-icon:hover { transform: scale(1.08); }
+  .item-icon.cn-item {
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 8px rgba(212,175,55,0.35);
+  }
+  .item-icon .item-time {
+    position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 9.5px; color: var(--text-2); font-weight: 700;
+    white-space: nowrap;
+  }
+  .item-icon.cn-item .item-time { color: var(--gold); }
+
+  /* ── Schedule item: featured hero strip ────────────────────── */
+  .schedule-pair { padding: 2px 0; }
+  .focus-hero-row {
+    display: flex; align-items: center; gap: 4px;
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 0.5px dashed var(--hairline);
+    grid-column: 1 / -1;
+  }
+  .focus-label {
+    font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.8px;
+    color: var(--text-3); font-weight: 700; flex-shrink: 0;
+    margin-right: 4px;
+  }
+  .focus-heroes {
+    display: flex; gap: 3px;
+  }
+  .focus-heroes.right { margin-left: auto; }
+  .focus-hero {
+    width: 28px; height: 18px;
+    border-radius: 3px;
+    background-size: cover; background-position: center;
+    background-color: #1F1812;
+    border: 0.5px solid var(--hairline);
+  }
+  .focus-hero.cn { border-color: rgba(212,175,55,0.45); }
+
+  /* ── RIGHT: bracket & standings ─────────────────────────────── */
+  .standings { padding: 8px 0; }
+  .standing-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto auto;
+    gap: 12px; align-items: center;
+    padding: 12px 20px;
+    border-bottom: 0.5px dashed var(--hairline);
+    font-size: 12.5px;
+  }
+  .standing-row:last-child { border-bottom: 0; }
+  .standing-row .rank {
+    font-family: var(--font-mono); font-weight: 700;
+    color: var(--text-3); text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .standing-row.top .rank { color: var(--gold); }
+  .standing-row.cn { background: linear-gradient(90deg, rgba(212,175,55,0.06), transparent 60%); }
+  .standing-row.cn .name { color: var(--gold-light); font-weight: 700; }
+  .standing-row .name { display: flex; align-items: center; gap: 8px; min-width: 0; color: var(--text); }
+  .standing-row .wl {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-2);
+  }
+  .standing-row .wl .w { color: var(--radiant); }
+  .standing-row .wl .l { color: var(--dire); }
+  .standing-row .points {
+    font-family: var(--font-mono); font-weight: 700;
+    color: var(--gold);
+  }
+
+  /* Bracket strip on the right */
+  .bracket-strip {
+    padding: 18px 20px 22px;
+    border-top: 0.5px solid var(--hairline);
+  }
+  .br-card {
+    background: rgba(6, 9, 15, 0.5);
+    border: 0.5px solid var(--hairline);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+  .br-card:last-child { margin-bottom: 0; }
+  .br-card.cn-w { border-color: rgba(212,175,55,0.40); }
+  .br-row { display: flex; justify-content: space-between; align-items: center; padding: 3px 0; }
+  .br-row.winner { color: var(--gold); font-weight: 700; }
+  .br-row .score { font-family: var(--font-mono); color: var(--text-2); }
+  .br-row.winner .score { color: var(--gold); }
+  .br-name { display: flex; align-items: center; gap: 6px; }
+
+  /* Logo colors */
+  .lg-lgd     { background: linear-gradient(135deg, #C8102E, #2A0008); }
+  .lg-xg      { background: linear-gradient(135deg, #FFD700, #8B6F1F); color: #1A1308; }
+  .lg-aster   { background: linear-gradient(135deg, #2E3A8C, #6B7CFF); }
+  .lg-tundra  { background: linear-gradient(135deg, #5A5A5A, #1A1A1A); }
+  .lg-liquid  { background: linear-gradient(135deg, #0E97D8, #0D2B5A); }
+  .lg-falcons { background: linear-gradient(135deg, #34D399, #064E3B); }
+  .lg-gg      { background: linear-gradient(135deg, #8B5CF6, #4C1D95); }
+  .lg-spirit  { background: linear-gradient(135deg, #D9534F, #1A0809); }
+
+  /* Footer */
+  .foot {
+    max-width: 1600px; margin: 16px auto 0;
+    padding: 20px 24px 32px;
+    text-align: center; font-size: 11px; color: var(--text-3);
+    border-top: 0.5px solid var(--hairline);
+  }
+  .foot a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 1200px) {
+    .center { grid-template-columns: 1fr; }
+    .hero-strip-inner { grid-template-columns: 1fr; }
+    .hero-aegis-mini, .hero-clock { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="ti15-skin-preview.html" class="brand"><span class="brand-mark">A</span>AMEFYS</a>
+    <span class="sep"></span>
+    <span class="live">LIVE</span>
+    <a href="ti15-skin-preview.html">v1 仪表盘</a>
+    <a href="ti15-skin-preview-v2.html">v2 海报</a>
+    <a href="ti15-skin-preview-v3.html" style="color: var(--gold);">v3 直播间</a>
+    <span class="spacer"></span>
+    <span class="countdown-inline">
+      <span class="label">TI15 开幕倒计时</span>
+      <span class="v" id="cd-compact">--d --h --m</span>
+    </span>
+  </div>
+</header>
+
+<!-- Compact hero strip -->
+<section class="hero-strip">
+  <div class="hero-strip-inner">
+    <div class="hero-aegis-mini" aria-hidden="true"></div>
+    <div class="hero-title-mid">
+      <div class="eyebrow">THE INTERNATIONAL 15 · 上海 · 主舞台</div>
+      <div class="title">六年再聚 · 上海</div>
+      <div class="sub">梅赛德斯-奔驰文化中心 · 距 Wings 捧盾 9 年</div>
+    </div>
+    <div class="hero-clock" aria-label="Countdown">
+      <div class="hc-cell"><div class="hc-num" id="hc-d">--</div><div class="hc-label">DAYS</div></div>
+      <div class="hc-cell"><div class="hc-num" id="hc-h">--</div><div class="hc-label">HRS</div></div>
+      <div class="hc-cell"><div class="hc-num" id="hc-m">--</div><div class="hc-label">MIN</div></div>
+      <div class="hc-cell"><div class="hc-num" id="hc-s">--</div><div class="hc-label">SEC</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Live ticker -->
+<div class="ticker" aria-label="实时比分">
+  <span class="ticker-label">Latest</span>
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="cn">PSG.LGD</span> <span class="winner">2</span><span class="score">-</span><span>1</span> <span>Tundra</span></span>
+    <span class="ticker-item"><span class="cn">XG</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Liquid</span></span>
+    <span class="ticker-item"><span class="cn">Aster</span> <span class="winner">2</span><span class="score">-</span><span>1</span> <span>Spirit</span></span>
+    <span class="ticker-item"><span>Gaimin</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Falcons</span></span>
+    <span class="ticker-item"><span class="cn">PSG.LGD</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Gaimin</span></span>
+    <span class="ticker-item">下一场: <span class="cn">XG</span> vs <span class="cn">PSG.LGD</span> · 20:00</span>
+    <!-- duplicated for infinite scroll -->
+    <span class="ticker-item"><span class="cn">PSG.LGD</span> <span class="winner">2</span><span class="score">-</span><span>1</span> <span>Tundra</span></span>
+    <span class="ticker-item"><span class="cn">XG</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Liquid</span></span>
+    <span class="ticker-item"><span class="cn">Aster</span> <span class="winner">2</span><span class="score">-</span><span>1</span> <span>Spirit</span></span>
+    <span class="ticker-item"><span>Gaimin</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Falcons</span></span>
+    <span class="ticker-item"><span class="cn">PSG.LGD</span> <span class="winner">2</span><span class="score">-</span><span>0</span> <span>Gaimin</span></span>
+    <span class="ticker-item">下一场: <span class="cn">XG</span> vs <span class="cn">PSG.LGD</span> · 20:00</span>
+  </div>
+</div>
+
+<!-- Main 3-column layout -->
+<main class="center">
+
+  <!-- LEFT: upcoming schedule -->
+  <aside class="panel">
+    <div class="panel-head">
+      <span class="panel-title">今日赛程</span>
+      <span class="panel-meta">SCHEDULE</span>
+    </div>
+    <div class="schedule-list">
+      <div class="schedule-item">
+        <span class="schedule-time">20:00</span>
+        <div class="schedule-pair">
+          <span class="schedule-team cn"><span class="mini-logo lg-lgd">L</span>PSG.LGD</span>
+          <span class="schedule-team cn"><span class="mini-logo lg-xg">X</span>XG</span>
+        </div>
+        <span class="schedule-bo">BO3</span>
+        <div class="focus-hero-row">
+          <span class="focus-label">POOL</span>
+          <div class="focus-heroes">
+            <span class="focus-hero cn" title="Spectre" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/spectre.png');"></span>
+            <span class="focus-hero cn" title="Storm Spirit" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/storm_spirit.png');"></span>
+            <span class="focus-hero cn" title="Mars" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/mars.png');"></span>
+          </div>
+          <div class="focus-heroes right">
+            <span class="focus-hero cn" title="Anti-Mage" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/antimage.png');"></span>
+            <span class="focus-hero cn" title="Invoker" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/invoker.png');"></span>
+            <span class="focus-hero cn" title="Tidehunter" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/tidehunter.png');"></span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">22:30</span>
+        <div class="schedule-pair">
+          <span class="schedule-team cn"><span class="mini-logo lg-aster">A</span>Aster</span>
+          <span class="schedule-team"><span class="mini-logo lg-falcons">F</span>Falcons</span>
+        </div>
+        <span class="schedule-bo">BO3</span>
+        <div class="focus-hero-row">
+          <span class="focus-label">POOL</span>
+          <div class="focus-heroes">
+            <span class="focus-hero cn" title="Faceless Void" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/faceless_void.png');"></span>
+            <span class="focus-hero cn" title="Phoenix" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/phoenix.png');"></span>
+            <span class="focus-hero cn" title="Tiny" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/tiny.png');"></span>
+          </div>
+          <div class="focus-heroes right">
+            <span class="focus-hero" title="Pangolier" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/pangolier.png');"></span>
+            <span class="focus-hero" title="Lina" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lina.png');"></span>
+            <span class="focus-hero" title="Earthshaker" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/earthshaker.png');"></span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">明日 19:00</span>
+        <div class="schedule-pair">
+          <span class="schedule-team"><span class="mini-logo lg-gg">G</span>Gaimin</span>
+          <span class="schedule-team"><span class="mini-logo lg-tundra">T</span>Tundra</span>
+        </div>
+        <span class="schedule-bo">BO5</span>
+        <div class="focus-hero-row">
+          <span class="focus-label">POOL</span>
+          <div class="focus-heroes">
+            <span class="focus-hero" title="Terrorblade" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/terrorblade.png');"></span>
+            <span class="focus-hero" title="Void Spirit" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/void_spirit.png');"></span>
+            <span class="focus-hero" title="Marci" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/marci.png');"></span>
+          </div>
+          <div class="focus-heroes right">
+            <span class="focus-hero" title="Medusa" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/medusa.png');"></span>
+            <span class="focus-hero" title="Puck" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/puck.png');"></span>
+            <span class="focus-hero" title="Mars" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/mars.png');"></span>
+          </div>
+        </div>
+      </div>
+      <div class="schedule-item">
+        <span class="schedule-time">明日 22:00</span>
+        <div class="schedule-pair">
+          <span class="schedule-team"><span class="mini-logo lg-spirit">S</span>Spirit</span>
+          <span class="schedule-team"><span class="mini-logo lg-liquid">L</span>Liquid</span>
+        </div>
+        <span class="schedule-bo">BO5</span>
+        <div class="focus-hero-row">
+          <span class="focus-label">POOL</span>
+          <div class="focus-heroes">
+            <span class="focus-hero" title="Naga Siren" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/naga_siren.png');"></span>
+            <span class="focus-hero" title="Tidehunter" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/tidehunter.png');"></span>
+            <span class="focus-hero" title="Magnus" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/magnataur.png');"></span>
+          </div>
+          <div class="focus-heroes right">
+            <span class="focus-hero" title="Drow Ranger" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/drow_ranger.png');"></span>
+            <span class="focus-hero" title="Beastmaster" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/beastmaster.png');"></span>
+            <span class="focus-hero" title="Lina" style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lina.png');"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CENTER: live match stage -->
+  <section class="live-stage">
+    <div class="live-stage-head">
+      <span class="live-stage-label">LIVE NOW · 主舞台</span>
+      <span class="live-stage-game">Game <span class="v">3</span> / 5 · <span class="v">42:18</span></span>
+    </div>
+
+    <div class="face-row">
+      <div class="face-team">
+        <div class="face-team-logo lg-lgd">L</div>
+        <div class="face-team-name">PSG.LGD</div>
+        <div class="face-team-meta">CHINA · 历届亚军</div>
+      </div>
+      <div class="face-score-block">
+        <div class="face-score">
+          <span class="s-cn">1</span>
+          <span class="s-sep">·</span>
+          <span>1</span>
+        </div>
+        <div class="face-game">DECIDER · BO3</div>
+      </div>
+      <div class="face-team">
+        <div class="face-team-logo lg-tundra">T</div>
+        <div class="face-team-name">Tundra</div>
+        <div class="face-team-meta">WEU · TI11 冠军</div>
+      </div>
+    </div>
+
+    <div class="live-stats">
+      <div class="live-stat">
+        <div class="live-stat-label">击杀</div>
+        <div class="live-stat-row"><span class="l">28</span><span class="vs">-</span><span class="r">22</span></div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-label">塔差</div>
+        <div class="live-stat-row"><span class="l">7</span><span class="vs">-</span><span class="r">5</span></div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-label">经济差</div>
+        <div class="live-stat-row"><span class="l">+8.2k</span></div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-label">Roshan</div>
+        <div class="live-stat-row"><span class="l">2</span><span class="vs">-</span><span class="r">1</span></div>
+      </div>
+    </div>
+
+    <div class="pick-stage">
+      <div class="pick-stage-head">
+        <span>BAN / PICK · 阵容</span>
+        <span class="pick-side-label cn">CN · 天辉</span>
+        <span class="pick-side-label">夜魇</span>
+      </div>
+      <div class="pick-row">
+        <div class="picks">
+          <div class="hero-pick cn-pick" title="Spectre · POS 1"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/spectre.png');"></div>
+          <div class="hero-pick cn-pick" title="Mars · POS 3"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/mars.png');"></div>
+          <div class="hero-pick cn-pick" title="Storm Spirit · POS 2"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/storm_spirit.png');"></div>
+          <div class="hero-pick cn-pick" title="Marci · POS 4"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/marci.png');"></div>
+          <div class="hero-pick cn-pick" title="Lion · POS 5"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/lion.png');"></div>
+        </div>
+        <span class="pick-vs">VS</span>
+        <div class="picks right">
+          <div class="hero-pick" title="Medusa · POS 1"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/medusa.png');"></div>
+          <div class="hero-pick" title="Magnus · POS 3"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/magnataur.png');"></div>
+          <div class="hero-pick" title="Puck · POS 2"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/puck.png');"></div>
+          <div class="hero-pick" title="Enchantress · POS 4"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/enchantress.png');"></div>
+          <div class="hero-pick" title="Crystal Maiden · POS 5"
+               style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/crystal_maiden.png');"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="items-stage">
+      <div class="items-stage-head">关键道具完成 · KEY ITEMS TIMELINE</div>
+      <div class="items-row">
+        <span class="item-icon cn-item" title="Spectre · Radiance · 14:32"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/radiance.png');">
+          <span class="item-time">14:32</span>
+        </span>
+        <span class="item-icon cn-item" title="Mars · Blink Dagger · 16:48"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/blink.png');">
+          <span class="item-time">16:48</span>
+        </span>
+        <span class="item-icon" title="Puck · Eul's Scepter · 18:02"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/cyclone.png');">
+          <span class="item-time">18:02</span>
+        </span>
+        <span class="item-icon cn-item" title="Spectre · Manta Style · 24:18"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/manta.png');">
+          <span class="item-time">24:18</span>
+        </span>
+        <span class="item-icon cn-item" title="Mars · Black King Bar · 28:42"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/black_king_bar.png');">
+          <span class="item-time">28:42</span>
+        </span>
+        <span class="item-icon" title="CM · Aghanim's Scepter · 31:50"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png');">
+          <span class="item-time">31:50</span>
+        </span>
+        <span class="item-icon cn-item" title="Storm Spirit · Aghanim's Scepter · 34:18"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/ultimate_scepter.png');">
+          <span class="item-time">34:18</span>
+        </span>
+        <span class="item-icon cn-item" title="Storm Spirit · Refresher Orb · 39:24"
+              style="background-image: url('https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/items/refresher.png');">
+          <span class="item-time">39:24</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT: standings + bracket -->
+  <aside class="panel">
+    <div class="panel-head">
+      <span class="panel-title">小组积分榜</span>
+      <span class="panel-meta">GROUP A</span>
+    </div>
+    <div class="standings">
+      <div class="standing-row top cn">
+        <span class="rank">1</span>
+        <span class="name"><span class="mini-logo lg-lgd">L</span>PSG.LGD</span>
+        <span class="wl"><span class="w">11</span>-<span class="l">3</span></span>
+        <span class="points">7.5</span>
+      </div>
+      <div class="standing-row top cn">
+        <span class="rank">2</span>
+        <span class="name"><span class="mini-logo lg-xg">X</span>Xtreme Gaming</span>
+        <span class="wl"><span class="w">10</span>-<span class="l">4</span></span>
+        <span class="points">7.0</span>
+      </div>
+      <div class="standing-row top">
+        <span class="rank">3</span>
+        <span class="name"><span class="mini-logo lg-tundra">T</span>Tundra</span>
+        <span class="wl"><span class="w">9</span>-<span class="l">5</span></span>
+        <span class="points">6.5</span>
+      </div>
+      <div class="standing-row">
+        <span class="rank">4</span>
+        <span class="name"><span class="mini-logo lg-gg">G</span>Gaimin</span>
+        <span class="wl"><span class="w">8</span>-<span class="l">6</span></span>
+        <span class="points">6.0</span>
+      </div>
+      <div class="standing-row cn">
+        <span class="rank">5</span>
+        <span class="name"><span class="mini-logo lg-aster">A</span>Aster</span>
+        <span class="wl"><span class="w">7</span>-<span class="l">7</span></span>
+        <span class="points">5.5</span>
+      </div>
+      <div class="standing-row">
+        <span class="rank">6</span>
+        <span class="name"><span class="mini-logo lg-spirit">S</span>Spirit</span>
+        <span class="wl"><span class="w">5</span>-<span class="l">9</span></span>
+        <span class="points">4.0</span>
+      </div>
+      <div class="standing-row">
+        <span class="rank">7</span>
+        <span class="name"><span class="mini-logo lg-liquid">L</span>Liquid</span>
+        <span class="wl"><span class="w">4</span>-<span class="l">10</span></span>
+        <span class="points">3.5</span>
+      </div>
+      <div class="standing-row">
+        <span class="rank">8</span>
+        <span class="name"><span class="mini-logo lg-falcons">F</span>Falcons</span>
+        <span class="wl"><span class="w">2</span>-<span class="l">12</span></span>
+        <span class="points">1.5</span>
+      </div>
+    </div>
+
+    <div class="bracket-strip">
+      <div class="panel-title" style="margin-bottom: 10px;">败者组 R1</div>
+      <div class="br-card cn-w">
+        <div class="br-row winner"><span class="br-name"><span class="mini-logo lg-xg">X</span>XG</span><span class="score">2</span></div>
+        <div class="br-row"><span class="br-name"><span class="mini-logo lg-liquid">L</span>Liquid</span><span class="score">0</span></div>
+      </div>
+      <div class="br-card cn-w">
+        <div class="br-row winner"><span class="br-name"><span class="mini-logo lg-aster">A</span>Aster</span><span class="score">2</span></div>
+        <div class="br-row"><span class="br-name"><span class="mini-logo lg-spirit">S</span>Spirit</span><span class="score">1</span></div>
+      </div>
+      <div class="br-card">
+        <div class="br-row"><span class="br-name"><span class="mini-logo lg-gg">G</span>Gaimin</span><span class="score">·</span></div>
+        <div class="br-row"><span class="br-name"><span class="mini-logo lg-falcons">F</span>Falcons</span><span class="score">·</span></div>
+      </div>
+    </div>
+  </aside>
+
+</main>
+
+<footer class="foot">
+  AMEFYS · v0.5.0 · 与 Valve / DOTA 2 / 国际邀请赛无任何官方关联 · 数据模拟<br>
+  · <a href="ti15-skin-preview.html">v1 Dashboard</a> · <a href="ti15-skin-preview-v2.html">v2 Cinematic</a> · <strong style="color:var(--gold);">v3 Live Center</strong> ·
+</footer>
+
+<script>
+  const TI_TARGET = new Date('2026-09-15T12:00:00+08:00').getTime()
+  const pad = (n) => n < 10 ? '0' + n : String(n)
+  function tick() {
+    const diff = Math.max(0, TI_TARGET - Date.now())
+    const d = Math.floor(diff / 86400000)
+    const h = Math.floor((diff % 86400000) / 3600000)
+    const m = Math.floor((diff % 3600000) / 60000)
+    const s = Math.floor((diff % 60000) / 1000)
+    document.getElementById('hc-d').textContent = d
+    document.getElementById('hc-h').textContent = pad(h)
+    document.getElementById('hc-m').textContent = pad(m)
+    document.getElementById('hc-s').textContent = pad(s)
+    document.getElementById('cd-compact').textContent = `${d}d ${pad(h)}h ${pad(m)}m`
+  }
+  tick()
+  setInterval(tick, 1000)
+</script>
+
+</body>
+</html>

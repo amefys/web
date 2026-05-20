@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TI15 Skin Preview · AMEFYS</title>
+<style>
+  :root {
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    --font-serif: "Cormorant Garamond", "Songti SC", "Source Han Serif SC", serif;
+    --fs-xxs: 10px; --fs-xs: 11px; --fs-sm: 13px; --fs-body: 14px;
+    --fs-xl: 22px; --fs-h2: 28px; --fs-h1: 40px;
+    --radius-sm: 6px; --radius-md: 12px; --radius-lg: 18px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: var(--font-stack);
+    line-height: 1.5; -webkit-font-smoothing: antialiased;
+    background: var(--color-bg);
+    color: var(--color-text);
+    transition: background 400ms ease, color 400ms ease;
+    min-height: 100vh;
+  }
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+   * ║  Skin A — Aegis Shanghai (default)                            ║
+   * ║  Champion gold × midnight blue × black, gravitas               ║
+   * ╚══════════════════════════════════════════════════════════════╝ */
+  [data-skin="aegis-shanghai"] {
+    --color-bg: #0A1530;
+    --color-bg-2: #0E1B3F;
+    --color-bg-3: #14224A;
+    --color-surface: rgba(20, 34, 74, 0.65);
+    --color-fill: rgba(212, 175, 55, 0.06);
+    --color-fill-secondary: rgba(212, 175, 55, 0.12);
+    --color-hairline: rgba(212, 175, 55, 0.18);
+    --color-hairline-strong: rgba(212, 175, 55, 0.32);
+
+    --color-text: #F2E9D2;
+    --color-text-secondary: rgba(242, 233, 210, 0.72);
+    --color-text-tertiary: rgba(242, 233, 210, 0.46);
+
+    --color-accent: #D4AF37;           /* aegis gold */
+    --color-accent-deep: #A8841F;
+    --color-accent-glow: rgba(212, 175, 55, 0.45);
+    --color-radiant: #6FCF8B;
+    --color-dire: #D9534F;
+
+    --skin-stage: linear-gradient(180deg, #06112A 0%, #0A1530 38%, #102046 100%);
+    --skin-decor-color: rgba(212, 175, 55, 0.07);
+  }
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+   * ║  Skin H — 归途 / Homecoming                                    ║
+   * ║  Ink wash × cinnabar × dim gold · CN DOTA Great Again         ║
+   * ║  Narrative: 九年一梦，盾归故里 (since Wings TI6, 2016)         ║
+   * ╚══════════════════════════════════════════════════════════════╝ */
+  [data-skin="homecoming"] {
+    --color-bg: #110A0E;
+    --color-bg-2: #1A0E14;
+    --color-bg-3: #221218;
+    --color-surface: rgba(38, 18, 24, 0.62);
+    --color-fill: rgba(200, 16, 46, 0.05);
+    --color-fill-secondary: rgba(200, 16, 46, 0.12);
+    --color-hairline: rgba(255, 215, 0, 0.14);
+    --color-hairline-strong: rgba(255, 215, 0, 0.28);
+
+    --color-text: #F4ECDD;
+    --color-text-secondary: rgba(244, 236, 221, 0.74);
+    --color-text-tertiary: rgba(244, 236, 221, 0.48);
+
+    --color-accent: #C8102E;             /* 朱砂 / cinnabar */
+    --color-accent-deep: #FFD700;        /* 暗金 / dim gold */
+    --color-accent-glow: rgba(200, 16, 46, 0.42);
+    --color-radiant: #27A567;            /* 翡翠 / jade */
+    --color-dire: #6B0E1C;
+
+    --skin-stage: radial-gradient(ellipse at 25% 20%, #2A1018 0%, #160810 55%, #08040A 100%);
+    --skin-decor-color: rgba(255, 215, 0, 0.09);
+  }
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+   * ║  Skin D — Trophy Forge                                        ║
+   * ║  Molten gold × forge brown × ember orange, "造神" feeling      ║
+   * ╚══════════════════════════════════════════════════════════════╝ */
+  [data-skin="trophy-forge"] {
+    --color-bg: #1A0E08;
+    --color-bg-2: #241410;
+    --color-bg-3: #2F1B14;
+    --color-surface: rgba(60, 32, 22, 0.62);
+    --color-fill: rgba(255, 122, 24, 0.05);
+    --color-fill-secondary: rgba(255, 122, 24, 0.12);
+    --color-hairline: rgba(255, 196, 81, 0.16);
+    --color-hairline-strong: rgba(255, 196, 81, 0.30);
+
+    --color-text: #FFF4DA;
+    --color-text-secondary: rgba(255, 244, 218, 0.74);
+    --color-text-tertiary: rgba(255, 244, 218, 0.48);
+
+    --color-accent: #FFC451;           /* molten gold */
+    --color-accent-deep: #FF7A18;      /* ember */
+    --color-accent-glow: rgba(255, 122, 24, 0.55);
+    --color-radiant: #FFC451;
+    --color-dire: #C4392B;
+
+    --skin-stage: radial-gradient(ellipse at 50% 80%, #5A2A14 0%, #2A1208 50%, #14070A 100%);
+    --skin-decor-color: rgba(255, 122, 24, 0.14);
+  }
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+   * ║  Layout                                                       ║
+   * ╚══════════════════════════════════════════════════════════════╝ */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    height: 56px;
+    background: rgba(8, 10, 18, 0.78);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.10);
+  }
+  .header-inner {
+    max-width: 1280px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px;
+  }
+  .header-title {
+    font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.78);
+    letter-spacing: 0.4px;
+  }
+  .header-title .badge {
+    display: inline-block; padding: 2px 8px;
+    margin-left: 10px; border-radius: 999px;
+    background: rgba(212, 175, 55, 0.18);
+    color: #D4AF37; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.6px; text-transform: uppercase;
+  }
+  .skin-toggle {
+    display: inline-flex; background: rgba(255,255,255,0.05);
+    border: 0.5px solid rgba(255,255,255,0.10);
+    border-radius: 999px; padding: 3px; gap: 0;
+  }
+  .skin-toggle button {
+    appearance: none; border: 0; background: transparent;
+    color: rgba(255,255,255,0.62); cursor: pointer;
+    font: inherit; font-size: 12px; font-weight: 600;
+    padding: 6px 14px; border-radius: 999px;
+    transition: background 200ms, color 200ms;
+    font-family: var(--font-stack);
+  }
+  .skin-toggle button[aria-pressed="true"] {
+    background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+    color: #1A1308;
+    box-shadow: 0 0 0 1px rgba(212,175,55,0.30), 0 2px 8px rgba(212,175,55,0.25);
+  }
+  [data-skin="trophy-forge"] .skin-toggle button[aria-pressed="true"]:nth-child(2) {
+    background: linear-gradient(135deg, #FFC451 0%, #FF7A18 100%);
+    color: #1A0708;
+    box-shadow: 0 0 0 1px rgba(255,196,81,0.36), 0 2px 12px rgba(255,122,24,0.45);
+  }
+  [data-skin="homecoming"] .skin-toggle button[aria-pressed="true"]:nth-child(3) {
+    background: linear-gradient(135deg, #C8102E 0%, #6B0E1C 100%);
+    color: #FFD700;
+    box-shadow: 0 0 0 1px rgba(255,215,0,0.36), 0 2px 12px rgba(200,16,46,0.45);
+  }
+
+  .stage {
+    min-height: calc(100vh - 56px);
+    background: var(--skin-stage);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /*
+   * Background composition (ALL skins layered together):
+   *   - Layer 1 [.stage::before]: Shanghai Bund skyline silhouette at the
+   *     bottom — Oriental Pearl Tower, Shanghai Tower, Jin Mao, World
+   *     Financial Center, abstract Bund row. Tinted by --decor-color.
+   *   - Layer 2 [.stage::after]: Giant centered Aegis abstract crest
+   *     (geometric, NOT Valve's actual artwork) — visible as a faint
+   *     watermark behind the cards.
+   *   - Layer 3 [skin-specific div .decor-extra]: Skin-specific accents
+   *     (forge sparks for D, seal stamp for H, 龙 dragon coil for H).
+   */
+
+  /* Layer 1: Shanghai Bund skyline silhouette */
+  .stage::before {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: 0; height: 280px;
+    z-index: 0; pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 280' fill='%23ffffff' fill-opacity='0.55' preserveAspectRatio='xMidYEnd meet'><!-- Oriental Pearl Tower --><path d='M180 280 L180 100 L184 100 L184 80 L188 80 L188 70 L192 70 L188 60 L208 60 L204 70 L208 70 L208 80 L212 80 L212 100 L216 100 L216 280 Z'/><circle cx='198' cy='90' r='14'/><circle cx='198' cy='42' r='7'/><path d='M195 30 L195 42 L201 42 L201 30 Z'/><!-- Jin Mao Tower --><path d='M320 280 L320 110 L324 110 L324 100 L328 100 L328 90 L332 90 L332 80 L338 80 L338 90 L342 90 L342 100 L346 100 L346 110 L350 110 L350 280 Z'/><!-- World Financial Center (bottle opener) --><path d='M420 280 L420 90 L424 90 L424 70 L432 70 L432 55 L440 55 L440 50 L448 50 L448 55 L456 55 L456 70 L464 70 L464 90 L468 90 L468 280 Z M438 55 L450 55 L450 65 L438 65 Z' fill-opacity='0.55'/><!-- Shanghai Tower (twist) --><path d='M540 280 L540 100 L545 100 L548 70 L552 50 L554 30 L558 50 L562 70 L565 100 L570 100 L570 280 Z'/><!-- Bund row (Art Deco buildings) --><path d='M700 280 L700 160 L720 160 L720 130 L740 130 L740 100 L745 95 L745 100 L760 100 L760 130 L780 130 L780 160 L800 160 L800 280 Z'/><path d='M820 280 L820 170 L840 170 L840 150 L860 150 L860 170 L880 170 L880 280 Z'/><path d='M900 280 L900 165 L915 165 L915 145 L935 145 L935 130 L945 130 L945 145 L965 145 L965 165 L980 165 L980 280 Z'/><path d='M1000 280 L1000 175 L1020 175 L1020 155 L1040 155 L1040 175 L1060 175 L1060 280 Z'/><!-- Generic skyline detail --><path d='M1100 280 L1100 195 L1115 195 L1115 175 L1135 175 L1135 195 L1155 195 L1155 175 L1175 175 L1175 195 L1190 195 L1190 280 Z'/><path d='M1220 280 L1220 200 L1240 200 L1240 220 L1260 220 L1260 200 L1280 200 L1280 280 Z'/></svg>") no-repeat center bottom / 1600px 280px;
+    opacity: 0.18;
+  }
+
+  /* Layer 2: Giant Aegis crest watermark (centered) */
+  .stage::after {
+    content: ""; position: absolute;
+    top: 40px; left: 50%; width: 720px; height: 900px;
+    transform: translateX(-50%);
+    z-index: 0; pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 320' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='1'><!-- Outer shield --><path d='M120 12 L216 56 L216 176 Q216 248 120 308 Q24 248 24 176 L24 56 Z'/><!-- Inner shield --><path d='M120 36 L192 70 L192 168 Q192 220 120 268 Q48 220 48 168 L48 70 Z'/><!-- Crown spikes (top) --><path d='M80 12 L80 0 L88 8 L96 0 L96 12'/><path d='M104 12 L104 -4 L120 8 L136 -4 L136 12'/><path d='M144 12 L144 0 L152 8 L160 0 L160 12'/><!-- Central diamond + circle --><circle cx='120' cy='160' r='28'/><path d='M120 132 L148 160 L120 188 L92 160 Z'/><circle cx='120' cy='160' r='10'/><!-- Wing flourishes --><path d='M48 96 L24 80 L20 60 L40 76'/><path d='M192 96 L216 80 L220 60 L200 76'/><!-- Engraved laurel curves --><path d='M60 220 Q90 240 120 245 Q150 240 180 220'/><path d='M70 240 Q95 255 120 260 Q145 255 170 240'/><!-- TI15 numerals at top of shield --><text x='120' y='90' font-family='Cinzel, Times, serif' font-size='12' font-weight='700' fill='%23ffffff' text-anchor='middle' letter-spacing='1'>TI15</text></svg>") no-repeat center / contain;
+    opacity: 0.06;
+  }
+  [data-skin="aegis-shanghai"] .stage::after { opacity: 0.10; filter: hue-rotate(0) drop-shadow(0 0 16px rgba(212,175,55,0.25)); }
+  [data-skin="trophy-forge"]  .stage::after { opacity: 0.12; filter: drop-shadow(0 0 20px rgba(255,122,24,0.30)); }
+  [data-skin="homecoming"]    .stage::after { opacity: 0.10; filter: drop-shadow(0 0 14px rgba(255,215,0,0.30)); }
+
+  [data-skin="aegis-shanghai"] .stage::before { filter: drop-shadow(0 0 8px rgba(212,175,55,0.20)); }
+  [data-skin="trophy-forge"]   .stage::before { opacity: 0.14; filter: drop-shadow(0 -4px 12px rgba(255,122,24,0.30)); }
+  [data-skin="homecoming"]     .stage::before { opacity: 0.16; filter: drop-shadow(0 0 6px rgba(255,215,0,0.20)); }
+
+  /* Layer 3: extra skin-specific decoration */
+  .decor-extra {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    display: none;
+  }
+  [data-skin="trophy-forge"] .decor-extra,
+  [data-skin="homecoming"] .decor-extra { display: block; }
+
+  /* Forge: ember sparks rising */
+  [data-skin="trophy-forge"] .decor-extra {
+    background-image:
+      radial-gradient(2px 2px at 20% 90%, #FFC451 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 38% 95%, #FF7A18 0%, transparent 60%),
+      radial-gradient(2px 2px at 62% 88%, #FFC451 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 84% 92%, #FF7A18 0%, transparent 60%);
+    animation: ember-rise 8s ease-in linear infinite;
+  }
+  /* Homecoming: 篆刻 red seal stamp top-right + dragon coil bottom-left */
+  [data-skin="homecoming"] .decor-extra {
+    background:
+      /* Top-right: 篆刻 chinese seal stamp with abstract "AME" / "归" character */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23C8102E' stroke-width='2.5' stroke-opacity='0.85'><rect x='4' y='4' width='92' height='92' rx='2'/><!-- Inner cross frame --><rect x='14' y='14' width='72' height='72' stroke-width='1.5'/><!-- Stylized 归 character (abstract: angular returning path) --><path d='M30 28 L70 28 M30 40 L70 40 M40 28 L40 72 M40 60 L60 60 M40 72 L60 72 L70 62'/><!-- Decorative dots --><circle cx='24' cy='24' r='1.5' fill='%23C8102E'/><circle cx='76' cy='24' r='1.5' fill='%23C8102E'/><circle cx='24' cy='76' r='1.5' fill='%23C8102E'/><circle cx='76' cy='76' r='1.5' fill='%23C8102E'/></svg>") no-repeat right 120px top 100px / 140px 140px,
+      /* Bottom-left: subtle dragon coil silhouette in dim gold */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke='%23FFD700' stroke-width='1' stroke-opacity='0.45'><path d='M40 160 Q20 140 30 110 Q50 80 90 90 Q130 100 130 130 Q130 160 100 160 Q70 160 70 130 Q70 105 95 110' /><path d='M30 50 Q60 30 100 40 Q150 55 170 100' stroke-dasharray='3 4'/><circle cx='95' cy='110' r='3' fill='%23FFD700' fill-opacity='0.6'/></svg>") no-repeat left 40px bottom 160px / 280px 280px;
+  }
+
+  @keyframes ember-rise {
+    0%   { transform: translateY(0) translateX(0); opacity: 0.0; }
+    20%  { opacity: 0.9; }
+    100% { transform: translateY(-340px) translateX(20px); opacity: 0; }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    [data-skin="trophy-forge"] .stage::after { animation: none; }
+    .gold-sweep::before { animation: none !important; }
+  }
+
+  .layout {
+    position: relative; z-index: 1;
+    max-width: 1080px; margin: 0 auto; padding: 32px 24px 96px;
+    display: grid;
+    grid-template-columns: 200px 1fr 320px;
+    gap: 24px;
+  }
+
+  /* ── Sidebar mock ──────────────────────────────────────────── */
+  .sidebar {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 16px 12px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    height: fit-content;
+  }
+  .sidebar a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border-radius: var(--radius-md);
+    color: var(--color-text-secondary); font-size: 13px;
+    text-decoration: none;
+    transition: background 120ms, color 120ms;
+  }
+  .sidebar a[data-active="true"] {
+    background: var(--color-fill-secondary);
+    color: var(--color-accent);
+    box-shadow: inset 2px 0 0 0 var(--color-accent);
+  }
+  .sidebar a:hover:not([data-active="true"]) {
+    background: var(--color-fill);
+    color: var(--color-text);
+  }
+  .sidebar-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px 16px;
+    border-bottom: 0.5px solid var(--color-hairline);
+    margin-bottom: 8px;
+  }
+  .brand-mark {
+    width: 28px; height: 28px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    display: grid; place-items: center;
+    color: var(--color-bg); font-weight: 800; font-size: 14px;
+    box-shadow: 0 0 16px var(--color-accent-glow);
+  }
+  .brand-name { font-weight: 700; font-size: 14px; letter-spacing: 0.3px; }
+  .brand-sub { font-size: 10px; color: var(--color-text-tertiary); letter-spacing: 0.5px; text-transform: uppercase; }
+
+  /* ── Main column ───────────────────────────────────────────── */
+  .main { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+
+  .greet {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 4px;
+  }
+  .greet h1 {
+    font-size: var(--fs-h1); font-weight: 700; letter-spacing: -0.6px;
+    margin-bottom: 4px;
+  }
+  [data-skin="aegis-shanghai"] .greet h1 {
+    background: linear-gradient(135deg, #F2E9D2 0%, #D4AF37 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  [data-skin="trophy-forge"] .greet h1 {
+    background: linear-gradient(135deg, #FFF4DA 0%, #FFC451 50%, #FF7A18 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 20px var(--color-accent-glow));
+  }
+  [data-skin="homecoming"] .greet h1 {
+    background: linear-gradient(135deg, #F4ECDD 0%, #FFD700 50%, #C8102E 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 12px rgba(200, 16, 46, 0.35));
+    font-family: var(--font-serif);
+    letter-spacing: 0;
+  }
+  .greet p { color: var(--color-text-tertiary); font-size: 14px; }
+
+  .cta-btn {
+    appearance: none; border: 0; cursor: pointer; font: inherit;
+    padding: 10px 22px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    color: var(--color-bg);
+    font-weight: 700; font-size: 13px; letter-spacing: 0.3px;
+    box-shadow: 0 4px 16px var(--color-accent-glow), 0 0 0 1px var(--color-hairline-strong);
+    position: relative; overflow: hidden;
+    transition: transform 120ms ease;
+  }
+  .cta-btn:hover { transform: translateY(-1px); }
+  .cta-btn::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+    transform: translateX(-110%);
+  }
+  .cta-btn:hover::before { animation: sweep 750ms ease forwards; }
+  @keyframes sweep { to { transform: translateX(110%); } }
+
+  /* Card primitive */
+  .card {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative; overflow: hidden;
+    transition: border-color 200ms, transform 200ms;
+  }
+  .card:hover {
+    border-color: var(--color-hairline-strong);
+    transform: translateY(-1px);
+  }
+  /* Gold sweep on Aegis cards */
+  [data-skin="aegis-shanghai"] .card.gold-sweep::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(212,175,55,0.16) 50%, transparent 65%);
+    transform: translateX(-110%);
+    pointer-events: none;
+  }
+  [data-skin="aegis-shanghai"] .card.gold-sweep:hover::before {
+    animation: sweep 1100ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  /* Heat shimmer on Trophy Forge cards */
+  [data-skin="trophy-forge"] .card.gold-sweep {
+    box-shadow: 0 0 0 0 rgba(255, 122, 24, 0);
+    transition: box-shadow 320ms ease, border-color 200ms;
+  }
+  [data-skin="trophy-forge"] .card.gold-sweep:hover {
+    box-shadow: 0 0 24px -2px rgba(255, 122, 24, 0.45), inset 0 0 0 1px rgba(255, 196, 81, 0.35);
+  }
+  [data-skin="trophy-forge"] .card.gold-sweep::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #FFC451 40%, #FF7A18 60%, transparent 100%);
+    opacity: 0; transition: opacity 200ms;
+  }
+  [data-skin="trophy-forge"] .card.gold-sweep:hover::after { opacity: 0.85; }
+
+  /* Skin H: ink stroke that "draws in" on hover */
+  [data-skin="homecoming"] .card.gold-sweep::before {
+    content: ""; position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(255,215,0,0.10) 50%, transparent 65%);
+    transform: translateX(-110%);
+    pointer-events: none;
+  }
+  [data-skin="homecoming"] .card.gold-sweep:hover::before {
+    animation: sweep 1300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  [data-skin="homecoming"] .card.gold-sweep:hover {
+    border-color: rgba(200, 16, 46, 0.45);
+    box-shadow: 0 0 0 1px rgba(255,215,0,0.12), 0 8px 20px -8px rgba(200,16,46,0.40);
+  }
+
+  .card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 0.5px solid var(--color-hairline);
+    position: relative; z-index: 1;
+  }
+  .card-title {
+    font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.3px;
+    color: var(--color-text);
+  }
+  .card-title .accent { color: var(--color-accent); font-weight: 700; margin-right: 4px; }
+  .see-all {
+    appearance: none; border: 0; background: 0; cursor: pointer;
+    font: inherit; color: var(--color-accent); font-size: var(--fs-xs);
+  }
+
+  /* Weekly stats card */
+  .weekly-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    align-items: center; gap: 16px;
+    padding: 14px 16px;
+    position: relative; z-index: 1;
+  }
+  .weekly-stat .label {
+    font-size: var(--fs-xxs); font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+  }
+  .weekly-stat .value {
+    font-size: var(--fs-h2); font-weight: 700; letter-spacing: -0.3px;
+    color: var(--color-text); line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .weekly-stat .value.positive { color: var(--color-accent); }
+  .weekly-stat .value .sep { color: var(--color-text-tertiary); font-weight: 500; margin: 0 4px; }
+  .weekly-stat .value .w { color: var(--color-radiant); }
+  .weekly-stat .value .l { color: var(--color-dire); }
+
+  .dots { display: flex; gap: 5px; }
+  .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--color-fill-secondary);
+  }
+  .dot[data-win="true"]  { background: var(--color-radiant); box-shadow: 0 0 6px var(--color-accent-glow); }
+  .dot[data-win="false"] { background: var(--color-dire); }
+
+  /* 4 stat cards */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .stat-card { padding: 16px; }
+  .stat-card .label {
+    font-size: var(--fs-xxs); font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--color-text-tertiary);
+    margin-bottom: 8px;
+  }
+  .stat-card .row {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 8px;
+  }
+  .stat-card .v {
+    font-size: var(--fs-h1); font-weight: 700; line-height: 1;
+    color: var(--color-text); letter-spacing: -0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-card .v.gold { color: var(--color-accent); }
+  .stat-card .sub {
+    font-size: var(--fs-xs); color: var(--color-text-tertiary);
+    margin-top: 6px;
+  }
+  .spark {
+    height: 28px; width: 80px;
+    background: linear-gradient(180deg, var(--color-accent-glow) 0%, transparent 100%);
+    clip-path: polygon(0 70%, 14% 60%, 28% 65%, 42% 40%, 57% 50%, 71% 25%, 85% 35%, 100% 10%, 100% 100%, 0 100%);
+    opacity: 0.75;
+  }
+
+  /* Matches list */
+  .match-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 10px 16px;
+    border-bottom: 0.5px solid var(--color-hairline);
+    position: relative; z-index: 1;
+    transition: background 100ms;
+  }
+  .match-row:hover { background: var(--color-fill); }
+  .match-row:last-child { border-bottom: 0; }
+  .wl-bar { width: 3px; height: 32px; border-radius: 2px; flex-shrink: 0; }
+  .wl-bar[data-win="true"]  { background: var(--color-radiant); box-shadow: 0 0 10px var(--color-accent-glow); }
+  .wl-bar[data-win="false"] { background: var(--color-dire); }
+  .hero-icon {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--color-accent-deep), var(--color-accent));
+    opacity: 0.55;
+  }
+  .match-info { flex: 1; min-width: 0; }
+  .match-hero { font-size: var(--fs-body); font-weight: 600; color: var(--color-text); }
+  .match-dur { font-size: var(--fs-xs); color: var(--color-text-tertiary); }
+  .match-kda { font-size: var(--fs-sm); color: var(--color-text-secondary); font-variant-numeric: tabular-nums; }
+  .pill {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 999px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .pill[data-tone="w"] {
+    background: rgba(111, 207, 139, 0.18); color: var(--color-radiant);
+    border: 0.5px solid rgba(111, 207, 139, 0.30);
+  }
+  [data-skin="trophy-forge"] .pill[data-tone="w"] {
+    background: linear-gradient(135deg, rgba(255,196,81,0.20), rgba(255,122,24,0.20));
+    color: var(--color-accent); border: 0.5px solid rgba(255,196,81,0.40);
+  }
+  .pill[data-tone="l"] {
+    background: rgba(217, 83, 79, 0.18); color: var(--color-dire);
+    border: 0.5px solid rgba(217, 83, 79, 0.30);
+  }
+  .match-when { font-size: var(--fs-xs); color: var(--color-text-tertiary); }
+
+  /* ── Side col: Top heroes ──────────────────────────────────── */
+  .side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .top-hero-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 0.5px solid var(--color-hairline);
+  }
+  .top-hero-row:last-child { border-bottom: 0; }
+  .hero-name { font-size: var(--fs-sm); font-weight: 600; color: var(--color-text); }
+  .hero-stats { font-size: var(--fs-xs); color: var(--color-text-tertiary); }
+  .hero-info { flex: 1; min-width: 0; }
+  .hero-pill {
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 700;
+    background: var(--color-fill-secondary); color: var(--color-accent);
+    border: 0.5px solid var(--color-hairline);
+  }
+
+  /* TI15 Tracker widget */
+  .ti-widget { padding: 16px; }
+  .ti-widget .title {
+    font-size: var(--fs-xxs); font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; color: var(--color-text-tertiary);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ti-pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 var(--color-accent-glow);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+    100% { box-shadow: 0 0 0 14px transparent; }
+  }
+  .ti-match {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 0.5px dashed var(--color-hairline);
+    font-size: 13px;
+  }
+  .ti-match:last-child { border-bottom: 0; }
+  .ti-teams { color: var(--color-text); font-weight: 600; }
+  .ti-when  { color: var(--color-accent); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  /* CN team highlight — 朱砂/金色衬底，强化归途叙事 */
+  .cn-team {
+    color: var(--color-accent); font-weight: 700;
+    position: relative; padding-left: 8px;
+  }
+  .cn-team::before {
+    content: ""; position: absolute; left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 12px; border-radius: 2px;
+    background: linear-gradient(180deg, var(--color-accent), var(--color-accent-deep));
+  }
+  [data-skin="homecoming"] .cn-team {
+    color: #FFD700;
+  }
+  [data-skin="homecoming"] .cn-team::before {
+    background: linear-gradient(180deg, #C8102E, #FFD700);
+    box-shadow: 0 0 6px rgba(200, 16, 46, 0.6);
+  }
+
+  /* ── Floating overlay preview ─────────────────────────────── */
+  .overlay-preview {
+    position: fixed; right: 28px; bottom: 28px;
+    width: 320px; padding: 14px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline-strong);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.45), 0 0 0 1px var(--color-hairline);
+    z-index: 50;
+    isolation: isolate;
+  }
+  [data-skin="aegis-shanghai"] .overlay-preview {
+    box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 24px -8px var(--color-accent-glow);
+  }
+  [data-skin="trophy-forge"] .overlay-preview {
+    box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 32px -4px rgba(255,122,24,0.35);
+  }
+  .overlay-title {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.7px;
+    font-weight: 700; color: var(--color-text-tertiary);
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .live-dot {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 8px var(--color-accent);
+    margin-right: 6px;
+    animation: pulse 2s ease-out infinite;
+  }
+  .item-chip-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 6px;
+  }
+  .item-chip {
+    padding: 5px 10px; border-radius: 8px;
+    background: var(--color-fill-secondary);
+    border: 0.5px solid var(--color-hairline);
+    font-size: 12px; font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: all 150ms ease;
+  }
+  .item-chip[data-hot="true"] {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    color: var(--color-bg);
+    border-color: transparent;
+    box-shadow: 0 0 12px var(--color-accent-glow);
+  }
+  .item-chip:hover { transform: translateY(-2px); }
+
+  /* Section label */
+  .section-label {
+    font-size: var(--fs-xxs); text-transform: uppercase; font-weight: 700;
+    letter-spacing: 0.8px; color: var(--color-text-tertiary);
+    margin: 24px 0 -4px; padding-left: 4px;
+  }
+
+  /* ─ TI15 Countdown hero banner ──────────────────────────────── */
+  .ti-banner {
+    grid-column: 1 / -1;
+    position: relative;
+    padding: 22px 28px;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline-strong);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+    isolation: isolate;
+  }
+  /*
+   * BANNER LAYOUT — Aegis as the visual anchor, NOT decoration.
+   * Three columns: [head/countdown] | [GIANT AEGIS] | [Shanghai context]
+   */
+  .ti-banner { padding: 28px 32px; min-height: 220px; }
+  /* Faint Shanghai skyline strip inside banner footer */
+  .ti-banner::before {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: -2px; height: 80px;
+    z-index: 0; pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 80' fill='%23ffffff' fill-opacity='0.4' preserveAspectRatio='xMidYEnd meet'><path d='M120 80 L120 30 L124 30 L124 22 L132 22 L132 14 L128 6 L138 6 L134 14 L142 14 L142 22 L150 22 L150 30 L154 30 L154 80 Z'/><circle cx='137' cy='30' r='5'/><circle cx='137' cy='10' r='2.5'/><path d='M220 80 L220 38 L226 38 L226 24 L232 24 L232 14 L240 14 L240 24 L246 24 L246 38 L252 38 L252 80 Z'/><path d='M320 80 L320 30 L326 30 L326 18 L334 18 L334 12 L342 12 L342 18 L350 18 L350 30 L356 30 L356 80 Z'/><path d='M420 80 L420 26 L428 22 L432 16 L436 22 L444 26 L444 80 Z'/><path d='M540 80 L540 50 L552 50 L552 38 L568 38 L568 50 L580 50 L580 80 Z'/><path d='M640 80 L640 54 L656 54 L656 42 L668 42 L668 54 L684 54 L684 80 Z'/><path d='M740 80 L740 48 L760 48 L760 36 L780 36 L780 80 Z'/><path d='M840 80 L840 56 L856 56 L856 42 L876 42 L876 56 L892 56 L892 80 Z'/><path d='M940 80 L940 50 L956 50 L956 36 L976 36 L976 50 L992 50 L992 80 Z'/><path d='M1050 80 L1050 56 L1070 56 L1070 44 L1090 44 L1090 80 Z'/><path d='M1160 80 L1160 54 L1180 54 L1180 40 L1200 40 L1200 54 L1220 54 L1220 80 Z'/><path d='M1280 80 L1280 60 L1296 60 L1296 48 L1316 48 L1316 80 Z'/><path d='M1380 80 L1380 56 L1400 56 L1400 44 L1420 44 L1420 80 Z'/></svg>") no-repeat center bottom / 100% 80px;
+    opacity: 0.20;
+  }
+  /* GIANT Aegis crest centered in the banner — the visual hero */
+  .aegis-crest {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px; height: 240px;
+    z-index: 1;
+    pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160' fill='none' stroke='%23ffffff' stroke-width='0.8' stroke-opacity='1'><!-- Outer shield --><path d='M60 4 L110 26 L110 86 Q110 124 60 156 Q10 124 10 86 L10 26 Z'/><!-- Mid shield --><path d='M60 16 L98 34 L98 84 Q98 116 60 144 Q22 116 22 84 L22 34 Z'/><!-- Inner shield --><path d='M60 30 L88 42 L88 82 Q88 108 60 132 Q32 108 32 82 L32 42 Z'/><!-- Top crown --><path d='M48 4 L48 -4 L54 2 L60 -4 L66 2 L72 -4 L72 4'/><!-- Side wings --><path d='M22 60 L8 50 L4 38 L18 46 Z'/><path d='M98 60 L112 50 L116 38 L102 46 Z'/><!-- Center diamond --><path d='M60 60 L80 80 L60 100 L40 80 Z'/><!-- Inner gem (circle + dot) --><circle cx='60' cy='80' r='10'/><circle cx='60' cy='80' r='3' fill='%23ffffff'/><!-- TI15 numerals, embossed --><text x='60' y='48' font-family='Cinzel, Times, serif' font-size='8' font-weight='700' fill='%23ffffff' text-anchor='middle' stroke='%23ffffff' stroke-width='0.2'>TI15</text><!-- Engraved laurels below --><path d='M30 122 Q44 134 60 138 Q76 134 90 122' stroke-width='0.5'/><path d='M40 132 Q50 140 60 142 Q70 140 80 132' stroke-width='0.5'/></svg>") no-repeat center / contain;
+  }
+  [data-skin="aegis-shanghai"] .aegis-crest {
+    filter: drop-shadow(0 0 24px rgba(212,175,55,0.55)) drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    opacity: 0.95;
+  }
+  [data-skin="trophy-forge"] .aegis-crest {
+    filter: drop-shadow(0 0 28px rgba(255,122,24,0.70)) drop-shadow(0 0 10px rgba(255,196,81,0.6));
+    opacity: 0.95;
+    animation: aegis-pulse 4s ease-in-out infinite;
+  }
+  [data-skin="homecoming"] .aegis-crest {
+    filter: drop-shadow(0 0 22px rgba(255,215,0,0.55)) drop-shadow(0 0 8px rgba(200,16,46,0.45));
+    opacity: 0.95;
+  }
+  @keyframes aegis-pulse {
+    0%, 100% { filter: drop-shadow(0 0 24px rgba(255,122,24,0.55)) drop-shadow(0 0 8px rgba(255,196,81,0.5)); }
+    50%      { filter: drop-shadow(0 0 36px rgba(255,122,24,0.85)) drop-shadow(0 0 14px rgba(255,196,81,0.8)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-skin="trophy-forge"] .aegis-crest { animation: none; }
+  }
+
+  .ti-banner-inner {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px;
+  }
+  .ti-banner-head {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .ti-eyebrow {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+    font-weight: 700; color: var(--color-accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ti-eyebrow .live-pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 var(--color-accent-glow);
+    animation: pulse 2s ease-out infinite;
+  }
+  .ti-title {
+    font-size: 26px; font-weight: 800; letter-spacing: 0.5px;
+    color: var(--color-text);
+    font-family: var(--font-serif);
+  }
+  [data-skin="aegis-shanghai"] .ti-title {
+    background: linear-gradient(135deg, #F2E9D2, #D4AF37);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  [data-skin="trophy-forge"] .ti-title {
+    background: linear-gradient(135deg, #FFF4DA, #FFC451 60%, #FF7A18);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  [data-skin="homecoming"] .ti-title {
+    background: linear-gradient(135deg, #FFD700, #C8102E);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .ti-place {
+    font-size: 13px; color: var(--color-text-tertiary);
+  }
+
+  .ti-countdown {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .cd-cell {
+    text-align: center; min-width: 64px;
+    position: relative;
+  }
+  .cd-num {
+    font-size: 36px; font-weight: 800; line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text);
+    letter-spacing: -1px;
+    font-family: var(--font-serif);
+  }
+  [data-skin="aegis-shanghai"] .cd-num { color: #F2E9D2; text-shadow: 0 0 16px rgba(212, 175, 55, 0.40); }
+  [data-skin="trophy-forge"]   .cd-num { color: #FFF4DA; text-shadow: 0 0 18px rgba(255, 122, 24, 0.55); }
+  [data-skin="homecoming"]     .cd-num { color: #FFD700; text-shadow: 0 0 12px rgba(200, 16, 46, 0.55); }
+  .cd-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px;
+    font-weight: 700; color: var(--color-text-tertiary);
+    margin-top: 6px;
+  }
+  .cd-sep {
+    font-size: 24px; color: var(--color-accent);
+    opacity: 0.55; align-self: flex-start; margin-top: 6px;
+    font-family: var(--font-serif);
+  }
+  @keyframes seconds-tick { 0% { transform: scale(1); } 30% { transform: scale(1.08); } 100% { transform: scale(1); } }
+  #cd-secs { animation: seconds-tick 1s ease-in-out infinite; transform-origin: center; display: inline-block; }
+  @media (prefers-reduced-motion: reduce) {
+    #cd-secs { animation: none; }
+  }
+
+  /* ─ Schedule strip ──────────────────────────────────────────── */
+  .schedule-strip {
+    grid-column: 1 / -1;
+    margin-top: 0;
+  }
+  .strip-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px; padding: 0 4px;
+  }
+  .strip-title {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+    font-weight: 700; color: var(--color-text-tertiary);
+  }
+  .strip-cn-badge {
+    font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 999px;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    color: var(--color-bg);
+    letter-spacing: 0.3px;
+  }
+
+  .match-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .match-tile {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 200ms, border-color 200ms;
+    position: relative; overflow: hidden;
+  }
+  .match-tile:hover { transform: translateY(-2px); border-color: var(--color-hairline-strong); }
+  /* CN match — distinct vermillion-gold gradient border */
+  .match-tile.cn-match {
+    border: 0.5px solid transparent;
+    background:
+      linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+      linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-deep) 100%) border-box;
+  }
+  .match-tile.cn-match::after {
+    content: ""; position: absolute;
+    top: 0; right: 0; width: 36px; height: 36px;
+    background: linear-gradient(225deg, var(--color-accent) 0%, transparent 50%);
+    opacity: 0.4;
+  }
+  [data-skin="homecoming"] .match-tile.cn-match {
+    background:
+      linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+      linear-gradient(135deg, #C8102E 0%, #FFD700 100%) border-box;
+    box-shadow: 0 0 0 1px rgba(255,215,0,0.10), 0 8px 16px -8px rgba(200,16,46,0.35);
+  }
+
+  .match-tile-time {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--color-accent); font-weight: 700;
+    margin-bottom: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+  .match-tile-faceoff {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .team {
+    display: flex; align-items: center; gap: 8px;
+    flex: 1; min-width: 0;
+  }
+  .team.away { flex-direction: row-reverse; }
+  .team-name {
+    font-size: 13px; font-weight: 700; color: var(--color-text);
+    letter-spacing: 0.2px; white-space: nowrap;
+  }
+  .team-logo {
+    width: 28px; height: 28px; border-radius: 6px;
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  /* Stylized abstract team marks (CN team logos color-coded) */
+  .team-logo.lgd     { background: linear-gradient(135deg, #C8102E, #2A0008); } /* PSG.LGD red */
+  .team-logo.xg      { background: linear-gradient(135deg, #FFD700, #B8941F); color: #1A1308; } /* XG gold */
+  .team-logo.aster   { background: linear-gradient(135deg, #2E3A8C, #6B7CFF); } /* Aster blue */
+  .team-logo.tundra  { background: linear-gradient(135deg, #5A5A5A, #1A1A1A); }
+  .team-logo.liquid  { background: linear-gradient(135deg, #0E97D8, #0D2B5A); }
+  .team-logo.falcons { background: linear-gradient(135deg, #34D399, #064E3B); }
+  .team-logo.gg      { background: linear-gradient(135deg, #8B5CF6, #4C1D95); }
+  .team-logo.spirit  { background: linear-gradient(135deg, #D9534F, #1A0809); }
+  .vs {
+    font-size: 11px; font-weight: 800;
+    color: var(--color-text-tertiary);
+    letter-spacing: 1.2px;
+  }
+  .match-tile-stage {
+    font-size: 11px; color: var(--color-text-tertiary);
+    border-top: 0.5px dashed var(--color-hairline);
+    padding-top: 8px;
+  }
+
+  /* Skin description bar */
+  .desc-bar {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px; margin-bottom: 8px;
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+  }
+  .desc-bar .name {
+    font-size: 18px; font-weight: 700; color: var(--color-accent);
+  }
+  [data-skin="aegis-shanghai"] .desc-bar .name { font-family: var(--font-serif); letter-spacing: 0.3px; }
+  .desc-bar .sub { font-size: 12px; color: var(--color-text-tertiary); }
+  .desc-bar .meta { font-size: 11px; color: var(--color-text-tertiary); text-align: right; }
+
+  /* Compliance disclaimer */
+  .disclaimer {
+    grid-column: 1 / -1;
+    margin-top: 28px; padding: 14px 18px;
+    border-top: 0.5px solid var(--color-hairline);
+    font-size: 11px; color: var(--color-text-tertiary);
+    text-align: center;
+  }
+</style>
+</head>
+<body data-skin="aegis-shanghai">
+
+<header class="header">
+  <div class="header-inner">
+    <div class="header-title">
+      AMEFYS · TI15 Skin Preview
+      <span class="badge">RC</span>
+      <span style="margin-left: 16px; font-size: 11px; color: rgba(255,255,255,0.45);">
+        <strong style="color: #D4AF37;">v1 Dashboard</strong>
+        · <a href="ti15-skin-preview-v2.html" style="color: rgba(255,255,255,0.62);">v2 Cinematic</a>
+        · <a href="ti15-skin-preview-v3.html" style="color: rgba(255,255,255,0.62);">v3 Live Center</a>
+      </span>
+    </div>
+    <div class="skin-toggle" role="tablist">
+      <button type="button" data-skin-id="aegis-shanghai" aria-pressed="true">Aegis 上海</button>
+      <button type="button" data-skin-id="trophy-forge"   aria-pressed="false">Trophy Forge</button>
+      <button type="button" data-skin-id="homecoming"     aria-pressed="false">归途 · CN</button>
+    </div>
+  </div>
+</header>
+
+<main class="stage">
+<div class="decor-extra"></div>
+<div class="layout">
+
+  <!-- TI15 Countdown banner — Aegis as centerpiece -->
+  <section class="ti-banner" aria-label="TI15 Countdown">
+    <div class="aegis-crest" aria-hidden="true"></div>
+    <div class="ti-banner-inner">
+      <div class="ti-banner-head">
+        <div class="ti-eyebrow"><span class="live-pulse"></span>THE INTERNATIONAL 15 · 上海</div>
+        <div class="ti-title">六年再聚 · 上海</div>
+        <div class="ti-place">梅赛德斯-奔驰文化中心 · 2026 年 9 月 · 距 Wings 2016 已 9 年</div>
+      </div>
+      <div class="ti-countdown" aria-live="off">
+        <div class="cd-cell"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DAYS</div></div>
+        <div class="cd-sep">·</div>
+        <div class="cd-cell"><div class="cd-num" id="cd-hrs">--</div><div class="cd-label">HOURS</div></div>
+        <div class="cd-sep">·</div>
+        <div class="cd-cell"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">MIN</div></div>
+        <div class="cd-sep">·</div>
+        <div class="cd-cell"><div class="cd-num"><span id="cd-secs">--</span></div><div class="cd-label">SEC</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TI15 Schedule strip — today's matches as full-width tiles -->
+  <section class="schedule-strip" aria-label="今日赛程">
+    <div class="strip-head">
+      <span class="strip-title">今日赛程 · TODAY'S MATCHES</span>
+      <span class="strip-cn-badge">中国战队 · 3 场</span>
+    </div>
+    <div class="match-strip">
+      <article class="match-tile cn-match">
+        <div class="match-tile-time">20:00 · BO3</div>
+        <div class="match-tile-faceoff">
+          <div class="team"><span class="team-logo lgd">L</span><span class="team-name">PSG.LGD</span></div>
+          <div class="vs">VS</div>
+          <div class="team away"><span class="team-name">Tundra</span><span class="team-logo tundra">T</span></div>
+        </div>
+        <div class="match-tile-stage">主舞台 · 小组赛</div>
+      </article>
+
+      <article class="match-tile cn-match">
+        <div class="match-tile-time">22:30 · BO3</div>
+        <div class="match-tile-faceoff">
+          <div class="team"><span class="team-logo xg">X</span><span class="team-name">XG</span></div>
+          <div class="vs">VS</div>
+          <div class="team away"><span class="team-name">Liquid</span><span class="team-logo liquid">L</span></div>
+        </div>
+        <div class="match-tile-stage">主舞台 · 小组赛</div>
+      </article>
+
+      <article class="match-tile">
+        <div class="match-tile-time">明日 19:00 · BO3</div>
+        <div class="match-tile-faceoff">
+          <div class="team"><span class="team-logo aster">A</span><span class="team-name">Aster</span></div>
+          <div class="vs">VS</div>
+          <div class="team away"><span class="team-name">Falcons</span><span class="team-logo falcons">F</span></div>
+        </div>
+        <div class="match-tile-stage">副舞台 · 小组赛</div>
+      </article>
+
+      <article class="match-tile">
+        <div class="match-tile-time">明日 22:00 · BO5</div>
+        <div class="match-tile-faceoff">
+          <div class="team"><span class="team-logo gg">G</span><span class="team-name">Gaimin</span></div>
+          <div class="vs">VS</div>
+          <div class="team away"><span class="team-name">Spirit</span><span class="team-logo spirit">S</span></div>
+        </div>
+        <div class="match-tile-stage">主舞台 · 淘汰赛</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Skin description bar -->
+  <div class="desc-bar">
+    <div>
+      <div class="name" id="skin-name">Aegis 上海</div>
+      <div class="sub" id="skin-sub">冠军金 × 午夜蓝 · 致敬不朽盾，迎接 TI15</div>
+    </div>
+    <div class="meta">
+      <div>Hover 卡片有金色光弧扫过</div>
+      <div>动效自动遵守 <code>prefers-reduced-motion</code></div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">A</div>
+      <div>
+        <div class="brand-name">AMEFYS</div>
+        <div class="brand-sub">v0.5.0</div>
+      </div>
+    </div>
+    <a data-active="true"><span class="sidebar-dot"></span> 仪表盘</a>
+    <a><span class="sidebar-dot"></span> 历史对局</a>
+    <a><span class="sidebar-dot"></span> 快捷回复</a>
+    <a><span class="sidebar-dot"></span> 翻译</a>
+    <a><span class="sidebar-dot"></span> 设置</a>
+    <a><span class="sidebar-dot"></span> 关于</a>
+  </aside>
+
+  <!-- Main column -->
+  <section class="main">
+    <div class="greet">
+      <div>
+        <h1 id="greet-title">Path to the Aegis.</h1>
+        <p id="greet-sub">准备好下一局了吗？ · 距 TI15 开赛 73 天</p>
+      </div>
+      <button class="cta-btn">模拟进入对局 →</button>
+    </div>
+
+    <!-- Weekly stats -->
+    <div class="card gold-sweep">
+      <div class="card-header">
+        <span class="card-title"><span class="accent">◈</span> 本周战绩</span>
+        <button class="see-all">查看全部</button>
+      </div>
+      <div class="weekly-body">
+        <div class="weekly-stat">
+          <div class="label">对局</div>
+          <div class="value">12</div>
+        </div>
+        <div class="weekly-stat">
+          <div class="label">胜 / 负</div>
+          <div class="value"><span class="w">8</span><span class="sep">/</span><span class="l">4</span></div>
+        </div>
+        <div class="weekly-stat">
+          <div class="label">胜率</div>
+          <div class="value positive">67%</div>
+        </div>
+        <div class="weekly-stat">
+          <div class="label">当前连胜</div>
+          <div class="value positive">3 连胜</div>
+        </div>
+        <div class="dots">
+          <span class="dot" data-win="false"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="false"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="false"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="false"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="true"></span>
+          <span class="dot" data-win="true"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="stats-row">
+      <div class="card stat-card">
+        <div class="label">胜率趋势 · 30 天</div>
+        <div class="row">
+          <div class="v gold">62%</div>
+          <div class="spark"></div>
+        </div>
+        <div class="sub">28 场 · 17 胜 11 负</div>
+      </div>
+      <div class="card stat-card">
+        <div class="label">排位 MMR</div>
+        <div class="row">
+          <div class="v">4 720</div>
+          <div class="spark"></div>
+        </div>
+        <div class="sub">+180 since last week</div>
+      </div>
+      <div class="card stat-card">
+        <div class="label">平均 KDA</div>
+        <div class="row"><div class="v">3.4</div></div>
+        <div class="sub">K/D/A · 96 场</div>
+      </div>
+      <div class="card stat-card">
+        <div class="label">本周建议命中率</div>
+        <div class="row"><div class="v gold">81%</div></div>
+        <div class="sub">14 场样本</div>
+      </div>
+    </div>
+
+    <div class="section-label">最近对局</div>
+
+    <!-- Matches -->
+    <div class="card">
+      <div class="match-row">
+        <div class="wl-bar" data-win="true"></div>
+        <div class="hero-icon"></div>
+        <div class="match-info">
+          <div class="match-hero">Invoker</div>
+          <div class="match-dur">38:24</div>
+        </div>
+        <div class="match-kda">14 / 5 / 18</div>
+        <span class="pill" data-tone="w">胜</span>
+        <div class="match-when">2h ago</div>
+      </div>
+      <div class="match-row">
+        <div class="wl-bar" data-win="true"></div>
+        <div class="hero-icon"></div>
+        <div class="match-info">
+          <div class="match-hero">Anti-Mage</div>
+          <div class="match-dur">42:11</div>
+        </div>
+        <div class="match-kda">11 / 3 / 9</div>
+        <span class="pill" data-tone="w">胜</span>
+        <div class="match-when">5h ago</div>
+      </div>
+      <div class="match-row">
+        <div class="wl-bar" data-win="false"></div>
+        <div class="hero-icon"></div>
+        <div class="match-info">
+          <div class="match-hero">Pudge</div>
+          <div class="match-dur">29:48</div>
+        </div>
+        <div class="match-kda">6 / 9 / 7</div>
+        <span class="pill" data-tone="l">负</span>
+        <div class="match-when">Yesterday</div>
+      </div>
+      <div class="match-row">
+        <div class="wl-bar" data-win="true"></div>
+        <div class="hero-icon"></div>
+        <div class="match-info">
+          <div class="match-hero">Storm Spirit</div>
+          <div class="match-dur">45:02</div>
+        </div>
+        <div class="match-kda">18 / 7 / 11</div>
+        <span class="pill" data-tone="w">胜</span>
+        <div class="match-when">Yesterday</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Side column -->
+  <aside class="side">
+    <div class="card">
+      <div class="card-header"><span class="card-title"><span class="accent">◈</span> 本周英雄</span></div>
+      <div class="top-hero-row">
+        <div class="hero-icon"></div>
+        <div class="hero-info">
+          <div class="hero-name">Invoker</div>
+          <div class="hero-stats">8 场 · 75% 胜率</div>
+        </div>
+        <span class="hero-pill">75%</span>
+      </div>
+      <div class="top-hero-row">
+        <div class="hero-icon"></div>
+        <div class="hero-info">
+          <div class="hero-name">Storm Spirit</div>
+          <div class="hero-stats">5 场 · 60% 胜率</div>
+        </div>
+        <span class="hero-pill">60%</span>
+      </div>
+      <div class="top-hero-row">
+        <div class="hero-icon"></div>
+        <div class="hero-info">
+          <div class="hero-name">Pudge</div>
+          <div class="hero-stats">4 场 · 50% 胜率</div>
+        </div>
+        <span class="hero-pill">50%</span>
+      </div>
+    </div>
+
+    <!-- TI15 Tracker -->
+    <div class="card ti-widget">
+      <div class="title">
+        <span class="ti-pulse"></span>
+        TI15 Live · Shanghai
+      </div>
+      <div class="ti-match">
+        <span class="ti-teams"><span class="cn-team">PSG.LGD</span> <span style="opacity:.45">vs</span> Tundra</span>
+        <span class="ti-when">20:00</span>
+      </div>
+      <div class="ti-match">
+        <span class="ti-teams"><span class="cn-team">XG</span> <span style="opacity:.45">vs</span> Liquid</span>
+        <span class="ti-when">22:30</span>
+      </div>
+      <div class="ti-match">
+        <span class="ti-teams"><span class="cn-team">Aster</span> <span style="opacity:.45">vs</span> Falcons</span>
+        <span class="ti-when">明日 19:00</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="disclaimer">
+    AMEFYS 与 Valve / DOTA 2 / 国际邀请赛无任何官方关联。本主题为社区致敬作品，所有视觉元素均为抽象设计。
+  </div>
+
+</div>
+</main>
+
+<!-- Overlay preview (always-on-top in real app) -->
+<div class="overlay-preview">
+  <div class="overlay-title">
+    <span><span class="live-dot"></span>Live · 天辉 · 24:30</span>
+    <span>建议</span>
+  </div>
+  <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px;">
+    Invoker · 中路 · 推荐核心
+  </div>
+  <div class="item-chip-row">
+    <span class="item-chip" data-hot="true">Hand of Midas</span>
+    <span class="item-chip">Phase Boots</span>
+    <span class="item-chip">Aghs Scepter</span>
+    <span class="item-chip">Octarine</span>
+    <span class="item-chip">Refresher</span>
+  </div>
+</div>
+
+<script>
+  // Skin toggle
+  const buttons = document.querySelectorAll('.skin-toggle button')
+  const body = document.body
+  const name = document.getElementById('skin-name')
+  const sub = document.getElementById('skin-sub')
+
+  const META = {
+    'aegis-shanghai': {
+      name: 'Aegis 上海',
+      sub: '冠军金 × 午夜蓝 · 致敬不朽盾，迎接 TI15',
+      greet: 'Path to the Aegis.',
+      sub2: '准备好下一局了吗？ · 距 TI15 开赛 73 天'
+    },
+    'trophy-forge': {
+      name: 'Trophy Forge · 锻造冠军',
+      sub: '熔金 × 火炉余烬 · 决赛日加冕款，向冠军之路致敬',
+      greet: 'Forge the Aegis.',
+      sub2: '决战已至 · 全球八强争夺最后的盾'
+    },
+    'homecoming': {
+      name: '归途 · Homecoming',
+      sub: '水墨 × 朱砂 × 暗金 · 九年一梦，盾归故里',
+      greet: '九年一梦，盾归故里。',
+      sub2: '上海 · TI15 · CN DOTA 的未完待续 (Wings 2016 → 2026)'
+    }
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.skinId
+      body.dataset.skin = id
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)))
+      const meta = META[id]
+      if (meta) {
+        name.textContent = meta.name
+        sub.textContent = meta.sub
+        document.getElementById('greet-title').textContent = meta.greet
+        document.getElementById('greet-sub').textContent = meta.sub2
+      }
+    })
+  })
+
+  // ── TI15 Countdown ──────────────────────────────────────────
+  // Target: 2026-09-15 12:00 China Standard Time (UTC+8). Date is a
+  // placeholder until Valve confirms — change `TI_TARGET` when official.
+  const TI_TARGET = new Date('2026-09-15T12:00:00+08:00').getTime()
+  const cdDays = document.getElementById('cd-days')
+  const cdHrs  = document.getElementById('cd-hrs')
+  const cdMins = document.getElementById('cd-mins')
+  const cdSecs = document.getElementById('cd-secs')
+
+  function pad(n) { return n < 10 ? '0' + n : String(n) }
+
+  function tickCountdown() {
+    const now = Date.now()
+    const diff = Math.max(0, TI_TARGET - now)
+    const d = Math.floor(diff / 86400000)
+    const h = Math.floor((diff % 86400000) / 3600000)
+    const m = Math.floor((diff % 3600000) / 60000)
+    const s = Math.floor((diff % 60000) / 1000)
+    cdDays.textContent = String(d)
+    cdHrs.textContent  = pad(h)
+    cdMins.textContent = pad(m)
+    cdSecs.textContent = pad(s)
+  }
+
+  tickCountdown()
+  setInterval(tickCountdown, 1000)
+</script>
+
+</body>
+</html>

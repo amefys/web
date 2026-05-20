@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TI15 Skin v2 · Cinematic · AMEFYS</title>
+<style>
+  :root {
+    --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Source Han Sans SC", sans-serif;
+    --font-serif: "Cormorant Garamond", "Cinzel", "Songti SC", "Source Han Serif SC", serif;
+    --color-bg: #03060F;
+    --color-bg-2: #060B1C;
+    --color-surface: rgba(14, 22, 44, 0.62);
+    --color-fill: rgba(212, 175, 55, 0.05);
+    --color-fill-secondary: rgba(212, 175, 55, 0.12);
+    --color-hairline: rgba(212, 175, 55, 0.18);
+    --color-hairline-strong: rgba(212, 175, 55, 0.32);
+    --color-text: #F2E9D2;
+    --color-text-secondary: rgba(242, 233, 210, 0.74);
+    --color-text-tertiary: rgba(242, 233, 210, 0.48);
+    --color-accent: #D4AF37;
+    --color-accent-deep: #A8841F;
+    --color-accent-glow: rgba(212, 175, 55, 0.55);
+    --color-cn: #C8102E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #000;
+    color: var(--color-text);
+    font-family: var(--font-stack);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: 56px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  }
+  .header-inner {
+    max-width: 1440px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px;
+    font-size: 13px;
+  }
+  .nav-back {
+    color: rgba(255,255,255,0.62); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px;
+  }
+  .nav-back:hover { color: var(--color-accent); }
+  .header-pill {
+    padding: 5px 14px; border-radius: 999px;
+    background: rgba(212,175,55,0.16); color: var(--color-accent);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .header-version {
+    color: rgba(255,255,255,0.62); font-size: 12px;
+  }
+
+  /* ╔════════════════════════════════════════════════════════════╗
+   * ║  HERO — full viewport with Aegis floating over Shanghai     ║
+   * ╚════════════════════════════════════════════════════════════╝ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 90%, rgba(212,175,55,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.06) 0%, transparent 60%),
+      linear-gradient(180deg, #06112A 0%, #0A1530 40%, #03060F 100%);
+  }
+
+  /* Star field (subtle) */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, #fff 0%, transparent 60%),
+      radial-gradient(1px 1px at 38% 12%, rgba(255,255,255,0.7) 0%, transparent 60%),
+      radial-gradient(1.5px 1.5px at 72% 22%, rgba(212,175,55,0.9) 0%, transparent 60%),
+      radial-gradient(1px 1px at 88% 10%, #fff 0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 22% 32%, rgba(255,255,255,0.5) 0%, transparent 60%),
+      radial-gradient(1px 1px at 56% 28%, rgba(212,175,55,0.7) 0%, transparent 60%),
+      radial-gradient(1px 1px at 92% 38%, #fff 0%, transparent 60%);
+    opacity: 0.7;
+  }
+
+  /* Shanghai night skyline at bottom */
+  .hero::after {
+    content: ""; position: absolute;
+    left: 0; right: 0; bottom: 0; height: 340px;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(8, 9, 13, 0.4) 60%, rgba(8, 9, 13, 0.95) 100%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 340' fill='%231a2540' preserveAspectRatio='xMidYEnd meet'><!-- Distant haze --><rect x='0' y='220' width='1600' height='120' fill-opacity='0.4'/><!-- Pudong skyline detailed --><!-- Oriental Pearl Tower --><path d='M180 340 L180 100 L184 100 L184 80 L188 80 L188 70 L184 60 L186 50 L188 40 L184 32 L196 26 L204 32 L200 40 L202 50 L204 60 L200 70 L208 70 L208 80 L212 80 L212 100 L216 100 L216 340 Z' fill='%23253659'/><circle cx='198' cy='90' r='14' fill='%23253659'/><circle cx='198' cy='42' r='7' fill='%23253659'/><!-- Window lights on Pearl Tower --><circle cx='198' cy='90' r='2' fill='%23FFD700' opacity='0.85'/><circle cx='198' cy='42' r='1.5' fill='%23FFD700' opacity='0.9'/><circle cx='198' cy='20' r='1' fill='%23C8102E' opacity='1'/><!-- Jin Mao Tower (tiered) --><path d='M320 340 L320 110 L324 110 L324 100 L328 100 L328 90 L332 90 L332 80 L338 80 L338 70 L342 70 L342 80 L348 80 L348 90 L352 90 L352 100 L356 100 L356 110 L360 110 L360 340 Z' fill='%231f3055'/><!-- World Financial Center --><path d='M420 340 L420 90 L424 90 L424 70 L432 70 L432 55 L440 55 L440 48 L450 48 L450 55 L458 55 L458 70 L466 70 L466 90 L470 90 L470 340 Z M438 55 L452 55 L452 65 L438 65 Z' fill='%231a2c50'/><!-- Shanghai Tower (twisted spire) --><path d='M540 340 L540 100 L545 100 L548 70 L552 50 L555 30 L558 50 L562 70 L565 100 L570 100 L570 340 Z' fill='%23253659'/><circle cx='555' cy='28' r='2' fill='%23FFD700' opacity='0.9'/><!-- Generic Pudong towers --><path d='M620 340 L620 150 L626 150 L626 130 L640 130 L640 110 L650 110 L650 130 L664 130 L664 150 L670 150 L670 340 Z' fill='%23192340'/><path d='M700 340 L700 180 L720 180 L720 150 L740 150 L740 120 L745 110 L745 120 L760 120 L760 150 L780 150 L780 180 L800 180 L800 340 Z' fill='%231a2540'/><!-- Bund row (Art Deco classic buildings) --><path d='M860 340 L860 200 L880 200 L880 180 L900 180 L900 200 L920 200 L920 340 Z' fill='%23253659'/><path d='M940 340 L940 190 L960 190 L960 170 L980 170 L980 190 L1000 190 L1000 340 Z' fill='%231f3055'/><path d='M1020 340 L1020 195 L1035 195 L1035 170 L1055 170 L1055 155 L1065 155 L1065 170 L1085 170 L1085 195 L1100 195 L1100 340 Z' fill='%23253659'/><path d='M1120 340 L1120 205 L1140 205 L1140 185 L1160 185 L1160 205 L1180 205 L1180 340 Z' fill='%231a2540'/><path d='M1200 340 L1200 195 L1220 195 L1220 175 L1240 175 L1240 195 L1260 195 L1260 340 Z' fill='%23192340'/><path d='M1280 340 L1280 220 L1300 220 L1300 200 L1320 200 L1320 220 L1340 220 L1340 220 L1360 220 L1360 200 L1380 200 L1380 220 L1400 220 L1400 340 Z' fill='%23253659'/><!-- Window light dots (random sparse) --><circle cx='340' cy='180' r='1' fill='%23FFD700' opacity='0.6'/><circle cx='344' cy='200' r='1' fill='%23FFD700' opacity='0.5'/><circle cx='438' cy='160' r='1' fill='%23FFD700' opacity='0.7'/><circle cx='450' cy='220' r='1' fill='%23FFD700' opacity='0.7'/><circle cx='550' cy='180' r='1' fill='%23FFD700' opacity='0.8'/><circle cx='560' cy='240' r='1' fill='%23FFD700' opacity='0.5'/><circle cx='708' cy='220' r='1' fill='%23FFD700' opacity='0.6'/><circle cx='748' cy='200' r='1' fill='%23FFD700' opacity='0.7'/><circle cx='870' cy='240' r='1' fill='%23FFD700' opacity='0.6'/><circle cx='962' cy='220' r='1' fill='%23FFD700' opacity='0.7'/><circle cx='1040' cy='220' r='1' fill='%23FFD700' opacity='0.55'/><circle cx='1180' cy='250' r='1' fill='%23FFD700' opacity='0.5'/><circle cx='1280' cy='240' r='1' fill='%23FFD700' opacity='0.6'/></svg>") no-repeat center bottom / 1600px 340px;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1440px; margin: 0 auto;
+    padding: 100px 32px 360px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Eyebrow */
+  .hero-eyebrow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px;
+    font-size: 12px; font-weight: 700; letter-spacing: 3px;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+  .hero-eyebrow .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 0 var(--color-accent-glow);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+    100% { box-shadow: 0 0 0 18px transparent; }
+  }
+  .hero-eyebrow .dash {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  }
+
+  /* Giant Aegis floating above the Bund */
+  .hero-aegis {
+    width: 280px; height: 340px;
+    margin: 0 auto;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160' fill='none' stroke='%23D4AF37' stroke-width='0.7' stroke-opacity='1'><defs><linearGradient id='aegisG' x1='0%25' y1='0%25' x2='0%25' y2='100%25'><stop offset='0%25' stop-color='%23F4E29A' stop-opacity='1'/><stop offset='50%25' stop-color='%23D4AF37' stop-opacity='1'/><stop offset='100%25' stop-color='%23A8841F' stop-opacity='0.9'/></linearGradient><radialGradient id='gemG' cx='50%25' cy='50%25'><stop offset='0%25' stop-color='%23ffffff' stop-opacity='0.95'/><stop offset='60%25' stop-color='%23D4AF37' stop-opacity='0.7'/><stop offset='100%25' stop-color='%23A8841F' stop-opacity='0.3'/></radialGradient></defs><!-- Outer shield (gradient fill) --><path d='M60 4 L110 26 L110 86 Q110 124 60 156 Q10 124 10 86 L10 26 Z' fill='url(%23aegisG)' fill-opacity='0.25'/><path d='M60 4 L110 26 L110 86 Q110 124 60 156 Q10 124 10 86 L10 26 Z'/><!-- Mid shield --><path d='M60 16 L98 34 L98 84 Q98 116 60 144 Q22 116 22 84 L22 34 Z' fill='url(%23aegisG)' fill-opacity='0.15'/><path d='M60 16 L98 34 L98 84 Q98 116 60 144 Q22 116 22 84 L22 34 Z'/><!-- Inner shield --><path d='M60 30 L88 42 L88 82 Q88 108 60 132 Q32 108 32 82 L32 42 Z' fill='url(%23aegisG)' fill-opacity='0.20'/><path d='M60 30 L88 42 L88 82 Q88 108 60 132 Q32 108 32 82 L32 42 Z'/><!-- Crown --><path d='M48 4 L48 -6 L54 0 L60 -6 L66 0 L72 -6 L72 4'/><!-- Side wings --><path d='M22 60 L8 50 L4 38 L18 46 Z' fill='url(%23aegisG)' fill-opacity='0.30'/><path d='M22 60 L8 50 L4 38 L18 46 Z'/><path d='M98 60 L112 50 L116 38 L102 46 Z' fill='url(%23aegisG)' fill-opacity='0.30'/><path d='M98 60 L112 50 L116 38 L102 46 Z'/><!-- Center diamond --><path d='M60 60 L80 80 L60 100 L40 80 Z' fill='url(%23aegisG)' fill-opacity='0.40'/><path d='M60 60 L80 80 L60 100 L40 80 Z'/><!-- Inner gem --><circle cx='60' cy='80' r='11' fill='url(%23gemG)'/><circle cx='60' cy='80' r='11'/><circle cx='60' cy='80' r='4' fill='%23ffffff' fill-opacity='0.9'/><!-- TI15 embossed --><text x='60' y='49' font-family='Cinzel, Times, serif' font-size='10' font-weight='800' fill='%23D4AF37' text-anchor='middle' stroke='%23D4AF37' stroke-width='0.25' letter-spacing='0.5'>TI15</text><!-- Engraved laurels --><path d='M28 122 Q44 134 60 138 Q76 134 92 122' stroke-width='0.5'/><path d='M38 132 Q49 140 60 142 Q71 140 82 132' stroke-width='0.5'/><!-- Decorative rivets --><circle cx='30' cy='40' r='1.4' fill='%23D4AF37'/><circle cx='90' cy='40' r='1.4' fill='%23D4AF37'/><circle cx='38' cy='115' r='1.4' fill='%23D4AF37'/><circle cx='82' cy='115' r='1.4' fill='%23D4AF37'/></svg>") no-repeat center / contain;
+    filter:
+      drop-shadow(0 0 60px rgba(212, 175, 55, 0.50))
+      drop-shadow(0 0 20px rgba(212, 175, 55, 0.85))
+      drop-shadow(0 12px 32px rgba(0,0,0,0.65));
+    animation: aegis-float 6s ease-in-out infinite;
+  }
+  @keyframes aegis-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-aegis { animation: none; }
+  }
+
+  /* Hero title */
+  .hero-title-block { text-align: center; max-width: 920px; margin: 0 auto; }
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: 76px; font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.05;
+    margin-bottom: 14px;
+    background: linear-gradient(180deg, #F4E29A 0%, #D4AF37 60%, #A8841F 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 4px 24px rgba(212, 175, 55, 0.30));
+  }
+  .hero-subtitle {
+    font-size: 16px; color: var(--color-text-secondary);
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .hero-meta {
+    font-size: 13px; color: var(--color-text-tertiary);
+    letter-spacing: 0.4px;
+  }
+  .hero-meta strong { color: var(--color-accent); font-weight: 700; }
+
+  /* Countdown — cinematic */
+  .hero-countdown {
+    display: flex; justify-content: center; align-items: flex-start;
+    gap: 36px;
+    margin-top: 12px;
+  }
+  .cd-cell {
+    text-align: center; min-width: 90px;
+  }
+  .cd-num {
+    font-family: var(--font-serif);
+    font-size: 80px; font-weight: 800; line-height: 1;
+    letter-spacing: -2px;
+    color: #F4E29A;
+    text-shadow: 0 0 32px rgba(212, 175, 55, 0.50), 0 4px 16px rgba(0,0,0,0.7);
+    font-variant-numeric: tabular-nums;
+  }
+  .cd-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 2.5px;
+    font-weight: 700; color: var(--color-text-tertiary);
+    margin-top: 10px;
+  }
+  .cd-sep {
+    font-family: var(--font-serif);
+    font-size: 52px; color: var(--color-accent);
+    opacity: 0.4; padding-top: 14px;
+  }
+  @keyframes seconds-tick { 0% { transform: scale(1); } 30% { transform: scale(1.06); } 100% { transform: scale(1); } }
+  #cd-secs { animation: seconds-tick 1s ease-in-out infinite; transform-origin: center; display: inline-block; }
+  @media (prefers-reduced-motion: reduce) {
+    #cd-secs { animation: none; }
+  }
+
+  /* CTA row */
+  .hero-cta-row {
+    display: flex; justify-content: center; gap: 12px;
+    margin-top: 6px;
+  }
+  .hero-cta {
+    appearance: none; border: 0; cursor: pointer; font: inherit;
+    padding: 14px 28px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.4px;
+    transition: transform 150ms;
+  }
+  .hero-cta:hover { transform: translateY(-2px); }
+  .hero-cta.primary {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-deep));
+    color: #1A1308;
+    box-shadow: 0 6px 24px rgba(212, 175, 55, 0.45), 0 0 0 1px rgba(212,175,55,0.45);
+  }
+  .hero-cta.ghost {
+    background: rgba(255,255,255,0.04);
+    color: var(--color-text);
+    border: 0.5px solid rgba(255,255,255,0.16);
+    backdrop-filter: blur(12px);
+  }
+
+  /* ╔════════════════════════════════════════════════════════════╗
+   * ║  SECTION 2 — Matches & Bracket                              ║
+   * ╚════════════════════════════════════════════════════════════╝ */
+  .section {
+    position: relative; padding: 80px 32px;
+    max-width: 1440px; margin: 0 auto;
+  }
+  .section-eyebrow {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 2.5px;
+    font-weight: 700; color: var(--color-accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 44px; font-weight: 800; letter-spacing: 0.3px;
+    margin-bottom: 32px;
+    background: linear-gradient(180deg, #F4E29A 0%, #D4AF37 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .feature-matches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .feat-match {
+    background:
+      linear-gradient(180deg, rgba(20, 34, 74, 0.78) 0%, rgba(10, 17, 38, 0.65) 100%);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: 18px;
+    padding: 28px;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(16px);
+    transition: transform 220ms, border-color 220ms;
+  }
+  .feat-match:hover { transform: translateY(-4px); border-color: var(--color-hairline-strong); }
+  .feat-match.cn {
+    background:
+      linear-gradient(180deg, rgba(200, 16, 46, 0.10), transparent 30%),
+      linear-gradient(180deg, rgba(20, 34, 74, 0.78) 0%, rgba(10, 17, 38, 0.65) 100%);
+    border: 0.5px solid transparent;
+    background-clip: padding-box;
+    box-shadow:
+      0 0 0 1px transparent,
+      0 12px 32px -16px rgba(212, 175, 55, 0.32);
+  }
+  .feat-match.cn::before {
+    content: ""; position: absolute; inset: 0;
+    border-radius: 18px; padding: 1px;
+    background: linear-gradient(135deg, #C8102E 0%, #FFD700 50%, #C8102E 100%);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  .feat-match.cn::after {
+    content: "中"; position: absolute; top: 16px; right: 16px;
+    font-family: var(--font-serif);
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #C8102E, #6B0E1C);
+    color: #FFD700; font-weight: 800; font-size: 16px;
+    display: grid; place-items: center;
+    box-shadow: 0 0 12px rgba(200, 16, 46, 0.55);
+  }
+  .feat-match-time {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--color-accent); font-weight: 700; margin-bottom: 18px;
+    font-variant-numeric: tabular-nums;
+  }
+  .feat-match-faceoff {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .feat-team {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    text-align: center; gap: 10px;
+  }
+  .feat-team-logo {
+    width: 64px; height: 64px; border-radius: 12px;
+    display: grid; place-items: center;
+    font-family: var(--font-serif); font-size: 28px; font-weight: 800;
+    color: #fff;
+    box-shadow: 0 8px 20px -4px rgba(0,0,0,0.6);
+  }
+  .feat-team-name {
+    font-size: 18px; font-weight: 800; letter-spacing: 0.3px;
+    color: var(--color-text);
+  }
+  .feat-team-meta {
+    font-size: 11px; color: var(--color-text-tertiary);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .feat-vs {
+    font-family: var(--font-serif);
+    font-size: 28px; font-weight: 800; letter-spacing: 1.5px;
+    color: var(--color-accent);
+    opacity: 0.55;
+  }
+  .feat-match-stage {
+    border-top: 0.5px solid var(--color-hairline);
+    padding-top: 14px;
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--color-text-tertiary);
+  }
+  .feat-match-bo {
+    background: rgba(212,175,55,0.16);
+    color: var(--color-accent);
+    padding: 2px 8px; border-radius: 4px;
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.6px;
+  }
+
+  /* Team logo colors */
+  .lg-lgd     { background: linear-gradient(135deg, #C8102E, #2A0008); }
+  .lg-xg      { background: linear-gradient(135deg, #FFD700, #8B6F1F); color: #1A1308; }
+  .lg-aster   { background: linear-gradient(135deg, #2E3A8C, #6B7CFF); }
+  .lg-tundra  { background: linear-gradient(135deg, #5A5A5A, #1A1A1A); }
+  .lg-liquid  { background: linear-gradient(135deg, #0E97D8, #0D2B5A); }
+  .lg-falcons { background: linear-gradient(135deg, #34D399, #064E3B); }
+  .lg-gg      { background: linear-gradient(135deg, #8B5CF6, #4C1D95); }
+  .lg-spirit  { background: linear-gradient(135deg, #D9534F, #1A0809); }
+
+  /* Bracket section */
+  .bracket-bg {
+    background: linear-gradient(180deg, transparent 0%, rgba(8,10,18,0.6) 100%);
+    border-top: 0.5px solid rgba(212,175,55,0.10);
+  }
+  .bracket {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+  .bracket-col {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .bracket-col-head {
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.8px;
+    font-weight: 700; color: var(--color-accent);
+    text-align: center; margin-bottom: 4px;
+  }
+  .br-match {
+    background: rgba(14,22,44,0.6);
+    border: 0.5px solid var(--color-hairline);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .br-match.cn-w {
+    border-color: rgba(255,215,0,0.32);
+    background: linear-gradient(90deg, rgba(200,16,46,0.10) 0%, rgba(14,22,44,0.6) 60%);
+  }
+  .br-team {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4px 0;
+  }
+  .br-team.winner { color: var(--color-accent); font-weight: 700; }
+  .br-team.winner .br-score { color: var(--color-accent); }
+  .br-team .br-name { display: flex; align-items: center; gap: 8px; }
+  .br-mini-logo {
+    width: 20px; height: 20px; border-radius: 4px;
+    display: grid; place-items: center;
+    font-size: 10px; font-weight: 800; color: #fff;
+  }
+  .br-score { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--color-text-secondary); }
+  .br-trophy {
+    text-align: center; padding: 24px 16px;
+    background: linear-gradient(180deg, rgba(212,175,55,0.18) 0%, rgba(168,132,31,0.06) 100%);
+    border: 0.5px solid rgba(212,175,55,0.40);
+    border-radius: 12px;
+  }
+  .br-trophy-title {
+    font-family: var(--font-serif);
+    font-size: 14px; font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+    letter-spacing: 1.2px;
+  }
+  .br-trophy-mini {
+    width: 56px; height: 70px;
+    margin: 0 auto 8px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160' fill='%23D4AF37' fill-opacity='0.85' stroke='%23F4E29A' stroke-width='0.8'><path d='M60 4 L108 26 L108 86 Q108 124 60 154 Q12 124 12 88 L12 26 Z'/><circle cx='60' cy='78' r='12' fill='%23F4E29A'/><circle cx='60' cy='78' r='4' fill='%23ffffff'/></svg>") no-repeat center / contain;
+    filter: drop-shadow(0 0 16px rgba(212,175,55,0.7));
+  }
+  .br-trophy-cta {
+    font-size: 11px; color: var(--color-text-secondary);
+    letter-spacing: 0.4px;
+  }
+
+  /* Section divider with motto */
+  .motto {
+    text-align: center; padding: 60px 32px;
+    font-family: var(--font-serif);
+    font-size: 20px; color: var(--color-text-tertiary);
+    letter-spacing: 2px;
+    border-top: 0.5px solid rgba(212,175,55,0.10);
+    border-bottom: 0.5px solid rgba(212,175,55,0.10);
+    background:
+      radial-gradient(ellipse 60% 100% at 50% 50%, rgba(212,175,55,0.06) 0%, transparent 70%),
+      linear-gradient(180deg, #03060F 0%, #060B1C 100%);
+  }
+  .motto .pinyin { font-size: 12px; color: var(--color-text-tertiary); opacity: 0.6; letter-spacing: 3px; margin-top: 8px; }
+  .motto .accent { color: var(--color-accent); }
+
+  /* Footer disclaimer */
+  .footer {
+    padding: 32px; text-align: center;
+    font-size: 11px; color: var(--color-text-tertiary);
+    background: #000;
+    border-top: 0.5px solid rgba(255,255,255,0.06);
+  }
+  .footer a { color: var(--color-accent); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-title { font-size: 48px; }
+    .cd-num { font-size: 56px; }
+    .cd-sep { font-size: 36px; }
+    .hero-aegis { width: 200px; height: 240px; }
+    .feature-matches { grid-template-columns: 1fr; }
+    .bracket { grid-template-columns: 1fr; }
+    .section { padding: 48px 20px; }
+    .section-title { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <span style="font-size: 11.5px; color: rgba(255,255,255,0.62);">
+      <a class="nav-back" href="ti15-skin-preview.html">v1 Dashboard</a>
+      · <strong style="color: #D4AF37;">v2 Cinematic</strong>
+      · <a class="nav-back" href="ti15-skin-preview-v3.html">v3 Live Center</a>
+    </span>
+    <span class="header-pill">v2 · Cinematic</span>
+    <span class="header-version">AMEFYS · TI15 Skin Preview</span>
+  </div>
+</header>
+
+<!-- ╔═════════════════════════════════════════════════════════════╗
+     ║  HERO                                                        ║
+     ╚═════════════════════════════════════════════════════════════╝ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dash"></span>
+      <span class="pulse"></span>
+      THE INTERNATIONAL 15 · 上海
+      <span class="pulse"></span>
+      <span class="dash"></span>
+    </div>
+
+    <div class="hero-aegis" aria-hidden="true"></div>
+
+    <div class="hero-title-block">
+      <h1 class="hero-title">六年再聚 · 上海</h1>
+      <p class="hero-subtitle">梅赛德斯-奔驰文化中心 · 2026 年 9 月</p>
+      <p class="hero-meta">距 Wings Gaming 捧盾 <strong>九年</strong> · 一切重新开始</p>
+    </div>
+
+    <div class="hero-countdown" aria-live="off">
+      <div class="cd-cell"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DAYS</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-cell"><div class="cd-num" id="cd-hrs">--</div><div class="cd-label">HOURS</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-cell"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">MINUTES</div></div>
+      <div class="cd-sep">·</div>
+      <div class="cd-cell"><div class="cd-num"><span id="cd-secs">--</span></div><div class="cd-label">SECONDS</div></div>
+    </div>
+
+    <div class="hero-cta-row">
+      <button type="button" class="hero-cta primary">应用此皮肤 →</button>
+      <button type="button" class="hero-cta ghost">查看完整赛程</button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔═════════════════════════════════════════════════════════════╗
+     ║  FEATURED MATCHES                                            ║
+     ╚═════════════════════════════════════════════════════════════╝ -->
+<section class="section">
+  <div class="section-eyebrow">今晚焦点 · TONIGHT'S MARQUEE</div>
+  <h2 class="section-title">主舞台对决</h2>
+
+  <div class="feature-matches">
+    <article class="feat-match cn">
+      <div class="feat-match-time">20:00 CST · 主舞台</div>
+      <div class="feat-match-faceoff">
+        <div class="feat-team">
+          <div class="feat-team-logo lg-lgd">L</div>
+          <div class="feat-team-name">PSG.LGD</div>
+          <div class="feat-team-meta">CHINA · 4 届 TI 亚军</div>
+        </div>
+        <div class="feat-vs">VS</div>
+        <div class="feat-team">
+          <div class="feat-team-logo lg-tundra">T</div>
+          <div class="feat-team-name">Tundra Esports</div>
+          <div class="feat-team-meta">WEU · TI11 冠军</div>
+        </div>
+      </div>
+      <div class="feat-match-stage">
+        <span>小组赛 · 上半区</span>
+        <span class="feat-match-bo">BO3</span>
+      </div>
+    </article>
+
+    <article class="feat-match cn">
+      <div class="feat-match-time">22:30 CST · 主舞台</div>
+      <div class="feat-match-faceoff">
+        <div class="feat-team">
+          <div class="feat-team-logo lg-xg">X</div>
+          <div class="feat-team-name">Xtreme Gaming</div>
+          <div class="feat-team-meta">CHINA · TI12 亚军</div>
+        </div>
+        <div class="feat-vs">VS</div>
+        <div class="feat-team">
+          <div class="feat-team-logo lg-liquid">L</div>
+          <div class="feat-team-name">Team Liquid</div>
+          <div class="feat-team-meta">EU · 季军候选</div>
+        </div>
+      </div>
+      <div class="feat-match-stage">
+        <span>小组赛 · 下半区</span>
+        <span class="feat-match-bo">BO3</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ╔═════════════════════════════════════════════════════════════╗
+     ║  BRACKET                                                     ║
+     ╚═════════════════════════════════════════════════════════════╝ -->
+<section class="section bracket-bg">
+  <div class="section-eyebrow">淘汰赛对阵 · UPPER BRACKET</div>
+  <h2 class="section-title">通往不朽盾的八支队伍</h2>
+
+  <div class="bracket">
+    <div class="bracket-col">
+      <div class="bracket-col-head">QUARTERFINALS</div>
+      <div class="br-match cn-w">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-lgd">L</span>PSG.LGD</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-tundra">T</span>Tundra</span><span class="br-score">1</span></div>
+      </div>
+      <div class="br-match">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-gg">G</span>Gaimin</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-falcons">F</span>Falcons</span><span class="br-score">0</span></div>
+      </div>
+      <div class="br-match cn-w">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-xg">X</span>XG</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-liquid">L</span>Liquid</span><span class="br-score">1</span></div>
+      </div>
+      <div class="br-match cn-w">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-aster">A</span>Aster</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-spirit">S</span>Spirit</span><span class="br-score">0</span></div>
+      </div>
+    </div>
+
+    <div class="bracket-col">
+      <div class="bracket-col-head">SEMIFINALS</div>
+      <div class="br-match cn-w">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-lgd">L</span>PSG.LGD</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-gg">G</span>Gaimin</span><span class="br-score">0</span></div>
+      </div>
+      <div class="br-match cn-w">
+        <div class="br-team winner"><span class="br-name"><span class="br-mini-logo lg-xg">X</span>XG</span><span class="br-score">2</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-aster">A</span>Aster</span><span class="br-score">1</span></div>
+      </div>
+    </div>
+
+    <div class="bracket-col">
+      <div class="bracket-col-head">GRAND FINAL</div>
+      <div class="br-match cn-w">
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-lgd">L</span>PSG.LGD</span><span class="br-score">·</span></div>
+        <div class="br-team"><span class="br-name"><span class="br-mini-logo lg-xg">X</span>XG</span><span class="br-score">·</span></div>
+      </div>
+      <div style="text-align: center; font-size: 11px; color: var(--color-text-tertiary); padding: 8px 0; letter-spacing: 1px;">
+        CHINA × CHINA · 决战日
+      </div>
+    </div>
+
+    <div class="bracket-col">
+      <div class="bracket-col-head">AEGIS</div>
+      <div class="br-trophy">
+        <div class="br-trophy-mini" aria-hidden="true"></div>
+        <div class="br-trophy-title">CHAMPION</div>
+        <div class="br-trophy-cta">归 · 故里</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="motto">
+  「<span class="accent">九年一梦，盾归故里</span>」
+  <div class="pinyin">SINCE WINGS · 2016 · 2026</div>
+</div>
+
+<footer class="footer">
+  AMEFYS · v0.5.0 · 与 Valve / DOTA 2 / 国际邀请赛无任何官方关联。所有视觉为社区致敬作品。<br>
+  · <a href="ti15-skin-preview.html">查看 v1 Dashboard 风格</a> ·
+</footer>
+
+<script>
+  // TI15 Countdown
+  const TI_TARGET = new Date('2026-09-15T12:00:00+08:00').getTime()
+  const cdDays = document.getElementById('cd-days')
+  const cdHrs  = document.getElementById('cd-hrs')
+  const cdMins = document.getElementById('cd-mins')
+  const cdSecs = document.getElementById('cd-secs')
+
+  function pad(n) { return n < 10 ? '0' + n : String(n) }
+
+  function tick() {
+    const diff = Math.max(0, TI_TARGET - Date.now())
+    const d = Math.floor(diff / 86400000)
+    const h = Math.floor((diff % 86400000) / 3600000)
+    const m = Math.floor((diff % 3600000) / 60000)
+    const s = Math.floor((diff % 60000) / 1000)
+    cdDays.textContent = String(d)
+    cdHrs.textContent  = pad(h)
+    cdMins.textContent = pad(m)
+    cdSecs.textContent = pad(s)
+  }
+
+  tick()
+  setInterval(tick, 1000)
+</script>
+
+</body>
+</html>
