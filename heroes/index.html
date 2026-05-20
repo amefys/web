@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DOTA 2 英雄出装攻略 · AMEFYS 实时助手</title>
+<meta name="description" content="127 名 DOTA 2 英雄的出装推荐、定位分析。AMEFYS 实时辅助工具，免费下载。">
+<link rel="canonical" href="https://amefys.com/heroes/">
+<meta property="og:title" content="DOTA 2 英雄出装攻略 · AMEFYS 实时助手">
+<meta property="og:description" content="127 名 DOTA 2 英雄的出装推荐、定位分析。AMEFYS 实时辅助工具，免费下载。">
+<meta property="og:url" content="https://amefys.com/heroes/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+
+<style>
+  :root {
+    --bg: #08090d; --bg-2: #0e1016; --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08); --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62); --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA; --emerald: #34D399; --radiant: #3DBE8A; --dire: #D9534F;
+    --r-md: 12px; --r-lg: 18px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--violet); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 24px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav-inner a { color: var(--text-2); }
+  .nav-inner a:hover { color: var(--text); text-decoration: none; }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--text) !important; font-weight: 600; }
+  .brand img { width: 20px; height: 20px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 96px; }
+  h1 { font-size: 32px; letter-spacing: -0.5px; margin: 0 0 6px; }
+  h2 { font-size: 20px; margin: 32px 0 12px; letter-spacing: -0.2px; }
+  .tagline { color: var(--text-2); margin: 0 0 24px; font-size: 15px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin: 20px 0 8px; }
+  .meta-cell { background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); padding: 12px 14px; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 4px; }
+  .meta-value { font-size: 16px; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px;
+    background: rgba(167,139,250,0.16); color: var(--violet);
+    font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .pill-warn { background: rgba(240,162,60,0.18); color: #f0a23c; }
+  .pill-radiant { background: rgba(61,190,138,0.18); color: var(--radiant); }
+  .pill-dire { background: rgba(217,83,79,0.18); color: var(--dire); }
+  .table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+  .table th, .table td { text-align: left; padding: 10px 12px;
+    border-bottom: 0.5px solid var(--hairline); font-size: 14px; }
+  .table th { color: var(--text-3); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.5px; font-weight: 700; }
+  .grid-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px; padding: 0; list-style: none; }
+  .grid-list a { display: block; padding: 10px 12px; background: var(--surface);
+    border: 0.5px solid var(--hairline); border-radius: var(--r-md);
+    color: var(--text); font-size: 14px; }
+  .grid-list a:hover { background: rgba(167,139,250,0.10); border-color: rgba(167,139,250,0.30); text-decoration: none; }
+  .cta { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+    background: linear-gradient(135deg, var(--emerald), #10B981); color: #062;
+    border-radius: 24px; font-weight: 700; font-size: 14px; margin: 24px 0 8px;
+    box-shadow: 0 0 0 3px rgba(52,211,153,0.16); }
+  .cta:hover { text-decoration: none; }
+  .breadcrumb { font-size: 12.5px; color: var(--text-3); margin-bottom: 14px; }
+  .breadcrumb a { color: var(--text-2); }
+  .disclaimer { font-size: 12px; color: var(--text-3); margin-top: 48px;
+    border-top: 0.5px solid var(--hairline); padding-top: 16px; }
+</style>
+
+</head><body>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="/"><img src="/assets/icon.svg" alt="" />AMEFYS</a>
+  <a href="/heroes/">英雄</a>
+  <a href="/items/">装备</a>
+  <a href="/packs/">回复包</a>
+  <a href="/about.html">关于</a>
+</div></nav>
+<main class="wrap">
+
+<div class="breadcrumb"><a href="/">首页</a> · 英雄列表</div>
+<h1>DOTA 2 英雄出装攻略</h1>
+<p class="tagline">127 名英雄的实时出装推荐、定位分析与 AMEFYS 助手适配。数据来源：Dota 2 官方 GSI + OpenDota 公开统计。</p>
+
+<h2>Carry（72）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/abaddon.html">Abaddon</a></li>
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/antimage.html">Anti-Mage</a></li>
+  <li><a href="/heroes/arc-warden.html">Arc Warden</a></li>
+  <li><a href="/heroes/axe.html">Axe</a></li>
+  <li><a href="/heroes/bloodseeker.html">Bloodseeker</a></li>
+  <li><a href="/heroes/brewmaster.html">Brewmaster</a></li>
+  <li><a href="/heroes/bristleback.html">Bristleback</a></li>
+  <li><a href="/heroes/broodmother.html">Broodmother</a></li>
+  <li><a href="/heroes/chaos-knight.html">Chaos Knight</a></li>
+  <li><a href="/heroes/clinkz.html">Clinkz</a></li>
+  <li><a href="/heroes/dawnbreaker.html">Dawnbreaker</a></li>
+  <li><a href="/heroes/death-prophet.html">Death Prophet</a></li>
+  <li><a href="/heroes/doom-bringer.html">Doom</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/drow-ranger.html">Drow Ranger</a></li>
+  <li><a href="/heroes/ember-spirit.html">Ember Spirit</a></li>
+  <li><a href="/heroes/faceless-void.html">Faceless Void</a></li>
+  <li><a href="/heroes/gyrocopter.html">Gyrocopter</a></li>
+  <li><a href="/heroes/huskar.html">Huskar</a></li>
+  <li><a href="/heroes/invoker.html">Invoker</a></li>
+  <li><a href="/heroes/juggernaut.html">Juggernaut</a></li>
+  <li><a href="/heroes/kez.html">Kez</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/legion-commander.html">Legion Commander</a></li>
+  <li><a href="/heroes/leshrac.html">Leshrac</a></li>
+  <li><a href="/heroes/life-stealer.html">Lifestealer</a></li>
+  <li><a href="/heroes/lina.html">Lina</a></li>
+  <li><a href="/heroes/lone-druid.html">Lone Druid</a></li>
+  <li><a href="/heroes/luna.html">Luna</a></li>
+  <li><a href="/heroes/lycan.html">Lycan</a></li>
+  <li><a href="/heroes/marci.html">Marci</a></li>
+  <li><a href="/heroes/mars.html">Mars</a></li>
+  <li><a href="/heroes/medusa.html">Medusa</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/monkey-king.html">Monkey King</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/muerta.html">Muerta</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/furion.html">Nature's Prophet</a></li>
+  <li><a href="/heroes/necrolyte.html">Necrophos</a></li>
+  <li><a href="/heroes/night-stalker.html">Night Stalker</a></li>
+  <li><a href="/heroes/obsidian-destroyer.html">Outworld Destroyer</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/phantom-assassin.html">Phantom Assassin</a></li>
+  <li><a href="/heroes/phantom-lancer.html">Phantom Lancer</a></li>
+  <li><a href="/heroes/queenofpain.html">Queen of Pain</a></li>
+  <li><a href="/heroes/razor.html">Razor</a></li>
+  <li><a href="/heroes/riki.html">Riki</a></li>
+  <li><a href="/heroes/nevermore.html">Shadow Fiend</a></li>
+  <li><a href="/heroes/silencer.html">Silencer</a></li>
+  <li><a href="/heroes/slardar.html">Slardar</a></li>
+  <li><a href="/heroes/slark.html">Slark</a></li>
+  <li><a href="/heroes/sniper.html">Sniper</a></li>
+  <li><a href="/heroes/spectre.html">Spectre</a></li>
+  <li><a href="/heroes/spirit-breaker.html">Spirit Breaker</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+  <li><a href="/heroes/templar-assassin.html">Templar Assassin</a></li>
+  <li><a href="/heroes/terrorblade.html">Terrorblade</a></li>
+  <li><a href="/heroes/tidehunter.html">Tidehunter</a></li>
+  <li><a href="/heroes/tinker.html">Tinker</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/troll-warlord.html">Troll Warlord</a></li>
+  <li><a href="/heroes/ursa.html">Ursa</a></li>
+  <li><a href="/heroes/viper.html">Viper</a></li>
+  <li><a href="/heroes/void-spirit.html">Void Spirit</a></li>
+  <li><a href="/heroes/weaver.html">Weaver</a></li>
+  <li><a href="/heroes/windrunner.html">Windranger</a></li>
+  <li><a href="/heroes/skeleton-king.html">Wraith King</a></li>
+  <li><a href="/heroes/zuus.html">Zeus</a></li>
+</ul>
+
+<h2>Support（48）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/abaddon.html">Abaddon</a></li>
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/ancient-apparition.html">Ancient Apparition</a></li>
+  <li><a href="/heroes/bane.html">Bane</a></li>
+  <li><a href="/heroes/chen.html">Chen</a></li>
+  <li><a href="/heroes/crystal-maiden.html">Crystal Maiden</a></li>
+  <li><a href="/heroes/dark-willow.html">Dark Willow</a></li>
+  <li><a href="/heroes/dazzle.html">Dazzle</a></li>
+  <li><a href="/heroes/disruptor.html">Disruptor</a></li>
+  <li><a href="/heroes/earthshaker.html">Earthshaker</a></li>
+  <li><a href="/heroes/enchantress.html">Enchantress</a></li>
+  <li><a href="/heroes/grimstroke.html">Grimstroke</a></li>
+  <li><a href="/heroes/hoodwink.html">Hoodwink</a></li>
+  <li><a href="/heroes/wisp.html">Io</a></li>
+  <li><a href="/heroes/jakiro.html">Jakiro</a></li>
+  <li><a href="/heroes/keeper-of-the-light.html">Keeper of the Light</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/largo.html">Largo</a></li>
+  <li><a href="/heroes/leshrac.html">Leshrac</a></li>
+  <li><a href="/heroes/lich.html">Lich</a></li>
+  <li><a href="/heroes/lina.html">Lina</a></li>
+  <li><a href="/heroes/lion.html">Lion</a></li>
+  <li><a href="/heroes/marci.html">Marci</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/ogre-magi.html">Ogre Magi</a></li>
+  <li><a href="/heroes/omniknight.html">Omniknight</a></li>
+  <li><a href="/heroes/oracle.html">Oracle</a></li>
+  <li><a href="/heroes/phoenix.html">Phoenix</a></li>
+  <li><a href="/heroes/ringmaster.html">Ringmaster</a></li>
+  <li><a href="/heroes/rubick.html">Rubick</a></li>
+  <li><a href="/heroes/sand-king.html">Sand King</a></li>
+  <li><a href="/heroes/shadow-demon.html">Shadow Demon</a></li>
+  <li><a href="/heroes/shadow-shaman.html">Shadow Shaman</a></li>
+  <li><a href="/heroes/silencer.html">Silencer</a></li>
+  <li><a href="/heroes/skywrath-mage.html">Skywrath Mage</a></li>
+  <li><a href="/heroes/snapfire.html">Snapfire</a></li>
+  <li><a href="/heroes/treant.html">Treant Protector</a></li>
+  <li><a href="/heroes/abyssal-underlord.html">Underlord</a></li>
+  <li><a href="/heroes/undying.html">Undying</a></li>
+  <li><a href="/heroes/vengefulspirit.html">Vengeful Spirit</a></li>
+  <li><a href="/heroes/venomancer.html">Venomancer</a></li>
+  <li><a href="/heroes/visage.html">Visage</a></li>
+  <li><a href="/heroes/warlock.html">Warlock</a></li>
+  <li><a href="/heroes/windrunner.html">Windranger</a></li>
+  <li><a href="/heroes/winter-wyvern.html">Winter Wyvern</a></li>
+  <li><a href="/heroes/witch-doctor.html">Witch Doctor</a></li>
+  <li><a href="/heroes/skeleton-king.html">Wraith King</a></li>
+</ul>
+
+<h2>Nuker（89）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/ancient-apparition.html">Ancient Apparition</a></li>
+  <li><a href="/heroes/antimage.html">Anti-Mage</a></li>
+  <li><a href="/heroes/arc-warden.html">Arc Warden</a></li>
+  <li><a href="/heroes/bane.html">Bane</a></li>
+  <li><a href="/heroes/beastmaster.html">Beastmaster</a></li>
+  <li><a href="/heroes/bloodseeker.html">Bloodseeker</a></li>
+  <li><a href="/heroes/bounty-hunter.html">Bounty Hunter</a></li>
+  <li><a href="/heroes/brewmaster.html">Brewmaster</a></li>
+  <li><a href="/heroes/bristleback.html">Bristleback</a></li>
+  <li><a href="/heroes/broodmother.html">Broodmother</a></li>
+  <li><a href="/heroes/centaur.html">Centaur Warrunner</a></li>
+  <li><a href="/heroes/rattletrap.html">Clockwerk</a></li>
+  <li><a href="/heroes/crystal-maiden.html">Crystal Maiden</a></li>
+  <li><a href="/heroes/dark-willow.html">Dark Willow</a></li>
+  <li><a href="/heroes/dazzle.html">Dazzle</a></li>
+  <li><a href="/heroes/death-prophet.html">Death Prophet</a></li>
+  <li><a href="/heroes/disruptor.html">Disruptor</a></li>
+  <li><a href="/heroes/doom-bringer.html">Doom</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/earth-spirit.html">Earth Spirit</a></li>
+  <li><a href="/heroes/earthshaker.html">Earthshaker</a></li>
+  <li><a href="/heroes/elder-titan.html">Elder Titan</a></li>
+  <li><a href="/heroes/ember-spirit.html">Ember Spirit</a></li>
+  <li><a href="/heroes/grimstroke.html">Grimstroke</a></li>
+  <li><a href="/heroes/gyrocopter.html">Gyrocopter</a></li>
+  <li><a href="/heroes/hoodwink.html">Hoodwink</a></li>
+  <li><a href="/heroes/invoker.html">Invoker</a></li>
+  <li><a href="/heroes/wisp.html">Io</a></li>
+  <li><a href="/heroes/jakiro.html">Jakiro</a></li>
+  <li><a href="/heroes/keeper-of-the-light.html">Keeper of the Light</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/legion-commander.html">Legion Commander</a></li>
+  <li><a href="/heroes/leshrac.html">Leshrac</a></li>
+  <li><a href="/heroes/lich.html">Lich</a></li>
+  <li><a href="/heroes/lina.html">Lina</a></li>
+  <li><a href="/heroes/lion.html">Lion</a></li>
+  <li><a href="/heroes/luna.html">Luna</a></li>
+  <li><a href="/heroes/magnataur.html">Magnus</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/muerta.html">Muerta</a></li>
+  <li><a href="/heroes/furion.html">Nature's Prophet</a></li>
+  <li><a href="/heroes/necrolyte.html">Necrophos</a></li>
+  <li><a href="/heroes/night-stalker.html">Night Stalker</a></li>
+  <li><a href="/heroes/nyx-assassin.html">Nyx Assassin</a></li>
+  <li><a href="/heroes/ogre-magi.html">Ogre Magi</a></li>
+  <li><a href="/heroes/omniknight.html">Omniknight</a></li>
+  <li><a href="/heroes/oracle.html">Oracle</a></li>
+  <li><a href="/heroes/obsidian-destroyer.html">Outworld Destroyer</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/phantom-lancer.html">Phantom Lancer</a></li>
+  <li><a href="/heroes/phoenix.html">Phoenix</a></li>
+  <li><a href="/heroes/puck.html">Puck</a></li>
+  <li><a href="/heroes/pudge.html">Pudge</a></li>
+  <li><a href="/heroes/pugna.html">Pugna</a></li>
+  <li><a href="/heroes/queenofpain.html">Queen of Pain</a></li>
+  <li><a href="/heroes/razor.html">Razor</a></li>
+  <li><a href="/heroes/ringmaster.html">Ringmaster</a></li>
+  <li><a href="/heroes/rubick.html">Rubick</a></li>
+  <li><a href="/heroes/sand-king.html">Sand King</a></li>
+  <li><a href="/heroes/shadow-demon.html">Shadow Demon</a></li>
+  <li><a href="/heroes/nevermore.html">Shadow Fiend</a></li>
+  <li><a href="/heroes/shadow-shaman.html">Shadow Shaman</a></li>
+  <li><a href="/heroes/silencer.html">Silencer</a></li>
+  <li><a href="/heroes/skywrath-mage.html">Skywrath Mage</a></li>
+  <li><a href="/heroes/slark.html">Slark</a></li>
+  <li><a href="/heroes/snapfire.html">Snapfire</a></li>
+  <li><a href="/heroes/sniper.html">Sniper</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+  <li><a href="/heroes/techies.html">Techies</a></li>
+  <li><a href="/heroes/terrorblade.html">Terrorblade</a></li>
+  <li><a href="/heroes/tidehunter.html">Tidehunter</a></li>
+  <li><a href="/heroes/shredder.html">Timbersaw</a></li>
+  <li><a href="/heroes/tinker.html">Tinker</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/tusk.html">Tusk</a></li>
+  <li><a href="/heroes/abyssal-underlord.html">Underlord</a></li>
+  <li><a href="/heroes/undying.html">Undying</a></li>
+  <li><a href="/heroes/vengefulspirit.html">Vengeful Spirit</a></li>
+  <li><a href="/heroes/venomancer.html">Venomancer</a></li>
+  <li><a href="/heroes/visage.html">Visage</a></li>
+  <li><a href="/heroes/void-spirit.html">Void Spirit</a></li>
+  <li><a href="/heroes/windrunner.html">Windranger</a></li>
+  <li><a href="/heroes/winter-wyvern.html">Winter Wyvern</a></li>
+  <li><a href="/heroes/witch-doctor.html">Witch Doctor</a></li>
+  <li><a href="/heroes/zuus.html">Zeus</a></li>
+</ul>
+
+<h2>Disabler（95）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/ancient-apparition.html">Ancient Apparition</a></li>
+  <li><a href="/heroes/axe.html">Axe</a></li>
+  <li><a href="/heroes/bane.html">Bane</a></li>
+  <li><a href="/heroes/batrider.html">Batrider</a></li>
+  <li><a href="/heroes/beastmaster.html">Beastmaster</a></li>
+  <li><a href="/heroes/bloodseeker.html">Bloodseeker</a></li>
+  <li><a href="/heroes/brewmaster.html">Brewmaster</a></li>
+  <li><a href="/heroes/centaur.html">Centaur Warrunner</a></li>
+  <li><a href="/heroes/chaos-knight.html">Chaos Knight</a></li>
+  <li><a href="/heroes/rattletrap.html">Clockwerk</a></li>
+  <li><a href="/heroes/crystal-maiden.html">Crystal Maiden</a></li>
+  <li><a href="/heroes/dark-seer.html">Dark Seer</a></li>
+  <li><a href="/heroes/dark-willow.html">Dark Willow</a></li>
+  <li><a href="/heroes/dazzle.html">Dazzle</a></li>
+  <li><a href="/heroes/death-prophet.html">Death Prophet</a></li>
+  <li><a href="/heroes/disruptor.html">Disruptor</a></li>
+  <li><a href="/heroes/doom-bringer.html">Doom</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/drow-ranger.html">Drow Ranger</a></li>
+  <li><a href="/heroes/earth-spirit.html">Earth Spirit</a></li>
+  <li><a href="/heroes/earthshaker.html">Earthshaker</a></li>
+  <li><a href="/heroes/elder-titan.html">Elder Titan</a></li>
+  <li><a href="/heroes/ember-spirit.html">Ember Spirit</a></li>
+  <li><a href="/heroes/enchantress.html">Enchantress</a></li>
+  <li><a href="/heroes/enigma.html">Enigma</a></li>
+  <li><a href="/heroes/faceless-void.html">Faceless Void</a></li>
+  <li><a href="/heroes/grimstroke.html">Grimstroke</a></li>
+  <li><a href="/heroes/gyrocopter.html">Gyrocopter</a></li>
+  <li><a href="/heroes/hoodwink.html">Hoodwink</a></li>
+  <li><a href="/heroes/invoker.html">Invoker</a></li>
+  <li><a href="/heroes/jakiro.html">Jakiro</a></li>
+  <li><a href="/heroes/keeper-of-the-light.html">Keeper of the Light</a></li>
+  <li><a href="/heroes/kez.html">Kez</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/largo.html">Largo</a></li>
+  <li><a href="/heroes/legion-commander.html">Legion Commander</a></li>
+  <li><a href="/heroes/leshrac.html">Leshrac</a></li>
+  <li><a href="/heroes/life-stealer.html">Lifestealer</a></li>
+  <li><a href="/heroes/lina.html">Lina</a></li>
+  <li><a href="/heroes/lion.html">Lion</a></li>
+  <li><a href="/heroes/magnataur.html">Magnus</a></li>
+  <li><a href="/heroes/marci.html">Marci</a></li>
+  <li><a href="/heroes/mars.html">Mars</a></li>
+  <li><a href="/heroes/medusa.html">Medusa</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/monkey-king.html">Monkey King</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/muerta.html">Muerta</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/necrolyte.html">Necrophos</a></li>
+  <li><a href="/heroes/night-stalker.html">Night Stalker</a></li>
+  <li><a href="/heroes/nyx-assassin.html">Nyx Assassin</a></li>
+  <li><a href="/heroes/ogre-magi.html">Ogre Magi</a></li>
+  <li><a href="/heroes/oracle.html">Oracle</a></li>
+  <li><a href="/heroes/obsidian-destroyer.html">Outworld Destroyer</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/phoenix.html">Phoenix</a></li>
+  <li><a href="/heroes/primal-beast.html">Primal Beast</a></li>
+  <li><a href="/heroes/puck.html">Puck</a></li>
+  <li><a href="/heroes/pudge.html">Pudge</a></li>
+  <li><a href="/heroes/riki.html">Riki</a></li>
+  <li><a href="/heroes/ringmaster.html">Ringmaster</a></li>
+  <li><a href="/heroes/rubick.html">Rubick</a></li>
+  <li><a href="/heroes/sand-king.html">Sand King</a></li>
+  <li><a href="/heroes/shadow-demon.html">Shadow Demon</a></li>
+  <li><a href="/heroes/shadow-shaman.html">Shadow Shaman</a></li>
+  <li><a href="/heroes/silencer.html">Silencer</a></li>
+  <li><a href="/heroes/skywrath-mage.html">Skywrath Mage</a></li>
+  <li><a href="/heroes/slardar.html">Slardar</a></li>
+  <li><a href="/heroes/slark.html">Slark</a></li>
+  <li><a href="/heroes/snapfire.html">Snapfire</a></li>
+  <li><a href="/heroes/spirit-breaker.html">Spirit Breaker</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+  <li><a href="/heroes/techies.html">Techies</a></li>
+  <li><a href="/heroes/tidehunter.html">Tidehunter</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/treant.html">Treant Protector</a></li>
+  <li><a href="/heroes/troll-warlord.html">Troll Warlord</a></li>
+  <li><a href="/heroes/tusk.html">Tusk</a></li>
+  <li><a href="/heroes/abyssal-underlord.html">Underlord</a></li>
+  <li><a href="/heroes/undying.html">Undying</a></li>
+  <li><a href="/heroes/ursa.html">Ursa</a></li>
+  <li><a href="/heroes/vengefulspirit.html">Vengeful Spirit</a></li>
+  <li><a href="/heroes/venomancer.html">Venomancer</a></li>
+  <li><a href="/heroes/viper.html">Viper</a></li>
+  <li><a href="/heroes/visage.html">Visage</a></li>
+  <li><a href="/heroes/void-spirit.html">Void Spirit</a></li>
+  <li><a href="/heroes/warlock.html">Warlock</a></li>
+  <li><a href="/heroes/windrunner.html">Windranger</a></li>
+  <li><a href="/heroes/winter-wyvern.html">Winter Wyvern</a></li>
+  <li><a href="/heroes/witch-doctor.html">Witch Doctor</a></li>
+  <li><a href="/heroes/skeleton-king.html">Wraith King</a></li>
+</ul>
+
+<h2>Initiator（55）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/axe.html">Axe</a></li>
+  <li><a href="/heroes/batrider.html">Batrider</a></li>
+  <li><a href="/heroes/beastmaster.html">Beastmaster</a></li>
+  <li><a href="/heroes/bloodseeker.html">Bloodseeker</a></li>
+  <li><a href="/heroes/brewmaster.html">Brewmaster</a></li>
+  <li><a href="/heroes/bristleback.html">Bristleback</a></li>
+  <li><a href="/heroes/centaur.html">Centaur Warrunner</a></li>
+  <li><a href="/heroes/chaos-knight.html">Chaos Knight</a></li>
+  <li><a href="/heroes/rattletrap.html">Clockwerk</a></li>
+  <li><a href="/heroes/dark-seer.html">Dark Seer</a></li>
+  <li><a href="/heroes/disruptor.html">Disruptor</a></li>
+  <li><a href="/heroes/doom-bringer.html">Doom</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/earth-spirit.html">Earth Spirit</a></li>
+  <li><a href="/heroes/earthshaker.html">Earthshaker</a></li>
+  <li><a href="/heroes/elder-titan.html">Elder Titan</a></li>
+  <li><a href="/heroes/ember-spirit.html">Ember Spirit</a></li>
+  <li><a href="/heroes/enigma.html">Enigma</a></li>
+  <li><a href="/heroes/faceless-void.html">Faceless Void</a></li>
+  <li><a href="/heroes/huskar.html">Huskar</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/legion-commander.html">Legion Commander</a></li>
+  <li><a href="/heroes/lion.html">Lion</a></li>
+  <li><a href="/heroes/magnataur.html">Magnus</a></li>
+  <li><a href="/heroes/marci.html">Marci</a></li>
+  <li><a href="/heroes/mars.html">Mars</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/monkey-king.html">Monkey King</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/night-stalker.html">Night Stalker</a></li>
+  <li><a href="/heroes/nyx-assassin.html">Nyx Assassin</a></li>
+  <li><a href="/heroes/ogre-magi.html">Ogre Magi</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/phoenix.html">Phoenix</a></li>
+  <li><a href="/heroes/primal-beast.html">Primal Beast</a></li>
+  <li><a href="/heroes/puck.html">Puck</a></li>
+  <li><a href="/heroes/pudge.html">Pudge</a></li>
+  <li><a href="/heroes/sand-king.html">Sand King</a></li>
+  <li><a href="/heroes/shadow-demon.html">Shadow Demon</a></li>
+  <li><a href="/heroes/shadow-shaman.html">Shadow Shaman</a></li>
+  <li><a href="/heroes/silencer.html">Silencer</a></li>
+  <li><a href="/heroes/slardar.html">Slardar</a></li>
+  <li><a href="/heroes/spirit-breaker.html">Spirit Breaker</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+  <li><a href="/heroes/tidehunter.html">Tidehunter</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/treant.html">Treant Protector</a></li>
+  <li><a href="/heroes/tusk.html">Tusk</a></li>
+  <li><a href="/heroes/vengefulspirit.html">Vengeful Spirit</a></li>
+  <li><a href="/heroes/venomancer.html">Venomancer</a></li>
+  <li><a href="/heroes/viper.html">Viper</a></li>
+  <li><a href="/heroes/warlock.html">Warlock</a></li>
+  <li><a href="/heroes/skeleton-king.html">Wraith King</a></li>
+</ul>
+
+<h2>Durable（50）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/abaddon.html">Abaddon</a></li>
+  <li><a href="/heroes/alchemist.html">Alchemist</a></li>
+  <li><a href="/heroes/axe.html">Axe</a></li>
+  <li><a href="/heroes/bane.html">Bane</a></li>
+  <li><a href="/heroes/beastmaster.html">Beastmaster</a></li>
+  <li><a href="/heroes/brewmaster.html">Brewmaster</a></li>
+  <li><a href="/heroes/bristleback.html">Bristleback</a></li>
+  <li><a href="/heroes/centaur.html">Centaur Warrunner</a></li>
+  <li><a href="/heroes/chaos-knight.html">Chaos Knight</a></li>
+  <li><a href="/heroes/rattletrap.html">Clockwerk</a></li>
+  <li><a href="/heroes/dawnbreaker.html">Dawnbreaker</a></li>
+  <li><a href="/heroes/doom-bringer.html">Doom</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/earth-spirit.html">Earth Spirit</a></li>
+  <li><a href="/heroes/elder-titan.html">Elder Titan</a></li>
+  <li><a href="/heroes/enchantress.html">Enchantress</a></li>
+  <li><a href="/heroes/faceless-void.html">Faceless Void</a></li>
+  <li><a href="/heroes/huskar.html">Huskar</a></li>
+  <li><a href="/heroes/kunkka.html">Kunkka</a></li>
+  <li><a href="/heroes/largo.html">Largo</a></li>
+  <li><a href="/heroes/legion-commander.html">Legion Commander</a></li>
+  <li><a href="/heroes/life-stealer.html">Lifestealer</a></li>
+  <li><a href="/heroes/lone-druid.html">Lone Druid</a></li>
+  <li><a href="/heroes/lycan.html">Lycan</a></li>
+  <li><a href="/heroes/mars.html">Mars</a></li>
+  <li><a href="/heroes/medusa.html">Medusa</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/necrolyte.html">Necrophos</a></li>
+  <li><a href="/heroes/night-stalker.html">Night Stalker</a></li>
+  <li><a href="/heroes/ogre-magi.html">Ogre Magi</a></li>
+  <li><a href="/heroes/omniknight.html">Omniknight</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/primal-beast.html">Primal Beast</a></li>
+  <li><a href="/heroes/pudge.html">Pudge</a></li>
+  <li><a href="/heroes/razor.html">Razor</a></li>
+  <li><a href="/heroes/slardar.html">Slardar</a></li>
+  <li><a href="/heroes/spectre.html">Spectre</a></li>
+  <li><a href="/heroes/spirit-breaker.html">Spirit Breaker</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+  <li><a href="/heroes/tidehunter.html">Tidehunter</a></li>
+  <li><a href="/heroes/shredder.html">Timbersaw</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/treant.html">Treant Protector</a></li>
+  <li><a href="/heroes/troll-warlord.html">Troll Warlord</a></li>
+  <li><a href="/heroes/abyssal-underlord.html">Underlord</a></li>
+  <li><a href="/heroes/undying.html">Undying</a></li>
+  <li><a href="/heroes/ursa.html">Ursa</a></li>
+  <li><a href="/heroes/viper.html">Viper</a></li>
+  <li><a href="/heroes/visage.html">Visage</a></li>
+  <li><a href="/heroes/skeleton-king.html">Wraith King</a></li>
+</ul>
+
+<h2>Escape（53）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/antimage.html">Anti-Mage</a></li>
+  <li><a href="/heroes/arc-warden.html">Arc Warden</a></li>
+  <li><a href="/heroes/batrider.html">Batrider</a></li>
+  <li><a href="/heroes/bounty-hunter.html">Bounty Hunter</a></li>
+  <li><a href="/heroes/broodmother.html">Broodmother</a></li>
+  <li><a href="/heroes/centaur.html">Centaur Warrunner</a></li>
+  <li><a href="/heroes/clinkz.html">Clinkz</a></li>
+  <li><a href="/heroes/dark-seer.html">Dark Seer</a></li>
+  <li><a href="/heroes/dark-willow.html">Dark Willow</a></li>
+  <li><a href="/heroes/earth-spirit.html">Earth Spirit</a></li>
+  <li><a href="/heroes/ember-spirit.html">Ember Spirit</a></li>
+  <li><a href="/heroes/faceless-void.html">Faceless Void</a></li>
+  <li><a href="/heroes/grimstroke.html">Grimstroke</a></li>
+  <li><a href="/heroes/hoodwink.html">Hoodwink</a></li>
+  <li><a href="/heroes/invoker.html">Invoker</a></li>
+  <li><a href="/heroes/wisp.html">Io</a></li>
+  <li><a href="/heroes/juggernaut.html">Juggernaut</a></li>
+  <li><a href="/heroes/kez.html">Kez</a></li>
+  <li><a href="/heroes/life-stealer.html">Lifestealer</a></li>
+  <li><a href="/heroes/lycan.html">Lycan</a></li>
+  <li><a href="/heroes/magnataur.html">Magnus</a></li>
+  <li><a href="/heroes/marci.html">Marci</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/monkey-king.html">Monkey King</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/furion.html">Nature's Prophet</a></li>
+  <li><a href="/heroes/nyx-assassin.html">Nyx Assassin</a></li>
+  <li><a href="/heroes/oracle.html">Oracle</a></li>
+  <li><a href="/heroes/pangolier.html">Pangolier</a></li>
+  <li><a href="/heroes/phantom-assassin.html">Phantom Assassin</a></li>
+  <li><a href="/heroes/phantom-lancer.html">Phantom Lancer</a></li>
+  <li><a href="/heroes/phoenix.html">Phoenix</a></li>
+  <li><a href="/heroes/puck.html">Puck</a></li>
+  <li><a href="/heroes/queenofpain.html">Queen of Pain</a></li>
+  <li><a href="/heroes/riki.html">Riki</a></li>
+  <li><a href="/heroes/ringmaster.html">Ringmaster</a></li>
+  <li><a href="/heroes/sand-king.html">Sand King</a></li>
+  <li><a href="/heroes/slardar.html">Slardar</a></li>
+  <li><a href="/heroes/slark.html">Slark</a></li>
+  <li><a href="/heroes/snapfire.html">Snapfire</a></li>
+  <li><a href="/heroes/spectre.html">Spectre</a></li>
+  <li><a href="/heroes/spirit-breaker.html">Spirit Breaker</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/templar-assassin.html">Templar Assassin</a></li>
+  <li><a href="/heroes/shredder.html">Timbersaw</a></li>
+  <li><a href="/heroes/treant.html">Treant Protector</a></li>
+  <li><a href="/heroes/abyssal-underlord.html">Underlord</a></li>
+  <li><a href="/heroes/vengefulspirit.html">Vengeful Spirit</a></li>
+  <li><a href="/heroes/void-spirit.html">Void Spirit</a></li>
+  <li><a href="/heroes/weaver.html">Weaver</a></li>
+  <li><a href="/heroes/windrunner.html">Windranger</a></li>
+</ul>
+
+<h2>Pusher（29）</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/broodmother.html">Broodmother</a></li>
+  <li><a href="/heroes/chaos-knight.html">Chaos Knight</a></li>
+  <li><a href="/heroes/chen.html">Chen</a></li>
+  <li><a href="/heroes/clinkz.html">Clinkz</a></li>
+  <li><a href="/heroes/death-prophet.html">Death Prophet</a></li>
+  <li><a href="/heroes/dragon-knight.html">Dragon Knight</a></li>
+  <li><a href="/heroes/drow-ranger.html">Drow Ranger</a></li>
+  <li><a href="/heroes/enchantress.html">Enchantress</a></li>
+  <li><a href="/heroes/enigma.html">Enigma</a></li>
+  <li><a href="/heroes/invoker.html">Invoker</a></li>
+  <li><a href="/heroes/jakiro.html">Jakiro</a></li>
+  <li><a href="/heroes/juggernaut.html">Juggernaut</a></li>
+  <li><a href="/heroes/leshrac.html">Leshrac</a></li>
+  <li><a href="/heroes/lone-druid.html">Lone Druid</a></li>
+  <li><a href="/heroes/luna.html">Luna</a></li>
+  <li><a href="/heroes/lycan.html">Lycan</a></li>
+  <li><a href="/heroes/meepo.html">Meepo</a></li>
+  <li><a href="/heroes/naga-siren.html">Naga Siren</a></li>
+  <li><a href="/heroes/furion.html">Nature's Prophet</a></li>
+  <li><a href="/heroes/phantom-lancer.html">Phantom Lancer</a></li>
+  <li><a href="/heroes/pugna.html">Pugna</a></li>
+  <li><a href="/heroes/razor.html">Razor</a></li>
+  <li><a href="/heroes/shadow-shaman.html">Shadow Shaman</a></li>
+  <li><a href="/heroes/terrorblade.html">Terrorblade</a></li>
+  <li><a href="/heroes/tinker.html">Tinker</a></li>
+  <li><a href="/heroes/tiny.html">Tiny</a></li>
+  <li><a href="/heroes/troll-warlord.html">Troll Warlord</a></li>
+  <li><a href="/heroes/venomancer.html">Venomancer</a></li>
+  <li><a href="/heroes/visage.html">Visage</a></li>
+</ul>
+
+<p class="disclaimer">数据快照 · 2026-05-20。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
+</main>
+</body></html>

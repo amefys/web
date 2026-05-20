@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DOTA 2 装备出装数据库 · AMEFYS</title>
+<meta name="description" content="DOTA 2 主流装备数据库，每件装备的推荐英雄、出场频率与 AMEFYS 实时关键道具提醒。">
+<link rel="canonical" href="https://amefys.com/items/">
+<meta property="og:title" content="DOTA 2 装备出装数据库 · AMEFYS">
+<meta property="og:description" content="DOTA 2 主流装备数据库，每件装备的推荐英雄、出场频率与 AMEFYS 实时关键道具提醒。">
+<meta property="og:url" content="https://amefys.com/items/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+
+<style>
+  :root {
+    --bg: #08090d; --bg-2: #0e1016; --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08); --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62); --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA; --emerald: #34D399; --radiant: #3DBE8A; --dire: #D9534F;
+    --r-md: 12px; --r-lg: 18px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--violet); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 24px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav-inner a { color: var(--text-2); }
+  .nav-inner a:hover { color: var(--text); text-decoration: none; }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--text) !important; font-weight: 600; }
+  .brand img { width: 20px; height: 20px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 96px; }
+  h1 { font-size: 32px; letter-spacing: -0.5px; margin: 0 0 6px; }
+  h2 { font-size: 20px; margin: 32px 0 12px; letter-spacing: -0.2px; }
+  .tagline { color: var(--text-2); margin: 0 0 24px; font-size: 15px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin: 20px 0 8px; }
+  .meta-cell { background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); padding: 12px 14px; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 4px; }
+  .meta-value { font-size: 16px; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px;
+    background: rgba(167,139,250,0.16); color: var(--violet);
+    font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .pill-warn { background: rgba(240,162,60,0.18); color: #f0a23c; }
+  .pill-radiant { background: rgba(61,190,138,0.18); color: var(--radiant); }
+  .pill-dire { background: rgba(217,83,79,0.18); color: var(--dire); }
+  .table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+  .table th, .table td { text-align: left; padding: 10px 12px;
+    border-bottom: 0.5px solid var(--hairline); font-size: 14px; }
+  .table th { color: var(--text-3); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.5px; font-weight: 700; }
+  .grid-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px; padding: 0; list-style: none; }
+  .grid-list a { display: block; padding: 10px 12px; background: var(--surface);
+    border: 0.5px solid var(--hairline); border-radius: var(--r-md);
+    color: var(--text); font-size: 14px; }
+  .grid-list a:hover { background: rgba(167,139,250,0.10); border-color: rgba(167,139,250,0.30); text-decoration: none; }
+  .cta { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+    background: linear-gradient(135deg, var(--emerald), #10B981); color: #062;
+    border-radius: 24px; font-weight: 700; font-size: 14px; margin: 24px 0 8px;
+    box-shadow: 0 0 0 3px rgba(52,211,153,0.16); }
+  .cta:hover { text-decoration: none; }
+  .breadcrumb { font-size: 12.5px; color: var(--text-3); margin-bottom: 14px; }
+  .breadcrumb a { color: var(--text-2); }
+  .disclaimer { font-size: 12px; color: var(--text-3); margin-top: 48px;
+    border-top: 0.5px solid var(--hairline); padding-top: 16px; }
+</style>
+
+</head><body>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="/"><img src="/assets/icon.svg" alt="" />AMEFYS</a>
+  <a href="/heroes/">英雄</a>
+  <a href="/items/">装备</a>
+  <a href="/packs/">回复包</a>
+  <a href="/about.html">关于</a>
+</div></nav>
+<main class="wrap">
+
+<div class="breadcrumb"><a href="/">首页</a> · 装备列表</div>
+<h1>DOTA 2 装备出装数据库</h1>
+<p class="tagline">167 件主流装备的推荐英雄、出场频率与 AMEFYS 实时提醒适配。数据来源：OpenDota 公开统计。</p>
+
+<h2>顶级（33）</h2>
+<ul class="grid-list">
+  <li><a href="/items/abyssal-blade.html">Abyssal Blade</a></li>
+  <li><a href="/items/aeon-disk.html">Aeon Disk</a></li>
+  <li><a href="/items/armlet.html">Armlet of Mordiggian</a></li>
+  <li><a href="/items/assault.html">Assault Cuirass</a></li>
+  <li><a href="/items/bfury.html">Battle Fury</a></li>
+  <li><a href="/items/black-king-bar.html">Black King Bar</a></li>
+  <li><a href="/items/blade-mail.html">Blade Mail</a></li>
+  <li><a href="/items/bloodstone.html">Bloodstone</a></li>
+  <li><a href="/items/bloodthorn.html">Bloodthorn</a></li>
+  <li><a href="/items/butterfly.html">Butterfly</a></li>
+  <li><a href="/items/consecrated-wraps.html">Consecrated Wraps</a></li>
+  <li><a href="/items/crellas-crozier.html">Crella's Crozier</a></li>
+  <li><a href="/items/crimson-guard.html">Crimson Guard</a></li>
+  <li><a href="/items/lesser-crit.html">Crystalys</a></li>
+  <li><a href="/items/greater-crit.html">Daedalus</a></li>
+  <li><a href="/items/rapier.html">Divine Rapier</a></li>
+  <li><a href="/items/ethereal-blade.html">Ethereal Blade</a></li>
+  <li><a href="/items/heart.html">Heart of Tarrasque</a></li>
+  <li><a href="/items/hurricane-pike.html">Hurricane Pike</a></li>
+  <li><a href="/items/kaya.html">Kaya</a></li>
+  <li><a href="/items/sphere.html">Linken's Sphere</a></li>
+  <li><a href="/items/lotus-orb.html">Lotus Orb</a></li>
+  <li><a href="/items/manta.html">Manta Style</a></li>
+  <li><a href="/items/meteor-hammer.html">Meteor Hammer</a></li>
+  <li><a href="/items/monkey-king-bar.html">Monkey King Bar</a></li>
+  <li><a href="/items/nullifier.html">Nullifier</a></li>
+  <li><a href="/items/radiance.html">Radiance</a></li>
+  <li><a href="/items/invis-sword.html">Shadow Blade</a></li>
+  <li><a href="/items/shivas-guard.html">Shiva's Guard</a></li>
+  <li><a href="/items/silver-edge.html">Silver Edge</a></li>
+  <li><a href="/items/basher.html">Skull Basher</a></li>
+  <li><a href="/items/soul-booster.html">Soul Booster</a></li>
+  <li><a href="/items/vanguard.html">Vanguard</a></li>
+</ul>
+
+<h2>高级（38）</h2>
+<ul class="grid-list">
+  <li><a href="/items/aether-lens.html">Aether Lens</a></li>
+  <li><a href="/items/ultimate-scepter-2.html">Aghanim's Blessing</a></li>
+  <li><a href="/items/ultimate-scepter.html">Aghanim's Scepter</a></li>
+  <li><a href="/items/aghanims-shard.html">Aghanim's Shard</a></li>
+  <li><a href="/items/arcane-boots.html">Arcane Boots</a></li>
+  <li><a href="/items/boots-of-bearing.html">Boots of Bearing</a></li>
+  <li><a href="/items/dagon.html">Dagon</a></li>
+  <li><a href="/items/dagon-2.html">Dagon</a></li>
+  <li><a href="/items/dagon-3.html">Dagon</a></li>
+  <li><a href="/items/dagon-4.html">Dagon</a></li>
+  <li><a href="/items/dagon-5.html">Dagon</a></li>
+  <li><a href="/items/ancient-janggo.html">Drum of Endurance</a></li>
+  <li><a href="/items/essence-distiller.html">Essence Distiller</a></li>
+  <li><a href="/items/cyclone.html">Eul's Scepter of Divinity</a></li>
+  <li><a href="/items/falcon-blade.html">Falcon Blade</a></li>
+  <li><a href="/items/force-staff.html">Force Staff</a></li>
+  <li><a href="/items/glimmer-cape.html">Glimmer Cape</a></li>
+  <li><a href="/items/guardian-greaves.html">Guardian Greaves</a></li>
+  <li><a href="/items/headdress.html">Headdress</a></li>
+  <li><a href="/items/holy-locket.html">Holy Locket</a></li>
+  <li><a href="/items/mage-slayer.html">Mage Slayer</a></li>
+  <li><a href="/items/mekansm.html">Mekansm</a></li>
+  <li><a href="/items/octarine-core.html">Octarine Core</a></li>
+  <li><a href="/items/orb-of-frost.html">Orb of Frost</a></li>
+  <li><a href="/items/orchid.html">Orchid Malevolence</a></li>
+  <li><a href="/items/devastator.html">Parasma</a></li>
+  <li><a href="/items/pavise.html">Pavise</a></li>
+  <li><a href="/items/pipe.html">Pipe of Insight</a></li>
+  <li><a href="/items/refresher.html">Refresher Orb</a></li>
+  <li><a href="/items/rod-of-atos.html">Rod of Atos</a></li>
+  <li><a href="/items/sheepstick.html">Scythe of Vyse</a></li>
+  <li><a href="/items/solar-crest.html">Solar Crest</a></li>
+  <li><a href="/items/specialists-array.html">Specialist's Array</a></li>
+  <li><a href="/items/spirit-vessel.html">Spirit Vessel</a></li>
+  <li><a href="/items/tranquil-boots.html">Tranquil Boots</a></li>
+  <li><a href="/items/urn-of-shadows.html">Urn of Shadows</a></li>
+  <li><a href="/items/veil-of-discord.html">Veil of Discord</a></li>
+  <li><a href="/items/vladmir.html">Vladmir's Offering</a></li>
+</ul>
+
+<h2>基础（15）</h2>
+<ul class="grid-list">
+  <li><a href="/items/travel-boots.html">Boots of Travel</a></li>
+  <li><a href="/items/travel-boots-2.html">Boots of Travel 2</a></li>
+  <li><a href="/items/bottle.html">Bottle</a></li>
+  <li><a href="/items/bracer.html">Bracer</a></li>
+  <li><a href="/items/hand-of-midas.html">Hand of Midas</a></li>
+  <li><a href="/items/magic-wand.html">Magic Wand</a></li>
+  <li><a href="/items/null-talisman.html">Null Talisman</a></li>
+  <li><a href="/items/oblivion-staff.html">Oblivion Staff</a></li>
+  <li><a href="/items/pers.html">Perseverance</a></li>
+  <li><a href="/items/phase-boots.html">Phase Boots</a></li>
+  <li><a href="/items/phylactery.html">Phylactery</a></li>
+  <li><a href="/items/power-treads.html">Power Treads</a></li>
+  <li><a href="/items/soul-ring.html">Soul Ring</a></li>
+  <li><a href="/items/witch-blade.html">Witch Blade</a></li>
+  <li><a href="/items/wraith-band.html">Wraith Band</a></li>
+</ul>
+
+<h2>秘密商店（12）</h2>
+<ul class="grid-list">
+  <li><a href="/items/demon-edge.html">Demon Edge</a></li>
+  <li><a href="/items/eagle.html">Eaglesong</a></li>
+  <li><a href="/items/energy-booster.html">Energy Booster</a></li>
+  <li><a href="/items/hyperstone.html">Hyperstone</a></li>
+  <li><a href="/items/mystic-staff.html">Mystic Staff</a></li>
+  <li><a href="/items/platemail.html">Platemail</a></li>
+  <li><a href="/items/point-booster.html">Point Booster</a></li>
+  <li><a href="/items/reaver.html">Reaver</a></li>
+  <li><a href="/items/relic.html">Sacred Relic</a></li>
+  <li><a href="/items/talisman-of-evasion.html">Talisman of Evasion</a></li>
+  <li><a href="/items/ultimate-orb.html">Ultimate Orb</a></li>
+  <li><a href="/items/vitality-booster.html">Vitality Booster</a></li>
+</ul>
+
+<h2>其他（2）</h2>
+<ul class="grid-list">
+  <li><a href="/items/harpoon.html">Harpoon</a></li>
+  <li><a href="/items/shadow-amulet.html">Shadow Amulet</a></li>
+</ul>
+
+<h2>神器（19）</h2>
+<ul class="grid-list">
+  <li><a href="/items/desolator.html">Desolator</a></li>
+  <li><a href="/items/diffusal-blade.html">Diffusal Blade</a></li>
+  <li><a href="/items/disperser.html">Disperser</a></li>
+  <li><a href="/items/dragon-lance.html">Dragon Lance</a></li>
+  <li><a href="/items/echo-sabre.html">Echo Sabre</a></li>
+  <li><a href="/items/skadi.html">Eye of Skadi</a></li>
+  <li><a href="/items/gungir.html">Gleipnir</a></li>
+  <li><a href="/items/heavens-halberd.html">Heaven's Halberd</a></li>
+  <li><a href="/items/helm-of-the-dominator.html">Helm of the Dominator</a></li>
+  <li><a href="/items/helm-of-the-overlord.html">Helm of the Overlord</a></li>
+  <li><a href="/items/kaya-and-sange.html">Kaya and Sange</a></li>
+  <li><a href="/items/maelstrom.html">Maelstrom</a></li>
+  <li><a href="/items/mask-of-madness.html">Mask of Madness</a></li>
+  <li><a href="/items/mjollnir.html">Mjollnir</a></li>
+  <li><a href="/items/sange.html">Sange</a></li>
+  <li><a href="/items/sange-and-yasha.html">Sange and Yasha</a></li>
+  <li><a href="/items/satanic.html">Satanic</a></li>
+  <li><a href="/items/yasha.html">Yasha</a></li>
+  <li><a href="/items/yasha-and-kaya.html">Yasha and Kaya</a></li>
+</ul>
+
+<h2>消耗品（9）</h2>
+<ul class="grid-list">
+  <li><a href="/items/blood-grenade.html">Blood Grenade</a></li>
+  <li><a href="/items/clarity.html">Clarity</a></li>
+  <li><a href="/items/enchanted-mango.html">Enchanted Mango</a></li>
+  <li><a href="/items/faerie-fire.html">Faerie Fire</a></li>
+  <li><a href="/items/branches.html">Iron Branch</a></li>
+  <li><a href="/items/ward-observer.html">Observer Ward</a></li>
+  <li><a href="/items/ward-sentry.html">Sentry Ward</a></li>
+  <li><a href="/items/smoke-of-deceit.html">Smoke of Deceit</a></li>
+  <li><a href="/items/tango.html">Tango</a></li>
+</ul>
+
+<h2>component（38）</h2>
+<ul class="grid-list">
+  <li><a href="/items/blade-of-alacrity.html">Blade of Alacrity</a></li>
+  <li><a href="/items/blades-of-attack.html">Blades of Attack</a></li>
+  <li><a href="/items/blink.html">Blink Dagger</a></li>
+  <li><a href="/items/blitz-knuckles.html">Blitz Knuckles</a></li>
+  <li><a href="/items/boots.html">Boots of Speed</a></li>
+  <li><a href="/items/broadsword.html">Broadsword</a></li>
+  <li><a href="/items/chainmail.html">Chainmail</a></li>
+  <li><a href="/items/chasm-stone.html">Chasm Stone</a></li>
+  <li><a href="/items/circlet.html">Circlet</a></li>
+  <li><a href="/items/claymore.html">Claymore</a></li>
+  <li><a href="/items/cloak.html">Cloak</a></li>
+  <li><a href="/items/diadem.html">Diadem</a></li>
+  <li><a href="/items/gauntlets.html">Gauntlets of Strength</a></li>
+  <li><a href="/items/ghost.html">Ghost Scepter</a></li>
+  <li><a href="/items/gloves.html">Gloves of Haste</a></li>
+  <li><a href="/items/helm-of-iron-will.html">Helm of Iron Will</a></li>
+  <li><a href="/items/javelin.html">Javelin</a></li>
+  <li><a href="/items/magic-stick.html">Magic Stick</a></li>
+  <li><a href="/items/mantle.html">Mantle of Intelligence</a></li>
+  <li><a href="/items/mithril-hammer.html">Mithril Hammer</a></li>
+  <li><a href="/items/lifesteal.html">Morbid Mask</a></li>
+  <li><a href="/items/ogre-axe.html">Ogre Axe</a></li>
+  <li><a href="/items/blight-stone.html">Orb of Blight</a></li>
+  <li><a href="/items/overwhelming-blink.html">Overwhelming Blink</a></li>
+  <li><a href="/items/quelling-blade.html">Quelling Blade</a></li>
+  <li><a href="/items/ring-of-health.html">Ring of Health</a></li>
+  <li><a href="/items/ring-of-protection.html">Ring of Protection</a></li>
+  <li><a href="/items/ring-of-regen.html">Ring of Regen</a></li>
+  <li><a href="/items/ring-of-tarrasque.html">Ring of Tarrasque</a></li>
+  <li><a href="/items/sobi-mask.html">Sage's Mask</a></li>
+  <li><a href="/items/slippers.html">Slippers of Agility</a></li>
+  <li><a href="/items/splintmail.html">Splintmail</a></li>
+  <li><a href="/items/staff-of-wizardry.html">Staff of Wizardry</a></li>
+  <li><a href="/items/swift-blink.html">Swift Blink</a></li>
+  <li><a href="/items/tiara-of-selemene.html">Tiara of Selemene</a></li>
+  <li><a href="/items/void-stone.html">Void Stone</a></li>
+  <li><a href="/items/voodoo-mask.html">Voodoo Mask</a></li>
+  <li><a href="/items/wind-lace.html">Wind Lace</a></li>
+</ul>
+
+<h2>consumable;laning（1）</h2>
+<ul class="grid-list">
+  <li><a href="/items/ward-dispenser.html">Observer and Sentry Wards</a></li>
+</ul>
+
+<p class="disclaimer">数据快照 · 2026-05-20。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
+</main>
+</body></html>

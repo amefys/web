@@ -1,0 +1,3439 @@
+[
+  {
+    "internalName": "item_abyssal_blade",
+    "displayName": "Abyssal Blade",
+    "cost": 6250,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_aegis",
+    "displayName": "Aegis of the Immortal",
+    "cost": 0,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_aeon_disk",
+    "displayName": "Aeon Disk",
+    "cost": 3000,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_aether_lens",
+    "displayName": "Aether Lens",
+    "cost": 2275,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_aghanims_shard",
+    "displayName": "Aghanim's Shard",
+    "cost": 1400,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_aghanims_shard_roshan",
+    "displayName": "Aghanim's Shard - Consumable",
+    "cost": 1400,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ancient_guardian",
+    "displayName": "Ancient Guardian",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ancient_janggo",
+    "displayName": "Drum of Endurance",
+    "cost": 1625,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_angels_demise",
+    "displayName": "Khanda",
+    "cost": 5600,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_apex",
+    "displayName": "Apex",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_arcane_blink",
+    "displayName": "Arcane Blink",
+    "cost": 6800,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_arcane_boots",
+    "displayName": "Arcane Boots",
+    "cost": 1500,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_arcane_ring",
+    "displayName": "Arcane Ring",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_armlet",
+    "displayName": "Armlet of Mordiggian",
+    "cost": 2500,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ascetic_cap",
+    "displayName": "Ascetic's Cap",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ash_legion_shield",
+    "displayName": "Ash Legion Shield",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_assault",
+    "displayName": "Assault Cuirass",
+    "cost": 5125,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_avianas_feather",
+    "displayName": "Aviana's Feather",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ballista",
+    "displayName": "Ballista",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_basher",
+    "displayName": "Skull Basher",
+    "cost": 2875,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_belt_of_strength",
+    "displayName": "Belt of Strength",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bfury",
+    "displayName": "Battle Fury",
+    "cost": 3900,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_black_grimoire",
+    "displayName": "Black Grimoire\\n(Warlock)",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_black_king_bar",
+    "displayName": "Black King Bar",
+    "cost": 4050,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_black_powder_bag",
+    "displayName": "Blast Rig",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blade_mail",
+    "displayName": "Blade Mail",
+    "cost": 2400,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blade_of_alacrity",
+    "displayName": "Blade of Alacrity",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blades_of_attack",
+    "displayName": "Blades of Attack",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blight_stone",
+    "displayName": "Orb of Blight",
+    "cost": 300,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blink",
+    "displayName": "Blink Dagger",
+    "cost": 2250,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blitz_knuckles",
+    "displayName": "Blitz Knuckles",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_blood_grenade",
+    "displayName": "Blood Grenade",
+    "cost": 50,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bloodstone",
+    "displayName": "Bloodstone",
+    "cost": 4700,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bloodthorn",
+    "displayName": "Bloodthorn",
+    "cost": 6400,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_book_of_shadows",
+    "displayName": "Book of Shadows",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_boots",
+    "displayName": "Boots of Speed",
+    "cost": 500,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_boots_of_bearing",
+    "displayName": "Boots of Bearing",
+    "cost": 4225,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_boots_of_elves",
+    "displayName": "Band of Elvenskin",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bottle",
+    "displayName": "Bottle",
+    "cost": 675,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bracer",
+    "displayName": "Bracer",
+    "cost": 505,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_branches",
+    "displayName": "Iron Branch",
+    "cost": 55,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_broadsword",
+    "displayName": "Broadsword",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_broom_handle",
+    "displayName": "Broom Handle",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_buckler",
+    "displayName": "Buckler",
+    "cost": 425,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_bullwhip",
+    "displayName": "Bullwhip",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_butterfly",
+    "displayName": "Butterfly",
+    "cost": 5450,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ceremonial_robe",
+    "displayName": "Ceremonial Robe",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_chainmail",
+    "displayName": "Chainmail",
+    "cost": 500,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_chasm_stone",
+    "displayName": "Chasm Stone",
+    "cost": 800,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_cheese",
+    "displayName": "Cheese",
+    "cost": 1000,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_chipped_vest",
+    "displayName": "Chipped Vest",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_circlet",
+    "displayName": "Circlet",
+    "cost": 155,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_clarity",
+    "displayName": "Clarity",
+    "cost": 60,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_claymore",
+    "displayName": "Claymore",
+    "cost": 1350,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_cloak",
+    "displayName": "Cloak",
+    "cost": 900,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_cloak_of_flames",
+    "displayName": "Cloak of Flames",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_clumsy_net",
+    "displayName": "Clumsy Net",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_conjurers_catalyst",
+    "displayName": "Conjurer's Catalyst",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_consecrated_wraps",
+    "displayName": "Consecrated Wraps",
+    "cost": 2600,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_cornucopia",
+    "displayName": "Cornucopia",
+    "cost": 1200,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_courier",
+    "displayName": "Animal Courier",
+    "cost": 50,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_craggy_coat",
+    "displayName": "Craggy Coat",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_crellas_crozier",
+    "displayName": "Crella's Crozier",
+    "cost": 4800,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_crimson_guard",
+    "displayName": "Crimson Guard",
+    "cost": 3725,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_crippling_crossbow",
+    "displayName": "Crippling Crossbow",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_crown",
+    "displayName": "Crown",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_cyclone",
+    "displayName": "Eul's Scepter of Divinity",
+    "cost": 2600,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagger_of_ristul",
+    "displayName": "Dagger of Ristul",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagon",
+    "displayName": "Dagon",
+    "cost": 3050,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagon_2",
+    "displayName": "Dagon",
+    "cost": 4200,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagon_3",
+    "displayName": "Dagon",
+    "cost": 5350,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagon_4",
+    "displayName": "Dagon",
+    "cost": 6500,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dagon_5",
+    "displayName": "Dagon",
+    "cost": 7650,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dandelion_amulet",
+    "displayName": "Dandelion Amulet",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_defiant_shell",
+    "displayName": "Defiant Shell",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_demon_edge",
+    "displayName": "Demon Edge",
+    "cost": 2200,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_demonicon",
+    "displayName": "Book of the Dead",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_desolator",
+    "displayName": "Desolator",
+    "cost": 3500,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_desolator_2",
+    "displayName": "Stygian Desolator",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_devastator",
+    "displayName": "Parasma",
+    "cost": 5975,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dezun_bloodrite",
+    "displayName": "Dezun Bloodrite",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_diadem",
+    "displayName": "Diadem",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_diffusal_blade",
+    "displayName": "Diffusal Blade",
+    "cost": 2500,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_diffusal_blade_2",
+    "displayName": "Diffusal Blade",
+    "cost": 3850,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_disperser",
+    "displayName": "Disperser",
+    "cost": 6100,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_divine_regalia",
+    "displayName": "Divine Regalia",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_divine_regalia_broken",
+    "displayName": "Disgraced Regalia",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dormant_curio",
+    "displayName": "Dormant Curio",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_doubloon",
+    "displayName": "Doubloon",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dragon_lance",
+    "displayName": "Dragon Lance",
+    "cost": 1900,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dragon_scale",
+    "displayName": "Dragon Scale",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_duelist_gloves",
+    "displayName": "Duelist Gloves",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_dust",
+    "displayName": "Dust of Appearance",
+    "cost": 80,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_eagle",
+    "displayName": "Eaglesong",
+    "cost": 2800,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_echo_sabre",
+    "displayName": "Echo Sabre",
+    "cost": 2700,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_eldwurms_edda",
+    "displayName": "Eldwurm's Edda",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_elixer",
+    "displayName": "Elixir",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_elven_tunic",
+    "displayName": "Elven Tunic",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enchanted_mango",
+    "displayName": "Enchanted Mango",
+    "cost": 65,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enchanted_quiver",
+    "displayName": "Enchanted Quiver",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enchanters_bauble",
+    "displayName": "Enchanter's Bauble",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_energy_booster",
+    "displayName": "Energy Booster",
+    "cost": 800,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_alert",
+    "displayName": "Alert",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_audacious",
+    "displayName": "Audacious",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_boundless",
+    "displayName": "Boundless",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_brawny",
+    "displayName": "Brawny",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_crude",
+    "displayName": "Crude",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_curious",
+    "displayName": "Unleashed",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_dominant",
+    "displayName": "Dominant",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_evolved",
+    "displayName": "Evolved",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_feverish",
+    "displayName": "Feverish",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_fierce",
+    "displayName": "Fierce",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_fleetfooted",
+    "displayName": "Fleetfooted",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_greedy",
+    "displayName": "Greedy",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_hulking",
+    "displayName": "Hulking",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_keen_eyed",
+    "displayName": "Keen-eyed",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_manic",
+    "displayName": "Manic",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_mystical",
+    "displayName": "Mystical",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_nimble",
+    "displayName": "Nimble",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_quickened",
+    "displayName": "Quickened",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_restorative",
+    "displayName": "Restorative",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_thick",
+    "displayName": "Thick",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_timeless",
+    "displayName": "Timeless",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_titanic",
+    "displayName": "Titanic",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_tough",
+    "displayName": "Tough",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_vampiric",
+    "displayName": "Vampiric",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_vast",
+    "displayName": "Vast",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_vital",
+    "displayName": "Vital",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_enhancement_wise",
+    "displayName": "Wise",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_essence_distiller",
+    "displayName": "Essence Distiller",
+    "cost": 1775,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_essence_ring",
+    "displayName": "Essence Ring",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_eternal_shroud",
+    "displayName": "Eternal Shroud",
+    "cost": 3900,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ethereal_blade",
+    "displayName": "Ethereal Blade",
+    "cost": 5200,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ex_machina",
+    "displayName": "Ex Machina",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_eye_of_the_vizier",
+    "displayName": "Eye of the Vizier",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_faded_broach",
+    "displayName": "Faded Broach",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_faerie_fire",
+    "displayName": "Faerie Fire",
+    "cost": 65,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_falcon_blade",
+    "displayName": "Falcon Blade",
+    "cost": 1125,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_fallen_sky",
+    "displayName": "Fallen Sky",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_famango",
+    "displayName": "Healing Lotus",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_flask",
+    "displayName": "Healing Salve",
+    "cost": 100,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_flayers_bota",
+    "displayName": "Flayer's Bota",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_flicker",
+    "displayName": "Flicker",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_fluffy_hat",
+    "displayName": "Fluffy Hat",
+    "cost": 250,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_flying_courier",
+    "displayName": "Flying Courier",
+    "cost": 100,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_foragers_health",
+    "displayName": "Vital Toadstool",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_foragers_kit",
+    "displayName": "Forager's Kit",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_foragers_mana",
+    "displayName": "Tomo'kan Ringcap",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_foragers_stats",
+    "displayName": "Ironwood Nut",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_force_boots",
+    "displayName": "Force Boots",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_force_field",
+    "displayName": "Arcanist's Armor",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_force_staff",
+    "displayName": "Force Staff",
+    "cost": 2200,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_furion_gold_bag",
+    "displayName": "Bag of Gold",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_fusion_rune",
+    "displayName": "Fusion Rune",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gale_guard",
+    "displayName": "Gale Guard",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gauntlets",
+    "displayName": "Gauntlets of Strength",
+    "cost": 140,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gem",
+    "displayName": "Gem of True Sight",
+    "cost": 900,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ghost",
+    "displayName": "Ghost Scepter",
+    "cost": 1500,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_giant_maul",
+    "displayName": "Giant's Maul",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_giants_ring",
+    "displayName": "Giant's Ring",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_glimmer_cape",
+    "displayName": "Glimmer Cape",
+    "cost": 2150,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gloves",
+    "displayName": "Gloves of Haste",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gossamer_cape",
+    "displayName": "Gossamer Cape",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_great_famango",
+    "displayName": "Great Healing Lotus",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_greater_crit",
+    "displayName": "Daedalus",
+    "cost": 5100,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_greater_faerie_fire",
+    "displayName": "Greater Faerie Fire",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_greater_famango",
+    "displayName": "Greater Healing Lotus",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_grisgris",
+    "displayName": "Gris-Gris",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_grove_bow",
+    "displayName": "Grove Bow",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_guardian_greaves",
+    "displayName": "Guardian Greaves",
+    "cost": 4450,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gungir",
+    "displayName": "Gleipnir",
+    "cost": 4650,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_gunpowder_gauntlets",
+    "displayName": "Gunpowder Gauntlet",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_hand_of_midas",
+    "displayName": "Hand of Midas",
+    "cost": 2200,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_harmonizer",
+    "displayName": "Harmonizer",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_harpoon",
+    "displayName": "Harpoon",
+    "cost": 4700,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_havoc_hammer",
+    "displayName": "Havoc Hammer",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_headdress",
+    "displayName": "Headdress",
+    "cost": 425,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_heart",
+    "displayName": "Heart of Tarrasque",
+    "cost": 5100,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_heavens_halberd",
+    "displayName": "Heaven's Halberd",
+    "cost": 3400,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_heavy_blade",
+    "displayName": "Witchbane",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_helm_of_iron_will",
+    "displayName": "Helm of Iron Will",
+    "cost": 975,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_helm_of_the_dominator",
+    "displayName": "Helm of the Dominator",
+    "cost": 2550,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_helm_of_the_overlord",
+    "displayName": "Helm of the Overlord",
+    "cost": 5650,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_helm_of_the_undying",
+    "displayName": "Helm of the Undying",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_holy_locket",
+    "displayName": "Holy Locket",
+    "cost": 2250,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_hood_of_defiance",
+    "displayName": "Hood of Defiance",
+    "cost": 0,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_hurricane_pike",
+    "displayName": "Hurricane Pike",
+    "cost": 4450,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_hydras_breath",
+    "displayName": "Hydra's Breath",
+    "cost": 5900,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_hyperstone",
+    "displayName": "Hyperstone",
+    "cost": 2000,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_idol_of_screeauk",
+    "displayName": "Idol of Scree'auk",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_illusionsts_cape",
+    "displayName": "Illusionist's Cape",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_imp_claw",
+    "displayName": "Imp Claw",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_infused_raindrop",
+    "displayName": "Infused Raindrops",
+    "cost": 225,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_invis_sword",
+    "displayName": "Shadow Blade",
+    "cost": 3250,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_iron_talon",
+    "displayName": "Iron Talon",
+    "cost": 0,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ironwood_tree",
+    "displayName": "Ironwood Tree",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_javelin",
+    "displayName": "Javelin",
+    "cost": 900,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_jidi_pollen_bag",
+    "displayName": "Jidi Pollen Bag",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_kaya",
+    "displayName": "Kaya",
+    "cost": 2100,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_kaya_and_sange",
+    "displayName": "Kaya and Sange",
+    "cost": 4200,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_keen_optic",
+    "displayName": "Keen Optic",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_kobold_cup",
+    "displayName": "Kobold Cup",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_lance_of_pursuit",
+    "displayName": "Lance of Pursuit",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_lesser_crit",
+    "displayName": "Crystalys",
+    "cost": 2000,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_lifesteal",
+    "displayName": "Morbid Mask",
+    "cost": 900,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_light_collector",
+    "displayName": "Light Collector",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_lotus_orb",
+    "displayName": "Lotus Orb",
+    "cost": 3850,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_madstone_bundle",
+    "displayName": "Madstone Bundle",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_maelstrom",
+    "displayName": "Maelstrom",
+    "cost": 2950,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mage_slayer",
+    "displayName": "Mage Slayer",
+    "cost": 3100,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_magic_stick",
+    "displayName": "Magic Stick",
+    "cost": 200,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_magic_wand",
+    "displayName": "Magic Wand",
+    "cost": 460,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_magnifying_monocle",
+    "displayName": "Magnifying Monocle",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mana_draught",
+    "displayName": "Mana Draught",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mango_tree",
+    "displayName": "Mango Tree",
+    "cost": null,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_manta",
+    "displayName": "Manta Style",
+    "cost": 4650,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mantle",
+    "displayName": "Mantle of Intelligence",
+    "cost": 140,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_martyrs_plate",
+    "displayName": "Martyr's Plate",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mask_of_madness",
+    "displayName": "Mask of Madness",
+    "cost": 1900,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_medallion_of_courage",
+    "displayName": "Medallion of Courage",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mekansm",
+    "displayName": "Mekansm",
+    "cost": 1775,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_metamorphic_mandible",
+    "displayName": "Metamorphic Mandible",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_meteor_hammer",
+    "displayName": "Meteor Hammer",
+    "cost": 2850,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mind_breaker",
+    "displayName": "Mind Breaker",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_minotaur_horn",
+    "displayName": "Minotaur Horn",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mirror_shield",
+    "displayName": "Mirror Shield",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_misericorde",
+    "displayName": "Brigand's Blade",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mithril_hammer",
+    "displayName": "Mithril Hammer",
+    "cost": 1600,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mjollnir",
+    "displayName": "Mjollnir",
+    "cost": 5500,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_monkey_king_bar",
+    "displayName": "Monkey King Bar",
+    "cost": 5000,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_moon_shard",
+    "displayName": "Moon Shard",
+    "cost": 4000,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_muertas_gun",
+    "displayName": "Mercy & Grace",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mutation_tombstone",
+    "displayName": "Tombstone",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mysterious_hat",
+    "displayName": "Fairy's Trinket",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_mystic_staff",
+    "displayName": "Mystic Staff",
+    "cost": 2800,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_necronomicon",
+    "displayName": "Necronomicon",
+    "cost": 2050,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_necronomicon_2",
+    "displayName": "Necronomicon",
+    "cost": 3300,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_necronomicon_3",
+    "displayName": "Necronomicon",
+    "cost": 4550,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_nemesis_curse",
+    "displayName": "Nemesis Curse",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_nether_shawl",
+    "displayName": "Nether Shawl",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ninja_gear",
+    "displayName": "Ninja Gear",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_null_talisman",
+    "displayName": "Null Talisman",
+    "cost": 505,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_nullifier",
+    "displayName": "Nullifier",
+    "cost": 4350,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_oblivion_staff",
+    "displayName": "Oblivion Staff",
+    "cost": 1625,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_occult_bracelet",
+    "displayName": "Occult Bracelet",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ocean_heart",
+    "displayName": "Ocean Heart",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_octarine_core",
+    "displayName": "Octarine Core",
+    "cost": 4900,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ofrenda",
+    "displayName": "Beloved Memory",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ofrenda_pledge",
+    "displayName": "Forebearer's Fortune",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ofrenda_shovel",
+    "displayName": "Scrying Shovel",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ogre_axe",
+    "displayName": "Ogre Axe",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ogre_seal_totem",
+    "displayName": "Ogre Seal Totem",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_orb_of_corrosion",
+    "displayName": "Orb of Corrosion",
+    "cost": 1050,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_orb_of_destruction",
+    "displayName": "Orb of Destruction",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_orb_of_frost",
+    "displayName": "Orb of Frost",
+    "cost": 300,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_orb_of_venom",
+    "displayName": "Orb of Venom",
+    "cost": 350,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_orchid",
+    "displayName": "Orchid Malevolence",
+    "cost": 3275,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_outworld_staff",
+    "displayName": "Outworld Staff",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_overwhelming_blink",
+    "displayName": "Overwhelming Blink",
+    "cost": 6800,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_paintball",
+    "displayName": "Fae Grenade",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_paladin_sword",
+    "displayName": "Paladin Sword",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_panic_button",
+    "displayName": "Magic Lamp",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_partisans_brand",
+    "displayName": "Partisan's Brand",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pavise",
+    "displayName": "Pavise",
+    "cost": 1350,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_penta_edged_sword",
+    "displayName": "Penta-Edged Sword",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pers",
+    "displayName": "Perseverance",
+    "cost": 1400,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_phase_boots",
+    "displayName": "Phase Boots",
+    "cost": 1450,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_philosophers_stone",
+    "displayName": "Philosopher's Stone",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_phoenix_ash",
+    "displayName": "Phoenix Ash",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_phylactery",
+    "displayName": "Phylactery",
+    "cost": 2600,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pipe",
+    "displayName": "Pipe of Insight",
+    "cost": 3725,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pirate_hat",
+    "displayName": "Pirate Hat",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_platemail",
+    "displayName": "Platemail",
+    "cost": 1400,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pocket_roshan",
+    "displayName": "Pocket Roshan",
+    "cost": 1000,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pocket_tower",
+    "displayName": "Pocket Tower",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pogo_stick",
+    "displayName": "Tumbler's Toy",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_point_booster",
+    "displayName": "Point Booster",
+    "cost": 1200,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_polliwog_charm",
+    "displayName": "Pollywog Charm",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_poor_mans_shield",
+    "displayName": "Poor Man's Shield",
+    "cost": 0,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_possessed_mask",
+    "displayName": "Possessed Mask",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_power_treads",
+    "displayName": "Power Treads",
+    "cost": 1400,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_princes_knife",
+    "displayName": "Prince's Knife",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_prophets_pendulum",
+    "displayName": "Prophet's Pendulum",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_psychic_headband",
+    "displayName": "Psychic Headband",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pupils_gift",
+    "displayName": "Pupil's Gift",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_pyrrhic_cloak",
+    "displayName": "Pyrrhic Cloak",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_quarterstaff",
+    "displayName": "Quarterstaff",
+    "cost": 875,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_quelling_blade",
+    "displayName": "Quelling Blade",
+    "cost": 100,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_quickening_charm",
+    "displayName": "Quickening Charm",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_quicksilver_amulet",
+    "displayName": "Quicksilver Amulet",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_radiance",
+    "displayName": "Radiance",
+    "cost": 4700,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_rapier",
+    "displayName": "Divine Rapier",
+    "cost": 5600,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_rattlecage",
+    "displayName": "Rattlecage",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_reaver",
+    "displayName": "Reaver",
+    "cost": 2800,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_abyssal_blade",
+    "displayName": "Abyssal Blade Recipe",
+    "cost": 1275,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_aeon_disk",
+    "displayName": "Aeon Disk Recipe",
+    "cost": 1200,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_aether_lens",
+    "displayName": "Aether Lens Recipe",
+    "cost": 775,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_ancient_janggo",
+    "displayName": "Drum of Endurance Recipe",
+    "cost": 525,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_arcane_blink",
+    "displayName": "Arcane Blink Recipe",
+    "cost": 1750,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_arcane_boots",
+    "displayName": "Arcane Boots Recipe",
+    "cost": 325,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_armlet",
+    "displayName": "Armlet of Mordiggian Recipe",
+    "cost": 625,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_assault",
+    "displayName": "Assault Cuirass Recipe",
+    "cost": 1300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_basher",
+    "displayName": "Skull Basher Recipe",
+    "cost": 825,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_bfury",
+    "displayName": "Battle Fury Recipe",
+    "cost": 400,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_black_king_bar",
+    "displayName": "Black King Bar Recipe",
+    "cost": 1450,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_blade_mail",
+    "displayName": "Blade Mail Recipe",
+    "cost": 450,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_bloodthorn",
+    "displayName": "Bloodthorn Recipe",
+    "cost": 600,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_bracer",
+    "displayName": "Bracer Recipe",
+    "cost": 210,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_buckler",
+    "displayName": "Buckler Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_consecrated_wraps",
+    "displayName": "Consecrated Wraps Recipe",
+    "cost": 700,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_crellas_crozier",
+    "displayName": "Crella's Crozier Recipe",
+    "cost": 300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_crimson_guard",
+    "displayName": "Crimson Guard Recipe",
+    "cost": 1050,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_cyclone",
+    "displayName": "Eul's Scepter Recipe",
+    "cost": 675,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_dagon",
+    "displayName": "Dagon Recipe",
+    "cost": 1150,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_devastator",
+    "displayName": "Parasma Recipe",
+    "cost": 400,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_diffusal_blade",
+    "displayName": "Diffusal Blade Recipe",
+    "cost": 1050,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_disperser",
+    "displayName": "Disperser Recipe",
+    "cost": 800,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_dragon_lance",
+    "displayName": "Dragon Lance Recipe",
+    "cost": 450,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_essence_distiller",
+    "displayName": "Essence Distiller Recipe",
+    "cost": 200,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_eternal_shroud",
+    "displayName": "Eternal Shroud Recipe",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_ethereal_blade",
+    "displayName": "Ethereal Blade Recipe",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_falcon_blade",
+    "displayName": "Falcon Blade Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_force_staff",
+    "displayName": "Force Staff Recipe",
+    "cost": 950,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_glimmer_cape",
+    "displayName": "Glimmer Cape Recipe",
+    "cost": 800,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_greater_crit",
+    "displayName": "Daedalus Recipe",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_guardian_greaves",
+    "displayName": "Guardian Greaves Recipe",
+    "cost": 1175,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_gungir",
+    "displayName": "Gleipnir Recipe",
+    "cost": 400,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_hand_of_midas",
+    "displayName": "Hand of Midas Recipe",
+    "cost": 1750,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_harpoon",
+    "displayName": "Harpoon Recipe",
+    "cost": 1000,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_headdress",
+    "displayName": "Headdress Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_heart",
+    "displayName": "Heart of Tarrasque Recipe",
+    "cost": 600,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_heavens_halberd",
+    "displayName": "Heaven's Halberd Recipe",
+    "cost": 450,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_helm_of_the_dominator",
+    "displayName": "Helm of the Dominator Recipe",
+    "cost": 1125,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_helm_of_the_overlord",
+    "displayName": "Helm of the Overlord Recipe",
+    "cost": 300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_holy_locket",
+    "displayName": "Holy Locket Recipe",
+    "cost": 1340,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_hurricane_pike",
+    "displayName": "Hurricane Pike Recipe",
+    "cost": 350,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_iron_talon",
+    "displayName": "Iron Talon Recipe",
+    "cost": 125,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_kaya",
+    "displayName": "Kaya Recipe",
+    "cost": 650,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_lesser_crit",
+    "displayName": "Crystalys Recipe",
+    "cost": 200,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_lotus_orb",
+    "displayName": "Lotus Orb Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_magic_wand",
+    "displayName": "Magic Wand Recipe",
+    "cost": 150,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_manta",
+    "displayName": "Manta Style Recipe",
+    "cost": 1550,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_mekansm",
+    "displayName": "Mekansm Recipe",
+    "cost": 850,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_meteor_hammer",
+    "displayName": "Meteor Hammer Recipe",
+    "cost": 300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_mjollnir",
+    "displayName": "Mjollnir Recipe",
+    "cost": 550,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_monkey_king_bar",
+    "displayName": "Monkey King Bar Recipe",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_necronomicon",
+    "displayName": "Necronomicon Recipe",
+    "cost": 1250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_null_talisman",
+    "displayName": "Null Talisman Recipe",
+    "cost": 210,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_octarine_core",
+    "displayName": "Octarine Core Recipe",
+    "cost": 200,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_orchid",
+    "displayName": "Orchid Malevolence Recipe",
+    "cost": 300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_overwhelming_blink",
+    "displayName": "Overwhelming Blink Recipe",
+    "cost": 1750,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_pavise",
+    "displayName": "Pavise Recipe",
+    "cost": 675,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_phylactery",
+    "displayName": "Phylactery Recipe",
+    "cost": 200,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_pipe",
+    "displayName": "Pipe of Insight Recipe",
+    "cost": 675,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_refresher",
+    "displayName": "Refresher Orb Recipe",
+    "cost": 1600,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_revenants_brooch",
+    "displayName": "Revenant's Brooch Recipe",
+    "cost": 650,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_ring_of_basilius",
+    "displayName": "Ring of Basilius Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_rod_of_atos",
+    "displayName": "Rod of Atos Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_sange",
+    "displayName": "Sange Recipe",
+    "cost": 650,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_sheepstick",
+    "displayName": "Scythe of Vyse Recipe",
+    "cost": 700,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_shivas_guard",
+    "displayName": "Shiva's Guard Recipe",
+    "cost": 1350,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_silver_edge",
+    "displayName": "Silver Edge Recipe",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_solar_crest",
+    "displayName": "Solar Crest Recipe",
+    "cost": 500,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_soul_ring",
+    "displayName": "Soul Ring Recipe",
+    "cost": 350,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_sphere",
+    "displayName": "Linken's Sphere Recipe",
+    "cost": 600,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_spirit_vessel",
+    "displayName": "Spirit Vessel Recipe",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_swift_blink",
+    "displayName": "Swift Blink Recipe",
+    "cost": 1750,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_travel_boots",
+    "displayName": "Boots of Travel Recipe",
+    "cost": 2000,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_trident",
+    "displayName": "Trident Recipe",
+    "cost": 1,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_ultimate_scepter_2",
+    "displayName": "Aghanim's Blessing Recipe",
+    "cost": 1600,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_urn_of_shadows",
+    "displayName": "Urn of Shadows Recipe",
+    "cost": 320,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_veil_of_discord",
+    "displayName": "Veil of Discord Recipe",
+    "cost": 350,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_wind_waker",
+    "displayName": "Wind Waker Recipe",
+    "cost": 1400,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_witch_blade",
+    "displayName": "Witch Blade Recipe",
+    "cost": 300,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_wraith_band",
+    "displayName": "Wraith Band Recipe",
+    "cost": 210,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_recipe_yasha",
+    "displayName": "Yasha Recipe",
+    "cost": 650,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_refresher",
+    "displayName": "Refresher Orb",
+    "cost": 5000,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_refresher_shard",
+    "displayName": "Refresher Shard",
+    "cost": 1000,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_relic",
+    "displayName": "Sacred Relic",
+    "cost": 3400,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_repair_kit",
+    "displayName": "Repair Kit",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_revenants_brooch",
+    "displayName": "Revenant's Brooch",
+    "cost": 3300,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_riftshadow_prism",
+    "displayName": "Riftshadow Prism",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_aquila",
+    "displayName": "Ring of Aquila",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_basilius",
+    "displayName": "Ring of Basilius",
+    "cost": 425,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_health",
+    "displayName": "Ring of Health",
+    "cost": 700,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_protection",
+    "displayName": "Ring of Protection",
+    "cost": 175,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_regen",
+    "displayName": "Ring of Regen",
+    "cost": 175,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ring_of_tarrasque",
+    "displayName": "Ring of Tarrasque",
+    "cost": 1700,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_rippers_lash",
+    "displayName": "Ripper's Lash",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter",
+    "displayName": "River Vial: Chrome",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter2",
+    "displayName": "River Vial: Dry",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter3",
+    "displayName": "River Vial: Slime",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter4",
+    "displayName": "River Vial: Oil",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter5",
+    "displayName": "River Vial: Electrified",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter6",
+    "displayName": "River Vial: Potion",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_river_painter7",
+    "displayName": "River Vial: Blood",
+    "cost": 0,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_robe",
+    "displayName": "Robe of the Magi",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_rod_of_atos",
+    "displayName": "Rod of Atos",
+    "cost": 2250,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_roshans_banner",
+    "displayName": "Roshan's Banner",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_royal_jelly",
+    "displayName": "Royal Jelly",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_royale_with_cheese",
+    "displayName": "Block of Cheese",
+    "cost": 2,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_safety_bubble",
+    "displayName": "Safety Bubble",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sange",
+    "displayName": "Sange",
+    "cost": 2100,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sange_and_yasha",
+    "displayName": "Sange and Yasha",
+    "cost": 4200,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_satanic",
+    "displayName": "Satanic",
+    "cost": 5050,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_searing_signet",
+    "displayName": "Searing Signet",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_seeds_of_serenity",
+    "displayName": "Seeds of Serenity",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_seer_stone",
+    "displayName": "Seer Stone",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_serrated_shiv",
+    "displayName": "Serrated Shiv",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_shadow_amulet",
+    "displayName": "Shadow Amulet",
+    "cost": 900,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_shawl",
+    "displayName": "Shawl",
+    "cost": 450,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sheepstick",
+    "displayName": "Scythe of Vyse",
+    "cost": 5200,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_shivas_guard",
+    "displayName": "Shiva's Guard",
+    "cost": 4500,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_silver_edge",
+    "displayName": "Silver Edge",
+    "cost": 5700,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sisters_shroud",
+    "displayName": "Sister's Shroud",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_skadi",
+    "displayName": "Eye of Skadi",
+    "cost": 5900,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_slippers",
+    "displayName": "Slippers of Agility",
+    "cost": 140,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_smoke_of_deceit",
+    "displayName": "Smoke of Deceit",
+    "cost": 50,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sobi_mask",
+    "displayName": "Sage's Mask",
+    "cost": 175,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_solar_crest",
+    "displayName": "Solar Crest",
+    "cost": 2575,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_soul_booster",
+    "displayName": "Soul Booster",
+    "cost": 3000,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_soul_ring",
+    "displayName": "Soul Ring",
+    "cost": 805,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spark_of_courage",
+    "displayName": "Spark of Courage",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_specialists_array",
+    "displayName": "Specialist's Array",
+    "cost": 2550,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spell_prism",
+    "displayName": "Spell Prism",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spellslinger",
+    "displayName": "Spellslinger",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_sphere",
+    "displayName": "Linken's Sphere",
+    "cost": 4800,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spider_legs",
+    "displayName": "Spider Legs",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spirit_vessel",
+    "displayName": "Spirit Vessel",
+    "cost": 2725,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_splintmail",
+    "displayName": "Splintmail",
+    "cost": 950,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_spy_gadget",
+    "displayName": "Telescope",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_staff_of_wizardry",
+    "displayName": "Staff of Wizardry",
+    "cost": 1000,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_stonefeather_satchel",
+    "displayName": "Stonefeather Satchel",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_stormcrafter",
+    "displayName": "Stormcrafter",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_stout_shield",
+    "displayName": "Stout Shield",
+    "cost": 100,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_swift_blink",
+    "displayName": "Swift Blink",
+    "cost": 6800,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_talisman_of_evasion",
+    "displayName": "Talisman of Evasion",
+    "cost": 1300,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tango",
+    "displayName": "Tango",
+    "cost": 90,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tango_single",
+    "displayName": "Tango (Shared)",
+    "cost": 30,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_the_leveller",
+    "displayName": "The Leveller",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_third_eye",
+    "displayName": "Third Eye",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tiara_of_selemene",
+    "displayName": "Tiara of Selemene",
+    "cost": 1700,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tidehunter_fish",
+    "displayName": "Leviathan's Fish",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tier1_token",
+    "displayName": "Tier 1 Token",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tier2_token",
+    "displayName": "Tier 2 Token",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tier3_token",
+    "displayName": "Tier 3 Token",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tier4_token",
+    "displayName": "Tier 4 Token",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tier5_token",
+    "displayName": "Tier 5 Token",
+    "cost": null,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_timeless_relic",
+    "displayName": "Timeless Relic",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_titan_sliver",
+    "displayName": "Titan Sliver",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tome_of_aghanim",
+    "displayName": "Tome of Aghanim",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tome_of_knowledge",
+    "displayName": "Tome of Knowledge",
+    "cost": 75,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tpscroll",
+    "displayName": "Town Portal Scroll",
+    "cost": 100,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_tranquil_boots",
+    "displayName": "Tranquil Boots",
+    "cost": 900,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_travel_boots",
+    "displayName": "Boots of Travel",
+    "cost": 2500,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_travel_boots_2",
+    "displayName": "Boots of Travel 2",
+    "cost": 4500,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_trickster_cloak",
+    "displayName": "Trickster Cloak",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_trident",
+    "displayName": "Trident",
+    "cost": 6301,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_trusty_shovel",
+    "displayName": "Trusty Shovel",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ultimate_orb",
+    "displayName": "Ultimate Orb",
+    "cost": 2800,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ultimate_scepter",
+    "displayName": "Aghanim's Scepter",
+    "cost": 4200,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ultimate_scepter_2",
+    "displayName": "Aghanim's Blessing",
+    "cost": 5800,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ultimate_scepter_roshan",
+    "displayName": "Aghanim's Blessing - Roshan",
+    "cost": 5800,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_unrelenting_eye",
+    "displayName": "Unrelenting Eye",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_unstable_wand",
+    "displayName": "Pig Pole",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_unwavering_condition",
+    "displayName": "Unwavering Condition",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_urn_of_shadows",
+    "displayName": "Urn of Shadows",
+    "cost": 825,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vambrace",
+    "displayName": "Vambrace",
+    "cost": 0,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vampire_fangs",
+    "displayName": "Vampire Fangs",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vanguard",
+    "displayName": "Vanguard",
+    "cost": 1700,
+    "qualifier": "epic",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_veil_of_discord",
+    "displayName": "Veil of Discord",
+    "cost": 1700,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vindicators_axe",
+    "displayName": "Vindicator's Axe",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vitality_booster",
+    "displayName": "Vitality Booster",
+    "cost": 1000,
+    "qualifier": "secret_shop",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_vladmir",
+    "displayName": "Vladmir's Offering",
+    "cost": 2200,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_void_stone",
+    "displayName": "Void Stone",
+    "cost": 700,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_voodoo_mask",
+    "displayName": "Voodoo Mask",
+    "cost": 650,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ward_dispenser",
+    "displayName": "Observer and Sentry Wards",
+    "cost": 50,
+    "qualifier": "consumable;laning",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ward_observer",
+    "displayName": "Observer Ward",
+    "cost": 0,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_ward_sentry",
+    "displayName": "Sentry Ward",
+    "cost": 50,
+    "qualifier": "consumable",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_weighted_dice",
+    "displayName": "Weighted Dice",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_whisper_of_the_dread",
+    "displayName": "Whisper of the Dread",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_wind_lace",
+    "displayName": "Wind Lace",
+    "cost": 225,
+    "qualifier": "component",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_wind_waker",
+    "displayName": "Wind Waker",
+    "cost": 6800,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_witch_blade",
+    "displayName": "Witch Blade",
+    "cost": 2775,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_witless_shako",
+    "displayName": "Witless Shako",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_wizard_hat",
+    "displayName": "Wizard Hat",
+    "cost": 250,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_woodland_striders",
+    "displayName": "Woodland Striders",
+    "cost": 0,
+    "qualifier": null,
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_wraith_band",
+    "displayName": "Wraith Band",
+    "cost": 505,
+    "qualifier": "common",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_wraith_pact",
+    "displayName": "Wraith Pact",
+    "cost": 3800,
+    "qualifier": "rare",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_yasha",
+    "displayName": "Yasha",
+    "cost": 2100,
+    "qualifier": "artifact",
+    "isRecipe": false
+  },
+  {
+    "internalName": "item_yasha_and_kaya",
+    "displayName": "Yasha and Kaya",
+    "cost": 4200,
+    "qualifier": "artifact",
+    "isRecipe": false
+  }
+]

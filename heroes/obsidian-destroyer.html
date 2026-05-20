@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outworld Destroyer 出装攻略 · AMEFYS DOTA 2 助手</title>
+<meta name="description" content="Outworld Destroyer（智力/远程）AMEFYS 实时出装推荐与定位分析。Carry、Nuker、Disabler。">
+<link rel="canonical" href="https://amefys.com/heroes/obsidian-destroyer.html">
+<meta property="og:title" content="Outworld Destroyer 出装攻略 · AMEFYS DOTA 2 助手">
+<meta property="og:description" content="Outworld Destroyer（智力/远程）AMEFYS 实时出装推荐与定位分析。Carry、Nuker、Disabler。">
+<meta property="og:url" content="https://amefys.com/heroes/obsidian-destroyer.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+
+<style>
+  :root {
+    --bg: #08090d; --bg-2: #0e1016; --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08); --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62); --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA; --emerald: #34D399; --radiant: #3DBE8A; --dire: #D9534F;
+    --r-md: 12px; --r-lg: 18px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: var(--violet); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 24px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav-inner a { color: var(--text-2); }
+  .nav-inner a:hover { color: var(--text); text-decoration: none; }
+  .brand { display: flex; align-items: center; gap: 8px; color: var(--text) !important; font-weight: 600; }
+  .brand img { width: 20px; height: 20px; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px 24px 96px; }
+  h1 { font-size: 32px; letter-spacing: -0.5px; margin: 0 0 6px; }
+  h2 { font-size: 20px; margin: 32px 0 12px; letter-spacing: -0.2px; }
+  .tagline { color: var(--text-2); margin: 0 0 24px; font-size: 15px; }
+  .meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px; margin: 20px 0 8px; }
+  .meta-cell { background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); padding: 12px 14px; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; margin-bottom: 4px; }
+  .meta-value { font-size: 16px; font-weight: 600; }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px;
+    background: rgba(167,139,250,0.16); color: var(--violet);
+    font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .pill-warn { background: rgba(240,162,60,0.18); color: #f0a23c; }
+  .pill-radiant { background: rgba(61,190,138,0.18); color: var(--radiant); }
+  .pill-dire { background: rgba(217,83,79,0.18); color: var(--dire); }
+  .table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; }
+  .table th, .table td { text-align: left; padding: 10px 12px;
+    border-bottom: 0.5px solid var(--hairline); font-size: 14px; }
+  .table th { color: var(--text-3); font-size: 12px; text-transform: uppercase;
+    letter-spacing: 0.5px; font-weight: 700; }
+  .grid-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px; padding: 0; list-style: none; }
+  .grid-list a { display: block; padding: 10px 12px; background: var(--surface);
+    border: 0.5px solid var(--hairline); border-radius: var(--r-md);
+    color: var(--text); font-size: 14px; }
+  .grid-list a:hover { background: rgba(167,139,250,0.10); border-color: rgba(167,139,250,0.30); text-decoration: none; }
+  .cta { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px;
+    background: linear-gradient(135deg, var(--emerald), #10B981); color: #062;
+    border-radius: 24px; font-weight: 700; font-size: 14px; margin: 24px 0 8px;
+    box-shadow: 0 0 0 3px rgba(52,211,153,0.16); }
+  .cta:hover { text-decoration: none; }
+  .breadcrumb { font-size: 12.5px; color: var(--text-3); margin-bottom: 14px; }
+  .breadcrumb a { color: var(--text-2); }
+  .disclaimer { font-size: 12px; color: var(--text-3); margin-top: 48px;
+    border-top: 0.5px solid var(--hairline); padding-top: 16px; }
+</style>
+
+</head><body>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="/"><img src="/assets/icon.svg" alt="" />AMEFYS</a>
+  <a href="/heroes/">英雄</a>
+  <a href="/items/">装备</a>
+  <a href="/packs/">回复包</a>
+  <a href="/about.html">关于</a>
+</div></nav>
+<main class="wrap">
+
+<div class="breadcrumb"><a href="/">首页</a> · <a href="/heroes/">英雄列表</a> · Outworld Destroyer</div>
+<h1>Outworld Destroyer</h1>
+<p class="tagline">AMEFYS 实时出装推荐 · 主属性 智力 · 远程</p>
+<div>
+  <span class="pill">Carry</span><span class="pill">Nuker</span><span class="pill">Disabler</span>
+</div>
+<div class="meta-grid">
+  <div class="meta-cell"><div class="meta-label">主属性</div><div class="meta-value">智力</div></div>
+  <div class="meta-cell"><div class="meta-label">攻击距离</div><div class="meta-value">远程</div></div>
+  <div class="meta-cell"><div class="meta-label">定位</div><div class="meta-value">Carry / Nuker / Disabler</div></div>
+</div>
+
+<h2>开局出装</h2>
+<table class="table">
+  <thead><tr><th>装备</th><th>出场频率</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/items/branches.html">Iron Branch</a></td><td>161</td></tr>
+    <tr><td><a href="/items/mantle.html">Mantle of Intelligence</a></td><td>84</td></tr>
+    <tr><td><a href="/items/circlet.html">Circlet</a></td><td>75</td></tr>
+    <tr><td><a href="/items/tango.html">Tango</a></td><td>72</td></tr>
+    <tr><td><a href="/items/ward-observer.html">Observer Ward</a></td><td>62</td></tr>
+    <tr><td><a href="/items/faerie-fire.html">Faerie Fire</a></td><td>15</td></tr>
+    <tr><td><a href="/items/magic-stick.html">Magic Stick</a></td><td>6</td></tr>
+    <tr><td><a href="/items/ward-dispenser.html">Observer and Sentry Wards</a></td><td>6</td></tr>
+  </tbody>
+</table>
+
+<h2>前期出装</h2>
+<table class="table">
+  <thead><tr><th>装备</th><th>出场频率</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/items/null-talisman.html">Null Talisman</a></td><td>151</td></tr>
+    <tr><td><a href="/items/boots.html">Boots of Speed</a></td><td>98</td></tr>
+    <tr><td><a href="/items/power-treads.html">Power Treads</a></td><td>86</td></tr>
+    <tr><td><a href="/items/blitz-knuckles.html">Blitz Knuckles</a></td><td>53</td></tr>
+    <tr><td><a href="/items/oblivion-staff.html">Oblivion Staff</a></td><td>31</td></tr>
+    <tr><td><a href="/items/chainmail.html">Chainmail</a></td><td>25</td></tr>
+    <tr><td><a href="/items/staff-of-wizardry.html">Staff of Wizardry</a></td><td>8</td></tr>
+    <tr><td><a href="/items/hand-of-midas.html">Hand of Midas</a></td><td>5</td></tr>
+  </tbody>
+</table>
+
+<h2>中期核心</h2>
+<table class="table">
+  <thead><tr><th>装备</th><th>出场频率</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/items/blade-of-alacrity.html">Blade of Alacrity</a></td><td>97</td></tr>
+    <tr><td><a href="/items/staff-of-wizardry.html">Staff of Wizardry</a></td><td>86</td></tr>
+    <tr><td><a href="/items/witch-blade.html">Witch Blade</a></td><td>80</td></tr>
+    <tr><td><a href="/items/dragon-lance.html">Dragon Lance</a></td><td>62</td></tr>
+    <tr><td><a href="/items/oblivion-staff.html">Oblivion Staff</a></td><td>55</td></tr>
+    <tr><td><a href="/items/force-staff.html">Force Staff</a></td><td>51</td></tr>
+    <tr><td><a href="/items/blink.html">Blink Dagger</a></td><td>44</td></tr>
+    <tr><td><a href="/items/hurricane-pike.html">Hurricane Pike</a></td><td>40</td></tr>
+  </tbody>
+</table>
+
+<h2>后期成型</h2>
+<table class="table">
+  <thead><tr><th>装备</th><th>出场频率</th></tr></thead>
+  <tbody>
+    <tr><td><a href="/items/mystic-staff.html">Mystic Staff</a></td><td>38</td></tr>
+    <tr><td><a href="/items/hurricane-pike.html">Hurricane Pike</a></td><td>28</td></tr>
+    <tr><td><a href="/items/devastator.html">Parasma</a></td><td>24</td></tr>
+    <tr><td><a href="/items/hyperstone.html">Hyperstone</a></td><td>20</td></tr>
+    <tr><td><a href="/items/force-staff.html">Force Staff</a></td><td>20</td></tr>
+    <tr><td><a href="/items/ultimate-scepter.html">Aghanim's Scepter</a></td><td>19</td></tr>
+    <tr><td><a href="/items/sheepstick.html">Scythe of Vyse</a></td><td>15</td></tr>
+    <tr><td><a href="/items/black-king-bar.html">Black King Bar</a></td><td>12</td></tr>
+  </tbody>
+</table>
+<h2>关于 AMEFYS 实时建议</h2>
+<p>AMEFYS 是一个开放式 DOTA 2 桌面助手，在游戏内通过 GSI（官方 Game State Integration）实时读取战场状态，并据此对 Outworld Destroyer 给出装备推荐、关键道具完成提醒、聊天翻译等辅助。所有数据均来自 Dota 2 官方接口与 OpenDota 公开统计，不修改任何游戏内容，符合 Valve 的合规要求。</p>
+<a class="cta" href="/#download">免费下载 AMEFYS →</a>
+
+<h2>同类英雄</h2>
+<ul class="grid-list">
+  <li><a href="/heroes/antimage.html">Anti-Mage</a></li>
+  <li><a href="/heroes/axe.html">Axe</a></li>
+  <li><a href="/heroes/bloodseeker.html">Bloodseeker</a></li>
+  <li><a href="/heroes/drow-ranger.html">Drow Ranger</a></li>
+  <li><a href="/heroes/juggernaut.html">Juggernaut</a></li>
+  <li><a href="/heroes/mirana.html">Mirana</a></li>
+  <li><a href="/heroes/morphling.html">Morphling</a></li>
+  <li><a href="/heroes/nevermore.html">Shadow Fiend</a></li>
+  <li><a href="/heroes/phantom-lancer.html">Phantom Lancer</a></li>
+  <li><a href="/heroes/razor.html">Razor</a></li>
+  <li><a href="/heroes/storm-spirit.html">Storm Spirit</a></li>
+  <li><a href="/heroes/sven.html">Sven</a></li>
+</ul>
+
+<p class="disclaimer">数据快照 · 2026-05-20。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
+</main>
+</body></html>
