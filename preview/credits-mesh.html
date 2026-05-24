@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>致谢 — AMEFYS</title>
+  <style>
+    :root {
+      --bg: #0a0418;
+      --bg-raised: #160630;
+      --surface: rgba(255, 255, 255, 0.04);
+      --hairline: rgba(255, 255, 255, 0.08);
+      --hairline-strong: rgba(255, 255, 255, 0.14);
+      --text: #f0f0f3;
+      --text-secondary: rgba(235, 235, 245, 0.62);
+      --text-tertiary: rgba(235, 235, 245, 0.4);
+      --accent: #a78bfa;
+      --accent-deep: #7c5ceb;
+      --accent-soft: rgba(167, 139, 250, 0.18);
+      --radiant: #6ee7b7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background:
+        radial-gradient(45% 50% at 18% 22%, rgba(124,58,237,0.55) 0%, transparent 60%),
+        radial-gradient(40% 45% at 80% 30%, rgba(236,72,153,0.40) 0%, transparent 60%),
+        radial-gradient(45% 50% at 50% 78%, rgba(56,189,248,0.35) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0418 0%, #160630 50%, #1a0830 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 64px 32px 96px;
+    }
+
+    /* ── Header / hero ──────────────────────────────────────── */
+
+    header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 56px;
+      font-size: 13px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 120ms;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff, #b8b3cc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ── Sections ───────────────────────────────────────────── */
+
+    section {
+      margin-top: 56px;
+      padding: 28px;
+      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--hairline);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    section h2::before {
+      content: "";
+      width: 4px;
+      height: 22px;
+      border-radius: 2px;
+      background: var(--accent);
+    }
+
+    .section-intro {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Lists ──────────────────────────────────────────────── */
+
+    .credit-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .credit-list[data-cols="2"] {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 640px) {
+      .credit-list[data-cols="2"] {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .credit {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--hairline);
+    }
+
+    .credit-name {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .credit-name a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 120ms;
+    }
+
+    .credit-name a:hover {
+      color: #c4b5fd;
+    }
+
+    .license-tag {
+      flex-shrink: 0;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .credit-desc {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    /* ── Legal block ────────────────────────────────────────── */
+
+    .legal-card {
+      background: rgba(252, 211, 77, 0.04);
+      border: 1px solid rgba(252, 211, 77, 0.25);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .legal-card strong {
+      color: #fcd34d;
+    }
+
+    /* ── Thanks block ───────────────────────────────────────── */
+
+    .thanks-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .thanks-chip {
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .thanks-placeholder {
+      color: var(--text-tertiary);
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    /* ── Contact ────────────────────────────────────────────── */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-card {
+      padding: 16px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--hairline);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
+      color: #c4b5fd;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+
+    footer {
+      margin-top: 72px;
+      padding-top: 32px;
+      border-top: 1px solid var(--hairline);
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    /* ── Language switcher ──────────────────────────────────── */
+
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      font-size: 12px;
+    }
+
+    .lang-switch button {
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 120ms;
+    }
+
+    .lang-switch button[data-active="true"] {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ─── Top navigation (mock — matches existing amefys.com nav style) ─── -->
+    <nav class="nav">
+      <a class="nav-brand" href="/" style="color: inherit; text-decoration: none;">
+        <span class="nav-icon">A</span>
+        <span>AMEFYS</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/heroes">英雄</a>
+        <a href="/items">装备</a>
+        <a href="/packs">快捷回复</a>
+        <a href="/about">关于</a>
+      </div>
+      <div class="lang-switch">
+        <button data-active="true">中文</button>
+        <button>EN</button>
+      </div>
+    </nav>
+
+    <!-- ─── Hero ─── -->
+    <header>
+      <h1>致谢</h1>
+      <p class="hero-subtitle">
+        AMEFYS 站在巨人的肩膀上 — 感谢所有数据源、开源社区和早期用户的支持。
+      </p>
+    </header>
+
+    <!-- ─── Legal disclaimer (top of mind) ─── -->
+    <section>
+      <h2>合规与免责声明</h2>
+      <div class="legal-card">
+        <p>
+          <strong>AMEFYS 是非官方 DOTA 2 辅助工具,与 Valve / Steam 没有任何关联。</strong>
+          DOTA 2 与 DOTA 2 Logo 是 Valve Corporation 的注册商标。
+        </p>
+        <br>
+        <p>
+          本工具仅通过游戏内置的 GSI(Game State Integration)接口读取数据,
+          严格遵守 Valve 用户协议。<strong>不修改游戏内存、不注入 DLL、不拦截网络流量、
+          不读取敌方隐藏信息</strong>(雾内视野等)。
+        </p>
+        <br>
+        <p>
+          完整合规姿态详见
+          <a href="/compliance" style="color: #fcd34d; text-decoration: underline;">合规说明</a>。
+        </p>
+      </div>
+    </section>
+
+    <!-- ─── Data sources ─── -->
+    <section>
+      <h2>数据来源</h2>
+      <p class="section-intro">
+        AMEFYS 的英雄数据、装备数据、对局统计和视觉资源来自以下公开 API 和 CDN。
+      </p>
+      <div class="credit-list" data-cols="2">
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.opendota.com/" target="_blank">OpenDota</a>
+            <span class="license-tag">Free API</span>
+          </div>
+          <div class="credit-desc">
+            英雄 / 装备元数据、出装统计、对局赔率。开源公益项目,数据由社区维护。
+          </div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://store.steampowered.com/" target="_blank">Steam CDN</a>
+            <span class="license-tag">Public CDN</span>
+          </div>
+          <div class="credit-desc">
+            英雄头像 / 装备图标。Valve 通过 cdn.cloudflare.steamstatic.com 公开提供。
+          </div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration"
+               target="_blank">Dota 2 GSI</a>
+            <span class="license-tag">Official</span>
+          </div>
+          <div class="credit-desc">
+            Valve 官方游戏状态集成接口。本工具读取的所有实时对局数据均来源于此。
+          </div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://dota2.fandom.com/" target="_blank">Dota 2 Wiki</a>
+            <span class="license-tag">CC-BY-SA</span>
+          </div>
+          <div class="credit-desc">
+            英雄技能说明、装备配方、合成路线参考。社区共同编辑维护。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Open source ─── -->
+    <section>
+      <h2>开源依赖</h2>
+      <p class="section-intro">
+        AMEFYS 客户端基于以下开源项目构建。完整传递依赖清单见
+        <a href="/licenses" style="color: var(--accent); text-decoration: none;">第三方许可</a>。
+      </p>
+      <div class="credit-list" data-cols="2">
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.electronjs.org/" target="_blank">Electron</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">桌面应用运行时</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://react.dev/" target="_blank">React</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">UI 框架</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a>
+            <span class="license-tag">Apache-2.0</span>
+          </div>
+          <div class="credit-desc">类型系统</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.electron.build/" target="_blank">electron-builder</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">打包 + 自动更新</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.framer.com/motion/" target="_blank">framer-motion</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">动画引擎</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://github.com/WiseLibs/better-sqlite3" target="_blank">better-sqlite3</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">本地对局数据存储</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://supabase.com/" target="_blank">Supabase JS</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">云端账号 + 数据同步</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://fastify.dev/" target="_blank">Fastify</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">GSI 数据接收服务器</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://vercel.com/font" target="_blank">Geist 字体</a>
+            <span class="license-tag">OFL-1.1</span>
+          </div>
+          <div class="credit-desc">界面字体(Vercel 出品)</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://zustand-demo.pmnd.rs/" target="_blank">zustand</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">状态管理</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.i18next.com/" target="_blank">i18next</a>
+            <span class="license-tag">MIT</span>
+          </div>
+          <div class="credit-desc">三语国际化</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">
+            <a href="https://www.cloudflare.com/" target="_blank">Cloudflare Workers</a>
+            <span class="license-tag">Cloud</span>
+          </div>
+          <div class="credit-desc">CDN + 主题分发</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Team ─── -->
+    <section>
+      <h2>团队</h2>
+      <p class="section-intro">
+        AMEFYS 项目 · 2026 — 一个为了"文斗 1v9、专心打游戏"而做的小工具。
+      </p>
+    </section>
+
+    <!-- ─── Special thanks ─── -->
+    <section>
+      <h2>特别感谢</h2>
+      <p class="section-intro">
+        Dogfood 阶段的早期测试者、bug 报告者、社区翻译贡献者(按字母序)。
+      </p>
+      <div class="thanks-list">
+        <span class="thanks-chip">早期 dogfood 用户 #1</span>
+        <span class="thanks-chip">早期 dogfood 用户 #2</span>
+        <span class="thanks-chip">俄语翻译志愿者</span>
+        <span class="thanks-placeholder">— 等你的名字 —</span>
+      </div>
+    </section>
+
+    <!-- ─── Inspiration ─── -->
+    <section>
+      <h2>灵感来源</h2>
+      <p class="section-intro">
+        给了我们启发的同类工具:
+      </p>
+      <div class="credit-list" data-cols="2">
+        <div class="credit">
+          <div class="credit-name">DotaPlus(Valve 官方)</div>
+          <div class="credit-desc">
+            付费订阅服务。展示了"实时辅助"作为商业模式的可行性,也是我们选择 GSI-only
+            而非内存读取路线的原因之一。
+          </div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">Overwolf 平台</div>
+          <div class="credit-desc">
+            悬浮窗 + 全屏游戏覆盖层的 UX 标杆。我们的 Overlay 设计参考了 Overwolf 系工具
+            的多年迭代。
+          </div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">OpenDota Web</div>
+          <div class="credit-desc">
+            数据驱动的英雄页面设计参考。我们的英雄/装备资料库也走开放数据路线。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Contact ─── -->
+    <section>
+      <h2>联系 / 反馈</h2>
+      <p class="section-intro">
+        最快路径是邮件 — 我们读每一封。社区频道在筹备中。
+      </p>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-label">Bug 报告 / 功能建议</div>
+          <div class="contact-value">
+            <a href="mailto:amefys@gmail.com?subject=AMEFYS%20反馈">amefys@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">商务合作</div>
+          <div class="contact-value">
+            <a href="mailto:amefys@gmail.com?subject=AMEFYS%20商务">amefys@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">Discord 社区</div>
+          <div class="contact-value" style="color: var(--text-secondary);">
+            筹备中,敬请期待
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">中文社区</div>
+          <div class="contact-value" style="color: var(--text-secondary);">
+            微信群 / QQ 群(待开放)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Footer ─── -->
+    <footer>
+      <p>© 2026 AMEFYS Project</p>
+      <p style="margin-top: 8px;">
+        <a href="/about">关于</a> · <a href="/privacy">隐私</a> ·
+        <a href="/compliance">合规</a> · <a href="/credits">致谢</a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

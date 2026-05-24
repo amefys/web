@@ -1,0 +1,354 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>致谢 — AMEFYS</title>
+<meta name="description" content="AMEFYS 站在巨人的肩膀上 — 感谢所有数据源、开源社区和早期用户的支持。">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --bg-3: #14161e;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Top nav — copy of about.html for consistency */
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s; }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); transition: color .12s; padding: 0 2px; }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  /* Page layout */
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+
+  /* Hero */
+  .page-hero { text-align: center; margin-bottom: 64px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(167,139,250,0.08); border: 0.5px solid rgba(167,139,250,0.25);
+    font-size: 11px; color: var(--violet); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0; line-height: 1.6; max-width: 560px; margin-left: auto; margin-right: auto; }
+
+  /* Sections */
+  section.s { margin: 0 0 56px; }
+  section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; }
+  section.s .section-intro { color: var(--text-2); font-size: 14px; margin: 0 0 24px; line-height: 1.65; }
+  section.s a.link { color: var(--violet); text-decoration: none; border-bottom: 0.5px solid rgba(167,139,250,0.3); }
+  section.s a.link:hover { border-bottom-color: var(--violet); }
+
+  /* Legal disclaimer card */
+  .legal-card {
+    padding: 22px 24px; border-radius: var(--r-lg);
+    background: linear-gradient(180deg, rgba(252,211,77,0.06), rgba(252,211,77,0.02));
+    border: 0.5px solid rgba(252,211,77,0.22);
+    font-size: 13.5px; color: var(--text-2); line-height: 1.7;
+  }
+  .legal-card strong { color: var(--text); font-weight: 600; }
+  .legal-card a { color: var(--amber); border-bottom: 0.5px solid rgba(252,211,77,0.35); }
+  .legal-card a:hover { border-bottom-color: var(--amber); }
+
+  /* Credit grid */
+  .credit-grid { display: grid; gap: 12px; }
+  .credit-grid[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+  .credit-grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+  .credit {
+    padding: 16px 18px; border-radius: var(--r-md);
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    transition: border-color .15s, transform .15s;
+  }
+  .credit:hover { border-color: var(--hairline-strong); transform: translateY(-1px); }
+  .credit-name {
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    font-size: 14.5px; font-weight: 600; margin-bottom: 6px;
+  }
+  .credit-name a { color: var(--text); }
+  .credit-name a:hover { color: var(--violet); }
+  .license-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px;
+    background: rgba(255,255,255,0.05); color: var(--text-3);
+    border: 0.5px solid var(--hairline);
+  }
+  .credit-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.55; }
+
+  /* Thanks chips */
+  .thanks-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .thanks-chip {
+    padding: 6px 12px; border-radius: 999px;
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    font-size: 13px; color: var(--text-2);
+  }
+  .thanks-placeholder {
+    padding: 6px 12px; border-radius: 999px;
+    background: transparent; border: 0.5px dashed var(--hairline-strong);
+    font-size: 13px; color: var(--text-3); font-style: italic;
+  }
+
+  /* Contact cards */
+  .contact-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .contact-card {
+    padding: 22px; border-radius: var(--r-lg);
+    background: var(--surface); border: 0.5px solid var(--hairline);
+  }
+  .contact-card .contact-label {
+    font-size: 11px; color: var(--text-3); font-weight: 700; letter-spacing: 0.6px;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .contact-card .contact-value { font-size: 15px; font-weight: 600; }
+  .contact-card .contact-value a { color: var(--violet); }
+  .contact-card .contact-value a:hover { text-decoration: underline; }
+  .contact-card .contact-sub { font-size: 12.5px; color: var(--text-2); margin-top: 6px; line-height: 1.55; }
+
+  /* Footer */
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .credit-grid[data-cols="2"],
+    .credit-grid[data-cols="3"],
+    .contact-cards { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="credits.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/credits.html">EN</a>
+        </div>
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- Hero -->
+    <div class="page-hero">
+      <div class="eyebrow">致谢</div>
+      <h1>站在巨人的肩膀上</h1>
+      <p>感谢所有数据源、开源社区和早期用户。这个项目是无数人公开工作的延伸。</p>
+    </div>
+
+    <!-- Legal disclaimer -->
+    <section class="s">
+      <h2>合规与免责声明</h2>
+      <div class="legal-card">
+        <p><strong>AMEFYS 是非官方 DOTA 2 辅助工具，与 Valve / Steam 没有任何关联。</strong>DOTA 2 与 DOTA 2 Logo 是 Valve Corporation 的注册商标。</p>
+        <p style="margin-top: 12px;">本工具仅通过游戏内置的 GSI（Game State Integration）接口读取数据，严格遵守 Valve 用户协议。<strong>不修改游戏内存、不注入 DLL、不拦截网络流量、不读取敌方隐藏信息</strong>（雾内视野等）。</p>
+        <p style="margin-top: 12px;">完整合规姿态详见 <a href="compliance.html">合规说明</a>。</p>
+      </div>
+    </section>
+
+    <!-- Data sources -->
+    <section class="s">
+      <h2>数据来源</h2>
+      <p class="section-intro">英雄数据、装备数据、对局统计和视觉资源来自以下公开 API 和 CDN。</p>
+      <div class="credit-grid" data-cols="2">
+        <div class="credit">
+          <div class="credit-name"><a href="https://www.opendota.com/" target="_blank" rel="noopener">OpenDota</a><span class="license-tag">Free API</span></div>
+          <div class="credit-desc">英雄 / 装备元数据、出装统计、对局赔率。开源公益项目，数据由社区维护。</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name"><a href="https://store.steampowered.com/" target="_blank" rel="noopener">Steam CDN</a><span class="license-tag">Public CDN</span></div>
+          <div class="credit-desc">英雄头像 / 装备图标。Valve 通过 cdn.cloudflare.steamstatic.com 公开提供。</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name"><a href="https://developer.valvesoftware.com/wiki/Counter-Strike:_Global_Offensive_Game_State_Integration" target="_blank" rel="noopener">DOTA 2 GSI</a><span class="license-tag">Official</span></div>
+          <div class="credit-desc">Valve 官方游戏状态集成接口。本工具读取的所有实时对局数据均来源于此。</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name"><a href="https://dota2.fandom.com/" target="_blank" rel="noopener">DOTA 2 Wiki</a><span class="license-tag">CC-BY-SA</span></div>
+          <div class="credit-desc">英雄技能说明、装备配方、合成路线参考。社区共同编辑维护。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open source dependencies -->
+    <section class="s">
+      <h2>开源依赖</h2>
+      <p class="section-intro">客户端基于以下开源项目构建。完整传递依赖清单见 <a href="licenses.html" class="link">第三方许可</a>。</p>
+      <div class="credit-grid" data-cols="2">
+        <div class="credit"><div class="credit-name"><a href="https://www.electronjs.org/" target="_blank" rel="noopener">Electron</a><span class="license-tag">MIT</span></div><div class="credit-desc">桌面应用运行时</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://react.dev/" target="_blank" rel="noopener">React</a><span class="license-tag">MIT</span></div><div class="credit-desc">UI 框架</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a><span class="license-tag">Apache-2.0</span></div><div class="credit-desc">类型系统</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://www.electron.build/" target="_blank" rel="noopener">electron-builder</a><span class="license-tag">MIT</span></div><div class="credit-desc">打包 + 自动更新</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://www.framer.com/motion/" target="_blank" rel="noopener">framer-motion</a><span class="license-tag">MIT</span></div><div class="credit-desc">动画引擎</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://github.com/WiseLibs/better-sqlite3" target="_blank" rel="noopener">better-sqlite3</a><span class="license-tag">MIT</span></div><div class="credit-desc">本地对局数据存储</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://supabase.com/" target="_blank" rel="noopener">Supabase JS</a><span class="license-tag">MIT</span></div><div class="credit-desc">云端账号 + 数据同步</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://fastify.dev/" target="_blank" rel="noopener">Fastify</a><span class="license-tag">MIT</span></div><div class="credit-desc">GSI 数据接收服务器</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://vercel.com/font" target="_blank" rel="noopener">Geist 字体</a><span class="license-tag">OFL-1.1</span></div><div class="credit-desc">界面字体（Vercel 出品）</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://zustand-demo.pmnd.rs/" target="_blank" rel="noopener">zustand</a><span class="license-tag">MIT</span></div><div class="credit-desc">状态管理</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://www.i18next.com/" target="_blank" rel="noopener">i18next</a><span class="license-tag">MIT</span></div><div class="credit-desc">三语国际化</div></div>
+        <div class="credit"><div class="credit-name"><a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare Workers</a><span class="license-tag">Cloud</span></div><div class="credit-desc">CDN + 主题分发</div></div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="s">
+      <h2>团队</h2>
+      <p class="section-intro">AMEFYS 项目 · 2026 — 一个为了"文斗 1v9、专心打游戏"而做的小工具。</p>
+    </section>
+
+    <!-- Special thanks -->
+    <section class="s">
+      <h2>特别感谢</h2>
+      <p class="section-intro">Dogfood 阶段的早期测试者、bug 报告者、社区翻译贡献者（按字母序）。</p>
+      <div class="thanks-list">
+        <span class="thanks-chip">早期 dogfood 用户 #1</span>
+        <span class="thanks-chip">早期 dogfood 用户 #2</span>
+        <span class="thanks-chip">俄语翻译志愿者</span>
+        <span class="thanks-placeholder">— 等你的名字 —</span>
+      </div>
+    </section>
+
+    <!-- Inspiration -->
+    <section class="s">
+      <h2>灵感来源</h2>
+      <p class="section-intro">给了我们启发的同类工具：</p>
+      <div class="credit-grid" data-cols="2">
+        <div class="credit">
+          <div class="credit-name">DOTA Plus<span class="license-tag">Valve 官方</span></div>
+          <div class="credit-desc">付费订阅服务。展示了"实时辅助"作为商业模式的可行性，也是我们选择 GSI-only 而非内存读取路线的原因之一。</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">Overwolf 平台</div>
+          <div class="credit-desc">悬浮窗 + 全屏游戏覆盖层的 UX 标杆。我们的 Overlay 设计参考了 Overwolf 系工具的多年迭代。</div>
+        </div>
+        <div class="credit">
+          <div class="credit-name">OpenDota Web</div>
+          <div class="credit-desc">数据驱动的英雄页面设计参考。我们的英雄 / 装备资料库也走开放数据路线。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="s">
+      <h2>联系 / 反馈</h2>
+      <p class="section-intro">最快路径是邮件 — 我们读每一封。社区频道在筹备中。</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-label">Bug 报告 / 功能建议</div>
+          <div class="contact-value"><a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener">github.com/amefys/web/issues</a></div>
+          <div class="contact-sub">公开 issue tracker · 5 工作日内响应</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-label">商务 / 合作</div>
+          <div class="contact-value"><a href="mailto:amefys@gmail.com">amefys@gmail.com</a></div>
+          <div class="contact-sub">合规咨询 / 媒体采访 / 合作洽谈</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="compliance.html">合规</a>
+      <a href="licenses.html">许可</a>
+      <a href="privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe'
+      : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>

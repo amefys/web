@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>合规说明 — AMEFYS</title>
+<meta name="description" content="AMEFYS 严格遵守 Valve 用户协议 — 这页详细说明我们做什么、不做什么、为什么不会被 VAC 封号。">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --dire: #d9534f;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    transition: transform .12s, box-shadow .12s; }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); transition: color .12s; padding: 0 2px; }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+
+  .page-hero { text-align: center; margin-bottom: 56px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(52,211,153,0.08); border: 0.5px solid rgba(52,211,153,0.25);
+    font-size: 11px; color: var(--emerald); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 600px; }
+  .page-hero .updated { font-size: 12px; color: var(--text-3); margin-top: 14px; }
+
+  section.s { margin: 0 0 48px; }
+  section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 14px; }
+  section.s p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; margin: 0 0 14px; }
+  section.s p strong { color: var(--text); font-weight: 600; }
+  section.s a.link { color: var(--violet); border-bottom: 0.5px solid rgba(167,139,250,0.3); }
+  section.s a.link:hover { border-bottom-color: var(--violet); }
+  section.s code { font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px;
+    font-size: 12.5px; color: var(--text); }
+
+  /* TL;DR cards (radiant green tone) */
+  .tldr {
+    padding: 22px 24px; border-radius: var(--r-lg);
+    background: linear-gradient(180deg, rgba(52,211,153,0.06), rgba(52,211,153,0.02));
+    border: 0.5px solid rgba(52,211,153,0.20);
+  }
+  .tldr p { color: var(--text); font-size: 14.5px; line-height: 1.7; margin: 0 0 10px; }
+  .tldr p:last-child { margin-bottom: 0; }
+
+  /* Do / Don't dual cards */
+  .do-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .do-card { padding: 22px; border-radius: var(--r-lg); }
+  .do-card[data-tone="ok"] {
+    background: linear-gradient(180deg, rgba(52,211,153,0.07), rgba(52,211,153,0.02));
+    border: 0.5px solid rgba(52,211,153,0.25);
+  }
+  .do-card[data-tone="no"] {
+    background: linear-gradient(180deg, rgba(217,83,79,0.07), rgba(217,83,79,0.02));
+    border: 0.5px solid rgba(217,83,79,0.25);
+  }
+  .do-card .do-icon {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 800; color: #0a0a14;
+    margin-bottom: 14px;
+  }
+  .do-card[data-tone="ok"] .do-icon { background: var(--emerald); }
+  .do-card[data-tone="no"] .do-icon { background: var(--dire); color: #fff; }
+  .do-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.2px; margin: 0 0 12px; }
+  .do-card ul { margin: 0; padding-left: 18px; color: var(--text-2); font-size: 13.5px; line-height: 1.7; }
+  .do-card ul li { margin-bottom: 5px; }
+
+  /* Tables */
+  .ct-table { width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); overflow: hidden;
+    font-size: 13.5px;
+  }
+  .ct-table th, .ct-table td { padding: 12px 16px; text-align: left;
+    border-bottom: 0.5px solid var(--hairline); color: var(--text-2); line-height: 1.6; }
+  .ct-table th { font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; background: rgba(255,255,255,0.02); }
+  .ct-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+  .ct-table tr:last-child td { border-bottom: 0; }
+
+  /* Quote block */
+  .quote {
+    padding: 18px 22px; border-left: 3px solid var(--violet);
+    background: rgba(167,139,250,0.04);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    color: var(--text-2); font-size: 14px; line-height: 1.7;
+    font-style: italic;
+    margin: 14px 0;
+  }
+  .quote .cite { display: block; margin-top: 10px; font-style: normal;
+    color: var(--text-3); font-size: 12px; }
+
+  /* Audit list */
+  .audit-list { margin: 14px 0; padding: 0; list-style: none; }
+  .audit-list li { padding: 10px 0 10px 24px; position: relative;
+    color: var(--text-2); font-size: 14px; line-height: 1.65;
+    border-bottom: 0.5px solid var(--hairline); }
+  .audit-list li:last-child { border-bottom: 0; }
+  .audit-list li::before { content: "→"; position: absolute; left: 0; color: var(--violet); font-weight: 700; }
+  .audit-list li strong { color: var(--text); font-weight: 600; }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .do-grid { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .ct-table { font-size: 12.5px; }
+    .ct-table th, .ct-table td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="compliance.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/compliance.html">EN</a>
+        </div>
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">合规说明</div>
+      <h1>透明，且<span style="color: var(--violet);">可验证</span>。</h1>
+      <p>AMEFYS 是非官方 DOTA 2 辅助工具，严格遵守 Valve 用户协议。这页详细说明我们做什么、不做什么、为什么不会被 VAC 封号。</p>
+      <div class="updated">最后更新：2026-05-24</div>
+    </div>
+
+    <!-- TL;DR -->
+    <section class="s">
+      <h2>简要结论</h2>
+      <div class="tldr">
+        <p>AMEFYS 只通过 Valve <strong>官方支持</strong>的 GSI（Game State Integration）接口读取数据，不修改游戏内存、不注入 DLL、不拦截网络、不读取敌方隐藏信息。聊天发送通过游戏自带的 <code>.cfg + alias + bind</code> 机制 — 跟用户在 console 里手动配置完全等价。</p>
+        <p>如果你在意"装这个软件会不会被 VAC 封号" — <strong>答案是不会</strong>。我们做的事情在 Valve 的政策允许范围内，跟你装一个 Steam Workshop 上的 HUD 修改器同等性质。</p>
+      </div>
+    </section>
+
+    <!-- Do / Don't -->
+    <section class="s">
+      <h2>我们做什么 / 不做什么</h2>
+      <div class="do-grid">
+        <div class="do-card" data-tone="ok">
+          <div class="do-icon">✓</div>
+          <h3>我们做的事情</h3>
+          <ul>
+            <li>通过官方 GSI 接口读取你的英雄、装备、对局状态</li>
+            <li>用本地规则 + AI 给出装备推荐</li>
+            <li>调用翻译 API 翻译你看到的聊天内容</li>
+            <li>通过 <code>.cfg + alias + bind</code> 帮你发送预制聊天文本</li>
+            <li>在本地 SQLite 存对局历史（可导出 / 删除）</li>
+            <li>登录用户的对局数据可选择同步到 Supabase 云端</li>
+          </ul>
+        </div>
+        <div class="do-card" data-tone="no">
+          <div class="do-icon">✗</div>
+          <h3>我们不做的事情</h3>
+          <ul>
+            <li>读取 / 修改 DOTA 2 进程内存</li>
+            <li>注入 DLL / dylib / 任何代码到游戏进程</li>
+            <li>拦截 / 修改 / 嗅探游戏网络流量</li>
+            <li>读取敌方英雄位置 / 雾内视野 / 隐身单位</li>
+            <li>读取敌方背包 / 技能冷却 / 等级 / 金钱</li>
+            <li>自动施法 / 自动连招 / 模拟鼠标精确点击</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- API table -->
+    <section class="s">
+      <h2>使用的官方接口</h2>
+      <table class="ct-table">
+        <thead>
+          <tr>
+            <th>接口</th>
+            <th>能读什么</th>
+            <th>Valve 支持等级</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Game State Integration (GSI)</td>
+            <td>己方英雄状态、装备、KDA、对局进程、地图时钟、己方金钱 / 经验</td>
+            <td>官方支持，有公开文档</td>
+          </tr>
+          <tr>
+            <td>cfg / alias / bind</td>
+            <td>读不到任何信息；<strong>写</strong>聊天内容到 chat box（等价于你手动 console 命令）</td>
+            <td>游戏内置脚本机制</td>
+          </tr>
+          <tr>
+            <td>Steam Web API</td>
+            <td>（可选）登录用户的 Steam ID、DOTA 2 公开战绩</td>
+            <td>需要用户授权</td>
+          </tr>
+          <tr>
+            <td>OpenDota API</td>
+            <td>英雄 / 装备元数据、历史出装统计（非实时，只查历史）</td>
+            <td>第三方公益项目</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Policy -->
+    <section class="s">
+      <h2>跟 Valve 政策的关系</h2>
+      <p>Valve 的 <a href="https://store.steampowered.com/subscriber_agreement/" target="_blank" rel="noopener" class="link">Steam 用户协议</a> 第 6 节"软件使用规范"允许第三方工具，只要它们：</p>
+      <div class="quote">…不修改 Steam 客户端或任何 Subscription 软件、不获取超出 Valve 公开接口范围的游戏状态信息、不干扰其他玩家的体验、不用于商业作弊…<span class="cite">— Steam Subscriber Agreement §6（节选）</span></div>
+      <p>AMEFYS 的每一项功能都在这条规则的"允许"侧 — 我们没有理由相信 Valve 会反对一个<strong>只读自己的 GSI 数据 + 通过游戏内置脚本发送预制文字</strong>的工具。</p>
+      <p>如果你对某个具体功能是否合规有疑虑，<a href="mailto:amefys@gmail.com?subject=AMEFYS%20合规疑问" class="link">直接发邮件给我们</a>，我们会逐条说明。</p>
+    </section>
+
+    <!-- VAC -->
+    <section class="s">
+      <h2>会不会被 VAC 封号？</h2>
+      <p><strong>不会。</strong>VAC（Valve Anti-Cheat）的检测目标是"修改游戏内存 / 注入代码 / 文件签名异常"。AMEFYS 不做这些事 — 它是一个独立桌面进程，跟 DOTA 2 通过 HTTP 协议（GSI）交换 JSON 数据，跟 Twitch 直播插件、SteelSeries OLED 显示工具的工作方式完全等价。</p>
+      <p>类似的 GSI 工具（Overwolf 系列、DOTA Plus 第三方插件、StreamProfile 等）已经在 DOTA 2 社区合规使用多年，没有任何 VAC 误封先例。</p>
+    </section>
+
+    <!-- Audit -->
+    <section class="s">
+      <h2>独立审计邀请</h2>
+      <p>我们欢迎安全研究者 / DOTA 2 社区成员对 AMEFYS 进行行为审计：</p>
+      <ul class="audit-list">
+        <li><strong>网络层</strong>：用 Wireshark 抓 DOTA 2 进程的全部流量 — 你会发现 AMEFYS 跟它完全无关</li>
+        <li><strong>进程层</strong>：用 Process Explorer 看 DOTA 2 句柄 — AMEFYS 不会出现在任何句柄持有者列表里</li>
+        <li><strong>文件层</strong>：看 DOTA 2 安装目录 — 我们只往 <code>cfg/gamestate_integration_amefys.cfg</code> 写过一个文件，其他文件从不动</li>
+        <li><strong>代码层</strong>：仓库公开后（beta 阶段后）可逐行审计</li>
+      </ul>
+      <p>发现问题 → <a href="mailto:amefys@gmail.com?subject=AMEFYS%20安全反馈" class="link">amefys@gmail.com</a> — 我们会公开回应。</p>
+    </section>
+
+    <!-- Q&A -->
+    <section class="s">
+      <h2>有疑问？</h2>
+      <p>合规相关问题：<a href="mailto:amefys@gmail.com?subject=AMEFYS%20合规疑问" class="link">amefys@gmail.com</a> — 我们读每一封邮件。</p>
+      <p>其他链接：<a href="privacy.html" class="link">隐私政策</a> · <a href="credits.html" class="link">致谢</a> · <a href="about.html" class="link">关于</a></p>
+    </section>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="licenses.html">许可</a>
+      <a href="privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>

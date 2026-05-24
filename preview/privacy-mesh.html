@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>隐私政策 — AMEFYS</title>
+  <style>
+    :root {
+      --bg: #0a0418;
+      --surface: rgba(255, 255, 255, 0.04);
+      --hairline: rgba(255, 255, 255, 0.08);
+      --hairline-strong: rgba(255, 255, 255, 0.14);
+      --text: #f0f0f3;
+      --text-secondary: rgba(235, 235, 245, 0.62);
+      --text-tertiary: rgba(235, 235, 245, 0.4);
+      --accent: #a78bfa;
+      --accent-deep: #7c5ceb;
+      --accent-soft: rgba(167, 139, 250, 0.18);
+      --radiant: #6ee7b7;
+      --warning: #fcd34d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background:
+        radial-gradient(45% 50% at 18% 22%, rgba(124,58,237,0.55) 0%, transparent 60%),
+        radial-gradient(40% 45% at 80% 30%, rgba(236,72,153,0.40) 0%, transparent 60%),
+        radial-gradient(45% 50% at 50% 78%, rgba(56,189,248,0.35) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0418 0%, #160630 50%, #1a0830 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    .container { max-width: 880px; margin: 0 auto; padding: 64px 32px 96px; }
+    .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 56px; font-size: 13px; }
+    .nav-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; color: inherit; }
+    .nav-icon { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg, var(--accent), var(--accent-deep)); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; }
+    .nav-links { display: flex; gap: 24px; color: var(--text-secondary); }
+    .nav-links a { color: inherit; text-decoration: none; }
+    .nav-links a:hover { color: var(--text); }
+    .lang-switch { display: flex; gap: 4px; font-size: 12px; }
+    .lang-switch button { padding: 3px 10px; border-radius: 999px; border: 1px solid var(--hairline); background: transparent; color: var(--text-secondary); font-family: inherit; cursor: pointer; }
+    .lang-switch button[data-active="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+
+    header { text-align: center; margin-bottom: 56px; }
+    h1 { font-size: 48px; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 12px; background: linear-gradient(135deg, #fff, #b8b3cc); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+    .updated-at { display: inline-block; margin-top: 18px; font-size: 12px; padding: 4px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+
+    section { margin-top: 40px; padding: 28px; border-radius: 16px; background: var(--surface); border: 1px solid var(--hairline); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    section h2 { font-size: 22px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+    section h2::before { content: ""; width: 4px; height: 22px; border-radius: 2px; background: var(--accent); }
+    section h3 { font-size: 16px; font-weight: 700; margin: 14px 0 6px; color: var(--text); }
+    section p { color: var(--text-secondary); margin-bottom: 10px; }
+    section p:last-child { margin-bottom: 0; }
+    section strong { color: var(--text); }
+    section code { font-family: 'SF Mono', Consolas, monospace; padding: 1px 6px; background: rgba(255,255,255,0.05); border-radius: 4px; font-size: 13px; }
+    a { color: var(--accent); }
+    a:hover { color: #c4b5fd; }
+
+    /* ── Data table ── */
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); font-weight: 700; }
+    td { color: var(--text-secondary); }
+    td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    tr:last-child td { border-bottom: none; }
+    .stay-local { padding: 2px 8px; border-radius: 999px; background: rgba(110, 231, 183, 0.15); color: var(--radiant); font-size: 11px; font-weight: 600; white-space: nowrap; }
+    .may-upload { padding: 2px 8px; border-radius: 999px; background: rgba(252, 211, 77, 0.15); color: var(--warning); font-size: 11px; font-weight: 600; white-space: nowrap; }
+    .third-party { padding: 2px 8px; border-radius: 999px; background: rgba(252, 165, 165, 0.15); color: #fca5a5; font-size: 11px; font-weight: 600; white-space: nowrap; }
+
+    /* ── Bullet lists ── */
+    .clean-ul { list-style: none; padding: 0; margin: 8px 0; }
+    .clean-ul li { padding-left: 18px; position: relative; margin-bottom: 6px; color: var(--text-secondary); }
+    .clean-ul li::before { content: "•"; position: absolute; left: 4px; color: var(--accent); }
+
+    /* ── Quick principle banner ── */
+    .principles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    @media (max-width: 720px) { .principles { grid-template-columns: 1fr; } }
+    .principle { padding: 16px; border-radius: 12px; background: rgba(167, 139, 250, 0.08); border: 1px solid var(--accent); text-align: center; }
+    .principle-icon { font-size: 28px; line-height: 1; margin-bottom: 8px; }
+    .principle-title { font-weight: 700; color: var(--text); font-size: 14px; margin-bottom: 4px; }
+    .principle-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+    footer { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--hairline); text-align: center; color: var(--text-tertiary); font-size: 12px; line-height: 1.7; }
+    footer a { color: var(--text-secondary); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="nav">
+      <a class="nav-brand" href="/"><span class="nav-icon">A</span><span>AMEFYS</span></a>
+      <div class="nav-links">
+        <a href="/">首页</a><a href="/heroes">英雄</a><a href="/items">装备</a>
+        <a href="/packs">快捷回复</a><a href="/about">关于</a>
+      </div>
+      <div class="lang-switch">
+        <button data-active="true">中文</button><button>EN</button>
+      </div>
+    </nav>
+
+    <header>
+      <h1>隐私政策</h1>
+      <p class="hero-subtitle">
+        我们在意你的数据 — 用最简单的话说清楚:收集了什么、为什么、给谁。
+      </p>
+      <div class="updated-at">生效日期:2026-05-24</div>
+    </header>
+
+    <!-- ─── 三条原则 ─── -->
+    <section>
+      <h2>三条核心原则</h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="principle-icon">🏠</div>
+          <div class="principle-title">默认本地</div>
+          <div class="principle-desc">所有数据先存本地;云端是可选项,不是必选项</div>
+        </div>
+        <div class="principle">
+          <div class="principle-icon">🤚</div>
+          <div class="principle-title">用户主权</div>
+          <div class="principle-desc">你可以随时查看、导出、删除自己的数据</div>
+        </div>
+        <div class="principle">
+          <div class="principle-icon">🔒</div>
+          <div class="principle-title">最小够用</div>
+          <div class="principle-desc">只收集功能所必需的数据,不做"以防万一"式数据囤积</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 收集什么 ─── -->
+    <section>
+      <h2>我们收集哪些数据</h2>
+      <p>
+        AMEFYS 处理的数据按"去向"分三类。下表是完整清单:
+      </p>
+      <table>
+        <thead>
+          <tr><th>数据</th><th>类型</th><th>用途</th><th>去向</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>对局历史</td>
+            <td>对局 ID / 英雄 / KDA / 装备 / 时长 / 胜负</td>
+            <td>历史记录页 + 复盘统计</td>
+            <td><span class="stay-local">仅本地</span> &nbsp; / 登录后可选择 <span class="may-upload">同步云端</span></td>
+          </tr>
+          <tr>
+            <td>翻译缓存</td>
+            <td>原文 hash + 译文(用于减少 API 调用)</td>
+            <td>避免重复翻译同一句话</td>
+            <td><span class="stay-local">仅本地</span></td>
+          </tr>
+          <tr>
+            <td>App 设置</td>
+            <td>语言 / 主题 / 翻译目标 / 快捷键 / 悬浮窗位置等</td>
+            <td>保留你的偏好</td>
+            <td><span class="stay-local">仅本地</span></td>
+          </tr>
+          <tr>
+            <td>账号信息</td>
+            <td>邮箱 / 密码 hash(可选)</td>
+            <td>云端账号 + 跨设备同步</td>
+            <td><span class="may-upload">Supabase(中国香港区)</span></td>
+          </tr>
+          <tr>
+            <td>GSI 实时数据</td>
+            <td>己方英雄状态 / 装备 / 地图时钟</td>
+            <td>实时装备推荐 / 翻译触发</td>
+            <td><span class="stay-local">从不离开你的电脑</span></td>
+          </tr>
+          <tr>
+            <td>聊天翻译请求</td>
+            <td>你粘贴的对方原文 + 你输入的中文</td>
+            <td>调用翻译 API</td>
+            <td><span class="third-party">第三方翻译引擎</span>(详见下)</td>
+          </tr>
+          <tr>
+            <td>错误上报(可选)</td>
+            <td>崩溃栈 / App 版本 / 操作系统</td>
+            <td>修 bug</td>
+            <td><span class="third-party">Sentry</span> &nbsp; — 默认开启,设置里可关</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── 翻译 API 怎么处理你的数据 ─── -->
+    <section>
+      <h2>翻译 API 怎么处理你的数据</h2>
+      <p>
+        聊天翻译功能会把<strong>你输入的原文</strong>(中文回复或粘贴的对方消息)发给翻译引擎。
+        我们支持多个引擎,默认通过 AMEFYS 后端代理调用:
+      </p>
+      <h3>默认模式:走 AMEFYS 后端代理</h3>
+      <ul class="clean-ul">
+        <li>请求经 AMEFYS Supabase Edge Function 转发到目标引擎(火山 / Azure / Claude / OpenAI 等)</li>
+        <li>我们的代理<strong>不存储</strong>翻译内容,只对单 IP 做速率限制</li>
+        <li>引擎方的隐私政策对你适用 — 但因为是 AMEFYS 的 key,引擎方拿到的是 AMEFYS 的标识,不是你个人的</li>
+      </ul>
+      <h3>BYO Key 模式:走你自己的 API Key</h3>
+      <ul class="clean-ul">
+        <li>请求<strong>直接</strong>从你的电脑发给翻译引擎,不经过 AMEFYS 服务器</li>
+        <li>引擎方拿到你的 API key — 隐私边界跟你自己直接调用该引擎一样</li>
+        <li>没有速率限制,适合高频用户</li>
+      </ul>
+    </section>
+
+    <!-- ─── 哪些数据从不离开 ─── -->
+    <section>
+      <h2>哪些数据从不离开你的电脑</h2>
+      <ul class="clean-ul">
+        <li><strong>GSI 实时数据</strong>:DOTA 2 通过 POST 推送到本地 <code>:4000/gsi</code>,只在本进程内处理</li>
+        <li><strong>翻译缓存</strong>:本地 SQLite 表 <code>translation_cache</code>,从不上传</li>
+        <li><strong>App 设置</strong>:本地 JSON 文件 <code>~/Library/.../amefys.json</code></li>
+        <li><strong>未登录用户的对局历史</strong>:仅本地 SQLite,从不上传</li>
+      </ul>
+    </section>
+
+    <!-- ─── 第三方服务 ─── -->
+    <section>
+      <h2>使用的第三方服务</h2>
+      <table>
+        <thead><tr><th>服务</th><th>数据</th><th>政策</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Supabase</td>
+            <td>邮箱 + 密码 + 登录用户的对局数据</td>
+            <td><a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a></td>
+          </tr>
+          <tr>
+            <td>翻译引擎(火山 / Azure / Claude / OpenAI / Gemini)</td>
+            <td>你的翻译原文 + 译文</td>
+            <td>详见各引擎方政策</td>
+          </tr>
+          <tr>
+            <td>OpenDota API</td>
+            <td>(可选)读取你的 Steam 公开对局战绩</td>
+            <td><a href="https://www.opendota.com/api-keys" target="_blank">opendota.com</a></td>
+          </tr>
+          <tr>
+            <td>Sentry(可选)</td>
+            <td>崩溃栈 + 设备 OS 版本</td>
+            <td><a href="https://sentry.io/privacy/" target="_blank">sentry.io/privacy</a></td>
+          </tr>
+          <tr>
+            <td>Cloudflare</td>
+            <td>主题资源下载(英雄/装备图标已从 Steam CDN 直取,不经 CF)</td>
+            <td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank">cloudflare.com/privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── 你的权利 ─── -->
+    <section>
+      <h2>你的权利 / 操作入口</h2>
+      <h3>查看 / 导出你的数据</h3>
+      <p>
+        App 内 设置 → 数据与隐私 提供:
+      </p>
+      <ul class="clean-ul">
+        <li>导出本地对局历史为 JSON / CSV</li>
+        <li>导出云端账号关联数据(如已登录)</li>
+        <li>查看本地数据库文件路径 + 大小</li>
+      </ul>
+      <h3>删除你的数据</h3>
+      <ul class="clean-ul">
+        <li>本地数据:设置 → 数据与隐私 → 清空对局历史 / 清空翻译缓存</li>
+        <li>云端数据:设置 → 账号 → 注销账号(删除所有 Supabase 端关联数据,48 小时内生效)</li>
+        <li>完整卸载:删除 <code>~/Library/Application Support/amefys/</code> 目录即清除全部本地痕迹</li>
+      </ul>
+      <h3>关闭可选功能</h3>
+      <ul class="clean-ul">
+        <li>错误上报:设置 → 数据与隐私 → 关闭"匿名崩溃报告"</li>
+        <li>云端同步:不登录 = 完全不上传</li>
+        <li>翻译:不输入文字 = 不发送任何内容</li>
+      </ul>
+    </section>
+
+    <!-- ─── 数据保留 ─── -->
+    <section>
+      <h2>数据保留期</h2>
+      <ul class="clean-ul">
+        <li><strong>本地数据</strong>:永久保留 — 由你完全控制</li>
+        <li><strong>云端对局历史</strong>:保留到账号注销或你主动删除;不主动清理</li>
+        <li><strong>翻译 API 请求</strong>:不存储;请求转发完即丢</li>
+        <li><strong>速率限制日志</strong>:仅 IP + 时间戳,30 天后自动清除</li>
+        <li><strong>Sentry 崩溃报告</strong>:Sentry 默认 30 天,我们不延长</li>
+      </ul>
+    </section>
+
+    <!-- ─── 未成年人 ─── -->
+    <section>
+      <h2>未成年用户</h2>
+      <p>
+        AMEFYS 不主动针对未成年用户。如果你未满 16 岁,请在监护人指导下使用。
+        我们不会有意收集未成年用户的个人数据 — 如果你认为有这种情况发生,
+        请发邮件给 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>,我们会立即处理。
+      </p>
+    </section>
+
+    <!-- ─── 政策变更 ─── -->
+    <section>
+      <h2>政策变更通知</h2>
+      <p>
+        若本政策实质性修改(新增数据收集类型 / 新第三方服务等),我们会:
+      </p>
+      <ul class="clean-ul">
+        <li>页面顶部"生效日期"更新</li>
+        <li>App 内弹一次提示卡片,要求用户主动确认</li>
+        <li>已登录用户:发邮件通知</li>
+      </ul>
+      <p>
+        纯文字 / 格式 / 错别字修订不视为实质性修改,不会触发通知。
+      </p>
+    </section>
+
+    <!-- ─── 联系 ─── -->
+    <section>
+      <h2>问题 / 投诉</h2>
+      <p>
+        隐私相关问题、删除请求、数据导出 — 都发到
+        <a href="mailto:amefys@gmail.com?subject=AMEFYS%20隐私问题">amefys@gmail.com</a>。
+        我们会在 7 个工作日内回复。
+      </p>
+      <p>
+        合规说明:<a href="/compliance">/compliance</a> · 致谢:<a href="/credits">/credits</a>
+      </p>
+    </section>
+
+    <footer>
+      <p>© 2026 AMEFYS Project</p>
+      <p style="margin-top: 8px;">
+        <a href="/about">关于</a> · <a href="/privacy">隐私</a> ·
+        <a href="/compliance">合规</a> · <a href="/credits">致谢</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
