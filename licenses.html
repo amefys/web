@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三方许可 — AMEFYS</title>
+<meta name="description" content="AMEFYS 客户端基于以下开源项目构建。每一个我们都心存感激。">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/icon-512.png">
+<style>
+  :root {
+    --bg: #08090d;
+    --bg-2: #0e1016;
+    --surface: rgba(22,24,32,0.72);
+    --hairline: rgba(255,255,255,0.08);
+    --hairline-strong: rgba(255,255,255,0.14);
+    --text: #f3f3f6;
+    --text-2: rgba(235,235,245,0.62);
+    --text-3: rgba(235,235,245,0.40);
+    --violet: #A78BFA;
+    --violet-deep: #7C5CEB;
+    --emerald: #34D399;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(8,9,13,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--violet-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 920px; margin: 0 auto; padding: 80px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 48px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(167,139,250,0.08); border: 0.5px solid rgba(167,139,250,0.25);
+    font-size: 11px; color: var(--violet); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 600px; }
+  .page-hero .updated { font-size: 12px; color: var(--text-3); margin-top: 14px; }
+
+  /* Stats strip */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 48px; }
+  .stat { padding: 18px; border-radius: var(--r-md);
+    background: var(--surface); border: 0.5px solid var(--hairline); text-align: center; }
+  .stat-value { font-size: 28px; font-weight: 800; letter-spacing: -0.6px; color: var(--violet); margin-bottom: 4px; }
+  .stat-label { font-size: 11.5px; color: var(--text-3); font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; }
+
+  /* Intro */
+  .intro { padding: 20px 22px; border-radius: var(--r-lg);
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    margin-bottom: 48px; font-size: 13.5px; color: var(--text-2); line-height: 1.7; }
+  .intro p { margin: 0 0 10px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro strong { color: var(--text); font-weight: 600; }
+  .intro code { font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px;
+    font-size: 12.5px; color: var(--text); }
+  .intro a { color: var(--violet); border-bottom: 0.5px solid rgba(167,139,250,0.3); }
+  .intro a:hover { border-bottom-color: var(--violet); }
+
+  /* Dependency group */
+  .group { margin-bottom: 36px; }
+  .group h2 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 14px; }
+
+  .dep-table { width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); overflow: hidden; font-size: 13px; }
+  .dep-table th, .dep-table td { padding: 11px 14px; text-align: left;
+    border-bottom: 0.5px solid var(--hairline); color: var(--text-2); }
+  .dep-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; background: rgba(255,255,255,0.02); }
+  .dep-table tr:last-child td { border-bottom: 0; }
+  .dep-table tr:hover td { background: rgba(255,255,255,0.015); }
+  .dep-table td.pkg { font-weight: 600; }
+  .dep-table td.pkg a { color: var(--text); }
+  .dep-table td.pkg a:hover { color: var(--violet); }
+  .dep-table td.ver { color: var(--text-3); font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 12px; white-space: nowrap; }
+  .license-tag { display: inline-block;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px;
+    background: rgba(255,255,255,0.05); color: var(--text-3);
+    border: 0.5px solid var(--hairline); white-space: nowrap; }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .dep-table { font-size: 12px; }
+    .dep-table th, .dep-table td { padding: 9px 10px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="licenses.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/licenses.html">EN</a>
+        </div>
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">第三方许可</div>
+      <h1>站在开源社区的肩膀上</h1>
+      <p>AMEFYS 客户端基于以下开源项目构建。每一个我们都心存感激。</p>
+      <div class="updated">客户端版本 v0.8.0 · 更新于 2026-05-24</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-value">~280</div><div class="stat-label">直接依赖</div></div>
+      <div class="stat"><div class="stat-value">~2.4k</div><div class="stat-label">传递依赖</div></div>
+      <div class="stat"><div class="stat-value">7</div><div class="stat-label">许可类型</div></div>
+      <div class="stat"><div class="stat-value">100%</div><div class="stat-label">OSI 兼容</div></div>
+    </div>
+
+    <div class="intro">
+      <p>下表列出客户端的<strong>直接 production 依赖</strong>。每个条目链接到上游官方仓库，点击 license tag 跳转到该协议全文。</p>
+      <p><strong>完整传递依赖清单</strong>（包括嵌套依赖）~2400 个，使用 <code>npm-license-checker</code> 自动生成。如有需要可联系我们获取。</p>
+      <p>所有依赖均为 <a href="https://opensource.org/licenses" target="_blank" rel="noopener">OSI 认证</a>开源协议，与 AMEFYS 的商业使用兼容。</p>
+    </div>
+
+    <!-- Runtime -->
+    <div class="group">
+      <h2>Runtime / 平台</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://www.electronjs.org/" target="_blank" rel="noopener">electron</a></td><td class="ver">~41.5.1</td><td><span class="license-tag">MIT</span></td><td>桌面应用运行时</td></tr>
+          <tr><td class="pkg"><a href="https://nodejs.org/" target="_blank" rel="noopener">node.js</a></td><td class="ver">22 LTS</td><td><span class="license-tag">MIT</span></td><td>主进程 JavaScript 运行时</td></tr>
+          <tr><td class="pkg"><a href="https://www.chromium.org/" target="_blank" rel="noopener">Chromium</a></td><td class="ver">132+</td><td><span class="license-tag">BSD-3-Clause</span></td><td>渲染进程引擎（Electron 内置）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Framework / UI -->
+    <div class="group">
+      <h2>框架 / UI</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://react.dev/" target="_blank" rel="noopener">react</a></td><td class="ver">^19</td><td><span class="license-tag">MIT</span></td><td>UI 框架</td></tr>
+          <tr><td class="pkg"><a href="https://react.dev/" target="_blank" rel="noopener">react-dom</a></td><td class="ver">^19</td><td><span class="license-tag">MIT</span></td><td>DOM 渲染器</td></tr>
+          <tr><td class="pkg"><a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">typescript</a></td><td class="ver">^5.7</td><td><span class="license-tag">Apache-2.0</span></td><td>类型系统</td></tr>
+          <tr><td class="pkg"><a href="https://vite.dev/" target="_blank" rel="noopener">vite</a></td><td class="ver">^7.3</td><td><span class="license-tag">MIT</span></td><td>开发服务器 + 构建工具</td></tr>
+          <tr><td class="pkg"><a href="https://electron-vite.org/" target="_blank" rel="noopener">electron-vite</a></td><td class="ver">^4</td><td><span class="license-tag">MIT</span></td><td>Electron 项目脚手架</td></tr>
+          <tr><td class="pkg"><a href="https://www.framer.com/motion/" target="_blank" rel="noopener">framer-motion</a></td><td class="ver">^12</td><td><span class="license-tag">MIT</span></td><td>动画 + 过渡引擎</td></tr>
+          <tr><td class="pkg"><a href="https://zustand-demo.pmnd.rs/" target="_blank" rel="noopener">zustand</a></td><td class="ver">^5</td><td><span class="license-tag">MIT</span></td><td>状态管理</td></tr>
+          <tr><td class="pkg"><a href="https://www.i18next.com/" target="_blank" rel="noopener">i18next</a></td><td class="ver">^23</td><td><span class="license-tag">MIT</span></td><td>国际化（zh / en / ru）</td></tr>
+          <tr><td class="pkg"><a href="https://react.i18next.com/" target="_blank" rel="noopener">react-i18next</a></td><td class="ver">^15</td><td><span class="license-tag">MIT</span></td><td>i18next 的 React 绑定</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Data / Storage -->
+    <div class="group">
+      <h2>数据 / 存储</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://github.com/WiseLibs/better-sqlite3" target="_blank" rel="noopener">better-sqlite3</a></td><td class="ver">^11</td><td><span class="license-tag">MIT</span></td><td>本地 SQLite（对局历史 + 翻译缓存）</td></tr>
+          <tr><td class="pkg"><a href="https://github.com/sindresorhus/electron-store" target="_blank" rel="noopener">electron-store</a></td><td class="ver">^10</td><td><span class="license-tag">MIT</span></td><td>App 配置持久化</td></tr>
+          <tr><td class="pkg"><a href="https://supabase.com/" target="_blank" rel="noopener">@supabase/supabase-js</a></td><td class="ver">^2</td><td><span class="license-tag">MIT</span></td><td>云端账号 + 对局数据同步</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Network -->
+    <div class="group">
+      <h2>网络 / 协议</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://fastify.dev/" target="_blank" rel="noopener">fastify</a></td><td class="ver">^5</td><td><span class="license-tag">MIT</span></td><td>本地 GSI HTTP 服务器（:4000）</td></tr>
+          <tr><td class="pkg">undici / fetch</td><td class="ver">node-builtin</td><td><span class="license-tag">MIT</span></td><td>HTTPS 客户端</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Native -->
+    <div class="group">
+      <h2>Native 模块</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://github.com/octalmage/robotjs" target="_blank" rel="noopener">@jitsi/robotjs</a></td><td class="ver">^0.6</td><td><span class="license-tag">MIT</span></td><td>键盘模拟（聊天发送 Method D）</td></tr>
+          <tr><td class="pkg">amefys-window-focus</td><td class="ver">workspace</td><td><span class="license-tag">MIT</span></td><td>跨平台窗口焦点检测（自维护的 native addon）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Fonts -->
+    <div class="group">
+      <h2>字体 / 资源</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://vercel.com/font" target="_blank" rel="noopener">Geist</a></td><td class="ver">v1.2</td><td><span class="license-tag">OFL-1.1</span></td><td>主界面字体</td></tr>
+          <tr><td class="pkg"><a href="https://vercel.com/font" target="_blank" rel="noopener">Geist Mono</a></td><td class="ver">v1.2</td><td><span class="license-tag">OFL-1.1</span></td><td>等宽字体（代码、时钟）</td></tr>
+          <tr><td class="pkg"><a href="https://fonts.google.com/specimen/Newsreader" target="_blank" rel="noopener">Newsreader</a></td><td class="ver">latest</td><td><span class="license-tag">OFL-1.1</span></td><td>装饰性衬线字体（部分 skin）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Build / CI -->
+    <div class="group">
+      <h2>构建 / 测试 / CI</h2>
+      <table class="dep-table">
+        <thead><tr><th>软件</th><th>版本</th><th>许可</th><th>用途</th></tr></thead>
+        <tbody>
+          <tr><td class="pkg"><a href="https://www.electron.build/" target="_blank" rel="noopener">electron-builder</a></td><td class="ver">^26</td><td><span class="license-tag">MIT</span></td><td>DMG / EXE 打包 + 自动更新</td></tr>
+          <tr><td class="pkg"><a href="https://vitest.dev/" target="_blank" rel="noopener">vitest</a></td><td class="ver">^4</td><td><span class="license-tag">MIT</span></td><td>单元 + 集成测试</td></tr>
+          <tr><td class="pkg"><a href="https://playwright.dev/" target="_blank" rel="noopener">@playwright/test</a></td><td class="ver">^1.49</td><td><span class="license-tag">Apache-2.0</span></td><td>E2E 测试</td></tr>
+          <tr><td class="pkg"><a href="https://eslint.org/" target="_blank" rel="noopener">eslint</a></td><td class="ver">^9</td><td><span class="license-tag">MIT</span></td><td>代码风格检查</td></tr>
+          <tr><td class="pkg"><a href="https://prettier.io/" target="_blank" rel="noopener">prettier</a></td><td class="ver">^3</td><td><span class="license-tag">MIT</span></td><td>代码格式化</td></tr>
+          <tr><td class="pkg"><a href="https://www.cloudflare.com/zh-cn/developer-platform/products/workers/" target="_blank" rel="noopener">Cloudflare Workers</a></td><td class="ver">cloud</td><td><span class="license-tag">SaaS</span></td><td>CDN + 主题分发 + 包热度统计</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>
