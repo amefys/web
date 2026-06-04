@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TI15 · 刺绣语言对比 v3a / v3b · AMEFYS</title>
+<style>
+  /* ════════════════════════════════════════════════════════════════
+   *  TI15 embroidery-language comparison
+   *  v3a — official translation: metallic gold type + clean panels,
+   *        embroidery ONLY on focal imagery (medallion + team patches)
+   *  v3b — high-fidelity patch: hand-drawn SVG stitch border-image
+   *        (per-stitch gradient/jitter), every panel & button = patch
+   *  Shared: brocade stage w/ warm spotlight + gold-dust bokeh
+   *  Palette from official key art: espresso cloth / gold thread
+   *  #D9A93F / pale satin #F0D88A / crimson #A6242F
+   * ════════════════════════════════════════════════════════════════ */
+  :root {
+    --gold: #D9A93F; --gold-hi: #F0D88A; --gold-deep: #9C7420;
+    --crimson: #A6242F;
+    --text: #F2E6CB; --text-2: rgba(242,230,203,0.72); --text-3: rgba(242,230,203,0.46);
+    --serif: "Songti SC", "Source Han Serif SC", "STSongti", serif;
+    --script: "Snell Roundhand", "Apple Chancery", "Savoye LET", cursive;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0D0805; font-family: var(--sans); color: var(--text); }
+
+  .variant-label {
+    max-width: 1120px; margin: 0 auto; padding: 18px 24px 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: 1px; color: var(--text-3);
+    text-transform: uppercase;
+  }
+  .variant-label strong { color: var(--gold); }
+
+  /* ── Shared stage: brocade cloth + spotlight + bokeh ───────────── */
+  .stage {
+    position: relative; overflow: hidden;
+    padding: 40px 0 56px;
+    background:
+      /* warm center spotlight */
+      radial-gradient(ellipse 64% 54% at 50% 26%, rgba(140,94,30,0.50) 0%, rgba(80,52,16,0.22) 46%, transparent 72%),
+      /* fabric weave noise */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.66  0 0 0 0 0.25  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23w)'/></svg>") repeat,
+      /* warp/weft threads */
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.06) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(240,216,138,0.025) 0 1px, transparent 1px 3px),
+      linear-gradient(180deg, #1C1208 0%, #170E07 55%, #100A04 100%);
+  }
+  /* vignette */
+  .stage::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse 90% 80% at 50% 40%, transparent 55%, rgba(8,5,2,0.55) 100%);
+  }
+  /* gold-dust bokeh, two depth layers */
+  .bokeh { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .bokeh.far {
+    filter: blur(7px);
+    background:
+      radial-gradient(circle at 8% 24%,  rgba(232,194,117,0.16) 0 18px, transparent 26px),
+      radial-gradient(circle at 16% 72%, rgba(232,194,117,0.11) 0 26px, transparent 36px),
+      radial-gradient(circle at 88% 18%, rgba(232,194,117,0.14) 0 22px, transparent 30px),
+      radial-gradient(circle at 93% 64%, rgba(232,194,117,0.10) 0 30px, transparent 40px),
+      radial-gradient(circle at 73% 88%, rgba(232,194,117,0.09) 0 20px, transparent 28px),
+      radial-gradient(circle at 30% 92%, rgba(232,194,117,0.08) 0 24px, transparent 32px);
+  }
+  .bokeh.near {
+    filter: blur(1.5px);
+    background:
+      radial-gradient(circle at 12% 44%, rgba(240,216,138,0.30) 0 4px, transparent 7px),
+      radial-gradient(circle at 5% 60%,  rgba(240,216,138,0.20) 0 3px, transparent 6px),
+      radial-gradient(circle at 90% 38%, rgba(240,216,138,0.26) 0 5px, transparent 8px),
+      radial-gradient(circle at 96% 80%, rgba(240,216,138,0.18) 0 3px, transparent 5px),
+      radial-gradient(circle at 82% 8%,  rgba(240,216,138,0.22) 0 4px, transparent 7px),
+      radial-gradient(circle at 22% 10%, rgba(240,216,138,0.16) 0 3px, transparent 6px);
+  }
+
+  .inner { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── Shared hero: embroidered medallion + script + metal title ── */
+  .hero { text-align: center; margin-bottom: 34px; }
+  .medallion {
+    width: 168px; height: 168px; margin: 0 auto 2px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' fill='none'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F0D88A'/><stop offset='0.5' stop-color='%23D9A93F'/><stop offset='1' stop-color='%239C7420'/></linearGradient><pattern id='s1' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(48)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23D9A93F' stroke-width='1.4' stroke-opacity='0.6'/></pattern><pattern id='s2' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(-38)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23E8C275' stroke-width='1.4' stroke-opacity='0.55'/></pattern><path id='p' d='M200 30 C217 56 217 84 200 104 C183 84 183 56 200 30 Z'/></defs><circle cx='200' cy='200' r='192' stroke='url(%23g)' stroke-width='2.5'/><circle cx='200' cy='200' r='186' stroke='%23D9A93F' stroke-width='1.1' stroke-dasharray='2.2 1.8' stroke-opacity='0.8'/><circle cx='200' cy='200' r='181' stroke='%23E8C275' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.5'/><circle cx='200' cy='200' r='176' stroke='url(%23g)' stroke-width='1.6'/><g stroke='url(%23g)' stroke-width='1.5'><use href='%23p' fill='url(%23s1)'/><use href='%23p' fill='url(%23s2)' transform='rotate(30 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(60 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(90 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(120 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(150 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(180 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(210 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(240 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(270 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(300 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(330 200 200)'/></g><g stroke='%23D9A93F' stroke-opacity='0.6' stroke-width='1' stroke-dasharray='1.8 1.5'><line x1='200' y1='40' x2='200' y2='92' transform='rotate(15 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(45 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(75 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(105 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(135 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(165 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(195 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(225 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(255 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(285 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(315 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(345 200 200)'/></g><g fill='%23A6242F' fill-opacity='0.85'><circle cx='247.9' cy='21.3' r='3'/><circle cx='330.8' cy='69.2' r='3'/><circle cx='378.7' cy='152.1' r='3'/><circle cx='378.7' cy='247.9' r='3'/><circle cx='330.8' cy='330.8' r='3'/><circle cx='247.9' cy='378.7' r='3'/><circle cx='152.1' cy='378.7' r='3'/><circle cx='69.2' cy='330.8' r='3'/><circle cx='21.3' cy='247.9' r='3'/><circle cx='21.3' cy='152.1' r='3'/><circle cx='69.2' cy='69.2' r='3'/><circle cx='152.1' cy='21.3' r='3'/></g><circle cx='200' cy='200' r='96' stroke='url(%23g)' stroke-width='2'/><circle cx='200' cy='200' r='90' stroke='%23D9A93F' stroke-width='1' stroke-dasharray='2.2 1.8' stroke-opacity='0.75'/><circle cx='200' cy='200' r='84' stroke='%23E8C275' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.5'/><path d='M200 142 L258 200 L200 258 L142 200 Z' fill='url(%23s2)' stroke='url(%23g)' stroke-width='2.2'/><path d='M200 152 L248 200 L200 248 L152 200 Z' stroke='%23F0D88A' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.8'/><circle cx='200' cy='200' r='13' fill='%23A6242F' fill-opacity='0.9' stroke='url(%23g)' stroke-width='2'/></svg>") no-repeat center / contain;
+    filter: drop-shadow(0 0 26px rgba(217,169,63,0.45)) drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+  }
+  .script {
+    font-family: var(--script);
+    font-size: 34px; line-height: 1.1;
+    background: linear-gradient(180deg, #F0D88A 10%, #D9A93F 55%, #B98C2C 90%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 1px 4px rgba(217,169,63,0.40));
+  }
+  .stars { font-size: 10px; letter-spacing: 6px; color: var(--gold); opacity: 0.85; margin: 2px 0 14px; }
+
+  /* SHANGHAI-style beveled metallic type */
+  .metal {
+    font-family: var(--serif); font-weight: 900;
+    background:
+      linear-gradient(100deg, transparent 40%, rgba(255,255,255,0.50) 50%, transparent 60%),
+      linear-gradient(180deg, #FFF8DC 0%, #F8E7B0 16%, #EFCB72 34%, #D9A93F 50%, #9C7420 63%, #7A5510 74%, #C9962E 86%, #F0D88A 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    filter:
+      drop-shadow(0 1px 0 rgba(80, 52, 8, 0.85))
+      drop-shadow(0 3px 2px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 0 22px rgba(217, 169, 63, 0.30));
+  }
+  .hero h1.metal { font-size: 52px; letter-spacing: 4px; line-height: 1.15; }
+  .hero .sub { margin-top: 8px; font-size: 13.5px; color: var(--text-2); letter-spacing: 1px; }
+
+  .countdown { display: flex; gap: 30px; justify-content: center; margin-top: 22px; }
+  .cd .num.metal { font-size: 44px; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  .cd .lab { font-size: 10px; letter-spacing: 1.6px; color: var(--text-3); font-weight: 700; margin-top: 4px; text-align: center; }
+
+  /* ── Shared content grid ──────────────────────────────────────── */
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 22px; }
+  .tile { padding: 16px 18px; position: relative; }
+  .tile .time { font-size: 10.5px; font-weight: 700; letter-spacing: 0.8px; color: var(--gold); margin-bottom: 10px; }
+  .faceoff { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+  .team { display: flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 700; }
+  .vs { font-size: 10.5px; font-weight: 800; color: var(--text-3); letter-spacing: 1px; }
+  .tile .stage-line { font-size: 11px; color: var(--text-3); border-top: 0.5px dashed rgba(217,169,63,0.25); padding-top: 9px; }
+  .stat-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; margin-bottom: 8px; }
+  .stat-v.metal { font-size: 40px; }
+  .stat-sub { font-size: 11.5px; color: var(--text-3); margin-top: 6px; }
+
+  /* team logo = embroidered mini patch (BOTH variants — official move) */
+  .logo {
+    width: 30px; height: 30px; border-radius: 7px; flex-shrink: 0;
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 800; color: #fff;
+    position: relative;
+    box-shadow: 0 0 12px -2px rgba(217,169,63,0.55), 0 3px 7px -2px rgba(0,0,0,0.6);
+  }
+  .logo::after {
+    content: ""; position: absolute; inset: -3px; border-radius: 10px;
+    padding: 3px; pointer-events: none;
+    background:
+      repeating-linear-gradient(48deg, rgba(74,46,8,0.55) 0 1px, transparent 1px 2.4px),
+      linear-gradient(135deg, #F0D88A, #D9A93F 45%, #8A6518);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+  .logo.lgd { background: linear-gradient(135deg, #C8102E, #2A0008); }
+  .logo.xg  { background: linear-gradient(135deg, #FFD700, #B8941F); color: #1A1308; }
+  .logo.liq { background: linear-gradient(135deg, #0E97D8, #0D2B5A); }
+  .logo.tun { background: linear-gradient(135deg, #5A5A5A, #1A1A1A); }
+
+  .actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .cta, .ghost { appearance: none; cursor: pointer; font: inherit; font-weight: 700; font-size: 13.5px; letter-spacing: 0.4px; }
+
+  /* ════════════════════════════════════════════════════════════════
+   *  v3a — OFFICIAL TRANSLATION
+   *  clean glass panels / hairline gold / metal CTA — embroidery only
+   *  on the medallion & team patches above
+   * ════════════════════════════════════════════════════════════════ */
+  .v3a .tile {
+    background: rgba(40, 26, 14, 0.66);
+    border: 0.5px solid rgba(217, 169, 63, 0.24);
+    border-radius: 14px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(240, 216, 138, 0.07), 0 10px 24px -14px rgba(0, 0, 0, 0.8);
+  }
+  .v3a .tile.cn {
+    border-left: 2px solid var(--crimson);
+    background: linear-gradient(90deg, rgba(166, 36, 47, 0.10), transparent 40%), rgba(40, 26, 14, 0.66);
+  }
+  /* metal-plate CTA, like the SHANGHAI lettering material */
+  .v3a .cta {
+    padding: 11px 26px; border-radius: 8px;
+    border: 1px solid rgba(122, 85, 16, 0.9);
+    background: linear-gradient(180deg, #F8E7B0 0%, #E8C275 28%, #D9A93F 55%, #9C7420 100%);
+    color: #2A1A06;
+    text-shadow: 0 1px 0 rgba(255, 248, 220, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 230, 0.75),
+      inset 0 -2px 3px rgba(110, 70, 10, 0.45),
+      0 4px 12px -4px rgba(0, 0, 0, 0.7),
+      0 0 22px -4px rgba(217, 169, 63, 0.45);
+  }
+  .v3a .ghost {
+    padding: 11px 22px; border-radius: 8px;
+    background: rgba(217, 169, 63, 0.07);
+    border: 0.5px solid rgba(217, 169, 63, 0.35);
+    color: var(--gold-hi);
+  }
+  .v3a .badge-cn {
+    font-size: 11.5px; font-weight: 700; padding: 6px 14px; border-radius: 999px;
+    background: linear-gradient(150deg, #8E2B33, #6E161E);
+    border: 1px solid rgba(217, 169, 63, 0.55);
+    color: #F0D88A;
+    box-shadow: 0 0 14px -4px rgba(166, 36, 47, 0.6);
+  }
+
+  /* ════════════════════════════════════════════════════════════════
+   *  v3b — HIGH-FIDELITY PATCH
+   *  hand-drawn SVG stitch tile via border-image: every stitch is a
+   *  rounded capsule w/ its own gradient + jitter; corners fan around
+   * ════════════════════════════════════════════════════════════════ */
+  .v3b .tile, .v3b .cta, .v3b .badge-cn {
+    border-style: solid; border-color: transparent;
+    border-image-source: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 54 54'><defs><linearGradient id='sg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23F8E7B0'/><stop offset='0.45' stop-color='%23DCAF4C'/><stop offset='1' stop-color='%238F6A1A'/></linearGradient><rect id='st' x='-1.4' y='0.8' width='2.8' height='12.9' rx='1.4' fill='url(%23sg)' stroke='%233A2406' stroke-opacity='0.45' stroke-width='0.4'/></defs><rect x='0' y='0.5' width='54' height='13' fill='%23755318'/><rect x='0' y='40.5' width='54' height='13' fill='%23755318'/><rect x='0.5' y='0' width='13' height='54' fill='%23755318'/><rect x='40.5' y='0' width='13' height='54' fill='%23755318'/><g id='all'><g><use href='%23st' transform='translate(17.6,0) rotate(3 0 2)'/><use href='%23st' transform='translate(20.7,0) rotate(-2.5 0 2)'/><use href='%23st' transform='translate(23.9,0) rotate(2 0 2)'/><use href='%23st' transform='translate(27,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(30.1,0) rotate(2.5 0 2)'/><use href='%23st' transform='translate(33.3,0) rotate(-2 0 2)'/><use href='%23st' transform='translate(36.4,0) rotate(3 0 2)'/><use href='%23st' transform='translate(14.4,0) rotate(-12 0 2)'/><use href='%23st' transform='rotate(-22 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-45 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-68 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-90 15 15) translate(13.4,0) rotate(12 0 2)'/></g><use href='%23all2' transform='rotate(90 27 27)'/></g><g id='all2'><g transform='rotate(90 27 27)'><use href='%23st' transform='translate(17.6,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(20.7,0) rotate(2.5 0 2)'/><use href='%23st' transform='translate(23.9,0) rotate(-2 0 2)'/><use href='%23st' transform='translate(27,0) rotate(3 0 2)'/><use href='%23st' transform='translate(30.1,0) rotate(-2.5 0 2)'/><use href='%23st' transform='translate(33.3,0) rotate(2 0 2)'/><use href='%23st' transform='translate(36.4,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(14.4,0) rotate(-12 0 2)'/><use href='%23st' transform='rotate(-22 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-45 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-68 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-90 15 15) translate(13.4,0) rotate(12 0 2)'/></g></g><use href='%23all' transform='rotate(180 27 27)'/></svg>");
+    border-image-slice: 16;
+    border-image-repeat: round;
+  }
+  .v3b .tile {
+    border-width: 12px;
+    border-image-width: 12px;
+    background:
+      /* fabric fill: turbulence + twill */
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.72  0 0 0 0 0.55  0 0 0 0 0.25  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>") repeat,
+      repeating-linear-gradient(48deg, rgba(240,216,138,0.030) 0 1px, rgba(0,0,0,0.025) 1px 2px, transparent 2px 3.2px),
+      linear-gradient(180deg, rgba(38, 24, 12, 0.97), rgba(29, 18, 9, 0.97));
+    outline: 1px dashed rgba(240, 216, 138, 0.28);
+    outline-offset: -17px;
+    box-shadow:
+      0 0 0 1px rgba(16, 9, 2, 0.85),
+      0 0 0 2px rgba(240, 216, 138, 0.07),
+      0 16px 30px -14px rgba(0, 0, 0, 0.85),
+      0 0 34px -8px rgba(217, 169, 63, 0.35);
+  }
+  .v3b .tile.cn {
+    background:
+      linear-gradient(rgba(166, 36, 47, 0.14), rgba(166, 36, 47, 0.05)),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.72  0 0 0 0 0.55  0 0 0 0 0.25  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>") repeat,
+      linear-gradient(180deg, rgba(38, 24, 12, 0.97), rgba(29, 18, 9, 0.97));
+  }
+  .v3b .cta {
+    border-width: 9px;
+    border-image-width: 9px;
+    padding: 5px 16px;
+    background:
+      repeating-linear-gradient(48deg, rgba(255, 244, 214, 0.22) 0 1px, rgba(110, 74, 14, 0.20) 1px 2px, transparent 2px 3px),
+      linear-gradient(160deg, #ECC979 0%, #D9A93F 48%, #B98C2C 100%);
+    color: #2A1A06;
+    text-shadow: 0 1px 0 rgba(255, 244, 214, 0.4);
+    box-shadow:
+      0 0 0 1px rgba(16, 9, 2, 0.85),
+      0 5px 14px -5px rgba(0, 0, 0, 0.7),
+      0 0 20px -3px rgba(217, 169, 63, 0.5);
+  }
+  .v3b .ghost {
+    padding: 11px 22px; border-radius: 8px;
+    background: rgba(217, 169, 63, 0.07);
+    border: 1px dashed rgba(217, 169, 63, 0.5);
+    color: var(--gold-hi);
+  }
+  .v3b .badge-cn {
+    border-width: 8px;
+    border-image-width: 8px;
+    font-size: 11.5px; font-weight: 700; padding: 3px 10px;
+    background:
+      repeating-linear-gradient(48deg, rgba(255, 198, 188, 0.16) 0 1px, rgba(60, 8, 10, 0.22) 1px 2px, transparent 2px 3px),
+      linear-gradient(150deg, #B02E39 0%, #A6242F 55%, #7E1A23 100%);
+    color: #F6E8C8;
+    text-shadow: 0 1px 2px rgba(40, 6, 8, 0.6);
+    box-shadow:
+      0 0 0 1px rgba(16, 9, 2, 0.85),
+      0 0 16px -4px rgba(217, 169, 63, 0.5);
+  }
+</style>
+</head>
+<body>
+
+<div class="variant-label"><strong>v3a · 官方式转译</strong> — 金属金字 + 干净面板，刺绣只在团花 / 队标布章</div>
+<section class="stage v3a">
+  <div class="bokeh far"></div><div class="bokeh near"></div>
+  <div class="inner">
+    <header class="hero">
+      <div class="medallion"></div>
+      <div class="script">The International</div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <h1 class="metal">七年再聚 · 上海</h1>
+      <p class="sub">浦发银行东方体育中心 · 2026.08.20 — 23</p>
+      <div class="countdown">
+        <div class="cd"><div class="num metal">76</div><div class="lab">DAYS</div></div>
+        <div class="cd"><div class="num metal">19</div><div class="lab">HOURS</div></div>
+        <div class="cd"><div class="num metal">26</div><div class="lab">MIN</div></div>
+        <div class="cd"><div class="num metal">04</div><div class="lab">SEC</div></div>
+      </div>
+    </header>
+    <div class="grid">
+      <article class="tile cn">
+        <div class="time">20:00 · BO3 · 淘汰赛</div>
+        <div class="faceoff">
+          <span class="team"><span class="logo lgd">L</span>PSG.LGD</span>
+          <span class="vs">VS</span>
+          <span class="team">Tundra<span class="logo tun">T</span></span>
+        </div>
+        <div class="stage-line">胜者组 · 主舞台</div>
+      </article>
+      <article class="tile cn">
+        <div class="time">22:30 · BO3</div>
+        <div class="faceoff">
+          <span class="team"><span class="logo xg">X</span>XG</span>
+          <span class="vs">VS</span>
+          <span class="team">Liquid<span class="logo liq">L</span></span>
+        </div>
+        <div class="stage-line">胜者组 · 小组赛</div>
+      </article>
+      <article class="tile">
+        <div class="stat-label">本周胜率</div>
+        <div class="stat-v metal">62%</div>
+        <div class="stat-sub">12 场 · 8 胜 4 负 · 3 连胜</div>
+      </article>
+    </div>
+    <div class="actions">
+      <button class="cta">模拟进入对局</button>
+      <button class="ghost">查看全部赛程</button>
+      <span class="badge-cn">中国战队 · 3 场</span>
+    </div>
+  </div>
+</section>
+
+<div class="variant-label"><strong>v3b · 高保真布章</strong> — SVG 手绘针脚锁边（每针独立渐变 + 抖动），面板 / 按钮全是布章</div>
+<section class="stage v3b">
+  <div class="bokeh far"></div><div class="bokeh near"></div>
+  <div class="inner">
+    <header class="hero">
+      <div class="medallion"></div>
+      <div class="script">The International</div>
+      <div class="stars">★ ★ ★ ★ ★</div>
+      <h1 class="metal">七年再聚 · 上海</h1>
+      <p class="sub">浦发银行东方体育中心 · 2026.08.20 — 23</p>
+      <div class="countdown">
+        <div class="cd"><div class="num metal">76</div><div class="lab">DAYS</div></div>
+        <div class="cd"><div class="num metal">19</div><div class="lab">HOURS</div></div>
+        <div class="cd"><div class="num metal">26</div><div class="lab">MIN</div></div>
+        <div class="cd"><div class="num metal">04</div><div class="lab">SEC</div></div>
+      </div>
+    </header>
+    <div class="grid">
+      <article class="tile cn">
+        <div class="time">20:00 · BO3 · 淘汰赛</div>
+        <div class="faceoff">
+          <span class="team"><span class="logo lgd">L</span>PSG.LGD</span>
+          <span class="vs">VS</span>
+          <span class="team">Tundra<span class="logo tun">T</span></span>
+        </div>
+        <div class="stage-line">胜者组 · 主舞台</div>
+      </article>
+      <article class="tile cn">
+        <div class="time">22:30 · BO3</div>
+        <div class="faceoff">
+          <span class="team"><span class="logo xg">X</span>XG</span>
+          <span class="vs">VS</span>
+          <span class="team">Liquid<span class="logo liq">L</span></span>
+        </div>
+        <div class="stage-line">胜者组 · 小组赛</div>
+      </article>
+      <article class="tile">
+        <div class="stat-label">本周胜率</div>
+        <div class="stat-v metal">62%</div>
+        <div class="stat-sub">12 场 · 8 胜 4 负 · 3 连胜</div>
+      </article>
+    </div>
+    <div class="actions">
+      <button class="cta">模拟进入对局</button>
+      <button class="ghost">查看全部赛程</button>
+      <span class="badge-cn">中国战队 · 3 场</span>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
