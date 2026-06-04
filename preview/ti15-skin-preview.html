@@ -24,30 +24,32 @@
 
   /* ╔══════════════════════════════════════════════════════════════╗
    * ║  Skin A — Aegis Shanghai (default)                            ║
-   * ║  Champion gold × midnight blue × black, gravitas               ║
+   * ║  Gold-thread embroidery × cloud-brocade brown × crimson        ║
+   * ║  (云锦 / 刺绣 — aligned to official TI15 visual, 2026-06)      ║
    * ╚══════════════════════════════════════════════════════════════╝ */
   [data-skin="aegis-shanghai"] {
-    --color-bg: #0A1530;
-    --color-bg-2: #0E1B3F;
-    --color-bg-3: #14224A;
-    --color-surface: rgba(20, 34, 74, 0.65);
-    --color-fill: rgba(212, 175, 55, 0.06);
-    --color-fill-secondary: rgba(212, 175, 55, 0.12);
-    --color-hairline: rgba(212, 175, 55, 0.18);
-    --color-hairline-strong: rgba(212, 175, 55, 0.32);
+    --color-bg: #170E07;               /* espresso brocade cloth */
+    --color-bg-2: #1F1409;
+    --color-bg-3: #2A1B0E;
+    --color-surface: rgba(46, 30, 16, 0.66);
+    --color-fill: rgba(217, 169, 63, 0.06);
+    --color-fill-secondary: rgba(217, 169, 63, 0.12);
+    --color-hairline: rgba(217, 169, 63, 0.20);
+    --color-hairline-strong: rgba(217, 169, 63, 0.36);
 
-    --color-text: #F2E9D2;
-    --color-text-secondary: rgba(242, 233, 210, 0.72);
-    --color-text-tertiary: rgba(242, 233, 210, 0.46);
+    --color-text: #F2E6CB;
+    --color-text-secondary: rgba(242, 230, 203, 0.72);
+    --color-text-tertiary: rgba(242, 230, 203, 0.46);
 
-    --color-accent: #D4AF37;           /* aegis gold */
-    --color-accent-deep: #A8841F;
-    --color-accent-glow: rgba(212, 175, 55, 0.45);
-    --color-radiant: #6FCF8B;
-    --color-dire: #D9534F;
+    --color-accent: #D9A93F;           /* gold thread */
+    --color-accent-deep: #9C7420;      /* shadow thread */
+    --color-accent-glow: rgba(217, 169, 63, 0.42);
+    --color-crimson: #A6242F;          /* embroidered crimson accent */
+    --color-radiant: #7FB880;          /* embroidery-thread green */
+    --color-dire: #C25048;
 
-    --skin-stage: linear-gradient(180deg, #06112A 0%, #0A1530 38%, #102046 100%);
-    --skin-decor-color: rgba(212, 175, 55, 0.07);
+    --skin-stage: radial-gradient(ellipse at 50% 28%, #2A1A0C 0%, #1C1108 48%, #120B05 100%);
+    --skin-decor-color: rgba(217, 169, 63, 0.08);
   }
 
   /* ╔══════════════════════════════════════════════════════════════╗
@@ -152,6 +154,11 @@
     color: #1A1308;
     box-shadow: 0 0 0 1px rgba(212,175,55,0.30), 0 2px 8px rgba(212,175,55,0.25);
   }
+  [data-skin="aegis-shanghai"] .skin-toggle button[aria-pressed="true"]:nth-child(1) {
+    background: linear-gradient(135deg, #E8C275 0%, #9C7420 100%);
+    color: #1C1108;
+    box-shadow: 0 0 0 1px rgba(217,169,63,0.36), 0 2px 8px rgba(217,169,63,0.30);
+  }
   [data-skin="trophy-forge"] .skin-toggle button[aria-pressed="true"]:nth-child(2) {
     background: linear-gradient(135deg, #FFC451 0%, #FF7A18 100%);
     color: #1A0708;
@@ -200,11 +207,20 @@
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 320' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='1'><!-- Outer shield --><path d='M120 12 L216 56 L216 176 Q216 248 120 308 Q24 248 24 176 L24 56 Z'/><!-- Inner shield --><path d='M120 36 L192 70 L192 168 Q192 220 120 268 Q48 220 48 168 L48 70 Z'/><!-- Crown spikes (top) --><path d='M80 12 L80 0 L88 8 L96 0 L96 12'/><path d='M104 12 L104 -4 L120 8 L136 -4 L136 12'/><path d='M144 12 L144 0 L152 8 L160 0 L160 12'/><!-- Central diamond + circle --><circle cx='120' cy='160' r='28'/><path d='M120 132 L148 160 L120 188 L92 160 Z'/><circle cx='120' cy='160' r='10'/><!-- Wing flourishes --><path d='M48 96 L24 80 L20 60 L40 76'/><path d='M192 96 L216 80 L220 60 L200 76'/><!-- Engraved laurel curves --><path d='M60 220 Q90 240 120 245 Q150 240 180 220'/><path d='M70 240 Q95 255 120 260 Q145 255 170 240'/><!-- TI15 numerals at top of shield --><text x='120' y='90' font-family='Cinzel, Times, serif' font-size='12' font-weight='700' fill='%23ffffff' text-anchor='middle' letter-spacing='1'>TI15</text></svg>") no-repeat center / contain;
     opacity: 0.06;
   }
-  [data-skin="aegis-shanghai"] .stage::after { opacity: 0.10; filter: hue-rotate(0) drop-shadow(0 0 16px rgba(212,175,55,0.25)); }
+  /* Aegis: swap the wireframe crest for an embroidered 团花 medallion —
+   * couched gold-thread rings (盘金绣), 12 satin-stitch petals with
+   * alternating thread direction, crimson french knots (打籽绣), dense
+   * running-stitch rays. Mirrors the official circular emblem treatment
+   * as a craft language, not as copied artwork. */
+  [data-skin="aegis-shanghai"] .stage::after {
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400' fill='none'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F0D88A'/><stop offset='0.5' stop-color='%23D9A93F'/><stop offset='1' stop-color='%239C7420'/></linearGradient><pattern id='s1' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(48)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23D9A93F' stroke-width='1.4' stroke-opacity='0.6'/></pattern><pattern id='s2' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(-38)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23E8C275' stroke-width='1.4' stroke-opacity='0.55'/></pattern><path id='p' d='M200 30 C217 56 217 84 200 104 C183 84 183 56 200 30 Z'/></defs><!-- couched outer rings --><circle cx='200' cy='200' r='192' stroke='url(%23g)' stroke-width='2.5'/><circle cx='200' cy='200' r='186' stroke='%23D9A93F' stroke-width='1.1' stroke-dasharray='2.2 1.8' stroke-opacity='0.8'/><circle cx='200' cy='200' r='181' stroke='%23E8C275' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.5'/><circle cx='200' cy='200' r='176' stroke='url(%23g)' stroke-width='1.6'/><!-- 12 satin petals, alternating thread direction --><g stroke='url(%23g)' stroke-width='1.5'><use href='%23p' fill='url(%23s1)'/><use href='%23p' fill='url(%23s2)' transform='rotate(30 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(60 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(90 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(120 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(150 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(180 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(210 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(240 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(270 200 200)'/><use href='%23p' fill='url(%23s1)' transform='rotate(300 200 200)'/><use href='%23p' fill='url(%23s2)' transform='rotate(330 200 200)'/></g><!-- dense stitch rays between petals --><g stroke='%23D9A93F' stroke-opacity='0.6' stroke-width='1' stroke-dasharray='1.8 1.5'><line x1='200' y1='40' x2='200' y2='92' transform='rotate(15 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(45 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(75 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(105 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(135 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(165 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(195 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(225 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(255 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(285 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(315 200 200)'/><line x1='200' y1='40' x2='200' y2='92' transform='rotate(345 200 200)'/></g><!-- crimson french knots on the rim --><g fill='%23A6242F' fill-opacity='0.85'><circle cx='247.9' cy='21.3' r='3'/><circle cx='330.8' cy='69.2' r='3'/><circle cx='378.7' cy='152.1' r='3'/><circle cx='378.7' cy='247.9' r='3'/><circle cx='330.8' cy='330.8' r='3'/><circle cx='247.9' cy='378.7' r='3'/><circle cx='152.1' cy='378.7' r='3'/><circle cx='69.2' cy='330.8' r='3'/><circle cx='21.3' cy='247.9' r='3'/><circle cx='21.3' cy='152.1' r='3'/><circle cx='69.2' cy='69.2' r='3'/><circle cx='152.1' cy='21.3' r='3'/></g><!-- couched inner rings --><circle cx='200' cy='200' r='96' stroke='url(%23g)' stroke-width='2'/><circle cx='200' cy='200' r='90' stroke='%23D9A93F' stroke-width='1' stroke-dasharray='2.2 1.8' stroke-opacity='0.75'/><circle cx='200' cy='200' r='84' stroke='%23E8C275' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.5'/><circle cx='200' cy='200' r='78' stroke='%23D9A93F' stroke-width='1' stroke-dasharray='2.2 1.8' stroke-opacity='0.65'/><circle cx='200' cy='200' r='72' stroke='%23E8C275' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.45'/><!-- center diamond, counter-direction satin + stitch outlines --><path d='M200 142 L258 200 L200 258 L142 200 Z' fill='url(%23s2)' stroke='url(%23g)' stroke-width='2.2'/><path d='M200 152 L248 200 L200 248 L152 200 Z' stroke='%23F0D88A' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.8'/><path d='M200 162 L238 200 L200 238 L162 200 Z' stroke='%23D9A93F' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.6'/><circle cx='200' cy='200' r='13' fill='%23A6242F' fill-opacity='0.9' stroke='url(%23g)' stroke-width='2'/><circle cx='200' cy='200' r='8' stroke='%23F0D88A' stroke-width='1' stroke-dasharray='1.6 1.3' stroke-opacity='0.7'/></svg>") no-repeat center / contain;
+    opacity: 0.15;
+    filter: drop-shadow(0 0 28px rgba(217,169,63,0.30));
+  }
   [data-skin="trophy-forge"]  .stage::after { opacity: 0.12; filter: drop-shadow(0 0 20px rgba(255,122,24,0.30)); }
   [data-skin="homecoming"]    .stage::after { opacity: 0.10; filter: drop-shadow(0 0 14px rgba(255,215,0,0.30)); }
 
-  [data-skin="aegis-shanghai"] .stage::before { filter: drop-shadow(0 0 8px rgba(212,175,55,0.20)); }
+  [data-skin="aegis-shanghai"] .stage::before { filter: drop-shadow(0 0 8px rgba(217,169,63,0.22)); }
   [data-skin="trophy-forge"]   .stage::before { opacity: 0.14; filter: drop-shadow(0 -4px 12px rgba(255,122,24,0.30)); }
   [data-skin="homecoming"]     .stage::before { opacity: 0.16; filter: drop-shadow(0 0 6px rgba(255,215,0,0.20)); }
 
@@ -213,8 +229,32 @@
     position: absolute; inset: 0; pointer-events: none; z-index: 0;
     display: none;
   }
+  [data-skin="aegis-shanghai"] .decor-extra,
   [data-skin="trophy-forge"] .decor-extra,
   [data-skin="homecoming"] .decor-extra { display: block; }
+
+  /* Aegis Shanghai: cloud-brocade cloth simulation —
+   *   layer 1/2: abstract scrolling-vine embroidery motifs (缠枝纹) in the
+   *              left/right gutters (outside the 1080px content column so
+   *              they stay visible), dashed strokes read as running
+   *              stitches, crimson knot center
+   *   layer 3: single broad satin sheen sweeping the cloth diagonally
+   *   layer 4: tone-on-tone damask tile (祥云 + 缠枝花) — the all-over
+   *            woven pattern that makes the cloth read as brocade
+   *   layer 5: gold-tinted fabric weave noise (feTurbulence)
+   *   layer 6/7: orthogonal warp/weft thread lines (brocade is woven,
+   *              so threads run 0°/90°; the sheen carries the diagonal)
+   * All original artwork — emulates the craft, copies no official asset. */
+  [data-skin="aegis-shanghai"] .decor-extra {
+    background:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke-linecap='round'><defs><pattern id='sa' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(48)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23D9A93F' stroke-width='1.3' stroke-opacity='0.6'/></pattern><pattern id='sb' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(-38)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23E8C275' stroke-width='1.3' stroke-opacity='0.55'/></pattern></defs><!-- main vine: double run of dense running stitches --><g stroke='%23D9A93F' stroke-opacity='0.55' stroke-width='1.1'><path d='M18 182 C40 150 48 128 86 116 C130 102 152 88 158 56' stroke-dasharray='2.4 1.8'/><path d='M21 184 C43 152 51 130 88 119 C131 105 154 91 161 59' stroke-dasharray='2.4 1.8' stroke-opacity='0.35'/><path d='M86 116 C70 80 96 56 124 52' stroke-dasharray='2.2 1.7' stroke-width='1'/></g><!-- satin-filled leaves --><path d='M60 140 C70 126 84 124 92 128 C82 140 68 144 60 140 Z' fill='url(%23sa)' stroke='%23D9A93F' stroke-opacity='0.6' stroke-width='1' stroke-dasharray='2 1.6'/><path d='M110 100 C122 90 134 90 140 94 C132 104 118 106 110 100 Z' fill='url(%23sb)' stroke='%23D9A93F' stroke-opacity='0.6' stroke-width='1' stroke-dasharray='2 1.6'/><!-- blossom: dense concentric stitch rings --><g stroke='%23D9A93F' stroke-opacity='0.6' stroke-width='1'><circle cx='150' cy='42' r='17' stroke-dasharray='2.2 1.8' stroke-width='1.1'/><circle cx='150' cy='42' r='13.5' stroke-dasharray='2 1.6' stroke-opacity='0.45'/><circle cx='150' cy='42' r='10' stroke-dasharray='2 1.6'/><circle cx='150' cy='42' r='6.5' stroke-dasharray='1.8 1.4' stroke-opacity='0.5'/></g><!-- dense radial petal stitches (16) --><g stroke='%23E8C275' stroke-opacity='0.55' stroke-width='1'><line x1='150' y1='24' x2='150' y2='30'/><line x1='156.9' y1='25.4' x2='154.6' y2='30.9'/><line x1='162.7' y1='29.3' x2='158.5' y2='33.5'/><line x1='166.6' y1='35.1' x2='161.1' y2='37.4'/><line x1='168' y1='42' x2='162' y2='42'/><line x1='166.6' y1='48.9' x2='161.1' y2='46.6'/><line x1='162.7' y1='54.7' x2='158.5' y2='50.5'/><line x1='156.9' y1='58.6' x2='154.6' y2='53.1'/><line x1='150' y1='60' x2='150' y2='54'/><line x1='143.1' y1='58.6' x2='145.4' y2='53.1'/><line x1='137.3' y1='54.7' x2='141.5' y2='50.5'/><line x1='133.4' y1='48.9' x2='138.9' y2='46.6'/><line x1='132' y1='42' x2='138' y2='42'/><line x1='133.4' y1='35.1' x2='138.9' y2='37.4'/><line x1='137.3' y1='29.3' x2='141.5' y2='33.5'/><line x1='143.1' y1='25.4' x2='145.4' y2='30.9'/></g><circle cx='150' cy='42' r='3.5' fill='%23A6242F' fill-opacity='0.9'/><circle cx='20' cy='180' r='4' stroke='%23D9A93F' stroke-opacity='0.55' stroke-dasharray='1.8 1.4' stroke-width='1'/></svg>") no-repeat left 18px top 110px / 165px 165px,
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' fill='none' stroke-linecap='round' transform='scale(-1,1)' transform-origin='100 100'><defs><pattern id='sc' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(48)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23D9A93F' stroke-width='1.3' stroke-opacity='0.55'/></pattern><pattern id='sd' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(-38)'><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23E8C275' stroke-width='1.3' stroke-opacity='0.5'/></pattern></defs><g stroke='%23D9A93F' stroke-opacity='0.5' stroke-width='1.1'><path d='M18 182 C40 150 48 128 86 116 C130 102 152 88 158 56' stroke-dasharray='2.4 1.8'/><path d='M21 184 C43 152 51 130 88 119 C131 105 154 91 161 59' stroke-dasharray='2.4 1.8' stroke-opacity='0.35'/><path d='M86 116 C70 80 96 56 124 52' stroke-dasharray='2.2 1.7' stroke-width='1'/></g><path d='M60 140 C70 126 84 124 92 128 C82 140 68 144 60 140 Z' fill='url(%23sc)' stroke='%23D9A93F' stroke-opacity='0.55' stroke-width='1' stroke-dasharray='2 1.6'/><path d='M110 100 C122 90 134 90 140 94 C132 104 118 106 110 100 Z' fill='url(%23sd)' stroke='%23D9A93F' stroke-opacity='0.55' stroke-width='1' stroke-dasharray='2 1.6'/><g stroke='%23D9A93F' stroke-opacity='0.55' stroke-width='1'><circle cx='150' cy='42' r='17' stroke-dasharray='2.2 1.8' stroke-width='1.1'/><circle cx='150' cy='42' r='13.5' stroke-dasharray='2 1.6' stroke-opacity='0.45'/><circle cx='150' cy='42' r='10' stroke-dasharray='2 1.6'/><circle cx='150' cy='42' r='6.5' stroke-dasharray='1.8 1.4' stroke-opacity='0.5'/></g><g stroke='%23E8C275' stroke-opacity='0.5' stroke-width='1'><line x1='150' y1='24' x2='150' y2='30'/><line x1='156.9' y1='25.4' x2='154.6' y2='30.9'/><line x1='162.7' y1='29.3' x2='158.5' y2='33.5'/><line x1='166.6' y1='35.1' x2='161.1' y2='37.4'/><line x1='168' y1='42' x2='162' y2='42'/><line x1='166.6' y1='48.9' x2='161.1' y2='46.6'/><line x1='162.7' y1='54.7' x2='158.5' y2='50.5'/><line x1='156.9' y1='58.6' x2='154.6' y2='53.1'/><line x1='150' y1='60' x2='150' y2='54'/><line x1='143.1' y1='58.6' x2='145.4' y2='53.1'/><line x1='137.3' y1='54.7' x2='141.5' y2='50.5'/><line x1='133.4' y1='48.9' x2='138.9' y2='46.6'/><line x1='132' y1='42' x2='138' y2='42'/><line x1='133.4' y1='35.1' x2='138.9' y2='37.4'/><line x1='137.3' y1='29.3' x2='141.5' y2='33.5'/><line x1='143.1' y1='25.4' x2='145.4' y2='30.9'/></g><circle cx='150' cy='42' r='3.5' fill='%23A6242F' fill-opacity='0.85'/><circle cx='20' cy='180' r='4' stroke='%23D9A93F' stroke-opacity='0.5' stroke-dasharray='1.8 1.4' stroke-width='1'/></svg>") no-repeat right 18px bottom 300px / 150px 150px,
+      linear-gradient(115deg, transparent 32%, rgba(240,216,138,0.05) 46%, rgba(240,216,138,0.10) 50%, rgba(240,216,138,0.05) 54%, transparent 68%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260'><g fill='none' stroke='%23D9A93F' stroke-opacity='0.13' stroke-width='1.4' stroke-linecap='round'><!-- spiral cloud --><path d='M28 92 C20 64 38 40 68 38 C98 36 116 56 112 78 C108 96 90 104 74 98 C62 93 58 80 66 72 C72 66 82 68 84 76'/><path d='M112 70 C132 64 148 70 156 84'/><path d='M40 110 C52 122 72 124 86 116'/><!-- stem to blossom --><path d='M156 84 C180 100 196 130 192 166'/><!-- leaf --><path d='M168 130 C156 122 144 124 138 132 C148 140 162 140 168 130 Z'/><!-- blossom --><circle cx='190' cy='190' r='18' stroke-dasharray='4 3'/><circle cx='190' cy='190' r='8'/><path d='M190 168 L190 175 M205 177 L200 182 M208 192 L201 191 M203 205 L199 199 M177 205 L181 199 M172 192 L179 191 M175 177 L180 182'/><!-- small cloud curl filling the mid-left gap --><path d='M52 150 C44 138 50 124 64 122 C76 120 84 130 80 140 C77 147 68 149 64 143'/></g><g fill='none' stroke='%23F0D88A' stroke-opacity='0.06' stroke-width='1.2' stroke-linecap='round'><path d='M196 36 C214 30 232 38 238 54 C243 68 234 80 222 80 C212 80 208 70 214 64'/><path d='M58 196 C44 204 40 220 50 232 C60 243 76 240 80 228'/></g><!-- scattered seed stitches (散点籽绣) --><g fill='none' stroke='%23E8C275' stroke-opacity='0.08' stroke-width='1.2' stroke-linecap='round'><path d='M14 28 L18 32 M118 14 L122 18 M232 116 L236 120 M120 212 L124 216 M16 122 L20 126 M218 140 L222 144 M70 246 L74 250 M170 226 L174 230'/></g></svg>") repeat left top / 260px 260px,
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='w'><feTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.66  0 0 0 0 0.25  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23w)'/></svg>") repeat left top / 120px 120px,
+      repeating-linear-gradient(0deg, rgba(0,0,0,0.07) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(240,216,138,0.03) 0 1px, transparent 1px 3px);
+  }
 
   /* Forge: ember sparks rising */
   [data-skin="trophy-forge"] .decor-extra {
@@ -311,9 +351,12 @@
     margin-bottom: 4px;
   }
   [data-skin="aegis-shanghai"] .greet h1 {
-    background: linear-gradient(135deg, #F2E9D2 0%, #D4AF37 100%);
+    background: linear-gradient(135deg, #F2E6CB 0%, #E8C275 45%, #D9A93F 75%, #9C7420 100%);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-family: var(--font-serif);
+    letter-spacing: 0;
+    filter: drop-shadow(0 1px 8px rgba(217, 169, 63, 0.25));
   }
   [data-skin="trophy-forge"] .greet h1 {
     background: linear-gradient(135deg, #FFF4DA 0%, #FFC451 50%, #FF7A18 100%);
@@ -367,7 +410,7 @@
   /* Gold sweep on Aegis cards */
   [data-skin="aegis-shanghai"] .card.gold-sweep::before {
     content: ""; position: absolute; inset: 0; z-index: 0;
-    background: linear-gradient(110deg, transparent 35%, rgba(212,175,55,0.16) 50%, transparent 65%);
+    background: linear-gradient(110deg, transparent 35%, rgba(232,194,117,0.15) 50%, transparent 65%);
     transform: translateX(-110%);
     pointer-events: none;
   }
@@ -404,6 +447,10 @@
     border-color: rgba(200, 16, 46, 0.45);
     box-shadow: 0 0 0 1px rgba(255,215,0,0.12), 0 8px 20px -8px rgba(200,16,46,0.40);
   }
+
+  /* ── Aegis Shanghai · embroidery language ───────────────────────
+   * Replaced by "embroidered-patch language v2" — see the block at
+   * the end of this stylesheet (must come last to win the cascade). */
 
   .card-header {
     display: flex; align-items: center; justify-content: space-between;
@@ -603,9 +650,6 @@
     z-index: 50;
     isolation: isolate;
   }
-  [data-skin="aegis-shanghai"] .overlay-preview {
-    box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 24px -8px var(--color-accent-glow);
-  }
   [data-skin="trophy-forge"] .overlay-preview {
     box-shadow: 0 12px 36px rgba(0,0,0,0.55), 0 0 32px -4px rgba(255,122,24,0.35);
   }
@@ -685,8 +729,12 @@
     pointer-events: none;
     background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 160' fill='none' stroke='%23ffffff' stroke-width='0.8' stroke-opacity='1'><!-- Outer shield --><path d='M60 4 L110 26 L110 86 Q110 124 60 156 Q10 124 10 86 L10 26 Z'/><!-- Mid shield --><path d='M60 16 L98 34 L98 84 Q98 116 60 144 Q22 116 22 84 L22 34 Z'/><!-- Inner shield --><path d='M60 30 L88 42 L88 82 Q88 108 60 132 Q32 108 32 82 L32 42 Z'/><!-- Top crown --><path d='M48 4 L48 -4 L54 2 L60 -4 L66 2 L72 -4 L72 4'/><!-- Side wings --><path d='M22 60 L8 50 L4 38 L18 46 Z'/><path d='M98 60 L112 50 L116 38 L102 46 Z'/><!-- Center diamond --><path d='M60 60 L80 80 L60 100 L40 80 Z'/><!-- Inner gem (circle + dot) --><circle cx='60' cy='80' r='10'/><circle cx='60' cy='80' r='3' fill='%23ffffff'/><!-- TI15 numerals, embossed --><text x='60' y='48' font-family='Cinzel, Times, serif' font-size='8' font-weight='700' fill='%23ffffff' text-anchor='middle' stroke='%23ffffff' stroke-width='0.2'>TI15</text><!-- Engraved laurels below --><path d='M30 122 Q44 134 60 138 Q76 134 90 122' stroke-width='0.5'/><path d='M40 132 Q50 140 60 142 Q70 140 80 132' stroke-width='0.5'/></svg>") no-repeat center / contain;
   }
+  /* Aegis: embroidered shield — merrow edge, dense running-stitch
+   * inner runs, satin-stitch fills with alternating thread direction,
+   * crimson french-knot core. */
   [data-skin="aegis-shanghai"] .aegis-crest {
-    filter: drop-shadow(0 0 24px rgba(212,175,55,0.55)) drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -10 120 172' fill='none' stroke-linecap='round'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F0D88A'/><stop offset='0.5' stop-color='%23D9A93F'/><stop offset='1' stop-color='%239C7420'/></linearGradient><pattern id='sa' width='2.2' height='2.2' patternUnits='userSpaceOnUse' patternTransform='rotate(48)'><line x1='0' y1='0' x2='0' y2='2.2' stroke='%23D9A93F' stroke-width='1.2' stroke-opacity='0.5'/></pattern><pattern id='sb' width='2.2' height='2.2' patternUnits='userSpaceOnUse' patternTransform='rotate(-38)'><line x1='0' y1='0' x2='0' y2='2.2' stroke='%23E8C275' stroke-width='1.2' stroke-opacity='0.5'/></pattern></defs><!-- merrow edge --><path d='M60 4 L110 26 L110 86 Q110 124 60 156 Q10 124 10 86 L10 26 Z' stroke='url(%23g)' stroke-width='2.6'/><!-- dense running-stitch inner runs --><path d='M60 10 L104 30 L104 85 Q104 118 60 148 Q16 118 16 85 L16 30 Z' stroke='%23F0D88A' stroke-width='0.9' stroke-dasharray='2 1.6' stroke-opacity='0.85'/><path d='M60 15 L99 33 L99 84 Q99 113 60 142 Q21 113 21 84 L21 33 Z' stroke='%23D9A93F' stroke-width='0.9' stroke-dasharray='2 1.6' stroke-opacity='0.55'/><!-- satin-filled mid shield --><path d='M60 24 L92 38 L92 82 Q92 108 60 132 Q28 108 28 82 L28 38 Z' fill='url(%23sa)' fill-opacity='0.45' stroke='url(%23g)' stroke-width='1.4'/><!-- crown with stitch marks --><path d='M46 4 L46 -6 L53 0 L60 -6 L67 0 L74 -6 L74 4' stroke='url(%23g)' stroke-width='1.8'/><path d='M48 2 L48 -3 M53 -1 L53 2 M60 -3 L60 1 M67 -1 L67 2 M72 2 L72 -3' stroke='%23F0D88A' stroke-width='0.8' stroke-opacity='0.7'/><!-- satin wings --><path d='M13 58 L3 50 L0 39 L12 47 Z' fill='url(%23sb)' fill-opacity='0.5' stroke='url(%23g)' stroke-width='1.1'/><path d='M107 58 L117 50 L120 39 L108 47 Z' fill='url(%23sb)' fill-opacity='0.5' stroke='url(%23g)' stroke-width='1.1'/><!-- center diamond, counter-direction satin + dense stitch outlines --><path d='M60 56 L84 80 L60 104 L36 80 Z' fill='url(%23sb)' stroke='url(%23g)' stroke-width='1.8'/><path d='M60 63 L77 80 L60 97 L43 80 Z' stroke='%23F0D88A' stroke-width='0.9' stroke-dasharray='1.8 1.4' stroke-opacity='0.8'/><circle cx='60' cy='80' r='10' stroke='%23D9A93F' stroke-width='0.9' stroke-dasharray='1.8 1.4' stroke-opacity='0.7'/><circle cx='60' cy='80' r='6.5' fill='%23A6242F' fill-opacity='0.92' stroke='url(%23g)' stroke-width='1.4'/><!-- dense laurel stitches --><path d='M30 120 Q44 132 60 136 Q76 132 90 120' stroke='%23D9A93F' stroke-width='1' stroke-dasharray='2 1.6' stroke-opacity='0.7'/><path d='M38 130 Q50 139 60 141 Q70 139 82 130' stroke='%23E8C275' stroke-width='0.9' stroke-dasharray='1.8 1.5' stroke-opacity='0.55'/></svg>") no-repeat center / contain;
+    filter: drop-shadow(0 0 20px rgba(217,169,63,0.50)) drop-shadow(0 4px 12px rgba(0,0,0,0.5));
     opacity: 0.95;
   }
   [data-skin="trophy-forge"] .aegis-crest {
@@ -731,7 +779,7 @@
     font-family: var(--font-serif);
   }
   [data-skin="aegis-shanghai"] .ti-title {
-    background: linear-gradient(135deg, #F2E9D2, #D4AF37);
+    background: linear-gradient(135deg, #F2E6CB, #E8C275 50%, #D9A93F);
     -webkit-background-clip: text; background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -763,7 +811,7 @@
     letter-spacing: -1px;
     font-family: var(--font-serif);
   }
-  [data-skin="aegis-shanghai"] .cd-num { color: #F2E9D2; text-shadow: 0 0 16px rgba(212, 175, 55, 0.40); }
+  [data-skin="aegis-shanghai"] .cd-num { color: #F2E6CB; text-shadow: 0 0 16px rgba(217, 169, 63, 0.40); }
   [data-skin="trophy-forge"]   .cd-num { color: #FFF4DA; text-shadow: 0 0 18px rgba(255, 122, 24, 0.55); }
   [data-skin="homecoming"]     .cd-num { color: #FFD700; text-shadow: 0 0 12px rgba(200, 16, 46, 0.55); }
   .cd-label {
@@ -910,6 +958,244 @@
     font-size: 11px; color: var(--color-text-tertiary);
     text-align: center;
   }
+
+  /* ╔══════════════════════════════════════════════════════════════╗
+   * ║  Aegis Shanghai · D1「鎏金请柬」Quiet Gold                     ║
+   * ║  (winner of ti15-direction-explore.html, 2026-06-04)          ║
+   * ║   1. NO heavy borders — panels are whisper-light glass with   ║
+   * ║      hairline gold; schedule tiles use fading gold rules      ║
+   * ║   2. hero banner: embroidered Aegis patch B (ring & pedestal, ║
+   * ║      composition homage / original artwork) + ceremonial      ║
+   * ║      centered lockup with huge metallic countdown             ║
+   * ║   3. stage: warm spotlight, corner vine flourishes, vignette  ║
+   * ║      — calm, NO bokeh, generous spacing                       ║
+   * ║   4. display text: beveled metallic gold (+ subtle satin     ║
+   * ║      texture on the banner title only)                        ║
+   * ║  (Kept LAST in the stylesheet so it wins the cascade over     ║
+   * ║   the generic panel rules above.)                             ║
+   * ╚══════════════════════════════════════════════════════════════╝ */
+  [data-skin="aegis-shanghai"] {
+    --emb-seam: rgba(74, 46, 8, 0.62);
+    --emb-body: linear-gradient(135deg, #F0D88A 0%, #D9A93F 42%, #B98C2C 68%, #8A6518 100%);
+    /* v3b hand-drawn stitch frame: each stitch = a rounded capsule
+     * with its own gradient + ±3° jitter over a dark-gold base band;
+     * corners fan around. Used via border-image (slice 16). */
+    --emb-stitch: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 54 54'><defs><linearGradient id='sg' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23F8E7B0'/><stop offset='0.45' stop-color='%23DCAF4C'/><stop offset='1' stop-color='%238F6A1A'/></linearGradient><rect id='st' x='-1.4' y='0.8' width='2.8' height='12.9' rx='1.4' fill='url(%23sg)' stroke='%233A2406' stroke-opacity='0.45' stroke-width='0.4'/></defs><rect x='0' y='0.5' width='54' height='13' fill='%23755318'/><rect x='0' y='40.5' width='54' height='13' fill='%23755318'/><rect x='0.5' y='0' width='13' height='54' fill='%23755318'/><rect x='40.5' y='0' width='13' height='54' fill='%23755318'/><g id='all'><g><use href='%23st' transform='translate(17.6,0) rotate(3 0 2)'/><use href='%23st' transform='translate(20.7,0) rotate(-2.5 0 2)'/><use href='%23st' transform='translate(23.9,0) rotate(2 0 2)'/><use href='%23st' transform='translate(27,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(30.1,0) rotate(2.5 0 2)'/><use href='%23st' transform='translate(33.3,0) rotate(-2 0 2)'/><use href='%23st' transform='translate(36.4,0) rotate(3 0 2)'/><use href='%23st' transform='translate(14.4,0) rotate(-12 0 2)'/><use href='%23st' transform='rotate(-22 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-45 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-68 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-90 15 15) translate(13.4,0) rotate(12 0 2)'/></g><use href='%23all2' transform='rotate(90 27 27)'/></g><g id='all2'><g transform='rotate(90 27 27)'><use href='%23st' transform='translate(17.6,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(20.7,0) rotate(2.5 0 2)'/><use href='%23st' transform='translate(23.9,0) rotate(-2 0 2)'/><use href='%23st' transform='translate(27,0) rotate(3 0 2)'/><use href='%23st' transform='translate(30.1,0) rotate(-2.5 0 2)'/><use href='%23st' transform='translate(33.3,0) rotate(2 0 2)'/><use href='%23st' transform='translate(36.4,0) rotate(-3 0 2)'/><use href='%23st' transform='translate(14.4,0) rotate(-12 0 2)'/><use href='%23st' transform='rotate(-22 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-45 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-68 15 15) translate(13.4,0)'/><use href='%23st' transform='rotate(-90 15 15) translate(13.4,0) rotate(12 0 2)'/></g></g><use href='%23all' transform='rotate(180 27 27)'/></svg>");
+    --emb-fabric: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.72  0 0 0 0 0.55  0 0 0 0 0.25  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+  }
+
+  /* D1 panels: whisper-light glass, hairline gold, soft drop. The
+   * brocade stage shows through — panels organize, never box in.
+   * NOTE: no `position` here — .overlay-preview must stay fixed. */
+  [data-skin="aegis-shanghai"] :is(.sidebar, .desc-bar) { position: relative; }
+  [data-skin="aegis-shanghai"] :is(.card, .sidebar, .desc-bar, .overlay-preview) {
+    border: 0.5px solid rgba(217, 169, 63, 0.15);
+    border-image: none;
+    border-radius: 14px;
+    background: rgba(34, 22, 11, 0.38);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    outline: none;
+    box-shadow: 0 14px 28px -20px rgba(0, 0, 0, 0.70);
+  }
+  [data-skin="aegis-shanghai"] .card:hover {
+    border-color: rgba(217, 169, 63, 0.32);
+    box-shadow: 0 14px 28px -20px rgba(0, 0, 0, 0.70), 0 0 24px -10px rgba(217, 169, 63, 0.35);
+  }
+  /* schedule tiles: no box at all — a fading gold rule on top,
+   * faint glow wash on hover (the D1 "invitation line" language) */
+  [data-skin="aegis-shanghai"] .match-tile {
+    border: 0; border-top: 1px solid;
+    border-image: linear-gradient(90deg, transparent, rgba(217, 169, 63, 0.32) 22%, rgba(217, 169, 63, 0.32) 78%, transparent) 1;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    outline: none; box-shadow: none;
+    padding: 18px 14px 14px;
+  }
+  [data-skin="aegis-shanghai"] .match-tile:hover {
+    transform: none;
+    background: linear-gradient(180deg, rgba(217, 169, 63, 0.06), transparent 70%);
+  }
+
+  /* CN match: the top rule blends crimson → gold, faint red wash */
+  [data-skin="aegis-shanghai"] .match-tile.cn-match {
+    border: 0; border-top: 1px solid;
+    border-image: linear-gradient(90deg, transparent, rgba(166, 36, 47, 0.60) 22%, rgba(217, 169, 63, 0.45) 78%, transparent) 1;
+    background: linear-gradient(180deg, rgba(166, 36, 47, 0.07), transparent 70%);
+  }
+  /* kill the generic corner glint — clashes with the quiet language */
+  [data-skin="aegis-shanghai"] .match-tile.cn-match::after { content: none; }
+
+  /* CTA: polished metal plate — the SHANGHAI-lettering material */
+  [data-skin="aegis-shanghai"] .cta-btn {
+    border: 1px solid rgba(122, 85, 16, 0.90);
+    border-image: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    background: linear-gradient(180deg, #F8E7B0 0%, #E8C275 28%, #D9A93F 55%, #9C7420 100%);
+    color: #2A1A06;
+    text-shadow: 0 1px 0 rgba(255, 248, 220, 0.50);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 230, 0.75),
+      inset 0 -2px 3px rgba(110, 70, 10, 0.45),
+      0 4px 12px -4px rgba(0, 0, 0, 0.70),
+      0 0 22px -4px rgba(217, 169, 63, 0.45);
+  }
+
+  /* CN badge: quiet crimson-rimmed pill, inner red ember */
+  [data-skin="aegis-shanghai"] .strip-cn-badge {
+    border: 1px solid rgba(166, 36, 47, 0.75);
+    border-image: none;
+    border-radius: 999px;
+    padding: 5px 14px;
+    background: transparent;
+    color: #E8C275;
+    text-shadow: none;
+    letter-spacing: 1px;
+    box-shadow: inset 0 0 14px -6px rgba(166, 36, 47, 0.50);
+  }
+
+  /* Hot item chip: soft gold fill, quiet */
+  [data-skin="aegis-shanghai"] .item-chip[data-hot="true"] {
+    border: 0.5px solid rgba(217, 169, 63, 0.50);
+    border-image: none;
+    border-radius: 8px;
+    padding: 5px 10px;
+    background: linear-gradient(180deg, rgba(217, 169, 63, 0.24), rgba(156, 116, 32, 0.16));
+    color: #F0D88A;
+    box-shadow: 0 0 14px -6px rgba(217, 169, 63, 0.45);
+  }
+
+  /* Team marks: mini embroidered patches — 3px gold merrow ring
+   * wrapping OUTSIDE the logo (like the official patch lockup) */
+  [data-skin="aegis-shanghai"] .team-logo {
+    position: relative;
+    box-shadow: 0 0 14px -2px rgba(217, 169, 63, 0.55), 0 3px 8px -2px rgba(0, 0, 0, 0.55);
+  }
+  [data-skin="aegis-shanghai"] .team-logo::after {
+    content: ""; position: absolute; inset: -3px; z-index: 1;
+    pointer-events: none;
+    border-radius: 9px;
+    padding: 3px;
+    background:
+      repeating-linear-gradient(48deg, var(--emb-seam) 0 1px, transparent 1px 2.4px),
+      var(--emb-body);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  /* Brand mark: same mini merrow ring */
+  [data-skin="aegis-shanghai"] .brand-mark { position: relative; }
+  [data-skin="aegis-shanghai"] .brand-mark::after {
+    content: ""; position: absolute; inset: -2.5px; z-index: 1;
+    pointer-events: none;
+    border-radius: 10px;
+    padding: 2.5px;
+    background:
+      repeating-linear-gradient(48deg, var(--emb-seam) 0 1px, transparent 1px 2.4px),
+      var(--emb-body);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  /* Hero pill: subtle running-stitch border */
+  [data-skin="aegis-shanghai"] .hero-pill {
+    border: 1px dashed rgba(217, 169, 63, 0.45);
+  }
+
+  /* ── v3b stage atmosphere: warm spotlight + gold-dust bokeh +
+   * vignette (from the official key-art lighting) ───────────────── */
+  [data-skin="aegis-shanghai"] .stage {
+    background:
+      radial-gradient(ellipse 64% 54% at 50% 26%, rgba(140, 94, 30, 0.40) 0%, rgba(80, 52, 16, 0.18) 46%, transparent 72%),
+      var(--skin-stage);
+  }
+  /* D1 is calm: no bokeh — just a soft edge vignette */
+  [data-skin="aegis-shanghai"] .decor-extra::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 90% 80% at 50% 40%, transparent 55%, rgba(8, 5, 2, 0.50) 100%);
+  }
+
+  /* ── v3b metallic type: SHANGHAI-style beveled gold for display
+   * text — headline, banner title, countdown, big stat numbers ──── */
+  [data-skin="aegis-shanghai"] .greet h1,
+  [data-skin="aegis-shanghai"] .ti-title,
+  [data-skin="aegis-shanghai"] .cd-num,
+  [data-skin="aegis-shanghai"] .stat-card .v {
+    background:
+      linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, 0.50) 50%, transparent 60%),
+      linear-gradient(180deg, #FFF8DC 0%, #F8E7B0 16%, #EFCB72 34%, #D9A93F 50%, #9C7420 63%, #7A5510 74%, #C9962E 86%, #F0D88A 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    text-shadow: none;
+    filter:
+      drop-shadow(0 1px 0 rgba(80, 52, 8, 0.85))
+      drop-shadow(0 2px 2px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 0 18px rgba(217, 169, 63, 0.28));
+  }
+  /* the seconds-tick scale animation promotes the span to its own
+   * compositing layer, which breaks background-clip:text on the
+   * parent (glyphs render fully transparent) — disable it here */
+  [data-skin="aegis-shanghai"] #cd-secs { animation: none; }
+
+  /* ── D1 hero banner: ceremonial centered lockup ────────────────
+   * banner goes transparent and sits straight on the spotlit cloth;
+   * the embroidered Aegis patch B (ring & pedestal — composition
+   * homage, original artwork) crowns a centered title + countdown */
+  [data-skin="aegis-shanghai"] .ti-banner {
+    background: transparent;
+    border: 0; border-image: none;
+    outline: none; box-shadow: none;
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+    border-radius: 0;
+    padding: 26px 32px 18px;
+    min-height: 0;
+    overflow: visible;
+  }
+  [data-skin="aegis-shanghai"] .ti-banner::before { display: none; } /* skyline strip off — keep it quiet */
+  [data-skin="aegis-shanghai"] .aegis-crest {
+    position: static;
+    transform: none;
+    width: 158px; height: 183px;
+    margin: 0 auto 12px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 164 190'><defs><pattern id='t72' width='2.5' height='2.5' patternUnits='userSpaceOnUse' patternTransform='rotate(72)'><rect width='2.5' height='2.5' fill='%23C9C4B6'/><line x1='0' y1='0' x2='0' y2='2.5' stroke='%23F2EFE6' stroke-width='1.1'/><line x1='1.3' y1='0' x2='1.3' y2='2.5' stroke='%238F897A' stroke-width='0.5'/></pattern><pattern id='t108' width='2.5' height='2.5' patternUnits='userSpaceOnUse' patternTransform='rotate(108)'><rect width='2.5' height='2.5' fill='%23A8A294'/><line x1='0' y1='0' x2='0' y2='2.5' stroke='%23D8D3C6' stroke-width='1.1'/><line x1='1.3' y1='0' x2='1.3' y2='2.5' stroke='%236E6857' stroke-width='0.5'/></pattern><pattern id='t20' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(20)'><rect width='2.4' height='2.4' fill='%23C29435'/><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23F0D88A' stroke-width='1.1'/><line x1='1.3' y1='0' x2='1.3' y2='2.4' stroke='%237A5510' stroke-width='0.5'/></pattern><pattern id='t145' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(145)'><rect width='2.4' height='2.4' fill='%23B98C2C'/><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23E8C275' stroke-width='1.1'/><line x1='1.3' y1='0' x2='1.3' y2='2.4' stroke='%236E4F12' stroke-width='0.5'/></pattern><pattern id='t45r' width='2.4' height='2.4' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'><rect width='2.4' height='2.4' fill='%238E1F29'/><line x1='0' y1='0' x2='0' y2='2.4' stroke='%23C84450' stroke-width='1.1'/><line x1='1.3' y1='0' x2='1.3' y2='2.4' stroke='%235E1018' stroke-width='0.5'/></pattern><linearGradient id='shineL' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23FFFFFF' stop-opacity='0.34'/><stop offset='0.5' stop-color='%23FFFFFF' stop-opacity='0.06'/><stop offset='1' stop-color='%23000000' stop-opacity='0.18'/></linearGradient><linearGradient id='shineR' x1='1' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23FFFFFF' stop-opacity='0.10'/><stop offset='0.6' stop-color='%23000000' stop-opacity='0.16'/><stop offset='1' stop-color='%23000000' stop-opacity='0.30'/></linearGradient><linearGradient id='coil' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23F8E7B0'/><stop offset='0.45' stop-color='%23D9A93F'/><stop offset='1' stop-color='%238F6A1A'/></linearGradient><filter id='silk'><feTurbulence type='turbulence' baseFrequency='0.5 0.55' numOctaves='2' seed='11' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='1.1' xChannelSelector='R' yChannelSelector='G'/></filter><filter id='silklite'><feTurbulence type='turbulence' baseFrequency='0.55 0.6' numOctaves='1' seed='4' result='n'/><feDisplacementMap in='SourceGraphic' in2='n' scale='0.6' xChannelSelector='R' yChannelSelector='G'/></filter></defs><g filter='url(%23silk)'><g transform='translate(3 5.5)' opacity='0.55'><circle cx='70' cy='58' r='48' fill='%230C0703'/><path d='M16 96 L8 92 L8 110 L16 114 Q30 134 70 140 Q110 134 124 114 L132 110 L132 92 L124 96 Z' fill='%230C0703'/></g><path d='M16 96 L8 92 L8 110 L16 114 Q30 134 70 140 L70 96 Z' fill='url(%23t72)'/><path d='M70 96 L70 140 Q110 134 124 114 L132 110 L132 92 L124 96 Z' fill='url(%23t108)'/><path d='M16 96 L8 92 L8 110 L16 114 Q30 134 70 140 L70 96 Z' fill='url(%23shineL)' opacity='0.6'/><path d='M70 96 L70 140 Q110 134 124 114 L132 110 L132 92 L124 96 Z' fill='url(%23shineR)' opacity='0.6'/><path d='M70 10 A48 48 0 0 1 118 58 L103 58 A33 33 0 0 0 70 25 Z' fill='url(%23t20)'/><path d='M118 58 A48 48 0 0 1 70 106 L70 91 A33 33 0 0 0 103 58 Z' fill='url(%23t145)'/><path d='M70 106 A48 48 0 0 1 22 58 L37 58 A33 33 0 0 0 70 91 Z' fill='url(%23t20)'/><path d='M22 58 A48 48 0 0 1 70 10 L70 25 A33 33 0 0 0 37 58 Z' fill='url(%23t145)'/><circle cx='70' cy='58' r='48' fill='url(%23shineL)' opacity='0.35'/><path d='M70 33 C76 41 76 49 70 55 C64 49 64 41 70 33 Z' fill='url(%23t20)'/><path d='M70 83 C76 75 76 67 70 61 C64 67 64 75 70 83 Z' fill='url(%23t20)'/><path d='M45 58 C53 52 61 52 67 58 C61 64 53 64 45 58 Z' fill='url(%23t145)'/><path d='M95 58 C87 52 79 52 73 58 C79 64 87 64 95 58 Z' fill='url(%23t145)'/><circle cx='70' cy='58' r='11' fill='url(%23t45r)'/><circle cx='70' cy='58' r='11' fill='url(%23shineL)' opacity='0.4'/></g><g filter='url(%23silklite)'><path d='M16 96 L8 92 L8 110 L16 114 Q30 134 70 140 Q110 134 124 114 L132 110 L132 92 L124 96 Z' fill='none' stroke='%235A430F' stroke-width='7' stroke-linejoin='round'/><path d='M16 96 L8 92 L8 110 L16 114 Q30 134 70 140 Q110 134 124 114 L132 110 L132 92 L124 96 Z' fill='none' stroke='url(%23coil)' stroke-width='6' stroke-linejoin='round' stroke-dasharray='2.2 1.4' stroke-linecap='round'/><circle cx='70' cy='58' r='48' fill='none' stroke='%235A430F' stroke-width='8'/><circle cx='70' cy='58' r='48' fill='none' stroke='url(%23coil)' stroke-width='7' stroke-dasharray='2.3 1.4' stroke-linecap='round'/><circle cx='70' cy='58' r='33' fill='none' stroke='%235A430F' stroke-width='5'/><circle cx='70' cy='58' r='33' fill='none' stroke='url(%23coil)' stroke-width='4.2' stroke-dasharray='2 1.3' stroke-linecap='round'/><circle cx='70' cy='58' r='11' fill='none' stroke='url(%23coil)' stroke-width='3.4' stroke-dasharray='1.8 1.2' stroke-linecap='round'/></g></svg>") no-repeat center / contain;
+    filter: drop-shadow(0 0 30px rgba(217, 169, 63, 0.45)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.55));
+    opacity: 1;
+  }
+  [data-skin="aegis-shanghai"] .ti-banner-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  [data-skin="aegis-shanghai"] .ti-banner-head { align-items: center; gap: 8px; }
+  [data-skin="aegis-shanghai"] .ti-eyebrow { justify-content: center; letter-spacing: 2.4px; }
+  [data-skin="aegis-shanghai"] .ti-title {
+    font-size: 46px; letter-spacing: 7px; line-height: 1.15;
+    /* faint satin threads over the metal — just a hint of embroidery */
+    background:
+      repeating-linear-gradient(48deg, rgba(255, 246, 214, 0.20) 0 1px, rgba(110, 74, 14, 0.20) 1px 2px, rgba(232, 194, 117, 0.06) 2px 3px),
+      linear-gradient(180deg, #FFF8DC 0%, #F8E7B0 16%, #EFCB72 34%, #D9A93F 50%, #9C7420 63%, #7A5510 74%, #C9962E 86%, #F0D88A 100%);
+    -webkit-background-clip: text; background-clip: text;
+  }
+  [data-skin="aegis-shanghai"] .ti-place { font-size: 13.5px; letter-spacing: 1.5px; }
+  [data-skin="aegis-shanghai"] .ti-countdown { gap: 46px; margin-top: 14px; }
+  [data-skin="aegis-shanghai"] .cd-sep { display: none; }
+  [data-skin="aegis-shanghai"] .cd-num { font-size: 50px; }
+  [data-skin="aegis-shanghai"] .cd-label { margin-top: 8px; letter-spacing: 2px; }
+
+  /* ── D1 breathing room — the anti-crowding pass ───────────────── */
+  [data-skin="aegis-shanghai"] .layout { gap: 30px; padding-top: 40px; }
+  [data-skin="aegis-shanghai"] .main, [data-skin="aegis-shanghai"] .side { gap: 22px; }
+  [data-skin="aegis-shanghai"] .stats-row { gap: 16px; }
+  [data-skin="aegis-shanghai"] .match-strip { gap: 20px; }
+  [data-skin="aegis-shanghai"] .schedule-strip { margin-top: 8px; }
+  [data-skin="aegis-shanghai"] .strip-head { margin-bottom: 16px; }
 </style>
 </head>
 <body data-skin="aegis-shanghai">
@@ -943,8 +1229,8 @@
     <div class="ti-banner-inner">
       <div class="ti-banner-head">
         <div class="ti-eyebrow"><span class="live-pulse"></span>THE INTERNATIONAL 15 · 上海</div>
-        <div class="ti-title">六年再聚 · 上海</div>
-        <div class="ti-place">梅赛德斯-奔驰文化中心 · 2026 年 9 月 · 距 Wings 2016 已 9 年</div>
+        <div class="ti-title">七年再聚 · 上海</div>
+        <div class="ti-place">浦发银行东方体育中心 · 2026 年 8 月 20–23 日 · 距 Wings 2016 整十年</div>
       </div>
       <div class="ti-countdown" aria-live="off">
         <div class="cd-cell"><div class="cd-num" id="cd-days">--</div><div class="cd-label">DAYS</div></div>
@@ -1010,8 +1296,8 @@
   <!-- Skin description bar -->
   <div class="desc-bar">
     <div>
-      <div class="name" id="skin-name">Aegis 上海</div>
-      <div class="sub" id="skin-sub">冠军金 × 午夜蓝 · 致敬不朽盾，迎接 TI15</div>
+      <div class="name" id="skin-name">Aegis 上海 · 云锦</div>
+      <div class="sub" id="skin-sub">金线刺绣 × 云锦深褐 × 绛红 · 致敬不朽盾，迎接 TI15</div>
     </div>
     <div class="meta">
       <div>Hover 卡片有金色光弧扫过</div>
@@ -1041,7 +1327,7 @@
     <div class="greet">
       <div>
         <h1 id="greet-title">Path to the Aegis.</h1>
-        <p id="greet-sub">准备好下一局了吗？ · 距 TI15 开赛 73 天</p>
+        <p id="greet-sub">准备好下一局了吗？ · 距 TI15 主舞台 78 天</p>
       </div>
       <button class="cta-btn">模拟进入对局 →</button>
     </div>
@@ -1252,10 +1538,10 @@
 
   const META = {
     'aegis-shanghai': {
-      name: 'Aegis 上海',
-      sub: '冠军金 × 午夜蓝 · 致敬不朽盾，迎接 TI15',
+      name: 'Aegis 上海 · 云锦',
+      sub: '金线刺绣 × 云锦深褐 × 绛红 · 致敬不朽盾，迎接 TI15',
       greet: 'Path to the Aegis.',
-      sub2: '准备好下一局了吗？ · 距 TI15 开赛 73 天'
+      sub2: '准备好下一局了吗？ · 距 TI15 主舞台 78 天'
     },
     'trophy-forge': {
       name: 'Trophy Forge · 锻造冠军',
@@ -1287,9 +1573,11 @@
   })
 
   // ── TI15 Countdown ──────────────────────────────────────────
-  // Target: 2026-09-15 12:00 China Standard Time (UTC+8). Date is a
-  // placeholder until Valve confirms — change `TI_TARGET` when official.
-  const TI_TARGET = new Date('2026-09-15T12:00:00+08:00').getTime()
+  // Target: 2026-08-20 12:00 CST — stadium main-event opening day per the
+  // official ticketing announcement (Shanghai Oriental Sports Center,
+  // Aug 20–23 2026, tickets on sale Jun 10). Group-stage dates still TBA;
+  // adjust `TI_TARGET` if Valve publishes an earlier opening date.
+  const TI_TARGET = new Date('2026-08-20T12:00:00+08:00').getTime()
   const cdDays = document.getElementById('cd-days')
   const cdHrs  = document.getElementById('cd-hrs')
   const cdMins = document.getElementById('cd-mins')
