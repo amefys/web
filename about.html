@@ -7,17 +7,17 @@
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <style>
   :root {
-    --bg: #08090d;
-    --bg-2: #0e1016;
-    --bg-3: #14161e;
-    --surface: rgba(22,24,32,0.72);
-    --hairline: rgba(255,255,255,0.08);
-    --hairline-strong: rgba(255,255,255,0.14);
-    --text: #f3f3f6;
-    --text-2: rgba(235,235,245,0.62);
-    --text-3: rgba(235,235,245,0.40);
-    --violet: #A78BFA;
-    --violet-deep: #7C5CEB;
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --bg-3: #1c1610;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
     --emerald: #34D399;
     --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
   }
@@ -32,7 +32,7 @@
   .nav {
     position: sticky; top: 0; z-index: 50;
     height: 48px;
-    background: rgba(8,9,13,0.72);
+    background: rgba(13,10,7,0.72);
     backdrop-filter: saturate(180%) blur(24px);
     -webkit-backdrop-filter: saturate(180%) blur(24px);
     border-bottom: 0.5px solid var(--hairline);
@@ -44,7 +44,7 @@
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
-    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
   .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
   .nav .links a:hover { color: var(--text); }
   .nav .links a[data-active="true"] { color: var(--text); }
@@ -54,13 +54,13 @@
   .btn-pill {
     display: inline-flex; align-items: center; justify-content: center;
     height: 28px; padding: 0 14px; border-radius: 14px;
-    background: var(--violet-deep); color: #fff; border: 0;
+    background: var(--gold-deep); color: #fff; border: 0;
     font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
     text-decoration: none; cursor: pointer;
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4);
     transition: transform .12s, box-shadow .12s;
   }
-  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(176,138,69,0.55); }
 
   /* Language switcher */
   .lang-switch {
@@ -94,9 +94,9 @@
   .hero-avatar {
     width: 110px; height: 110px; margin: 0 auto 24px;
     border-radius: 26px;
-    background: linear-gradient(135deg, #1c1830, #0a0a14);
+    background: linear-gradient(135deg, #241a0e, #0e0a06);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 12px 40px rgba(124,92,235,0.25);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 12px 40px rgba(176,138,69,0.25);
   }
   .hero-avatar svg { width: 70%; height: 70%; }
   .hero-about h1 {
@@ -134,7 +134,7 @@
   .contact-icon.wechat { background: rgba(7,193,96,0.15); color: #07c160; }
   .contact-icon.douyin { background: rgba(255,42,109,0.15); color: #ff2a6d; }
   .contact-icon.email  { background: rgba(91,140,255,0.15); color: #5b8cff; }
-  .contact-icon.github { background: rgba(255,255,255,0.08); color: #f3f3f6; }
+  .contact-icon.github { background: rgba(232,199,121,0.12); color: #f2ead8; }
   .contact-label {
     font-size: 15px; font-weight: 600;
   }
@@ -146,7 +146,7 @@
     margin-bottom: 6px;
   }
   .contact-id a { color: inherit; }
-  .contact-id a:hover { color: var(--violet); }
+  .contact-id a:hover { color: var(--gold); }
   .contact-sub {
     font-size: 12.5px; color: var(--text-3);
   }
@@ -173,12 +173,12 @@
   .letter {
     padding: 36px 40px;
     border-radius: var(--r-xl);
-    background: linear-gradient(180deg, rgba(167,139,250,0.05), rgba(167,139,250,0.02));
+    background: linear-gradient(180deg, rgba(212,175,106,0.05), rgba(212,175,106,0.02));
     border: 0.5px solid var(--hairline);
     margin-bottom: 48px;
     font-size: 15px;
     line-height: 1.85;
-    color: rgba(235,235,245,0.86);
+    color: rgba(242,234,216,0.86);
   }
   .letter .salute {
     font-weight: 600;
@@ -196,7 +196,7 @@
     font-style: italic;
   }
   .letter em.hl {
-    color: var(--violet);
+    color: var(--gold);
     font-style: normal;
     font-weight: 600;
   }
@@ -209,7 +209,7 @@
   .btn-coffee {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     height: 48px; padding: 0 28px; border-radius: 24px;
-    background: #34d399; color: #0a0a14;
+    background: #34d399; color: #0e0a06;
     font-size: 14px; font-weight: 700; letter-spacing: 0.2px;
     text-decoration: none; border: 0; cursor: pointer;
     box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(52,211,153,0.35);
@@ -330,8 +330,8 @@
         <svg viewBox="0 0 1024 1024" fill="none" aria-hidden="true">
           <defs>
             <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#9a7dff"/>
-              <stop offset="100%" stop-color="#5B3AE0"/>
+              <stop offset="0%" stop-color="#F0D38A"/>
+              <stop offset="100%" stop-color="#9A7B3F"/>
             </linearGradient>
           </defs>
           <path d="M512 240 L744 730 L649 730 L512 429 L374 730 L280 730 Z" fill="url(#ag)"/>
@@ -432,7 +432,7 @@
         <div class="contact-sub">提 issue · 看源码 · star 仓库</div>
         <div class="qr-thumbs">
           <div style="height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: var(--text-3); font-size: 12.5px; text-align: center; padding: 0 16px;">
-            <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet); font-weight: 600; font-size: 13px;">→ 提交 Issue</a>
+            <a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--gold); font-weight: 600; font-size: 13px;">→ 提交 Issue</a>
             <a href="https://github.com/amefys" target="_blank" rel="noopener" style="color: var(--text-2);">github.com/amefys</a>
           </div>
         </div>
@@ -457,7 +457,7 @@
           <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 8px var(--emerald);"></span>合规白皮书
         </div>
         <h2 style="font-size: 38px; font-weight: 700; letter-spacing: -1px; margin: 20px 0 12px;">透明，且<em class="hl" style="font-style: normal;">可验证</em>。</h2>
-        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">应用代码当前处于商业开发阶段（暂未开源），但所有合规承诺可通过网络流量与文件系统行为独立验证。完整合规白皮书见 <a href="https://github.com/amefys/web/blob/main/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--violet); text-decoration: underline;">COMPLIANCE.md</a>。</p>
+        <p style="color: var(--text-2); font-size: 15px; line-height: 1.55; max-width: 540px; margin: 0 auto;">应用代码当前处于商业开发阶段（暂未开源），但所有合规承诺可通过网络流量与文件系统行为独立验证。完整合规白皮书见 <a href="https://github.com/amefys/web/blob/main/COMPLIANCE.md" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: underline;">COMPLIANCE.md</a>。</p>
       </div>
 
       <!-- 4-card compliance grid -->
@@ -475,8 +475,8 @@
           </ul>
         </div>
 
-        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(167,139,250,0.06), rgba(167,139,250,0.02)); border: 0.5px solid rgba(167,139,250,0.20);">
-          <div style="font-size: 11px; color: var(--violet); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">📦 数据默认本地</div>
+        <div style="padding: 22px; border-radius: 16px; background: linear-gradient(180deg, rgba(212,175,106,0.06), rgba(212,175,106,0.02)); border: 0.5px solid rgba(212,175,106,0.20);">
+          <div style="font-size: 11px; color: var(--gold); font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 10px;">📦 数据默认本地</div>
           <h3 style="font-size: 18px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 10px;">本地优先，云同步可选</h3>
           <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
             <li><strong style="color: var(--text);">本地永驻</strong>：对局数据、聊天历史、翻译缓存、应用日志（SQLite）</li>
@@ -502,7 +502,7 @@
           <ul style="margin: 0; padding-left: 20px; font-size: 13.5px; line-height: 1.65; color: var(--text-2);">
             <li>用 mitmproxy / Wireshark 可独立抓包验证出站连接 —— 应看到 Supabase / Sentry / 用户配的 LLM，<strong style="color: var(--text);">不应</strong>看到 Steam / Dota 2 服务器</li>
             <li>用 <code style="font-family: ui-monospace, monospace; background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 4px; font-size: 12px;">fs_usage</code> / Process Monitor 监控文件读写 —— 不会触碰 Dota 2 客户端文件</li>
-            <li>合规咨询 / 审计请求：<a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--violet);">GitHub Issue</a> · 5 工作日内响应</li>
+            <li>合规咨询 / 审计请求：<a href="https://github.com/amefys/web/issues" target="_blank" rel="noopener" style="color: var(--gold);">GitHub Issue</a> · 5 工作日内响应</li>
             <li>核心代码当前未开源（商业开发期），保留未来按需开放的可能</li>
           </ul>
         </div>

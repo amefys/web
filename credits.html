@@ -8,17 +8,17 @@
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <style>
   :root {
-    --bg: #08090d;
-    --bg-2: #0e1016;
-    --bg-3: #14161e;
-    --surface: rgba(22,24,32,0.72);
-    --hairline: rgba(255,255,255,0.08);
-    --hairline-strong: rgba(255,255,255,0.14);
-    --text: #f3f3f6;
-    --text-2: rgba(235,235,245,0.62);
-    --text-3: rgba(235,235,245,0.40);
-    --violet: #A78BFA;
-    --violet-deep: #7C5CEB;
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --bg-3: #1c1610;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
     --emerald: #34D399;
     --amber: #fcd34d;
     --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
@@ -32,7 +32,7 @@
 
   /* Top nav — copy of about.html for consistency */
   .nav { position: sticky; top: 0; z-index: 50; height: 48px;
-    background: rgba(8,9,13,0.72);
+    background: rgba(13,10,7,0.72);
     backdrop-filter: saturate(180%) blur(24px);
     -webkit-backdrop-filter: saturate(180%) blur(24px);
     border-bottom: 0.5px solid var(--hairline); }
@@ -41,7 +41,7 @@
     font-size: 12.5px; font-weight: 500; }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
-    box-shadow: 0 0 12px rgba(167,139,250,0.45); }
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
   .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
   .nav .links a:hover { color: var(--text); }
   .nav .links a[data-active="true"] { color: var(--text); }
@@ -50,12 +50,12 @@
   .btn-text:hover { color: var(--text); }
   .btn-pill { display: inline-flex; align-items: center; justify-content: center;
     height: 28px; padding: 0 14px; border-radius: 14px;
-    background: var(--violet-deep); color: #fff; border: 0;
+    background: var(--gold-deep); color: #fff; border: 0;
     font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
     text-decoration: none; cursor: pointer;
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4);
     transition: transform .12s, box-shadow .12s; }
-  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(176,138,69,0.55); }
   .lang-switch { display: inline-flex; align-items: center; gap: 6px;
     font-size: 11.5px; color: var(--text-3);
     padding: 0 10px; height: 28px;
@@ -73,8 +73,8 @@
   .page-hero { text-align: center; margin-bottom: 64px; }
   .page-hero .eyebrow {
     display: inline-block; padding: 5px 12px; border-radius: 999px;
-    background: rgba(167,139,250,0.08); border: 0.5px solid rgba(167,139,250,0.25);
-    font-size: 11px; color: var(--violet); letter-spacing: 0.5px; text-transform: uppercase;
+    background: rgba(212,175,106,0.08); border: 0.5px solid rgba(212,175,106,0.25);
+    font-size: 11px; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase;
     font-weight: 700; margin-bottom: 18px;
   }
   .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
@@ -84,8 +84,8 @@
   section.s { margin: 0 0 56px; }
   section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; }
   section.s .section-intro { color: var(--text-2); font-size: 14px; margin: 0 0 24px; line-height: 1.65; }
-  section.s a.link { color: var(--violet); text-decoration: none; border-bottom: 0.5px solid rgba(167,139,250,0.3); }
-  section.s a.link:hover { border-bottom-color: var(--violet); }
+  section.s a.link { color: var(--gold); text-decoration: none; border-bottom: 0.5px solid rgba(212,175,106,0.3); }
+  section.s a.link:hover { border-bottom-color: var(--gold); }
 
   /* Legal disclaimer card */
   .legal-card {
@@ -113,7 +113,7 @@
     font-size: 14.5px; font-weight: 600; margin-bottom: 6px;
   }
   .credit-name a { color: var(--text); }
-  .credit-name a:hover { color: var(--violet); }
+  .credit-name a:hover { color: var(--gold); }
   .license-tag {
     font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
     padding: 2px 7px; border-radius: 4px;
@@ -146,7 +146,7 @@
     text-transform: uppercase; margin-bottom: 10px;
   }
   .contact-card .contact-value { font-size: 15px; font-weight: 600; }
-  .contact-card .contact-value a { color: var(--violet); }
+  .contact-card .contact-value a { color: var(--gold); }
   .contact-card .contact-value a:hover { text-decoration: underline; }
   .contact-card .contact-sub { font-size: 12.5px; color: var(--text-2); margin-top: 6px; line-height: 1.55; }
 

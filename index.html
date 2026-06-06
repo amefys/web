@@ -9,17 +9,17 @@
 <link rel="apple-touch-icon" href="assets/icon-512.png">
 <style>
   :root {
-    --bg: #08090d;
-    --bg-2: #0e1016;
-    --bg-3: #14161e;
-    --surface: rgba(22,24,32,0.72);
-    --hairline: rgba(255,255,255,0.08);
-    --hairline-strong: rgba(255,255,255,0.14);
-    --text: #f3f3f6;
-    --text-2: rgba(235,235,245,0.62);
-    --text-3: rgba(235,235,245,0.40);
-    --violet: #A78BFA;
-    --violet-deep: #7C5CEB;
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --bg-3: #1c1610;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
     --emerald: #34D399;
     --radiant: #3DBE8A;
     --dire: #D9534F;
@@ -38,7 +38,7 @@
   .nav {
     position: sticky; top: 0; z-index: 50;
     height: 48px;
-    background: rgba(8,9,13,0.72);
+    background: rgba(13,10,7,0.72);
     backdrop-filter: saturate(180%) blur(24px);
     -webkit-backdrop-filter: saturate(180%) blur(24px);
     border-bottom: 0.5px solid var(--hairline);
@@ -50,7 +50,7 @@
   }
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px;
-    box-shadow: 0 0 12px rgba(167,139,250,0.45); display: block; }
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); display: block; }
   .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; }
   .nav .links a:hover { color: var(--text); }
   .nav .actions { display: flex; gap: 12px; align-items: center; }
@@ -59,13 +59,13 @@
   .btn-pill {
     display: inline-flex; align-items: center; justify-content: center;
     height: 28px; padding: 0 14px; border-radius: 14px;
-    background: var(--violet-deep); color: #fff; border: 0;
+    background: var(--gold-deep); color: #fff; border: 0;
     font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
     text-decoration: none; cursor: pointer;
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(124,92,235,0.4);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4);
     transition: transform .12s, box-shadow .12s;
   }
-  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(124,92,235,0.55); }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(176,138,69,0.55); }
 
   /* Language switcher — small text toggle next to the actions */
   .lang-switch {
@@ -91,10 +91,10 @@
   .hero {
     position: relative; min-height: 760px;
     background:
-      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(124,92,235,0.35), transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(176,138,69,0.35), transparent 60%),
       radial-gradient(ellipse 60% 40% at 100% 0%, rgba(217,83,79,0.18), transparent 70%),
       radial-gradient(ellipse 60% 40% at 0% 0%, rgba(61,190,138,0.16), transparent 70%),
-      linear-gradient(180deg, #06070b 0%, #0a0c12 60%, #06070b 100%);
+      linear-gradient(180deg, #0a0805 0%, #100c08 60%, #0a0805 100%);
     overflow: hidden;
     text-align: center;
     padding: 100px 24px 0;
@@ -120,26 +120,26 @@
   }
   .hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   .particle { position: absolute; width: 2px; height: 2px; border-radius: 50%;
-    background: var(--violet); box-shadow: 0 0 8px var(--violet);
+    background: var(--gold); box-shadow: 0 0 8px var(--gold);
     animation: float-up 8s linear infinite; }
   .hero-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 5px 11px; border-radius: 999px;
-    background: rgba(167,139,250,0.12); color: var(--violet);
+    background: rgba(212,175,106,0.12); color: var(--gold);
     font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
-    border: 0.5px solid rgba(167,139,250,0.3);
+    border: 0.5px solid rgba(212,175,106,0.3);
     margin-bottom: 22px;
     position: relative; z-index: 1;
   }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 10px var(--violet); }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
   .hero h1 {
     font-size: 84px; line-height: 0.98; letter-spacing: -2.4px;
     font-weight: 700; margin: 0 0 18px;
-    background: linear-gradient(180deg, #ffffff 0%, #c7c4e1 70%, #8b88a3 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #E5D9B8 70%, #A6987A 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     position: relative; z-index: 1;
   }
-  .hero h1 em { font-style: normal; background: linear-gradient(135deg, #b39df9, #7C5CEB); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero h1 em { font-style: normal; background: linear-gradient(135deg, #F0D38A, #9A7B3F); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hero p.lead {
     max-width: 620px; margin: 0 auto 32px;
     font-size: 19px; color: var(--text-2); letter-spacing: -0.1px;
@@ -154,10 +154,10 @@
     transition: transform .12s, box-shadow .12s, background .12s;
   }
   .btn-cta.primary {
-    background: linear-gradient(180deg, #9374f6 0%, #7C5CEB 100%); color: #fff;
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(124,92,235,0.45);
+    background: linear-gradient(180deg, #D9AE5F 0%, #9A7B3F 100%); color: #fff;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(176,138,69,0.45);
   }
-  .btn-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(124,92,235,0.6); }
+  .btn-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(176,138,69,0.6); }
   .btn-cta.ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 0.5px solid var(--hairline-strong); }
   .btn-cta.ghost:hover { background: rgba(255,255,255,0.1); }
   .platforms { margin-top: 18px; font-size: 11.5px; color: var(--text-3); letter-spacing: 0.4px; position: relative; z-index: 1; }
@@ -166,13 +166,13 @@
   .preview-wrap { position: relative; margin: 70px auto 0; max-width: 1080px; padding: 0 24px; z-index: 1; }
   .preview {
     position: relative; aspect-ratio: 16 / 10; border-radius: 18px;
-    background: linear-gradient(180deg, #16171e 0%, #0e1016 100%);
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.1), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(124,92,235,0.18);
+    background: linear-gradient(180deg, #1e1812 0%, #141009 100%);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.1), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(176,138,69,0.18);
     overflow: hidden;
   }
   .preview::before { /* Glow under */
     content: ''; position: absolute; left: 10%; right: 10%; bottom: -40px; height: 120px;
-    background: radial-gradient(ellipse, rgba(124,92,235,0.55), transparent 70%); filter: blur(30px); z-index: -1;
+    background: radial-gradient(ellipse, rgba(176,138,69,0.55), transparent 70%); filter: blur(30px); z-index: -1;
   }
   .titlebar { height: 30px; background: rgba(255,255,255,0.04); border-bottom: 0.5px solid var(--hairline);
     display: flex; align-items: center; padding: 0 12px; gap: 6px; }
@@ -183,9 +183,9 @@
     background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 4px; }
   .pv-side .p-row { padding: 7px 10px; border-radius: 8px; font-size: 12px; color: var(--text-2);
     display: flex; align-items: center; gap: 8px; }
-  .pv-side .p-row.active { background: rgba(167,139,250,0.16); color: #fff; }
+  .pv-side .p-row.active { background: rgba(212,175,106,0.16); color: #fff; }
   .pv-side .p-glyph { width: 14px; height: 14px; border-radius: 4px; background: rgba(255,255,255,0.12); }
-  .pv-side .p-row.active .p-glyph { background: var(--violet); }
+  .pv-side .p-row.active .p-glyph { background: var(--gold); }
   .pv-main { padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
   .pv-h { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; }
   .pv-sub { font-size: 11px; color: var(--text-3); }
@@ -193,21 +193,21 @@
     background: rgba(255,255,255,0.04); border: 0.5px solid var(--hairline);
     border-radius: 12px; padding: 14px;
   }
-  .pv-card.accent { background: linear-gradient(135deg, rgba(167,139,250,0.18), rgba(124,92,235,0.06));
-    border: 0.5px solid rgba(167,139,250,0.3); }
+  .pv-card.accent { background: linear-gradient(135deg, rgba(212,175,106,0.18), rgba(176,138,69,0.06));
+    border: 0.5px solid rgba(212,175,106,0.3); }
   .item-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 10px; }
   .item { aspect-ratio: 1; border-radius: 6px;
-    background: linear-gradient(135deg, rgba(120,120,140,0.4), rgba(40,40,52,0.5));
+    background: linear-gradient(135deg, rgba(140,125,100,0.4), rgba(46,38,28,0.5));
     border: 0.5px solid var(--hairline); display: flex; align-items: center; justify-content: center;
     font-family: ui-monospace, monospace; font-size: 8px; color: var(--text-3); }
-  .item.active { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); border: 1.5px solid var(--violet);
-    box-shadow: 0 0 0 3px rgba(167,139,250,0.2); color: #fff; }
+  .item.active { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); border: 1.5px solid var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,175,106,0.2); color: #fff; }
   .pv-right { padding: 16px; border-left: 0.5px solid var(--hairline); display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.16); }
   .chat-bubble { padding: 9px 12px; border-radius: 12px; font-size: 11.5px; }
   .chat-bubble .raw { color: var(--text); }
   .chat-bubble .tr { color: var(--text-2); margin-top: 3px; font-size: 11px; }
   .chat-bubble.them { background: rgba(255,255,255,0.05); border: 0.5px solid var(--hairline); }
-  .chat-bubble.me { background: var(--violet-deep); align-self: flex-end; max-width: 80%; }
+  .chat-bubble.me { background: var(--gold-deep); align-self: flex-end; max-width: 80%; }
   .chat-bubble.me .tr { color: rgba(255,255,255,0.78); }
   .who { font-size: 10px; color: var(--text-3); margin-bottom: 3px; font-weight: 600; }
 
@@ -216,8 +216,8 @@
   .container { max-width: 1080px; margin: 0 auto; }
   .eyebrow { display: inline-flex; align-items: center; gap: 8px;
     font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
-    color: var(--violet); text-transform: uppercase; margin-bottom: 14px; }
-  .eyebrow .bar { width: 24px; height: 1px; background: var(--violet); }
+    color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--gold); }
   h2.section-title {
     font-size: 56px; line-height: 1.04; letter-spacing: -1.4px;
     font-weight: 700; margin: 0 0 16px; max-width: 720px;
@@ -238,7 +238,7 @@
   }
   .bento-card.span-col { grid-column: 1 / -1; }
   .bento-h { font-size: 28px; line-height: 1.1; letter-spacing: -0.6px; font-weight: 700; margin: 0 0 10px; }
-  .bento-h em { font-style: normal; color: var(--violet); }
+  .bento-h em { font-style: normal; color: var(--gold); }
   .bento-p { font-size: 14px; color: var(--text-2); margin: 0; max-width: 440px; }
   .bento-art { position: absolute; right: 28px; bottom: 24px; }
 
@@ -248,7 +248,7 @@
     background: var(--bg-3); border: 0.5px solid var(--hairline);
     border-radius: 16px; padding: 22px; min-height: 200px; position: relative;
   }
-  .pipe-num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--violet); letter-spacing: 1px; }
+  .pipe-num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--gold); letter-spacing: 1px; }
   .pipe-h { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin: 14px 0 6px; }
   .pipe-p { font-size: 12.5px; color: var(--text-2); margin: 0; line-height: 1.55; }
 
@@ -263,22 +263,22 @@
     background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
     position: relative; overflow: hidden; min-height: 280px;
   }
-  .split-card.violet::before {
+  .split-card.gold::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(167,139,250,0.22), transparent 60%);
+    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(212,175,106,0.22), transparent 60%);
   }
   .split-card.emerald::before {
     content: ''; position: absolute; inset: 0;
     background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(52,211,153,0.18), transparent 60%);
   }
   .split-card .label { position: relative; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-3); }
-  .split-card.violet .label { color: var(--violet); }
+  .split-card.gold .label { color: var(--gold); }
   .split-card.emerald .label { color: var(--emerald); }
   .split-card h3 { position: relative; font-size: 32px; line-height: 1.1; letter-spacing: -0.8px; margin: 12px 0 10px; }
   .split-card p { position: relative; font-size: 14px; color: var(--text-2); margin: 0; max-width: 360px; }
   .split-stat { position: relative; margin-top: 28px; display: flex; gap: 28px; }
   .stat .v { font-size: 36px; font-weight: 700; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
-  .stat .v em { font-style: normal; color: var(--violet); }
+  .stat .v em { font-style: normal; color: var(--gold); }
   .stat.em .v em { color: var(--emerald); }
   .stat .l { font-size: 11px; color: var(--text-3); letter-spacing: 0.6px; }
 
@@ -310,7 +310,7 @@
   .lang-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
   .lang-tag { padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06);
     border: 0.5px solid var(--hairline); font-size: 11.5px; color: var(--text-2); font-weight: 500; }
-  .lang-tag.on { background: rgba(167,139,250,0.18); border-color: rgba(167,139,250,0.4); color: var(--violet); }
+  .lang-tag.on { background: rgba(212,175,106,0.18); border-color: rgba(212,175,106,0.4); color: var(--gold); }
 
   .overlay-mock {
     width: 320px; border-radius: 14px;
@@ -319,7 +319,7 @@
     overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
   }
   .om-head { padding: 10px 12px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; gap: 8px; font-size: 11px; }
-  .om-head .mark { width: 12px; height: 12px; border-radius: 4px; background: var(--violet); }
+  .om-head .mark { width: 12px; height: 12px; border-radius: 4px; background: var(--gold); }
   .om-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 
   /* Pricing */
@@ -328,10 +328,10 @@
     border: 0.5px solid var(--hairline); border-radius: 22px; padding: 32px;
     background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); position: relative;
   }
-  .price-card.feature { border: 0.5px solid rgba(167,139,250,0.5);
-    background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2)); }
+  .price-card.feature { border: 0.5px solid rgba(212,175,106,0.5);
+    background: linear-gradient(180deg, rgba(212,175,106,0.08), var(--bg-2)); }
   .price-card .plan { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); }
-  .price-card.feature .plan { color: var(--violet); }
+  .price-card.feature .plan { color: var(--gold); }
   .price-card .amount { font-size: 56px; font-weight: 700; letter-spacing: -1.4px; margin: 14px 0 4px; font-variant-numeric: tabular-nums; }
   .price-card .amount small { font-size: 14px; color: var(--text-3); font-weight: 500; letter-spacing: 0; }
   .price-card .note { font-size: 12.5px; color: var(--text-2); margin: 0 0 24px; }
@@ -343,15 +343,15 @@
                       linear-gradient(-45deg, transparent 45%, var(--text-2) 45% 55%, transparent 55%);
     background-size: 8px 8px; background-repeat: no-repeat; background-position: center;
   }
-  .price-card.feature li::before { background-color: rgba(167,139,250,0.16); border-color: rgba(167,139,250,0.4); }
+  .price-card.feature li::before { background-color: rgba(212,175,106,0.16); border-color: rgba(212,175,106,0.4); }
   .price-card .btn-buy {
     display: inline-flex; align-items: center; justify-content: center;
     width: 100%; height: 40px; border-radius: 20px; border: 0.5px solid var(--hairline-strong);
     background: rgba(255,255,255,0.06); color: var(--text); font-size: 13px; font-weight: 600;
     line-height: 1; text-decoration: none; cursor: pointer;
   }
-  .price-card.feature .btn-buy { background: var(--violet-deep); border: 0; color: #fff;
-    box-shadow: 0 6px 20px rgba(124,92,235,0.4); }
+  .price-card.feature .btn-buy { background: var(--gold-deep); border: 0; color: #fff;
+    box-shadow: 0 6px 20px rgba(176,138,69,0.4); }
 
   /* FAQ */
   .faq { margin-top: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
@@ -369,12 +369,12 @@
   .final-cta {
     text-align: center; padding: 140px 24px;
     background:
-      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(124,92,235,0.32), transparent 70%),
-      linear-gradient(180deg, #06070b, #0a0c12);
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(176,138,69,0.32), transparent 70%),
+      linear-gradient(180deg, #0a0805, #100c08);
     border-top: 0.5px solid var(--hairline);
   }
   .final-cta h2 { font-size: 72px; line-height: 1; letter-spacing: -1.8px; font-weight: 700; margin: 0 auto 20px; max-width: 800px;
-    background: linear-gradient(180deg, #fff, #b39df9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    background: linear-gradient(180deg, #fff, #F0D38A); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .final-cta p { font-size: 17px; color: var(--text-2); max-width: 560px; margin: 0 auto 32px; }
 
   /* Footer */
@@ -385,7 +385,7 @@
   .ft-col a:hover { color: var(--text); }
   .ft-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
   .ft-brand .brand-mark { width: 22px; height: 22px; border-radius: 6px;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep)); }
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
   .ft-tag { font-size: 12px; color: var(--text-3); max-width: 240px; line-height: 1.6; }
   .ft-bot { max-width: 1080px; margin: 48px auto 0; padding-top: 24px; border-top: 0.5px solid var(--hairline);
     display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); }
@@ -463,8 +463,8 @@
     aspect-ratio: 16 / 10;
     border-radius: 22px;
     overflow: hidden;
-    border: 0.5px solid rgba(255,255,255,0.08);
-    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(124,92,235,0.16);
+    border: 0.5px solid rgba(232,199,121,0.12);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(176,138,69,0.16);
     cursor: grab;
     user-select: none;
     touch-action: pan-y;
@@ -494,7 +494,7 @@
     font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
     text-shadow: 0 0 12px rgba(0,0,0,0.5);
   }
-  .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--violet); }
+  .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--gold); }
   .hc-title {
     position: absolute; top: 74px; left: 44px; z-index: 5;
     color: #fff;
@@ -504,7 +504,7 @@
   }
   .hc-title em {
     font-style: normal;
-    background: linear-gradient(135deg, var(--violet), var(--violet-deep));
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .hc-sub {
@@ -576,14 +576,14 @@
     max-width: 200px;
   }
   .hc-callout-card .key {
-    color: var(--accent, var(--violet));
+    color: var(--accent, var(--gold));
     font-size: 9.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
     margin-bottom: 3px;
     display: flex; align-items: center; gap: 5px;
   }
   .hc-callout-card .key .num {
     width: 16px; height: 16px; border-radius: 50%;
-    background: var(--accent, var(--violet)); color: #fff;
+    background: var(--accent, var(--gold)); color: #fff;
     font-size: 9.5px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
   }
@@ -595,28 +595,28 @@
   }
   .hc-callout .arr {
     flex-shrink: 0; width: 32px; height: 1.5px;
-    background: linear-gradient(90deg, var(--accent, var(--violet)), transparent);
+    background: linear-gradient(90deg, var(--accent, var(--gold)), transparent);
     position: relative; top: 7px;
   }
   .hc-callout .arr::after {
     content: ''; position: absolute; right: -1px; top: -3.5px;
-    border: 4px solid transparent; border-left-color: var(--accent, var(--violet));
+    border: 4px solid transparent; border-left-color: var(--accent, var(--gold));
   }
   .hc-callout.flip { flex-direction: row-reverse; }
-  .hc-callout.flip .arr { background: linear-gradient(90deg, transparent, var(--accent, var(--violet))); transform: rotate(180deg); }
+  .hc-callout.flip .arr { background: linear-gradient(90deg, transparent, var(--accent, var(--gold))); transform: rotate(180deg); }
 
   /* ──── Slide 1 · main UI basics ──── */
   .hc-slide-1 {
     background:
-      radial-gradient(circle at 20% 30%, rgba(167,139,250,0.18), transparent 60%),
+      radial-gradient(circle at 20% 30%, rgba(212,175,106,0.18), transparent 60%),
       radial-gradient(circle at 80% 70%, rgba(96,165,250,0.12), transparent 60%),
-      linear-gradient(180deg, #0c0d12, #08090d);
+      linear-gradient(180deg, #0c0d12, #0d0a07);
   }
   .hc-app {
     position: absolute; top: 50%; right: 5%; transform: translateY(-50%);
     width: 50%; max-width: 600px; aspect-ratio: 16/12;
     border-radius: 14px;
-    background: #14161e;
+    background: #1c1610;
     border: 0.5px solid rgba(255,255,255,0.10);
     box-shadow: 0 24px 60px rgba(0,0,0,0.55);
     overflow: hidden;
@@ -626,7 +626,7 @@
   .hc-app-titlebar {
     display: flex; align-items: center; gap: 7px; padding: 0 12px;
     background: rgba(0,0,0,0.4);
-    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    border-bottom: 0.5px solid rgba(232,199,121,0.12);
   }
   .hc-app-titlebar i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .hc-app-body { display: grid; grid-template-columns: 130px 1fr; min-height: 0; }
@@ -637,15 +637,15 @@
     font-size: 11.5px;
   }
   .hc-app-side .row { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 7px; color: rgba(255,255,255,0.65); }
-  .hc-app-side .row[data-active='true'] { background: rgba(167,139,250,0.16); color: #fff; }
-  .hc-app-side .glyph { width: 12px; height: 12px; border-radius: 3px; background: rgba(255,255,255,0.14); }
-  .hc-app-side .row[data-active='true'] .glyph { background: var(--violet); }
+  .hc-app-side .row[data-active='true'] { background: rgba(212,175,106,0.16); color: #fff; }
+  .hc-app-side .glyph { width: 12px; height: 12px; border-radius: 3px; background: rgba(232,199,121,0.20); }
+  .hc-app-side .row[data-active='true'] .glyph { background: var(--gold); }
   .hc-app-main { padding: 14px; display: flex; flex-direction: column; gap: 11px; }
   .hc-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
-  .hc-tile { padding: 8px 10px; border-radius: 8px; background: rgba(167,139,250,0.08); border: 0.5px solid rgba(167,139,250,0.20); }
+  .hc-tile { padding: 8px 10px; border-radius: 8px; background: rgba(212,175,106,0.08); border: 0.5px solid rgba(212,175,106,0.20); }
   .hc-tile .l { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: .6px; text-transform: uppercase; }
   .hc-tile .v { font-size: 16px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
-  .hc-card { padding: 11px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-card { padding: 11px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(232,199,121,0.12); }
   .hc-card h5 { margin: 0 0 8px; font-size: 9.5px; letter-spacing: .8px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700; }
   .hc-mrow { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); font-size: 11px; }
   .hc-mrow:last-child { border-bottom: 0; }
@@ -654,14 +654,14 @@
   .hc-mrow .w { color: var(--emerald); font-weight: 700; }
   .hc-mrow .l { color: var(--dire); font-weight: 700; }
   .hc-mrow .t { color: rgba(255,255,255,0.4); font-family: ui-monospace, monospace; font-size: 10px; }
-  .hc-slide-1 { --accent: var(--violet); }
-  .hc-slide-1 .hc-eyebrow .bar { background: var(--violet); }
+  .hc-slide-1 { --accent: var(--gold); }
+  .hc-slide-1 .hc-eyebrow .bar { background: var(--gold); }
 
   /* ──── Slide 2 · overlay over game ──── */
   .hc-slide-2 {
     background:
-      radial-gradient(60% 50% at 18% 22%, rgba(244,114,182,0.20), transparent 60%),
-      radial-gradient(60% 50% at 78% 32%, rgba(167,139,250,0.20), transparent 60%),
+      radial-gradient(60% 50% at 18% 22%, rgba(221,136,102,0.20), transparent 60%),
+      radial-gradient(60% 50% at 78% 32%, rgba(212,175,106,0.20), transparent 60%),
       radial-gradient(60% 50% at 28% 80%, rgba(96,165,250,0.18), transparent 60%),
       radial-gradient(60% 50% at 82% 80%, rgba(52,211,153,0.16), transparent 60%),
       #0a0c14;
@@ -670,22 +670,22 @@
     font-family: 'Newsreader','Source Han Serif SC','Songti SC',serif;
     font-style: italic;
   }
-  .hc-slide-2 .hc-title em { background: linear-gradient(135deg, #fbcfe8, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .hc-slide-2 .hc-eyebrow .bar { background: #f472b6; }
-  .hc-slide-2 { --accent: #f472b6; }
+  .hc-slide-2 .hc-title em { background: linear-gradient(135deg, #fbcfe8, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-2 .hc-eyebrow .bar { background: #DD8866; }
+  .hc-slide-2 { --accent: #DD8866; }
   .hc-game-bg { position: absolute; inset: 0; z-index: 0; filter: blur(8px) brightness(0.72) saturate(0.85); transform: scale(1.08); }
   .hc-game-bg svg { width: 100%; height: 100%; display: block; }
   .hc-game-tint {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background:
-      radial-gradient(60% 50% at 18% 22%, rgba(244,114,182,0.20), transparent 60%),
+      radial-gradient(60% 50% at 18% 22%, rgba(221,136,102,0.20), transparent 60%),
       radial-gradient(60% 50% at 50% 50%, rgba(0,0,0,0.35), transparent 70%),
-      linear-gradient(180deg, rgba(8,9,13,0.25) 0%, rgba(8,9,13,0.5) 100%);
+      linear-gradient(180deg, rgba(13,10,7,0.25) 0%, rgba(13,10,7,0.5) 100%);
   }
   .hc-hud { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; z-index: 1; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85)); pointer-events: none; }
   .hc-hud .row { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; gap: 5px; }
-  .hc-hud .slot { width: 32px; height: 24px; border-radius: 3px; background: linear-gradient(180deg, rgba(167,139,250,0.32), rgba(124,92,235,0.12)); border: 0.5px solid rgba(255,255,255,0.18); }
-  .hc-hud .slot.empty { background: rgba(0,0,0,0.45); border-color: rgba(255,255,255,0.08); }
+  .hc-hud .slot { width: 32px; height: 24px; border-radius: 3px; background: linear-gradient(180deg, rgba(212,175,106,0.32), rgba(176,138,69,0.12)); border: 0.5px solid rgba(255,255,255,0.18); }
+  .hc-hud .slot.empty { background: rgba(0,0,0,0.45); border-color: rgba(232,199,121,0.12); }
   .hc-hud .clock { position: absolute; left: 20px; bottom: 14px; color: rgba(255,255,255,0.8); font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
   .hc-hud .team { position: absolute; bottom: 16px; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 800; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
   .hc-hud .team.r { left: 24%; color: #3DBE8A; }
@@ -708,39 +708,39 @@
     position: relative;
     height: 34px; padding: 0 10px 0 14px;
     display: flex; align-items: center; gap: 10px;
-    border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    border-bottom: 0.5px solid rgba(232,199,121,0.12);
   }
-  .hc-ow-brand { width: 16px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); box-shadow: 0 0 8px rgba(167,139,250,0.5); }
+  .hc-ow-brand { width: 16px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); box-shadow: 0 0 8px rgba(212,175,106,0.5); }
   .hc-ow-titlebar strong { font-weight: 700; color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 13.5px; }
   .hc-ow-titlebar small { margin-left: auto; color: rgba(255,255,255,0.6); font-size: 10px; font-family: ui-monospace, monospace; }
   .hc-ow-opacity-btn {
     width: 22px; height: 22px; border-radius: 6px;
-    background: linear-gradient(135deg, #f472b6, var(--violet));
-    border: 0.5px solid #f472b6;
+    background: linear-gradient(135deg, #DD8866, var(--gold));
+    border: 0.5px solid #DD8866;
     color: #fff;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 0 2px rgba(244,114,182,0.18);
+    box-shadow: 0 0 0 2px rgba(221,136,102,0.18);
   }
   .hc-ow-opacity-btn svg { width: 11px; height: 11px; }
   .hc-ow-opacity-panel {
     display: flex; align-items: center; gap: 8px;
     padding: 7px 12px;
-    background: rgba(244,114,182,0.10);
-    border-bottom: 0.5px solid rgba(244,114,182,0.18);
+    background: rgba(221,136,102,0.10);
+    border-bottom: 0.5px solid rgba(221,136,102,0.18);
   }
   .hc-ow-opacity-panel .lbl { font-size: 9.5px; color: rgba(255,255,255,0.8); letter-spacing: .5px; text-transform: uppercase; font-weight: 700; }
-  .hc-ow-opacity-panel .track { flex: 1; height: 4px; background: rgba(255,255,255,0.14); border-radius: 2px; position: relative; }
-  .hc-ow-opacity-panel .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 76%; background: linear-gradient(90deg, #f472b6, var(--violet)); border-radius: 2px; }
+  .hc-ow-opacity-panel .track { flex: 1; height: 4px; background: rgba(232,199,121,0.20); border-radius: 2px; position: relative; }
+  .hc-ow-opacity-panel .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 76%; background: linear-gradient(90deg, #DD8866, var(--gold)); border-radius: 2px; }
   .hc-ow-opacity-panel .thumb { position: absolute; left: 76%; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
   .hc-ow-opacity-panel .val { font-size: 10.5px; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; width: 28px; text-align: right; }
   .hc-ow-opacity-panel .x { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,0.35); color: rgba(255,255,255,0.85); border: 0; font-size: 13px; display: flex; align-items: center; justify-content: center; }
-  .hc-ow-tabs { display: flex; padding: 4px 8px 0; gap: 4px; border-bottom: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-ow-tabs { display: flex; padding: 4px 8px 0; gap: 4px; border-bottom: 0.5px solid rgba(232,199,121,0.12); }
   .hc-ow-tab { flex: 1; height: 24px; border-radius: 7px 7px 0 0; background: transparent; border: 0; color: rgba(255,255,255,0.5); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
   .hc-ow-tab[data-active='true'] { background: rgba(255,255,255,0.15); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.22); }
   .hc-ow-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 7px; }
   .hc-bubble { padding: 6px 9px; border-radius: 10px; font-size: 10.5px; line-height: 1.4; }
   .hc-bubble.them { background: rgba(255,255,255,0.12); align-self: flex-start; max-width: 92%; }
-  .hc-bubble.me { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); align-self: flex-end; max-width: 92%; color: #fff; box-shadow: 0 4px 10px rgba(124,92,235,0.35); }
+  .hc-bubble.me { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); align-self: flex-end; max-width: 92%; color: #fff; box-shadow: 0 4px 10px rgba(176,138,69,0.35); }
   .hc-bubble .who { font-size: 8.5px; color: rgba(255,255,255,0.65); font-weight: 700; letter-spacing: .3px; margin-bottom: 1px; }
   .hc-bubble .raw { color: rgba(255,255,255,0.92); }
   .hc-bubble .tr { color: rgba(255,255,255,0.6); font-size: 9.5px; margin-top: 1px; font-style: italic; font-family: 'Newsreader',serif; }
@@ -750,13 +750,13 @@
   .hc-radial svg { width: 100%; height: 100%; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); }
   .hc-radial .bp { fill: rgba(0,0,0,0.55); stroke: rgba(255,255,255,0.30); stroke-width: 0.5; }
   .hc-radial .sec { fill: rgba(255,255,255,0.12); stroke: rgba(255,255,255,0.22); stroke-width: 0.5; }
-  .hc-radial .sec[data-active='true'] { fill: rgba(244,114,182,0.50); stroke: #f472b6; stroke-width: 1.2; }
+  .hc-radial .sec[data-active='true'] { fill: rgba(221,136,102,0.50); stroke: #DD8866; stroke-width: 1.2; }
   .hc-radial .lbl { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; font-size: 12px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
   .hc-radial .cdot { fill: rgba(255,255,255,0.35); }
   .hc-radial-tail { position: absolute; right: 56px; bottom: -2px; width: 0; height: 0; border: 6px solid transparent; border-top-color: rgba(255,255,255,0.30); z-index: 4; }
   .hc-qr-row { display: flex; gap: 4px; flex-wrap: wrap; }
   .hc-qr-chip { height: 22px; padding: 0 9px; border-radius: 11px; background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.18); color: #fff; font-size: 10px; font-weight: 600; display: inline-flex; align-items: center; }
-  .hc-qr-chip.hot { background: linear-gradient(135deg, #f472b6, var(--violet)); color: #fff; border-color: #f472b6; box-shadow: 0 0 0 3px rgba(244,114,182,0.22); font-weight: 800; margin-left: auto; }
+  .hc-qr-chip.hot { background: linear-gradient(135deg, #DD8866, var(--gold)); color: #fff; border-color: #DD8866; box-shadow: 0 0 0 3px rgba(221,136,102,0.22); font-weight: 800; margin-left: auto; }
   .hc-block-q { margin-top: 2px; padding: 8px 10px; border-radius: 10px; background: rgba(52,211,153,0.10); border: 0.5px solid rgba(52,211,153,0.22); }
   .hc-block-q h6 { margin: 0 0 5px; font-size: 8.5px; color: var(--emerald); font-weight: 700; letter-spacing: .7px; }
   .hc-block-q .row { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: rgba(255,255,255,0.88); margin-bottom: 2px; }
@@ -766,70 +766,70 @@
   .hc-block-q .row .t { margin-left: auto; color: rgba(255,255,255,0.5); font-size: 8.5px; font-family: ui-monospace, monospace; }
   .hc-ow-input { display: flex; align-items: center; gap: 5px; padding: 6px 4px 2px; border-top: 0.5px solid rgba(255,255,255,0.06); margin-top: 3px; }
   .hc-ow-input .field { flex: 1; height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(0,0,0,0.30); border: 0.5px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.55); font-size: 10px; display: flex; align-items: center; }
-  .hc-ow-input .send { height: 26px; padding: 0 10px; border-radius: 13px; background: var(--violet-deep); color: #fff; font-size: 10px; font-weight: 700; border: 0; box-shadow: 0 4px 12px rgba(124,92,235,0.4); display: flex; align-items: center; }
+  .hc-ow-input .send { height: 26px; padding: 0 10px; border-radius: 13px; background: var(--gold-deep); color: #fff; font-size: 10px; font-weight: 700; border: 0; box-shadow: 0 4px 12px rgba(176,138,69,0.4); display: flex; align-items: center; }
 
   /* ──── Slide 3 · multi-theme ──── */
   .hc-slide-3 { background: linear-gradient(90deg, #0a0e1a 0%, #0a0e1a 33%, #0c0d12 33%, #0c0d12 66%, #0e1018 66%, #0e1018 100%); }
-  .hc-slide-3 .hc-title em { background: linear-gradient(135deg, #06b6d4, #f472b6); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .hc-slide-3 .hc-eyebrow .bar { background: #06b6d4; }
-  .hc-slide-3 { --accent: #06b6d4; }
+  .hc-slide-3 .hc-title em { background: linear-gradient(135deg, #E09A66, #DD8866); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-3 .hc-eyebrow .bar { background: #E09A66; }
+  .hc-slide-3 { --accent: #E09A66; }
   .hc-3split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; }
   .hc-3pane { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .hc-3pane.cy {
     background-image:
-      repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(6,182,212,0.08) 19px, rgba(6,182,212,0.08) 20px),
-      repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(244,114,182,0.06) 19px, rgba(244,114,182,0.06) 20px);
+      repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(224,154,102,0.08) 19px, rgba(224,154,102,0.08) 20px),
+      repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(221,136,102,0.06) 19px, rgba(221,136,102,0.06) 20px);
   }
-  .hc-3pane.cy::after { content: ''; position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: linear-gradient(90deg, transparent, #06b6d4, transparent); box-shadow: 0 0 8px #06b6d4; }
-  .hc-3pane.df { background: radial-gradient(circle at 50% 30%, rgba(167,139,250,0.10), transparent 60%); border-left: 0.5px solid rgba(255,255,255,0.06); border-right: 0.5px solid rgba(255,255,255,0.06); }
-  .hc-3pane.gl { background: radial-gradient(60% 50% at 30% 30%, rgba(244,114,182,0.22), transparent 60%), radial-gradient(60% 50% at 70% 70%, rgba(167,139,250,0.24), transparent 60%); }
+  .hc-3pane.cy::after { content: ''; position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: linear-gradient(90deg, transparent, #E09A66, transparent); box-shadow: 0 0 8px #E09A66; }
+  .hc-3pane.df { background: radial-gradient(circle at 50% 30%, rgba(212,175,106,0.10), transparent 60%); border-left: 0.5px solid rgba(255,255,255,0.06); border-right: 0.5px solid rgba(255,255,255,0.06); }
+  .hc-3pane.gl { background: radial-gradient(60% 50% at 30% 30%, rgba(221,136,102,0.22), transparent 60%), radial-gradient(60% 50% at 70% 70%, rgba(212,175,106,0.24), transparent 60%); }
   .hc-3pane .label { position: absolute; top: 24px; left: 24px; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
-  .hc-3pane.cy .label { color: #06b6d4; font-family: ui-monospace, monospace; }
-  .hc-3pane.df .label { color: var(--violet); }
+  .hc-3pane.cy .label { color: #E09A66; font-family: ui-monospace, monospace; }
+  .hc-3pane.df .label { color: var(--gold); }
   .hc-3pane.gl .label { color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 16px; font-weight: 400; letter-spacing: -0.2px; }
   .hc-3card { width: 75%; max-width: 220px; padding: 16px; border-radius: 14px; z-index: 3; }
   .hc-3card.cy {
-    background: linear-gradient(180deg, rgba(6,182,212,0.10), rgba(244,114,182,0.06));
-    border: 1px solid #06b6d4;
+    background: linear-gradient(180deg, rgba(224,154,102,0.10), rgba(221,136,102,0.06));
+    border: 1px solid #E09A66;
     clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
   }
-  .hc-3card.cy h4 { font-family: ui-monospace, monospace; color: #06b6d4; font-size: 13px; margin: 0 0 4px; letter-spacing: 1.4px; font-weight: 700; }
-  .hc-3card.cy .s { font-family: ui-monospace, monospace; color: #f472b6; font-size: 9px; letter-spacing: .8px; margin-bottom: 12px; }
+  .hc-3card.cy h4 { font-family: ui-monospace, monospace; color: #E09A66; font-size: 13px; margin: 0 0 4px; letter-spacing: 1.4px; font-weight: 700; }
+  .hc-3card.cy .s { font-family: ui-monospace, monospace; color: #DD8866; font-size: 9px; letter-spacing: .8px; margin-bottom: 12px; }
   .hc-3card.cy .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .hc-3card.cy .icn { width: 38px; height: 38px; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); background: linear-gradient(135deg, #06b6d4, #f472b6); color: #000; font-family: ui-monospace, monospace; font-weight: 800; font-size: 10px; display: flex; align-items: center; justify-content: center; }
-  .hc-3card.cy .meta strong { display: block; font-family: ui-monospace, monospace; color: #06b6d4; font-size: 11px; letter-spacing: .5px; }
-  .hc-3card.cy .meta span { color: #f472b6; font-size: 9.5px; font-family: ui-monospace, monospace; letter-spacing: .7px; }
+  .hc-3card.cy .icn { width: 38px; height: 38px; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); background: linear-gradient(135deg, #E09A66, #DD8866); color: #000; font-family: ui-monospace, monospace; font-weight: 800; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.cy .meta strong { display: block; font-family: ui-monospace, monospace; color: #E09A66; font-size: 11px; letter-spacing: .5px; }
+  .hc-3card.cy .meta span { color: #DD8866; font-size: 9.5px; font-family: ui-monospace, monospace; letter-spacing: .7px; }
   .hc-3card.cy .br { display: flex; gap: 3px; }
   .hc-3card.cy .br span { flex: 1; height: 7px; }
-  .hc-3card.cy .br span:nth-child(1) { background: linear-gradient(135deg, #06b6d4, #f472b6); }
-  .hc-3card.cy .br span:nth-child(2) { background: rgba(6,182,212,0.3); }
-  .hc-3card.cy .br span:nth-child(3) { background: rgba(6,182,212,0.12); }
+  .hc-3card.cy .br span:nth-child(1) { background: linear-gradient(135deg, #E09A66, #DD8866); }
+  .hc-3card.cy .br span:nth-child(2) { background: rgba(224,154,102,0.3); }
+  .hc-3card.cy .br span:nth-child(3) { background: rgba(224,154,102,0.12); }
   .hc-3card.cy .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
   .hc-3card.df { background: linear-gradient(180deg, rgba(36,37,46,0.92), rgba(28,28,34,0.92)); border: 0.5px solid rgba(255,255,255,0.10); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
   .hc-3card.df h4 { color: #fff; font-size: 14px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.2px; }
-  .hc-3card.df .s { color: rgba(235,235,245,0.62); font-size: 10.5px; margin-bottom: 12px; }
+  .hc-3card.df .s { color: rgba(242,234,216,0.62); font-size: 10.5px; margin-bottom: 12px; }
   .hc-3card.df .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .hc-3card.df .icn { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff; font-size: 9.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(167,139,250,0.18); }
+  .hc-3card.df .icn { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #fff; font-size: 9.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(212,175,106,0.18); }
   .hc-3card.df .meta strong { display: block; color: #fff; font-size: 12px; font-weight: 700; }
-  .hc-3card.df .meta span { color: rgba(235,235,245,0.62); font-size: 10.5px; }
+  .hc-3card.df .meta span { color: rgba(242,234,216,0.62); font-size: 10.5px; }
   .hc-3card.df .br { display: flex; gap: 4px; }
   .hc-3card.df .br span { flex: 1; height: 7px; border-radius: 3.5px; }
-  .hc-3card.df .br span:nth-child(1) { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); }
-  .hc-3card.df .br span:nth-child(2) { background: rgba(167,139,250,0.28); }
-  .hc-3card.df .br span:nth-child(3) { background: rgba(167,139,250,0.15); }
+  .hc-3card.df .br span:nth-child(1) { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
+  .hc-3card.df .br span:nth-child(2) { background: rgba(212,175,106,0.28); }
+  .hc-3card.df .br span:nth-child(3) { background: rgba(212,175,106,0.15); }
   .hc-3card.df .br span:nth-child(4) { background: rgba(255,255,255,0.05); }
-  .hc-3card.gl { background: rgba(255,255,255,0.08); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 0.5px solid rgba(255,255,255,0.20); box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3); }
+  .hc-3card.gl { background: rgba(232,199,121,0.12); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 0.5px solid rgba(255,255,255,0.20); box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3); }
   .hc-3card.gl h4 { font-family: 'Newsreader',serif; font-style: italic; font-weight: 400; color: #fff; font-size: 16px; margin: 0 0 5px; letter-spacing: -0.3px; }
   .hc-3card.gl .s { color: rgba(255,255,255,0.6); font-size: 10.5px; margin-bottom: 12px; }
   .hc-3card.gl .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
-  .hc-3card.gl .icn { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #f472b6, var(--violet)); border: 0.5px solid rgba(255,255,255,0.3); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.gl .icn { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #DD8866, var(--gold)); border: 0.5px solid rgba(255,255,255,0.3); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
   .hc-3card.gl .meta strong { display: block; font-family: 'Newsreader',serif; font-style: italic; color: #fff; font-size: 13px; }
   .hc-3card.gl .meta span { color: rgba(255,255,255,0.65); font-size: 10.5px; }
   .hc-3card.gl .br { display: flex; gap: 4px; }
   .hc-3card.gl .br span { flex: 1; height: 8px; border-radius: 4px; }
-  .hc-3card.gl .br span:nth-child(1) { background: linear-gradient(135deg, #f472b6, var(--violet)); }
-  .hc-3card.gl .br span:nth-child(2) { background: rgba(167,139,250,0.3); }
-  .hc-3card.gl .br span:nth-child(3) { background: rgba(167,139,250,0.18); }
+  .hc-3card.gl .br span:nth-child(1) { background: linear-gradient(135deg, #DD8866, var(--gold)); }
+  .hc-3card.gl .br span:nth-child(2) { background: rgba(212,175,106,0.3); }
+  .hc-3card.gl .br span:nth-child(3) { background: rgba(212,175,106,0.18); }
   .hc-3card.gl .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
   .hc-3arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.7); border: 0.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 4; }
   .hc-3arrow.a1 { left: calc(33.333% - 14px); }
@@ -839,8 +839,8 @@
   .hc-slide-4 {
     background:
       radial-gradient(circle at 20% 30%, rgba(52,211,153,0.18), transparent 60%),
-      radial-gradient(circle at 80% 70%, rgba(167,139,250,0.15), transparent 60%),
-      linear-gradient(180deg, #0a0d10, #08090d);
+      radial-gradient(circle at 80% 70%, rgba(212,175,106,0.15), transparent 60%),
+      linear-gradient(180deg, #0a0d10, #0d0a07);
   }
   .hc-slide-4 .hc-title em { background: linear-gradient(135deg, var(--emerald), #10B981); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hc-slide-4 .hc-eyebrow .bar { background: var(--emerald); }
@@ -848,7 +848,7 @@
   .hc-gsi { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
   .hc-gsi-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
   .hc-gsi-tile { padding: 11px 12px; border-radius: 11px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.10); }
-  .hc-gsi-tile.lvl { background: rgba(167,139,250,0.10); border-color: rgba(167,139,250,0.30); }
+  .hc-gsi-tile.lvl { background: rgba(212,175,106,0.10); border-color: rgba(212,175,106,0.30); }
   .hc-gsi-tile.gpm { background: rgba(52,211,153,0.10); border-color: rgba(52,211,153,0.30); }
   .hc-gsi-tile.xpm { background: rgba(240,162,60,0.10); border-color: rgba(240,162,60,0.30); }
   .hc-gsi-tile.kda { background: rgba(217,83,79,0.08); border-color: rgba(217,83,79,0.30); }
@@ -856,7 +856,7 @@
   .hc-gsi-tile .v { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; margin-top: 2px; }
   .hc-gsi-tile.gpm .v { color: var(--emerald); }
   .hc-gsi-tile.xpm .v { color: var(--warn); }
-  .hc-gsi-main { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, rgba(167,139,250,0.12), rgba(124,92,235,0.05)); border: 0.5px solid rgba(167,139,250,0.30); }
+  .hc-gsi-main { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, rgba(212,175,106,0.12), rgba(176,138,69,0.05)); border: 0.5px solid rgba(212,175,106,0.30); }
   .hc-gsi-main .head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .hc-gsi-main .av { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(135deg, #4f46e5, #1e1b4b); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
   .hc-gsi-main .head .n { flex: 1; }
@@ -864,13 +864,13 @@
   .hc-gsi-main .head .sb { color: rgba(255,255,255,0.6); font-size: 11px; }
   .hc-gsi-main .conf { padding: 5px 9px; border-radius: 999px; background: rgba(52,211,153,0.18); color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: .5px; }
   .hc-gsi-main .rec { display: flex; gap: 11px; align-items: center; padding: 9px 0; border-top: 0.5px solid rgba(255,255,255,0.06); }
-  .hc-gsi-main .rec .ic { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .hc-gsi-main .rec .ic { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
   .hc-gsi-main .rec .nm { color: #fff; font-size: 13px; font-weight: 700; }
   .hc-gsi-main .rec .ds { color: rgba(255,255,255,0.6); font-size: 10.5px; }
   .hc-gsi-main .rec .sts { margin-left: auto; text-align: right; }
   .hc-gsi-main .rec .sts .gp { color: #fff; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
   .hc-gsi-main .rec .sts .tm { color: rgba(255,255,255,0.5); font-size: 9.5px; font-family: ui-monospace, monospace; }
-  .hc-pulse { padding: 10px 12px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-pulse { padding: 10px 12px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(232,199,121,0.12); }
   .hc-pulse .h { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
   .hc-pulse .h .d { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
   .hc-pulse .h .l { color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
@@ -883,7 +883,7 @@
     background:
       radial-gradient(circle at 70% 30%, rgba(240,162,60,0.18), transparent 60%),
       radial-gradient(circle at 30% 70%, rgba(52,211,153,0.12), transparent 60%),
-      linear-gradient(180deg, #0a0d10, #08090d);
+      linear-gradient(180deg, #0a0d10, #0d0a07);
   }
   .hc-slide-5 .hc-title em { background: linear-gradient(135deg, var(--warn), var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hc-slide-5 .hc-eyebrow .bar { background: var(--warn); }
@@ -899,7 +899,7 @@
   .hc-res-met.cpu .v { color: var(--emerald); }
   .hc-res-met.mem .v { color: var(--warn); }
   .hc-res-met.mem .sp span { background: var(--warn); }
-  .hc-res-vs { padding: 12px 14px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(255,255,255,0.08); }
+  .hc-res-vs { padding: 12px 14px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(232,199,121,0.12); }
   .hc-res-vs h5 { margin: 0 0 8px; font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
   .hc-res-vs .row { display: flex; align-items: center; gap: 10px; padding: 4px 0; font-size: 11.5px; }
   .hc-res-vs .name { width: 120px; color: #fff; }
@@ -959,9 +959,9 @@
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="skyGlow" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stop-color="#7C5CEB" stop-opacity="0.35"></stop>
-            <stop offset="50%" stop-color="#A78BFA" stop-opacity="0.15"></stop>
-            <stop offset="100%" stop-color="#06070b" stop-opacity="0"></stop>
+            <stop offset="0%" stop-color="#9A7B3F" stop-opacity="0.35"></stop>
+            <stop offset="50%" stop-color="#E8C779" stop-opacity="0.15"></stop>
+            <stop offset="100%" stop-color="#0a0805" stop-opacity="0"></stop>
           </linearGradient>
           <linearGradient id="radiantGlow" x1="0" x2="1" y1="0.5" y2="0.5">
             <stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.25"></stop>
@@ -972,8 +972,8 @@
             <stop offset="100%" stop-color="#D9534F" stop-opacity="0"></stop>
           </linearGradient>
           <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
-            <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.4"></stop>
-            <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"></stop>
+            <stop offset="0%" stop-color="#E8C779" stop-opacity="0.4"></stop>
+            <stop offset="100%" stop-color="#E8C779" stop-opacity="0"></stop>
           </radialGradient>
         </defs>
         <!-- Sky atmosphere -->
@@ -983,9 +983,9 @@
         <rect x="900" y="0" width="700" height="900" fill="url(#direGlow)"></rect>
         <!-- Moon -->
         <circle cx="1280" cy="180" r="120" fill="url(#moonGlow)"></circle>
-        <circle cx="1280" cy="180" r="34" fill="#d8d2f5" opacity="0.65"></circle>
+        <circle cx="1280" cy="180" r="34" fill="#F0E6C8" opacity="0.65"></circle>
         <!-- Far mountain ridge (dire side) -->
-        <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0a0a14" opacity="0.85"></path>
+        <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0e0a06" opacity="0.85"></path>
         <!-- Far mountain ridge (radiant side) -->
         <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.85"></path>
         <!-- Mid silhouettes: ancient towers / pillars -->
@@ -1036,19 +1036,19 @@
           <g transform="translate(800,560)">
             <!-- Long robes -->
             <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"></path>
-            <path d="M-22,40 L22,40 L26,150 L18,230 L-18,230 L-26,150 Z" fill="#0a0a14"></path>
+            <path d="M-22,40 L22,40 L26,150 L18,230 L-18,230 L-26,150 Z" fill="#0e0a06"></path>
             <!-- Hood pulled back / pointed cowl -->
             <path d="M-22,40 Q-30,10 -18,-4 L0,-12 L18,-4 Q30,10 22,40 Z" fill="#06060c"></path>
             <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"></ellipse>
             <!-- Three orbs floating around (quas/wex/exort feel) -->
             <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.7"></circle>
             <circle cx="-46" cy="60" r="11" fill="#3DBE8A" opacity="0.18"></circle>
-            <circle cx="46" cy="40" r="6" fill="#A78BFA" opacity="0.75"></circle>
-            <circle cx="46" cy="40" r="11" fill="#A78BFA" opacity="0.2"></circle>
+            <circle cx="46" cy="40" r="6" fill="#E8C779" opacity="0.75"></circle>
+            <circle cx="46" cy="40" r="11" fill="#E8C779" opacity="0.2"></circle>
             <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.7"></circle>
             <circle cx="0" cy="-30" r="13" fill="#F0A23C" opacity="0.18"></circle>
             <!-- Robe trim glow -->
-            <path d="M-44,40 Q-58,150 -48,230" stroke="#A78BFA" stroke-width="0.6" fill="none" opacity="0.35"></path>
+            <path d="M-44,40 Q-58,150 -48,230" stroke="#E8C779" stroke-width="0.6" fill="none" opacity="0.35"></path>
           </g>
 
           <!-- HERO 4: JUGGERNAUT-style dual-blade swordsman (right-center, Dire side) -->
@@ -1056,45 +1056,45 @@
             <!-- Crouched stance silhouette -->
             <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"></path>
             <!-- Mask head with horns -->
-            <ellipse cx="0" cy="8" rx="13" ry="15" fill="#0c0810"></ellipse>
-            <path d="M-12,-2 L-18,-12 L-10,-6 Z M12,-2 L18,-12 L10,-6 Z" fill="#0c0810"></path>
+            <ellipse cx="0" cy="8" rx="13" ry="15" fill="#100c07"></ellipse>
+            <path d="M-12,-2 L-18,-12 L-10,-6 Z M12,-2 L18,-12 L10,-6 Z" fill="#100c07"></path>
             <!-- Dual curved blades -->
             <path d="M-30,40 Q-60,80 -70,140 L-66,142 Q-56,84 -28,46 Z" fill="#1a1424"></path>
             <path d="M30,40 Q60,80 70,140 L66,142 Q56,84 28,46 Z" fill="#1a1424"></path>
             <!-- Violet rim light along edges -->
-            <path d="M-32,40 L-34,160 L-24,220" stroke="#A78BFA" stroke-width="0.8" fill="none" opacity="0.45"></path>
-            <path d="M32,40 L34,160 L24,220" stroke="#A78BFA" stroke-width="0.8" fill="none" opacity="0.45"></path>
+            <path d="M-32,40 L-34,160 L-24,220" stroke="#E8C779" stroke-width="0.8" fill="none" opacity="0.45"></path>
+            <path d="M32,40 L34,160 L24,220" stroke="#E8C779" stroke-width="0.8" fill="none" opacity="0.45"></path>
           </g>
 
           <!-- HERO 5: PUDGE-style hooked bruiser (far right, Dire) -->
           <g transform="translate(1430,600)">
             <!-- Round belly silhouette -->
-            <path d="M-50,50 Q-60,120 -54,200 Q-30,220 0,220 Q30,220 54,200 Q60,120 50,50 Q40,30 0,28 Q-40,30 -50,50 Z" fill="#0c0810"></path>
+            <path d="M-50,50 Q-60,120 -54,200 Q-30,220 0,220 Q30,220 54,200 Q60,120 50,50 Q40,30 0,28 Q-40,30 -50,50 Z" fill="#100c07"></path>
             <!-- Small head -->
             <ellipse cx="0" cy="14" rx="13" ry="14" fill="#0a060e"></ellipse>
             <!-- Hook (chain extending up-right) -->
             <path d="M40,30 L70,-20 L96,-44 Q104,-50 100,-58 Q96,-66 86,-62 L80,-56" stroke="#1a1424" stroke-width="3" fill="none" stroke-linecap="round"></path>
             <circle cx="86" cy="-58" r="4" fill="#1a1424"></circle>
             <!-- Glow drips / chain shimmer -->
-            <circle cx="60" cy="0" r="1.5" fill="#A78BFA" opacity="0.7"></circle>
-            <circle cx="80" cy="-30" r="1.2" fill="#A78BFA" opacity="0.6"></circle>
-            <path d="M-50,50 Q-54,200 -30,220" stroke="#A78BFA" stroke-width="0.7" fill="none" opacity="0.4"></path>
-            <path d="M50,50 Q54,200 30,220" stroke="#A78BFA" stroke-width="0.7" fill="none" opacity="0.4"></path>
+            <circle cx="60" cy="0" r="1.5" fill="#E8C779" opacity="0.7"></circle>
+            <circle cx="80" cy="-30" r="1.2" fill="#E8C779" opacity="0.6"></circle>
+            <path d="M-50,50 Q-54,200 -30,220" stroke="#E8C779" stroke-width="0.7" fill="none" opacity="0.4"></path>
+            <path d="M50,50 Q54,200 30,220" stroke="#E8C779" stroke-width="0.7" fill="none" opacity="0.4"></path>
           </g>
 
           <!-- Faint background creep figures (smaller) -->
           <g opacity="0.55">
             <ellipse cx="540" cy="690" rx="14" ry="34" fill="#08120e"></ellipse>
             <ellipse cx="600" cy="700" rx="12" ry="28" fill="#08120e"></ellipse>
-            <ellipse cx="1000" cy="690" rx="14" ry="34" fill="#0c0810"></ellipse>
-            <ellipse cx="1060" cy="700" rx="12" ry="28" fill="#0c0810"></ellipse>
+            <ellipse cx="1000" cy="690" rx="14" ry="34" fill="#100c07"></ellipse>
+            <ellipse cx="1060" cy="700" rx="12" ry="28" fill="#100c07"></ellipse>
           </g>
         </g>
         <!-- Esports arena crowd silhouette / city floor at very bottom -->
         <g opacity="0.6">
           <rect x="0" y="780" width="1600" height="120" fill="#02030680"></rect>
           <!-- Audience pinpricks (esports stage) -->
-          <g fill="#A78BFA" opacity="0.6">
+          <g fill="#E8C779" opacity="0.6">
             <circle cx="100" cy="820" r="1.2"></circle><circle cx="160" cy="824" r="1"></circle><circle cx="220" cy="818" r="1.4"></circle>
             <circle cx="290" cy="826" r="1"></circle><circle cx="360" cy="822" r="1.2"></circle><circle cx="430" cy="828" r="1"></circle>
             <circle cx="500" cy="820" r="1.4"></circle><circle cx="570" cy="826" r="1"></circle><circle cx="640" cy="822" r="1.2"></circle>
@@ -1104,10 +1104,10 @@
             <circle cx="1350" cy="820" r="1"></circle><circle cx="1420" cy="826" r="1.4"></circle><circle cx="1490" cy="822" r="1"></circle>
           </g>
           <!-- Stage edge glow -->
-          <line x1="0" y1="800" x2="1600" y2="800" stroke="#A78BFA" stroke-width="0.5" opacity="0.4"></line>
+          <line x1="0" y1="800" x2="1600" y2="800" stroke="#E8C779" stroke-width="0.5" opacity="0.4"></line>
         </g>
         <!-- Dust motes / embers -->
-        <g fill="#A78BFA" opacity="0.5">
+        <g fill="#E8C779" opacity="0.5">
           <circle cx="450" cy="280" r="1"></circle><circle cx="620" cy="200" r="0.8"></circle>
           <circle cx="780" cy="340" r="1.2"></circle><circle cx="920" cy="240" r="0.8"></circle>
           <circle cx="1100" cy="320" r="1"></circle><circle cx="1180" cy="220" r="0.8"></circle>
@@ -1159,7 +1159,7 @@
                   <div class="hc-tiles">
                     <div class="hc-tile"><div class="l">本月</div><div class="v">198</div></div>
                     <div class="hc-tile"><div class="l">胜率</div><div class="v" style="color:var(--emerald)">61%</div></div>
-                    <div class="hc-tile"><div class="l">命中</div><div class="v" style="color:var(--violet)">+317</div></div>
+                    <div class="hc-tile"><div class="l">命中</div><div class="v" style="color:var(--gold)">+317</div></div>
                     <div class="hc-tile"><div class="l">时长</div><div class="v">42h</div></div>
                   </div>
                   <div class="hc-card">
@@ -1182,18 +1182,18 @@
             <div class="hc-game-bg">
               <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
                 <defs>
-                  <linearGradient id="hcSkyG" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#7C5CEB" stop-opacity="0.35"/><stop offset="50%" stop-color="#A78BFA" stop-opacity="0.15"/><stop offset="100%" stop-color="#06070b" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="hcSkyG" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#9A7B3F" stop-opacity="0.35"/><stop offset="50%" stop-color="#E8C779" stop-opacity="0.15"/><stop offset="100%" stop-color="#0a0805" stop-opacity="0"/></linearGradient>
                   <linearGradient id="hcRadG" x1="0" x2="1" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.30"/><stop offset="100%" stop-color="#3DBE8A" stop-opacity="0"/></linearGradient>
                   <linearGradient id="hcDirG" x1="1" x2="0" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#D9534F" stop-opacity="0.28"/><stop offset="100%" stop-color="#D9534F" stop-opacity="0"/></linearGradient>
-                  <radialGradient id="hcMoonG" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#A78BFA" stop-opacity="0.45"/><stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/></radialGradient>
+                  <radialGradient id="hcMoonG" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#E8C779" stop-opacity="0.45"/><stop offset="100%" stop-color="#E8C779" stop-opacity="0"/></radialGradient>
                 </defs>
                 <rect width="1600" height="900" fill="#0a0c14"/>
                 <rect width="1600" height="900" fill="url(#hcSkyG)"/>
                 <rect x="0" y="0" width="700" height="900" fill="url(#hcRadG)"/>
                 <rect x="900" y="0" width="700" height="900" fill="url(#hcDirG)"/>
                 <circle cx="1280" cy="180" r="120" fill="url(#hcMoonG)"/>
-                <circle cx="1280" cy="180" r="34" fill="#d8d2f5" opacity="0.7"/>
-                <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0a0a14" opacity="0.9"/>
+                <circle cx="1280" cy="180" r="34" fill="#F0E6C8" opacity="0.7"/>
+                <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0e0a06" opacity="0.9"/>
                 <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.9"/>
                 <g opacity="0.95">
                   <g transform="translate(360,580)">
@@ -1205,15 +1205,15 @@
                     <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"/>
                     <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"/>
                     <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.85"/>
-                    <circle cx="46" cy="40" r="6" fill="#A78BFA" opacity="0.85"/>
+                    <circle cx="46" cy="40" r="6" fill="#E8C779" opacity="0.85"/>
                     <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.85"/>
                   </g>
                   <g transform="translate(1180,580)">
                     <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"/>
-                    <ellipse cx="0" cy="8" rx="13" ry="15" fill="#0c0810"/>
+                    <ellipse cx="0" cy="8" rx="13" ry="15" fill="#100c07"/>
                   </g>
                 </g>
-                <g opacity="0.65"><circle cx="700" cy="640" r="60" fill="#F0A23C" opacity="0.25"/><circle cx="900" cy="660" r="50" fill="#A78BFA" opacity="0.30"/></g>
+                <g opacity="0.65"><circle cx="700" cy="640" r="60" fill="#F0A23C" opacity="0.25"/><circle cx="900" cy="660" r="50" fill="#E8C779" opacity="0.30"/></g>
               </svg>
             </div>
             <div class="hc-game-tint"></div>
@@ -1437,7 +1437,7 @@
   </header>
 
   <!-- Three pillars strip -->
-  <section id="pillars" style="padding: 90px 24px; border-top: 0.5px solid var(--hairline); background: linear-gradient(180deg, transparent, rgba(167,139,250,0.03));">
+  <section id="pillars" style="padding: 90px 24px; border-top: 0.5px solid var(--hairline); background: linear-gradient(180deg, transparent, rgba(212,175,106,0.03));">
     <div class="container">
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;" class="pillar-grid">
         <div class="pipe-card" style="border-color: rgba(217,83,79,0.4); background: linear-gradient(180deg, rgba(217,83,79,0.08), var(--bg-2));">
@@ -1450,8 +1450,8 @@
           <div class="pipe-h">完全免费的实时助手</div>
           <p class="pipe-p">实时对局数据、出装建议、时机提示、英雄计数 —— 功能对齐官方付费助手，0 内购、0 广告、0 限时。</p>
         </div>
-        <div class="pipe-card" style="border-color: rgba(6,182,212,0.4); background: linear-gradient(180deg, rgba(6,182,212,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:#06b6d4;">03 / MULTI-SKIN</div>
+        <div class="pipe-card" style="border-color: rgba(224,154,102,0.4); background: linear-gradient(180deg, rgba(224,154,102,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:#E09A66;">03 / MULTI-SKIN</div>
           <div class="pipe-h">多主题皮肤切换</div>
           <p class="pipe-p">默认 + Cyberpunk + Liquid Glass 三套完整皮肤。背景、字体、卡片切角、动效一并替换，皮肤设置同步上云。</p>
         </div>
@@ -1460,8 +1460,8 @@
           <div class="pipe-h">软件 UI 12 国语言</div>
           <p class="pipe-p">软件本体、术语、文档、官网全部本地化。从巴西雨林到东南亚网吧，每个 DOTA 玩家都能用母语开局。</p>
         </div>
-        <div class="pipe-card" style="border-color: rgba(167,139,250,0.4); background: linear-gradient(180deg, rgba(167,139,250,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--violet);">05 / FACTION-AWARE</div>
+        <div class="pipe-card" style="border-color: rgba(212,175,106,0.4); background: linear-gradient(180deg, rgba(212,175,106,0.08), var(--bg-2));">
+          <div class="pipe-num" style="color:var(--gold);">05 / FACTION-AWARE</div>
           <div class="pipe-h">界面随阵营实时切换</div>
           <p class="pipe-p">天辉时翡翠绿日光感；夜魇时辉夜紫月光感。氛围实时贴合你所在的一方，而不是固定皮肤。</p>
         </div>
@@ -1544,10 +1544,10 @@
             </div>
             <div class="om-body">
               <div style="display:flex;gap:6px;flex-wrap:wrap;">
-                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GG</button>
-                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GLHF</button>
-                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">NP</button>
-                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.14);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">WP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(232,199,121,0.20);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GG</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(232,199,121,0.20);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">GLHF</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(232,199,121,0.20);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">NP</button>
+                <button style="height:30px;padding:0 14px;border-radius:15px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(232,199,121,0.20);color:var(--text);font-size:12.5px;font-weight:600;letter-spacing:.3px;cursor:default;">WP</button>
                 <button style="height:30px;padding:0 14px;border-radius:15px;background:linear-gradient(135deg, var(--emerald), #10B981);border:0.5px solid rgba(52,211,153,0.6);color:#062;font-size:12.5px;font-weight:700;letter-spacing:.2px;cursor:default;box-shadow:0 0 0 3px rgba(52,211,153,0.18);">默认消息块 ▸</button>
               </div>
 
@@ -1641,22 +1641,22 @@
               <div style="margin-top:24px;display:flex;gap:24px;">
                 <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;">198</div><div style="font-size:11px;color:var(--text-3);">本月对局</div></div>
                 <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--radiant);">61<small style="font-size:14px;font-weight:500;color:var(--text-3);">%</small></div><div style="font-size:11px;color:var(--text-3);">30 天胜率</div></div>
-                <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--violet);">+317</div><div style="font-size:11px;color:var(--text-3);">建议命中分</div></div>
+                <div><div style="font-size:30px;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--gold);">+317</div><div style="font-size:11px;color:var(--text-3);">建议命中分</div></div>
               </div>
             </div>
             <div style="position:relative;">
               <svg viewBox="0 0 400 200" width="100%" style="display:block;">
                 <defs>
                   <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.4"></stop>
-                    <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"></stop>
+                    <stop offset="0%" stop-color="#E8C779" stop-opacity="0.4"></stop>
+                    <stop offset="100%" stop-color="#E8C779" stop-opacity="0"></stop>
                   </linearGradient>
                 </defs>
                 <path d="M0,160 C40,150 60,140 80,130 S140,80 180,90 S260,40 300,50 S380,20 400,30 L400,200 L0,200 Z" fill="url(#g1)"></path>
-                <path d="M0,160 C40,150 60,140 80,130 S140,80 180,90 S260,40 300,50 S380,20 400,30" fill="none" stroke="#A78BFA" stroke-width="2"></path>
+                <path d="M0,160 C40,150 60,140 80,130 S140,80 180,90 S260,40 300,50 S380,20 400,30" fill="none" stroke="#E8C779" stroke-width="2"></path>
                 <path d="M0,170 C40,165 60,168 80,158 S140,140 180,150 S260,120 300,130 S380,110 400,118" fill="none" stroke="rgba(217,83,79,0.6)" stroke-width="1.5" stroke-dasharray="4 4"></path>
-                <text x="0" y="14" font-family="ui-monospace,monospace" font-size="9" fill="rgba(235,235,245,0.4)">GOLD ADVANTAGE · LIVE</text>
-                <text x="370" y="195" font-family="ui-monospace,monospace" font-size="9" fill="rgba(235,235,245,0.4)" text-anchor="end">38:12</text>
+                <text x="0" y="14" font-family="ui-monospace,monospace" font-size="9" fill="rgba(242,234,216,0.4)">GOLD ADVANTAGE · LIVE</text>
+                <text x="370" y="195" font-family="ui-monospace,monospace" font-size="9" fill="rgba(242,234,216,0.4)" text-anchor="end">38:12</text>
               </svg>
             </div>
           </div>
@@ -1698,49 +1698,49 @@
   </section>
 
   <!-- Multi-skin support -->
-  <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(6,182,212,0.04), rgba(244,114,182,0.04), transparent);">
+  <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(224,154,102,0.04), rgba(221,136,102,0.04), transparent);">
     <div class="container">
       <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>特性 03 · 多主题皮肤</div>
-      <h2 class="section-title">不只是<em style="color:var(--violet);font-style:normal;">换个颜色</em>。<br>整套界面，<em style="color:#06b6d4;font-style:normal;">换个灵魂</em>。</h2>
-      <p class="section-lead">默认主题之外，AMEFYS 内置两套完整皮肤：<strong style="color:#06b6d4;">Cyberpunk</strong> 与 <strong style="color:#A78BFA;">Liquid Glass</strong>。每一套都是 token + decoration 双层重塑——背景纹理、字体、卡片切角、悬浮窗轮廓、动效一并替换。皮肤设置同步上云，多设备一致。</p>
+      <h2 class="section-title">不只是<em style="color:var(--gold);font-style:normal;">换个颜色</em>。<br>整套界面，<em style="color:#E09A66;font-style:normal;">换个灵魂</em>。</h2>
+      <p class="section-lead">默认主题之外，AMEFYS 内置两套完整皮肤：<strong style="color:#E09A66;">Cyberpunk</strong> 与 <strong style="color:#E8C779;">Liquid Glass</strong>。每一套都是 token + decoration 双层重塑——背景纹理、字体、卡片切角、悬浮窗轮廓、动效一并替换。皮肤设置同步上云，多设备一致。</p>
 
       <div class="split">
         <!-- CYBERPUNK CARD -->
-        <div class="split-card" style="background:#0a0e1a;border-color:rgba(6,182,212,0.4);">
-          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(6,182,212,0.08) 19px, rgba(6,182,212,0.08) 20px),repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(244,114,182,0.06) 19px, rgba(244,114,182,0.06) 20px);"></div>
-          <div style="position:absolute;left:0;right:0;top:38%;height:1px;background:linear-gradient(90deg, transparent, #06b6d4, transparent);box-shadow:0 0 8px #06b6d4;"></div>
+        <div class="split-card" style="background:#0a0e1a;border-color:rgba(224,154,102,0.4);">
+          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(224,154,102,0.08) 19px, rgba(224,154,102,0.08) 20px),repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(221,136,102,0.06) 19px, rgba(221,136,102,0.06) 20px);"></div>
+          <div style="position:absolute;left:0;right:0;top:38%;height:1px;background:linear-gradient(90deg, transparent, #E09A66, transparent);box-shadow:0 0 8px #E09A66;"></div>
 
-          <div class="label" style="position:relative;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">CYBERPUNK · 赛博朋克 · 霓虹高对比</div>
+          <div class="label" style="position:relative;color:#E09A66;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;">CYBERPUNK · 赛博朋克 · 霓虹高对比</div>
           <h3 style="position:relative;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0;">霓虹切角。<br>扫描光束。<br>六边网格。</h3>
           <p style="position:relative;">Rajdhani 标题字体 + JetBrains Mono 数字字体；卡片用 clip-path 多边形切角；扫描光束周期性掠过 UI；六边形网格背景纹理。动效在 [data-effects='full'] 下开启，遵守 prefers-reduced-motion。</p>
 
-          <div style="position:relative;margin-top:24px;clip-path:polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);background:linear-gradient(180deg, rgba(6,182,212,0.08), rgba(244,114,182,0.06));border:1px solid #06b6d4;padding:14px;">
-            <div style="font-size:9px;color:#06b6d4;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;margin-bottom:8px;">▌ DASHBOARD :: CONNECTED</div>
+          <div style="position:relative;margin-top:24px;clip-path:polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);background:linear-gradient(180deg, rgba(224,154,102,0.08), rgba(221,136,102,0.06));border:1px solid #E09A66;padding:14px;">
+            <div style="font-size:9px;color:#E09A66;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:1.4px;margin-bottom:8px;">▌ DASHBOARD :: CONNECTED</div>
             <div style="display:flex;gap:10px;align-items:center;">
-              <div style="width:38px;height:38px;clip-path:polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);background:linear-gradient(135deg, #06b6d4, #f472b6);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:8px;font-weight:700;color:#000;display:flex;align-items:center;justify-content:center;">BKB</div>
+              <div style="width:38px;height:38px;clip-path:polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);background:linear-gradient(135deg, #E09A66, #DD8866);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:8px;font-weight:700;color:#000;display:flex;align-items:center;justify-content:center;">BKB</div>
               <div style="flex:1;min-width:0;">
-                <div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;color:#06b6d4;letter-spacing:.5px;">BLACK_KING_BAR</div>
-                <div style="font-size:9px;color:#f472b6;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.8px;">CONF=0.94 · GAP=420G</div>
+                <div style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;color:#E09A66;letter-spacing:.5px;">BLACK_KING_BAR</div>
+                <div style="font-size:9px;color:#DD8866;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.8px;">CONF=0.94 · GAP=420G</div>
               </div>
             </div>
           </div>
 
           <div class="split-stat" style="position:relative;">
-            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">2077</em></div><div class="l">视觉关键词 · 高对比霓虹</div></div>
-            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#06b6d4;">60fps</em></div><div class="l">动效流畅 · GPU 合成</div></div>
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#E09A66;">2077</em></div><div class="l">视觉关键词 · 高对比霓虹</div></div>
+            <div class="stat"><div class="v" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;"><em style="color:#E09A66;">60fps</em></div><div class="l">动效流畅 · GPU 合成</div></div>
           </div>
         </div>
 
         <!-- LIQUID GLASS CARD -->
-        <div class="split-card" style="background:radial-gradient(60% 40% at 20% 20%, rgba(244,114,182,0.18), transparent), radial-gradient(60% 40% at 80% 30%, rgba(167,139,250,0.18), transparent), radial-gradient(60% 40% at 30% 80%, rgba(96,165,250,0.16), transparent), radial-gradient(60% 40% at 80% 80%, rgba(52,211,153,0.14), transparent), #0e1018;border-color:rgba(255,255,255,0.18);">
+        <div class="split-card" style="background:radial-gradient(60% 40% at 20% 20%, rgba(221,136,102,0.18), transparent), radial-gradient(60% 40% at 80% 30%, rgba(212,175,106,0.18), transparent), radial-gradient(60% 40% at 30% 80%, rgba(96,165,250,0.16), transparent), radial-gradient(60% 40% at 80% 80%, rgba(52,211,153,0.14), transparent), #0e1018;border-color:rgba(255,255,255,0.18);">
           <div class="label" style="position:relative;color:#fbcfe8;">LIQUID GLASS · 液态玻璃 · 柔和反射</div>
           <h3 style="position:relative;font-family:'Newsreader','Source Han Serif SC','Songti SC',serif;font-style:italic;font-weight:400;letter-spacing:-1px;">流动光斑，<br>多层模糊，<br>呼吸感氛围。</h3>
           <p style="position:relative;">5 色径向网格背景 + 28 秒缓慢漂移；3 层反射叠加的雾玻璃卡片；Newsreader 衬线 + Geist 无衬线双字体；亮色模式下 overlay 文字自动反色适配。动效同样遵守 prefers-reduced-motion。</p>
 
-          <div style="position:relative;margin-top:24px;border-radius:18px;background:rgba(255,255,255,0.08);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:0.5px solid rgba(255,255,255,0.2);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3);">
+          <div style="position:relative;margin-top:24px;border-radius:18px;background:rgba(232,199,121,0.12);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:0.5px solid rgba(255,255,255,0.2);padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3);">
             <div style="font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:.4px;margin-bottom:8px;">仪表盘 · 已连接</div>
             <div style="display:flex;gap:10px;align-items:center;">
-              <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg, #f472b6, #A78BFA);border:0.5px solid rgba(255,255,255,0.3);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">BKB</div>
+              <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg, #DD8866, #E8C779);border:0.5px solid rgba(255,255,255,0.3);font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;letter-spacing:.2px;">BKB</div>
               <div style="flex:1;min-width:0;">
                 <div style="font-family:'Newsreader','Source Han Serif SC',serif;font-size:14px;font-style:italic;color:#fff;">Black King Bar</div>
                 <div style="font-size:10.5px;color:rgba(255,255,255,0.65);">置信 94% · 缺口 420g</div>
@@ -1749,8 +1749,8 @@
           </div>
 
           <div class="split-stat" style="position:relative;">
-            <div class="stat"><div class="v" style="font-family:'Newsreader','Source Han Serif SC',serif;font-style:italic;"><em style="color:#A78BFA;">visionOS</em></div><div class="l">设计语言参考</div></div>
-            <div class="stat"><div class="v"><em style="color:#A78BFA;">3 层</em></div><div class="l">反射叠加 · 雾玻璃</div></div>
+            <div class="stat"><div class="v" style="font-family:'Newsreader','Source Han Serif SC',serif;font-style:italic;"><em style="color:#E8C779;">visionOS</em></div><div class="l">设计语言参考</div></div>
+            <div class="stat"><div class="v"><em style="color:#E8C779;">3 层</em></div><div class="l">反射叠加 · 雾玻璃</div></div>
           </div>
         </div>
       </div>
@@ -1866,7 +1866,7 @@
                   <div style="font-size:11px;color:rgba(240,162,60,0.85);">置信 92% · 缺口 1 248g</div>
                 </div>
               </div>
-              <div style="background:rgba(240,162,60,0.08);border:0.5px solid rgba(240,162,60,0.25);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">驱散控制链，清装备势。</div>
+              <div style="background:rgba(240,162,60,0.08);border:0.5px solid rgba(240,162,60,0.25);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(242,234,216,0.78);line-height:1.45;">驱散控制链，清装备势。</div>
             </div>
           </div>
           <div style="background:rgba(20,22,28,0.72);border:0.5px solid var(--hairline);border-radius:14px;overflow:hidden;">
@@ -1880,13 +1880,13 @@
                 <span style="font-variant-numeric:tabular-nums;">21:28</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;">
-                <div style="width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,#9374f6,#7C5CEB);border:1.5px solid #A78BFA;font-family:ui-monospace,monospace;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">MAN</div>
+                <div style="width:42px;height:42px;border-radius:9px;background:linear-gradient(135deg,#D9AE5F,#9A7B3F);border:1.5px solid #E8C779;font-family:ui-monospace,monospace;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">MAN</div>
                 <div style="flex:1;min-width:0;">
                   <div style="font-size:13px;font-weight:700;">Manta Style · Top pick</div>
-                  <div style="font-size:11px;color:rgba(167,139,250,0.85);">Conf 92% · Need 1,248g</div>
+                  <div style="font-size:11px;color:rgba(212,175,106,0.85);">Conf 92% · Need 1,248g</div>
                 </div>
               </div>
-              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">Dispel control chain, sustain DPS.</div>
+              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(242,234,216,0.78);line-height:1.45;">Dispel control chain, sustain DPS.</div>
             </div>
           </div>
           <div style="background:rgba(20,22,28,0.72);border:0.5px solid var(--hairline);border-radius:14px;overflow:hidden;">
@@ -1906,7 +1906,7 @@
                   <div style="font-size:11px;color:rgba(52,211,153,0.85);">Увер. 92% · Нужно 1 248g</div>
                 </div>
               </div>
-              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(235,235,245,0.78);line-height:1.45;">Снять контроль, выживать в драке.</div>
+              <div style="background:rgba(255,255,255,0.04);border:0.5px solid var(--hairline);border-radius:7px;padding:8px 10px;font-size:11px;color:rgba(242,234,216,0.78);line-height:1.45;">Снять контроль, выживать в драке.</div>
             </div>
           </div>
         </div>
@@ -1927,7 +1927,7 @@
   <section id="faction" style="background: var(--bg-2);">
     <div class="container">
       <div class="eyebrow"><span class="bar"></span>特性 05 · 阵营氛围实时切换</div>
-      <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--violet);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
+      <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--gold);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
       <p class="section-lead">不只是换个皮肤。AMEFYS 在你被分配到天辉时切换为翡翠绿日光氛围，分配到夜魇时切换为辉夜紫月光氛围——背景纹理、强调色、悬浮窗轮廓全部跟随，让助手永远像是「我方」。</p>
 
       <div class="split">
@@ -1952,7 +1952,7 @@
                   <div style="font-size:10px;color:rgba(52,211,153,0.85);">置信 94% · 缺口 420g</div>
                 </div>
               </div>
-              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
+              <div style="background:rgba(52,211,153,0.08);border:0.5px solid rgba(52,211,153,0.25);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(242,234,216,0.78);line-height:1.5;">
                 <span style="color:#34D399;font-weight:700;">Lv 8 · GPM 612</span> 自身节奏稳，建议侵略推塔
               </div>
               <div style="display:flex;gap:4px;">
@@ -1969,34 +1969,34 @@
             <div class="stat em"><div class="v"><em>62%</em></div><div class="l">推塔成功率</div></div>
           </div>
         </div>
-        <div class="split-card violet">
+        <div class="split-card gold">
           <div class="label">DIRE · 夜魇 · 辉夜紫月色</div>
           <h3>幽暗、深沉、伺机反打。</h3>
           <p>分配到夜魇时切到辉夜紫强调，背景泛起月光纹理，建议引擎基于自己的状态偏向防守装备与撤退提示。</p>
 
           <!-- in-product preview · dire -->
-          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(167,139,250,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
+          <div style="position:relative;margin-top:24px;border-radius:14px;overflow:hidden;border:0.5px solid rgba(212,175,106,0.35);background:linear-gradient(180deg,rgba(28,22,42,0.92),rgba(12,10,20,0.92));">
             <div style="height:22px;border-bottom:0.5px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 8px;gap:4px;">
               <span style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></span>
               <span style="width:8px;height:8px;border-radius:50%;background:#28c840;"></span>
-              <span style="margin-left:auto;font-size:9px;color:rgba(167,139,250,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
+              <span style="margin-left:auto;font-size:9px;color:rgba(212,175,106,0.8);font-family:ui-monospace,monospace;letter-spacing:.6px;">DIRE · 24:42</span>
             </div>
             <div style="padding:14px;display:flex;flex-direction:column;gap:8px;">
               <div style="display:flex;gap:8px;align-items:center;">
-                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);border:1.5px solid #A78BFA;box-shadow:0 0 0 3px rgba(167,139,250,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
+                <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#E8C779,#9A7B3F);border:1.5px solid #E8C779;box-shadow:0 0 0 3px rgba(212,175,106,0.22);font-family:ui-monospace,monospace;font-size:8px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">BKB</div>
                 <div style="flex:1;min-width:0;">
                   <div style="font-size:12px;font-weight:700;color:#fff;">黑皇杖 · 防守</div>
-                  <div style="font-size:10px;color:rgba(167,139,250,0.9);">置信 91% · 缺口 880g</div>
+                  <div style="font-size:10px;color:rgba(212,175,106,0.9);">置信 91% · 缺口 880g</div>
                 </div>
               </div>
-              <div style="background:rgba(167,139,250,0.08);border:0.5px solid rgba(167,139,250,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(235,235,245,0.78);line-height:1.5;">
-                <span style="color:#A78BFA;font-weight:700;">自己 BKB</span> 冷却 38s · Roshan 推算 ≈ 11:20
+              <div style="background:rgba(212,175,106,0.08);border:0.5px solid rgba(212,175,106,0.28);border-radius:8px;padding:8px 10px;font-size:10.5px;color:rgba(242,234,216,0.78);line-height:1.5;">
+                <span style="color:#E8C779;font-weight:700;">自己 BKB</span> 冷却 38s · Roshan 推算 ≈ 11:20
               </div>
               <div style="display:flex;gap:4px;">
-                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#A78BFA,#7C5CEB);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.2);"></div>
-                <div style="flex:1;height:24px;border-radius:5px;background:rgba(167,139,250,0.12);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:linear-gradient(135deg,#E8C779,#9A7B3F);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(212,175,106,0.2);"></div>
+                <div style="flex:1;height:24px;border-radius:5px;background:rgba(212,175,106,0.12);"></div>
                 <div style="flex:1;height:24px;border-radius:5px;background:rgba(255,255,255,0.04);"></div>
               </div>
             </div>
@@ -2038,7 +2038,7 @@
       <div class="faq">
         <details open="">
           <summary>AMEFYS 这个名字是怎么来的？</summary>
-          <p>来自 DOTA 圈一个流传已久的梗：<span style="color:var(--violet);">AME</span> + <span style="color:var(--violet);">FY</span> + <span style="color:var(--violet);">Somethings</span>。</p>
+          <p>来自 DOTA 圈一个流传已久的梗：<span style="color:var(--gold);">AME</span> + <span style="color:var(--gold);">FY</span> + <span style="color:var(--gold);">Somethings</span>。</p>
         </details>
         <details open="">
           <summary>使用 AMEFYS 会被 Valve 封号吗？</summary>
