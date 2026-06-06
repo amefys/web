@@ -163,7 +163,7 @@ const HEAD_STYLE = `
 function nav() {
   return `
 <nav class="nav"><div class="nav-inner">
-  <a class="brand" href="/"><img src="/assets/icon.svg" alt="" />AMEFYS</a>
+  <a class="brand" href="/"><img src="/assets/icon.svg?v=2" alt="" />AMEFYS</a>
   <a href="/heroes/">英雄</a>
   <a href="/items/">装备</a>
   <a href="/packs/">回复包</a>
@@ -183,9 +183,9 @@ function shell({ title, description, canonical, body, lang = 'zh' }) {
 <meta property="og:description" content="${escape(description)}">
 <meta property="og:url" content="${escape(canonical)}">
 <meta property="og:type" content="article">
-<meta property="og:image" content="${SITE}/assets/icon-512.png">
+<meta property="og:image" content="${SITE}/assets/icon-512.png?v=2">
 <meta name="twitter:card" content="summary">
-<link rel="icon" type="image/svg+xml" href="/assets/icon.svg">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
 ${HEAD_STYLE}
 </head><body>
 ${nav()}
