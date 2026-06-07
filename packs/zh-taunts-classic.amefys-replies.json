@@ -1,19 +1,25 @@
 {
   "version": 1,
   "name": "中文嘲讽 · 经典",
-  "description": "国服公屏高频嘲讽语,问号文化为核心。已过滤脏话/人身攻击,避免触发行为分惩罚。",
+  "description": "国服公屏高频嘲讽语,问号文化为核心。已过滤脏话/人身攻击,避免触发行为分惩罚。悬浮窗 hover 打开抽屉单条点发;整组连发 10 条易触发游戏禁言,慎用。",
   "author": "AMEFYS",
   "createdAt": 1780801986000,
   "items": [
-    { "type": "single", "label": "?", "messages": ["?"] },
-    { "type": "single", "label": "就这", "messages": ["就这?"] },
-    { "type": "single", "label": "菜就多练", "messages": ["菜就多练"] },
-    { "type": "single", "label": "下饭", "messages": ["这操作有点下饭啊"] },
-    { "type": "single", "label": "人机?", "messages": ["你是人机吗?"] },
-    { "type": "single", "label": "谢谢人头", "messages": ["谢谢人头"] },
-    { "type": "single", "label": "GGEZ", "messages": ["ggez"] },
-    { "type": "single", "label": "别送了", "messages": ["别送了,心疼你们泉水"] },
-    { "type": "single", "label": "TP呢", "messages": ["你的TP呢?"] },
-    { "type": "single", "label": "练补刀", "messages": ["回家练补刀吧"] }
+    {
+      "type": "block",
+      "label": "中文嘲讽",
+      "messages": [
+        "?",
+        "就这?",
+        "菜就多练",
+        "这操作有点下饭啊",
+        "你是人机吗?",
+        "谢谢人头",
+        "ggez",
+        "别送了,心疼你们泉水",
+        "你的TP呢?",
+        "回家练补刀吧"
+      ]
+    }
   ]
 }
