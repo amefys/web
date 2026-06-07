@@ -44,7 +44,13 @@ const PACKS = [
   'numbers-meme',
   'timings',
   'ru-friendly',
-  'sea-international'
+  'sea-international',
+  'zh-taunts-classic',
+  'zh-taunts-memes',
+  'en-taunts-classic',
+  'en-taunts-memes',
+  'ru-taunts-classic',
+  'ru-taunts-memes'
 ]
 
 const CORS_HEADERS = {

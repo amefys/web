@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "name": "EN Taunts · TI Memes",
+  "description": "Iconic lines from TI history and pro-scene memes: Lakad Matatag, EZ GAME EZ LIFE, caster calls and pub-culture diffs.",
+  "author": "AMEFYS",
+  "createdAt": 1780801986000,
+  "items": [
+    { "type": "single", "label": "Lakad Matatag", "messages": ["LAKAD MATATAG! NORMALIN, NORMALIN!"] },
+    { "type": "single", "label": "ez game ez life", "messages": ["EZ GAME EZ LIFE"] },
+    { "type": "single", "label": "ez katka", "messages": ["ez katka"] },
+    { "type": "single", "label": "where mid", "messages": ["where is your mid now?"] },
+    { "type": "single", "label": "monitor on?", "messages": ["is your monitor even on?"] },
+    { "type": "single", "label": "creep diff", "messages": ["creep diff"] },
+    { "type": "single", "label": "git gud", "messages": ["git gud"] },
+    { "type": "single", "label": "next level", "messages": ["the next level play!"] },
+    { "type": "single", "label": "easiest money", "messages": ["easiest money of my life"] },
+    { "type": "single", "label": "nice throw", "messages": ["nice throw"] }
+  ]
+}
