@@ -1,19 +1,25 @@
 {
   "version": 1,
   "name": "中文嘲讽 · 名场面",
-  "description": "DOTA 圈名人名言与贴吧名梗:ROTK 嘲讽三连、XB骑士、单车武士、技不如人甘拜下风等。",
+  "description": "DOTA 圈名人名言与贴吧名梗:ROTK 嘲讽三连、XB骑士、单车武士、技不如人甘拜下风等。悬浮窗 hover 打开抽屉单条点发;整组连发易触发游戏禁言,慎用。",
   "author": "AMEFYS",
   "createdAt": 1780801986000,
   "items": [
-    { "type": "single", "label": "世界亚军", "messages": ["世界亚军你们好!"] },
-    { "type": "single", "label": "nice不nice", "messages": ["我就问你nice不nice!"] },
-    { "type": "single", "label": "会不会玩", "messages": ["三个打一个还被反杀,会不会玩!"] },
-    { "type": "single", "label": "版本之子", "messages": ["影魔已经不适合这个版本了"] },
-    { "type": "single", "label": "CN DOTA", "messages": ["CN DOTA, BEST DOTA"] },
-    { "type": "single", "label": "甘拜下风", "messages": ["技不如人,甘拜下风"] },
-    { "type": "single", "label": "拉谁说话", "messages": ["拉谁!说话!拉谁!"] },
-    { "type": "single", "label": "一换一", "messages": ["我叫战神7,和你一换一"] },
-    { "type": "single", "label": "泉水好喝", "messages": ["泉水好喝吗?"] },
-    { "type": "single", "label": "躺赢", "messages": ["这把躺赢,舒服"] }
+    {
+      "type": "block",
+      "label": "中文名场面",
+      "messages": [
+        "世界亚军你们好!",
+        "我就问你nice不nice!",
+        "三个打一个还被反杀,会不会玩!",
+        "影魔已经不适合这个版本了",
+        "CN DOTA, BEST DOTA",
+        "技不如人,甘拜下风",
+        "拉谁!说话!拉谁!",
+        "我叫战神7,和你一换一",
+        "泉水好喝吗?",
+        "这把躺赢,舒服"
+      ]
+    }
   ]
 }
