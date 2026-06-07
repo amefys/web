@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "name": "EN Taunts · Classic",
+  "description": "The all-chat classics every pub has seen: ?, ez, mid or feed, report mid. Profanity-free to keep your behavior score safe.",
+  "author": "AMEFYS",
+  "createdAt": 1780801986000,
+  "items": [
+    { "type": "single", "label": "?", "messages": ["?"] },
+    { "type": "single", "label": "ez", "messages": ["ez"] },
+    { "type": "single", "label": "gg ez", "messages": ["gg ez"] },
+    { "type": "single", "label": "mid or feed", "messages": ["mid or feed"] },
+    { "type": "single", "label": "report mid", "messages": ["report mid pls"] },
+    { "type": "single", "label": "free mmr", "messages": ["ty for the free mmr"] },
+    { "type": "single", "label": "noob", "messages": ["noob"] },
+    { "type": "single", "label": "uninstall", "messages": ["uninstall pls"] },
+    { "type": "single", "label": "skill diff", "messages": ["skill diff"] },
+    { "type": "single", "label": "nice ult", "messages": ["nice ult btw"] }
+  ]
+}
