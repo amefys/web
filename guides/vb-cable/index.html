@@ -1,0 +1,337 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VB-Cable 虚拟声卡安装教程 · AMEFYS</title>
+<meta name="description" content="AMEFYS 游戏语音发送功能依赖 VB-Cable 虚拟声卡。本教程手把手完成下载、安装、重启验证与 48kHz 音频格式设置，并解答无声、爆音等常见问题。">
+<link rel="icon" type="image/svg+xml" href="../../assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="../../assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="../../assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --bg-3: #1c1610;
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --dire: #D9534F;
+    --warn: #F0A23C;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Top nav — same as index.html */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(13,10,7,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(176,138,69,0.55); }
+  .btn-pill.lg { height: 40px; padding: 0 24px; border-radius: 20px; font-size: 14px; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 64px 24px 80px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 14px;
+  }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--gold); }
+  h1 { font-size: 44px; font-weight: 700; letter-spacing: -1.2px; line-height: 1.1; margin: 0 0 16px; }
+  h1 em { font-style: normal; background: linear-gradient(135deg, #F0D38A, #9A7B3F); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { font-size: 16.5px; color: var(--text-2); max-width: 640px; line-height: 1.6; margin: 0 0 8px; }
+  h2 { font-size: 24px; letter-spacing: -0.4px; margin: 56px 0 6px; }
+  h2 .num { color: var(--gold); margin-right: 10px; font-variant-numeric: tabular-nums; }
+  .sec-sub { font-size: 13.5px; color: var(--text-3); margin: 0 0 20px; }
+
+  code, kbd { font-family: ui-monospace, "SF Mono", Consolas, monospace; }
+  code { font-size: 12.5px; background: rgba(255,255,255,0.06); padding: 1px 7px; border-radius: 5px; }
+  kbd { font-size: 11.5px; background: rgba(255,255,255,0.07); border: 0.5px solid var(--hairline-strong);
+    border-bottom-width: 2px; border-radius: 5px; padding: 1px 7px; }
+
+  /* TOC */
+  .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 28px 0 0; }
+  .toc a { font-size: 12.5px; color: var(--text-2); border: 0.5px solid var(--hairline);
+    border-radius: 99px; padding: 6px 14px; transition: .15s; }
+  .toc a:hover { color: var(--gold); border-color: var(--hairline-strong); }
+
+  /* callouts */
+  .callout { display: flex; gap: 12px; border-radius: var(--r-md); padding: 14px 18px; margin: 18px 0;
+    font-size: 13.5px; line-height: 1.65; border: 0.5px solid var(--hairline);
+    background: linear-gradient(180deg, rgba(212,175,106,0.06), rgba(212,175,106,0.02)); }
+  .callout .ico { flex: none; font-size: 16px; }
+  .callout.warn { border-color: rgba(240,162,60,0.35); background: linear-gradient(180deg, rgba(240,162,60,0.08), rgba(240,162,60,0.02)); }
+  .callout.danger { border-color: rgba(217,83,79,0.35); background: linear-gradient(180deg, rgba(217,83,79,0.08), rgba(217,83,79,0.02)); }
+  .callout.ok { border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.07), rgba(52,211,153,0.02)); }
+  .callout b { color: var(--text); }
+
+  /* steps */
+  .step { display: flex; gap: 18px; margin: 26px 0; }
+  .step-num { flex: none; width: 34px; height: 34px; border-radius: 10px;
+    background: rgba(212,175,106,0.16); color: var(--gold);
+    font-size: 15px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .step-body { flex: 1; min-width: 0; }
+  .step-body h3 { font-size: 16px; margin: 5px 0 8px; }
+  .step-body p { font-size: 13.5px; color: var(--text-2); line-height: 1.7; margin: 0 0 8px; }
+  .step-body p b { color: var(--text); }
+
+  /* mock UI fragments（无截图时的示意图） */
+  .mock { border: 0.5px solid var(--hairline-strong); border-radius: var(--r-md);
+    background: var(--bg-2); padding: 16px 18px; margin: 12px 0; font-size: 12.5px; }
+  .mock .ttl { font-size: 11px; letter-spacing: 1px; color: var(--text-3); text-transform: uppercase; margin-bottom: 10px; }
+  .mock .row { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; margin: 4px 0;
+    background: rgba(255,255,255,0.03); color: var(--text-2); }
+  .mock .row.hl { outline: 1px solid var(--gold); background: rgba(212,175,106,0.1); color: var(--text); }
+  .mock .row .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); flex: none; }
+  .mock .row .tag { margin-left: auto; font-size: 10.5px; color: var(--gold); border: 0.5px solid var(--hairline-strong);
+    border-radius: 5px; padding: 1px 7px; white-space: nowrap; }
+  .mock .fakebtn { display: inline-block; background: var(--gold-deep); color: #fff; border-radius: 8px;
+    padding: 7px 18px; font-size: 12.5px; font-weight: 600; margin: 4px 6px 2px 0; }
+  .mock .fakebtn.line { background: none; border: 0.5px solid var(--hairline-strong); color: var(--gold); }
+
+  /* download cards */
+  .dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  @media (max-width: 720px) { .dl-grid { grid-template-columns: 1fr; } }
+  .dl-card { border: 0.5px solid var(--hairline-strong); border-radius: var(--r-lg);
+    background: linear-gradient(180deg, rgba(212,175,106,0.07), rgba(212,175,106,0.02));
+    padding: 22px 24px; }
+  .dl-card .need { font-size: 10.5px; font-weight: 700; letter-spacing: 1px; border-radius: 5px; padding: 2px 8px; }
+  .dl-card .need.must { color: #1c1505; background: var(--gold); }
+  .dl-card .need.opt { color: var(--text-3); border: 0.5px solid var(--hairline-strong); }
+  .dl-card h3 { font-size: 17px; margin: 12px 0 6px; }
+  .dl-card p { font-size: 12.5px; color: var(--text-2); line-height: 1.65; margin: 0 0 14px; }
+
+  /* FAQ */
+  details { border: 0.5px solid var(--hairline); border-radius: var(--r-md); margin: 10px 0;
+    background: var(--bg-2); overflow: hidden; }
+  summary { cursor: pointer; padding: 14px 18px; font-size: 14px; font-weight: 600; list-style: none; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 18px; color: var(--gold); font-weight: 400; }
+  details[open] summary::after { content: "–"; }
+  details .a { padding: 0 18px 16px; font-size: 13px; color: var(--text-2); line-height: 1.75; }
+  details .a b { color: var(--text); }
+  details .a ol { margin: 6px 0; padding-left: 20px; }
+
+  .footer { border-top: 0.5px solid var(--hairline); padding: 32px 24px; margin-top: 80px; text-align: center; font-size: 12px; color: var(--text-3); }
+  .footer a { color: var(--text-2); }
+  .footer a:hover { color: var(--text); }
+  .copyright-box { margin-top: 56px; padding: 18px 22px; border: 0.5px dashed var(--hairline-strong);
+    border-radius: var(--r-md); font-size: 12px; color: var(--text-3); line-height: 1.8; }
+</style>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="../../index.html"><img class="brand-mark" src="../../assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="../../index.html#pillars">五大特性</a>
+        <a href="../../index.html#trash">文斗 1v9</a>
+        <a href="../../index.html#assist">实时助手</a>
+        <a href="../../packs/index.html">回复包</a>
+        <a href="../../index.html#faq">常见问题</a>
+        <a href="../../about.html">关于</a>
+      </div>
+      <div class="actions">
+        <a class="btn-pill" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="eyebrow"><span class="bar"></span>安装教程 · 约 5 分钟 · 仅 Windows</div>
+    <h1>VB-Cable 虚拟声卡<br><em>下载安装</em>一步步来。</h1>
+    <p class="lead">AMEFYS 的<strong>游戏语音发送</strong>功能（把麦克风 / 语音包 / TTS 发到队伍或开黑频道）需要一根免费的虚拟音频线 <strong>VB-Cable</strong>。装好重启后，剩下的设备和按键配置全部由 AMEFYS 一键完成。</p>
+
+    <div class="toc">
+      <a href="#who">谁需要装</a>
+      <a href="#download">① 下载</a>
+      <a href="#install">② 安装与重启</a>
+      <a href="#verify">③ 验证 + 48kHz 设置</a>
+      <a href="#autoconfig">④ 回到软件一键配置</a>
+      <a href="#faq">故障排查</a>
+      <a href="#uninstall">卸载</a>
+    </div>
+
+    <h2 id="who">先确认：你需要装吗？</h2>
+    <p class="sec-sub">不是所有功能都依赖虚拟声卡。</p>
+    <div class="callout ok"><span class="ico">✅</span><div>
+      <b>不用装</b> —— 只用「实时字幕翻译」（听别人说话出字幕）：默认的简易模式零驱动开箱即用。
+    </div></div>
+    <div class="callout"><span class="ico">🔊</span><div>
+      <b>要装 VB-Cable 基础版</b> —— 使用「语音发送」（把声音发进游戏频道），或想开字幕的「纯净采集模式」（隔离纯游戏声、嘈杂团战识别率更高）。
+    </div></div>
+    <div class="callout warn"><span class="ico">⚠️</span><div>
+      <b>VB-Cable A+B 暂时不用装</b> —— 仅未来「双频道同时发不同内容」的增强功能需要，当前版本用不到。
+    </div></div>
+
+    <h2 id="download"><span class="num">①</span>从官网下载</h2>
+    <p class="sec-sub">VB-Cable 由 VB-Audio Software 出品，捐赠软件（免费使用）。请只从官网下载，AMEFYS 不分发驱动文件。</p>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <span class="need must">必装</span>
+        <h3>VB-Cable 基础版</h3>
+        <p>设备对 <code>CABLE Input</code> / <code>CABLE Output</code>。安装包约 1.3MB。页面上方第一个下载按钮 <b>“Download VBCABLE Driver Pack”</b>。</p>
+        <a class="btn-pill" href="https://vb-audio.com/Cable/" target="_blank" rel="noopener">前往 vb-audio.com/Cable →</a>
+      </div>
+      <div class="dl-card">
+        <span class="need opt">可选 · 暂不需要</span>
+        <h3>VB-Cable A+B</h3>
+        <p>设备对 <code>CABLE A/B Input/Output</code>，在同一页面下方 “VB-Cable A &amp; B” 区域。等 AMEFYS 双频道增强功能上线后再装也不迟。</p>
+        <a class="btn-pill" style="background:none;border:0.5px solid var(--hairline-strong);color:var(--gold);box-shadow:none" href="https://vb-audio.com/Cable/" target="_blank" rel="noopener">同页下方 ↓</a>
+      </div>
+    </div>
+    <div class="callout danger"><span class="ico">🛑</span><div>
+      不要从第三方“驱动下载站”获取安装包 —— 捆绑安装与篡改风险高。认准官网域名 <b>vb-audio.com</b>。
+    </div></div>
+
+    <h2 id="install"><span class="num">②</span>安装并重启电脑</h2>
+    <p class="sec-sub">整个过程 2 分钟，重启是必须的，跳过会出现“设备不存在”。</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <h3>解压 zip</h3>
+      <p>下载得到 <code>VBCABLE_Driver_Pack45.zip</code>（版本号可能不同）。<b>右键 → 全部解压</b>到任意文件夹。直接在压缩包里双击运行会安装失败。</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body">
+      <h3>以管理员身份运行安装器</h3>
+      <p>64 位系统（绝大多数）运行 <code>VBCABLE_Setup_x64.exe</code>：<b>右键 → 以管理员身份运行</b>。出现用户账户控制弹窗时点“是”。</p>
+      <div class="mock">
+        <div class="ttl">VB-Audio Virtual Cable 安装器</div>
+        <span class="fakebtn">Install Driver</span>
+        <span class="fakebtn line">Uninstall Driver</span>
+        <p style="margin:10px 0 0;color:var(--text-3);font-size:12px">点击左侧 <b style="color:var(--text)">Install Driver</b>，等待几秒出现 “…completed successfully” 即可。</p>
+      </div>
+      <p>若提示 Windows 安全中心拦截：选择“仍要运行”。驱动带 VB-Audio 数字签名，可在文件属性中验证。</p>
+    </div></div>
+
+    <div class="step"><div class="step-num">3</div><div class="step-body">
+      <h3>重启电脑（必须）</h3>
+      <p>虚拟声卡驱动在重启后才会注册到系统。<b>不重启 = AMEFYS 检测不到设备</b>，这是最常见的“装了没用”原因。</p>
+    </div></div>
+
+    <h2 id="verify"><span class="num">③</span>验证安装 + 设置 48kHz 音频格式</h2>
+    <p class="sec-sub">重启后 1 分钟完成。统一 48000Hz 是防爆音 / 无声 / 杂音的关键。</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <h3>确认设备已出现</h3>
+      <p>右键任务栏喇叭图标 → <b>声音设置</b> → 拉到底部 <b>更多声音设置</b>（Win10 为“声音控制面板”）。在“播放”与“录制”两个选项卡里应分别看到：</p>
+      <div class="mock">
+        <div class="ttl">声音控制面板 · 播放</div>
+        <div class="row hl"><span class="dot"></span>CABLE Input <span style="color:var(--text-3)">(VB-Audio Virtual Cable)</span><span class="tag">就绪</span></div>
+        <div class="row"><span class="dot"></span>扬声器 / 耳机（你原来的设备）<span class="tag">默认设备 · 保持不动</span></div>
+        <div class="ttl" style="margin-top:14px">声音控制面板 · 录制</div>
+        <div class="row hl"><span class="dot"></span>CABLE Output <span style="color:var(--text-3)">(VB-Audio Virtual Cable)</span><span class="tag">就绪</span></div>
+        <div class="row"><span class="dot"></span>麦克风（你原来的设备）<span class="tag">保持不动</span></div>
+      </div>
+      <div class="callout warn"><span class="ico">⚠️</span><div>
+        <b>不要把 CABLE 设为系统默认设备</b> —— 否则整台电脑的声音都会被吞进虚拟线、耳机变哑巴。默认设备保持你原来的扬声器 / 麦克风，剩下的交给 AMEFYS 自动配置。
+      </div></div>
+    </div></div>
+
+    <div class="step"><div class="step-num">2</div><div class="step-body">
+      <h3>把两个 CABLE 设备统一为 16bit / 48000Hz</h3>
+      <p>分别双击 <code>CABLE Input</code>（播放页）和 <code>CABLE Output</code>（录制页）→ <b>高级</b>选项卡 → 默认格式选 <b>“16 位，48000 Hz (DVD 音质)”</b> → 确定。</p>
+      <div class="mock">
+        <div class="ttl">CABLE Input 属性 · 高级</div>
+        <div class="row">16 位，44100 Hz (CD 音质)</div>
+        <div class="row hl">16 位，48000 Hz (DVD 音质) ✓</div>
+        <div class="row">24 位，96000 Hz (录音棚音质)</div>
+      </div>
+      <p>采样率不一致是发送侧<b>爆音 / 电流声 / 变速</b>的头号原因。AMEFYS 一键配置时也会检测并提醒，但系统格式只能在这里手动改。</p>
+    </div></div>
+
+    <h2 id="autoconfig"><span class="num">④</span>回到 AMEFYS，一键完成剩下所有配置</h2>
+    <p class="sec-sub">驱动是唯一需要你手动做的事，其余全自动。</p>
+    <div class="step"><div class="step-num">✓</div><div class="step-body">
+      <p>打开 AMEFYS → <b>设置 → 游戏语音 → 开始一键配置</b>（请先关闭 DOTA2）。软件将自动：</p>
+      <div class="mock">
+        <div class="row"><span class="dot"></span>检测 CABLE Input / Output 是否就绪、采样率是否为 48kHz</div>
+        <div class="row"><span class="dot"></span>定位 Steam / DOTA2 目录，写入语音按键与参数配置</div>
+        <div class="row"><span class="dot"></span>设置 Windows 默认通讯录音设备</div>
+        <div class="row"><span class="dot"></span>回环自检：自己发一段测试音并采回，确认全链路贯通</div>
+      </div>
+      <p>看到四项全部 ✓ 后进游戏即可使用：按 <kbd>V</kbd> 发队伍语音、按 <kbd>B</kbd> 发开黑小组语音。</p>
+    </div></div>
+
+    <h2 id="faq">故障排查</h2>
+    <p class="sec-sub">点开对应症状。</p>
+
+    <details><summary>装完了，AMEFYS 还是检测不到 CABLE 设备</summary><div class="a">
+      按概率排查：<ol>
+        <li><b>没重启电脑</b> —— 占 90%。重启后再试。</li>
+        <li>安装时没用管理员身份运行 —— 重新右键“以管理员身份运行”装一次。</li>
+        <li>在压缩包内直接运行了安装器 —— 先解压再装。</li>
+        <li>设备被禁用 —— 声音控制面板空白处右键 → 勾选“显示禁用的设备”，若 CABLE 是灰色，右键启用。</li>
+      </ol>
+    </div></details>
+
+    <details><summary>队友说听到的声音爆音 / 有电流声 / 像快进</summary><div class="a">
+      99% 是<b>采样率不一致</b>。按本页 <a href="#verify" style="color:var(--gold)">第 ③ 步</a> 把 CABLE Input 与 CABLE Output 都设为 <b>16 位 / 48000 Hz</b>，并在两个设备的“高级”选项卡里取消勾选“允许应用程序独占控制此设备”后重试。
+    </div></details>
+
+    <details><summary>按 V / B 没人听到声音</summary><div class="a">
+      <ol>
+        <li>先在 AMEFYS 里跑一次<b>回环自检</b>（设置 → 游戏语音 → 一键配置），确认软件到 CABLE 的链路是通的。</li>
+        <li>自检通过仍无声：进 DOTA2 设置 → 音频，确认语音输入设备指向 CABLE Output、语音模式为按键说话（一键配置会写好，若手动改过会被覆盖）。</li>
+        <li>确认游戏内没有把自己静音，且当前处于对局中（大厅里队伍语音不生效）。</li>
+      </ol>
+    </div></details>
+
+    <details><summary>装完后电脑没声音了 / 麦克风失灵</summary><div class="a">
+      你把 CABLE 设成系统<b>默认设备</b>了。右键喇叭图标 → 声音设置 → 把“输出”改回你的扬声器/耳机、“输入”改回你的物理麦克风。CABLE 不需要也不应该是默认设备（AMEFYS 仅把它设为“默认通讯设备”供游戏语音使用）。
+    </div></details>
+
+    <details><summary>Windows 安全中心 / 杀毒软件报警</summary><div class="a">
+      VB-Cable 是带数字签名的正规音频驱动（右键 exe → 属性 → 数字签名可见 “VB-Audio Software”）。从官网下载的安装包可放心放行；若从其他渠道下载，请删除并重新到 <b>vb-audio.com</b> 获取。
+    </div></details>
+
+    <details id="uninstall"><summary>如何彻底卸载</summary><div class="a">
+      重新运行解压目录里的 <code>VBCABLE_Setup_x64.exe</code>（管理员身份）→ 点 <b>Uninstall Driver</b> → 重启电脑。卸载后 AMEFYS 的语音发送与纯净采集模式会自动不可用，字幕的简易模式不受影响。
+    </div></details>
+
+    <div class="copyright-box">
+      <b style="color:var(--text-2)">版权与合规声明</b><br>
+      VB-Cable / VB-Cable A+B 是 <a href="https://vb-audio.com" style="color:var(--gold)" target="_blank" rel="noopener">VB-Audio Software</a>（Vincent Burel）出品的捐赠软件（Donationware），版权归其所有；觉得好用可以在官网捐赠支持作者。AMEFYS 仅提供安装引导与官网下载链接，不二次分发驱动文件、不静默安装。AMEFYS 全部语音功能均为应用层音频路由与配置文件写入：不读取游戏内存、不注入进程、不拦截网络流量，VAC 安全。
+    </div>
+
+    <p style="margin-top:40px"><a class="btn-pill lg" href="../../index.html">返回 AMEFYS 首页 →</a></p>
+  </main>
+
+  <footer class="footer">
+    <div>© 2026 AMEFYS · MIT · 不隶属于 Valve / DOTA 2 · VB-Cable © VB-Audio Software</div>
+  </footer>
+
+</body></html>
