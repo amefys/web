@@ -1,0 +1,104 @@
+/* ─────────────────────────────────────────────────────────────
+   AMEFYS · shared mobile navigation (hamburger)
+   Loaded via absolute path /assets/mobile-nav.css on every full-nav
+   page (root, /en/, /en/packs/, /guides/…). Relies only on the shared
+   nav markup (.nav > .nav-inner > .brand, .links, .actions, .nav-toggle)
+   and the CSS vars (--text, --hairline, --gold-deep…) each page defines.
+   Desktop layout is untouched: the toggle is display:none above 900px.
+   ───────────────────────────────────────────────────────────── */
+
+/* Hamburger button — hidden on desktop, revealed at the breakpoint */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 42px;
+  height: 48px;
+  padding: 8px 9px;
+  margin: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--text, #f2ead8);
+  transition: transform .22s ease, opacity .18s ease;
+}
+
+@media (max-width: 900px) {
+  /* Let the bar grow into an accordion panel when opened */
+  .nav { height: auto; }
+  .nav .nav-inner {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 48px;
+    padding: 0 16px;
+    column-gap: 12px;
+    row-gap: 0;
+  }
+  .nav .nav-inner > .brand {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    order: 1;
+  }
+
+  /* Show + animate the hamburger */
+  .nav-toggle { display: inline-flex; order: 2; margin-left: auto; }
+  .nav[data-open="true"] .nav-toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .nav[data-open="true"] .nav-toggle span:nth-child(2) { opacity: 0; }
+  .nav[data-open="true"] .nav-toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  /* Links + actions become full-width stacked rows, collapsed by default.
+     flex-basis:100% forces them onto their own line under the bar; the
+     !important resets beat each page's inline .nav .links {flex:1 / margin} */
+  .nav .nav-inner > .links,
+  .nav .nav-inner > .actions {
+    flex: 0 0 100% !important;
+    width: 100%;
+    margin: 0 !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    display: none;
+  }
+  .nav[data-open="true"] .nav-inner > .links { display: flex; order: 3; }
+  .nav[data-open="true"] .nav-inner > .actions { display: flex; order: 4; }
+
+  .nav .nav-inner > .links a {
+    padding: 13px 2px;
+    font-size: 15px;
+    color: var(--text, #f2ead8);
+    border-top: 0.5px solid var(--hairline, rgba(232,199,121,0.12));
+  }
+
+  .nav .nav-inner > .actions {
+    padding: 14px 0 18px;
+    gap: 14px;
+    border-top: 0.5px solid var(--hairline, rgba(232,199,121,0.12));
+  }
+  /* Language switch: drop the desktop side borders, sit inline */
+  .nav .nav-inner > .actions .lang-switch {
+    border-left: 0;
+    border-right: 0;
+    padding: 0;
+    height: auto;
+    font-size: 13px;
+    gap: 8px;
+  }
+  .nav .nav-inner > .actions .btn-text { padding: 4px 0; font-size: 14px; }
+  /* Download CTA spans the panel for an easy tap target */
+  .nav .nav-inner > .actions .btn-pill {
+    width: 100%;
+    height: 42px;
+    border-radius: 21px;
+    font-size: 14px;
+  }
+}

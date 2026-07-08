@@ -200,10 +200,13 @@
 
   @media (max-width: 760px) {
     .contact-grid { grid-template-columns: 1fr; }
+    .tp-services { grid-template-columns: 1fr 1fr !important; }
     .hero-about h1 { font-size: 34px; letter-spacing: -0.8px; }
     .letter { padding: 24px 22px; font-size: 14px; }
   }
 </style>
+<link rel="stylesheet" href="/assets/mobile-nav.css">
+<script src="/assets/mobile-nav.js" defer></script>
 </head>
 <body>
 
@@ -229,6 +232,7 @@
         <a class="btn-text" href="#">Sign in</a>
         <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">Free download</a>
       </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -414,7 +418,7 @@
 
       <div style="margin-top: 28px; padding: 18px 22px; border-radius: 14px; background: rgba(255,255,255,0.02); border: 0.5px solid var(--hairline);">
         <div style="font-size: 11px; color: var(--text-3); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 12px;">Third-party services · outgoing connections</div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12.5px; color: var(--text-2); line-height: 1.5;">
+        <div class="tp-services" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12.5px; color: var(--text-2); line-height: 1.5;">
           <div><strong style="color: var(--text);">Supabase</strong><br>Auth + cloud sync<br>Only when logged in &amp; sync on</div>
           <div><strong style="color: var(--text);">Sentry</strong><br>Anonymous error stacks<br>Crash only · can be disabled</div>
           <div><strong style="color: var(--text);">OpenDota API</strong><br>Hero / item metadata<br>CI data prep only</div>
