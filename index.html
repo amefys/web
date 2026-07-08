@@ -921,7 +921,75 @@
     .hc-arrow.prev { left: 8px; }
     .hc-arrow.next { right: 8px; }
   }
+
+  /* ══════════════ Mobile adaptation ══════════════ */
+  /* Inline grids the base 900px block doesn't reach */
+  @media (max-width: 900px) {
+    .assist-recap { grid-template-columns: 1fr !important; gap: 28px !important; height: auto !important; }
+    .i18n-triplet { grid-template-columns: 1fr !important; }
+  }
+
+  @media (max-width: 760px) {
+    section { padding: 68px 18px; }
+    #pillars { padding: 56px 18px !important; }
+
+    /* Hero header */
+    .hero { padding: 76px 18px 0; min-height: 0; }
+    .hero h1 { font-size: 44px; letter-spacing: -1px; }
+    .hero p.lead { font-size: 15.5px; }
+    .cta-row { flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .preview-wrap { padding: 0 12px; margin-top: 40px; }
+
+    /* Hero carousel → clean vertical text slides on phones.
+       Track/slide widths stay untouched so the JS transform math is intact;
+       we only reflow each slide's inner content and hide the desktop-only
+       product mockups + annotation callouts that can't fit a small screen. */
+    .hc-carousel { aspect-ratio: 4 / 5; }
+    .hc-slide {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: flex-start; gap: 14px; padding: 34px 22px 58px;
+    }
+    .hc-eyebrow, .hc-title, .hc-sub, .hc-stage-tag {
+      position: static !important; inset: auto !important;
+      top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+      transform: none !important; margin: 0 !important; max-width: none !important;
+      text-align: left !important;
+    }
+    .hc-title { font-size: 30px !important; letter-spacing: -0.6px; line-height: 1.1; }
+    .hc-sub { font-size: 14px !important; color: rgba(255,255,255,0.82); }
+    .hc-stage-tag { margin-top: 4px !important; }
+    .hc-app, .hc-overlay-win, .hc-3split, .hc-gsi, .hc-res,
+    .hc-callout, .hc-hud, .hc-game-tint { display: none !important; }
+    .hc-arrow { display: none; }
+    .hc-dots { bottom: 18px; }
+
+    /* Translate / quick-reply demo panels */
+    .translate-left { padding: 32px 22px; }
+    .translate-right { padding: 24px 18px; }
+    .overlay-mock { width: 100%; max-width: 340px; }
+
+    /* Footer bottom bar */
+    .ft-bot { flex-direction: column; gap: 12px; }
+    .ft-legal { display: flex; flex-wrap: wrap; }
+    .ft-legal a { margin-left: 0; margin-right: 16px; }
+
+    /* Final CTA */
+    .final-cta { padding: 84px 20px; }
+    .final-cta .cta-row { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 36px; }
+    h2.section-title { font-size: 30px; letter-spacing: -0.6px; }
+    .final-cta h2 { font-size: 34px; }
+    .hc-title { font-size: 26px !important; }
+    .pillar-grid { grid-template-columns: 1fr !important; }
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+    .btn-cta { font-size: 13px; padding: 0 18px; }
+  }
 </style>
+<link rel="stylesheet" href="/assets/mobile-nav.css">
+<script src="/assets/mobile-nav.js" defer></script>
 </head>
 <body style="">
 
@@ -949,6 +1017,7 @@
         <a class="btn-text" href="#">登录</a>
         <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
       </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
@@ -1633,7 +1702,7 @@
         </div>
 
         <div class="bento-card span-col" style="min-height: 320px; padding: 40px;">
-          <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:60px;height:100%;">
+          <div class="assist-recap" style="display:grid;grid-template-columns:1fr 1.3fr;gap:60px;height:100%;">
             <div>
               <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>对局复盘</div>
               <h3 class="bento-h">每一局都被<em>认真记下</em>。</h3>
@@ -1848,7 +1917,7 @@
         <h3 style="font-size:32px;line-height:1.1;letter-spacing:-0.7px;margin:14px 0 12px;font-weight:700;">英雄名、装备名、位置、提示词——<br>都跟着语言走。</h3>
         <p style="font-size:14px;color:var(--text-2);margin:0 0 28px;max-width:620px;">同一条决策卡片在三种语言下的渲染。所有文本均从官方语言包读取，数字、缩写、位置、状态机提示全部走 i18n。</p>
 
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="i18n-triplet" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
           <div style="background:rgba(20,22,28,0.72);border:0.5px solid rgba(240,162,60,0.3);border-radius:14px;overflow:hidden;">
             <div style="padding:8px 12px;border-bottom:0.5px solid var(--hairline);display:flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:10px;color:var(--warn);letter-spacing:.6px;">
               <span style="width:18px;height:13px;border-radius:2px;background:rgba(240,162,60,0.2);border:0.5px solid rgba(240,162,60,0.4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;">中</span>
