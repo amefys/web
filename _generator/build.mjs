@@ -188,7 +188,12 @@ function shell({ title, description, canonical, body, lang = 'zh' }) {
 <meta property="og:title" content="${escape(title)}">
 <meta property="og:description" content="${escape(description)}">
 <meta property="og:url" content="${escape(canonical)}">
-<meta property="og:type" content="article">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="${SITE}/assets/icon-512.png?v=2">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
@@ -423,8 +428,16 @@ ${arr
 function renderSitemap(heroFiles, itemFiles) {
   const urls = [
     { loc: `${SITE}/`, priority: '1.0' },
-    { loc: `${SITE}/about.html`, priority: '0.6' },
+    { loc: `${SITE}/compliance.html`, priority: '0.8' },
     { loc: `${SITE}/packs/`, priority: '0.7' },
+    { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
+    { loc: `${SITE}/about.html`, priority: '0.6' },
+    { loc: `${SITE}/privacy.html`, priority: '0.4' },
+    { loc: `${SITE}/credits.html`, priority: '0.3' },
+    { loc: `${SITE}/licenses.html`, priority: '0.3' },
+    { loc: `${SITE}/en/`, priority: '0.8' },
+    { loc: `${SITE}/en/about.html`, priority: '0.5' },
+    { loc: `${SITE}/en/packs/`, priority: '0.6' },
     { loc: `${SITE}/heroes/`, priority: '0.8' },
     { loc: `${SITE}/items/`, priority: '0.8' },
     ...heroFiles.map((slug) => ({ loc: `${SITE}/heroes/${slug}.html`, priority: '0.6' })),
