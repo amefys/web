@@ -41,7 +41,7 @@ async function latestPrereleaseTag() {
   const api = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/releases?per_page=20`
   const res = await fetch(api, {
     headers: { 'User-Agent': 'amefys-dl-proxy', Accept: 'application/vnd.github+json' },
-    cf: { cacheTtl: 600, cacheEverything: true }
+    cf: { cacheTtlByStatus: { '200-299': 600, '400-599': 0 }, cacheEverything: true }
   })
   if (!res.ok) return null
   const releases = await res.json()
@@ -90,8 +90,13 @@ export default {
     if (!response) {
       // Fetch from GitHub. fetch() follows redirects by default, so the
       // final body is the asset itself, not the 302 to release-assets.
+      // cacheTtlByStatus, not cacheTtl: a plain cacheTtl also pins error
+      // responses, so one request for a not-yet-published tag poisoned that
+      // versioned URL with a 404 for 30 days (v0.23.0-beta.0, 2026-09-04).
+      // Errors now live 30 s at most, so a release that lands minutes later
+      // is picked up on the next try.
       const upstream = await fetch(ghUrl, {
-        cf: { cacheTtl: ttl, cacheEverything: true },
+        cf: { cacheTtlByStatus: { '200-299': ttl, '404': 30, '500-599': 0 }, cacheEverything: true },
         redirect: 'follow'
       })
 
