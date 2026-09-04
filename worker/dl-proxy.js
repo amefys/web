@@ -17,15 +17,37 @@
  *       -> github.com/amefys/web/releases/latest/download/AMEFYS.dmg
  *   https://amefys.com/dl/v0.1.17/AMEFYS-Setup.exe
  *       -> github.com/amefys/web/releases/download/v0.1.17/AMEFYS-Setup.exe
+ *   https://amefys.com/dl/beta/AMEFYS-Setup.exe
+ *       -> the newest published *pre-release* (tag with -beta / -rc) on
+ *          github.com/amefys/web, resolved via the Releases API. Stable
+ *          users never see it: /dl/<file> keeps following releases/latest,
+ *          which GitHub defines as the newest non-prerelease.
  *
  * Caching policy:
  *   - Versioned URL [/dl/v0.1.17/*]   -> 30 days, immutable
  *   - Latest URL    [/dl/<filename>]  -> 1 hour, so a new release the CI
  *                                        warms with curl gets seen quickly
+ *   - Beta URL      [/dl/beta/<file>]  -> 10 minutes; the tag lookup itself
+ *                                        is cached for 10 minutes too
  */
 
 const GH_OWNER = 'amefys'
 const GH_REPO = 'web'
+
+// Newest published pre-release tag (drafts excluded), or null. The
+// unauthenticated Releases API allows 60 requests/hour per IP; the 10-minute
+// edge cache below keeps a busy beta well inside that.
+async function latestPrereleaseTag() {
+  const api = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/releases?per_page=20`
+  const res = await fetch(api, {
+    headers: { 'User-Agent': 'amefys-dl-proxy', Accept: 'application/vnd.github+json' },
+    cf: { cacheTtl: 600, cacheEverything: true }
+  })
+  if (!res.ok) return null
+  const releases = await res.json()
+  const beta = releases.find((r) => r.prerelease && !r.draft)
+  return beta ? beta.tag_name : null
+}
 
 export default {
   async fetch(request, _env, ctx) {
@@ -43,6 +65,11 @@ export default {
     if (parts.length === 2) {
       ghPath = `releases/latest/download/${encodeURIComponent(parts[1])}`
       ttl = 3600 // 1 hour
+    } else if (parts[1] === 'beta') {
+      const tag = await latestPrereleaseTag()
+      if (!tag) return new Response('No beta release', { status: 404 })
+      ghPath = `releases/download/${tag}/${encodeURIComponent(parts[2])}`
+      ttl = 600 // 10 minutes — a beta may be replaced within the day
     } else {
       const tag = parts[1]
       const file = parts[2]
