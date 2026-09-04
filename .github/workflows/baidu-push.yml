@@ -1,0 +1,46 @@
+name: Baidu URL push
+
+# Feeds amefys.com pages into Baidu's crawl queue (普通收录 API). Runs after
+# every content deploy and once a day for the long-tail rotation. A no-op
+# until the BAIDU_PUSH_TOKEN secret exists, so forks and the pre-registration
+# period stay green.
+
+on:
+  schedule:
+    - cron: "17 2 * * *" # 10:17 Beijing, daily
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "*.html"
+      - "packs/**"
+      - "guides/**"
+      - "sitemap.xml"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "URLs to push this run"
+        default: "20"
+
+permissions:
+  contents: read
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Push URLs
+        if: ${{ env.BAIDU_PUSH_TOKEN != '' }}
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+          LIMIT: ${{ github.event.inputs.limit || '20' }}
+        run: node scripts/baidu-push.mjs --limit "$LIMIT"
+      - name: Skipped
+        if: ${{ env.BAIDU_PUSH_TOKEN == '' }}
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: echo "BAIDU_PUSH_TOKEN secret not set — skipping (register the site at ziyuan.baidu.com first)"
