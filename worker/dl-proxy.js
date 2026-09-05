@@ -104,7 +104,10 @@ async function serveFromR2(bucket, key, request, channel, file) {
   if (object.body === undefined) {
     return new Response(null, { status: 304, headers })
   }
-  if (object.range) {
+  // R2 reports `range` even for a full read; only answer 206 when the client
+  // actually asked for a range, otherwise plain downloads would see a partial
+  // status (observed as 206 on every GET/HEAD, 2026-09-05).
+  if (object.range && request.headers.has('Range')) {
     const { offset, length } = normaliseRange(object.range, object.size)
     headers.set('Content-Range', `bytes ${offset}-${offset + length - 1}/${object.size}`)
     headers.set('Content-Length', String(length))
