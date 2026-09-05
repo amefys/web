@@ -23,7 +23,7 @@ for f in "${FILES[@]}"; do
   url="https://github.com/amefys/web/releases/download/$TAG/$f"
   echo "→ $f"
   if ! curl -sSL --retry 3 -o "$work/$f" "$url"; then echo "   (missing on GitHub, skipped)"; continue; fi
-  npx --yes wrangler@3 r2 object put "$BUCKET/$TAG/$f" --file "$work/$f" --remote
+  npx --yes wrangler@3 r2 object put "$BUCKET/$TAG/$f" --file "$work/$f"
 done
 
 pointer="${POINTER:-auto}"
@@ -33,7 +33,7 @@ fi
 if [[ "$pointer" != none ]]; then
   echo "{\"tag\":\"$TAG\"}" > "$work/$pointer.json"
   npx --yes wrangler@3 r2 object put "$BUCKET/$pointer.json" --file "$work/$pointer.json" \
-    --content-type application/json --cache-control 'public, max-age=60' --remote
+    --content-type application/json --cache-control 'public, max-age=60'
   echo "→ $pointer.json now points at $TAG"
 fi
 echo "done"
