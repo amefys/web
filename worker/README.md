@@ -24,16 +24,14 @@ R2 bucket bound as **`DL`**.
 ### Uploads
 
 `amefys` repo's `release.yml` uploads every published release to
-`amefys-dl/<tag>/*` and rewrites the channel pointer (`latest.json` for
-stable, `beta.json` for -beta/-rc). It needs these repo secrets on
-`amefys/amefys`, from an R2 API token with **Object Read & Write** on the
-bucket (R2 → Manage R2 API Tokens):
+`amefys-dl/<tag>/*` with wrangler and rewrites the channel pointer
+(`latest.json` for stable, `beta.json` for -beta/-rc). It needs two repo
+secrets on `amefys/amefys`:
 
 | secret | value |
 |---|---|
-| `R2_ACCOUNT_ID` | the account id shown on the R2 overview page |
-| `R2_ACCESS_KEY_ID` | token access key |
-| `R2_SECRET_ACCESS_KEY` | token secret |
+| `CLOUDFLARE_API_TOKEN` | an API token with **Account · Workers R2 Storage · Edit** |
+| `CLOUDFLARE_ACCOUNT_ID` | the account id (R2 overview page / any dashboard URL) |
 
 Without them the step is skipped and downloads keep working through the
 GitHub fallback.
@@ -41,10 +39,13 @@ GitHub fallback.
 Backfill releases that predate the upload step with the same credentials:
 
 ```
-R2_ACCOUNT_ID=… R2_ACCESS_KEY_ID=… R2_SECRET_ACCESS_KEY=… \
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… \
   scripts/r2-backfill.sh v0.22.1          # stable → also writes latest.json
   scripts/r2-backfill.sh v0.23.0-beta.0   # pre-release → writes beta.json
 ```
+
+Bucket `amefys-dl` (APAC) and the `DL` binding were created via the API on
+2026-09-05; both releases above were backfilled the same day.
 
 ### Verify
 
