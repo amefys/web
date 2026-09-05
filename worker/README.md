@@ -3,14 +3,55 @@
 Two workers live here. Both bind a route on `amefys.com/...` in the
 Cloudflare dashboard; they are not auto-deployed by CI (yet).
 
-## 1. `dl-proxy.js` — `/dl/*` installer reverse-proxy
+## 1. `dl-proxy.js` — `/dl/*` installer downloads (R2 → GitHub fallback)
 
-Already deployed. Caches GitHub release assets at the CF edge so the
-public download URLs (`amefys.com/dl/AMEFYS-Setup.exe`) hit warm cache
-worldwide instead of the slow GitHub origin. See file header for the
-URL contract and cache policy.
+Serves the installers from an R2 bucket and falls back to proxying the
+GitHub Release when an object is missing. See the file header for the URL
+contract. The edge cache alone cannot do this job: Cloudflare caps a
+cacheable object at 100 MB on Free/Pro, and both installers are bigger,
+so before R2 every download streamed from GitHub's US origin.
 
-No bindings required.
+### Bindings required
+
+R2 bucket bound as **`DL`**.
+
+1. Dashboard → **R2 Object Storage** → **Create bucket** → name
+   `amefys-dl`, location hint APAC (closest to most users).
+2. **Workers & Pages** → **dl-proxy** → **Settings** → **Bindings** →
+   **Add** → R2 bucket → variable name `DL`, bucket `amefys-dl`.
+3. Paste the current `dl-proxy.js` → **Save and Deploy**.
+
+### Uploads
+
+`amefys` repo's `release.yml` uploads every published release to
+`amefys-dl/<tag>/*` and rewrites the channel pointer (`latest.json` for
+stable, `beta.json` for -beta/-rc). It needs these repo secrets on
+`amefys/amefys`, from an R2 API token with **Object Read & Write** on the
+bucket (R2 → Manage R2 API Tokens):
+
+| secret | value |
+|---|---|
+| `R2_ACCOUNT_ID` | the account id shown on the R2 overview page |
+| `R2_ACCESS_KEY_ID` | token access key |
+| `R2_SECRET_ACCESS_KEY` | token secret |
+
+Without them the step is skipped and downloads keep working through the
+GitHub fallback.
+
+Backfill releases that predate the upload step with the same credentials:
+
+```
+R2_ACCOUNT_ID=… R2_ACCESS_KEY_ID=… R2_SECRET_ACCESS_KEY=… \
+  scripts/r2-backfill.sh v0.22.1          # stable → also writes latest.json
+  scripts/r2-backfill.sh v0.23.0-beta.0   # pre-release → writes beta.json
+```
+
+### Verify
+
+```
+curl -sI https://amefys.com/dl/AMEFYS-Setup.exe | grep -i 'x-amefys-source\|accept-ranges'
+# → X-AMEFYS-Source: r2   Accept-Ranges: bytes      (github = fallback path)
+```
 
 ## 2. `pack-stats.js` — `/p/*` quick-reply pack telemetry
 
