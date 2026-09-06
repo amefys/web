@@ -1,0 +1,393 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>更新日志 — AMEFYS 每个版本改了什么</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS DOTA 2 助手的版本更新记录：每个正式版和 Beta 版新增了什么、修了什么，以及 Beta 频道的下载方式。">
+<link rel="canonical" href="https://amefys.com/changelog.html">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="更新日志 — AMEFYS 每个版本改了什么">
+<meta property="og:description" content="AMEFYS DOTA 2 助手的版本更新记录：每个正式版和 Beta 版新增了什么、修了什么，以及 Beta 频道的下载方式。">
+<meta property="og:url" content="https://amefys.com/changelog.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="更新日志 — AMEFYS 每个版本改了什么">
+<meta name="twitter:description" content="AMEFYS DOTA 2 助手的版本更新记录：每个正式版和 Beta 版新增了什么、修了什么，以及 Beta 频道的下载方式。">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --sky: #60a5fa;
+    --rose: #fb7185;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 44px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(96,165,250,0.10); border: 0.5px solid rgba(96,165,250,0.30);
+    font-size: 11px; color: var(--sky); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 620px; }
+  .page-hero .updated { font-size: 12px; color: var(--text-3); margin-top: 14px; }
+
+  /* Channel cards */
+  .channels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 56px; }
+  .channel { padding: 20px 22px; border-radius: var(--r-lg); background: var(--surface);
+    border: 0.5px solid var(--hairline); }
+  .channel h3 { margin: 0 0 6px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .channel p { margin: 0 0 12px; font-size: 13px; color: var(--text-2); line-height: 1.6; }
+  .channel .dl { display: flex; gap: 8px; flex-wrap: wrap; }
+  .channel .dl a { display: inline-flex; align-items: center; height: 30px; padding: 0 12px;
+    border-radius: 15px; font-size: 12px; font-weight: 600; border: 0.5px solid var(--hairline-strong);
+    color: var(--text); background: rgba(255,255,255,0.03); }
+  .channel .dl a:hover { border-color: var(--gold); color: var(--gold); }
+  .channel .dl a.primary { background: var(--gold-deep); color: #fff; border-color: transparent; }
+  .channel .dl a.primary:hover { color: #fff; filter: brightness(1.08); }
+
+  /* Release entries */
+  .release { position: relative; padding: 0 0 40px 28px; border-left: 0.5px solid var(--hairline); }
+  .release::before { content: ''; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--bg); }
+  .release.beta::before { background: var(--sky); }
+  .release:last-of-type { padding-bottom: 8px; }
+  .release header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .release h2 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+  .release .date { font-size: 12.5px; color: var(--text-3); }
+  .release .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 4px; white-space: nowrap; letter-spacing: 0.3px; }
+  .tag-stable { background: rgba(52,211,153,0.12); color: var(--emerald); }
+  .tag-beta { background: rgba(96,165,250,0.14); color: var(--sky); }
+  .tag-latest { background: rgba(212,175,106,0.16); color: var(--gold); }
+  .release .lead { font-size: 14.5px; color: var(--text-2); margin: 0 0 14px; line-height: 1.7; }
+  .release .lead strong { color: var(--text); font-weight: 600; }
+  .group { margin: 0 0 12px; }
+  .group h4 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .group h4 .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .dot-new { background: var(--emerald); } .dot-fix { background: var(--amber); }
+  .dot-theme { background: var(--gold); } .dot-note { background: var(--sky); }
+  .group ul { margin: 0; padding-left: 18px; color: var(--text-2); font-size: 14px; line-height: 1.75; }
+  .group li { margin-bottom: 4px; }
+  .group li strong { color: var(--text); font-weight: 600; }
+  .callout { margin: 10px 0 0; padding: 12px 14px; border-radius: var(--r-md);
+    background: rgba(96,165,250,0.08); border: 0.5px solid rgba(96,165,250,0.25);
+    font-size: 13px; color: var(--text-2); line-height: 1.65; }
+  .callout strong { color: var(--text); }
+  .older { margin-top: 8px; font-size: 13px; color: var(--text-3); }
+  .older a { color: var(--gold); border-bottom: 0.5px solid rgba(212,175,106,0.3); }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .channels { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .release { padding-left: 20px; }
+    .release h2 { font-size: 21px; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css">
+<script src="/assets/mobile-nav.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="changelog.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/index.html">EN</a>
+        </div>
+        <a class="btn-text" href="#">登录</a>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">更新日志</div>
+      <h1>每个版本，改了什么</h1>
+      <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
+      <div class="updated">最近更新：2026-09-06</div>
+    </div>
+
+    <!-- 两个频道 -->
+    <section class="channels">
+      <div class="channel">
+        <h3><span class="tag tag-stable">稳定版</span> 0.22.1</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。</p>
+        <div class="dl">
+          <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
+          <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
+        </div>
+      </div>
+      <div class="channel">
+        <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.1</h3>
+        <p>新功能先在这里露面。可能有小问题；不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
+        <div class="dl">
+          <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
+          <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 0.23.0-beta.1 ── -->
+    <article class="release beta" id="v0-23-0-beta-1">
+      <header><h2>0.23.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-06</span></header>
+      <p class="lead">新增<strong>关键时间提醒</strong>：莲花、符点、昼夜、10 分游走这些节点，到点前几秒悬浮窗提醒你，想喊队友点一下就行。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>关键时间提醒</strong>：由官方 GSI 的对局时钟驱动。内置赏金符、水符、莲花、功能符、经验符、天黑、天亮、10 分游走窗口、叠野秒数 9 个节点，每个可单独开关、设置提前 5 到 60 秒。</li>
+          <li><strong>悬浮窗提示条 + 提示音</strong>：到点前从悬浮窗顶部滑出，3 秒收起；短促双音提示，可关。系统通知作为可选项（默认关，因为独占全屏时看不见）。</li>
+          <li><strong>标题栏倒计时胶囊</strong>：悬浮窗标题栏常驻「下一个节点还有多久」，30 秒内变蓝。</li>
+          <li><strong>事件流记录</strong>：每条提醒都写进悬浮窗「事件」标签，和击杀、推塔放在一起。</li>
+          <li><strong>喊队友</strong>：提示条上的按钮，点一下把预制短语（如「莲花刷了」）发到队伍频道，按你的翻译目标语言发；不点不发。</li>
+          <li><strong>自定义提醒</strong>：名称 + 分钟 + 可选间隔，比如「12 分看 Roshan」。</li>
+          <li><strong>到点自动发送（默认关闭）</strong>：唯一一项会根据游戏状态自动发消息的功能，需要你在设置里主动打开，每局最多 6 条，打开时会明确提示它会占用键盘约 1 秒。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>设置 → DOTA 2 分区里 cfg 绑定行下方多出一条横线。</li>
+          <li>两条提醒同一秒到点（如 6:00 的莲花 + 功能符）时，发送改为排队进行，不再互相打乱按键。</li>
+          <li>人机 / 房间局第二局不再漏提醒（这类对局的 matchid 都是 0，改为按时钟倒退识别新一局）。</li>
+        </ul></div>
+      <div class="callout"><strong>合规说明：</strong>提醒只读对局时钟，不读敌方任何信息，不改游戏。「自动发送」是我们第一次加入"按游戏状态自动发消息"的能力，所以做成默认关闭、显式警告、每局限量。合规页会随正式版同步更新。</div>
+    </article>
+
+    <!-- ── 0.23.0-beta.0 ── -->
+    <article class="release beta" id="v0-23-0-beta-0">
+      <header><h2>0.23.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-04</span></header>
+      <p class="lead"><strong>液态玻璃主题 v1.1</strong>：对齐 macOS 的 Liquid Glass 观感，强调色改成系统蓝。</p>
+      <div class="group"><h4><span class="dot dot-theme"></span>主题</h4>
+        <ul>
+          <li>液态玻璃去掉了原来的紫色偏色，玻璃厚度、模糊、边缘高光按 macOS 重新校准。</li>
+          <li>不管用哪个皮肤，Logo 都保持 DOTA 金。</li>
+          <li>悬浮窗的可读性底色与玻璃参数解耦：调玻璃透明度不会把悬浮窗文字冲淡。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>悬浮窗状态文案更准确：语音发送、批量翻译、等待游戏焦点时显示的是真实状态。</li>
+          <li>液态玻璃皮肤卡片的预览与实际背景一致。</li>
+        </ul></div>
+      <div class="callout"><strong>下载变快了：</strong>安装包改为从 Cloudflare R2 直出，不再受 100 MB 缓存上限影响。稳定版和 Beta 都受益，地址不变。</div>
+    </article>
+
+    <!-- ── 0.22.1 ── -->
+    <article class="release" id="v0-22-1">
+      <header><h2>0.22.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-03</span></header>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul><li>皮肤列表刷新陷入循环、反复请求 CDN 的问题。</li></ul></div>
+    </article>
+
+    <!-- ── 0.22.0 / 0.21.x ── -->
+    <article class="release" id="v0-22-0">
+      <header><h2>0.22.0 · 0.21.1 · 0.21.2</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-08-15 至 2026-08-18</span></header>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>自动更新：系统代理不可达时回退直连，不再卡在"检查更新"。</li>
+          <li>macOS 通用安装包去掉多余的编译缓存，体积更小。</li>
+        </ul></div>
+    </article>
+
+    <!-- ── 0.21.0 ── -->
+    <article class="release" id="v0-21-0">
+      <header><h2>0.21.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-06-23</span></header>
+      <p class="lead">一次完整的 <strong>UX 审查</strong>，改了 50 多处细节，重点在悬浮窗和新手引导。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li>悬浮窗可以把某个标签设为默认（双击标签），下次打开直接落在那里。</li>
+          <li>快捷回复：单击直接发队伍频道，右键 / 长按弹出频道圆盘选全体或队伍。</li>
+          <li>字幕一键静音；事件流可以只看推塔、肉山等目标事件。</li>
+          <li>低血量警告；出装建议显示时机、选取率、来源，首选项加徽章。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
+        <ul>
+          <li>没有数据时不再是一屏横线，而是引导你连接 GSI 或看示例对局。</li>
+          <li>减少动效选项、更大的点击目标、更清晰的对比度。</li>
+          <li>俄语、英语翻译补齐与校对。</li>
+        </ul></div>
+    </article>
+
+    <!-- ── 0.20.0 ── -->
+    <article class="release" id="v0-20-0">
+      <header><h2>0.20.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-06-19</span></header>
+      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
+        <ul>
+          <li>悬浮窗标题栏整段都能拖动，双击 Logo 折叠。</li>
+          <li>频道圆盘菜单在小窗口里不再被裁掉。</li>
+        </ul></div>
+    </article>
+
+    <!-- ── 0.16 – 0.19 ── -->
+    <article class="release" id="v0-16-0">
+      <header><h2>0.16.0 至 0.19.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-06-13 至 2026-06-14</span></header>
+      <p class="lead"><strong>游戏语音</strong>上线：说中文，队友听到目标语言；对方说话，你看字幕。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li>语音发送：按住热键说话，识别、翻译、合成后通过虚拟声卡送进游戏语音。带设置向导和自检。</li>
+          <li>语音接收：捕获游戏语音，云端识别后在悬浮窗显示字幕。</li>
+          <li>麦克风设备选择，并在选到虚拟声卡时给出警告。</li>
+          <li>悬浮窗紧凑模式：拖得很窄时自动收成只剩聊天。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul><li>悬浮窗单个标签出错不再拖垮整个窗口；新手向导正确读取绑定状态。</li></ul></div>
+    </article>
+
+    <!-- ── 0.13 – 0.15 ── -->
+    <article class="release" id="v0-13-0">
+      <header><h2>0.13.0 至 0.15.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-06-06 至 2026-06-08</span></header>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li>中、英、俄三语嘲讽语料包，一键导入快捷回复。</li>
+          <li>翻译目标新增越南语、印尼语、菲律宾语；OCR 识别支持越南语。</li>
+          <li>悬浮窗精简布局，默认 320 宽。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-theme"></span>主题</h4>
+        <ul><li>DOTA 金品牌重塑：新皮肤「dota-gold」、默认强调色改金、应用图标换金。</li></ul></div>
+    </article>
+
+    <!-- ── 0.10 – 0.12 ── -->
+    <article class="release" id="v0-10-0">
+      <header><h2>0.10.0 至 0.12.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-06-04 至 2026-06-06</span></header>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li>会员体系：翻译走 AMEFYS 代理不用自己配 key；激活码兑换；账号页显示用量和有效期。</li>
+          <li>语音输入（按住说话）第一版；会员专属识别通道。</li>
+          <li>OCR 框选区域校准器，捕获热键可自定义，识别时屏幕闪烁提示区域。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>Windows 悬浮窗四角发黑。</li>
+          <li>悬浮窗在两局之间消失后能自动重建，不用重启。</li>
+          <li>macOS 上框选坐标被菜单栏挤偏 60 像素。</li>
+        </ul></div>
+    </article>
+
+    <!-- ── 0.6 – 0.9 ── -->
+    <article class="release" id="v0-6-0">
+      <header><h2>0.6.0 至 0.9.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-05-21 至 2026-05-29</span></header>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li>聊天 OCR 自动捕获：识别游戏聊天区并翻译（macOS Vision / Windows 内置 OCR）。</li>
+          <li>示例对局：不开游戏也能体验完整的实时页面和悬浮窗。</li>
+          <li>新手引导：欢迎向导、侧栏清单、首次使用提示。</li>
+          <li>远程主题皮肤：新皮肤上线不用更新应用。</li>
+          <li>粘贴翻译、周战绩卡、关键道具完成通知。</li>
+        </ul></div>
+    </article>
+
+    <p class="older">更早的版本与每次提交的技术细节见 <a href="https://github.com/amefys/web/releases" rel="noopener">GitHub Releases</a>。</p>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="privacy.html">隐私</a>
+      <a href="licenses.html">许可</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>

@@ -429,6 +429,7 @@ function renderSitemap(heroFiles, itemFiles) {
   const urls = [
     { loc: `${SITE}/`, priority: '1.0' },
     { loc: `${SITE}/compliance.html`, priority: '0.8' },
+    { loc: `${SITE}/changelog.html`, priority: '0.7' },
     { loc: `${SITE}/packs/`, priority: '0.7' },
     { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
     { loc: `${SITE}/about.html`, priority: '0.6' },
