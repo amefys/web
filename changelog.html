@@ -200,7 +200,7 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.2</h3>
+        <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.3</h3>
         <p>新功能先在这里露面。可能有小问题；不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
@@ -208,6 +208,17 @@
         </div>
       </div>
     </section>
+
+    <!-- ── 0.23.0-beta.3 ── -->
+    <article class="release beta" id="v0-23-0-beta-3">
+      <header><h2>0.23.0-beta.3</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-06</span></header>
+      <p class="lead">紧急修一个发送 bug：<strong>连续两条提醒时，第二条可能把你剪贴板里的内容发进聊天</strong>。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>发送靠「借用剪贴板 → 粘贴」实现，发完 0.5 秒会把你原来的剪贴板内容写回。两条提醒接连发送时，第一条的写回正好落在第二条粘贴之前，于是第二条粘贴出去的是你刚复制的东西（测试时是一个下载地址）。现在写回放进发送队列里，下一条必须等上一条彻底收尾才开始；并且只有剪贴板里还是我们写进去的短语时才写回，不会覆盖你中途新复制的内容。</li>
+        </ul></div>
+      <div class="callout"><strong>如果你在用 beta.1 / beta.2 并开了自动发送：</strong>请更新到 beta.3，或在更新前先关掉自动发送。</div>
+    </article>
 
     <!-- ── 0.23.0-beta.2 ── -->
     <article class="release beta" id="v0-23-0-beta-2">
