@@ -58,13 +58,40 @@ export default {
       const tag = TAG_RE.test(channel) ? channel : await pointerTag(env.DL, channel)
       if (tag) {
         const r2 = await serveFromR2(env.DL, `${tag}/${file}`, request, channel, file)
-        if (r2) return r2
+        if (r2) return countDownload(env, request, r2, { tag, channel, file, source: 'r2' })
       }
     }
 
     // ── 2. GitHub fallback ───────────────────────────────────────────
-    return serveFromGitHub(channel, file, request, ctx)
+    const gh = await serveFromGitHub(channel, file, request, ctx)
+    return countDownload(env, request, gh, { tag: channel, channel, file, source: 'github' })
   }
+}
+
+/**
+ * Download telemetry → Workers Analytics Engine (dataset bound as DL_STATS).
+ * Counts one download per installer fetch: a plain 200, or the first chunk of
+ * a resumable download (Range starting at byte 0) — later chunks of the same
+ * download are not counted again. Records tag / file / channel / source /
+ * country only; no IPs, no user agents. Read from the ops dashboard through
+ * the Analytics Engine SQL API. Missing binding = silently no telemetry.
+ */
+function countDownload(env, request, response, { tag, channel, file, source }) {
+  try {
+    if (!env.DL_STATS || request.method !== 'GET') return response
+    if (!/\.(exe|dmg)$/i.test(file)) return response
+    const range = request.headers.get('Range')
+    const firstChunk = response.status === 200 || (response.status === 206 && /^bytes=0-/.test(range || ''))
+    if (!firstChunk) return response
+    env.DL_STATS.writeDataPoint({
+      blobs: [tag, file, channel, source, (request.cf && request.cf.country) || 'XX'],
+      doubles: [1],
+      indexes: [file]
+    })
+  } catch {
+    /* telemetry must never break a download */
+  }
+  return response
 }
 
 /** Resolve `latest` / `beta` to a tag via the pointer object in R2. */
