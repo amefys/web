@@ -200,7 +200,7 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.1</h3>
+        <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.2</h3>
         <p>新功能先在这里露面。可能有小问题；不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
@@ -208,6 +208,24 @@
         </div>
       </div>
     </section>
+
+    <!-- ── 0.23.0-beta.2 ── -->
+    <article class="release beta" id="v0-23-0-beta-2">
+      <header><h2>0.23.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-06</span></header>
+      <p class="lead">根据 beta.1 第一轮真机反馈修的一版：<strong>随时都能发、消息带时间、自动发送不再半路停</strong>。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>随时发送</strong>：不再只能在提示条的 3 秒内点「喊队友」。事件列表里的每条提醒行有「发送」按钮；标题栏的倒计时胶囊点开后列出接下来 6 个节点，每个都能直接发。三处共享同一份「已发送」状态。</li>
+          <li><strong>消息带时间</strong>：发到队伍频道的话现在是「[03:00] 莲花刷了」，队友知道说的是哪一波。</li>
+          <li><strong>魔方（折磨者）首刷</strong>：20:00 提醒。被杀后 10 分钟的重生时刻靠时钟推不出来，暂不提醒。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>开了自动发送后，第 6 条之后的提醒不再进聊天（经验符等）。原因是每局 6 条的保护上限太低，现在放宽为纯防失控的兜底，每个节点每次只发一条。</li>
+          <li>提示条先显示、再后台发送；发送失败时「喊队友」按钮会回来，可以手动补发。之前提示条要等发送完才弹出，晚 1 秒左右。</li>
+          <li>新一局开始后，悬浮窗事件列表会清空，不再顶着上一局的记录。</li>
+        </ul></div>
+    </article>
 
     <!-- ── 0.23.0-beta.1 ── -->
     <article class="release beta" id="v0-23-0-beta-1">
