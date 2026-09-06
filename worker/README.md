@@ -54,6 +54,15 @@ curl -sI https://amefys.com/dl/AMEFYS-Setup.exe | grep -i 'x-amefys-source\|acce
 # → X-AMEFYS-Source: r2   Accept-Ranges: bytes      (github = fallback path)
 ```
 
+### Download telemetry (2026-09-06)
+
+`countDownload()` writes one Analytics Engine data point per installer fetch
+(tag / file / channel / source / country — no IPs) into dataset `amefys_dl`,
+bound as `DL_STATS`. Redeploy with both bindings via
+`CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… worker/deploy-dl-proxy.sh`.
+The amefys repo's `npm run ops` dashboard reads it through the SQL API
+(token needs Account Analytics: Read).
+
 ## 2. `pack-stats.js` — `/p/*` quick-reply pack telemetry
 
 Powers the "热门下载榜" on `amefys.com/packs/`. Tracks per-pack
