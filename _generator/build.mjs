@@ -173,6 +173,7 @@ function nav() {
   <a href="/heroes/">英雄</a>
   <a href="/items/">装备</a>
   <a href="/packs/">回复包</a>
+  <a href="/changelog.html">更新日志</a>
   <a href="/about.html">关于</a>
 </div></nav>`
 }

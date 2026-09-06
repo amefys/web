@@ -1023,7 +1023,7 @@
 {"@type":"Question","name":"使用 AMEFYS 会被 Valve 封号吗？","acceptedAnswer":{"@type":"Answer","text":"不会。AMEFYS 只使用 Valve 官方的 Game State Integration 接口读取对局状态；发送消息走 DOTA 内置聊天热键加剪贴板粘贴，与手动操作等价。不读取游戏内存、不修改客户端文件、不拦截网络流量，不在 VAC 的检测范围内。"}},
 {"@type":"Question","name":"怎么让 AMEFYS 连上 DOTA 2？","acceptedAnswer":{"@type":"Answer","text":"首次打开有 GSI 配置向导：一键写入配置文件到 DOTA 2 的 cfg/gamestate_integration 目录，再把 -gamestateintegration 粘贴到 Steam 启动选项，进入游戏主菜单即自动连接，约 30 秒。"}},
 {"@type":"Question","name":"正式天梯能看到敌方装备或小地图位置吗？","acceptedAnswer":{"@type":"Answer","text":"不能。正式对局中 GSI 只推送你自己英雄的数据，AMEFYS 不会也无法绕过这一限制，所有建议基于你自己的状态与选人阶段公开的双方阵容。"}},
-{"@type":"Question","name":"翻译能自动发送回游戏吗？","acceptedAnswer":{"@type":"Answer","text":"能，但每一条都由你点击触发：翻译预设短语后写入剪贴板，用 DOTA 默认聊天热键打开聊天框、粘贴、回车，与手动操作完全等价，没有任何根据局势自动发送的逻辑。"}},
+{"@type":"Question","name":"翻译能自动发送回游戏吗？","acceptedAnswer":{"@type":"Answer","text":"能，但每一条都由你点击触发：翻译预设短语后写入剪贴板，用 DOTA 默认聊天热键打开聊天框、粘贴、回车，与手动操作完全等价。唯一的例外是「关键时间提醒」的到点自动发送：默认关闭，需要你在设置里主动打开，开启后每个节点只发一条带时间的预制短语。"}},
 {"@type":"Question","name":"对电脑配置有要求吗？","acceptedAnswer":{"@type":"Answer","text":"没有额外要求。AMEFYS 占用资源很低，可与 DOTA 2 同时运行；支持 Windows 11 与 macOS 13 及以上。"}}
 ]}
 </script>
@@ -1042,6 +1042,7 @@
         <a href="heroes/">英雄</a>
         <a href="items/">装备</a>
         <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
         <a href="#faq">常见问题</a>
         <a href="about.html">关于</a>
       </div>
@@ -2164,7 +2165,7 @@
         </details>
         <details>
           <summary>翻译能自动发送回游戏吗？</summary>
-          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。</p>
+          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。唯一会「不经点击」发消息的是「关键时间提醒」的到点自动发送：它<strong>默认关闭</strong>，需要你在设置里主动打开，开启时会有明确警告，开启后每个节点只发一条带时间的预制短语（如「[03:00] 莲花刷了」）。</p>
         </details>
         <details open="">
           <summary>翻译是云端处理还是本地？</summary>
