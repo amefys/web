@@ -27,3 +27,19 @@ stays consistent.
 ```sh
 python3 -m http.server 8000  # then open http://localhost:8000
 ```
+
+## Changelog page (`changelog.html`)
+
+`changelog.html` is the user-facing release history. Keep it in sync with
+every release cut in the `amefys` repo:
+
+1. Stable or beta tag pushed upstream → add an `<article class="release">`
+   at the top (add `beta` class for pre-releases), written for players, not
+   commit messages: what is new, what is fixed, anything they must know.
+2. Update the two channel cards (current stable / current beta version) and
+   the "最近更新" date in the hero.
+3. When a beta graduates to stable, fold its entries into the stable entry
+   and move the `tag-latest` badge.
+
+Download links stay channel-relative (`/dl/...`, `/dl/beta/...`) so they
+never need editing.

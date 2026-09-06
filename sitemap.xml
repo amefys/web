@@ -2,6 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://amefys.com/</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
   <url><loc>https://amefys.com/compliance.html</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://amefys.com/changelog.html</loc><lastmod>2026-09-06</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://amefys.com/packs/</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://amefys.com/guides/vb-cable/</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://amefys.com/about.html</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
