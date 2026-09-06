@@ -164,6 +164,7 @@
         <a href="heroes/">英雄</a>
         <a href="items/">装备</a>
         <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
         <a href="index.html#faq">常见问题</a>
         <a href="about.html">关于</a>
       </div>
@@ -192,7 +193,7 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.22.1</h3>
+        <h3><span class="tag tag-stable">稳定版</span> 0.23.0</h3>
         <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
@@ -201,13 +202,35 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.23.0-beta.3</h3>
-        <p>新功能先在这里露面。可能有小问题；不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
+        <p>已并入稳定版 0.23.0，两者内容相同。新功能先在这里露面；Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.23.0 ── -->
+    <article class="release" id="v0-23-0">
+      <header><h2>0.23.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-06</span></header>
+      <p class="lead"><strong>关键时间提醒</strong>正式上线，同时带来液态玻璃主题 v1.1。三个 Beta 版的内容全部并入，已装稳定版的用户会自动收到更新。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>关键时间提醒</strong>：莲花、赏金符、水符、功能符、经验符、天黑、天亮、10 分游走、魔方首刷、叠野秒数 10 个内置节点，到点前几秒悬浮窗滑出提示条 + 提示音，每个可单独开关、设置提前 5 到 60 秒；还能加自定义提醒。</li>
+          <li><strong>随时喊队友</strong>：提示条上的按钮、事件列表里的提醒行、标题栏倒计时胶囊点开的「接下来」列表，三处都能一键把带时间的预制短语（如「[03:00] 莲花刷了」）发到队伍频道，状态互通。</li>
+          <li><strong>到点自动发送（默认关闭）</strong>：唯一一项按游戏状态自动发消息的功能，需在设置里主动打开并确认警告；每个节点每次只发一条。合规页已同步说明。</li>
+          <li><strong>液态玻璃主题 v1.1</strong>：对齐 macOS Liquid Glass，强调色改系统蓝；Logo 在所有皮肤下保持 DOTA 金。</li>
+          <li>官网新增「更新日志」页面和导航入口，就是你正在看的这一页。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li>连续两条消息接连发送时，第二条可能把你剪贴板里的内容发进聊天（Beta 期间发现，已修）。</li>
+          <li>新一局开始后悬浮窗事件列表不清空。</li>
+          <li>设置 → DOTA 2 分区里多出一条横线。</li>
+          <li>安装包改为从 Cloudflare R2 直出，下载明显变快。</li>
+        </ul></div>
+      <div class="callout"><strong>时间表说明：</strong>内置节点的时间随版本发布、以游戏内实际为准；魔方被杀后 10 分钟重生的时刻靠时钟推不出来，只提醒 20:00 首刷。发现对不上的地方欢迎反馈。</div>
+    </article>
 
     <!-- ── 0.23.0-beta.3 ── -->
     <article class="release beta" id="v0-23-0-beta-3">
@@ -281,7 +304,7 @@
 
     <!-- ── 0.22.1 ── -->
     <article class="release" id="v0-22-1">
-      <header><h2>0.22.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-03</span></header>
+      <header><h2>0.22.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-03</span></header>
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
         <ul><li>皮肤列表刷新陷入循环、反复请求 CDN 的问题。</li></ul></div>
     </article>
