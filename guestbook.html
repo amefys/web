@@ -187,6 +187,19 @@
   #waline .wl-panel { border-radius:14px; background:var(--surface); }
   #waline .wl-editor, #waline .wl-input { color:var(--text); }
   #waline .wl-btn.primary { color:#1a1408; font-weight:600; }
+  /* While submitting, Waline disables the primary button and swaps the label
+     for a currentColor spinner. Its disabled palette (faint grey on grey) plus
+     our dark `color` above render as an empty near-black box on this theme, so
+     paint an explicit "sending" state and keep the width from jumping. */
+  #waline .wl-btn.primary:disabled,
+  #waline .wl-btn.primary:disabled:hover,
+  #waline .wl-btn.primary:disabled:active {
+    min-width:6em;
+    border-color:rgba(232,199,121,0.45);
+    background:rgba(232,199,121,0.16);
+    color:var(--gold);
+    cursor:progress;
+  }
   #waline .wl-card .wl-head .wl-nick { color:var(--gold); }
   #waline .wl-card .wl-content a { color:var(--gold); }
 </style>
