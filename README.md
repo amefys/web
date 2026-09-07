@@ -43,3 +43,26 @@ every release cut in the `amefys` repo:
 
 Download links stay channel-relative (`/dl/...`, `/dl/beta/...`) so they
 never need editing.
+
+## Guestbook (`guestbook.html`, `en/guestbook.html`)
+
+Waline client + a self-hosted worker (`waline.amefys.com`, see the
+`waline-worker` repo). Two local scripts patch the client:
+
+- `assets/waline-captcha.js` — drops the previous Turnstile widget before each
+  submit, otherwise the second submit hangs on Cloudflare's "already rendered".
+- `assets/waline-turnstile-prewarm.js` — runs the Turnstile challenge on page
+  load and hands the cached token to Waline on submit. Without it a comment
+  takes 15–40s to post from mainland China, because the client only starts the
+  challenge after the click.
+
+Rules when touching either file:
+
+1. **Bump the `?v=` in both pages.** Cloudflare serves this site with
+   `cache-control: max-age=14400`, so returning visitors keep the old file for
+   four hours otherwise — a broken submit path would stay broken for them.
+2. **Never pre-define `window.turnstile`**, and never load Cloudflare's
+   `api.js` with `async`/`defer` — both break the client in ways that only
+   show up on submit (hang, or an `alert()` about `turnstile.ready()`).
+3. Run `npm test` (`tests/waline-*.test.cjs`) and verify on the live site, not
+   just localhost: the Turnstile site key only accepts amefys.com.

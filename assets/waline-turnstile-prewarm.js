@@ -134,8 +134,6 @@
       renderPrewarm()
     }
 
-    /* Hand Waline the token we already have; if we have none, get out of
-       the way and let it run the challenge itself. */
     /* Waline calls turnstile.ready() before rendering. If Cloudflare refuses
        that call for any reason, it throws and Waline surfaces the message in
        an alert() instead of posting the comment. We only get here from the
@@ -154,6 +152,8 @@
       }
     }
 
+    /* Hand Waline the token we already have; if we have none, get out of
+       the way and let it run the challenge itself. */
     function wrapRender(turnstile) {
       if (!turnstile || typeof turnstile.render !== 'function') return
       if (state.native) return
