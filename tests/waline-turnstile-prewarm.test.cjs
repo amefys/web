@@ -264,4 +264,13 @@ for (const page of ['guestbook.html', 'en/guestbook.html']) {
     assert.match(html, /const TURNSTILE_SITE_KEY = window\.AMEFYS_TURNSTILE_KEY/,
       'Waline and the pre-warm must share one site key')
   })
+
+  test(`${page}: the guestbook scripts are cache-busted`, () => {
+    const html = fs.readFileSync(path.join(__dirname, '..', page), 'utf8')
+    // Cloudflare serves this site with `cache-control: max-age=14400`, so a
+    // returning visitor keeps running the old file for four hours unless the
+    // URL changes. Bump ?v= whenever either script is edited.
+    assert.match(html, /waline-turnstile-prewarm\.js\?v=\d+/, 'the pre-warm script needs a ?v=')
+    assert.match(html, /waline-captcha\.js\?v=\d+/, 'the captcha patch needs a ?v=')
+  })
 }

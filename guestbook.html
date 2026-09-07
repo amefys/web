@@ -300,8 +300,8 @@
 <!-- Site key of the Cloudflare Turnstile widget for amefys.com (public value).
      Defined before the pre-warm script, which reads it on load. -->
 <script>window.AMEFYS_TURNSTILE_KEY = '0x4AAAAAAEq3vUWqxYSWqdMd'</script>
-<script defer src="assets/waline-captcha.js"></script>
-<script defer src="assets/waline-turnstile-prewarm.js"></script>
+<script defer src="assets/waline-captcha.js?v=2"></script>
+<script defer src="assets/waline-turnstile-prewarm.js?v=2"></script>
 <script type="module">
   import { init } from './assets/vendor/waline/waline.js'
   const TURNSTILE_SITE_KEY = window.AMEFYS_TURNSTILE_KEY

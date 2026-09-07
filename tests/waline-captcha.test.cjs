@@ -172,8 +172,10 @@ for (const [page, src] of [
     const fs = require('node:fs')
     const html = fs.readFileSync(path.join(__dirname, '..', page), 'utf8')
 
-    assert.ok(
-      html.includes(`<script defer src="${src}"></script>`),
+    // ?v= cache-buster included: Cloudflare gives the file a 4h browser TTL.
+    assert.match(
+      html,
+      new RegExp(`<script defer src="${src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\?v=\\d+)?"></script>`),
       `${page} must load ${src}`,
     )
     assert.ok(
