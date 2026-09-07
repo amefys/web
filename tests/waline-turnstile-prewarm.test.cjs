@@ -101,6 +101,39 @@ test('injects api.js with an explicit onload callback', () => {
   assert.strictEqual(typeof env.win.__amefysTurnstileReady, 'function')
 })
 
+test('loads api.js synchronously so turnstile.ready() keeps working', () => {
+  const env = makeEnv()
+  prewarm.install(env.win, env.doc, { now: env.now })
+  const script = env.appended.find((el) => el.src)
+  // A dynamically created <script> is async by default; Cloudflare then kills
+  // turnstile.ready() page-wide, and @waline/client calls ready() on submit —
+  // every comment failed with an alert() until this was set to false.
+  assert.strictEqual(script.async, false, 'api.js must not be async')
+  assert.notStrictEqual(script.defer, true, 'api.js must not be defer')
+})
+
+test('a refused turnstile.ready() still runs the callback (no alert on submit)', () => {
+  const env = makeEnv()
+  const turnstile = makeTurnstile()
+  boot(env, turnstile)
+
+  let ran = false
+  assert.doesNotThrow(() => env.win.turnstile.ready(() => { ran = true }))
+  assert.strictEqual(ran, true, 'Waline must still get past ready() and submit')
+  assert.strictEqual(turnstile.calls.ready, 1, 'the native ready() is tried first')
+})
+
+test('a working turnstile.ready() is left alone', () => {
+  const env = makeEnv()
+  const turnstile = makeTurnstile()
+  turnstile.api.ready = function (fn) { turnstile.calls.ready++; fn() }
+  boot(env, turnstile)
+
+  let count = 0
+  env.win.turnstile.ready(() => { count++ })
+  assert.strictEqual(count, 1, 'the callback runs exactly once, not twice')
+})
+
 test('does nothing without a site key', () => {
   const env = makeEnv()
   delete env.win.AMEFYS_TURNSTILE_KEY

@@ -52,7 +52,7 @@
     var sitekey = opts.sitekey || win.AMEFYS_TURNSTILE_KEY
     if (!sitekey || !doc || !doc.createElement) return null
 
-    var state = { token: null, at: 0, widgetId: null, native: null }
+    var state = { token: null, at: 0, widgetId: null, native: null, nativeReady: null }
     var now = opts.now || function () { return Date.now() }
 
     function fresh() {
@@ -114,6 +114,24 @@
 
     /* Hand Waline the token we already have; if we have none, get out of
        the way and let it run the challenge itself. */
+    /* Waline calls turnstile.ready() before rendering. If Cloudflare refuses
+       that call for any reason, it throws and Waline surfaces the message in
+       an alert() instead of posting the comment. We only get here from the
+       ?onload= callback, i.e. Turnstile *is* ready, so running the callback
+       ourselves is both safe and correct. */
+    function wrapReady(turnstile) {
+      if (!turnstile || typeof turnstile.ready !== 'function') return
+      if (state.nativeReady) return
+      state.nativeReady = turnstile.ready
+      turnstile.ready = function (callback) {
+        try {
+          return state.nativeReady.call(this, callback)
+        } catch (e) {
+          if (typeof callback === 'function') callback()
+        }
+      }
+    }
+
     function wrapRender(turnstile) {
       if (!turnstile || typeof turnstile.render !== 'function') return
       if (state.native) return
@@ -137,6 +155,7 @@
       var turnstile = win.turnstile
       if (!turnstile) return
       wrapRender(turnstile)
+      wrapReady(turnstile)
       // No turnstile.ready() here: Cloudflare throws "Remove async/defer from
       // the Turnstile api.js script tag before using turnstile.ready()" when
       // the API was loaded asynchronously. The ?onload= callback we are
@@ -153,8 +172,12 @@
 
     var script = doc.createElement('script')
     script.src = API_URL + '?onload=' + READY_CALLBACK + '&render=explicit'
-    script.async = true
-    script.defer = true
+    // Must stay false. A dynamically created <script> defaults to async=true,
+    // and Cloudflare then refuses turnstile.ready() *page-wide* with
+    // "Remove async/defer from the Turnstile api.js script tag" — which is
+    // exactly the call @waline/client makes when you press submit, so every
+    // comment would fail with that message in an alert().
+    script.async = false
     ;(doc.head || doc.documentElement).appendChild(script)
 
     var handle = { state: state, start: start, refresh: refresh, isFresh: fresh }
