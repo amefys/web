@@ -279,6 +279,39 @@
 
 
 <link rel="stylesheet" href="../assets/vendor/waline/waline.css">
+<script>
+  // Turnstile hygiene for Waline: Waline renders the widget into
+  // .wl-captcha-container on every submit and never removes it, so a second
+  // submit hits "already rendered" and the old widget lingers. Wrap render()
+  // (whenever api.js defines window.turnstile) to drop the previous widget
+  // first and remove the current one once its token has been handed over.
+  (function () {
+    var real = null, widgetId = null
+    function wrap(t) {
+      if (!t || t.__amefysWrapped) return t
+      var render = t.render.bind(t), remove = t.remove ? t.remove.bind(t) : function () {}
+      t.render = function (el, opts) {
+        if (widgetId !== null) { try { remove(widgetId) } catch (e) {} widgetId = null }
+        var cb = opts && opts.callback
+        var id = render(el, Object.assign({}, opts, {
+          callback: function (token) {
+            if (cb) cb(token)
+            setTimeout(function () { if (widgetId === id) { try { remove(id) } catch (e) {} widgetId = null } }, 600)
+          }
+        }))
+        widgetId = id
+        return id
+      }
+      t.__amefysWrapped = true
+      return t
+    }
+    Object.defineProperty(window, 'turnstile', {
+      configurable: true,
+      get: function () { return real },
+      set: function (v) { real = wrap(v) }
+    })
+  })()
+</script>
 <script type="module">
   import { init } from '../assets/vendor/waline/waline.js'
   // Site key of the Cloudflare Turnstile widget for amefys.com (public value).
