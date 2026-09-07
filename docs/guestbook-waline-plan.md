@@ -107,7 +107,7 @@ Secret：`RESEND_API_KEY`；发件域用现有 Resend 里已验证的域。**只
 
 ## 4. 实施步骤
 
-> **进度 2026-09-07**：P0 全部完成——fork 已推 `amefys/waline-worker`（默认部署分支 `amefys`），D1 `waline-db` 已建表，Worker `waline` 已部署并绑定 `waline.amefys.com`（302 / 列表 / CORS / 审核 waiting 均已冒烟验证），`JWT_SECRET` 已写入，`wl_Settings` 已种入审核默认值与版本钉子。**待用户**：注册管理员；Turnstile widget（token 无 Turnstile 写权限）；WAF 规则恢复见 §4.2。
+> **进度 2026-09-07**：P0 / P1（除 WAF 规则恢复）/ P2 全部完成，留言板已上线 https://amefys.com/guestbook.html（官网提交 ec3145c）。管理员已注册，注册口已自动关闭（实测 403）；Turnstile 服务端校验生效（无 token 403）。**仍待用户**：恢复被覆盖的 WAF 限速规则（合并 OR 表达式，见 §4.2）。P3 未开始。原 P0 记录：fork 已推 `amefys/waline-worker`（默认部署分支 `amefys`），D1 `waline-db` 已建表，Worker `waline` 已部署并绑定 `waline.amefys.com`（302 / 列表 / CORS / 审核 waiting 均已冒烟验证），`JWT_SECRET` 已写入，`wl_Settings` 已种入审核默认值与版本钉子。**待用户**：注册管理员；Turnstile widget（token 无 Turnstile 写权限）；WAF 规则恢复见 §4.2。
 
 ### 4.1 P0 · 后端上线（约半天）
 
