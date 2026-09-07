@@ -38,6 +38,10 @@
   // ours well before that and re-run the challenge in the background.
   var TOKEN_TTL = 240000
   var REFRESH_CHECK = 30000
+  // A challenge can take well over a minute on a bad link. Never restart one
+  // that is still running before this — resetting mid-flight throws the work
+  // away and the widget can end up never producing a token at all.
+  var CHALLENGE_TIMEOUT = 150000
   // @waline/client renders its own widget with action "social"; keep the
   // pre-warmed one identical so the two are interchangeable.
   var ACTION = 'social'
@@ -52,7 +56,7 @@
     var sitekey = opts.sitekey || win.AMEFYS_TURNSTILE_KEY
     if (!sitekey || !doc || !doc.createElement) return null
 
-    var state = { token: null, at: 0, widgetId: null, native: null, nativeReady: null }
+    var state = { token: null, at: 0, widgetId: null, native: null, nativeReady: null, pendingSince: 0 }
     var now = opts.now || function () { return Date.now() }
 
     function fresh() {
@@ -72,35 +76,52 @@
       return el
     }
 
+    /* A challenge is running: nothing may restart it until it settles (or
+       CHALLENGE_TIMEOUT says it never will). */
+    function pending() {
+      return state.pendingSince !== 0 && now() - state.pendingSince < CHALLENGE_TIMEOUT
+    }
+
+    function settle(token) {
+      state.pendingSince = 0
+      state.token = token || null
+      state.at = token ? now() : 0
+    }
+
     function renderPrewarm() {
       var turnstile = win.turnstile
       if (!turnstile || !state.native) return
+      state.pendingSince = now()
       try {
         state.widgetId = state.native.call(turnstile, box(), {
           sitekey: sitekey,
           action: ACTION,
           size: 'compact',
           callback: function (token) {
-            state.token = token
-            state.at = now()
+            settle(token)
           },
           'error-callback': function () {
-            state.token = null
+            settle(null)
+          },
+          'timeout-callback': function () {
+            settle(null)
           },
           'expired-callback': function () {
-            state.token = null
+            settle(null)
             refresh()
           },
         })
       } catch (e) {
         state.widgetId = null
+        state.pendingSince = 0
       }
     }
 
     function refresh() {
       var turnstile = win.turnstile
-      if (!turnstile) return
+      if (!turnstile || pending()) return
       state.token = null
+      state.pendingSince = now()
       if (state.widgetId !== null && state.widgetId !== undefined) {
         try {
           turnstile.reset(state.widgetId)
@@ -109,6 +130,7 @@
           state.widgetId = null
         }
       }
+      state.pendingSince = 0
       renderPrewarm()
     }
 
@@ -163,7 +185,7 @@
       renderPrewarm()
       if (win.setInterval) {
         win.setInterval(function () {
-          if (!fresh()) refresh()
+          if (!fresh() && !pending()) refresh()
         }, REFRESH_CHECK)
       }
     }
@@ -180,7 +202,7 @@
     script.async = false
     ;(doc.head || doc.documentElement).appendChild(script)
 
-    var handle = { state: state, start: start, refresh: refresh, isFresh: fresh }
+    var handle = { state: state, start: start, refresh: refresh, isFresh: fresh, isPending: pending }
     // Diagnostics only: lets us check from the console whether a token is
     // ready without poking at Cloudflare's internals.
     win.__amefysTurnstilePrewarm = handle

@@ -238,16 +238,63 @@ test('a failed pre-warm leaves Waline’s own flow untouched', () => {
   assert.strictEqual(turnstile.calls.render.length, 2, 'Waline renders its own widget')
 })
 
-test('the background timer re-arms a spent token', () => {
+test('the timer never restarts a challenge that is still running', () => {
+  const env = makeEnv()
+  // A slow link: the challenge is started but has not called back yet.
+  const turnstile = makeTurnstile({ solves: false })
+  boot(env, turnstile)
+  assert.strictEqual(turnstile.calls.render.length, 1)
+
+  env.runInterval()
+  env.runInterval()
+  assert.deepStrictEqual(turnstile.calls.reset, [], 'resetting mid-flight throws the work away')
+  assert.strictEqual(turnstile.calls.render.length, 1, 'and so does re-rendering')
+})
+
+test('a challenge that never settles is eventually retried', () => {
+  const env = makeEnv()
+  const turnstile = makeTurnstile({ solves: false })
+  boot(env, turnstile)
+
+  env.clock.t += 150000 + 1
+  env.runInterval()
+  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'a hung widget is restarted once it times out')
+})
+
+test('an error-callback frees the slot for the next attempt', () => {
+  const env = makeEnv()
+  const turnstile = makeTurnstile({ solves: false })
+  boot(env, turnstile)
+  turnstile.calls.render[0].params['error-callback']()
+
+  env.runInterval()
+  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'a failed challenge can retry immediately')
+})
+
+test('handing the token over immediately starts the next challenge', () => {
   const env = makeEnv()
   const turnstile = makeTurnstile()
   boot(env, turnstile)
   env.win.turnstile.render('.wl-captcha-container', { callback() {} })
   env.flushTimeouts()
+
+  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'a spent token is replaced at once')
+  env.runInterval()
+  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'and the heartbeat does not pile on a second one')
+})
+
+test('the heartbeat re-arms once a challenge has failed', () => {
+  const env = makeEnv()
+  const turnstile = makeTurnstile()
+  boot(env, turnstile)
+  env.win.turnstile.render('.wl-captcha-container', { callback() {} })
+  env.flushTimeouts()
+  // The replacement challenge fails; the heartbeat is what tries again.
+  turnstile.calls.render[0].params['error-callback']()
   turnstile.calls.reset.length = 0
 
   env.runInterval()
-  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'a spent cache triggers another challenge')
+  assert.deepStrictEqual(turnstile.calls.reset, ['w0'], 'a spent, failed cache triggers another challenge')
 })
 
 /* The English page has been forgotten twice already (b6ca2bd, ee9c9c8). */
