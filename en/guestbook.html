@@ -288,7 +288,10 @@
     serverURL: 'https://waline.amefys.com',
     path: '/guestbook',
     lang: 'en-US',
-    login: 'disable',
+    // Hidden maintainer switch: open the page with #admin to get the login
+    // button (registration is closed, so it is useless to visitors). Log in,
+    // post as the account, then pin the note from the admin panel.
+    login: location.hash === '#admin' ? 'enable' : 'disable',
     meta: ['nick', 'mail'],
     requiredMeta: ['nick', 'mail'],
     wordLimit: [0, 500],
