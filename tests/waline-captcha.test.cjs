@@ -162,13 +162,23 @@ test('missing captcha container is a no-op', () => {
   assert.deepStrictEqual(dom.removed, [])
 })
 
-test('guestbook.html loads the external patch and no inline turnstile shim', () => {
-  const fs = require('node:fs')
-  const html = fs.readFileSync(path.join(__dirname, '..', 'guestbook.html'), 'utf8')
+// Both guestbook pages carried the same inline shim; the English one was easy
+// to forget, so assert on every page that boots the Waline client.
+for (const [page, src] of [
+  ['guestbook.html', 'assets/waline-captcha.js'],
+  [path.join('en', 'guestbook.html'), '../assets/waline-captcha.js'],
+]) {
+  test(`${page} loads the external patch and no inline turnstile shim`, () => {
+    const fs = require('node:fs')
+    const html = fs.readFileSync(path.join(__dirname, '..', page), 'utf8')
 
-  assert.match(html, /<script defer src="assets\/waline-captcha\.js"><\/script>/)
-  assert.ok(
-    !/defineProperty\(\s*window\s*,\s*['"]turnstile['"]/.test(html),
-    'pre-defining window.turnstile breaks Cloudflare api.js initialisation',
-  )
-})
+    assert.ok(
+      html.includes(`<script defer src="${src}"></script>`),
+      `${page} must load ${src}`,
+    )
+    assert.ok(
+      !/defineProperty\(\s*window\s*,\s*['"]turnstile['"]/.test(html),
+      'pre-defining window.turnstile breaks Cloudflare api.js initialisation',
+    )
+  })
+}
