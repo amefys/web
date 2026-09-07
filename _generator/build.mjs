@@ -174,6 +174,7 @@ function nav() {
   <a href="/items/">装备</a>
   <a href="/packs/">回复包</a>
   <a href="/changelog.html">更新日志</a>
+  <a href="/guestbook.html">留言板</a>
   <a href="/about.html">关于</a>
 </div></nav>`
 }
@@ -431,6 +432,8 @@ function renderSitemap(heroFiles, itemFiles) {
     { loc: `${SITE}/`, priority: '1.0' },
     { loc: `${SITE}/compliance.html`, priority: '0.8' },
     { loc: `${SITE}/changelog.html`, priority: '0.7' },
+    { loc: `${SITE}/guestbook.html`, priority: '0.6' },
+    { loc: `${SITE}/en/guestbook.html`, priority: '0.5' },
     { loc: `${SITE}/packs/`, priority: '0.7' },
     { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
     { loc: `${SITE}/about.html`, priority: '0.6' },

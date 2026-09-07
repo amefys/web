@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>留言板 — 给 AMEFYS 留言</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS DOTA 2 助手的玩家留言板：功能建议、bug 反馈、想加的英雄语音都可以留在这里，审核后公开显示。">
+<link rel="canonical" href="https://amefys.com/guestbook.html">
+<link rel="alternate" hreflang="zh-CN" href="https://amefys.com/guestbook.html">
+<link rel="alternate" hreflang="en" href="https://amefys.com/en/guestbook.html">
+<link rel="alternate" hreflang="x-default" href="https://amefys.com/guestbook.html">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="留言板 — 给 AMEFYS 留言">
+<meta property="og:description" content="AMEFYS DOTA 2 助手的玩家留言板：功能建议、bug 反馈、想加的英雄语音都可以留在这里，审核后公开显示。">
+<meta property="og:url" content="https://amefys.com/guestbook.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="留言板 — 给 AMEFYS 留言">
+<meta name="twitter:description" content="AMEFYS DOTA 2 助手的玩家留言板：功能建议、bug 反馈、想加的英雄语音都可以留在这里，审核后公开显示。">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --sky: #60a5fa;
+    --rose: #fb7185;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 44px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(96,165,250,0.10); border: 0.5px solid rgba(96,165,250,0.30);
+    font-size: 11px; color: var(--sky); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 620px; }
+  .page-hero .updated { font-size: 12px; color: var(--text-3); margin-top: 14px; }
+
+  /* Channel cards */
+  .channels { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 56px; }
+  .channel { padding: 20px 22px; border-radius: var(--r-lg); background: var(--surface);
+    border: 0.5px solid var(--hairline); }
+  .channel h3 { margin: 0 0 6px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+  .channel p { margin: 0 0 12px; font-size: 13px; color: var(--text-2); line-height: 1.6; }
+  .channel .dl { display: flex; gap: 8px; flex-wrap: wrap; }
+  .channel .dl a { display: inline-flex; align-items: center; height: 30px; padding: 0 12px;
+    border-radius: 15px; font-size: 12px; font-weight: 600; border: 0.5px solid var(--hairline-strong);
+    color: var(--text); background: rgba(255,255,255,0.03); }
+  .channel .dl a:hover { border-color: var(--gold); color: var(--gold); }
+  .channel .dl a.primary { background: var(--gold-deep); color: #fff; border-color: transparent; }
+  .channel .dl a.primary:hover { color: #fff; filter: brightness(1.08); }
+
+  /* Release entries */
+  .release { position: relative; padding: 0 0 40px 28px; border-left: 0.5px solid var(--hairline); }
+  .release::before { content: ''; position: absolute; left: -5px; top: 8px; width: 9px; height: 9px;
+    border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--bg); }
+  .release.beta::before { background: var(--sky); }
+  .release:last-of-type { padding-bottom: 8px; }
+  .release header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .release h2 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.5px; }
+  .release .date { font-size: 12.5px; color: var(--text-3); }
+  .release .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+    border-radius: 4px; white-space: nowrap; letter-spacing: 0.3px; }
+  .tag-stable { background: rgba(52,211,153,0.12); color: var(--emerald); }
+  .tag-beta { background: rgba(96,165,250,0.14); color: var(--sky); }
+  .tag-latest { background: rgba(212,175,106,0.16); color: var(--gold); }
+  .release .lead { font-size: 14.5px; color: var(--text-2); margin: 0 0 14px; line-height: 1.7; }
+  .release .lead strong { color: var(--text); font-weight: 600; }
+  .group { margin: 0 0 12px; }
+  .group h4 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .group h4 .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+  .dot-new { background: var(--emerald); } .dot-fix { background: var(--amber); }
+  .dot-theme { background: var(--gold); } .dot-note { background: var(--sky); }
+  .group ul { margin: 0; padding-left: 18px; color: var(--text-2); font-size: 14px; line-height: 1.75; }
+  .group li { margin-bottom: 4px; }
+  .group li strong { color: var(--text); font-weight: 600; }
+  .callout { margin: 10px 0 0; padding: 12px 14px; border-radius: var(--r-md);
+    background: rgba(96,165,250,0.08); border: 0.5px solid rgba(96,165,250,0.25);
+    font-size: 13px; color: var(--text-2); line-height: 1.65; }
+  .callout strong { color: var(--text); }
+  .older { margin-top: 8px; font-size: 13px; color: var(--text-3); }
+  .older a { color: var(--gold); border-bottom: 0.5px solid rgba(212,175,106,0.3); }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .channels { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .release { padding-left: 20px; }
+    .release h2 { font-size: 21px; }
+  }
+
+  /* Guestbook */
+  .gb-note { display:flex; gap:12px; align-items:flex-start; padding:14px 16px; border:1px solid var(--hairline); border-radius:12px; background:var(--surface); color:var(--text-2); font-size:13px; line-height:1.7; margin:0 0 22px; }
+  .gb-note b { color:var(--text); font-weight:600; }
+  .gb-note .ic { flex:none; width:22px; height:22px; border-radius:6px; background:rgba(232,199,121,0.14); color:var(--gold); display:grid; place-items:center; font-size:12px; font-weight:700; }
+  .gb-rules { margin:0 0 28px; padding:0 0 0 18px; color:var(--text-3); font-size:12.5px; line-height:1.8; }
+  .gb-fallback { display:none; padding:16px; border:1px dashed var(--hairline-strong); border-radius:12px; color:var(--text-2); font-size:13px; }
+  .gb-fallback a { color:var(--gold); }
+  #waline:empty + .gb-fallback { display:block; }
+  /* Waline → site tokens */
+  #waline {
+    --waline-font-size: 14px;
+    --waline-white: var(--bg-2);
+    --waline-light-grey: rgba(242,234,216,0.28);
+    --waline-dark-grey: var(--text-2);
+    --waline-color: var(--text);
+    --waline-bg-color: var(--bg-2);
+    --waline-bg-color-light: rgba(38,31,22,0.72);
+    --waline-bg-color-hover: rgba(232,199,121,0.06);
+    --waline-border-color: var(--hairline-strong);
+    --waline-disable-bg-color: rgba(242,234,216,0.06);
+    --waline-disable-color: var(--text-3);
+    --waline-code-bg-color: rgba(0,0,0,0.35);
+    --waline-theme-color: var(--gold);
+    --waline-active-color: #f3d68e;
+    --waline-info-bg-color: rgba(232,199,121,0.10);
+    --waline-info-color: var(--text-2);
+    --waline-border: 1px solid var(--waline-border-color);
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+    --waline-badge-color: var(--gold);
+    --waline-badge-font-size: 11px;
+    color: var(--text);
+  }
+  #waline .wl-panel { border-radius:14px; background:var(--surface); }
+  #waline .wl-editor, #waline .wl-input { color:var(--text); }
+  #waline .wl-btn.primary { color:#1a1408; font-weight:600; }
+  #waline .wl-card .wl-head .wl-nick { color:var(--gold); }
+  #waline .wl-card .wl-content a { color:var(--gold); }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css">
+<script src="/assets/mobile-nav.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="guestbook.html" aria-current="page">留言板</a>
+        <a href="index.html#faq">常见问题</a>
+        <a href="about.html">关于</a>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="guestbook.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/index.html">EN</a>
+        </div>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">留言板</div>
+      <h1>给 AMEFYS 留言</h1>
+      <p>功能建议、bug 反馈、想加的英雄语音、用得爽或不爽的地方，都可以写在这里。不用注册，留个昵称和邮箱就行。</p>
+    </div>
+
+    <div class="gb-note">
+      <span class="ic">i</span>
+      <div>
+        <b>留言先审核再显示</b>，通常一天内处理；邮箱只用于给你发回复通知，<b>不会公开</b>。
+        反馈 bug 时如果能附上版本号（设置 → 关于）和日志（Windows：<code>%APPDATA%\amefys\logs\amefys.log</code>，macOS：<code>~/Library/Logs/amefys/</code>）会快很多。
+      </div>
+    </div>
+
+    <div id="waline"></div>
+    <div class="gb-fallback">留言组件没有加载出来。可以直接发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或稍后刷新再试。</div>
+
+    <ul class="gb-rules">
+      <li>提交留言即表示同意 <a href="privacy.html" style="color:var(--text-2)">隐私政策</a>；我们会保存昵称、留言内容、邮箱、IP 和浏览器信息用于审核与反垃圾。</li>
+      <li>禁止广告、外挂 / 脚本交易、账号买卖、人身攻击及其他违法违规内容，此类留言不会通过审核。</li>
+      <li>想删除自己的留言，用留言时的邮箱发信到 amefys@gmail.com 即可。</li>
+    </ul>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="privacy.html">隐私</a>
+      <a href="licenses.html">许可</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+
+<link rel="stylesheet" href="assets/vendor/waline/waline.css">
+<script type="module">
+  import { init } from './assets/vendor/waline/waline.js'
+  // Site key of the Cloudflare Turnstile widget for amefys.com (public value).
+  const TURNSTILE_SITE_KEY = '0x4AAAAAAEq3vUWqxYSWqdMd'
+  init({
+    el: '#waline',
+    serverURL: 'https://waline.amefys.com',
+    path: '/guestbook',
+    lang: 'zh-CN',
+    login: 'disable',
+    meta: ['nick', 'mail'],
+    requiredMeta: ['nick', 'mail'],
+    wordLimit: [0, 500],
+    pageSize: 20,
+    imageUploader: false,
+    search: false,
+    pageview: false,
+    reaction: false,
+    emoji: false,
+    noRss: true,
+    turnstileKey: TURNSTILE_SITE_KEY,
+    placeholder: '写点什么吧：功能建议、bug 反馈、想加的英雄语音都可以。留言审核后显示；邮箱仅用于回复通知，不公开。',
+    locale: {
+      placeholder: '写点什么吧：功能建议、bug 反馈、想加的英雄语音都可以。留言审核后显示；邮箱仅用于回复通知，不公开。',
+      comment: '留言',
+      sofa: '还没有留言，来做第一个吧。',
+      submit: '发布留言',
+      approved: '已通过',
+      waiting: '待审核',
+      admin: '作者'
+    }
+  })
+</script>
+
+</body></html>
