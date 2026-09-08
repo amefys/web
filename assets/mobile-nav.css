@@ -4,7 +4,7 @@
    page (root, /en/, /en/packs/, /guides/…). Relies only on the shared
    nav markup (.nav > .nav-inner > .brand, .links, .actions, .nav-toggle)
    and the CSS vars (--text, --hairline, --gold-deep…) each page defines.
-   Desktop layout is untouched: the toggle is display:none above 900px.
+   Desktop layout is untouched: the toggle is display:none above 1080px.
    ───────────────────────────────────────────────────────────── */
 
 /* Hamburger button — hidden on desktop, revealed at the breakpoint */
@@ -31,7 +31,7 @@
   transition: transform .22s ease, opacity .18s ease;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   /* Let the bar grow into an accordion panel when opened */
   .nav { height: auto; }
   .nav .nav-inner {

@@ -66,3 +66,32 @@ Rules when touching either file:
    show up on submit (hang, or an `alert()` about `turnstile.ready()`).
 3. Run `npm test` (`tests/waline-*.test.cjs`) and verify on the live site, not
    just localhost: the Turnstile site key only accepts amefys.com.
+
+## Top navigation (`assets/mobile-nav.*`, `assets/nav-more.*`)
+
+Every full-nav page loads four shared files from absolute paths, so the bar
+behaves identically on `/`, `/en/`, `/packs/`, `/guides/…`:
+
+- `mobile-nav.css` / `mobile-nav.js` — the hamburger panel. It takes over at
+  **≤1080px**, the width of `.nav-inner` itself: below that the English link
+  list no longer fits on one line, so the bar collapses instead of wrapping.
+- `nav-more.css` / `nav-more.js` — the **更多 / More** dropdown that holds the
+  tail of the menu (常见问题 / 关于 / 捐助 · FAQ / About / Donate). Hover and
+  `:focus-within` open it in CSS; the click path sets `data-open` so it works
+  on touch. Inside the hamburger panel the dropdown flattens back into plain
+  rows, so mobile users still see all three entries.
+
+Rules when touching them:
+
+1. **Bump the `?v=` on every page that loads the file** — Cloudflare serves
+   this site with `cache-control: max-age=14400`.
+2. Adding a nav entry means checking the bar at ~1085px (the narrowest desktop
+   layout) in both languages; English labels are the ones that overflow first.
+3. Generated pages (`heroes/`, `items/`) carry a shorter nav emitted by
+   `_generator/build.mjs` — update `nav()` there too, then re-run the build.
+
+## Donate page (`donate.html`, `en/donate.html`)
+
+WeChat tip QR (`assets/qr-tip.svg`) is currently the only live channel — Buy Me
+a Coffee is not set up, so nothing should link to it. The page also states that
+a tip is a voluntary gift, not a purchase; keep that wording when editing.

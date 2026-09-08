@@ -53,7 +53,7 @@
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
     box-shadow: 0 0 12px rgba(212,175,106,0.45); }
-  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
   .nav .links a:hover { color: var(--text); }
   .nav .actions { display: flex; align-items: center; gap: 14px; }
   .btn-text { color: var(--text-2); font-size: 12px; }
@@ -142,8 +142,10 @@
     .dep-table th, .dep-table td { padding: 9px 10px; }
   }
 </style>
-<link rel="stylesheet" href="/assets/mobile-nav.css">
-<script src="/assets/mobile-nav.js" defer></script>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
 </head>
 <body>
 
@@ -160,8 +162,14 @@
         <a href="packs/index.html">回复包</a>
         <a href="changelog.html">更新日志</a>
         <a href="guestbook.html">留言板</a>
-        <a href="index.html#faq">常见问题</a>
-        <a href="about.html">关于</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">常见问题</a>
+            <a href="about.html" role="menuitem">关于</a>
+            <a href="donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="lang-switch">

@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>捐助 AMEFYS — 请开发者喝杯咖啡，让工具走得更远</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS 永久免费、无广告、不锁功能。如果它帮你赢过一局，可以微信打赏请开发者喝杯咖啡，任意金额，不解锁任何东西。">
+<link rel="canonical" href="https://amefys.com/donate.html">
+<link rel="alternate" hreflang="zh-CN" href="https://amefys.com/donate.html">
+<link rel="alternate" hreflang="en" href="https://amefys.com/en/donate.html">
+<link rel="alternate" hreflang="x-default" href="https://amefys.com/donate.html">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="捐助 AMEFYS — 请开发者喝杯咖啡，让工具走得更远">
+<meta property="og:description" content="AMEFYS 永久免费、无广告、不锁功能。捐助只是心意，不解锁任何东西。">
+<meta property="og:url" content="https://amefys.com/donate.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="捐助 AMEFYS — 请开发者喝杯咖啡，让工具走得更远">
+<meta name="twitter:description" content="AMEFYS 永久免费、无广告、不锁功能。捐助只是心意，不解锁任何东西。">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); font-weight: 600; }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 56px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(232,199,121,0.10); border: 0.5px solid rgba(232,199,121,0.30);
+    font-size: 11px; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero h1 em { font-style: normal; color: var(--gold); }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 600px; }
+
+  section.s { margin: 0 0 52px; }
+  section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; }
+  section.s .s-sub { color: var(--text-2); font-size: 14px; margin: 0 0 22px; line-height: 1.6; }
+  section.s p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; margin: 0 0 12px; }
+  section.s p strong { color: var(--text); font-weight: 600; }
+  section.s a.link { color: var(--gold); border-bottom: 0.5px solid rgba(212,175,106,0.3); }
+  section.s a.link:hover { border-bottom-color: var(--gold); }
+
+  /* 三条承诺 */
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .promise {
+    padding: 24px 22px; border-radius: var(--r-lg);
+    background: var(--surface); border: 0.5px solid var(--hairline); text-align: center;
+  }
+  .promise-icon { font-size: 30px; margin-bottom: 12px; }
+  .promise-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .promise-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+  /* 捐助渠道 */
+  .ways { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 420px; margin: 0 auto; }
+  .way {
+    padding: 28px 26px 24px; border-radius: var(--r-xl);
+    background: linear-gradient(180deg, rgba(232,199,121,0.06), rgba(232,199,121,0.015));
+    border: 0.5px solid var(--hairline-strong);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .way-badge {
+    font-size: 10.5px; font-weight: 800; letter-spacing: 0.7px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .way h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 6px; }
+  .way .way-sub { font-size: 13px; color: var(--text-2); line-height: 1.55; margin: 0 0 20px; }
+  .way-qr { background: #fff; padding: 10px; border-radius: 12px; width: 200px; margin: 0 auto 16px; }
+  .way-qr img { width: 100%; height: auto; display: block; }
+  .way-foot { font-size: 11.5px; color: var(--text-3); line-height: 1.6; margin-top: auto; }
+
+  /* 用途表 */
+  .cost-table { width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); overflow: hidden; font-size: 13px; }
+  .cost-table th, .cost-table td { padding: 11px 14px; text-align: left;
+    border-bottom: 0.5px solid var(--hairline); color: var(--text-2); line-height: 1.6; vertical-align: top; }
+  .cost-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; background: rgba(255,255,255,0.02); }
+  .cost-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+  .cost-table tr:last-child td { border-bottom: 0; }
+
+  /* 免费支持 */
+  .free-ways { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .free-way {
+    padding: 18px 20px; border-radius: var(--r-md);
+    background: var(--surface); border: 0.5px solid var(--hairline);
+  }
+  .free-way h4 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; }
+  .free-way p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+  .note {
+    padding: 20px 22px; border-radius: var(--r-lg);
+    background: rgba(52,211,153,0.05); border: 0.5px solid rgba(52,211,153,0.2);
+    font-size: 13.5px; color: var(--text-2); line-height: 1.7;
+  }
+  .note strong { color: var(--emerald); font-weight: 700; }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .promises, .ways, .free-ways { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .cost-table { font-size: 12px; }
+    .cost-table th, .cost-table td { padding: 9px 10px; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">常见问题</a>
+            <a href="about.html" role="menuitem">关于</a>
+            <a href="donate.html" data-active="true" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="donate.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/donate.html">EN</a>
+        </div>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">支持项目</div>
+      <h1>AMEFYS 一直<em>免费</em>。</h1>
+      <p>如果它帮你赢过一局、或者让你在全场骂战里没落下风，可以请开发者喝杯咖啡。</p>
+      <p style="color: var(--text-3); font-size: 13.5px;">但这永远只是心意 —— 不捐助，功能一个都不会少。</p>
+    </div>
+
+    <!-- 三条承诺 -->
+    <section class="s">
+      <div class="promises">
+        <div class="promise">
+          <div class="promise-icon">🆓</div>
+          <div class="promise-title">全部功能免费</div>
+          <div class="promise-desc">出装推荐、聊天翻译、语音、主题 —— 没有付费墙，也不做「捐助版」</div>
+        </div>
+        <div class="promise">
+          <div class="promise-icon">🚫</div>
+          <div class="promise-title">没有广告</div>
+          <div class="promise-desc">不插广告、不卖数据、不做第三方追踪，详见<a href="privacy.html" class="link">隐私政策</a></div>
+        </div>
+        <div class="promise">
+          <div class="promise-icon">🤝</div>
+          <div class="promise-title">捐了也不特殊</div>
+          <div class="promise-desc">不解锁任何东西。你的建议我们会认真看，但不排队插队</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 捐助渠道 -->
+    <section class="s">
+      <h2>微信打赏，任意金额</h2>
+      <p class="s-sub">目前只开通了微信打赏，不需要注册任何账号。海外支付渠道还在筹备。</p>
+      <div class="ways">
+        <div class="way">
+          <div class="way-badge">微信</div>
+          <h3>微信打赏</h3>
+          <p class="way-sub">扫码 → 长按识别 → 输入任意金额</p>
+          <div class="way-qr">
+            <img src="assets/qr-tip.svg" alt="AMEFYS 微信打赏二维码" width="200" height="200" loading="lazy">
+          </div>
+          <div class="way-foot">留言写上你最想要的功能<br>下个版本我们尽量优先做</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 钱花在哪 -->
+    <section class="s">
+      <h2>这些钱花在哪</h2>
+      <p class="s-sub">AMEFYS 是个人项目，没有公司、没有投资。下面这些是每个月实打实要付的账单。</p>
+      <table class="cost-table">
+        <thead>
+          <tr><th>开支</th><th>用来做什么</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>翻译 API</td>
+            <td>队友和对手的聊天实时互译（中 / 英 / 俄 / 越 / 印尼 / 菲律宾语），按字符计费，人越多花得越多</td>
+          </tr>
+          <tr>
+            <td>语音识别</td>
+            <td>语音输入与语音翻译的云端 ASR，按时长计费</td>
+          </tr>
+          <tr>
+            <td>CDN 与服务器</td>
+            <td>安装包下载加速、主题皮肤分发、留言板托管</td>
+          </tr>
+          <tr>
+            <td>域名与证书</td>
+            <td>amefys.com 及其子域的续费</td>
+          </tr>
+          <tr>
+            <td>开发时间</td>
+            <td>剩下的是继续写新功能、修 bug、跟进 DOTA 2 版本更新的动力</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 不花钱也能支持 -->
+    <section class="s">
+      <h2>不花钱，也能帮上忙</h2>
+      <p class="s-sub">说实话，下面这几件事对项目的价值不比打赏低。</p>
+      <div class="free-ways">
+        <div class="free-way">
+          <h4>💬 去留言板提一条建议</h4>
+          <p>想要的功能、遇到的 bug、翻译不准的句子 —— 写在<a href="guestbook.html" class="link">留言板</a>，不用注册。</p>
+        </div>
+        <div class="free-way">
+          <h4>⭐ 在 GitHub 点个 star</h4>
+          <p>让更多人搜得到：<a href="https://github.com/amefys" class="link" target="_blank" rel="noopener">github.com/amefys</a></p>
+        </div>
+        <div class="free-way">
+          <h4>🎮 推给你的车队</h4>
+          <p>五黑里有一个人装了，全队的沟通体验都不一样。</p>
+        </div>
+        <div class="free-way">
+          <h4>📱 关注抖音 @Amefys</h4>
+          <p>新版本演示、实战片段、隐藏用法都先发抖音，抖音号 <strong style="color:var(--text);">67517850605</strong> —— <a href="about.html#contact" class="link">扫码关注</a>，点个关注就是支持。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 说明 -->
+    <section class="s">
+      <div class="note">
+        <strong>几句实话：</strong>这是个人开发者维护的项目，打赏属于自愿赠与，<strong>不是购买服务</strong> —— 不提供发票、不承诺具体功能的交付时间，也不构成任何形式的会员或订阅关系。已经打赏但想撤回，或者有任何疑问，直接发邮件到
+        <a href="mailto:amefys@gmail.com?subject=AMEFYS%20捐助咨询" class="link">amefys@gmail.com</a>，我们会在 7 个工作日内回复。
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="licenses.html">许可</a>
+      <a href="privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>

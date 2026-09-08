@@ -27,6 +27,6 @@
 
   // Back to desktop width → make sure we don't leave a panel stuck open.
   window.addEventListener('resize', function () {
-    if (window.innerWidth > 900 && nav.getAttribute('data-open') === 'true') setOpen(false)
+    if (window.innerWidth > 1080 && nav.getAttribute('data-open') === 'true') setOpen(false)
   })
 })()

@@ -1,0 +1,69 @@
+/* ─────────────────────────────────────────────────────────────
+   AMEFYS · shared "More" dropdown in the top nav
+   Collapses the tail of the menu (FAQ / About / Donate) into one
+   entry so the bar stops wrapping once the link list grows.
+   Loaded via absolute path /assets/nav-more.css next to
+   /assets/mobile-nav.css; relies only on the shared nav markup and
+   the CSS vars each page defines (--bg-2, --text, --hairline…).
+   ───────────────────────────────────────────────────────────── */
+
+.nav-more { position: relative; display: inline-flex; align-items: center; }
+
+.nav-more-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin: 0; padding: 0; border: 0; background: none;
+  font: inherit; color: inherit; line-height: inherit;
+  cursor: pointer; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-more-btn:hover { color: var(--text, #f2ead8); }
+.nav-more[data-active="true"] > .nav-more-btn { color: var(--text, #f2ead8); font-weight: 600; }
+.nav-more-btn svg { width: 9px; height: 9px; opacity: 0.7; transition: transform .16s ease; }
+.nav-more[data-open="true"] > .nav-more-btn svg { transform: rotate(180deg); }
+
+.nav-more-panel {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  isolation: isolate; z-index: 60;
+  min-width: 132px; padding: 6px;
+  display: none; flex-direction: column;
+  border-radius: 12px;
+  background: var(--bg-2, #141009);
+  border: 0.5px solid var(--hairline-strong, rgba(232,199,121,0.20));
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+/* Hover keeps the desktop feel; focus-within keeps it keyboard-reachable;
+   data-open is the click path (and the only one that works on touch). */
+.nav-more:hover > .nav-more-panel,
+.nav-more:focus-within > .nav-more-panel,
+.nav-more[data-open="true"] > .nav-more-panel { display: flex; }
+
+/* Invisible bridge so the pointer can travel from the button to the panel
+   across the 6px gap without the hover state dropping. */
+.nav-more::after {
+  content: ''; position: absolute; top: 100%; right: 0;
+  width: 100%; height: 8px; display: none;
+}
+.nav-more:hover::after { display: block; }
+
+.nav-more-panel a {
+  display: block; padding: 8px 12px; border-radius: 8px;
+  color: var(--text-2, rgba(242,234,216,0.62)); white-space: nowrap;
+}
+.nav-more-panel a:hover { background: rgba(255,255,255,0.06); color: var(--text, #f2ead8); }
+.nav-more-panel a[data-active="true"] { color: var(--text, #f2ead8); font-weight: 600; }
+
+/* Inside the mobile hamburger panel the dropdown flattens into plain rows. */
+@media (max-width: 1080px) {
+  .nav .nav-inner > .links > .nav-more { display: block; }
+  .nav .nav-inner > .links > .nav-more > .nav-more-btn { display: none; }
+  .nav .nav-inner > .links > .nav-more > .nav-more-panel {
+    position: static; display: flex; min-width: 0;
+    padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none;
+  }
+  .nav .nav-inner > .links > .nav-more > .nav-more-panel a {
+    padding: 13px 2px; border-radius: 0; font-size: 15px;
+    color: var(--text, #f2ead8);
+    border-top: 0.5px solid var(--hairline, rgba(232,199,121,0.12));
+  }
+  .nav .nav-inner > .links > .nav-more::after { display: none; }
+}

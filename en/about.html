@@ -65,7 +65,7 @@
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
     box-shadow: 0 0 12px rgba(212,175,106,0.45); }
-  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
   .nav .links a:hover { color: var(--text); }
   .nav .links a[data-active="true"] { color: var(--text); }
   .nav .actions { display: flex; align-items: center; gap: 14px; }
@@ -225,8 +225,10 @@
     .letter { padding: 24px 22px; font-size: 14px; }
   }
 </style>
-<link rel="stylesheet" href="/assets/mobile-nav.css">
-<script src="/assets/mobile-nav.js" defer></script>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
 </head>
 <body>
 
@@ -242,8 +244,14 @@
         <a href="packs/index.html">Packs</a>
         <a href="../changelog.html">Changelog</a>
         <a href="guestbook.html">Guestbook</a>
-        <a href="index.html#faq">FAQ</a>
-        <a href="about.html" data-active="true">About</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">More<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">FAQ</a>
+            <a href="about.html" data-active="true" role="menuitem">About</a>
+            <a href="donate.html" role="menuitem">Donate</a>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="lang-switch">
@@ -371,11 +379,11 @@
 
     <!-- Coffee CTA -->
     <div class="coffee-row">
-      <a class="btn-coffee" href="https://buymeacoffee.com/amefys" target="_blank" rel="noopener">
+      <a class="btn-coffee" href="donate.html">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5C19 16.5 12 21 12 21z"/>
         </svg>
-        Buy us a coffee
+        Support AMEFYS
       </a>
       <div class="coffee-hint">Every coffee keeps AMEFYS shipping the next bug fix.</div>
     </div>

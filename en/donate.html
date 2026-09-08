@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Donate to AMEFYS — buy the developer a coffee</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS is free forever, ad-free, with nothing locked behind a paywall. If it ever won you a game, you can buy the developer a coffee — any amount, no account needed.">
+<link rel="canonical" href="https://amefys.com/en/donate.html">
+<link rel="alternate" hreflang="en" href="https://amefys.com/en/donate.html">
+<link rel="alternate" hreflang="zh-CN" href="https://amefys.com/donate.html">
+<link rel="alternate" hreflang="x-default" href="https://amefys.com/donate.html">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Donate to AMEFYS — buy the developer a coffee">
+<meta property="og:description" content="AMEFYS is free forever, ad-free, and nothing is locked behind a paywall. A tip unlocks nothing — it is just a thank you.">
+<meta property="og:url" content="https://amefys.com/en/donate.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Donate to AMEFYS — buy the developer a coffee">
+<meta name="twitter:description" content="AMEFYS is free forever, ad-free, and nothing is locked behind a paywall. A tip unlocks nothing — it is just a thank you.">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="../assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="../assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 22px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .links a[data-active="true"] { color: var(--text); font-weight: 600; }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 56px; }
+  .page-hero .eyebrow {
+    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(232,199,121,0.10); border: 0.5px solid rgba(232,199,121,0.30);
+    font-size: 11px; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 18px;
+  }
+  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero h1 em { font-style: normal; color: var(--gold); }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 600px; }
+
+  section.s { margin: 0 0 52px; }
+  section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; }
+  section.s .s-sub { color: var(--text-2); font-size: 14px; margin: 0 0 22px; line-height: 1.6; }
+  section.s p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; margin: 0 0 12px; }
+  section.s p strong { color: var(--text); font-weight: 600; }
+  section.s a.link { color: var(--gold); border-bottom: 0.5px solid rgba(212,175,106,0.3); }
+  section.s a.link:hover { border-bottom-color: var(--gold); }
+
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .promise {
+    padding: 24px 22px; border-radius: var(--r-lg);
+    background: var(--surface); border: 0.5px solid var(--hairline); text-align: center;
+  }
+  .promise-icon { font-size: 30px; margin-bottom: 12px; }
+  .promise-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .promise-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+
+  .ways { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 420px; margin: 0 auto; }
+  .way {
+    padding: 28px 26px 24px; border-radius: var(--r-xl);
+    background: linear-gradient(180deg, rgba(232,199,121,0.06), rgba(232,199,121,0.015));
+    border: 0.5px solid var(--hairline-strong);
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+  .way-badge {
+    font-size: 10.5px; font-weight: 800; letter-spacing: 0.7px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .way h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 6px; }
+  .way .way-sub { font-size: 13px; color: var(--text-2); line-height: 1.55; margin: 0 0 20px; }
+  .way-qr { background: #fff; padding: 10px; border-radius: 12px; width: 200px; margin: 0 auto 16px; }
+  .way-qr img { width: 100%; height: auto; display: block; }
+  .way-foot { font-size: 11.5px; color: var(--text-3); line-height: 1.6; margin-top: auto; }
+
+  .cost-table { width: 100%; border-collapse: collapse;
+    background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); overflow: hidden; font-size: 13px; }
+  .cost-table th, .cost-table td { padding: 11px 14px; text-align: left;
+    border-bottom: 0.5px solid var(--hairline); color: var(--text-2); line-height: 1.6; vertical-align: top; }
+  .cost-table th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+    color: var(--text-3); font-weight: 700; background: rgba(255,255,255,0.02); }
+  .cost-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+  .cost-table tr:last-child td { border-bottom: 0; }
+
+  .free-ways { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .free-way {
+    padding: 18px 20px; border-radius: var(--r-md);
+    background: var(--surface); border: 0.5px solid var(--hairline);
+  }
+  .free-way h4 { font-size: 14.5px; font-weight: 700; margin: 0 0 6px; }
+  .free-way p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin: 0; }
+
+  .note {
+    padding: 20px 22px; border-radius: var(--r-lg);
+    background: rgba(52,211,153,0.05); border: 0.5px solid rgba(52,211,153,0.2);
+    font-size: 13.5px; color: var(--text-2); line-height: 1.7;
+  }
+  .note strong { color: var(--emerald); font-weight: 700; }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 760px) {
+    .promises, .ways, .free-ways { grid-template-columns: 1fr; }
+    .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .nav .links { display: none; }
+    .cost-table { font-size: 12px; }
+    .cost-table th, .cost-table td { padding: 9px 10px; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+</head>
+<body>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="../assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">Features</a>
+        <a href="index.html#trash">Trash-talk 1v9</a>
+        <a href="index.html#assist">Assistant</a>
+        <a href="index.html#skins">Skins</a>
+        <a href="packs/index.html">Packs</a>
+        <a href="../changelog.html">Changelog</a>
+        <a href="guestbook.html">Guestbook</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">More<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">FAQ</a>
+            <a href="about.html" role="menuitem">About</a>
+            <a href="donate.html" data-active="true" role="menuitem">Donate</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="../donate.html">中文</a>
+          <span class="sep">·</span>
+          <a href="donate.html" aria-current="page">EN</a>
+        </div>
+        <a class="btn-pill js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">Free download</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="eyebrow">Support the project</div>
+      <h1>AMEFYS stays <em>free</em>.</h1>
+      <p>If it ever won you a lane — or kept you from losing an all-chat war — you can buy the developer a coffee.</p>
+      <p style="color: var(--text-3); font-size: 13.5px;">It is only a thank you. Skip it and you still get every single feature.</p>
+    </div>
+
+    <section class="s">
+      <div class="promises">
+        <div class="promise">
+          <div class="promise-icon">🆓</div>
+          <div class="promise-title">Every feature is free</div>
+          <div class="promise-desc">Build advice, chat translation, voice, skins — no paywall, and no "supporter edition"</div>
+        </div>
+        <div class="promise">
+          <div class="promise-icon">🚫</div>
+          <div class="promise-title">No ads, ever</div>
+          <div class="promise-desc">No ads, no data selling, no third-party tracking of any kind</div>
+        </div>
+        <div class="promise">
+          <div class="promise-icon">🤝</div>
+          <div class="promise-title">Donors get no perks</div>
+          <div class="promise-desc">A tip unlocks nothing. We read every suggestion, but nobody buys a place in the queue</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s">
+      <h2>WeChat tip, any amount</h2>
+      <p class="s-sub">WeChat is the only channel open right now — no account needed on this site. International payment options are still being set up.</p>
+      <div class="ways">
+        <div class="way">
+          <div class="way-badge">WeChat</div>
+          <h3>WeChat tip</h3>
+          <p class="way-sub">Scan → long-press to recognise → any amount</p>
+          <div class="way-qr">
+            <img src="../assets/qr-tip.svg" alt="AMEFYS WeChat tip QR code" width="200" height="200" loading="lazy">
+          </div>
+          <div class="way-foot">Leave the feature you want most in the note<br>we try to prioritise it in the next build</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s">
+      <h2>Where the money goes</h2>
+      <p class="s-sub">AMEFYS is a solo project — no company, no investors. These are the bills that arrive every month.</p>
+      <table class="cost-table">
+        <thead>
+          <tr><th>Cost</th><th>What it pays for</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Translation API</td>
+            <td>Live two-way chat translation (EN / ZH / RU / VI / ID / FIL), billed per character — the more players, the bigger the bill</td>
+          </tr>
+          <tr>
+            <td>Speech recognition</td>
+            <td>Cloud ASR behind voice input and voice translation, billed per second of audio</td>
+          </tr>
+          <tr>
+            <td>CDN and servers</td>
+            <td>Installer downloads, skin delivery, and hosting for the guestbook</td>
+          </tr>
+          <tr>
+            <td>Domain and certificates</td>
+            <td>Renewals for amefys.com and its subdomains</td>
+          </tr>
+          <tr>
+            <td>Development time</td>
+            <td>Whatever is left is the reason new features, bug fixes and DOTA 2 patch updates keep coming</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="s">
+      <h2>Free ways to help</h2>
+      <p class="s-sub">Honestly, these are worth as much to the project as a tip.</p>
+      <div class="free-ways">
+        <div class="free-way">
+          <h4>💬 Leave one suggestion</h4>
+          <p>A feature you want, a bug you hit, a mistranslation you caught — the <a href="guestbook.html" class="link">guestbook</a> needs no sign-up.</p>
+        </div>
+        <div class="free-way">
+          <h4>⭐ Star it on GitHub</h4>
+          <p>It helps people find the project: <a href="https://github.com/amefys" class="link" target="_blank" rel="noopener">github.com/amefys</a></p>
+        </div>
+        <div class="free-way">
+          <h4>🎮 Tell your stack</h4>
+          <p>One person running AMEFYS changes how the whole party communicates.</p>
+        </div>
+        <div class="free-way">
+          <h4>📱 Follow @Amefys on Douyin</h4>
+          <p>Build demos, clip breakdowns and hidden tricks land there first. Douyin ID <strong style="color:var(--text);">67517850605</strong> — <a href="../about.html#contact" class="link">scan the QR</a> to follow.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="s">
+      <div class="note">
+        <strong>The fine print:</strong> this is a project run by one developer. A tip is a voluntary gift, <strong>not a purchase</strong> — no invoice is issued, no delivery date is promised for any feature, and it creates no membership or subscription of any kind. If you want a tip refunded, or have any question at all, email
+        <a href="mailto:amefys@gmail.com?subject=AMEFYS%20donation" class="link">amefys@gmail.com</a> and we will reply within 7 working days.
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · Not affiliated with Valve / DOTA 2</div>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="mailto:amefys@gmail.com">Contact</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>

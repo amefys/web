@@ -73,7 +73,7 @@
   .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
   .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px;
     box-shadow: 0 0 12px rgba(212,175,106,0.45); display: block; }
-  .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; }
+  .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; white-space: nowrap; }
   .nav .links a:hover { color: var(--text); }
   .nav .actions { display: flex; gap: 12px; align-items: center; }
   .btn-text { color: var(--text-2); font-size: 12px; }
@@ -1012,8 +1012,10 @@
     .btn-cta { font-size: 13px; padding: 0 18px; }
   }
 </style>
-<link rel="stylesheet" href="/assets/mobile-nav.css">
-<script src="/assets/mobile-nav.js" defer></script>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"AMEFYS","alternateName":"AMEFYS DOTA 2 实时辅助工具","applicationCategory":"GameApplication","applicationSubCategory":"DOTA 2 companion","operatingSystem":"Windows 11, macOS 13+","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"downloadUrl":"https://amefys.com/dl/AMEFYS-Setup.exe","installUrl":"https://amefys.com/dl/AMEFYS-Setup.exe","softwareVersion":"0.22.1","inLanguage":["zh-CN","en","ru"],"description":"DOTA 2 实时辅助：聊天翻译、出装推荐、快捷回复。只读 Valve 官方 GSI 接口，不碰游戏内存。","url":"https://amefys.com/","image":"https://amefys.com/assets/icon-512.png?v=2","featureList":["实时聊天翻译与一键回复","按局势推荐出装与关键道具时机","快捷回复与社区语料包","多主题皮肤与悬浮窗"],"publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/","logo":"https://amefys.com/assets/icon-512.png?v=2"}}
 </script>
@@ -1044,8 +1046,14 @@
         <a href="packs/index.html">回复包</a>
         <a href="changelog.html">更新日志</a>
         <a href="guestbook.html">留言板</a>
-        <a href="#faq">常见问题</a>
-        <a href="about.html">关于</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="#faq" role="menuitem">常见问题</a>
+            <a href="about.html" role="menuitem">关于</a>
+            <a href="donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
       </div>
       <div class="actions">
         <div class="lang-switch">
