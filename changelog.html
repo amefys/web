@@ -201,22 +201,52 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.23.3</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.24.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版重做了出装推荐，并修掉了悬浮窗抢走游戏声音的问题。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.24.0-beta.1</h3>
-        <p>接着 beta.0 修了一批实机反馈：悬浮窗不再抢走游戏声音，出装推荐会随着对局往前走，GSI 连不上时会直接告诉你卡在哪一步。Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
+        <h3><span class="tag tag-beta">Beta</span> 暂无新版本</h3>
+        <p>beta.0 / beta.1 的内容已经全部并入稳定版 0.24.0，用左边的安装包即可。下一批要试的功能出来后这里会再更新。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.24.0 ── -->
+    <article class="release" id="v0-24-0">
+      <header><h2>0.24.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-10</span></header>
+      <p class="lead">出装推荐整个重做了一遍，<strong>加速模式下不再一整局不变</strong>，也会跟着对局一路往前换。另外修掉一个很影响体验的老问题：<strong>点悬浮窗不会再让游戏静音</strong>。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>鼠标点到悬浮窗，游戏声音就没了。</strong>Dota 2 一旦失去焦点就会自己静音，而悬浮窗显示时会把焦点抢过去、之后每次点击继续占着。现在悬浮窗全程不抢焦点，按钮、标签、拖动照常能点；只有在聊天框里打字时才临时借一下，打完立刻还给游戏。</li>
+          <li><strong>加速模式（Turbo）的出装建议会跟着打了。</strong>之前一整局几乎都停在「前期」，后期装根本推不出来——判断阶段只看了游戏时钟，而加速模式钱是双倍的、局却只有二十来分钟。现在按实际经济速度算，顺风局也会更早提示该出大件。</li>
+          <li><strong>出装推荐一整局不变，7 分钟还在推荐初始装备。</strong>推荐里混进了持续树、树枝这类消耗品——用掉就不算「已拥有」，永远划不掉，而且开局购买率最高、稳占前排；同时同一阶段内部的排序是固定的。现在消耗品不进推荐栏，排序按「这件通常什么时候成型」跟着当前时间走。</li>
+          <li><strong>跳过小件直接买成品，小件不会再回到推荐里。</strong>比如不买回复戒直接出先锋盾——合成会把小件吃掉，而我们只看了背包。顺带修掉出装进度条会倒退的问题。</li>
+          <li><strong>推荐栏不再同时列出成品和它的零件</strong>，也不会再出现同一件装备重复两行。</li>
+          <li><strong>「多少人出这件」的百分比之前是错的。</strong>斧王的跳刀显示 23%——几乎每个斧王都出的东西。现在改成相对热度：这一阶段最常出的那件是 100%。</li>
+          <li><strong>选了「全体」，单条快捷回复还是发到队伍。</strong>顺带修掉切换标签页后频道会跳回「团队」的问题。</li>
+          <li><strong>关掉「发送匿名崩溃报告」之后，其实还在上报。</strong>这个开关此前从未生效过。</li>
+          <li><strong>GSI 端口被别的程序占用时会自己换一个。</strong>之前会弹窗让你去改一个并不存在的设置项。</li>
+          <li><strong>补齐 202 个中文名</strong>：3 个新英雄（百戏大王、凯、朗戈）和全部 201 件中立物品。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>出装推荐会告诉你还差多少钱、大概几分钟能凑齐</strong>，大件也会提前提示，不用等到别人都出完了才看到。</li>
+          <li><strong>「GSI 未连接」现在会告诉你为什么。</strong>同一句话以前覆盖了七种完全不同的原因。现在会分别指出是配置文件没装、Dota 还没启动、启动参数没生效、还是端口被占；最常见的那种还会印出配置文件的实际路径——装了两个 Dota 的话一眼就能看出配错了目录。旁边有「复制诊断信息」，反馈问题时直接贴给我们。</li>
+          <li><strong>开了独占全屏会提示一句。</strong>独占全屏绕过桌面合成，任何普通窗口都画不到游戏上面，所以悬浮窗不会显示。要盖上去只能注入游戏图形接口，那是我们的合规红线——在 Dota 2 设置 → 视频 → 显示模式里改成「无边框窗口」即可。</li>
+          <li><strong>推荐条数变多</strong>：悬浮窗 3 → 5 条，主界面 4 → 6 条。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.24.0-beta.1 ── -->
     <article class="release beta" id="v0-24-0-beta-1">
