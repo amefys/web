@@ -195,7 +195,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-09</div>
+      <div class="updated">最近更新：2026-09-10</div>
     </div>
 
     <!-- 两个频道 -->
@@ -209,14 +209,40 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.24.0-beta.0</h3>
-        <p>这一版重做了出装推荐，加速模式和已合成装备的两个老问题都修了。Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.24.0-beta.1</h3>
+        <p>接着 beta.0 修了一批实机反馈：悬浮窗不再抢走游戏声音，出装推荐会随着对局往前走，GSI 连不上时会直接告诉你卡在哪一步。Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.24.0-beta.1 ── -->
+    <article class="release beta" id="v0-24-0-beta-1">
+      <header><h2>0.24.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-10</span></header>
+      <p class="lead">这一版几乎全部来自 beta.0 的实机反馈。<strong>点悬浮窗不会再让游戏静音</strong>，出装推荐会跟着对局一路往前换，快捷回复终于听频道选择器的了，GSI 连不上时也会直接说清楚卡在哪一步——而不是一句「未连接」。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>鼠标点到悬浮窗，游戏声音就没了。</strong>Dota 2 一旦失去焦点就会自己静音，而悬浮窗显示时会把焦点抢过去、之后每次点击继续占着。现在悬浮窗全程不抢焦点，按钮、标签、拖动照常能点；只有在聊天框里打字时才临时借一下，打完立刻还给游戏。</li>
+          <li><strong>出装推荐一整局不变，7 分钟还在推荐初始装备。</strong>两个原因叠在一起：推荐里混进了持续树、树枝这类消耗品——它们用掉就不算「已拥有」，永远划不掉，而且开局购买率最高、稳占前排；同时同一阶段内部的排序是固定的，时钟和钱包都推不动它。现在消耗品不再进推荐栏，排序改成按「这件装备通常什么时候成型」跟着当前时间走，一路从鞋子换到大件。</li>
+          <li><strong>选了「全体」，单条快捷回复还是发到队伍。</strong>频道选择器的状态藏在聊天框内部，快捷回复看不到，只能写死发队伍。顺带修掉另一个小毛病：切到「下一件」再切回来，频道会悄悄跳回「团队」。</li>
+          <li><strong>GSI 端口被别的程序占用时，会自己换一个。</strong>之前会弹窗让你去「设置 → Dota 2 → GSI 端口」改——而那个设置项根本不存在。现在自动顺延到下一个可用端口并同步改好配置文件，你只需要在提示出现时重启一次 Dota 2。</li>
+          <li><strong>补齐 202 个中文名。</strong>3 个新英雄（百戏大王、凯、朗戈）和全部 201 件中立物品之前在中文界面里显示英文名。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>「GSI 未连接」现在会告诉你为什么。</strong>同一句话以前覆盖了七种完全不同的原因，没法自查。现在会分别指出是配置文件没装、Dota 还没启动、启动参数没生效、还是端口被别的工具占了；最常见的那种还会把配置文件的实际路径印出来——如果你装了两个 Dota，一眼就能看出配错了目录。旁边有个「复制诊断信息」，反馈问题时直接贴给我们，不用再截图。</li>
+          <li><strong>开了独占全屏会提示一句。</strong>独占全屏会绕过桌面合成，任何普通窗口都画不到游戏上面，所以悬浮窗不会显示。要盖上去只能注入游戏的图形接口，那是我们的合规红线，所以暂不支持——在 Dota 2 设置 → 视频 → 显示模式里改成「无边框窗口」即可，画质和性能几乎没差别。</li>
+          <li><strong>推荐条数变多了</strong>：悬浮窗 3 → 5 条，主界面 4 → 6 条。改了排序之后，多出来的行是「接下来该出什么」的预告，而不是继续往冷门里翻。</li>
+        </ul>
+      </div>
+
+      <div class="callout"><strong>特别想请你帮忙验两件事：</strong>一是点悬浮窗之后游戏声音还在不在；二是打一局加速模式，看出装推荐是不是一路在变。这两条都只能在真实对局里看出来。</div>
+    </article>
 
     <!-- ── 0.24.0-beta.0 ── -->
     <article class="release beta" id="v0-24-0-beta-0">
