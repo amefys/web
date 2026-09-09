@@ -195,7 +195,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-08</div>
+      <div class="updated">最近更新：2026-09-09</div>
     </div>
 
     <!-- 两个频道 -->
@@ -209,14 +209,36 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.23.3-beta.0</h3>
-        <p>已并入稳定版 0.23.3，两者内容相同。新功能先在这里露面；Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.24.0-beta.0</h3>
+        <p>这一版重做了出装推荐，加速模式和已合成装备的两个老问题都修了。Beta 不会自动更新，想换回稳定版重新安装即可，设置和数据都保留。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.24.0-beta.0 ── -->
+    <article class="release beta" id="v0-24-0-beta-0">
+      <header><h2>0.24.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-09</span></header>
+      <p class="lead">出装推荐重做：<strong>加速模式下建议不再一整局不变</strong>，已经合成掉的小件也不会再赖在推荐栏里。顺带把「多少人出这件」的百分比算对了，并且现在会告诉你还差多少钱。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>加速模式（Turbo）的出装建议会跟着打了。</strong>之前一整局几乎都停在「前期」，后期装根本推不出来——因为判断阶段只看了游戏时钟，而加速模式钱是双倍的、局却只有二十来分钟。现在按实际经济速度算，顺风局也会更早提示该出大件了。</li>
+          <li><strong>跳过小件直接买成品，小件不会再回到推荐里。</strong>比如不买回复戒直接出先锋盾，回复戒之前会重新冒出来——合成会把小件吃掉，而我们只看了背包。顺带修掉出装进度条会倒退的问题。</li>
+          <li><strong>推荐栏不再同时列出成品和它的零件。</strong>之前斧王中期会同时推荐「刃甲」和「阔剑」，而阔剑本来就是刃甲的一部分。</li>
+          <li><strong>「多少人出这件」的百分比之前是错的。</strong>斧王的跳刀显示 23%——几乎每个斧王都出的东西。现在改成相对热度：这一阶段最常出的那件是 100%，其它按比例。</li>
+          <li>设置里的<strong>「允许上报崩溃报告」开关之前是不起作用的</strong>，关掉了照样上报。现在关掉立即生效（重新开启需要重启）。</li>
+        </ul></div>
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li>推荐里每件装备现在显示<strong>还差多少钱、大概几分钟能攒够</strong>，买得起的会直接标出来。</li>
+          <li>大件会<strong>提前提示</strong>了：以前要等到大家平均做出来的那个时间点才提醒，等于消息永远迟到；现在按你攒钱的速度提前告诉你。</li>
+          <li>已经买了零件的装备会算进「还差多少」——手里有阔剑，刃甲确实比标价更近。</li>
+          <li>推荐条目改用装备本身的品质配色，去掉了对玩家没意义的「本地/AI」来源标签。</li>
+        </ul></div>
+      <div class="callout"><strong>这一版改动集中在实时对局里</strong>，尤其想请打加速模式的朋友帮忙看看出装建议是不是跟着局势走了。有问题欢迎到<a href="guestbook.html">留言板</a>说。</div>
+    </article>
 
     <!-- ── 0.23.3 ── -->
     <article class="release" id="v0-23-3">
