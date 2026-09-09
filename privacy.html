@@ -188,7 +188,7 @@
       <div class="eyebrow">隐私政策</div>
       <h1>你的数据，你做主</h1>
       <p>用最简单的话说清楚：我们收集了什么、为什么、给谁。</p>
-      <div class="updated">生效日期：2026-05-24</div>
+      <div class="updated">生效日期：2026-09-09（上一版 2026-05-24）</div>
     </div>
 
     <!-- 三条原则 -->
@@ -230,7 +230,7 @@
             <td>翻译缓存</td>
             <td>原文 hash + 译文（用于减少 API 调用）</td>
             <td>避免重复翻译同一句话</td>
-            <td><span class="tag tag-local">仅本地</span></td>
+            <td><span class="tag tag-local">仅本地</span> / 默认<span class="tag tag-cloud">贡献共享缓存</span>（80 字以内短句，<a href="#share-cache" class="link">可关</a>）</td>
           </tr>
           <tr>
             <td>官网留言板</td>
@@ -279,8 +279,19 @@
       <h3>默认模式：走 AMEFYS 后端代理</h3>
       <ul class="clean">
         <li>请求经 AMEFYS Supabase Edge Function 转发到目标引擎（火山 / Azure / Claude / OpenAI 等）</li>
-        <li>我们的代理<strong>不存储</strong>翻译内容，只对单 IP 做速率限制</li>
         <li>引擎方的隐私政策对你适用 — 但因为是 AMEFYS 的 key，引擎方拿到的是 AMEFYS 的标识，不是你个人的</li>
+        <li><strong>你输入的原文不会被我们存下来</strong>：代理只保留它的 SHA-256 hash，用来查缓存和记用量</li>
+        <li>我们会记一条用量日志：账号 ID、消耗字符数、原文 hash、时间 — 用于额度计算和防滥用，<strong>不含原文</strong>，30 天后自动删除</li>
+      </ul>
+
+      <h3 id="share-cache">共享翻译缓存（默认开启，可关）</h3>
+      <p>局内高频短句重复度极高（"miss mid"、"gg"、"打肉山"）。为了少调一次 API、也让所有人共用额度，<strong>80 字以内</strong>的翻译结果默认会匿名进入一张全站共享的缓存表：</p>
+      <ul class="clean">
+        <li><strong>存什么</strong>：原文的 SHA-256 hash + 目标语言 + <strong>译文</strong> + 使用的引擎。不存原文明文，不存账号 ID，不关联到你</li>
+        <li><strong>要说清楚的一点</strong>：译文本身是明文存的，而译文在语义上等价于原文 — 所以请把它当作"这句话的内容会被匿名保留"来判断，而不是"只存了 hash"</li>
+        <li><strong>怎么关</strong>：设置 → 数据与隐私 → 数据共享 → 关闭「贡献匿名翻译缓存」。关闭后你的翻译<strong>不再写入</strong>共享缓存；仍可读取他人已贡献的缓存（读取不泄露任何东西）</li>
+        <li><strong>保留期</strong>：90 天内没有被命中过的条目会被自动清除</li>
+        <li>BYO Key 模式不经过我们的服务器，因此完全不涉及这张表</li>
       </ul>
       <h3>BYO Key 模式：走你自己的 API Key</h3>
       <ul class="clean">
@@ -295,7 +306,7 @@
       <h2>哪些数据从不离开你的电脑</h2>
       <ul class="clean">
         <li><strong>GSI 实时数据</strong>：DOTA 2 通过 POST 推送到本地 <code>:4000/gsi</code>，只在本进程内处理</li>
-        <li><strong>翻译缓存</strong>：本地 SQLite 表 <code>translation_cache</code>，从不上传</li>
+        <li><strong>本地翻译缓存</strong>：SQLite 表 <code>translation_cache</code>，从不上传（注意这与上面的<a href="#share-cache" class="link">共享翻译缓存</a>是两张不同的表 — 后者默认会匿名收录 80 字以内的译文）</li>
         <li><strong>App 设置</strong>：本地 JSON 文件 <code>~/Library/.../amefys.json</code></li>
         <li><strong>未登录用户的对局历史</strong>：仅本地 SQLite，从不上传</li>
       </ul>
@@ -336,7 +347,8 @@
       </ul>
       <h3>关闭可选功能</h3>
       <ul class="clean">
-        <li>错误上报：设置 → 数据与隐私 → 关闭"匿名崩溃报告"</li>
+        <li>错误上报：设置 → 数据与隐私 → 关闭"发送匿名崩溃报告"</li>
+        <li><a href="#share-cache" class="link">共享翻译缓存</a>：设置 → 数据与隐私 → 数据共享 → 关闭"贡献匿名翻译缓存"</li>
         <li>云端同步：不登录 = 完全不上传</li>
         <li>翻译：不输入文字 = 不发送任何内容</li>
       </ul>
@@ -348,8 +360,10 @@
       <ul class="clean">
         <li><strong>本地数据</strong>：永久保留 — 由你完全控制</li>
         <li><strong>云端对局历史</strong>：保留到账号注销或你主动删除；不主动清理</li>
-        <li><strong>翻译 API 请求</strong>：不存储；请求转发完即丢</li>
-        <li><strong>速率限制日志</strong>：仅 IP + 时间戳，30 天后自动清除</li>
+        <li><strong>翻译原文</strong>：不存储；转发完即丢，只留 SHA-256 hash</li>
+        <li><strong>用量日志</strong>：账号 ID + 字符数 + 原文 hash + 时间，30 天后自动清除</li>
+        <li><strong><a href="#share-cache" class="link">共享翻译缓存</a></strong>：匿名短句译文，90 天内未被命中即清除</li>
+        <li><strong>速率限制记录</strong>：仅计数窗口，1 小时后自动清除</li>
         <li><strong>Sentry 崩溃报告</strong>：Sentry 默认 30 天，我们不延长</li>
       </ul>
     </section>
