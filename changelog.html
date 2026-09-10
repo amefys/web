@@ -201,7 +201,7 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.24.0</h3>
+        <h3><span class="tag tag-stable">稳定版</span> 0.24.1</h3>
         <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版重做了出装推荐，并修掉了悬浮窗抢走游戏声音的问题。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
@@ -217,6 +217,20 @@
         </div>
       </div>
     </section>
+
+    <!-- ── 0.24.1 ── -->
+    <article class="release" id="v0-24-1">
+      <header><h2>0.24.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-10</span></header>
+      <p class="lead">修掉 0.24.0 带进来的一个问题，另外两处出装和聊天的小毛病也一起改了。<strong>建议 macOS 用户尽快更新。</strong></p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>macOS：在悬浮窗聊天框打完字，有时会把 Dota 2 和 Steam 启动起来。</strong>0.24.0 改了悬浮窗的焦点处理之后引入的——打完字要把焦点还给游戏，而还焦点用的那条系统指令在游戏没开时会顺手把它启动。现在改成只对已经在运行的游戏生效，没开就什么都不做。Windows 不受影响。</li>
+          <li><strong>出装推荐现在按推荐度从高到低排。</strong>每一行右边都有「多少人这么出」的百分比，但列表并不是按它排的，看起来像是乱序。现在排序和这个数字一致了，最主流的选择永远在最上面。</li>
+          <li><strong>从消息包里点一条发送，现在也跟随左下角的频道选择。</strong>之前选了「全体」，从消息包点出去的还是发到队伍——上个版本修了快捷回复，漏了消息包这一处。按住 Shift 点击仍然是单次强制发全体。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.24.0 ── -->
     <article class="release" id="v0-24-0">
