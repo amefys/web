@@ -51,10 +51,28 @@ const PACKS = [
   'en-taunts-memes',
   'ru-taunts-classic',
   'ru-taunts-memes',
-  'zh-rant-staccato',
-  'zh-rant-autofire',
-  'zh-rant-longform',
-  'zh-rant-explicit'
+  'zh-guankou-staccato',
+  'zh-guankou-wakeup',
+  'zh-guankou-general',
+  'zh-guankou-autofire',
+  'zh-guankou-longform',
+  'zh-guankou-reverse',
+  'zh-guankou-courage',
+  'zh-guankou-mindgame',
+  'zh-guankou-explicit',
+  'zh-guankou-fullsend',
+  'zh-guankou-cantplay',
+  'zh-guankou-jiuzhe',
+  'zh-guankou-accident',
+  'zh-guankou-again',
+  'zh-counter-nomic-1',
+  'zh-counter-nomic-2',
+  'zh-counter-report-1',
+  'zh-counter-report-2',
+  'zh-counter-report-3',
+  'zh-counter-micspam-1',
+  'zh-counter-micspam-2',
+  'zh-counter-micspam-3'
 ]
 
 const CORS_HEADERS = {

@@ -203,6 +203,7 @@
   .pack-card[data-tone='timings']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(224,154,102,0.16), transparent 60%); }
   .pack-card[data-tone='ru']::before          { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.14), transparent 60%); }
   .pack-card[data-tone='sea']::before         { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card[data-tone='counter']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(125,175,220,0.16), transparent 60%); }
   .pack-card[data-tone='nsfw']::before        { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.20), transparent 60%); }
   .pack-card > * { position: relative; }
 
@@ -230,6 +231,7 @@
   .pack-card[data-tone='timings'] .pack-badge     { color: var(--cyan); border-color: rgba(224,154,102,0.4); background: rgba(224,154,102,0.1); }
   .pack-card[data-tone='ru'] .pack-badge          { color: var(--dire); border-color: rgba(217,83,79,0.4); background: rgba(217,83,79,0.1); }
   .pack-card[data-tone='sea'] .pack-badge         { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+  .pack-card[data-tone='counter'] .pack-badge     { color: #7dafdc; border-color: rgba(125,175,220,0.4); background: rgba(125,175,220,0.1); }
   .pack-card[data-tone='nsfw'] .pack-badge        { color: var(--dire); border-color: rgba(217,83,79,0.55); background: rgba(217,83,79,0.14); }
 
   .pack-desc {
@@ -361,9 +363,9 @@
   </nav>
 
   <main class="page">
-    <div class="eyebrow"><span class="bar"></span>社区精选 · 18 个包 · MIT 开源</div>
+    <div class="eyebrow"><span class="bar"></span>社区精选 · 36 个包 · MIT 开源</div>
     <h1>一键<em>下载</em>，<br>把社区语料塞进悬浮窗。</h1>
-    <p class="lead">18 个由 AMEFYS 团队 + 玩家社区共同维护的快捷回复包：礼貌局 / 战术指挥 / 文斗经典 / 数字梗 / 关键时机 / 俄语 / 东南亚，中英俄三语嘲讽系列，以及全新的<strong>中文贯口系列</strong>（成段连发，含一个标注了脏话的高风险包）。下载 → 导入 → 在悬浮窗点一下就发完。</p>
+    <p class="lead">36 个由 AMEFYS 团队 + 玩家社区共同维护的快捷回复包：礼貌局 / 战术指挥 / 文斗经典 / 数字梗 / 关键时机 / 俄语 / 东南亚，中英俄三语嘲讽系列，以及全新的<strong>中文贯口 / 反制系列</strong>——22 段完整贯口，每段独立成包、一个消息块整段连发（其中 6 个标注了脏话）。下载 → 导入 → 在悬浮窗点一下就发完。</p>
 
     <div class="howto">
       <div class="howto-step">
@@ -727,113 +729,443 @@
         </div>
       </article>
 
-      <!-- Pack 15: ZH Rant Staccato -->
-      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-staccato"><span class="rank-medal" aria-hidden="true"></span>
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-staccato"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
-          <h3 class="pack-title">中文贯口 · 短句连发</h3>
+          <h3 class="pack-title">中文贯口 · 短句急促</h3>
           <span class="pack-badge">贯口</span>
         </div>
-        <p class="pack-desc">相声贯口式短句，4-5 条一段成节奏，不用等对方先开口。每个消息块都是一段独立贯口，整块连发即可 —— 刻意压到 5 条以内，比 10 条连发安全得多。无脏话。</p>
+        <p class="pack-desc">最短最急的一段，句子压到 4-8 字，像机关枪点射。开局到中期随时可甩，不需要对方先开口。无脏话。</p>
         <div class="pack-chips">
-          <span class="pack-chip">这也敢打?</span>
-          <span class="pack-chip">你脑子呢?</span>
-          <span class="pack-chip">就你最显眼,还最没用</span>
-          <span class="pack-chip">你到底会啥?</span>
-          <span class="pack-chip">小地图看不见?</span>
-          <span class="pack-chip block">▸ 这也敢三连</span>
-          <span class="pack-chip block">▸ 叫醒服务</span>
-          <span class="pack-chip block">▸ 像什么五连</span>
-          <span class="pack-chip block">▸ 全白送四连</span>
-          <span class="pack-chip block">▸ 反向四连</span>
-          <span class="pack-chip block">▸ 收尾三连</span>
+          <span class="pack-chip">这也敢打？</span>
+          <span class="pack-chip">这也敢冲？</span>
+          <span class="pack-chip">这也敢接团？</span>
+          <span class="pack-chip">你脑子呢？</span>
+          <span class="pack-chip more">+58</span>
         </div>
-        <div class="pack-meta">5 单条 · 6 消息块 <span class="dot"></span> 2.4 KB</div>
+        <div class="pack-meta">1 消息块 · 62 条 <span class="dot"></span> 2.4 KB</div>
         <div class="pack-actions">
-          <a class="btn-download" href="zh-rant-staccato.amefys-replies.json" download>↓ 下载 .json</a>
-          <a class="btn-view" href="zh-rant-staccato.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+          <a class="btn-download" href="zh-guankou-staccato.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-staccato.amefys-replies.json" target="_blank" rel="noopener">查看</a>
         </div>
       </article>
 
-      <!-- Pack 16: ZH Rant Longform -->
-      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-longform"><span class="rank-medal" aria-hidden="true"></span>
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-wakeup"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
-          <h3 class="pack-title">中文贯口 · 长句排比</h3>
+          <h3 class="pack-title">中文贯口 · 叫醒服务</h3>
           <span class="pack-badge">贯口</span>
         </div>
-        <p class="pack-desc">整句长嘲讽，句长统一、排比成串，单条甩出去也站得住。只打游戏表现和嘴硬，不碰年龄 / 收入 / 家庭等现实处境。无脏话，但攻击性明显高于「经典」包。</p>
+        <p class="pack-desc">从「你醒了吗」一路数落到「先照照战绩」，全段短句，节奏最密。适合队友全程梦游的那种局。无脏话。</p>
         <div class="pack-chips">
-          <span class="pack-chip">闭眼打</span>
-          <span class="pack-chip">来看直播</span>
-          <span class="pack-chip">后面逛街</span>
-          <span class="pack-chip">支援速度</span>
-          <span class="pack-chip">不用研究阵容</span>
-          <span class="pack-chip block">▸ 你不是…你只是</span>
-          <span class="pack-chip block">▸ 甩锅拆解</span>
-          <span class="pack-chip block">▸ 嘴和手</span>
-          <span class="pack-chip block">▸ 下一把一定行</span>
+          <span class="pack-chip">你醒了吗？</span>
+          <span class="pack-chip">游戏开始了。</span>
+          <span class="pack-chip">不是让你发呆。</span>
+          <span class="pack-chip">也不是让你送。</span>
+          <span class="pack-chip more">+69</span>
         </div>
-        <div class="pack-meta">5 单条 · 4 消息块 <span class="dot"></span> 3.2 KB</div>
+        <div class="pack-meta">1 消息块 · 73 条 <span class="dot"></span> 2.7 KB</div>
         <div class="pack-actions">
-          <a class="btn-download" href="zh-rant-longform.amefys-replies.json" download>↓ 下载 .json</a>
-          <a class="btn-view" href="zh-rant-longform.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+          <a class="btn-download" href="zh-guankou-wakeup.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-wakeup.amefys-replies.json" target="_blank" rel="noopener">查看</a>
         </div>
       </article>
 
-      <!-- Pack 18: ZH Rant Autofire -->
-      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-autofire"><span class="rank-medal" aria-hidden="true"></span>
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-general"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 通用连珠</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">「这X也敢Y」开头的通用连珠，短句为主，中间穿插排比和自问自答。不挑局势，随时能起。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">这操作也敢往前走？</span>
+          <span class="pack-chip">这意识也敢接团？</span>
+          <span class="pack-chip">这反应也敢玩后期？</span>
+          <span class="pack-chip">这经济也敢出门？</span>
+          <span class="pack-chip more">+58</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 62 条 <span class="dot"></span> 3.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-general.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-general.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-autofire"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">中文贯口 · 机关枪</h3>
           <span class="pack-badge">贯口</span>
         </div>
-        <p class="pack-desc">中长句机关枪，句长接近、排比成串：这也敢四连 / 别X了四连 / 这是真那是真 / 为什么四问。全部是可整块连发的成段贯口，不用等对方先开口。无脏话。</p>
+        <p class="pack-desc">中长句机关枪，句长接近、排比成串，从开麦资格一路打到「继续排吧」。无脏话。</p>
         <div class="pack-chips">
-          <span class="pack-chip">几斤几两</span>
-          <span class="pack-chip">小地图是摆设</span>
-          <span class="pack-chip">来碰瓷的</span>
-          <span class="pack-chip">泉水在外面</span>
-          <span class="pack-chip">等你自己犯错</span>
-          <span class="pack-chip">屏幕中央那个问题</span>
-          <span class="pack-chip block">▸ 这也敢四连</span>
-          <span class="pack-chip block">▸ 别X了四连</span>
-          <span class="pack-chip block">▸ 这是真那是真</span>
-          <span class="pack-chip block">▸ 别人你四连</span>
-          <span class="pack-chip block">▸ 你不是三连</span>
-          <span class="pack-chip block">▸ 为什么四问</span>
-          <span class="pack-chip block">▸ 最大的四连</span>
+          <span class="pack-chip">这也敢排位？</span>
+          <span class="pack-chip">这水平也敢开麦？</span>
+          <span class="pack-chip">这战绩也敢指挥？</span>
+          <span class="pack-chip">这操作也敢接团？</span>
+          <span class="pack-chip more">+40</span>
         </div>
-        <div class="pack-meta">6 单条 · 7 消息块 <span class="dot"></span> 3.5 KB</div>
+        <div class="pack-meta">1 消息块 · 44 条 <span class="dot"></span> 3.2 KB</div>
         <div class="pack-actions">
-          <a class="btn-download" href="zh-rant-autofire.amefys-replies.json" download>↓ 下载 .json</a>
-          <a class="btn-view" href="zh-rant-autofire.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+          <a class="btn-download" href="zh-guankou-autofire.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-autofire.amefys-replies.json" target="_blank" rel="noopener">查看</a>
         </div>
       </article>
 
-      <!-- Pack 17: ZH Rant Explicit (only pack that breaks the no-profanity rule) -->
-      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-rant-explicit"><span class="rank-medal" aria-hidden="true"></span>
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-longform"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 整句排比</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">整句长嘲讽，句长统一，「你不是…你只是」系列是核心段落。单条拎出来也站得住。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你这操作到底怎么练的，闭着眼睛打也不至于这么离谱吧？</span>
+          <span class="pack-chip">你这反应到底怎么回事，对面技能都放完了你还没看懂吧？</span>
+          <span class="pack-chip">这么明显的团战都看不明白，你到底是来打游戏还是来看直播？</span>
+          <span class="pack-chip">队友都已经冲到脸上了，你还在后面逛街，是准备等他们打完吗？</span>
+          <span class="pack-chip more">+45</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 49 条 <span class="dot"></span> 5.7 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-longform.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-longform.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-reverse"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 反向天赋</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">以「别人…你…」对照句开场，中段转「你是不是觉得自己特别有X」连问，收在「脸捡回来吧」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">我是真服你了，这么离谱的操作居然还能连续复刻。</span>
+          <span class="pack-chip">别人打团看局势，你打团看心情是吧？</span>
+          <span class="pack-chip">别人看到危险撤退，你看到危险直接加速？</span>
+          <span class="pack-chip">别人残血回城，你残血追人，是嫌自己死得不够快吗？</span>
+          <span class="pack-chip more">+41</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 45 条 <span class="dot"></span> 3.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-reverse.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-reverse.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-courage"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 谁给你的勇气</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">从「谁给你的勇气」问到「你最大的X不是…是…」，专打自我认知和脸皮。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你这水平到底是谁给你的勇气？</span>
+          <span class="pack-chip">是战绩给你的，还是脸皮给你的？</span>
+          <span class="pack-chip">这操作到底是在玩游戏，还是在攻击队友心态？</span>
+          <span class="pack-chip">这意识到底是在地图上，还是已经离线回家了？</span>
+          <span class="pack-chip more">+38</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 42 条 <span class="dot"></span> 3.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-courage.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-courage.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-mindgame"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 认知打击</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">不碰现实身份，火力集中在脑子、情商、脸皮、嘴硬和自我认知上。攻击性高于其它无脏话包。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你这脑子到底是怎么长的，正常人能把一局游戏玩成你这个鬼样子？</span>
+          <span class="pack-chip">你这情商是不是全拿去点反向天赋了，队友看见你都不知道该说什么？</span>
+          <span class="pack-chip">你这自信到底是谁培养出来的，脸皮厚成这样确实挺难得？</span>
+          <span class="pack-chip">你这理解能力真是感人，我说一句你能错着理解三遍是吧？</span>
+          <span class="pack-chip more">+48</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 52 条 <span class="dot"></span> 5.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-mindgame.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-mindgame.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-guankou-explicit"><span class="rank-medal" aria-hidden="true"></span>
         <div class="pack-head">
           <h3 class="pack-title">中文贯口 · 脏话版</h3>
           <span class="pack-badge">⚠️ 含脏字</span>
         </div>
-        <p class="pack-desc"><strong>本站唯一突破「无脏话」收录原则的包。</strong>Valve 会因辱骂降行为分并禁言，导入前请自行判断风险。同样不碰年龄 / 收入 / 家庭等现实处境，只打游戏表现。</p>
+        <p class="pack-desc"><strong>⚠️ 含脏字（傻逼/煞笔/他妈）。</strong>Valve 会因辱骂降行为分并禁言，导入前自行判断。不含歧视语，不碰年龄/收入/家庭。</p>
         <div class="pack-chips">
-          <span class="pack-chip">闭眼乱按</span>
-          <span class="pack-chip">来旅游</span>
-          <span class="pack-chip">精准踩技能</span>
-          <span class="pack-chip">还敢指挥</span>
-          <span class="pack-chip">突破口</span>
-          <span class="pack-chip block">▸ 开团问候</span>
-          <span class="pack-chip block">▸ 移动提款机</span>
-          <span class="pack-chip block">▸ 嘴硬拆穿</span>
-          <span class="pack-chip block">▸ 收尾</span>
-          <span class="pack-chip block">▸ 键盘乱按</span>
-          <span class="pack-chip block">▸ 糟蹋装备</span>
-          <span class="pack-chip block">▸ 编外人员</span>
-          <span class="pack-chip block">▸ 甩出残影</span>
+          <span class="pack-chip">你这傻逼操作到底怎么练的，闭着眼睛乱按都比你打得像个人吧？</span>
+          <span class="pack-chip">你这煞笔意识到底去哪了，对面都骑脸了你还在原地发呆？</span>
+          <span class="pack-chip">这么明显的团战都看不懂，你他妈到底是来打游戏还是来旅游的？</span>
+          <span class="pack-chip">队友都快打完了你才姗姗来迟，你这支援速度是准备等下班吗？</span>
+          <span class="pack-chip more">+53</span>
         </div>
-        <div class="pack-meta">5 单条 · 8 消息块 <span class="dot"></span> 4.8 KB</div>
+        <div class="pack-meta">1 消息块 · 57 条 <span class="dot"></span> 6.2 KB</div>
         <div class="pack-actions">
-          <a class="btn-download" href="zh-rant-explicit.amefys-replies.json" download>↓ 下载 .json</a>
-          <a class="btn-view" href="zh-rant-explicit.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+          <a class="btn-download" href="zh-guankou-explicit.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-explicit.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-guankou-fullsend"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 火力全开</h3>
+          <span class="pack-badge">⚠️ 含脏字</span>
+        </div>
+        <p class="pack-desc"><strong>⚠️ 含脏字，最长的一段（82 条），从键盘乱按一路打到「继续嘴硬」。</strong>不含歧视语，不碰年龄/收入/家庭。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你这逼操作到底是人打出来的，还是键盘自己受不了开始乱按了？</span>
+          <span class="pack-chip">你这脑子到底装了什么，为什么每次关键时刻都能选择最蠢的答案？</span>
+          <span class="pack-chip">这游戏有这么难吗，怎么让你玩得像第一次看见鼠标一样？</span>
+          <span class="pack-chip">你这反应速度是不是得等对面把技能放完，才能想起来自己应该躲？</span>
+          <span class="pack-chip more">+78</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 82 条 <span class="dot"></span> 7.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-fullsend.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-fullsend.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-guankou-cantplay"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 会不会玩</h3>
+          <span class="pack-badge">⚠️ 含脏字</span>
+        </div>
+        <p class="pack-desc"><strong>⚠️ 含脏字。</strong>一上来就是「你他妈到底会不会玩」，全段感叹号，语速最冲。不含歧视语，不碰年龄/收入/家庭。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你他妈到底会不会玩？！</span>
+          <span class="pack-chip">这操作是手打的还是脚打的？！</span>
+          <span class="pack-chip">人机都不敢这么送！</span>
+          <span class="pack-chip">技能是抽奖抽出来的吗？！</span>
+          <span class="pack-chip more">+28</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 32 条 <span class="dot"></span> 1.9 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-cantplay.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-cantplay.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-guankou-jiuzhe"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 就这</h3>
+          <span class="pack-badge">贯口</span>
+        </div>
+        <p class="pack-desc">从「啊？！就这？！」起手，连问「你到底哪来的勇气/自信/判断」，收在「每一分钟都在刷新下限」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">啊？！</span>
+          <span class="pack-chip">就这？！</span>
+          <span class="pack-chip">这也敢接团？！</span>
+          <span class="pack-chip">这也敢上？！</span>
+          <span class="pack-chip more">+35</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 39 条 <span class="dot"></span> 1.9 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-jiuzhe.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-jiuzhe.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-guankou-accident"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 事故现场</h3>
+          <span class="pack-badge">⚠️ 含脏字</span>
+        </div>
+        <p class="pack-desc"><strong>⚠️ 含脏字。</strong>「见人就冲！见技能就吃！」的排比最密，收在「求你安静三十秒」。不含歧视语。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">操！</span>
+          <span class="pack-chip">这是什么鬼东西？！</span>
+          <span class="pack-chip">你这波到底在干什么？！</span>
+          <span class="pack-chip">冲什么？！</span>
+          <span class="pack-chip more">+34</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 38 条 <span class="dot"></span> 1.9 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-accident.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-accident.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-guankou-again"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文贯口 · 又送</h3>
+          <span class="pack-badge">⚠️ 含脏字</span>
+        </div>
+        <p class="pack-desc"><strong>⚠️ 含脏字。</strong>团灭当场的即时爆发，「又送？！又送？！」开头，最长的怒吼段。不含歧视语。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">啊啊啊啊！</span>
+          <span class="pack-chip">又送？！</span>
+          <span class="pack-chip">又送？！</span>
+          <span class="pack-chip">还是你？！</span>
+          <span class="pack-chip more">+50</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 54 条 <span class="dot"></span> 2.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-guankou-again.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-guankou-again.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-nomic-1"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 不开麦 ①</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：对方逼你开麦时用。核心是「你叫你的，我打我的，你越急我越不急」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">开麦？凭什么？</span>
+          <span class="pack-chip">你想让我陪你演，我就得陪你演？</span>
+          <span class="pack-chip">你嗓门大一点就觉得自己赢了？</span>
+          <span class="pack-chip">急着开麦干什么？</span>
+          <span class="pack-chip more">+21</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 25 条 <span class="dot"></span> 1.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-nomic-1.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-nomic-1.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-nomic-2"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 不开麦 ②</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：不开麦的第二套，更长更慢，「你负责疯狂，我负责看你疯狂」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">哈哈哈哈，开麦？</span>
+          <span class="pack-chip">你怎么这么执着？</span>
+          <span class="pack-chip">我不开，你是不是难受得睡不着？</span>
+          <span class="pack-chip">非得让我听见你的声音才觉得自己能赢？</span>
+          <span class="pack-chip more">+25</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 29 条 <span class="dot"></span> 1.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-nomic-2.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-nomic-2.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-report-1"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 举报随意 ①</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：对方拿举报威胁时用。核心是「真有问题就走流程，别拿举报当吓人的玩具」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">举报？</span>
+          <span class="pack-chip">去啊！</span>
+          <span class="pack-chip">现在就去！</span>
+          <span class="pack-chip">怎么还没去？</span>
+          <span class="pack-chip more">+22</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 26 条 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-report-1.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-report-1.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-report-2"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 举报随意 ②</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：举报威胁的第二套，「有证据就交，有规则就按规则来」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">行啊！</span>
+          <span class="pack-chip">举报啊！</span>
+          <span class="pack-chip">我听见了！</span>
+          <span class="pack-chip">然后呢？！</span>
+          <span class="pack-chip more">+19</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 23 条 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-report-2.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-report-2.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-report-3"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 举报随意 ③</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：举报威胁的第三套，最长，逐条把举报流程念给对方听。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">又举报？</span>
+          <span class="pack-chip">你今天的技能是不是就这一招？</span>
+          <span class="pack-chip">举报！</span>
+          <span class="pack-chip">举报！</span>
+          <span class="pack-chip more">+22</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 26 条 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-report-3.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-report-3.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-micspam-1"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 麦霸 ①</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：对方语音刷屏时用。「你喷一句，我不接；你喷十句，我还是不接」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你继续开！</span>
+          <span class="pack-chip">别停！</span>
+          <span class="pack-chip">谁让你停了？！</span>
+          <span class="pack-chip">我不开麦，你就一个人演完整场？</span>
+          <span class="pack-chip more">+16</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 20 条 <span class="dot"></span> 1.3 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-micspam-1.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-micspam-1.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-micspam-2"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 麦霸 ②</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：麦霸的第二套，「你这麦是不是焊嘴上了」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">又开始了？</span>
+          <span class="pack-chip">麦霸同志！</span>
+          <span class="pack-chip">你这麦是不是焊嘴上了？</span>
+          <span class="pack-chip">游戏不用打了？</span>
+          <span class="pack-chip more">+19</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 23 条 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-micspam-2.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-micspam-2.amefys-replies.json" target="_blank" rel="noopener">查看</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="counter" data-pack-slug="zh-counter-micspam-3"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">中文反制 · 麦霸 ③</h3>
+          <span class="pack-badge">反制</span>
+        </div>
+        <p class="pack-desc">反制型：麦霸的第三套，最冷的一段，「把麦克风当树洞，把队伍当观众」。无脏话。</p>
+        <div class="pack-chips">
+          <span class="pack-chip">你怎么还在开麦？</span>
+          <span class="pack-chip">我都没开，你到底在跟谁吵？</span>
+          <span class="pack-chip">你对着空气输出这么久，</span>
+          <span class="pack-chip">不累吗？</span>
+          <span class="pack-chip more">+22</span>
+        </div>
+        <div class="pack-meta">1 消息块 · 26 条 <span class="dot"></span> 1.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="zh-counter-micspam-3.amefys-replies.json" download>↓ 下载 .json</a>
+          <a class="btn-view" href="zh-counter-micspam-3.amefys-replies.json" target="_blank" rel="noopener">查看</a>
         </div>
       </article>
     </div>
@@ -880,10 +1212,28 @@
         'en-taunts-memes': 'EN 嘲讽·TI 梗',
         'ru-taunts-classic': 'RU 嘲讽·经典',
         'ru-taunts-memes': 'RU 梗包',
-        'zh-rant-staccato': '中文贯口·短句',
-        'zh-rant-autofire': '中文贯口·机关枪',
-        'zh-rant-longform': '中文贯口·长句',
-        'zh-rant-explicit': '中文贯口·脏话版'
+        'zh-guankou-staccato': '中文贯口·短句急促',
+        'zh-guankou-wakeup': '中文贯口·叫醒服务',
+        'zh-guankou-general': '中文贯口·通用连珠',
+        'zh-guankou-autofire': '中文贯口·机关枪',
+        'zh-guankou-longform': '中文贯口·整句排比',
+        'zh-guankou-reverse': '中文贯口·反向天赋',
+        'zh-guankou-courage': '中文贯口·谁给你的勇气',
+        'zh-guankou-mindgame': '中文贯口·认知打击',
+        'zh-guankou-explicit': '中文贯口·脏话版',
+        'zh-guankou-fullsend': '中文贯口·火力全开',
+        'zh-guankou-cantplay': '中文贯口·会不会玩',
+        'zh-guankou-jiuzhe': '中文贯口·就这',
+        'zh-guankou-accident': '中文贯口·事故现场',
+        'zh-guankou-again': '中文贯口·又送',
+        'zh-counter-nomic-1': '中文反制·不开麦 ①',
+        'zh-counter-nomic-2': '中文反制·不开麦 ②',
+        'zh-counter-report-1': '中文反制·举报随意 ①',
+        'zh-counter-report-2': '中文反制·举报随意 ②',
+        'zh-counter-report-3': '中文反制·举报随意 ③',
+        'zh-counter-micspam-1': '中文反制·麦霸 ①',
+        'zh-counter-micspam-2': '中文反制·麦霸 ②',
+        'zh-counter-micspam-3': '中文反制·麦霸 ③'
       }
 
       function fireBeacon(slug) {
