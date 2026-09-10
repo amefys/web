@@ -85,12 +85,26 @@ Triggers → Routes → Add route).
 
 ### Deploy steps
 
+First time only, in the CF dashboard: **Workers & Pages → Create
+application → Create Worker → name `pack-stats`**, then add the KV binding
+and the route per above.
+
+Every deploy after that goes through the script, which re-declares the KV
+binding on each PUT:
+
 ```
-# In CF dashboard:
-# Workers & Pages → Create application → Create Worker → name "pack-stats"
-# Edit code → paste contents of pack-stats.js → Save and Deploy
-# Add KV binding + Route per above.
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… worker/deploy-pack-stats.sh
 ```
+
+The token needs **Account · Workers Scripts · Edit**.
+
+**Run it whenever `PACKS` in `pack-stats.js` changes.** That array is the
+allowlist for `/p/track`: a slug that is missing from the *deployed* copy
+has its downloads dropped and still gets a `204`, so nothing anywhere
+reports an error — the pack simply never appears on the leaderboard. The
+six taunt packs shipped 2026-06-07 went uncounted until 2026-09-10 for
+exactly this reason, because the deploy was a manual dashboard step that
+nobody remembered to repeat.
 
 ### Verify
 
