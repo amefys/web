@@ -50,7 +50,11 @@ const PACKS = [
   'en-taunts-classic',
   'en-taunts-memes',
   'ru-taunts-classic',
-  'ru-taunts-memes'
+  'ru-taunts-memes',
+  'zh-rant-staccato',
+  'zh-rant-autofire',
+  'zh-rant-longform',
+  'zh-rant-explicit'
 ]
 
 const CORS_HEADERS = {

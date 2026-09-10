@@ -186,6 +186,7 @@
   .pack-card[data-tone='timings']::before     { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(224,154,102,0.16), transparent 60%); }
   .pack-card[data-tone='ru']::before          { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.14), transparent 60%); }
   .pack-card[data-tone='sea']::before         { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(52,211,153,0.12), transparent 60%); }
+  .pack-card[data-tone='nsfw']::before        { background: radial-gradient(ellipse 60% 50% at 0% 0%, rgba(217,83,79,0.20), transparent 60%); }
   .pack-card > * { position: relative; }
 
   .pack-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
@@ -204,6 +205,7 @@
   .pack-card[data-tone='timings'] .pack-badge     { color: var(--cyan); border-color: rgba(224,154,102,0.4); background: rgba(224,154,102,0.1); }
   .pack-card[data-tone='ru'] .pack-badge          { color: var(--dire); border-color: rgba(217,83,79,0.4); background: rgba(217,83,79,0.1); }
   .pack-card[data-tone='sea'] .pack-badge         { color: var(--emerald); border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.1); }
+  .pack-card[data-tone='nsfw'] .pack-badge        { color: var(--dire); border-color: rgba(217,83,79,0.55); background: rgba(217,83,79,0.14); }
 
   .pack-desc { font-size: 13.5px; color: var(--text-2); line-height: 1.55; margin: 0; }
   .pack-chips {
@@ -302,9 +304,9 @@
   </nav>
 
   <main class="page">
-    <div class="eyebrow"><span class="bar"></span>Community-curated · 14 packs · MIT open-source</div>
+    <div class="eyebrow"><span class="bar"></span>Community-curated · 18 packs · MIT open-source</div>
     <h1>One-click <em>download</em>,<br>community language packed in.</h1>
-    <p class="lead">Fourteen quick-reply packs maintained by the AMEFYS team plus the player community: essentials, tactical commands, classic banter, number-memes, timings, Russian, SEA — and the new <strong>zh / en / ru taunt series</strong>. Download → import → tap a chip in the overlay.</p>
+    <p class="lead">Eighteen quick-reply packs maintained by the AMEFYS team plus the player community: essentials, tactical commands, classic banter, number-memes, timings, Russian, SEA, the zh / en / ru taunt series — and the new <strong>CN rant series</strong> (fired as runs; one pack is flagged for profanity). Download → import → tap a chip in the overlay.</p>
 
     <div class="howto">
       <div class="howto-step">
@@ -650,6 +652,111 @@
           <a class="btn-view" href="../../packs/ru-taunts-memes.amefys-replies.json" target="_blank" rel="noopener">View</a>
         </div>
       </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-staccato"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">CN Rant · Staccato</h3>
+          <span class="pack-badge">Rant</span>
+        </div>
+        <p class="pack-desc">Chinese crosstalk-style rapid fire: 4-5 short lines per block, each block a self-contained run you fire as one burst. Deliberately capped under 5 lines — far safer than a 10-line dump. No profanity.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">这也敢打?</span>
+          <span class="pack-chip">你脑子呢?</span>
+          <span class="pack-chip">就你最显眼,还最没用</span>
+          <span class="pack-chip">你到底会啥?</span>
+          <span class="pack-chip">小地图看不见?</span>
+          <span class="pack-chip block">▸ 这也敢三连</span>
+          <span class="pack-chip block">▸ 叫醒服务</span>
+          <span class="pack-chip block">▸ 像什么五连</span>
+          <span class="pack-chip block">▸ 全白送四连</span>
+          <span class="pack-chip block">▸ 反向四连</span>
+          <span class="pack-chip block">▸ 收尾三连</span>
+        </div>
+        <div class="pack-meta">5 singles · 6 blocks <span class="dot"></span> 2.4 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/zh-rant-staccato.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/zh-rant-staccato.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-longform"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">CN Rant · Longform</h3>
+          <span class="pack-badge">Rant</span>
+        </div>
+        <p class="pack-desc">Full-sentence burns of even length, built as parallel runs but each one lands solo. Targets in-game play and trash-talking only — never age, income or family. No profanity, but noticeably sharper than the Classic pack.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">闭眼打</span>
+          <span class="pack-chip">来看直播</span>
+          <span class="pack-chip">后面逛街</span>
+          <span class="pack-chip">支援速度</span>
+          <span class="pack-chip">不用研究阵容</span>
+          <span class="pack-chip block">▸ 你不是…你只是</span>
+          <span class="pack-chip block">▸ 甩锅拆解</span>
+          <span class="pack-chip block">▸ 嘴和手</span>
+          <span class="pack-chip block">▸ 下一把一定行</span>
+        </div>
+        <div class="pack-meta">5 singles · 4 blocks <span class="dot"></span> 3.2 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/zh-rant-longform.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/zh-rant-longform.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="banter-cn" data-pack-slug="zh-rant-autofire"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">CN Rant · Autofire</h3>
+          <span class="pack-badge">Rant</span>
+        </div>
+        <p class="pack-desc">Mid-length machine-gun runs of near-equal line length, built as parallel sets. Every block is a full run you fire as one burst — no need to wait for the other side to start. No profanity.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">几斤几两</span>
+          <span class="pack-chip">小地图是摆设</span>
+          <span class="pack-chip">来碰瓷的</span>
+          <span class="pack-chip">泉水在外面</span>
+          <span class="pack-chip">等你自己犯错</span>
+          <span class="pack-chip block">▸ 这也敢四连</span>
+          <span class="pack-chip block">▸ 别X了四连</span>
+          <span class="pack-chip block">▸ 这是真那是真</span>
+          <span class="pack-chip block">▸ 别人你四连</span>
+          <span class="pack-chip block">▸ 你不是三连</span>
+          <span class="pack-chip block">▸ 为什么四问</span>
+          <span class="pack-chip block">▸ 最大的四连</span>
+        </div>
+        <div class="pack-meta">6 singles · 7 blocks <span class="dot"></span> 3.5 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/zh-rant-autofire.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/zh-rant-autofire.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
+
+      <article class="pack-card" data-tone="nsfw" data-pack-slug="zh-rant-explicit"><span class="rank-medal" aria-hidden="true"></span>
+        <div class="pack-head">
+          <h3 class="pack-title">CN Rant · Explicit</h3>
+          <span class="pack-badge">⚠️ Profanity</span>
+        </div>
+        <p class="pack-desc"><strong>The only pack here that breaks the no-profanity rule.</strong> Valve docks behavior score and issues comms bans for abuse — import at your own risk. Still avoids age, income and family; in-game performance only.</p>
+        <div class="pack-chips">
+          <span class="pack-chip">闭眼乱按</span>
+          <span class="pack-chip">来旅游</span>
+          <span class="pack-chip">精准踩技能</span>
+          <span class="pack-chip">还敢指挥</span>
+          <span class="pack-chip">突破口</span>
+          <span class="pack-chip block">▸ 开团问候</span>
+          <span class="pack-chip block">▸ 移动提款机</span>
+          <span class="pack-chip block">▸ 嘴硬拆穿</span>
+          <span class="pack-chip block">▸ 收尾</span>
+          <span class="pack-chip block">▸ 键盘乱按</span>
+          <span class="pack-chip block">▸ 糟蹋装备</span>
+          <span class="pack-chip block">▸ 编外人员</span>
+          <span class="pack-chip block">▸ 甩出残影</span>
+        </div>
+        <div class="pack-meta">5 singles · 8 blocks <span class="dot"></span> 4.8 KB</div>
+        <div class="pack-actions">
+          <a class="btn-download" href="../../packs/zh-rant-explicit.amefys-replies.json" download>↓ Download .json</a>
+          <a class="btn-view" href="../../packs/zh-rant-explicit.amefys-replies.json" target="_blank" rel="noopener">View</a>
+        </div>
+      </article>
     </div>
 
     <section class="contribute">
@@ -679,6 +786,10 @@
         'timings': 'Timings',
         'ru-friendly': 'Russian',
         'sea-international': 'SEA',
+        'zh-rant-staccato': 'CN Rant·Staccato',
+        'zh-rant-autofire': 'CN Rant·Autofire',
+        'zh-rant-longform': 'CN Rant·Longform',
+        'zh-rant-explicit': 'CN Rant·Explicit',
         'zh-taunts-classic': 'CN Taunts',
         'zh-taunts-memes': 'CN Hall of Fame',
         'en-taunts-classic': 'EN Taunts',
