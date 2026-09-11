@@ -195,7 +195,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-10</div>
+      <div class="updated">最近更新：2026-09-11</div>
     </div>
 
     <!-- 两个频道 -->
@@ -209,14 +209,39 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 暂无新版本</h3>
-        <p>beta.0 / beta.1 的内容已经全部并入稳定版 0.24.0，用左边的安装包即可。下一批要试的功能出来后这里会再更新。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.25.0-beta.1</h3>
+        <p>最近更新 2026-09-11。长消息包可以断点续发，悬浮窗折叠后也能用语音、顶栏整条都能拖。想提前试新功能就用这个，遇到问题欢迎到留言板反馈。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.25.0-beta.1 ── -->
+    <article class="release beta" id="v0-25-0-beta-1">
+      <header><h2>0.25.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-11</span></header>
+      <p class="lead">这一版都在修用着别扭的地方：<strong>超过 20 条的长消息包现在能一次点完</strong>，悬浮窗折叠起来也能用语音，顶栏整条都能拖。另外<strong>官网新增 22 个中文贯口和反制消息包</strong>。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>长消息包断点续发。</strong>游戏一次最多连发 20 条，更长的消息包以前发完前 20 条就停了，再点一次又从头发。现在会接着上次的位置往下发，点几次就能把整段发完。</li>
+          <li><strong>22 个中文贯口 / 反制消息包</strong>，在「消息包」里直接下载，每个贯口是完整的一整段。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>悬浮窗折叠之后，按住语音键说话没反应。</strong>录音其实一直是好的，只是折叠时没有地方把结果交出去。现在开了自动发送就直接发，没开就自动展开让你确认。</li>
+          <li><strong>悬浮窗只有左上角能拖。</strong>现在顶栏上除了按钮以外的地方都能拖动。</li>
+          <li><strong>把窗口拉小时，底部的语音输入区会被挤没。</strong>现在优先保住输入框和麦克风，先收起来的是快捷回复。</li>
+          <li><strong>GSI「一键安装」提示没找到目录时，可以自己填路径了</strong>，填错还会提示正确的目录。以前填什么都显示成功，但 Dota 根本不读那个位置。</li>
+          <li><strong>OCR 快捷键统一成 Alt+Shift+Q</strong>（此前 OCR 页和快捷键页显示的不一样），「前往设置」也能正常跳转了；赛博朋克和液态玻璃皮肤下看不出哪个选项是选中的，一并修好。</li>
+          <li><strong>关键时间提醒改成将来时</strong>：「刷符了」→「要刷符了」，「天亮了」→「天要亮了」——提示是提前发的，说成已经发生会让人来不及反应。</li>
+          <li>移除聊天设置里一个点了没反应的「自动触发按键」开关。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.24.1 ── -->
     <article class="release" id="v0-24-1">
