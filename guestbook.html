@@ -207,6 +207,8 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
+<link rel="stylesheet" href="/assets/coffee.css?v=1">
+<script src="/assets/coffee.js?v=1" defer></script>
 </head>
 <body>
 
@@ -252,6 +254,17 @@
       <p>功能建议、bug 反馈、想加的英雄语音、用得爽或不爽的地方，都可以写在这里。不用注册，留个昵称和邮箱就行。</p>
     </div>
 
+    <!-- 赞助 -->
+    <div class="coffee-row">
+      <button type="button" class="btn-coffee">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 21s-7-4.5-9.5-9A5 5 0 0 1 12 6a5 5 0 0 1 9.5 5C19 16.5 12 21 12 21z"/>
+        </svg>
+        赞助一杯咖啡
+      </button>
+      <div class="coffee-hint">让 AMEFYS 走得更远</div>
+    </div>
+
     <div class="gb-note">
       <span class="ic">i</span>
       <div>
@@ -269,6 +282,20 @@
       <li>想删除自己的留言，用留言时的邮箱发信到 amefys@gmail.com 即可。</li>
     </ul>
 
+  </div>
+
+
+  <!-- 赞助二维码弹窗（样式与逻辑见 /assets/coffee.css + coffee.js） -->
+  <div class="modal-backdrop" id="coffee-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close" id="coffee-close" aria-label="关闭">×</button>
+      <h3>感谢你的支持 💚</h3>
+      <p class="modal-sub">每一杯咖啡，都是 AMEFYS 多写一个 fix 的动力</p>
+      <div class="modal-qr">
+        <img src="assets/qr-tip.svg" alt="微信打赏二维码 amefys">
+      </div>
+      <div class="modal-footnote">微信扫码 → 长按识别 → 任意金额<br>留言告诉我们你最希望加的功能，下个版本我们尽量优先</div>
+    </div>
   </div>
 
   <footer>
