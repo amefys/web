@@ -201,8 +201,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.24.1</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版重做了出装推荐，并修掉了悬浮窗抢走游戏声音的问题。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.25.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版长消息包能接着上次的位置发完，识别失败的报错也不会再糊住悬浮窗。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -210,13 +210,40 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.25.0-beta.2</h3>
-        <p>最近更新 2026-09-11。长消息包可以断点续发，悬浮窗折叠后也能用语音、顶栏整条都能拖。想提前试新功能就用这个，遇到问题欢迎到留言板反馈。</p>
+        <p>这一轮 Beta 的内容已经全部并进 0.25.0 稳定版，而且稳定版还多修了几处，<strong>建议直接用左边的稳定版</strong>。下一个 Beta 出来时这里会更新。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.25.0 ── -->
+    <article class="release" id="v0-25-0">
+      <header><h2>0.25.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-11</span></header>
+      <p class="lead">Beta 期间的改动一次性转正，重点是<strong>长消息包终于能完整发完</strong>，以及一批「用着别扭」的地方。另外<strong>官网新增 22 个中文贯口和反制消息包</strong>。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>长消息包断点续发。</strong>游戏一次最多连发 20 条，更长的消息包以前发完前 20 条就停了，再点一次又从头发。现在会接着上次的位置往下发，而且发完一轮后会明确告诉你「已发 20 / 62，再点一次继续发剩下的 42」，不用自己猜还剩多少。</li>
+          <li><strong>22 个中文贯口 / 反制消息包</strong>，在「消息包」里直接下载，每个贯口是完整的一整段。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>Windows 上截图识别失败时，报错会铺满整个悬浮窗</strong>，把聊天全挡住。现在只显示一句话说明原因和该怎么办（比如「缺少语言包」），技术细节收进可展开的「技术详情」里，需要反馈时一键复制。</li>
+          <li><strong>长消息包发送时，进度数字会来回跳</strong>（一会儿 23/62、一会儿 3/20）。现在始终按整包计数。</li>
+          <li><strong>翻译临时失败后，再点同一个消息包会把已经发过的前 20 条重发一遍</strong>，在公屏上刷两遍。现在续发位置只认你写的原文，跟翻译成没成功无关。</li>
+          <li><strong>录音时把悬浮窗折叠起来，整条顶栏点不动也拖不了</strong>，关闭和展开按钮全失灵，只能等转写结束。</li>
+          <li><strong>折叠悬浮窗这个动作本身，会把之前留着的一段语音发出去</strong>（或者让窗口自己又弹开）。现在只处理折叠之后新录的内容。</li>
+          <li><strong>设置里把 Dota 目录填错一次，聊天功能会整个变灰</strong>，重启后连修复建议都不显示——即使之前的配置其实还好好的。现在填错只提示填错，不动已有配置。</li>
+          <li><strong>用引导页装 GSI 配置时，聊天快捷键会被写成一个无效按键</strong>，界面显示安装成功，实际按了没反应。</li>
+          <li><strong>连接诊断降低后台开销</strong>：之前诊断横幅显示期间，后台每 4 秒会反复做一轮系统查询，低配机上会感觉到卡顿。</li>
+          <li><strong>会员状态异常时的提示更准确</strong>，不会再把「暂时读不到」说成「不是会员」。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.25.0-beta.1 ── -->
     <article class="release beta" id="v0-25-0-beta-1">
@@ -337,7 +364,7 @@
 
     <!-- ── 0.23.3 ── -->
     <article class="release" id="v0-23-3">
-      <header><h2>0.23.3</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-08</span></header>
+      <header><h2>0.23.3</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-08</span></header>
       <p class="lead">修一个看着像「没连上」的显示问题：<strong>先进 DOTA 再开 AMEFYS，连接状态一直显示未连接</strong>。</p>
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
         <ul>
