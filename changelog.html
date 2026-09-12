@@ -197,7 +197,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-11</div>
+      <div class="updated">最近更新：2026-09-12</div>
     </div>
 
     <!-- 赞助 -->
@@ -222,14 +222,38 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.25.0-beta.2</h3>
-        <p>这一轮 Beta 的内容已经全部并进 0.25.0 稳定版，而且稳定版还多修了几处，<strong>建议直接用左边的稳定版</strong>。下一个 Beta 出来时这里会更新。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.0</h3>
+        <p>最近更新 2026-09-12。消息包可以一次导入一整批，快捷回复列表支持折叠和搜索，游戏目录改过名字也能自动找到。想提前试就用这个，遇到问题欢迎到留言板反馈。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.26.0-beta.0 ── -->
+    <article class="release beta" id="v0-26-0-beta-0">
+      <header><h2>0.26.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-12</span></header>
+      <p class="lead">这一版围绕「装好、找得到、用得顺」：<strong>消息包可以一次导入一整批</strong>，<strong>快捷回复列表不再被长贯口刷屏</strong>，装游戏的目录改过名字也能自动找到了。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>一次导入多个消息包。</strong>以前一个包要走一遍「打开对话框 → 找文件夹 → 选 → 确认」，装 22 个贯口包就是重复 22 次。现在按住 Shift 或 Ctrl 多选，一次全导进来；其中某个文件坏了只跳过它，其余照常导入。</li>
+          <li><strong>长消息包在设置里可以折叠。</strong>一个贯口包是一条记录、装着二三十到八十几行，以前整包平铺出来，几个包就把整页刷满、编辑和删除按钮都被挤走了。现在默认只显示前 3 行并标注「共 62 条」，需要时再展开。</li>
+          <li><strong>快捷回复支持搜索</strong>（条目多了才出现），<strong>标签和消息正文一起搜</strong>——你通常记得自己写过哪句话，而不是当初起的标签。</li>
+          <li><strong>导入完能看出哪些是新的。</strong>新导入的条目会高亮并自动滚到眼前，不再只给一句「导入成功」让你自己在一百条里找。</li>
+          <li><strong>找不到游戏目录时，可以直接「选择文件夹」</strong>，不用再手打路径。而且选到哪一层都行——游戏根目录、game、dota、cfg 都认，剩下的我们自己往下找。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>改过安装文件夹名字的用户，现在也能自动检测到 DOTA 2。</strong>以前是按固定名字 <code>dota 2 beta</code> 去猜，改过名就必然找不到，只能手填路径。现在直接读 Steam 自己的安装记录。</li>
+          <li><strong>不再把「没找到 DOTA 2」说成「没检测到 Steam」。</strong>游戏装在别的盘时，以前的提示会把人引去重装一个根本没问题的 Steam。</li>
+          <li><strong>删除快捷回复会先问一句。</strong>之前一次误点就能删掉一个八十几行的包，而且没有撤销。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.25.0 ── -->
     <article class="release" id="v0-25-0">
