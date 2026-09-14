@@ -241,6 +241,19 @@
     border-radius: 22px; padding: 32px; min-height: 360px;
   }
   .bento-card.span-col { grid-column: 1 / -1; }
+  /* ── Timing reminders, rebuilt from the overlay's own components ── */
+  .tm-demo { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: flex-start; }
+  .tm-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); font-size: 11.5px; font-family: ui-monospace, monospace; color: var(--text-2); }
+  /* Mirrors TimingToast.module.css: 12px radius, translucent floor, accent
+     hairline, the emoji / title+clock / action layout. */
+  .tm-toast { align-self: stretch; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: rgba(14,16,22,0.92); border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); box-shadow: 0 14px 40px -14px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.18); }
+  .tm-toast .em { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .tm-toast .tx { flex: 1; min-width: 0; }
+  .tm-toast .t1 { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .tm-toast .t2 { font-size: 11px; color: var(--text-3); font-family: ui-monospace, monospace; margin-top: 1px; }
+  .tm-toast .pill { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--gold); color: #23170a; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+  .tm-toast .auto { font-size: 11px; color: var(--emerald); white-space: nowrap; flex-shrink: 0; }
+
 
   /* ── OCR demo: the two things prose alone can't show ── */
   .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
@@ -1362,7 +1375,7 @@
         <div class="bento-card">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>In-game overlay</div>
           <h3 class="bento-h">Floats above<br>every window.</h3>
-          <p class="bento-p">⌥⇧D collapses it. Auto-fades to 30% opacity during team fights — your fountain hook attempt won't be blocked by an item tooltip.</p>
+          <p class="bento-p">Alt+Shift+D collapses it. The opacity slider lives in its title bar, so you can dial it down before a fight — it is a window, not an injection, and it takes no part in the game's rendering.</p>
           <div class="bento-art" style="right: -40px; bottom: -20px;">
             <div class="overlay-mock" style="transform: scale(0.7); transform-origin: bottom right;">
               <div class="om-head"><span class="mark"></span>AMEFYS · 21:28</div>
@@ -1459,11 +1472,19 @@
         <div class="bento-card">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Key timings</div>
           <h3 class="bento-h">Bounty, lotus, tormentor,<br><em>called on time</em>.</h3>
-          <p class="bento-p">Ten timings tracked against the match clock: bounty and water runes, lotuses, power and wisdom runes, day and night, the 10-minute gank window, the first tormentor, and the :53 stack. By default it only tells you. It can also post a timestamped preset line to team chat when a timing lands — <strong style="color:var(--warn);">that one ships off</strong>, warns you clearly when you switch it on, and sends at most one line per timing.</p>
-          <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;">
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[03:00] lotus up</span>
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[05:00] night</span>
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[20:00] tormentor</span>
+          <p class="bento-p">The title bar carries a countdown to the next timing; 8–45 seconds before it lands a banner slides in, and one tap posts a preset line to your team. Ten of them: bounty and water runes, lotuses, power and wisdom runes, day and night, the 10-minute gank window, the first tormentor, and the :53 stack. The lines are deliberately future tense ("Lotus soon") — the reminder always fires before the event, and "Lotus up" sends the team walking to nothing. It can post automatically instead: <strong style="color:var(--warn);">that is off by default</strong>, warns you clearly when switched on, and sends at most one line per timing.</p>
+          <div class="tm-demo">
+            <div class="tm-chip">⏱ Lotus · 01:20</div>
+            <div class="tm-toast">
+              <span class="em">🪷</span>
+              <div class="tx"><div class="t1">in 20s · Lotus</div><div class="t2">03:00</div></div>
+              <span class="pill">Tell the team →</span>
+            </div>
+            <div class="tm-toast">
+              <span class="em">🟪</span>
+              <div class="tx"><div class="t1">in 30s · Tormentor spawns</div><div class="t2">20:00</div></div>
+              <span class="auto">auto-sent</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1481,7 +1502,7 @@
         <div class="pipe-card">
           <div class="pipe-num">01 / LAUNCH</div>
           <div class="pipe-h">Sign in</div>
-          <p class="pipe-p">Email / GitHub / Google / Discord — pick one. 30 days remember-me; keys stay in the OS secure store. Supabase cloud sync is opt-in; local-first by default.</p>
+          <p class="pipe-p">Email and password. 30 days remember-me; keys stay in the OS secure store. Supabase cloud sync is opt-in; local-first by default.</p>
         </div>
         <div class="pipe-card">
           <div class="pipe-num">02 / CONNECT</div>
@@ -1491,7 +1512,7 @@
         <div class="pipe-card">
           <div class="pipe-num">03 / LIVE</div>
           <div class="pipe-h">Sync the match</div>
-          <p class="pipe-p">Your hero's level / net worth / items / abilities push to the recommendation engine at 1 Hz. Chat events fan out to your chosen translation provider (Azure / DeepL / Claude / OpenAI / Gemini — BYO key supported). Ranked matches only expose your own POV (Valve anti-cheat limit).</p>
+          <p class="pipe-p">Your hero's level / net worth / items / abilities push to the recommendation engine at 1 Hz. <strong>GSI does not carry chat</strong> — what your team and the enemy typed comes from one hotkey, a box you drag, and the OS OCR engine reading it on your machine; only the recognised text goes to a translation provider (Volcano / Azure / Aliyun / Claude / OpenAI / Gemini — BYO key supported). Ranked matches only expose your own POV (Valve anti-cheat limit).</p>
         </div>
         <div class="pipe-card">
           <div class="pipe-num">04 / DECIDE</div>
@@ -1816,7 +1837,7 @@
         <div class="spec-cell"><div class="l">Hero coverage</div><div class="v">All 127</div><div class="s">Up to the Crownfall balance patch</div></div>
         <div class="spec-cell"><div class="l">Languages</div><div class="v">3 UI · 6 translated</div><div class="s">UI: EN · 中简 · RU &nbsp;·&nbsp; chat translation adds VI · ID · FIL</div></div>
         <div class="spec-cell"><div class="l">Size</div><div class="v">~ 100 MB</div><div class="s">macOS Universal · Windows x64 · check the installer for exact size</div></div>
-        <div class="spec-cell"><div class="l">Sign-in</div><div class="v">4 methods</div><div class="s">Email · GitHub · Google · Discord</div></div>
+        <div class="spec-cell"><div class="l">Sign-in</div><div class="v">Email</div><div class="s">Email + password · 30-day remember-me · keys in the OS secure store</div></div>
       </div>
     </div>
   </section>
@@ -1841,15 +1862,15 @@
         </details>
         <details>
           <summary>Can it auto-send the translated reply back into chat?</summary>
-          <p>Yes. The quick-reply button runs the full chain: translate your preset phrase → write the system clipboard → open Dota's chat box with the native hotkey (Enter = team / Shift+Enter = all chat) → Ctrl+V to paste → Enter to send. Each message is identical to a human keystroke and takes ~300 ms. Batch interval is configurable from 100 ms to 10 s.</p>
+          <p>Yes. The quick-reply button runs the full chain: translate your preset phrase → write the system clipboard → open Dota's chat box with the native hotkey (Enter = team / Shift+Enter = all chat) → Ctrl+V to paste → Enter to send. Each message is identical to a human keystroke and takes ~300 ms. Batch interval is configurable from 100 ms to 10 s. The one thing that can send <em>without</em> a click is the auto-send option on key-timing reminders: it is off by default, warns you clearly when you switch it on, and posts at most one preset line per timing (e.g. "Lotus soon" — future tense, because the reminder fires 8–45 seconds before the event).</p>
         </details>
         <details open="">
           <summary>Is translation done in the cloud or locally?</summary>
-          <p>Hybrid by default: tactical callouts hit a local model and return instantly; longer sentences go to your chosen cloud provider. Full offline mode is in Settings if you prefer — accuracy on long sentences drops a bit, but everything stays on device.</p>
+          <p>In the cloud, by one of two routes: the AMEFYS translation proxy by default (signed in, with a daily free allowance), or your own API key in Settings, in which case the client talks to your chosen vendor directly and nothing passes through us. Both need a connection — there is no offline translation today. Sentences you have already translated are served from a local cache instead of being billed twice.</p>
         </details>
         <details>
           <summary>Which Dota 2 regions are supported?</summary>
-          <p>All of them. AMEFYS works in EU West / EU East / US East / US West / SEA / SA / Russia / Perfect World China — anywhere Dota 2 launches. BYO translation key (Azure / DeepL / Claude / OpenAI / Gemini) means you can route through whichever provider has good latency in your region.</p>
+          <p>All of them. AMEFYS works in EU West / EU East / US East / US West / SEA / SA / Russia / Perfect World China — anywhere Dota 2 launches. BYO translation key (Volcano / Azure / Aliyun / Claude / OpenAI / Gemini) means you can route through whichever provider has good latency in your region.</p>
         </details>
         <details>
           <summary>System requirements?</summary>
