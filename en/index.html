@@ -241,6 +241,30 @@
     border-radius: 22px; padding: 32px; min-height: 360px;
   }
   .bento-card.span-col { grid-column: 1 / -1; }
+
+  /* ── OCR demo: the two things prose alone can't show ── */
+  .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
+  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; }
+  .ocr-pane-t { font-size: 10.5px; letter-spacing: .7px; text-transform: uppercase; font-weight: 700; color: var(--text-3); margin-bottom: 10px; }
+  .ocr-chat { position: relative; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11.5px; line-height: 1.9; }
+  .ocr-chat .line { color: rgba(242,234,216,0.34); white-space: nowrap; }
+  .ocr-chat .line.inside { color: rgba(242,234,216,0.92); }
+  .ocr-marq { position: absolute; left: -6px; right: 18%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
+  .ocr-marq .hd { position: absolute; width: 7px; height: 7px; background: var(--bg-1); border: 1.5px solid var(--emerald); border-radius: 2px; }
+  .ocr-marq .hd.tl { top: -4px; left: -4px; } .ocr-marq .hd.tr { top: -4px; right: -4px; }
+  .ocr-marq .hd.bl { bottom: -4px; left: -4px; } .ocr-marq .hd.br { bottom: -4px; right: -4px; }
+  .ocr-marq .sz { position: absolute; top: -9px; right: 6px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+  .ocr-out { margin-top: 12px; padding-top: 10px; border-top: 0.5px dashed var(--hairline); font-size: 12px; line-height: 1.7; color: var(--emerald); }
+  .ocr-out .k { color: var(--text-3); font-size: 10.5px; letter-spacing: .6px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .ocr-step { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; font-size: 12.5px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--hairline); margin-bottom: 7px; }
+  .ocr-step .ic { width: 17px; height: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+  .ocr-step.ok .ic { background: rgba(110,231,183,0.18); color: var(--emerald); }
+  .ocr-step.todo { border-color: rgba(240,162,60,0.4); background: rgba(240,162,60,0.07); }
+  .ocr-step.todo .ic { background: rgba(240,162,60,0.2); color: var(--warn); }
+  .ocr-step .go { margin-left: auto; font-size: 11px; padding: 3px 9px; border-radius: 999px; background: var(--warn); color: #23170a; font-weight: 700; white-space: nowrap; }
+  .ocr-note { font-size: 11.5px; line-height: 1.6; color: var(--text-3); margin-top: 10px; }
+  @media (max-width: 900px) { .ocr-demo { grid-template-columns: 1fr; } }
+
   .bento-h { font-size: 28px; line-height: 1.1; letter-spacing: -0.6px; font-weight: 700; margin: 0 0 10px; }
   .bento-h em { font-style: normal; color: var(--gold); }
   .bento-p { font-size: 14px; color: var(--text-2); margin: 0; max-width: 440px; }
@@ -1383,15 +1407,31 @@
           </div>
         </div>
 
-        <div class="bento-card">
+        <div class="bento-card span-col">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Chat OCR</div>
-          <h3 class="bento-h">That line you can't read?<br><em>Frame it</em>.</h3>
-          <p class="bento-p">One hotkey, drag a box, and only what you framed gets read. Recognition uses the engine your OS already ships (Vision on macOS, Windows OCR on Windows) and runs on this machine — the screenshot is never uploaded; only the recognised text goes off to be translated. Nine languages: EN / 简中 / 繁中 / RU / KO / JA / ES / PT / VI.</p>
-          <div class="bento-art" style="right: 24px; bottom: 24px;">
-            <div style="width:260px;border:1px dashed rgba(110,231,183,0.55);border-radius:10px;padding:10px 12px;background:rgba(110,231,183,0.05);">
-              <div style="font-size:11px;font-family:ui-monospace,monospace;color:var(--text-3);">[Allies] Игрок:</div>
-              <div style="font-size:12.5px;color:var(--text-2);margin-top:2px;">иди мид, я лес</div>
-              <div style="font-size:12.5px;color:var(--emerald);margin-top:6px;">go mid, I'm jungling</div>
+          <h3 class="bento-h">That line you can't read? <em>Frame it</em>.</h3>
+          <p class="bento-p" style="max-width:680px;">One hotkey dims the screen; drag a box and only what you framed gets read. Recognition uses the engine your OS already ships (Vision on macOS, Windows OCR on Windows) and runs on this machine — the screenshot is never uploaded, only the recognised text goes off to be translated.</p>
+          <div class="ocr-demo">
+            <div class="ocr-pane">
+              <div class="ocr-pane-t">① Drag a box</div>
+              <div class="ocr-chat">
+                <div class="ocr-marq" style="top:26px;height:46px;"><span class="hd tl"></span><span class="hd tr"></span><span class="hd bl"></span><span class="hd br"></span><span class="sz">412 × 46</span></div>
+                <div class="line">[All] Хару: где мид</div>
+                <div class="line inside">[Allies] Игрок: иди мид, я лес</div>
+                <div class="line inside">[Allies] Sniper: need smoke</div>
+                <div class="line">12:34</div>
+              </div>
+              <div class="ocr-out">
+                <span class="k">Read inside the box, then translated</span>
+                go mid, I'm jungling<br>need smoke
+              </div>
+            </div>
+            <div class="ocr-pane">
+              <div class="ocr-pane-t">② Windows wants the OCR component first</div>
+              <div class="ocr-step ok"><span class="ic">✓</span>English<span style="color:var(--text-3);font-size:11.5px;">ready</span></div>
+              <div class="ocr-step todo"><span class="ic">!</span>简体中文<span style="color:var(--text-3);font-size:11.5px;">component missing</span><span class="go">Install</span></div>
+              <div class="ocr-step ok"><span class="ic">✓</span>Русский<span style="color:var(--text-3);font-size:11.5px;">ready</span></div>
+              <p class="ocr-note">A language pack is not the OCR component. The wizard walks you to Language options → Language features → Optical character recognition, hands you an admin command when Settings won't cooperate, and re-checks afterwards that the engine really starts. macOS needs none of this — Vision ships every language with the OS.</p>
             </div>
           </div>
         </div>
@@ -1400,22 +1440,26 @@
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Voice</div>
           <h3 class="bento-h">Hold to talk,<br>they <em>read</em> your point.</h3>
           <p class="bento-p">Release and it transcribes and translates — whether it goes out is still your click. When your team opens mic, their voice can become subtitles too: the audio is discarded right after transcription, and the subtitles never leave your machine.</p>
-          <div class="bento-art" style="right: 28px; bottom: 28px;">
-            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(125,211,252,0.1);border:0.5px solid rgba(125,211,252,0.35);">
-              <span style="width:8px;height:8px;border-radius:50%;background:#7DD3FC;"></span>
-              <span style="font-size:12px;color:var(--text-2);">Holding F10 · listening…</span>
+          <div class="ocr-pane" style="margin-top:22px;">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#7DD3FC;flex-shrink:0;"></span>
+              <span class="ocr-pane-t" style="margin:0;">Holding F10 · listening…</span>
+            </div>
+            <div style="font-size:12.5px;color:rgba(242,234,216,0.92);line-height:1.7;">"ward for me, I'm ganking top"</div>
+            <div class="ocr-out" style="color:#7DD3FC;">
+              <span class="k">What your team reads</span>
+              поставь вард, иду на топ
             </div>
           </div>
         </div>
 
-        <div class="bento-card span-col" style="min-height: 260px;">
+        <div class="bento-card">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Key timings</div>
-          <h3 class="bento-h">Bounty, lotus, tormentor — <em>called on time</em>.</h3>
-          <p class="bento-p" style="max-width:640px;">Ten timings tracked against the match clock: bounty and water runes, lotuses, power and wisdom runes, day and night, the 10-minute gank window, the first tormentor, and the :53 stack. By default it only tells you. It can also post a timestamped preset line to team chat when a timing lands — <strong style="color:var(--warn);">that one ships off</strong>, warns you clearly when you switch it on, and sends at most one line per timing.</p>
+          <h3 class="bento-h">Bounty, lotus, tormentor,<br><em>called on time</em>.</h3>
+          <p class="bento-p">Ten timings tracked against the match clock: bounty and water runes, lotuses, power and wisdom runes, day and night, the 10-minute gank window, the first tormentor, and the :53 stack. By default it only tells you. It can also post a timestamped preset line to team chat when a timing lands — <strong style="color:var(--warn);">that one ships off</strong>, warns you clearly when you switch it on, and sends at most one line per timing.</p>
           <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;">
             <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[03:00] lotus up</span>
             <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[05:00] night</span>
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[07:00] wisdom rune</span>
             <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[20:00] tormentor</span>
           </div>
         </div>
