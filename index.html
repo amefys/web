@@ -264,18 +264,18 @@
 
   /* ── OCR demo: the two things a screenshot of text can't show ── */
   .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
-  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; }
+  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; text-align: left; }
   .ocr-pane-t { font-size: 10.5px; letter-spacing: .7px; text-transform: uppercase; font-weight: 700; color: var(--text-3); margin-bottom: 10px; }
   /* the mock chat ledger being framed */
   .ocr-chat { position: relative; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11.5px; line-height: 1.9; }
   .ocr-chat .line { color: rgba(242,234,216,0.34); white-space: nowrap; }
   .ocr-chat .line.inside { color: rgba(242,234,216,0.92); }
   /* the marquee the user drags — dashed, with corner handles and a size read-out */
-  .ocr-marq { position: absolute; left: -6px; right: 18%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
+  .ocr-marq { position: absolute; left: -6px; right: 4%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
   .ocr-marq .hd { position: absolute; width: 7px; height: 7px; background: var(--bg-1); border: 1.5px solid var(--emerald); border-radius: 2px; }
   .ocr-marq .hd.tl { top: -4px; left: -4px; } .ocr-marq .hd.tr { top: -4px; right: -4px; }
   .ocr-marq .hd.bl { bottom: -4px; left: -4px; } .ocr-marq .hd.br { bottom: -4px; right: -4px; }
-  .ocr-marq .sz { position: absolute; top: -9px; right: 6px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+  .ocr-marq .sz { position: absolute; top: -17px; right: -1px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
   .ocr-out { margin-top: 12px; padding-top: 10px; border-top: 0.5px dashed var(--hairline); font-size: 12px; line-height: 1.7; color: var(--emerald); }
   .ocr-out .k { color: var(--text-3); font-size: 10.5px; letter-spacing: .6px; text-transform: uppercase; display: block; margin-bottom: 4px; }
   /* the language-component checklist */
@@ -1535,27 +1535,30 @@
             <h2 class="hc-title">他打的那行字，<br>框一下<em>就懂</em>。</h2>
             <p class="hc-sub">框住聊天框，识别在本机完成。<br>截图不上传，也不碰游戏进程。</p>
             <div class="hc-res">
-              <div class="hc-res-big">
-                <div class="hc-res-met cpu">
-                  <div class="l">可识别语言</div>
-                  <div class="v">9<small>种</small></div>
-                  <div class="note">英 / 简中 / 繁中 / 俄 / 韩 / 日 / 西 / 葡 / 越</div>
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">① 按快捷键，拖一个框</div>
+                <div class="ocr-chat">
+                  <div class="ocr-marq" style="top:26px;height:46px;"><span class="hd tl"></span><span class="hd tr"></span><span class="hd bl"></span><span class="hd br"></span><span class="sz">412 × 46</span></div>
+                  <div class="line">[全部] Хару: где мид</div>
+                  <div class="line inside">[队友] Игрок: иди мид, я лес</div>
+                  <div class="line inside">[队友] Sniper: need smoke</div>
+                  <div class="line">12:34</div>
                 </div>
-                <div class="hc-res-met mem">
-                  <div class="l">截图上传云端</div>
-                  <div class="v">0<small>张</small></div>
-                  <div class="note">识别在本机完成，原图不出这台电脑</div>
+                <div class="ocr-out">
+                  <span class="k">框内识别 + 翻译</span>
+                  去中路，我打野　·　需要烟雾
                 </div>
               </div>
-              <div class="hc-res-vs">
-                <h5>这一步发生在哪里</h5>
-                <div class="row plain"><div class="name">截屏取词</div><div class="val">本机</div></div>
-                <div class="row plain"><div class="name">文字识别</div><div class="val">系统引擎 · Vision / Windows OCR</div></div>
-                <div class="row plain"><div class="name">译文</div><div class="val">仅文本经云端翻译</div></div>
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">② Windows 要单独装识别组件</div>
+                <div class="ocr-step ok"><span class="ic">✓</span>简体中文<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+                <div class="ocr-step todo"><span class="ic">!</span>English<span style="color:var(--text-3);font-size:11.5px;">缺识别组件</span><span class="go">去安装</span></div>
+                <div class="ocr-step ok"><span class="ic">✓</span>Русский<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+                <p class="ocr-note">共 9 种可识别语言。macOS 自带全部语言，不用装。</p>
               </div>
             </div>
             <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>框选即识别</div><div class="body">一个快捷键，拖一个框，只认你框住的那块。</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>系统自带引擎</div><div class="body">macOS 用 Vision，Windows 用 Windows.Media.Ocr，不装第三方模型。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>装语言包 ≠ 装组件</div><div class="body">Windows 要单独装「光学字符识别」，向导带你装完并复检。</div></div><span class="arr"></span></div>
             <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>不碰游戏</div><div class="body">读的是屏幕像素，不读游戏内存、不注入、不拦网络流量。</div></div><span class="arr"></span></div>
             <div class="hc-stage-tag"><span class="dot"></span>本机识别</div>
           </div>

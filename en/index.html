@@ -244,16 +244,16 @@
 
   /* ── OCR demo: the two things prose alone can't show ── */
   .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
-  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; }
+  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; text-align: left; }
   .ocr-pane-t { font-size: 10.5px; letter-spacing: .7px; text-transform: uppercase; font-weight: 700; color: var(--text-3); margin-bottom: 10px; }
   .ocr-chat { position: relative; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11.5px; line-height: 1.9; }
   .ocr-chat .line { color: rgba(242,234,216,0.34); white-space: nowrap; }
   .ocr-chat .line.inside { color: rgba(242,234,216,0.92); }
-  .ocr-marq { position: absolute; left: -6px; right: 18%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
+  .ocr-marq { position: absolute; left: -6px; right: 4%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
   .ocr-marq .hd { position: absolute; width: 7px; height: 7px; background: var(--bg-1); border: 1.5px solid var(--emerald); border-radius: 2px; }
   .ocr-marq .hd.tl { top: -4px; left: -4px; } .ocr-marq .hd.tr { top: -4px; right: -4px; }
   .ocr-marq .hd.bl { bottom: -4px; left: -4px; } .ocr-marq .hd.br { bottom: -4px; right: -4px; }
-  .ocr-marq .sz { position: absolute; top: -9px; right: 6px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+  .ocr-marq .sz { position: absolute; top: -17px; right: -1px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
   .ocr-out { margin-top: 12px; padding-top: 10px; border-top: 0.5px dashed var(--hairline); font-size: 12px; line-height: 1.7; color: var(--emerald); }
   .ocr-out .k { color: var(--text-3); font-size: 10.5px; letter-spacing: .6px; text-transform: uppercase; display: block; margin-bottom: 4px; }
   .ocr-step { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; font-size: 12.5px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--hairline); margin-bottom: 7px; }
@@ -1110,27 +1110,30 @@
             <h2 class="hc-title">That line you can't read?<br><em>Frame it</em>.</h2>
             <p class="hc-sub">Frame the chat box.<br>Recognition runs here; the screenshot stays here.</p>
             <div class="hc-res">
-              <div class="hc-res-big">
-                <div class="hc-res-met cpu">
-                  <div class="l">Languages recognised</div>
-                  <div class="v">9</div>
-                  <div class="note">EN / 简中 / 繁中 / RU / KO / JA / ES / PT / VI</div>
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">① Hit the hotkey, drag a box</div>
+                <div class="ocr-chat">
+                  <div class="ocr-marq" style="top:26px;height:46px;"><span class="hd tl"></span><span class="hd tr"></span><span class="hd bl"></span><span class="hd br"></span><span class="sz">412 × 46</span></div>
+                  <div class="line">[All] Хару: где мид</div>
+                  <div class="line inside">[Allies] Игрок: иди мид, я лес</div>
+                  <div class="line inside">[Allies] Sniper: need smoke</div>
+                  <div class="line">12:34</div>
                 </div>
-                <div class="hc-res-met mem">
-                  <div class="l">Screenshots uploaded</div>
-                  <div class="v">0</div>
-                  <div class="note">Recognition is local; the image stays on your PC</div>
+                <div class="ocr-out">
+                  <span class="k">Read inside the box, then translated</span>
+                  go mid, I'm jungling　·　need smoke
                 </div>
               </div>
-              <div class="hc-res-vs">
-                <h5>Where each step happens</h5>
-                <div class="row plain"><div class="name">Screen grab</div><div class="val">This machine</div></div>
-                <div class="row plain"><div class="name">Text recognition</div><div class="val">OS engine · Vision / Windows OCR</div></div>
-                <div class="row plain"><div class="name">Translation</div><div class="val">Text only, via the cloud</div></div>
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">② Windows wants the component per language</div>
+                <div class="ocr-step ok"><span class="ic">✓</span>English<span style="color:var(--text-3);font-size:11.5px;">ready</span></div>
+                <div class="ocr-step todo"><span class="ic">!</span>简体中文<span style="color:var(--text-3);font-size:11.5px;">component missing</span><span class="go">Install</span></div>
+                <div class="ocr-step ok"><span class="ic">✓</span>Русский<span style="color:var(--text-3);font-size:11.5px;">ready</span></div>
+                <p class="ocr-note">Nine languages in total. macOS ships them all — nothing to install.</p>
               </div>
             </div>
             <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>Frame and read</div><div class="body">One hotkey, drag a box, only what you framed gets read.</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>The OS engine</div><div class="body">Vision on macOS, Windows.Media.Ocr on Windows. No third-party model.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>A pack isn't the component</div><div class="body">Windows installs "Optical character recognition" separately; the wizard walks you through it and re-checks.</div></div><span class="arr"></span></div>
             <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>Hands off the game</div><div class="body">Reads screen pixels. No memory reads, no injection, no traffic interception.</div></div><span class="arr"></span></div>
             <div class="hc-stage-tag"><span class="dot"></span>On-device OCR</div>
           </div>
