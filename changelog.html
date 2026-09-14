@@ -222,14 +222,30 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.3</h3>
-        <p>最近更新 2026-09-14。这一版把 Windows 上「OCR 提示语言没装、装了还说没装」的死胡同走通了：<strong>文字识别是独立于语言包的组件</strong>，向导现在会说清这件事并带你装对；少装一种语言时也不再悄无声息。此前两版让翻译认识了 DOTA 术语，也修好了信使路上的装备被重复推荐。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.4</h3>
+        <p>最近更新 2026-09-14。这一版修的都是「会让你以为是自己电脑坏了」的地方：语音输入收不到声音时会<strong>直接说清原因</strong>（设置里还能当场测麦克风），<strong>悬浮窗不会再打开在屏幕外</strong>、也终于能拖到第二块显示器。上一版则打通了 Windows 上「OCR 说语言没装、装了还说没装」的死胡同——<strong>文字识别是独立于语言包的组件</strong>。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.26.0-beta.4 ── -->
+    <article class="release beta" id="v0-26-0-beta-4">
+      <header><h2>0.26.0-beta.4</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-14</span></header>
+      <p class="lead">三个「明明是软件的问题，却让你怀疑是自己电脑坏了」的地方。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>语音输入收不到声音时，现在会直接告诉你原因。</strong>有玩家的电脑上唯一被识别成「麦克风」的设备，是 Steam 远程同乐装的虚拟设备——它不连任何硬件，录到的永远是静音，而台式机本身又没有内置麦克风。以前软件对此一言不发，只说「没听清」。现在三种情况会分别说明：<strong>一个麦克风都没插</strong>、<strong>能选的全是虚拟设备</strong>、<strong>你选中的那个是虚拟设备</strong>。</li>
+          <li><strong>设置里多了「测试麦克风」。</strong>点一下对着说话，下面的条会跟着跳——不用进游戏、不用真的发一句话，就能当场看出这个设备到底收不收得到声音。条完全不动，就是它听不见。</li>
+          <li><strong>悬浮窗不会再打开在屏幕外面了。</strong>之前恢复窗口位置时不检查屏幕范围，换了分辨率、改了缩放比例，甚至只是默认高度在高缩放的屏幕上放不下，都可能让它只露出一小条，而且因为标题栏跑到画面外，连拖都拖不回来。现在会自动夹回当前屏幕的可用区域内。</li>
+          <li><strong>悬浮窗终于能拖到第二块显示器上了。</strong>以前的边界判断写死了主显示器，拖过去会被弹回来。任务栏停靠在屏幕左边或上边时的偏移，现在也算对了。</li>
+          <li><strong>语音快捷键不再显示成「Backquote」。</strong>那是键盘上 <code>~</code> 那个键的程序内部叫法，键帽上并没有印这个词，被告知「按住 Backquote 说话」的人根本无从找起。现在直接显示 <code>`</code>。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.26.0-beta.3 ── -->
     <article class="release beta" id="v0-26-0-beta-3">
