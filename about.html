@@ -113,12 +113,14 @@
   }
   .hero-avatar {
     width: 110px; height: 110px; margin: 0 auto 24px;
-    border-radius: 26px;
-    background: linear-gradient(135deg, #241a0e, #0e0a06);
+    /* 24px ≈ the icon's own 220/1024 corner radius at this size, so the
+       shadow hugs the artwork instead of showing a square edge. */
+    border-radius: 24px;
+    overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 0 0 1px rgba(255,255,255,0.05) inset, 0 12px 40px rgba(176,138,69,0.25);
   }
-  .hero-avatar svg { width: 70%; height: 70%; }
+  .hero-avatar img { width: 100%; height: 100%; display: block; }
   .hero-about h1 {
     font-size: 44px; letter-spacing: -1.2px; font-weight: 700;
     margin: 0 0 14px;
@@ -359,17 +361,8 @@
     <!-- Hero -->
     <div class="hero-about">
       <div class="hero-avatar">
-        <!-- Brand mark — same glyph as installer icon -->
-        <svg viewBox="0 0 1024 1024" fill="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#F0D38A"/>
-              <stop offset="100%" stop-color="#9A7B3F"/>
-            </linearGradient>
-          </defs>
-          <path d="M512 240 L744 730 L649 730 L512 429 L374 730 L280 730 Z" fill="url(#ag)"/>
-          <rect x="376" y="566" width="280" height="72" rx="16" fill="#fff" opacity="0.94"/>
-        </svg>
+        <!-- The installer icon itself, not a copy of it -->
+        <img src="assets/icon.svg?v=2" alt="AMEFYS" width="110" height="110" />
       </div>
       <h1>聊聊 AMEFYS</h1>
       <p><strong>文斗 1 v 9，全球无敌手！</strong></p>
