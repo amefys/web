@@ -433,9 +433,9 @@
     cursor: grab; user-select: none; touch-action: pan-y;
   }
   .hc-carousel:active { cursor: grabbing; }
-  .hc-track { display: flex; width: 500%; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .hc-track { display: flex; width: 600%; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
   .hc-track[data-dragging='true'] { transition: none; }
-  .hc-slide { width: 20%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
+  .hc-slide { width: 16.6667%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
 
   .hc-eyebrow { position: absolute; top: 36px; left: 44px; z-index: 5; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; text-shadow: 0 0 12px rgba(0,0,0,0.5); }
   .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--gold); }
@@ -655,6 +655,13 @@
   .hc-slide-5 { background: radial-gradient(circle at 70% 30%, rgba(240,162,60,0.18), transparent 60%), radial-gradient(circle at 30% 70%, rgba(52,211,153,0.12), transparent 60%), linear-gradient(180deg, #0a0d10, #0d0a07); --accent: var(--warn); }
   .hc-slide-5 .hc-title em { background: linear-gradient(135deg, var(--warn), var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .hc-slide-5 .hc-eyebrow .bar { background: var(--warn); }
+  .hc-slide-6 { background: radial-gradient(120% 100% at 15% 20%, #101820 0%, #0a0d12 55%, #070809 100%); --accent: #7DD3FC; }
+  .hc-slide-6 .hc-title em { background: linear-gradient(135deg, #7DD3FC, var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-6 .hc-eyebrow .bar { background: #7DD3FC; }
+  /* Fact rows carrying a label and a statement rather than a comparable bar. */
+  .hc-res-vs .row.plain .name { width: auto; flex: 1; color: rgba(255,255,255,0.7); }
+  .hc-res-vs .row.plain .val { width: auto; color: #fff; }
+  .hc-res-met .note { font-size: 10.5px; line-height: 1.5; color: rgba(255,255,255,0.55); }
   .hc-res { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
   .hc-res-big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .hc-res-met { padding: 18px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 0.5px solid rgba(255,255,255,0.12); }
@@ -840,12 +847,12 @@
     </div>
     <div class="hero-eyebrow"><span class="dot"></span>100% free · no ads · no telemetry sale</div>
     <h1>Trash-talk <em>1v9</em>,<br>anywhere on <em>Earth</em>.</h1>
-    <p class="lead">Item picks and timing windows on par with Dota Plus — free forever. You type English; the Russian on your team flames in Cyrillic; AMEFYS reads it as English and lets you fire back one-click — translated, pasted into the Dota chat box, sent. The UI even shifts mood when you load into Radiant vs Dire.</p>
+    <p class="lead">Item picks and timing windows on par with Dota Plus — free. You type English; the Russian on your team flames in Cyrillic; AMEFYS reads it as English and lets you fire back one-click — translated, pasted into the Dota chat box, sent. The UI even shifts mood when you load into Radiant vs Dire.</p>
     <div class="cta-row">
       <a class="btn-cta primary js-dl-cta" data-fallback="https://github.com/amefys/web/releases/latest" href="https://github.com/amefys/web/releases/latest" rel="noopener">Free download</a>
       <a class="btn-cta ghost" href="#demo" data-open-demo rel="noopener">Watch 60-sec demo →</a>
     </div>
-    <div class="platforms">macOS 13+ · Windows 11 · free forever · no IAP · no ads</div>
+    <div class="platforms">macOS 13+ · Windows 11 · core features free · no ads</div>
 
     <div class="preview-wrap" style="position:relative;">
       <div class="hc-carousel" data-hc>
@@ -1068,40 +1075,71 @@
             </div>
             <div class="hc-callout flip" style="top:13%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>Valve official GSI</div><div class="body"><kbd>-gamestateintegration</kbd> launch option. No AC exemption.</div></div><span class="arr"></span></div>
             <div class="hc-callout flip" style="top:36%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>1Hz sync</div><div class="body">Level / GPM / XPM / KDA pushed every second.</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="bottom:30%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>124 hero coverage</div><div class="body">Top / Top3 / Timeline / Counter for each hero.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:30%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>127 hero coverage</div><div class="body">Top / Top3 / Timeline / Counter for each hero.</div></div><span class="arr"></span></div>
             <div class="hc-callout flip" style="bottom:8%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">4</span>Conf + gap</div><div class="body">Each pick has confidence, gold gap, timing window.</div></div><span class="arr"></span></div>
             <div class="hc-stage-tag"><span class="dot"></span>GSI · 1Hz Live</div>
           </div>
 
-          <!-- ═══════════ SLIDE 5 · Low resource ═══════════ -->
+          <!-- ═══════════ SLIDE 5 · Chat OCR ═══════════ -->
           <div class="hc-slide hc-slide-5" data-slide="4">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 05 · Low footprint</div>
-            <h2 class="hc-title">You barely notice<br>it <em>running</em>.</h2>
-            <p class="hc-sub">Desktop + overlay + 1Hz GSI stays at 1.5% CPU / 80MB RAM. Zero impact on game framerate.</p>
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 05 · Chat OCR</div>
+            <h2 class="hc-title">That line you can't read?<br><em>Frame it</em>.</h2>
+            <p class="hc-sub">Frame the chat box.<br>Recognition runs here; the screenshot stays here.</p>
             <div class="hc-res">
               <div class="hc-res-big">
                 <div class="hc-res-met cpu">
-                  <div class="l">CPU · idle</div>
-                  <div class="v">1.5<small>%</small></div>
-                  <div class="sp"><span style="height:35%"></span><span style="height:42%"></span><span style="height:38%"></span><span style="height:45%"></span><span style="height:40%"></span><span style="height:48%"></span><span style="height:36%"></span><span style="height:44%"></span><span style="height:39%"></span><span style="height:42%"></span><span style="height:45%"></span><span style="height:40%"></span><span style="height:38%"></span><span style="height:41%"></span><span style="height:44%"></span><span style="height:37%"></span><span style="height:42%"></span><span style="height:39%"></span></div>
+                  <div class="l">Languages recognised</div>
+                  <div class="v">9</div>
+                  <div class="note">EN / 简中 / 繁中 / RU / KO / JA / ES / PT / VI</div>
                 </div>
                 <div class="hc-res-met mem">
-                  <div class="l">RAM</div>
-                  <div class="v">80<small>MB</small></div>
-                  <div class="sp"><span style="height:75%"></span><span style="height:76%"></span><span style="height:74%"></span><span style="height:75%"></span><span style="height:77%"></span><span style="height:76%"></span><span style="height:75%"></span><span style="height:74%"></span><span style="height:75%"></span><span style="height:76%"></span><span style="height:75%"></span><span style="height:74%"></span><span style="height:75%"></span><span style="height:76%"></span><span style="height:75%"></span><span style="height:74%"></span><span style="height:75%"></span><span style="height:76%"></span></div>
+                  <div class="l">Screenshots uploaded</div>
+                  <div class="v">0</div>
+                  <div class="note">Recognition is local; the image stays on your PC</div>
                 </div>
               </div>
               <div class="hc-res-vs">
-                <h5>Memory usage vs peers</h5>
-                <div class="row us"><div class="name">AMEFYS</div><div class="bar"><span></span></div><div class="val">80 MB</div></div>
-                <div class="row them1"><div class="name">Dota Plus overlay</div><div class="bar"><span></span></div><div class="val">~240 MB</div></div>
-                <div class="row them2"><div class="name">Discord overlay</div><div class="bar"><span></span></div><div class="val">~480 MB</div></div>
+                <h5>Where each step happens</h5>
+                <div class="row plain"><div class="name">Screen grab</div><div class="val">This machine</div></div>
+                <div class="row plain"><div class="name">Text recognition</div><div class="val">OS engine · Vision / Windows OCR</div></div>
+                <div class="row plain"><div class="name">Translation</div><div class="val">Text only, via the cloud</div></div>
               </div>
             </div>
-            <div class="hc-callout flip" style="top:16%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>1.5% CPU</div><div class="body">M1 Mac / 12th-gen i5 measured. Peak ≤ 4%.</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="top:42%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>80 MB RAM</div><div class="body">All-resident with GSI + overlay on. ~67% less than Dota Plus.</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="bottom:14%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>Zero FPS impact</div><div class="body">GSI is Valve push, overlay uses GPU compositor — no render-thread blocking.</div></div><span class="arr"></span></div>
-            <div class="hc-stage-tag"><span class="dot"></span>Performance baseline</div>
+            <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>Frame and read</div><div class="body">One hotkey, drag a box, only what you framed gets read.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>The OS engine</div><div class="body">Vision on macOS, Windows.Media.Ocr on Windows. No third-party model.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>Hands off the game</div><div class="body">Reads screen pixels. No memory reads, no injection, no traffic interception.</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>On-device OCR</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 6 · Voice ═══════════ -->
+          <div class="hc-slide hc-slide-6" data-slide="5">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 06 · Voice</div>
+            <h2 class="hc-title">He opens mic,<br>you <em>read</em> it.</h2>
+            <p class="hc-sub">Hold to talk, land it in his language.<br>He talks, you get subtitles.</p>
+            <div class="hc-res">
+              <div class="hc-res-big">
+                <div class="hc-res-met cpu">
+                  <div class="l">Push to talk</div>
+                  <div class="v">1<small>key</small></div>
+                  <div class="note">Release to transcribe and translate — sending stays your call</div>
+                </div>
+                <div class="hc-res-met mem">
+                  <div class="l">Team voice</div>
+                  <div class="v">Subtitles</div>
+                  <div class="note">Audio is discarded right after transcription</div>
+                </div>
+              </div>
+              <div class="hc-res-vs">
+                <h5>Two paths, kept apart</h5>
+                <div class="row plain"><div class="name">Voice input (you)</div><div class="val">Transcribe → translate → you confirm</div></div>
+                <div class="row plain"><div class="name">Voice listen (them)</div><div class="val">Transcribe → subtitles, shown locally</div></div>
+                <div class="row plain"><div class="name">Recognition channel</div><div class="val">Membership channel, or your own key</div></div>
+              </div>
+            </div>
+            <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>No hijacking</div><div class="body">We don't take exclusive hold of your mic, or touch the game's voice settings.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>No speaker labels</div><div class="body">Subtitles carry content, never a claim about who said it.</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>Audio isn't kept</div><div class="body">Discarded right after transcription; subtitles stay on your machine.</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>Voice · push to talk</div>
           </div>
 
         </div>
@@ -1114,6 +1152,7 @@
           <button class="hc-dot" data-hc-go="2" aria-label="Slide 3"></button>
           <button class="hc-dot" data-hc-go="3" aria-label="Slide 4"></button>
           <button class="hc-dot" data-hc-go="4" aria-label="Slide 5"></button>
+          <button class="hc-dot" data-hc-go="5" aria-label="Slide 6"></button>
         </div>
       </div>
     </div>
@@ -1129,8 +1168,8 @@
           <p class="pipe-p">9-language real-time translation + one-tap reply packs: single-line or block-sequenced. You read English; they read Russian; nobody misses a beat.</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(52,211,153,0.3); background: linear-gradient(180deg, rgba(52,211,153,0.06), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--emerald);">02 / FREE FOREVER</div>
-          <div class="pipe-h">A live coach that costs $0</div>
+          <div class="pipe-num" style="color:var(--emerald);">02 / FREE CORE</div>
+          <div class="pipe-h">A live coach, free on your machine</div>
           <p class="pipe-p">Live match telemetry, item picks, timing windows, counter intel — feature-parity with the paid coach overlays. Zero IAP. Zero ads. Zero "limited-time" gates.</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(224,154,102,0.4); background: linear-gradient(180deg, rgba(224,154,102,0.08), var(--bg-2));">
@@ -1139,9 +1178,9 @@
           <p class="pipe-p">Default + Cyberpunk + Liquid Glass. Each pack rebuilds background, typography, card corners, and motion. Your pick syncs across devices.</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(240,162,60,0.4); background: linear-gradient(180deg, rgba(240,162,60,0.08), var(--bg-2));">
-          <div class="pipe-num" style="color:var(--warn);">04 / 12 LANGUAGES</div>
-          <div class="pipe-h">Full UI in 12 languages</div>
-          <p class="pipe-p">The app, the terminology, the docs, this site — all localised. From the Amazon to South-East Asian internet cafés, every Dota player picks in their native tongue.</p>
+          <div class="pipe-num" style="color:var(--warn);">04 / LANGUAGES</div>
+          <div class="pipe-h">UI in 3 · translation in 6</div>
+          <p class="pipe-p">The app, hero and item names and the docs are localised into English, Chinese and Russian; chat translation adds Vietnamese, Indonesian and Filipino. From the Amazon to South-East Asian internet cafés, every Dota player picks in their native tongue.</p>
         </div>
         <div class="pipe-card" style="border-color: rgba(212,175,106,0.4); background: linear-gradient(180deg, rgba(212,175,106,0.08), var(--bg-2));">
           <div class="pipe-num" style="color:var(--gold);">05 / FACTION-AWARE</div>
@@ -1278,7 +1317,7 @@
     <div class="container">
       <div class="eyebrow"><span class="bar"></span>Feature 02 · Free Real-time Coach</div>
       <h2 class="section-title">Everything Dota Plus charges for,<br>here for <em style="color:var(--emerald);font-style:normal;">$0</em>.</h2>
-      <p class="section-lead">Top pick · Top 3 · Timeline · Counter — four views, with confidence scores, gold gaps, and timing windows. Synced over Valve's official Game State Integration at 1 Hz. Every feature is free forever — we don't sell tiers, we don't sell ads, we don't sell your match data.</p>
+      <p class="section-lead">Top pick · Top 3 · Timeline · Counter — four views, with confidence scores, gold gaps, and timing windows. Synced over Valve's official Game State Integration at 1 Hz. Item picks, match history and the overlay all run on your machine and are free; cloud translation and speech recognition come with a daily free allowance, and membership only raises it. We don't sell ads, we don't sell your match data.</p>
 
       <div class="bento">
         <div class="bento-card">
@@ -1341,6 +1380,43 @@
                 <text x="370" y="195" font-family="ui-monospace,monospace" font-size="9" fill="rgba(242,234,216,0.4)" text-anchor="end">38:12</text>
               </svg>
             </div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Chat OCR</div>
+          <h3 class="bento-h">That line you can't read?<br><em>Frame it</em>.</h3>
+          <p class="bento-p">One hotkey, drag a box, and only what you framed gets read. Recognition uses the engine your OS already ships (Vision on macOS, Windows OCR on Windows) and runs on this machine — the screenshot is never uploaded; only the recognised text goes off to be translated. Nine languages: EN / 简中 / 繁中 / RU / KO / JA / ES / PT / VI.</p>
+          <div class="bento-art" style="right: 24px; bottom: 24px;">
+            <div style="width:260px;border:1px dashed rgba(110,231,183,0.55);border-radius:10px;padding:10px 12px;background:rgba(110,231,183,0.05);">
+              <div style="font-size:11px;font-family:ui-monospace,monospace;color:var(--text-3);">[Allies] Игрок:</div>
+              <div style="font-size:12.5px;color:var(--text-2);margin-top:2px;">иди мид, я лес</div>
+              <div style="font-size:12.5px;color:var(--emerald);margin-top:6px;">go mid, I'm jungling</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Voice</div>
+          <h3 class="bento-h">Hold to talk,<br>they <em>read</em> your point.</h3>
+          <p class="bento-p">Release and it transcribes and translates — whether it goes out is still your click. When your team opens mic, their voice can become subtitles too: the audio is discarded right after transcription, and the subtitles never leave your machine.</p>
+          <div class="bento-art" style="right: 28px; bottom: 28px;">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;background:rgba(125,211,252,0.1);border:0.5px solid rgba(125,211,252,0.35);">
+              <span style="width:8px;height:8px;border-radius:50%;background:#7DD3FC;"></span>
+              <span style="font-size:12px;color:var(--text-2);">Holding F10 · listening…</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card span-col" style="min-height: 260px;">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>Key timings</div>
+          <h3 class="bento-h">Bounty, lotus, tormentor — <em>called on time</em>.</h3>
+          <p class="bento-p" style="max-width:640px;">Ten timings tracked against the match clock: bounty and water runes, lotuses, power and wisdom runes, day and night, the 10-minute gank window, the first tormentor, and the :53 stack. By default it only tells you. It can also post a timestamped preset line to team chat when a timing lands — <strong style="color:var(--warn);">that one ships off</strong>, warns you clearly when you switch it on, and sends at most one line per timing.</p>
+          <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;">
+            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[03:00] lotus up</span>
+            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[05:00] night</span>
+            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[07:00] wisdom rune</span>
+            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[20:00] tormentor</span>
           </div>
         </div>
       </div>
@@ -1442,9 +1518,9 @@
   <!-- i18n / Multi-language -->
   <section id="i18n" style="background: linear-gradient(180deg, transparent, rgba(240,162,60,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>Feature 04 · UI in 12 languages</div>
-      <h2 class="section-title">From Amazon rainforest to SEA cybercafés,<br>every Dota player picks<br>in their<em style="color:var(--warn);font-style:normal;"> native tongue</em>.</h2>
-      <p class="section-lead">The UI isn't the only thing translated. <strong style="color:var(--warn);">Hero names, item names, lane / role, decision hints, ability tooltips, post-match review packs</strong> — all localised. 12 languages covering every Dota 2 region. You see "BKB · Soft Support · Defend tower" in English; "黑皇杖 · 4 号位 · 防守推塔" in Chinese; "Чёрный Скипетр · Поддержка · Защита башни" in Russian.</p>
+      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>Feature 04 · Languages</div>
+      <h2 class="section-title">You type English,<br>your team reads<br>their<em style="color:var(--warn);font-style:normal;"> own language</em>.</h2>
+      <p class="section-lead">Two layers. The <strong style="color:var(--warn);">interface</strong> comes in English, Chinese and Russian — and <strong style="color:var(--warn);">hero names, item names, lane / role, decision hints, ability tooltips and post-match review packs</strong> travel with it. <strong style="color:var(--warn);">Chat translation</strong> covers three more: Vietnamese, Indonesian and Filipino. You see "BKB · Soft Support · Defend tower" in English; "黑皇杖 · 4 号位 · 防守推塔" in Chinese; "Чёрный Скипетр · Поддержка · Защита башни" in Russian.</p>
 
       <div class="i18n-hero">
         <div class="i18n-card onboard">
@@ -1454,17 +1530,9 @@
           <div class="lang-list">
             <div class="lang-item selected"><span class="flag">EN</span><span class="name">English</span><span class="native">default</span></div>
             <div class="lang-item"><span class="flag">中</span><span class="name">简体中文</span><span class="native">中文</span></div>
-            <div class="lang-item"><span class="flag">繁</span><span class="name">繁體中文</span><span class="native">繁中</span></div>
             <div class="lang-item"><span class="flag">RU</span><span class="name">Русский</span><span class="native">Русский</span></div>
-            <div class="lang-item"><span class="flag">ES</span><span class="name">Español</span><span class="native">Español</span></div>
-            <div class="lang-item"><span class="flag">PT</span><span class="name">Português</span><span class="native">BR</span></div>
-            <div class="lang-item"><span class="flag">ID</span><span class="name">B. Indonesia</span><span class="native">Indonesia</span></div>
-            <div class="lang-item"><span class="flag">MS</span><span class="name">B. Melayu</span><span class="native">Melayu</span></div>
-            <div class="lang-item"><span class="flag">VI</span><span class="name">Tiếng Việt</span><span class="native">Việt</span></div>
-            <div class="lang-item"><span class="flag">TH</span><span class="name">ภาษาไทย</span><span class="native">ไทย</span></div>
-            <div class="lang-item"><span class="flag">JA</span><span class="name">日本語</span><span class="native">日本語</span></div>
-            <div class="lang-item"><span class="flag">KO</span><span class="name">한국어</span><span class="native">한국어</span></div>
           </div>
+          <p style="font-size:12px;color:var(--text-3);margin:14px 0 0;line-height:1.6;">Three for now. Chat translation additionally covers <strong style="color:var(--warn);">Vietnamese · Indonesian · Filipino</strong> — no interface in those yet, but you will understand what your team is saying.</p>
           <div style="display:flex;gap:10px;margin-top:24px;">
             <button class="btn-cta primary" style="background:linear-gradient(180deg,#F0B25C,#D9893A);box-shadow:0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 6px 20px rgba(217,137,58,0.4);height:38px;padding:0 18px;font-size:13px;border-radius:19px;">Continue · 确认</button>
             <button class="btn-cta ghost" style="height:38px;padding:0 18px;font-size:13px;border-radius:19px;">Follow OS language</button>
@@ -1593,9 +1661,9 @@
       </div>
 
       <div class="lang-coverage-strip">
-        <div class="lang-chip"><div class="num">12</div><div class="lab">UI languages</div></div>
-        <div class="lang-chip"><div class="num">124</div><div class="lab">Hero · item · ability names</div></div>
-        <div class="lang-chip"><div class="num">3</div><div class="lab">Terminology styles / language</div></div>
+        <div class="lang-chip"><div class="num">3</div><div class="lab">UI languages</div></div>
+        <div class="lang-chip"><div class="num">127</div><div class="lab">Hero · item · ability names</div></div>
+        <div class="lang-chip"><div class="num">6</div><div class="lab">Translation languages</div></div>
         <div class="lang-chip"><div class="num">200ms</div><div class="lab">Switch repaint</div></div>
       </div>
     </div>
@@ -1698,8 +1766,8 @@
         <div class="spec-cell"><div class="l">Sync rate</div><div class="v">1 Hz</div><div class="s">Game state · screenshots throttled to 5s</div></div>
         <div class="spec-cell"><div class="l">Data residency</div><div class="v">Local-first</div><div class="s">Local only by default · cloud opt-in</div></div>
         <div class="spec-cell"><div class="l">Compliance</div><div class="v">GSI + logs</div><div class="s">No memory reads · no process injection</div></div>
-        <div class="spec-cell"><div class="l">Hero coverage</div><div class="v">All 124</div><div class="s">Up to the Crownfall balance patch</div></div>
-        <div class="spec-cell"><div class="l">UI languages</div><div class="v">12</div><div class="s">EN · 中简 · 中繁 · RU · ES · PT · ID · MS · VI · TH · JA · KO</div></div>
+        <div class="spec-cell"><div class="l">Hero coverage</div><div class="v">All 127</div><div class="s">Up to the Crownfall balance patch</div></div>
+        <div class="spec-cell"><div class="l">Languages</div><div class="v">3 UI · 6 translated</div><div class="s">UI: EN · 中简 · RU &nbsp;·&nbsp; chat translation adds VI · ID · FIL</div></div>
         <div class="spec-cell"><div class="l">Size</div><div class="v">~ 100 MB</div><div class="s">macOS Universal · Windows x64 · check the installer for exact size</div></div>
         <div class="spec-cell"><div class="l">Sign-in</div><div class="v">4 methods</div><div class="s">Email · GitHub · Google · Discord</div></div>
       </div>
