@@ -261,6 +261,19 @@
     border-radius: 22px; padding: 32px; min-height: 360px;
   }
   .bento-card.span-col { grid-column: 1 / -1; }
+  /* ── Timing reminders, rebuilt from the overlay's own components ── */
+  .tm-demo { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: flex-start; }
+  .tm-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); font-size: 11.5px; font-family: ui-monospace, monospace; color: var(--text-2); }
+  /* Mirrors TimingToast.module.css: 12px radius, translucent floor, accent
+     hairline, the emoji / title+clock / action layout. */
+  .tm-toast { align-self: stretch; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: rgba(14,16,22,0.92); border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); box-shadow: 0 14px 40px -14px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.18); }
+  .tm-toast .em { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .tm-toast .tx { flex: 1; min-width: 0; }
+  .tm-toast .t1 { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .tm-toast .t2 { font-size: 11px; color: var(--text-3); font-family: ui-monospace, monospace; margin-top: 1px; }
+  .tm-toast .pill { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--gold); color: #23170a; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+  .tm-toast .auto { font-size: 11px; color: var(--emerald); white-space: nowrap; flex-shrink: 0; }
+
 
   /* ── OCR demo: the two things a screenshot of text can't show ── */
   .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
@@ -1327,7 +1340,7 @@
             </div>
             <div class="hc-callout flip" style="top:14%;right:46%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>4 大模块</div><div class="body">首页 / 游戏中 / 历史对局 / 资料库——一键导航。</div></div><span class="arr"></span></div>
             <div class="hc-callout flip" style="top:46%;right:52%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>实时数据</div><div class="body">本月对局 · 胜率 · 命中分 · 时长，看板式呈现。</div></div><span class="arr"></span></div>
-            <div class="hc-callout flip" style="bottom:14%;right:52%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>多账号 + 设置</div><div class="body">邮箱 / 微信 / GitHub 登录，密钥进系统安全区。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:14%;right:52%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>多账号 + 设置</div><div class="body">邮箱注册登录，密钥进系统安全区。</div></div><span class="arr"></span></div>
             <div class="hc-stage-tag"><span class="dot"></span>Default 主题 · 主界面</div>
           </div>
 
@@ -1789,7 +1802,7 @@
         <div class="bento-card">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>悬浮窗</div>
           <h3 class="bento-h">游戏内浮在<br>所有窗口之上。</h3>
-          <p class="bento-p">⌥⇧D 一键收起。团战时自动半透明 30%，不挡视野、不打断节奏。</p>
+          <p class="bento-p">Alt+Shift+D 一键收起。透明度在标题栏随手调，团战前拨低就不挡视野——它只是一层窗口，不注入游戏、不参与渲染。</p>
           <div class="bento-art" style="right: -40px; bottom: -20px;">
             <div class="overlay-mock" style="transform: scale(0.7); transform-origin: bottom right;">
               <div class="om-head"><span class="mark"></span>AMEFYS · 21:28</div>
@@ -1886,11 +1899,19 @@
         <div class="bento-card">
           <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>关键时间</div>
           <h3 class="bento-h">赏金、莲花、魔方，<br><em>到点提醒</em>。</h3>
-          <p class="bento-p">按对局时钟盯 10 类节点：赏金符、水符、莲花、功能符、经验符、天亮天黑、10 分游走窗口、魔方首刷、叠野 :53。默认只提醒你自己；也可以让它到点自动发一条带时间的预制短语给队伍——<strong style="color:var(--warn);">这一项默认关闭</strong>，开启时有明确警告，每个节点只发一条。</p>
-          <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;">
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[03:00] 莲花刷了</span>
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[05:00] 天黑</span>
-            <span style="font-size:11.5px;font-family:ui-monospace,monospace;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,0.05);border:0.5px solid var(--hairline);color:var(--text-2);">[20:00] 魔方首刷</span>
+          <p class="bento-p">标题栏常驻下一个节点的倒计时，到点前 8–45 秒滑入提醒，点「喊队友」发一条预制短语。共 10 类：赏金符、水符、莲花、功能符、经验符、天亮天黑、10 分游走窗口、魔方首刷、叠野 :53。短语刻意用将来时（「莲花要刷了」）——提醒总在事件发生之前响，说成「刷了」队友会白跑一趟。也可以让它到点自动发，<strong style="color:var(--warn);">这一项默认关闭</strong>，开启时有明确警告，每个节点只发一条。</p>
+          <div class="tm-demo">
+            <div class="tm-chip">⏱ 莲花 · 01:20</div>
+            <div class="tm-toast">
+              <span class="em">🪷</span>
+              <div class="tx"><div class="t1">20 秒后 · 莲花</div><div class="t2">03:00</div></div>
+              <span class="pill">喊队友 →</span>
+            </div>
+            <div class="tm-toast">
+              <span class="em">🟪</span>
+              <div class="tx"><div class="t1">30 秒后 · 魔方（折磨者）首刷</div><div class="t2">20:00</div></div>
+              <span class="auto">已自动发送</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1908,7 +1929,7 @@
         <div class="pipe-card">
           <div class="pipe-num">01 / 启动</div>
           <div class="pipe-h">登录账号</div>
-          <p class="pipe-p">邮箱 / 微信 / Facebook / GitHub 任选其一。30 天免登录，密钥保存在系统安全区。Supabase 云端同步可选，本地优先。</p>
+          <p class="pipe-p">邮箱 + 密码注册登录。30 天免登录，密钥保存在系统安全区。Supabase 云端同步可选，本地优先。</p>
         </div>
         <div class="pipe-card">
           <div class="pipe-num">02 / 接入</div>
@@ -1918,7 +1939,7 @@
         <div class="pipe-card">
           <div class="pipe-num">03 / 实时</div>
           <div class="pipe-h">同步对局</div>
-          <p class="pipe-p">自己英雄的等级 / 经济 / 装备 / 技能以 1Hz 推送给推荐引擎；聊天事件由 GSI provider 实时推送后调用多 provider 翻译（火山 / Azure / 阿里 / Claude / OpenAI / Gemini，可自选 BYO Key）。正式天梯仅可获得自己视角数据（Valve 反作弊限制）。</p>
+          <p class="pipe-p">自己英雄的等级 / 经济 / 装备 / 技能以 1Hz 推送给推荐引擎。<strong>聊天内容 GSI 并不提供</strong>——队友和对手说了什么，靠你按一次快捷键框选、由系统 OCR 在本机识别，再把识别出的文字送去翻译（火山 / Azure / 阿里 / Claude / OpenAI / Gemini，可自选 BYO Key）。正式天梯仅可获得自己视角数据（Valve 反作弊限制）。</p>
         </div>
         <div class="pipe-card">
           <div class="pipe-num">04 / 决策</div>
@@ -2249,7 +2270,7 @@
         <div class="spec-cell"><div class="l">英雄覆盖</div><div class="v">全 127 位</div><div class="s">Crownfall 平衡补丁</div></div>
         <div class="spec-cell"><div class="l">语言</div><div class="v">界面 3 · 翻译 6</div><div class="s">界面：中简 · EN · RU &nbsp;·&nbsp; 聊天翻译另加 越南语 · 印尼语 · 菲律宾语</div></div>
         <div class="spec-cell"><div class="l">体积</div><div class="v">约 100 MB</div><div class="s">macOS Universal · Windows x64 · 以实际安装包为准</div></div>
-        <div class="spec-cell"><div class="l">登录</div><div class="v">4 种方式</div><div class="s">邮箱 · 微信 · Facebook · GitHub</div></div>
+        <div class="spec-cell"><div class="l">登录</div><div class="v">邮箱</div><div class="s">邮箱 + 密码 · 30 天免登录 · 密钥存系统安全区</div></div>
       </div>
     </div>
   </section>
@@ -2282,19 +2303,19 @@
         </details>
         <details>
           <summary>翻译能自动发送回游戏吗？</summary>
-          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。唯一会「不经点击」发消息的是「关键时间提醒」的到点自动发送：它<strong>默认关闭</strong>，需要你在设置里主动打开，开启时会有明确警告，开启后每个节点只发一条带时间的预制短语（如「[03:00] 莲花刷了」）。</p>
+          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。唯一会「不经点击」发消息的是「关键时间提醒」的到点自动发送：它<strong>默认关闭</strong>，需要你在设置里主动打开，开启时会有明确警告，开启后每个节点只发一条预制短语（如「莲花要刷了」——用将来时，因为提醒在事件发生前 8–45 秒触发）。</p>
         </details>
         <details open="">
           <summary>翻译是云端处理还是本地？</summary>
-          <p>默认为混合模式：常见战术口令由本地小模型即时翻译；超过 8 个词的长句送云端处理。完全离线模式可在设置中开启，但会牺牲部分准确度。</p>
+          <p>云端处理，两条路可选：默认走 AMEFYS 的翻译代理（登录即用，每天有免费额度）；也可以在设置里填自己的 API Key，客户端直连你选的厂商，不经过我们。两者都需要联网——目前没有离线翻译。已翻译过的句子会命中本地缓存，不重复计费。</p>
         </details>
         <details>
           <summary>支持中国大陆账号吗？</summary>
-          <p>支持。完美兰国服、Steam 国际服、东南亚服均可使用。微信登录与翻译云端走国内节点，延迟 &lt; 80ms。</p>
+          <p>支持。完美世界国服、Steam 国际服、东南亚服均可使用。默认翻译代理走国内可直连的节点，不需要额外网络工具。</p>
         </details>
         <details>
           <summary>对电脑配置有要求吗？</summary>
-          <p>无额外要求。AMEFYS 占用资源极低（&lt; 200MB 内存），可完美与 DOTA 2 同时运行。</p>
+          <p>无额外要求。能跑 DOTA 2 就能跑 AMEFYS：它不注入游戏进程，悬浮窗走系统合成层，不参与游戏渲染。</p>
         </details>
       </div>
     </div>
