@@ -197,7 +197,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-12</div>
+      <div class="updated">最近更新：2026-09-14</div>
     </div>
 
     <!-- 赞助 -->
@@ -222,14 +222,63 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.2</h3>
-        <p>最近更新 2026-09-13。这一版翻译开始认识 DOTA 术语——「先别打肉山，等我买活」不会再被译成外国人看不懂的句子。另外刚买的装备在信使路上时，出装推荐不会再催你买第二遍。<strong>术语翻译是全新的，还没经过大量实战</strong>，译得不对欢迎到留言板贴原文和译文，那是最有用的反馈。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.3</h3>
+        <p>最近更新 2026-09-14。这一版把 Windows 上「OCR 提示语言没装、装了还说没装」的死胡同走通了：<strong>文字识别是独立于语言包的组件</strong>，向导现在会说清这件事并带你装对；少装一种语言时也不再悄无声息。此前两版让翻译认识了 DOTA 术语，也修好了信使路上的装备被重复推荐。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
           <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
       </div>
     </section>
+
+    <!-- ── 0.26.0-beta.3 ── -->
+    <article class="release beta" id="v0-26-0-beta-3">
+      <header><h2>0.26.0-beta.3</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-14</span></header>
+      <p class="lead">这一版只做一件事：把<strong>「OCR 说语言没装，装了还说没装」</strong>这个死胡同走通。有玩家装好了英文语言包，识别依旧提示英文没装——他没装错，<strong>Windows 的文字识别是另一个要单独装的组件</strong>，而我们有四个地方都没把这件事说清楚。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>引导</h4>
+        <ul>
+          <li><strong>向导直说：装语言包 ≠ 装文字识别。</strong>文案里不再出现「语言包」这个会把人带偏的说法，缺的是文字识别组件，并给出到底该点哪里。</li>
+          <li><strong>设置里每种语言的「安装」按钮改成打开向导。</strong>以前它跳到 Windows 的语言列表页就结束了，而真正的开关在那再往下两层——微软没有提供能直达那一页的链接（已对着官方链接清单确认过）。</li>
+          <li><strong>多了一条折叠的「我明明装过这个语言，为什么还要装？」</strong>被第二次告知「没装」的时候，这句话能把它从「这软件坏了」变回「Windows 就是这么设计的」。</li>
+          <li><strong>命令行方案补了怎么拿管理员权限</strong>，没有权限的话直接告诉你改走设置路线。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>选了两种语言、只装了一种时，以前完全没有任何提示。</strong>识别照常「成功」，只是悄悄少跑了一种语言。现在没跑成的语言会跟着结果一起告诉你，并直接给安装入口。</li>
+          <li><strong>向导会先让识别引擎真的启动一次，再说「装好了」。</strong>「Windows 列出了这个语言」和「它真的能识别」不是一回事。</li>
+          <li><strong>语言探测失败时，界面以前和「全都装好了」长得一模一样。</strong>现在这是第三种状态，不会再被当成正常。</li>
+          <li><strong>引擎级的失败不再一律显示「未知错误」+一个按了也没用的「重试」。</strong>现在分开归类，各自给真正能解决问题的操作。</li>
+          <li><strong>框选识别不再拿聊天框的过滤规则去套你自己框的内容</strong>，也不会在过滤完之后跟你说「没识别到文字」。</li>
+          <li><strong>引擎自己都判定看不清的行，会在进聊天前丢掉</strong>，不再白白花掉一次翻译。中文行除外——正确的中文在 macOS 上得分也只有 0.3 左右。</li>
+          <li><strong>越南语在设置里能选、向导里却没有</strong>，选了之后安装器既不列它也不认它。现在两边共用同一份语言列表。</li>
+          <li><strong>OCR 出错现在会上报错误码</strong>，以前全部被吞掉，只能靠玩家自己发截图过来。上报的是错误码、平台、语言和框选区域的<em>尺寸</em>——<strong>不含识别出的文字、截图和坐标</strong>。</li>
+        </ul>
+      </div>
+
+      <div class="callout"><strong>这批改动全部发生在 Windows 上，而它们还没在真机上完整走过一遍。</strong>如果你按向导装完仍然提示没装，或者哪一步的说明对不上你看到的界面，欢迎到留言板说一声，最好带上那一步的截图。</div>
+    </article>
+
+    <!-- ── 0.26.0-beta.2 ── -->
+    <article class="release beta" id="v0-26-0-beta-2">
+      <header><h2>0.26.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-13</span></header>
+      <p class="lead"><strong>翻译开始认识 DOTA 术语了。</strong>「先别打肉山，等我买活」以前会被逐字译成外国队友看不懂的句子，现在肉山、买活、大招这类词会被当成专有名词保护起来，而不是按字面意思翻。英雄的中文外号也一起认（「小小」「船长」这些是我们自己整理的，Valve 并不提供）。</p>
+      <div class="callout"><strong>术语翻译是全新的，还没经过大量实战。</strong>译得不对欢迎到留言板贴上原文和译文——那是最有用的反馈。</div>
+    </article>
+
+    <!-- ── 0.26.0-beta.1 ── -->
+    <article class="release beta" id="v0-26-0-beta-1">
+      <header><h2>0.26.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-12</span></header>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>刚买的装备还在信使路上时，不会再催你买第二遍。</strong>东西离开商店、还没到手的那段时间游戏里查不到，出装推荐以前就当你没买。</li>
+          <li><strong>关键装备的提醒每件只响一次</strong>，不再因为信使多跑几趟就重复提醒。</li>
+          <li><strong>对局分析面板也知道有哪些装备是它看不见的</strong>，不会再拿一份不全的装备表去下结论。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.26.0-beta.0 ── -->
     <article class="release beta" id="v0-26-0-beta-0">
