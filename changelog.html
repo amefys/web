@@ -92,6 +92,7 @@
     border: 0.5px solid var(--hairline); }
   .channel h3 { margin: 0 0 6px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
   .channel p { margin: 0 0 12px; font-size: 13px; color: var(--text-2); line-height: 1.6; }
+  .channel-note { margin: 10px 0 0; font-size: 12px; color: var(--text-3, var(--text-2)); line-height: 1.6; }
   .channel .dl { display: flex; gap: 8px; flex-wrap: wrap; }
   .channel .dl a { display: inline-flex; align-items: center; height: 30px; padding: 0 12px;
     border-radius: 15px; font-size: 12px; font-weight: 600; border: 0.5px solid var(--hairline-strong);
@@ -226,8 +227,8 @@
         <p>最近更新 2026-09-14。这一版修的都是「会让你以为是自己电脑坏了」的地方：语音输入收不到声音时会<strong>直接说清原因</strong>（设置里还能当场测麦克风），<strong>悬浮窗不会再打开在屏幕外</strong>、也终于能拖到第二块显示器。上一版则打通了 Windows 上「OCR 说语言没装、装了还说没装」的死胡同——<strong>文字识别是独立于语言包的组件</strong>。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
-          <a href="https://amefys.com/dl/beta/AMEFYS.dmg">macOS Beta</a>
         </div>
+        <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
 
