@@ -198,7 +198,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-14</div>
+      <div class="updated">最近更新：2026-09-17</div>
     </div>
 
     <!-- 赞助 -->
@@ -223,14 +223,58 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.4</h3>
-        <p>最近更新 2026-09-14。这一版修的都是「会让你以为是自己电脑坏了」的地方：语音输入收不到声音时会<strong>直接说清原因</strong>（设置里还能当场测麦克风），<strong>悬浮窗不会再打开在屏幕外</strong>、也终于能拖到第二块显示器。上一版则打通了 Windows 上「OCR 说语言没装、装了还说没装」的死胡同——<strong>文字识别是独立于语言包的组件</strong>。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.6</h3>
+        <p>最近更新 2026-09-17。这一版<strong>修了一个会让应用打不开的问题</strong>：在设置里把快捷键录成方向键或 <code>+</code>，轻则丢掉所有已设好的快捷键，重则下次启动直接报错退出——0.25.0 上有这个毛病，正式版修复会跟着 0.26.0 一起发。另外<strong>文字识别组件现在能在向导里一键装</strong>（Windows 10 的设置里根本没有这个入口），语言列表也终于标上了中文名。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.26.0-beta.6 ── -->
+    <article class="release beta" id="v0-26-0-beta-6">
+      <header><h2>0.26.0-beta.6</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-17</span></header>
+      <p class="lead">一个会让应用<strong>打不开</strong>的问题，加上文字识别向导的一轮返工。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>在设置里把快捷键录成方向键或 <code>+</code>，可能让应用下次启动就打不开。</strong>录快捷键时用的是浏览器给的键名，而系统那边对同一个键有另一套叫法（方向键、<code>+</code> 都对不上）。对不上时系统不是拒绝，而是直接报错——于是<strong>你已经设好的快捷键会被一次性全部丢掉</strong>，而那个录坏的键还被存了下来，下次启动读到它就报错退出。0.25.0 上有这个毛病，正式版修复会跟着 0.26.0 一起发。现在录制只认一份明确的对照表，认不出的键当场拒绝，也<strong>不再允许把单个字母或方向键设成全局快捷键</strong>——那会连 DOTA 2 里的按键一起吞掉。已经设好的老快捷键不受影响。</li>
+          <li><strong>点「复制」没反应，却还是提示「已复制」。</strong>浏览器的复制接口要求窗口处于焦点状态，而在 Windows 上，点一个被游戏或悬浮窗盖住的窗口里的按钮，正好不满足这个条件。现在复制改走应用自己的通道（没有焦点要求），并且<strong>复制失败就说失败</strong>。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>文字识别向导</h4>
+        <ul>
+          <li><strong>弹窗不会再显示不全了。</strong>内容一长就被截掉上下两头，而且滚不动——现在正文区自己滚动，底部按钮始终看得见。</li>
+          <li><strong>Windows 10 上不再给一套走不通的步骤。</strong>Windows 11 的语言选项页里有「光学字符识别」的下载按钮，<strong>Windows 10 的那一页压根没有这一项</strong>。以前两个系统给的是同一份说明，Win10 用户只会对着屏幕找一个不存在的按钮。现在按你的系统显示对应的做法，Win10 上直接用一键安装。</li>
+          <li><strong>语言列表标上了中文名。</strong>以前只写「Português」「한국어」，不认识就只能靠猜。现在照 Windows 的做法，底下补一行「葡萄牙语（巴西）」「韩语（韩国）」。设置里的语言列表同样。</li>
+          <li><strong>说明文字大幅精简</strong>，不再解释 Windows 10 和 11 有什么不同——你用的是哪个，软件自己知道。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ── 0.26.0-beta.5 ── -->
+    <article class="release beta" id="v0-26-0-beta-5">
+      <header><h2>0.26.0-beta.5</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-16</span></header>
+      <p class="lead">Windows 10 上<strong>根本没有安装文字识别组件的界面</strong>——这一版让软件自己装。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>向导里多了「一键安装」。</strong>点一下，确认 Windows 弹出的管理员授权框，剩下的它自己装完。要执行的命令就明明白白写在按钮上方，<strong>你是先看清楚再授权</strong>，不是授权完才知道装了什么。</li>
+          <li><strong>装不上的时候会说人话。</strong>公司或网吧电脑被更新策略挡住、Windows Update 服务被关掉、网络不通——这三种原因各自有各自的解决办法，以前它们统统显示成一串十六进制错误码。授权框被你自己关掉，也不会再当成「安装失败」。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>等待安装的转圈以前可能永远停不下来。</strong>Windows 装完这个组件经常要求重启，而重启之前它是检测不到的。现在等够时间会直接告诉你「多半是装好了，重启一下」。</li>
+          <li><strong>说明里几处和实际对不上的地方</strong>：加语言的时候并不一定会顺带装上文字识别（在一台真的 Windows 10 上完整验证过）、装完可能需要重启、下载时间也不是「30 秒到 2 分钟」——它走 Windows Update，慢的时候要好几分钟。</li>
+        </ul>
+      </div>
+
+      <div class="callout"><strong>一键安装这条路还没在很多台机器上验证过。</strong>如果点了没反应、或者装完仍然提示没装，欢迎到留言板说一声，带上那一步的截图最好。</div>
+    </article>
 
     <!-- ── 0.26.0-beta.4 ── -->
     <article class="release beta" id="v0-26-0-beta-4">
