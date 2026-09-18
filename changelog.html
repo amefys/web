@@ -198,7 +198,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-18</div>
+      <div class="updated">最近更新：2026-09-19</div>
     </div>
 
     <!-- 赞助 -->
@@ -223,14 +223,38 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.7</h3>
-        <p><strong>0.26.0 的内容已经全部进正式版了，现在装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里比正式版旧，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.0</h3>
+        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，面板边框不再显得又厚又糊，背景也终于给玻璃留了可以折射的东西。只动了这一个主题，用别的主题的话这一版对你没区别。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.27.0-beta.0 ── -->
+    <article class="release beta" id="v0-27-0-beta-0">
+      <header><h2>0.27.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-19</span></header>
+      <p class="lead">只有一件事：<strong>「液态玻璃」主题重做了一遍</strong>。用别的主题的话，这一版对你没有任何区别。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>液态玻璃：终于像玻璃了</h4>
+        <ul>
+          <li><strong>面板的边不再又厚又糊。</strong>问题其实不是边画粗了，而是边<strong>没有终点</strong>——一条边上同时叠了四层由亮到透的渐变，外面还并排着第二条细线，眼睛找不到边界在哪儿结束，就读成一圈发白发脏的厚框。现在只留一条<strong>有方向</strong>的高光：左上最亮，绕下来变暗，底边回一点反光，然后戛然而止，跟 macOS 的玻璃是同一个做法。</li>
+          <li><strong>背景重做，玻璃才有东西可以折射。</strong>上一版为了不让面板看起来发紫，把背景压成了接近纯黑——结果玻璃没有任何颜色可以「喝」，再怎么模糊也只是一块半透明的灰板。现在背景有明暗层次和几处很淡的冷暖光，<strong>面板挪到哪儿就带上哪儿的颜色</strong>，同时整体仍然是中性的，不会又变回「紫色主题」。</li>
+          <li><strong>圆角换成了苹果那种连续曲率的圆角</strong>（squircle），不是普通圆弧。22 像素这个尺寸上肉眼分得出来——不会觉得「那是个圆弧」，只会觉得「这看着廉价」。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>Windows 上尤其明显的几处</h4>
+        <ul>
+          <li><strong>系统缩放开到 125% / 150% 时，面板的边线会糊成一条灰边。</strong>细线的宽度现在按屏幕清晰度自动选，不再让它落在半个像素上。</li>
+          <li><strong>玻璃上的白字不再出现彩色毛边。</strong>Windows 默认的字体渲染方式要求文字背后是不透明的，而半透明面板正好不满足——这个主题里改用另一种渲染方式，其它主题不受影响。</li>
+          <li><strong>大面积渐变的色带（一圈一圈的台阶）用一层极轻的噪点抹掉了。</strong>macOS 系统自己会做这件事，Windows 不会，所以同样的渐变在 Windows 上看着更脏。这不是以前那层被去掉的「胶片颗粒」——当时的问题是太重，看着像玻璃上的灰。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这一版只改了主窗口的玻璃面板，<strong>悬浮窗保持原样</strong>。另外要说实话：这些改动<strong>还没在 Windows 实机上看过</strong>，本来也正是为此才发这个 Beta——如果你那边看着不对，欢迎到留言板说一声，带上截图最好。</div>
+    </article>
 
     <!-- ── 0.26.0 ── -->
     <article class="release" id="v0-26-0">
