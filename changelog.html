@@ -198,7 +198,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-17</div>
+      <div class="updated">最近更新：2026-09-18</div>
     </div>
 
     <!-- 赞助 -->
@@ -215,22 +215,58 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.25.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版长消息包能接着上次的位置发完，识别失败的报错也不会再糊住悬浮窗。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.26.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>翻译开始认识 DOTA 术语</strong>（肉山、买活、大招不再被逐字硬译），<strong>屏幕识别的安装终于走得通</strong>了，还修了一个会让应用打不开的快捷键问题。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.6</h3>
-        <p>最近更新 2026-09-17。这一版<strong>修了一个会让应用打不开的问题</strong>：在设置里把快捷键录成方向键或 <code>+</code>，轻则丢掉所有已设好的快捷键，重则下次启动直接报错退出——0.25.0 上有这个毛病，正式版修复会跟着 0.26.0 一起发。另外<strong>文字识别组件现在能在向导里一键装</strong>（Windows 10 的设置里根本没有这个入口），语言列表也终于标上了中文名。<strong>Beta 里的东西还没经过大量实战</strong>，遇到不对欢迎到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.26.0-beta.7</h3>
+        <p><strong>0.26.0 的内容已经全部进正式版了，现在装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里比正式版旧，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.26.0 ── -->
+    <article class="release" id="v0-26-0">
+      <header><h2>0.26.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-18</span></header>
+      <p class="lead">两件事：<strong>翻译开始认识 DOTA 的黑话</strong>，以及<strong>屏幕识别的安装终于走得通了</strong>。外加一个会让应用打不开的问题。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>翻译认术语了</h4>
+        <ul>
+          <li><strong>「先别打肉山，等我买活」不会再被逐字译成外国队友看不懂的句子。</strong>肉山、买活、大招这类词现在被当成专有名词保护起来，而不是按字面意思翻。英雄的中文外号也一起认——「小小」「船长」这些是我们自己整理的，Valve 并不提供。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>屏幕识别：从装不上到一键装好</h4>
+        <ul>
+          <li><strong>装了语言包却提示「语言没装」的死胡同，走通了。</strong>Windows 把「界面显示这门语言」和「认得出这门语言的文字」当成两个独立组件，后者默认不装。软件里四个地方都没把这件事说清楚，现在都说清了。</li>
+          <li><strong>多了「一键安装」。</strong>点一下，同意 Windows 弹出的管理员授权框，剩下的它自己装完——<strong>Windows 10 的系统设置里根本没有安装这个组件的入口</strong>，这条路以前只能靠命令行。要执行的命令就写在按钮上方，你是先看清楚再授权。</li>
+          <li><strong>装不上的时候说人话。</strong>公司或网吧电脑被更新策略挡住、Windows Update 服务被关掉、网络不通——各自有各自的解决办法，以前统统显示成一串十六进制错误码。</li>
+          <li><strong>按你的系统给对应的步骤。</strong>Windows 11 的语言选项页里有下载按钮，Windows 10 那一页压根没有这一项——以前两个系统给的是同一份说明，Win10 用户只会对着屏幕找一个不存在的按钮。</li>
+          <li><strong>识别语言列表标上了中文名</strong>，不用再猜「Português」「한국어」是什么；新增<strong>希腊语、阿拉伯语、拉美西语、葡萄牙葡语</strong>四种。</li>
+          <li><strong>越南语、乌克兰语这些 Windows 没有识别器的语言，改用同一套字母的识别器代读</strong>（越南语用英文、乌克兰语用俄语），而不是干脆不认。泰语有自己的文字，任何替代都是乱码，所以老实标成不支持。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>在设置里把快捷键录成方向键或 <code>+</code>，可能让应用下次启动就打不开。</strong>录快捷键用的是浏览器给的键名，系统那边对同一个键有另一套叫法，对不上时系统直接报错——<strong>你已设好的快捷键会被一次性全部丢掉</strong>，而那个录坏的键还被存了下来，下次启动读到它就报错退出。<strong>0.25.0 有这个毛病，这一版修了。</strong>现在也不再允许把单个字母或方向键设成全局快捷键——那会连 DOTA 2 里的按键一起吞掉。已设好的老快捷键不受影响。</li>
+          <li><strong>语音输入收不到声音时，会直接告诉你原因</strong>：一个麦克风都没插 / 能选的全是虚拟设备 / 你选中的那个是虚拟设备。设置里还多了「测试麦克风」，对着说话看条跳不跳，不用进游戏就知道设备收不收得到声音。</li>
+          <li><strong>悬浮窗不会再打开在屏幕外面</strong>，也终于能拖到第二块显示器上了。</li>
+          <li><strong>点「复制」没反应却提示「已复制」</strong>——复制改走应用自己的通道，失败就说失败。</li>
+          <li><strong>刚买的装备还在信使路上时，不会再催你买第二遍</strong>，关键装备提醒每件也只响一次。</li>
+          <li><strong>语音快捷键不再显示成「Backquote」</strong>，直接显示 <code>`</code>。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这一版的屏幕识别改动几乎全在 Windows 上，并且是跟着一位玩家的真实机器一步步试出来的。如果你那边还有对不上的地方，欢迎到留言板说一声，带上那一步的截图最好。</div>
+    </article>
 
     <!-- ── 0.26.0-beta.6 ── -->
     <article class="release beta" id="v0-26-0-beta-6">
@@ -367,7 +403,7 @@
 
     <!-- ── 0.25.0 ── -->
     <article class="release" id="v0-25-0">
-      <header><h2>0.25.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-11</span></header>
+      <header><h2>0.25.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-11</span></header>
       <p class="lead">Beta 期间的改动一次性转正，重点是<strong>长消息包终于能完整发完</strong>，以及一批「用着别扭」的地方。另外<strong>官网新增 22 个中文贯口和反制消息包</strong>。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
