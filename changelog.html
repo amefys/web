@@ -223,14 +223,31 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.1</h3>
-        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，外加两个界面问题的修复——<strong>下拉菜单展开后白底白字看不见</strong>，以及设置里两个按钮高得离谱。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.2</h3>
+        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，外加一串界面修复——下拉菜单白底白字、滑杆是系统蓝不是皮肤色，以及<strong>升级时弹出的那个「Unexpected Error」</strong>。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.27.0-beta.2 ── -->
+    <article class="release beta" id="v0-27-0-beta-2">
+      <header><h2>0.27.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-19</span></header>
+      <p class="lead">升级时那个吓人的报错，加上几处「这看着不像同一个软件」的地方。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>升级时如果软件正开着，会弹出一个红叉的「AMEFYS — Unexpected Error: the worker has exited」，看上去像是安装失败了。</strong>其实安装没问题——那个框不是安装程序弹的，是<strong>正在运行的 AMEFYS 自己在退出的路上弹的</strong>：安装程序请求它关闭，它写日志的后台线程先一步结束，之后再写的那行日志就炸了。现在两头都堵上了，写日志再也不能把程序带崩，退出过程中也不再弹这种框。</li>
+          <li><strong>滑杆是 Windows 的系统蓝，不是当前皮肤的颜色。</strong>设置 → DOTA 2 里的「批量间隔」和「悬浮窗不透明度」两个滑杆，跟旁边的金色/青色控件对不上。同时<strong>选中文字的高亮</strong>也改成跟着皮肤走了——安装引导里那条要你选中复制的命令，以前选中是系统蓝。</li>
+          <li><strong>安装引导里「会弹出管理员授权框」这句话说得太满。</strong>如果你的电脑关掉了 UAC，或者 AMEFYS 本身就以管理员身份运行，它就不会弹，直接开始装——而原来的文案会让人以为是没执行。现在写明了这两种情况。</li>
+          <li><strong>macOS：</strong>文字识别的后台程序如果提前退出，会弹一个多余的错误框。识别失败本来就有正经的提示，那个框纯属噪音，去掉了。</li>
+        </ul>
+      </div>
+
+      <div class="callout">前两条都是有人在 Windows 上实际用着发现的。上一个 Beta 的液态玻璃主题仍然在等 Windows 实机确认。</div>
+    </article>
 
     <!-- ── 0.27.0-beta.1 ── -->
     <article class="release beta" id="v0-27-0-beta-1">
