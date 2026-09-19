@@ -223,14 +223,29 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.2</h3>
-        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，外加一串界面修复——下拉菜单白底白字、滑杆是系统蓝不是皮肤色，以及<strong>升级时弹出的那个「Unexpected Error」</strong>。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.3</h3>
+        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，一串界面修复，以及<strong>文字识别语言包安装的两个大坑</strong>——明明在装却报「安装失败」，和等待时叫你去重启电脑。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.27.0-beta.3 ── -->
+    <article class="release beta" id="v0-27-0-beta-3">
+      <header><h2>0.27.0-beta.3</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-19</span></header>
+      <p class="lead">文字识别语言包安装的两个坑。都是跟着一台 Win11 实机一步步挖出来的，而且<strong>两个都会让人以为坏了，其实没坏</strong>。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>点了「一键安装」，明明还在装，却报「安装失败 (NO_RESULT)」。</strong>安装其实一点问题没有——是软件<strong>问得太早，把沉默当成了答案</strong>：它以为管理员窗口一退出就等于装完了，于是去拿结果，那一刻结果当然还没写出来。现在改成等结果本身，而不是等那个窗口。<strong>顺带治好了一个更隐蔽的毛病</strong>：真正的失败原因（比如公司电脑被更新策略挡住）如果晚一秒才写出来，以前会被一并报成「没有结果」，那套写好的原因说明一条都用不上。</li>
+          <li><strong>等待安装时，软件会在下载中途告诉你「多半装好了，去重启电脑」。</strong>这句话出现在第 6 分钟，而语言包从 Windows Update 下载十几二十分钟是常态——<strong>照着做正好会打断正在进行的下载</strong>。现在它不再猜：明确说还在装、别重启、别重来（重来会从头下载），并且告诉你可以最小化窗口去干别的。旁边还多了一行<strong>「已等待 X 分 Y 秒」</strong>——真实进度拿不到（那个百分比在管理员进程里），但这行字至少能让你分清「还在走」和「死了」。</li>
+        </ul>
+      </div>
+
+      <div class="callout">顺便说个实测结论：语言包下载慢是<strong>Windows 本身的事</strong>，不是软件能修的——微软也不提供离线安装包。这台 Win11 上环境完全正常，命令挂了很久之后自己装完了。所以看到它转很久，先别急着重来。</div>
+    </article>
 
     <!-- ── 0.27.0-beta.2 ── -->
     <article class="release beta" id="v0-27-0-beta-2">
