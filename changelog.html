@@ -223,14 +223,29 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.0</h3>
-        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，面板边框不再显得又厚又糊，背景也终于给玻璃留了可以折射的东西。只动了这一个主题，用别的主题的话这一版对你没区别。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.1</h3>
+        <p>比正式版多的东西：<strong>「液态玻璃」主题重做了一遍</strong>，外加两个界面问题的修复——<strong>下拉菜单展开后白底白字看不见</strong>，以及设置里两个按钮高得离谱。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.27.0-beta.1 ── -->
+    <article class="release beta" id="v0-27-0-beta-1">
+      <header><h2>0.27.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-19</span></header>
+      <p class="lead">两个界面问题，都是有人在 Windows 上实际用着发现的。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>下拉菜单点开之后，白底白字，一个选项都看不见。</strong>比如设置里选麦克风、历史对局里筛英雄，展开后只有高亮的那一条读得出来，其余全是空白。<strong>菜单的外框是我们自己画的，展开的那个列表却是系统画的</strong>——我们从来没告诉过它这是个深色界面，于是它按浅色画了白底，而字色仍是我们设的白色。<strong>macOS 上不会出现</strong>，那边的弹出列表走的是系统菜单。现在整个应用统一声明了深浅色，列表跟着当前皮肤走，以后新加的其它系统控件也一并受益。</li>
+          <li><strong>设置 → 屏幕识别里，「手动框选」和「固定区域」两个按钮高得离谱。</strong>它们和下面的识别语言卡片共用一套样式，而语言卡片需要一个固定高度（名字换行成两行时整排才不会高低不齐）——这个高度被这两个单行按钮一起继承了。<strong>0.26.0 正式版里就是这样</strong>，这一版改回正常高度，语言卡片不受影响。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这两个都是<strong>看得见就能验</strong>的改动，装上点开设置就知道对不对。上一个 Beta 里的液态玻璃主题仍然需要在 Windows 上确认——那部分到现在还没在真机上看过。</div>
+    </article>
 
     <!-- ── 0.27.0-beta.0 ── -->
     <article class="release beta" id="v0-27-0-beta-0">
