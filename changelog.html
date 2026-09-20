@@ -198,7 +198,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-19</div>
+      <div class="updated">最近更新：2026-09-20</div>
     </div>
 
     <!-- 赞助 -->
@@ -215,8 +215,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.26.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>翻译开始认识 DOTA 术语</strong>（肉山、买活、大招不再被逐字硬译），<strong>屏幕识别的安装终于走得通</strong>了，还修了一个会让应用打不开的快捷键问题。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.27.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>悬浮窗上能直接看到当前金钱和 GPM</strong>，「液态玻璃」主题重做了一遍，<strong>屏幕识别的语言包安装不会再假装失败</strong>，另外修了几处只在 Windows 上炸的界面问题。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -224,13 +224,52 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.4</h3>
-        <p>比正式版多的东西：<strong>悬浮窗里能直接看到当前金钱和 GPM</strong>，「液态玻璃」主题重做了一遍，一串界面修复，以及文字识别语言包安装的两个大坑。Beta 里的东西没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <p><strong>0.27.0 的内容已经全部进正式版了，现在装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.27.0 ── -->
+    <article class="release" id="v0-27-0">
+      <header><h2>0.27.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-20</span></header>
+      <p class="lead">悬浮窗上多了<strong>当前金钱</strong>，「液态玻璃」主题<strong>重做了一遍</strong>，还有几个只在 Windows 上现形的界面问题。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>悬浮窗：出装推荐旁边就是你的钱</h4>
+        <ul>
+          <li><strong>英雄名下面多一行：当前金钱 + GPM。</strong>出装推荐里本来就写着「还差 550」，但<strong>没有一个基准数</strong>——你得回头看游戏自己的界面才知道手上现在有多少。现在两个数在同一屏上，一眼能对上。数字和金币图标是<strong>照着 DOTA 客户端里那个样子做的</strong>，不用重新学。窗口拖窄时 GPM 会自动让位，只留金钱，不会挤到「等级」上。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>液态玻璃：终于像玻璃了</h4>
+        <ul>
+          <li><strong>面板的边不再又厚又糊。</strong>问题其实不是边画粗了，而是边<strong>没有终点</strong>——一条边上同时叠了四层由亮到透的渐变，外面还并排着第二条细线，眼睛找不到边界在哪儿结束，就读成一圈发白发脏的厚框。现在只留一条<strong>有方向</strong>的高光：左上最亮，绕下来变暗，底边回一点反光，然后戛然而止。</li>
+          <li><strong>背景重做，玻璃才有东西可以折射。</strong>上一版为了不让面板看起来发紫，把背景压成了接近纯黑——结果玻璃没有任何颜色可以「喝」，再怎么模糊也只是一块半透明的灰板。现在面板挪到哪儿就带上哪儿的颜色，整体仍然中性。</li>
+          <li><strong>圆角换成苹果那种连续曲率的圆角</strong>（squircle）。22 像素这个尺寸上肉眼分得出来——不会觉得「那是个圆弧」，只会觉得「这看着廉价」。</li>
+          <li><strong>Windows 上三处：</strong>系统缩放 125% / 150% 时边线不再糊成灰边；玻璃上的白字不再出现彩色毛边；大面积渐变的色带用一层极轻的噪点抹掉了（macOS 系统自己会做这件事，Windows 不会）。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>屏幕识别：安装不再假装失败</h4>
+        <ul>
+          <li><strong>语言包明明在装，却弹「安装失败」。</strong>装这个组件要走 Windows Update 下载，慢的时候要好几分钟；而我们过早就认定它结束了，于是<strong>在它还在下的时候报了失败</strong>。现在改成一直等到真有结果为止。</li>
+          <li><strong>等待时不再让你重启。</strong>下载还没完的时候，界面以前会建议「重启电脑再试」——重启只会让已经下了一半的进度白费。</li>
+          <li>等得久的时候会告诉你<strong>它确实还在跑</strong>，以及大概还要多久，而不是干转一个圈。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>界面修复（都是 Windows 上实际用出来的）</h4>
+        <ul>
+          <li><strong>下拉菜单点开之后白底白字，一个选项都看不见。</strong>比如设置里选麦克风、历史对局里筛英雄。菜单外框是我们画的，展开的列表却是系统画的——我们从来没告诉过它这是个深色界面。<strong>macOS 上不会出现。</strong>现在整个应用统一声明了深浅色，列表跟着当前皮肤走。</li>
+          <li><strong>设置 → 屏幕识别里，「手动框选」和「固定区域」两个按钮高得离谱。</strong>它们和下面的语言卡片共用一套样式，而语言卡片需要一个固定高度，这个高度被两个单行按钮一起继承了。<strong>0.26.0 正式版里就是这样。</strong></li>
+          <li><strong>升级安装时如果软件还开着，可能弹一个红叉报错框。</strong>软件退出时会关掉自己的日志通道，而那一下的正常关闭被当成了错误报出来。现在退出过程中不再弹任何错误框。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这一版的绝大部分改动是跟着一位玩家的 Windows 11 实机一步步试出来的。<strong>液态玻璃和悬浮窗金钱这两块还没在足够多的机器上看过</strong>——如果你那边显示得不对，欢迎到留言板说一声，带上截图最好。</div>
+    </article>
 
     <!-- ── 0.27.0-beta.4 ── -->
     <article class="release beta" id="v0-27-0-beta-4">
@@ -319,7 +358,7 @@
 
     <!-- ── 0.26.0 ── -->
     <article class="release" id="v0-26-0">
-      <header><h2>0.26.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-18</span></header>
+      <header><h2>0.26.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-18</span></header>
       <p class="lead">两件事：<strong>翻译开始认识 DOTA 的黑话</strong>，以及<strong>屏幕识别的安装终于走得通了</strong>。外加一个会让应用打不开的问题。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>翻译认术语了</h4>
