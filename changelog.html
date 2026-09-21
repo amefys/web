@@ -198,7 +198,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-09-20</div>
+      <div class="updated">最近更新：2026-09-21</div>
     </div>
 
     <!-- 赞助 -->
@@ -215,8 +215,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.27.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>悬浮窗上能直接看到当前金钱和 GPM</strong>，「液态玻璃」主题重做了一遍，<strong>屏幕识别的语言包安装不会再假装失败</strong>，另外修了几处只在 Windows 上炸的界面问题。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.28.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>英雄名字全部改成国服官方译名</strong>，另外把<strong>几块看不清的界面</strong>修了——弹窗太透明、悬浮窗的提示气泡和报错条在游戏上几乎看不见。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -224,7 +224,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.4</h3>
-        <p><strong>0.27.0 的内容已经全部进正式版了，现在装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <p><strong>正式版已经走到 0.28.0，比这里新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -232,9 +232,33 @@
       </div>
     </section>
 
+    <!-- ── 0.28.0 ── -->
+    <article class="release" id="v0-28-0">
+      <header><h2>0.28.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-21</span></header>
+      <p class="lead">英雄名字改用<strong>国服官方译名</strong>，外加三块<strong>看不清的界面</strong>。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>英雄名字对了</h4>
+        <ul>
+          <li><strong>有个英雄的名字根本就是错的。</strong>Hoodwink 在悬浮窗里显示成「兽匿」——这既不是官方译名，也不是任何人会用的叫法。它叫<strong>森海飞霞</strong>。</li>
+          <li><strong>另外七个是玩家俗称，现在统一成官方名。</strong>撼地神牛→撼地者、屠夫→帕吉、剃刀→雷泽、月之骑士→米拉娜、先知→自然先知、德鲁伊→独行德鲁伊、深渊领主→孽主。<strong>聊天翻译不受影响</strong>——你在游戏里打「屠夫」「熊德」，它照样认得出来，俗称一直都在词库里留着。</li>
+          <li>全部 127 个英雄的中文名都跟 Valve 官方数据核对了一遍，往后有守卫盯着，不会再漂。英文名本来就是对的；<strong>俄语不用改</strong>——Valve 官方的俄语版本身就保留英文英雄名，127 个里一个俄文字母都没有。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>三块看不清的界面</h4>
+        <ul>
+          <li><strong>「液态玻璃」主题下，弹窗太透明。</strong>比如选识别语言那个对话框，背后设置页的卡片会直接透上来，和弹窗自己的卡片叠在一起，糊成一片。这不是可以调的设置——面板缺了一层该有的毛玻璃模糊，那个透明度本来就是配着模糊才成立的。</li>
+          <li><strong>悬浮窗的引导气泡，在游戏上几乎看不见。</strong>同一个原因，而且它浮在游戏画面上，背景比设置页更花。</li>
+          <li><strong>识别失败的红色提示条也一样淡。</strong>一条读不出来的错误提示等于没有提示。现在它有了厚实的底色，红色也终于看得出是红色。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这一版没有新功能，全是把已经有的东西修正确。用别的主题的玩家，界面这三处的变化会小一些——问题在「液态玻璃」下最明显，但缺的那行设置是所有主题共有的，一起补上了。</div>
+    </article>
+
     <!-- ── 0.27.0 ── -->
     <article class="release" id="v0-27-0">
-      <header><h2>0.27.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-20</span></header>
+      <header><h2>0.27.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-20</span></header>
       <p class="lead">悬浮窗上多了<strong>当前金钱</strong>，「液态玻璃」主题<strong>重做了一遍</strong>，还有几个只在 Windows 上现形的界面问题。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>悬浮窗：出装推荐旁边就是你的钱</h4>
