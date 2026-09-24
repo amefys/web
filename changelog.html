@@ -223,14 +223,37 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.27.0-beta.4</h3>
-        <p><strong>正式版已经走到 0.28.1，比这里新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。Beta 里的功能没经过大量实战，愿意帮忙先试的欢迎，遇到不对到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.0</h3>
+        <p><strong>新功能：BP 选人推荐。</strong>选人阶段点悬浮窗上的「BP」（或按 Alt+Shift+B）打开，把双方选的、禁的点进去，右边给出推荐。功能刚做好，还没经过大量实战，愿意帮忙先试的欢迎，推荐得不对、用着别扭都请到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.29.0-beta.0 ── -->
+    <article class="release beta" id="v0-29-0-beta-0">
+      <header><h2>0.29.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-24</span></header>
+      <p class="lead">新增 <strong>BP 选人推荐</strong>：告诉你这一手选谁、禁谁，以及为什么。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>BP 选人推荐</h4>
+        <ul>
+          <li><strong>怎么打开：</strong>点悬浮窗标题栏的「BP」按钮，或按 <strong>Alt+Shift+B</strong>，悬浮窗会放大成完整的选人面板；再点一次收回原来的大小。放大后的窗口可以拖动、拉边框调大小，会记住你上次放的位置。</li>
+          <li><strong>怎么用：</strong>在英雄墙上把双方选了谁、禁了谁点进去（鼠标移到头像上点「禁 / 我 / 敌」，右键直接禁，也能拖到格子里）。右边会列出推荐选谁、推荐禁谁，每个推荐都写着理由：克制对面谁、和队友配不配、会不会被对面剩下的英雄针对。</li>
+          <li><strong>数据从哪来：</strong>用的是最近一周几百万局公开天梯和加速模式对局的统计，每天更新，按你的段位看强度。</li>
+          <li><strong>按你自己的习惯推：</strong>可以标出你的绝活、常用、不会玩的英雄和常打的位置，「不会玩」的不会再推给你。在设置里的「BP 偏好」也能改。愿意的话，可以打开「使用我的 Steam 数据」，自动参考你的段位和常玩英雄（默认关闭，需要先在设置里填 Steam ID）。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>按设置页提示填了 Steam ID 的玩家，天梯分一直拉不到。</strong>现在两种 ID 写法都能认。</li>
+        </ul>
+      </div>
+
+      <div class="callout">BP 面板里的信息都是你自己点进去的：我们不读游戏画面、不碰游戏本身，选人界面上的内容不会被自动识别。推荐只是参考，最后选谁还是你说了算。</div>
+    </article>
 
     <!-- ── 0.28.1 ── -->
     <article class="release" id="v0-28-1">
