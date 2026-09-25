@@ -223,14 +223,40 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.1</h3>
-        <p><strong>BP 选人推荐：英雄池换成和游戏里一样的样子。</strong>选人阶段点悬浮窗上的「BP」（或按 Alt+Shift+B）打开；左键记我方、右键记对面、按住 Ctrl 点击记禁用。功能还在试，推荐得不对、用着别扭都请到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.2</h3>
+        <p><strong>BP 选人推荐（Pro 会员）：</strong>英雄顺序和游戏里一致，推荐直接显示「推荐 xx%」，推荐列表也能左键我方、右键对面、Ctrl 点击禁用。功能还在试，推荐得不对、用着别扭都请到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.29.0-beta.2 ── -->
+    <article class="release beta" id="v0-29-0-beta-2">
+      <header><h2>0.29.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
+      <p class="lead">按大家试用 beta.1 的反馈，把 BP 选人推荐改得更顺手。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>英雄顺序和游戏里一模一样。</strong>中文客户端的顺序不是按拼音排的，这次照着游戏对齐了；用英文客户端的，在「英雄顺序」里切一下就行。</li>
+          <li><strong>推荐直接看百分比：</strong>「推荐 81%」「该禁 80%」。50% 就是和一般英雄差不多，越高越值得选 / 禁。鼠标放上去能看到它是怎么算出来的。</li>
+          <li><strong>推荐列表和英雄池一个点法：</strong>左键我方、右键对面、按住 Ctrl 点击禁用。</li>
+          <li><strong>选错了直接右键放回：</strong>在我方 / 对面 / 禁用格子上右键，英雄就回到英雄池。</li>
+          <li><strong>「新一局」改名「重置」，</strong>挪到分段、模式那一行，一键清空全部选择，点「撤销」能找回来。</li>
+          <li><strong>设置里的「Steam ID」改成「好友代码」：</strong>就是 DOTA「好友 → 添加好友」页上那串数字。填好后会显示查到的昵称和段位，一眼知道填没填对。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>Windows 上按住 Ctrl 点英雄，前几下禁不上</strong>的问题。</li>
+          <li><strong>「获取 MMR」一直查不到</strong>的问题（数据来源改了字段名，我们没跟上）。</li>
+        </ul>
+      </div>
+
+      <div class="callout">BP 选人推荐从这一版起是 <strong>Pro 会员</strong>功能：没登录或免费账号点「BP」会看到提示，不会打开面板。在主窗口「设置 → 账户」里激活 Pro 后就能用。</div>
+    </article>
 
     <!-- ── 0.29.0-beta.1 ── -->
     <article class="release beta" id="v0-29-0-beta-1">
