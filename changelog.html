@@ -223,8 +223,8 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.5</h3>
-        <p><strong>BP 选人推荐（Pro 会员）：</strong>修好了英雄池搜索框打不了字的问题，推荐列表换成了大头像。功能还在试，推荐得不对、用着别扭都请到留言板说一声。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.6</h3>
+        <p><strong>新功能：BP 选人推荐，登录就能用。</strong>选人阶段点悬浮窗上的「BP」（或按 Alt+Shift+B）打开，左键记我方、右键记对面、按住 Ctrl 点击记禁用，右边给出推荐。功能还在试，推荐得不对、用着别扭都请到留言板说一声。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -232,117 +232,36 @@
       </div>
     </section>
 
-    <!-- ── 0.29.0-beta.5 ── -->
-    <article class="release beta" id="v0-29-0-beta-5">
-      <header><h2>0.29.0-beta.5</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
-      <p class="lead">修好 BP 面板的<strong>英雄搜索框</strong>，推荐列表换上<strong>大头像</strong>。</p>
+    <!-- ── 0.29.0-beta.6 ── -->
+    <article class="release beta" id="v0-29-0-beta-6">
+      <header><h2>0.29.0-beta.6</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-26</span></header>
+      <p class="lead">新增 <strong>BP 选人推荐</strong>：选人阶段告诉你这一手选谁、禁谁，以及为什么。<strong>登录就能用。</strong></p>
 
-      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+      <div class="group"><h4><span class="dot dot-new"></span>怎么用</h4>
         <ul>
-          <li><strong>英雄池上方的搜索框点了打不了字</strong>的问题。现在点一下就能输入：打几个字，按回车 = 我方选，Shift+回车 = 对面选，Ctrl+回车 = 禁用。输入时游戏会短暂切到后台，打完就切回去。</li>
+          <li><strong>打开：</strong>点悬浮窗顶上金色的「BP」按钮，或按 <strong>Alt+Shift+B</strong>，悬浮窗会放大成完整的选人面板；再点一次收回。放大后的窗口可以拖动、拉边框调大小。</li>
+          <li><strong>录入：</strong>英雄池和游戏选人界面逐格一致（同样的顺序、同样 6 行）。<strong>左键 = 我方选，右键 = 对面选，按住 Ctrl 点击 = 禁用</strong>；点错了用同一个键再点一次撤回，或者在阵容格上右键放回。也可以在搜索框里打字，按回车选中。</li>
+          <li><strong>看推荐：</strong>右边列出推荐选谁、建议禁谁，每个都有「推荐 81%」这样的推荐度（50% 就是和一般英雄差不多），以及理由：克制对面谁、和队友配不配、会不会被对面剩下的英雄针对。点 ▾ 能看到每一项是怎么算的。</li>
+          <li><strong>数据：</strong>最近一周几百万局公开天梯和加速模式对局的统计，每天更新，按你的段位看强度。</li>
         </ul>
       </div>
 
-      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+      <div class="group"><h4><span class="dot dot-new"></span>按你的习惯来</h4>
         <ul>
-          <li><strong>推荐和建议 Ban 列表换成大头像</strong>，和阵容格里的一样，一眼就能认出是谁。头像会在启动后提前下好，选人时不会出现空白。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.29.0-beta.4 ── -->
-    <article class="release beta" id="v0-29-0-beta-4">
-      <header><h2>0.29.0-beta.4</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
-      <p class="lead">BP 面板的英雄池排得<strong>和游戏里一格不差</strong>。</p>
-
-      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
-        <ul>
-          <li><strong>英雄池行列和游戏一模一样：</strong>每组 6 行，力量、敏捷、智力各 6 列，全才 4 列。窗口拖大拖小，只有头像跟着变大变小，英雄的位置不会跑，和游戏里对着找更顺手。</li>
-          <li><strong>禁用的英雄看得清了：</strong>禁用格放大到和我方、对面的格子一样，每行 5 + 5 对齐排在阵容上方。</li>
-          <li>右边的推荐栏窄了一些，把位置让给英雄池。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.29.0-beta.3 ── -->
-    <article class="release beta" id="v0-29-0-beta-3">
-      <header><h2>0.29.0-beta.3</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
-      <p class="lead">BP 面板：英雄池能<strong>自己排顺序</strong>了，点选时也有<strong>提示音</strong>。</p>
-
-      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
-        <ul>
-          <li><strong>自定义英雄顺序：</strong>「英雄顺序」选「自定义」，点「调整顺序」，把英雄拖到同一组里的另一个英雄上就换过去了；调好点「完成」。想回到游戏里的顺序，点「恢复客户端顺序」。你的顺序会跟着账号同步到别的电脑。</li>
-          <li><strong>操作音效：</strong>我方选、对面选、禁用、放回英雄池各有一声轻响，一听就知道点成了什么。音量跟着系统走；不想要的话，点「重置」右边的「音效」关掉。直播或录屏时观众也会听到。</li>
-        </ul>
-      </div>
-
-      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
-        <ul>
-          <li>悬浮窗顶上的「BP」按钮换成了金色，和 PRO 标识一样，一眼能认出是会员功能。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.29.0-beta.2 ── -->
-    <article class="release beta" id="v0-29-0-beta-2">
-      <header><h2>0.29.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
-      <p class="lead">按大家试用 beta.1 的反馈，把 BP 选人推荐改得更顺手。</p>
-
-      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
-        <ul>
-          <li><strong>英雄顺序和游戏里一模一样。</strong>中文客户端的顺序不是按拼音排的，这次照着游戏对齐了；用英文客户端的，在「英雄顺序」里切一下就行。</li>
-          <li><strong>推荐直接看百分比：</strong>「推荐 81%」「该禁 80%」。50% 就是和一般英雄差不多，越高越值得选 / 禁。鼠标放上去能看到它是怎么算出来的。</li>
-          <li><strong>推荐列表和英雄池一个点法：</strong>左键我方、右键对面、按住 Ctrl 点击禁用。</li>
-          <li><strong>选错了直接右键放回：</strong>在我方 / 对面 / 禁用格子上右键，英雄就回到英雄池。</li>
-          <li><strong>「新一局」改名「重置」，</strong>挪到分段、模式那一行，一键清空全部选择，点「撤销」能找回来。</li>
-          <li><strong>设置里的「Steam ID」改成「好友代码」：</strong>就是 DOTA「好友 → 添加好友」页上那串数字。填好后会显示查到的昵称和段位，一眼知道填没填对。</li>
+          <li><strong>我的偏好：</strong>标出你的绝活、常用、不会玩的英雄和常打的位置，「不会玩」的不会推给你；英雄池里点五角星也能快速加入。</li>
+          <li><strong>好友代码：</strong>在「设置 → 通用」填上 DOTA「好友 → 添加好友」页里的好友代码，会显示查到的昵称和段位；打开「使用我的 Steam 数据」后，推荐会参考你的段位和常玩英雄（默认关闭）。</li>
+          <li><strong>自定义英雄顺序：</strong>「英雄顺序」选「自定义」→「调整顺序」，把英雄拖到同组另一个英雄上就能换位置。</li>
+          <li><strong>操作音效：</strong>选人、禁用、放回各有一声轻响，音量跟着系统；不需要就点「重置」右边的「音效」关掉。直播或录屏时观众也会听到。</li>
         </ul>
       </div>
 
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
         <ul>
-          <li><strong>Windows 上按住 Ctrl 点英雄，前几下禁不上</strong>的问题。</li>
-          <li><strong>「获取 MMR」一直查不到</strong>的问题（数据来源改了字段名，我们没跟上）。</li>
+          <li><strong>「获取 MMR」一直查不到</strong>的问题：按设置页提示填了 Steam ID 的玩家查不到，数据来源改了字段名我们也没跟上，现在都修好了。</li>
         </ul>
       </div>
 
-      <div class="callout">BP 选人推荐从这一版起是 <strong>Pro 会员</strong>功能：没登录或免费账号点「BP」会看到提示，不会打开面板。在主窗口「设置 → 账户」里激活 Pro 后就能用。</div>
-    </article>
-
-    <!-- ── 0.29.0-beta.1 ── -->
-    <article class="release beta" id="v0-29-0-beta-1">
-      <header><h2>0.29.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-25</span></header>
-      <p class="lead">BP 面板的英雄池改成<strong>和游戏选人界面一模一样</strong>，录入也更快了。</p>
-
-      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
-        <ul>
-          <li><strong>英雄池照游戏客户端做：</strong>竖版头像，力量、敏捷、智力、全才四组并排，位置和游戏里对得上，找英雄不用重新认。已经被选走的英雄会变暗，底下的色条告诉你是哪一边拿的；被禁的整格变灰、划一道红线。</li>
-          <li><strong>点一下就记好：</strong>左键 = 我方选，右键 = 对面选，按住 Ctrl 再点 = 禁用（Mac 上按 ⌘ 也行）。开局一批禁用，按住 Ctrl 连点就行；点错了，用同一个键再点一次就撤回。原来的「连点」按钮和头像上的「禁 / 我 / 敌」三格按钮去掉了。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.29.0-beta.0 ── -->
-    <article class="release beta" id="v0-29-0-beta-0">
-      <header><h2>0.29.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-09-24</span></header>
-      <p class="lead">新增 <strong>BP 选人推荐</strong>：告诉你这一手选谁、禁谁，以及为什么。</p>
-
-      <div class="group"><h4><span class="dot dot-new"></span>BP 选人推荐</h4>
-        <ul>
-          <li><strong>怎么打开：</strong>点悬浮窗标题栏的「BP」按钮，或按 <strong>Alt+Shift+B</strong>，悬浮窗会放大成完整的选人面板；再点一次收回原来的大小。放大后的窗口可以拖动、拉边框调大小，会记住你上次放的位置。</li>
-          <li><strong>怎么用：</strong>在英雄墙上把双方选了谁、禁了谁点进去（鼠标移到头像上点「禁 / 我 / 敌」，右键直接禁，也能拖到格子里）。右边会列出推荐选谁、推荐禁谁，每个推荐都写着理由：克制对面谁、和队友配不配、会不会被对面剩下的英雄针对。</li>
-          <li><strong>数据从哪来：</strong>用的是最近一周几百万局公开天梯和加速模式对局的统计，每天更新，按你的段位看强度。</li>
-          <li><strong>按你自己的习惯推：</strong>可以标出你的绝活、常用、不会玩的英雄和常打的位置，「不会玩」的不会再推给你。在设置里的「BP 偏好」也能改。愿意的话，可以打开「使用我的 Steam 数据」，自动参考你的段位和常玩英雄（默认关闭，需要先在设置里填 Steam ID）。</li>
-        </ul>
-      </div>
-
-      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
-        <ul>
-          <li><strong>按设置页提示填了 Steam ID 的玩家，天梯分一直拉不到。</strong>现在两种 ID 写法都能认。</li>
-        </ul>
-      </div>
-
-      <div class="callout">BP 面板里的信息都是你自己点进去的：我们不读游戏画面、不碰游戏本身，选人界面上的内容不会被自动识别。推荐只是参考，最后选谁还是你说了算。</div>
+      <div class="callout">BP 面板里的信息都是你自己点进去的：我们不读游戏内存、不碰游戏本身。推荐只是参考，最后选谁还是你说了算。功能还在试，推荐得不对、用着别扭都请到留言板说一声。</div>
     </article>
 
     <!-- ── 0.28.1 ── -->
