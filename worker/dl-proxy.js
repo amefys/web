@@ -23,8 +23,16 @@
  *                                      fallback github releases/download/<tag>/<file>)
  *
  * Pointer files, written by amefys' release.yml after every publish:
- *   latest.json  {"tag":"v0.23.0"}         — stable releases only
- *   beta.json    {"tag":"v0.24.0-beta.0"}  — -beta / -rc releases only
+ *   latest.json      {"tag":"v0.23.0"}         — stable releases only
+ *   latest-mac.json  {"tag":"v0.23.0"}         — stable releases that carry a DMG
+ *   beta.json        {"tag":"v0.24.0-beta.0"}  — -beta / -rc releases only
+ *
+ * Stable tags build Windows only by default (macOS runners cost 10x Actions
+ * minutes); a DMG ships only from a hand-dispatched mac build. So the stable
+ * mac files (AMEFYS.dmg, its blockmap, latest-mac.yml) resolve through
+ * latest-mac.json: /dl/AMEFYS.dmg keeps serving the newest release that has
+ * one instead of 404ing on a Windows-only release, and mac auto-update keeps
+ * reading a latest-mac.yml that matches the DMG next to it.
  *
  * Bindings: R2 bucket bound as `DL` (see README). Without the binding the
  * worker degrades to the GitHub proxy path.
@@ -34,6 +42,16 @@ const GH_OWNER = 'amefys'
 const GH_REPO = 'web'
 const TAG_RE = /^v\d+\.\d+\.\d+(-[\w.]+)?$/
 const POINTER_TTL_S = 60
+const MAC_FILE_RE = /^(AMEFYS\.dmg(\.blockmap)?|latest-mac\.yml)$/
+
+/** Stable mac files follow their own pointer; everything else its channel's. */
+async function resolveTag(bucket, channel, file) {
+  if (TAG_RE.test(channel)) return channel
+  if (channel === 'latest' && MAC_FILE_RE.test(file)) {
+    return (await pointerTag(bucket, 'latest-mac')) ?? (await pointerTag(bucket, 'latest'))
+  }
+  return pointerTag(bucket, channel)
+}
 
 export default {
   async fetch(request, env, ctx) {
@@ -54,8 +72,9 @@ export default {
     else return new Response('Invalid tag', { status: 400 })
 
     // ── 1. R2 ────────────────────────────────────────────────────────
+    let tag = null
     if (env.DL) {
-      const tag = TAG_RE.test(channel) ? channel : await pointerTag(env.DL, channel)
+      tag = await resolveTag(env.DL, channel, file)
       if (tag) {
         const r2 = await serveFromR2(env.DL, `${tag}/${file}`, request, channel, file)
         if (r2) return countDownload(env, request, r2, { tag, channel, file, source: 'r2' })
@@ -63,7 +82,10 @@ export default {
     }
 
     // ── 2. GitHub fallback ───────────────────────────────────────────
-    const gh = await serveFromGitHub(channel, file, request, ctx)
+    // A stable mac file resolved to a pinned tag goes to that tag on GitHub:
+    // releases/latest may be a Windows-only release with no DMG.
+    const ghChannel = channel === 'latest' && tag && MAC_FILE_RE.test(file) ? tag : channel
+    const gh = await serveFromGitHub(ghChannel, file, request, ctx)
     return countDownload(env, request, gh, { tag: channel, channel, file, source: 'github' })
   }
 }
