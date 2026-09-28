@@ -215,7 +215,7 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.29.1</h3>
+        <h3><span class="tag tag-stable">稳定版</span> 0.29.2</h3>
         <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版新增<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
@@ -224,7 +224,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.29.0-beta.8</h3>
-        <p><strong>正式版已经走到 0.29.1，BP 选人推荐已经进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.29.2，BP 选人推荐已经进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -232,9 +232,38 @@
       </div>
     </section>
 
+    <!-- ── 0.29.2 ── -->
+    <article class="release" id="v0-29-2">
+      <header><h2>0.29.2</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-28</span></header>
+      <p class="lead">一次集中修复：把最近一个月新功能里藏着的问题一起清掉。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>翻译与发送</h4>
+        <ul>
+          <li><strong>俄语翻译更准：</strong>「хорошо」这类常用词不会再被误当成游戏术语改掉。</li>
+          <li>快捷回复「NP」（没关系）不会再被翻成英雄名「自然先知」。</li>
+          <li>翻译失败时，发出去的是你原本写的话，不会是被改动过的文字。</li>
+          <li>一键发送长段落时不再触发翻译限流导致夹杂原文；和计时提醒的自动发送也不会再互相打断、丢行。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>对局与 BP</h4>
+        <ul>
+          <li>某个页面出错时只影响那一页，左侧导航还能用，不会整个窗口变白。</li>
+          <li>「还差 N 金」按准确金额计算，钱刚好够时会直接显示可购买。</li>
+          <li>AI 出装推荐不会再迟迟不出现。</li>
+          <li>观战别人的比赛不会再记进你的对局历史，也不会触发计时提醒。</li>
+          <li>用快捷键关掉 BP 面板后，焦点会还给游戏。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>设置</h4>
+        <ul>
+          <li>刚改完设置就退出，下次打开不会被云端的旧设置改回去。</li>
+          <li>手动填写了 DOTA 路径的玩家，端口变化时游戏读的配置也会一起更新。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.29.1 ── -->
     <article class="release" id="v0-29-1">
-      <header><h2>0.29.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-09-28</span></header>
+      <header><h2>0.29.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-09-28</span></header>
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
         <ul>
           <li><strong>选完英雄后的「决策时间」主窗口变成白屏、显示「出错了」</strong>的问题：这段时间英雄还没出生，游戏只告诉我们英雄的编号、不给名字，我们没处理好。现在会先显示「等待对局」，英雄出生后照常显示。悬浮窗的英雄面板也一起修了。</li>
