@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>捐助 AMEFYS — 请开发者喝杯咖啡，让工具走得更远</title>
 <!-- seo:start -->
-<meta name="description" content="AMEFYS 核心功能免费、无广告。如果它帮你赢过一局，可以微信打赏请开发者喝杯咖啡 —— 任意金额，都是我们继续做下去的底气。">
+<meta name="description" content="AMEFYS 核心功能免费、无广告。如果它帮你赢过一局，可以微信打赏或在爱发电赞助，请开发者喝杯咖啡 —— 任意金额，都是我们继续做下去的底气。">
 <link rel="canonical" href="https://amefys.com/donate.html">
 <link rel="alternate" hreflang="zh-CN" href="https://amefys.com/donate.html">
 <link rel="alternate" hreflang="en" href="https://amefys.com/en/donate.html">
@@ -107,7 +107,7 @@
   .promise-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; }
 
   /* 捐助渠道 */
-  .ways { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 420px; margin: 0 auto; }
+  .ways { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 760px; margin: 0 auto; }
   .way {
     padding: 28px 26px 24px; border-radius: var(--r-xl);
     background: linear-gradient(180deg, rgba(232,199,121,0.06), rgba(232,199,121,0.015));
@@ -123,6 +123,12 @@
   .way-qr { background: #fff; padding: 10px; border-radius: 12px; width: 200px; margin: 0 auto 16px; }
   .way-qr img { width: 100%; height: auto; display: block; }
   .way-foot { font-size: 11.5px; color: var(--text-3); line-height: 1.6; margin-top: auto; }
+  .way-cta {
+    display: inline-block; margin: 8px auto 18px; padding: 12px 26px; border-radius: 999px;
+    background: var(--gold); color: var(--bg); font-weight: 700; font-size: 14px; text-decoration: none;
+  }
+  .way-cta:hover { filter: brightness(1.08); }
+  .way-list { font-size: 12.5px; color: var(--text-2); line-height: 1.8; margin: 0 0 18px; padding: 0; list-style: none; }
 
   /* 用途表 */
   .cost-table { width: 100%; border-collapse: collapse;
@@ -240,8 +246,8 @@
 
     <!-- 捐助渠道 -->
     <section class="s">
-      <h2>微信打赏，任意金额</h2>
-      <p class="s-sub">目前只开通了微信打赏，不需要注册任何账号。海外支付渠道还在筹备。</p>
+      <h2>微信打赏或爱发电，任选一种</h2>
+      <p class="s-sub">微信打赏不需要注册任何账号；爱发电支持微信和支付宝，付款时会验证一次手机号或邮箱。海外支付渠道还在筹备。</p>
       <div class="ways">
         <div class="way">
           <div class="way-badge">微信</div>
@@ -251,6 +257,17 @@
             <img src="assets/qr-tip.svg" alt="AMEFYS 微信打赏二维码" width="200" height="200" loading="lazy">
           </div>
           <div class="way-foot">留言写上你最想要的功能<br>下个版本我们尽量优先做</div>
+        </div>
+        <div class="way">
+          <div class="way-badge">爱发电</div>
+          <h3>在爱发电赞助</h3>
+          <p class="way-sub">微信 / 支付宝都能付，电脑上扫码即可</p>
+          <ul class="way-list">
+            <li>「赞助一杯咖啡」—— 纯支持，任意心意</li>
+            <li>AMEFYS 官方爱发电主页：afdian.com/a/amefys</li>
+          </ul>
+          <a class="way-cta" href="https://afdian.com/a/amefys" target="_blank" rel="noopener">去爱发电主页</a>
+          <div class="way-foot">App 内购买 Pro 会员的入口即将上线<br><a href="refund.html" class="link">退款政策</a></div>
         </div>
       </div>
     </section>
@@ -330,6 +347,7 @@
       <a href="credits.html">致谢</a>
       <a href="compliance.html">合规</a>
       <a href="licenses.html">许可</a>
+      <a href="refund.html">退款</a>
       <a href="privacy.html">隐私</a>
       <a href="mailto:amefys@gmail.com">联系</a>
     </div>
