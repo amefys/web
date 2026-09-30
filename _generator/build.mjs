@@ -441,6 +441,7 @@ function renderSitemap(heroFiles, itemFiles) {
     { loc: `${SITE}/donate.html`, priority: '0.6' },
     { loc: `${SITE}/en/donate.html`, priority: '0.5' },
     { loc: `${SITE}/privacy.html`, priority: '0.4' },
+    { loc: `${SITE}/refund.html`, priority: '0.3' },
     { loc: `${SITE}/credits.html`, priority: '0.3' },
     { loc: `${SITE}/licenses.html`, priority: '0.3' },
     { loc: `${SITE}/en/`, priority: '0.8' },
