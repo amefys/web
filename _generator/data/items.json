@@ -4,7 +4,8 @@
     "displayName": "Abyssal Blade",
     "cost": 6250,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_basher", "item_sange"]
   },
   {
     "internalName": "item_aegis",
@@ -18,14 +19,16 @@
     "displayName": "Aeon Disk",
     "cost": 3000,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_vitality_booster", "item_energy_booster"]
   },
   {
     "internalName": "item_aether_lens",
     "displayName": "Aether Lens",
     "cost": 2275,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_energy_booster", "item_void_stone"]
   },
   {
     "internalName": "item_aghanims_shard",
@@ -53,14 +56,16 @@
     "displayName": "Drum of Endurance",
     "cost": 1625,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_headdress", "item_belt_of_strength", "item_wind_lace"]
   },
   {
     "internalName": "item_angels_demise",
     "displayName": "Khanda",
     "cost": 5600,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_phylactery", "item_soul_booster"]
   },
   {
     "internalName": "item_apex",
@@ -74,14 +79,16 @@
     "displayName": "Arcane Blink",
     "cost": 6800,
     "qualifier": "component",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blink", "item_mystic_staff"]
   },
   {
     "internalName": "item_arcane_boots",
     "displayName": "Arcane Boots",
     "cost": 1500,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots", "item_ring_of_basilius", "item_wizard_hat"]
   },
   {
     "internalName": "item_arcane_ring",
@@ -95,7 +102,8 @@
     "displayName": "Armlet of Mordiggian",
     "cost": 2500,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_helm_of_iron_will", "item_gloves", "item_blades_of_attack"]
   },
   {
     "internalName": "item_ascetic_cap",
@@ -116,7 +124,8 @@
     "displayName": "Assault Cuirass",
     "cost": 5125,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_buckler", "item_hyperstone", "item_platemail"]
   },
   {
     "internalName": "item_avianas_feather",
@@ -137,7 +146,8 @@
     "displayName": "Skull Basher",
     "cost": 2875,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_mithril_hammer", "item_belt_of_strength"]
   },
   {
     "internalName": "item_belt_of_strength",
@@ -151,7 +161,8 @@
     "displayName": "Battle Fury",
     "cost": 3900,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pers", "item_broadsword", "item_broadsword", "item_quelling_blade"]
   },
   {
     "internalName": "item_black_grimoire",
@@ -165,7 +176,8 @@
     "displayName": "Black King Bar",
     "cost": 4050,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_mithril_hammer", "item_ogre_axe"]
   },
   {
     "internalName": "item_black_powder_bag",
@@ -179,7 +191,8 @@
     "displayName": "Blade Mail",
     "cost": 2400,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_broadsword", "item_splintmail"]
   },
   {
     "internalName": "item_blade_of_alacrity",
@@ -228,14 +241,16 @@
     "displayName": "Bloodstone",
     "cost": 4700,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_veil_of_discord", "item_soul_booster"]
   },
   {
     "internalName": "item_bloodthorn",
     "displayName": "Bloodthorn",
     "cost": 6400,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_orchid", "item_oblivion_staff", "item_javelin"]
   },
   {
     "internalName": "item_book_of_shadows",
@@ -256,7 +271,8 @@
     "displayName": "Boots of Bearing",
     "cost": 4225,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_tranquil_boots", "item_ancient_janggo", "item_ring_of_tarrasque"]
   },
   {
     "internalName": "item_boots_of_elves",
@@ -277,7 +293,8 @@
     "displayName": "Bracer",
     "cost": 505,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_circlet", "item_gauntlets"]
   },
   {
     "internalName": "item_branches",
@@ -305,7 +322,8 @@
     "displayName": "Buckler",
     "cost": 425,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_protection"]
   },
   {
     "internalName": "item_bullwhip",
@@ -319,7 +337,8 @@
     "displayName": "Butterfly",
     "cost": 5450,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_eagle", "item_claymore", "item_talisman_of_evasion"]
   },
   {
     "internalName": "item_ceremonial_robe",
@@ -410,7 +429,8 @@
     "displayName": "Consecrated Wraps",
     "cost": 2600,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_vitality_booster", "item_shawl", "item_crown"]
   },
   {
     "internalName": "item_cornucopia",
@@ -438,14 +458,16 @@
     "displayName": "Crella's Crozier",
     "cost": 4800,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ghost", "item_soul_booster"]
   },
   {
     "internalName": "item_crimson_guard",
     "displayName": "Crimson Guard",
     "cost": 3725,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_vanguard", "item_helm_of_iron_will"]
   },
   {
     "internalName": "item_crippling_crossbow",
@@ -466,7 +488,8 @@
     "displayName": "Eul's Scepter of Divinity",
     "cost": 2600,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_staff_of_wizardry", "item_void_stone", "item_wind_lace"]
   },
   {
     "internalName": "item_dagger_of_ristul",
@@ -480,7 +503,8 @@
     "displayName": "Dagon",
     "cost": 3050,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_point_booster", "item_crown", "item_wizard_hat"]
   },
   {
     "internalName": "item_dagon_2",
@@ -543,7 +567,8 @@
     "displayName": "Desolator",
     "cost": 3500,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_mithril_hammer", "item_mithril_hammer", "item_blight_stone"]
   },
   {
     "internalName": "item_desolator_2",
@@ -557,7 +582,8 @@
     "displayName": "Parasma",
     "cost": 5975,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_witch_blade", "item_mystic_staff"]
   },
   {
     "internalName": "item_dezun_bloodrite",
@@ -578,21 +604,24 @@
     "displayName": "Diffusal Blade",
     "cost": 2500,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blade_of_alacrity", "item_robe"]
   },
   {
     "internalName": "item_diffusal_blade_2",
     "displayName": "Diffusal Blade",
     "cost": 3850,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_diffusal_blade", "item_recipe_diffusal_blade"]
   },
   {
     "internalName": "item_disperser",
     "displayName": "Disperser",
     "cost": 6100,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_diffusal_blade", "item_eagle"]
   },
   {
     "internalName": "item_divine_regalia",
@@ -627,7 +656,8 @@
     "displayName": "Dragon Lance",
     "cost": 1900,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blade_of_alacrity", "item_belt_of_strength"]
   },
   {
     "internalName": "item_dragon_scale",
@@ -662,7 +692,8 @@
     "displayName": "Echo Sabre",
     "cost": 2700,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ogre_axe", "item_broadsword", "item_void_stone"]
   },
   {
     "internalName": "item_eldwurms_edda",
@@ -907,7 +938,8 @@
     "displayName": "Essence Distiller",
     "cost": 1775,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_urn_of_shadows", "item_chainmail", "item_wizard_hat"]
   },
   {
     "internalName": "item_essence_ring",
@@ -921,14 +953,16 @@
     "displayName": "Eternal Shroud",
     "cost": 3900,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_cloak", "item_ogre_axe", "item_vitality_booster"]
   },
   {
     "internalName": "item_ethereal_blade",
     "displayName": "Ethereal Blade",
     "cost": 5200,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ultimate_orb", "item_ghost"]
   },
   {
     "internalName": "item_ex_machina",
@@ -963,7 +997,8 @@
     "displayName": "Falcon Blade",
     "cost": 1125,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blades_of_attack", "item_fluffy_hat", "item_sobi_mask"]
   },
   {
     "internalName": "item_fallen_sky",
@@ -1061,7 +1096,8 @@
     "displayName": "Force Staff",
     "cost": 2200,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_staff_of_wizardry", "item_fluffy_hat"]
   },
   {
     "internalName": "item_furion_gold_bag",
@@ -1124,7 +1160,8 @@
     "displayName": "Glimmer Cape",
     "cost": 2150,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_shadow_amulet", "item_shawl"]
   },
   {
     "internalName": "item_gloves",
@@ -1145,14 +1182,16 @@
     "displayName": "Great Healing Lotus",
     "cost": 0,
     "qualifier": "consumable",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_famango", "item_famango", "item_famango"]
   },
   {
     "internalName": "item_greater_crit",
     "displayName": "Daedalus",
     "cost": 5100,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_lesser_crit", "item_demon_edge"]
   },
   {
     "internalName": "item_greater_faerie_fire",
@@ -1166,7 +1205,8 @@
     "displayName": "Greater Healing Lotus",
     "cost": 0,
     "qualifier": "consumable",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_great_famango", "item_great_famango"]
   },
   {
     "internalName": "item_grisgris",
@@ -1187,14 +1227,16 @@
     "displayName": "Guardian Greaves",
     "cost": 4450,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_arcane_boots", "item_mekansm"]
   },
   {
     "internalName": "item_gungir",
     "displayName": "Gleipnir",
     "cost": 4650,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_rod_of_atos", "item_point_booster", "item_chasm_stone"]
   },
   {
     "internalName": "item_gunpowder_gauntlets",
@@ -1208,7 +1250,8 @@
     "displayName": "Hand of Midas",
     "cost": 2200,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_gloves"]
   },
   {
     "internalName": "item_harmonizer",
@@ -1222,7 +1265,8 @@
     "displayName": "Harpoon",
     "cost": 4700,
     "qualifier": null,
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_echo_sabre", "item_diadem"]
   },
   {
     "internalName": "item_havoc_hammer",
@@ -1236,21 +1280,24 @@
     "displayName": "Headdress",
     "cost": 425,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_regen"]
   },
   {
     "internalName": "item_heart",
     "displayName": "Heart of Tarrasque",
     "cost": 5100,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_reaver", "item_ring_of_tarrasque"]
   },
   {
     "internalName": "item_heavens_halberd",
     "displayName": "Heaven's Halberd",
     "cost": 3400,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_talisman_of_evasion", "item_splintmail", "item_ring_of_health"]
   },
   {
     "internalName": "item_heavy_blade",
@@ -1271,14 +1318,16 @@
     "displayName": "Helm of the Dominator",
     "cost": 2550,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_helm_of_iron_will", "item_crown"]
   },
   {
     "internalName": "item_helm_of_the_overlord",
     "displayName": "Helm of the Overlord",
     "cost": 5650,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_helm_of_the_dominator", "item_ultimate_orb"]
   },
   {
     "internalName": "item_helm_of_the_undying",
@@ -1292,7 +1341,8 @@
     "displayName": "Holy Locket",
     "cost": 2250,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_magic_wand", "item_crown"]
   },
   {
     "internalName": "item_hood_of_defiance",
@@ -1306,14 +1356,16 @@
     "displayName": "Hurricane Pike",
     "cost": 4450,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_force_staff", "item_dragon_lance"]
   },
   {
     "internalName": "item_hydras_breath",
     "displayName": "Hydra's Breath",
     "cost": 5900,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_specialists_array", "item_dragon_lance", "item_orb_of_venom", "item_"]
   },
   {
     "internalName": "item_hyperstone",
@@ -1355,14 +1407,16 @@
     "displayName": "Shadow Blade",
     "cost": 3250,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_claymore", "item_blitz_knuckles", "item_shadow_amulet"]
   },
   {
     "internalName": "item_iron_talon",
     "displayName": "Iron Talon",
     "cost": 0,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_quelling_blade", "item_ring_of_protection"]
   },
   {
     "internalName": "item_ironwood_tree",
@@ -1390,14 +1444,16 @@
     "displayName": "Kaya",
     "cost": 2100,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_staff_of_wizardry", "item_robe"]
   },
   {
     "internalName": "item_kaya_and_sange",
     "displayName": "Kaya and Sange",
     "cost": 4200,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_kaya", "item_sange"]
   },
   {
     "internalName": "item_keen_optic",
@@ -1425,7 +1481,8 @@
     "displayName": "Crystalys",
     "cost": 2000,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_claymore", "item_blades_of_attack"]
   },
   {
     "internalName": "item_lifesteal",
@@ -1446,7 +1503,8 @@
     "displayName": "Lotus Orb",
     "cost": 3850,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pers", "item_platemail", "item_energy_booster"]
   },
   {
     "internalName": "item_madstone_bundle",
@@ -1460,14 +1518,16 @@
     "displayName": "Maelstrom",
     "cost": 2950,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_mithril_hammer", "item_javelin", "item_gloves"]
   },
   {
     "internalName": "item_mage_slayer",
     "displayName": "Mage Slayer",
     "cost": 3100,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pers", "item_cloak", "item_blades_of_attack", "item_orb_of_venom"]
   },
   {
     "internalName": "item_magic_stick",
@@ -1481,7 +1541,8 @@
     "displayName": "Magic Wand",
     "cost": 460,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_magic_stick", "item_branches", "item_branches"]
   },
   {
     "internalName": "item_magnifying_monocle",
@@ -1509,7 +1570,8 @@
     "displayName": "Manta Style",
     "cost": 4650,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_yasha", "item_diadem"]
   },
   {
     "internalName": "item_mantle",
@@ -1530,21 +1592,24 @@
     "displayName": "Mask of Madness",
     "cost": 1900,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_broadsword", "item_lifesteal"]
   },
   {
     "internalName": "item_medallion_of_courage",
     "displayName": "Medallion of Courage",
     "cost": 0,
     "qualifier": null,
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_chainmail", "item_sobi_mask", "item_blight_stone"]
   },
   {
     "internalName": "item_mekansm",
     "displayName": "Mekansm",
     "cost": 1775,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_headdress", "item_chainmail"]
   },
   {
     "internalName": "item_metamorphic_mandible",
@@ -1558,7 +1623,8 @@
     "displayName": "Meteor Hammer",
     "cost": 2850,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_kaya", "item_crown"]
   },
   {
     "internalName": "item_mind_breaker",
@@ -1600,21 +1666,24 @@
     "displayName": "Mjollnir",
     "cost": 5500,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_maelstrom", "item_hyperstone"]
   },
   {
     "internalName": "item_monkey_king_bar",
     "displayName": "Monkey King Bar",
     "cost": 5000,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_demon_edge", "item_blitz_knuckles", "item_javelin"]
   },
   {
     "internalName": "item_moon_shard",
     "displayName": "Moon Shard",
     "cost": 4000,
     "qualifier": "consumable",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_hyperstone", "item_hyperstone"]
   },
   {
     "internalName": "item_muertas_gun",
@@ -1649,21 +1718,24 @@
     "displayName": "Necronomicon",
     "cost": 2050,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_sobi_mask", "item_sobi_mask", "item_belt_of_strength"]
   },
   {
     "internalName": "item_necronomicon_2",
     "displayName": "Necronomicon",
     "cost": 3300,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_necronomicon", "item_recipe_necronomicon"]
   },
   {
     "internalName": "item_necronomicon_3",
     "displayName": "Necronomicon",
     "cost": 4550,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_necronomicon_2", "item_recipe_necronomicon"]
   },
   {
     "internalName": "item_nemesis_curse",
@@ -1691,21 +1763,24 @@
     "displayName": "Null Talisman",
     "cost": 505,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_circlet", "item_mantle"]
   },
   {
     "internalName": "item_nullifier",
     "displayName": "Nullifier",
     "cost": 4350,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_relic", "item_splintmail"]
   },
   {
     "internalName": "item_oblivion_staff",
     "displayName": "Oblivion Staff",
     "cost": 1625,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blitz_knuckles", "item_robe", "item_sobi_mask"]
   },
   {
     "internalName": "item_occult_bracelet",
@@ -1726,7 +1801,8 @@
     "displayName": "Octarine Core",
     "cost": 4900,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_soul_booster", "item_tiara_of_selemene", "item_"]
   },
   {
     "internalName": "item_ofrenda",
@@ -1768,7 +1844,8 @@
     "displayName": "Orb of Corrosion",
     "cost": 1050,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots_of_elves", "item_orb_of_frost", "item_blight_stone"]
   },
   {
     "internalName": "item_orb_of_destruction",
@@ -1796,7 +1873,8 @@
     "displayName": "Orchid Malevolence",
     "cost": 3275,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_oblivion_staff", "item_claymore"]
   },
   {
     "internalName": "item_outworld_staff",
@@ -1810,7 +1888,8 @@
     "displayName": "Overwhelming Blink",
     "cost": 6800,
     "qualifier": "component",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blink", "item_reaver"]
   },
   {
     "internalName": "item_paintball",
@@ -1845,7 +1924,8 @@
     "displayName": "Pavise",
     "cost": 1350,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_wizard_hat", "item_fluffy_hat", "item_ring_of_protection"]
   },
   {
     "internalName": "item_penta_edged_sword",
@@ -1859,14 +1939,16 @@
     "displayName": "Perseverance",
     "cost": 1400,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_health", "item_void_stone"]
   },
   {
     "internalName": "item_phase_boots",
     "displayName": "Phase Boots",
     "cost": 1450,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots", "item_chainmail", "item_blades_of_attack"]
   },
   {
     "internalName": "item_philosophers_stone",
@@ -1887,14 +1969,16 @@
     "displayName": "Phylactery",
     "cost": 2600,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pers", "item_diadem"]
   },
   {
     "internalName": "item_pipe",
     "displayName": "Pipe of Insight",
     "cost": 3725,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_tarrasque", "item_cloak", "item_shawl", "item_"]
   },
   {
     "internalName": "item_pirate_hat",
@@ -1964,7 +2048,8 @@
     "displayName": "Power Treads",
     "cost": 1400,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots", "item_gloves", "item_belt_of_strength"]
   },
   {
     "internalName": "item_princes_knife",
@@ -2034,14 +2119,16 @@
     "displayName": "Radiance",
     "cost": 4700,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_relic", "item_talisman_of_evasion"]
   },
   {
     "internalName": "item_rapier",
     "displayName": "Divine Rapier",
     "cost": 5600,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_relic", "item_demon_edge"]
   },
   {
     "internalName": "item_rattlecage",
@@ -2636,7 +2723,8 @@
     "displayName": "Refresher Orb",
     "cost": 5000,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_tarrasque", "item_tiara_of_selemene"]
   },
   {
     "internalName": "item_refresher_shard",
@@ -2664,7 +2752,8 @@
     "displayName": "Revenant's Brooch",
     "cost": 3300,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_lesser_crit", "item_voodoo_mask"]
   },
   {
     "internalName": "item_riftshadow_prism",
@@ -2685,7 +2774,8 @@
     "displayName": "Ring of Basilius",
     "cost": 425,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_sobi_mask"]
   },
   {
     "internalName": "item_ring_of_health",
@@ -2783,7 +2873,8 @@
     "displayName": "Rod of Atos",
     "cost": 2250,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_staff_of_wizardry", "item_vitality_booster"]
   },
   {
     "internalName": "item_roshans_banner",
@@ -2818,21 +2909,24 @@
     "displayName": "Sange",
     "cost": 2100,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ogre_axe", "item_belt_of_strength"]
   },
   {
     "internalName": "item_sange_and_yasha",
     "displayName": "Sange and Yasha",
     "cost": 4200,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_sange", "item_yasha"]
   },
   {
     "internalName": "item_satanic",
     "displayName": "Satanic",
     "cost": 5050,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_reaver", "item_claymore", "item_lifesteal"]
   },
   {
     "internalName": "item_searing_signet",
@@ -2881,21 +2975,24 @@
     "displayName": "Scythe of Vyse",
     "cost": 5200,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_mystic_staff", "item_tiara_of_selemene"]
   },
   {
     "internalName": "item_shivas_guard",
     "displayName": "Shiva's Guard",
     "cost": 4500,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_platemail", "item_splintmail", "item_chasm_stone"]
   },
   {
     "internalName": "item_silver_edge",
     "displayName": "Silver Edge",
     "cost": 5700,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_invis_sword", "item_demon_edge"]
   },
   {
     "internalName": "item_sisters_shroud",
@@ -2909,7 +3006,8 @@
     "displayName": "Eye of Skadi",
     "cost": 5900,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ultimate_orb", "item_ultimate_orb", "item_orb_of_frost"]
   },
   {
     "internalName": "item_slippers",
@@ -2937,21 +3035,24 @@
     "displayName": "Solar Crest",
     "cost": 2575,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pavise", "item_chainmail", "item_wind_lace"]
   },
   {
     "internalName": "item_soul_booster",
     "displayName": "Soul Booster",
     "cost": 3000,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_point_booster", "item_vitality_booster", "item_energy_booster"]
   },
   {
     "internalName": "item_soul_ring",
     "displayName": "Soul Ring",
     "cost": 805,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ring_of_protection", "item_gauntlets", "item_gauntlets"]
   },
   {
     "internalName": "item_spark_of_courage",
@@ -2965,7 +3066,8 @@
     "displayName": "Specialist's Array",
     "cost": 2550,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blade_of_alacrity", "item_broadsword"]
   },
   {
     "internalName": "item_spell_prism",
@@ -2986,7 +3088,8 @@
     "displayName": "Linken's Sphere",
     "cost": 4800,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_pers", "item_ultimate_orb", "item_"]
   },
   {
     "internalName": "item_spider_legs",
@@ -3000,7 +3103,8 @@
     "displayName": "Spirit Vessel",
     "cost": 2725,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_urn_of_shadows", "item_diadem"]
   },
   {
     "internalName": "item_splintmail",
@@ -3049,7 +3153,8 @@
     "displayName": "Swift Blink",
     "cost": 6800,
     "qualifier": "component",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blink", "item_eagle"]
   },
   {
     "internalName": "item_talisman_of_evasion",
@@ -3175,21 +3280,24 @@
     "displayName": "Tranquil Boots",
     "cost": 900,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots", "item_wind_lace", "item_ring_of_regen"]
   },
   {
     "internalName": "item_travel_boots",
     "displayName": "Boots of Travel",
     "cost": 2500,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_boots"]
   },
   {
     "internalName": "item_travel_boots_2",
     "displayName": "Boots of Travel 2",
     "cost": 4500,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_travel_boots", "item_recipe_travel_boots"]
   },
   {
     "internalName": "item_trickster_cloak",
@@ -3203,7 +3311,8 @@
     "displayName": "Trident",
     "cost": 6301,
     "qualifier": null,
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_kaya", "item_sange", "item_yasha", "item_"]
   },
   {
     "internalName": "item_trusty_shovel",
@@ -3224,14 +3333,21 @@
     "displayName": "Aghanim's Scepter",
     "cost": 4200,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": [
+      "item_point_booster",
+      "item_staff_of_wizardry",
+      "item_ogre_axe",
+      "item_blade_of_alacrity"
+    ]
   },
   {
     "internalName": "item_ultimate_scepter_2",
     "displayName": "Aghanim's Blessing",
     "cost": 5800,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ultimate_scepter"]
   },
   {
     "internalName": "item_ultimate_scepter_roshan",
@@ -3266,7 +3382,8 @@
     "displayName": "Urn of Shadows",
     "cost": 825,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_sobi_mask", "item_ring_of_protection", "item_circlet", "item_"]
   },
   {
     "internalName": "item_vambrace",
@@ -3287,14 +3404,16 @@
     "displayName": "Vanguard",
     "cost": 1700,
     "qualifier": "epic",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_vitality_booster", "item_ring_of_health"]
   },
   {
     "internalName": "item_veil_of_discord",
     "displayName": "Veil of Discord",
     "cost": 1700,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_voodoo_mask", "item_robe", "item_fluffy_hat"]
   },
   {
     "internalName": "item_vindicators_axe",
@@ -3315,7 +3434,13 @@
     "displayName": "Vladmir's Offering",
     "cost": 2200,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": [
+      "item_buckler",
+      "item_ring_of_basilius",
+      "item_lifesteal",
+      "item_blades_of_attack"
+    ]
   },
   {
     "internalName": "item_void_stone",
@@ -3336,7 +3461,8 @@
     "displayName": "Observer and Sentry Wards",
     "cost": 50,
     "qualifier": "consumable;laning",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_ward_sentry", "item_ward_observer"]
   },
   {
     "internalName": "item_ward_observer",
@@ -3378,14 +3504,16 @@
     "displayName": "Wind Waker",
     "cost": 6800,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_cyclone", "item_mystic_staff"]
   },
   {
     "internalName": "item_witch_blade",
     "displayName": "Witch Blade",
     "cost": 2775,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_oblivion_staff", "item_chainmail", "item_orb_of_venom"]
   },
   {
     "internalName": "item_witless_shako",
@@ -3413,27 +3541,31 @@
     "displayName": "Wraith Band",
     "cost": 505,
     "qualifier": "common",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_circlet", "item_slippers"]
   },
   {
     "internalName": "item_wraith_pact",
     "displayName": "Wraith Pact",
     "cost": 3800,
     "qualifier": "rare",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_vladmir", "item_point_booster"]
   },
   {
     "internalName": "item_yasha",
     "displayName": "Yasha",
     "cost": 2100,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_blade_of_alacrity", "item_boots_of_elves"]
   },
   {
     "internalName": "item_yasha_and_kaya",
     "displayName": "Yasha and Kaya",
     "cost": 4200,
     "qualifier": "artifact",
-    "isRecipe": false
+    "isRecipe": false,
+    "components": ["item_yasha", "item_kaya"]
   }
 ]
