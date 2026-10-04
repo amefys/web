@@ -1,0 +1,5859 @@
+{
+ "npc_dota_hero_queenofpain": {
+  "zh": "痛苦女王",
+  "nicknames": [
+   "女王"
+  ]
+ },
+ "npc_dota_hero_antimage": {
+  "zh": "敌法师",
+  "nicknames": [
+   "敌法"
+  ]
+ },
+ "npc_dota_hero_kunkka": {
+  "zh": "昆卡",
+  "nicknames": [
+   "船长"
+  ]
+ },
+ "npc_dota_hero_lina": {
+  "zh": "莉娜",
+  "nicknames": [
+   "火女"
+  ]
+ },
+ "npc_dota_hero_mirana": {
+  "zh": "米拉娜",
+  "nicknames": [
+   "白虎"
+  ]
+ },
+ "npc_dota_hero_slardar": {
+  "zh": "斯拉达",
+  "nicknames": [
+   "鱼人",
+   "大鱼",
+   "大鱼人"
+  ]
+ },
+ "npc_dota_hero_lion": {
+  "zh": "莱恩",
+  "nicknames": [
+   "恶魔巫师"
+  ]
+ },
+ "npc_dota_hero_phantom_assassin": {
+  "zh": "幻影刺客",
+  "nicknames": [
+   "幻刺"
+  ]
+ },
+ "npc_dota_hero_tidehunter": {
+  "zh": "潮汐猎人",
+  "nicknames": [
+   "潮汐"
+  ]
+ },
+ "npc_dota_hero_witch_doctor": {
+  "zh": "巫医",
+  "nicknames": []
+ },
+ "npc_dota_hero_vengefulspirit": {
+  "zh": "复仇之魂",
+  "nicknames": [
+   "复仇"
+  ]
+ },
+ "npc_dota_hero_juggernaut": {
+  "zh": "主宰",
+  "nicknames": [
+   "剑圣",
+   "尤涅若"
+  ]
+ },
+ "npc_dota_hero_earthshaker": {
+  "zh": "撼地者",
+  "nicknames": [
+   "小牛",
+   "神牛"
+  ]
+ },
+ "npc_dota_hero_pudge": {
+  "zh": "帕吉",
+  "nicknames": [
+   "屠夫"
+  ]
+ },
+ "npc_dota_hero_bane": {
+  "zh": "祸乱之源",
+  "nicknames": [
+   "祸乱"
+  ]
+ },
+ "npc_dota_hero_crystal_maiden": {
+  "zh": "水晶室女",
+  "nicknames": [
+   "冰女",
+   "冰晶"
+  ]
+ },
+ "npc_dota_hero_sven": {
+  "zh": "斯温",
+  "nicknames": [
+   "流浪",
+   "流浪剑客"
+  ]
+ },
+ "npc_dota_hero_skeleton_king": {
+  "zh": "冥魂大帝",
+  "nicknames": [
+   "骷髅王"
+  ]
+ },
+ "npc_dota_hero_storm_spirit": {
+  "zh": "风暴之灵",
+  "nicknames": [
+   "蓝猫"
+  ]
+ },
+ "npc_dota_hero_sand_king": {
+  "zh": "沙王",
+  "nicknames": []
+ },
+ "npc_dota_hero_nevermore": {
+  "zh": "影魔",
+  "nicknames": []
+ },
+ "npc_dota_hero_drow_ranger": {
+  "zh": "卓尔游侠",
+  "nicknames": [
+   "小黑",
+   "黑弓",
+   "卓尔"
+  ]
+ },
+ "npc_dota_hero_axe": {
+  "zh": "斧王",
+  "nicknames": [
+   "斧子"
+  ]
+ },
+ "npc_dota_hero_bloodseeker": {
+  "zh": "血魔",
+  "nicknames": [
+   "嗜血狂魔"
+  ]
+ },
+ "npc_dota_hero_phantom_lancer": {
+  "zh": "幻影长矛手",
+  "nicknames": [
+   "幻矛",
+   "猴子"
+  ]
+ },
+ "npc_dota_hero_razor": {
+  "zh": "雷泽",
+  "nicknames": [
+   "电魂",
+   "剃刀",
+   "电棍"
+  ]
+ },
+ "npc_dota_hero_morphling": {
+  "zh": "变体精灵",
+  "nicknames": [
+   "水人"
+  ]
+ },
+ "npc_dota_hero_zuus": {
+  "zh": "宙斯",
+  "nicknames": []
+ },
+ "npc_dota_hero_tiny": {
+  "zh": "小小",
+  "nicknames": [
+   "山岭巨人"
+  ]
+ },
+ "npc_dota_hero_puck": {
+  "zh": "帕克",
+  "nicknames": [
+   "精灵龙"
+  ]
+ },
+ "npc_dota_hero_windrunner": {
+  "zh": "风行者",
+  "nicknames": [
+   "风行"
+  ]
+ },
+ "npc_dota_hero_lich": {
+  "zh": "巫妖",
+  "nicknames": []
+ },
+ "npc_dota_hero_shadow_shaman": {
+  "zh": "暗影萨满",
+  "nicknames": [
+   "小Y"
+  ]
+ },
+ "npc_dota_hero_riki": {
+  "zh": "力丸",
+  "nicknames": [
+   "隐刺",
+   "隐形刺客"
+  ]
+ },
+ "npc_dota_hero_enigma": {
+  "zh": "谜团",
+  "nicknames": [
+   "黑洞"
+  ]
+ },
+ "npc_dota_hero_tinker": {
+  "zh": "修补匠",
+  "nicknames": []
+ },
+ "npc_dota_hero_sniper": {
+  "zh": "狙击手",
+  "nicknames": [
+   "火枪",
+   "矮子"
+  ]
+ },
+ "npc_dota_hero_necrolyte": {
+  "zh": "瘟疫法师",
+  "nicknames": [
+   "死灵法师",
+   "死灵"
+  ]
+ },
+ "npc_dota_hero_warlock": {
+  "zh": "术士",
+  "nicknames": []
+ },
+ "npc_dota_hero_beastmaster": {
+  "zh": "兽王",
+  "nicknames": [
+   "老兽"
+  ]
+ },
+ "npc_dota_hero_venomancer": {
+  "zh": "剧毒术士",
+  "nicknames": [
+   "剧毒"
+  ]
+ },
+ "npc_dota_hero_faceless_void": {
+  "zh": "虚空假面",
+  "nicknames": [
+   "虚空",
+   "鸡巴脸"
+  ]
+ },
+ "npc_dota_hero_death_prophet": {
+  "zh": "死亡先知",
+  "nicknames": [
+   "女妖"
+  ]
+ },
+ "npc_dota_hero_pugna": {
+  "zh": "帕格纳",
+  "nicknames": [
+   "骨法"
+  ]
+ },
+ "npc_dota_hero_templar_assassin": {
+  "zh": "圣堂刺客",
+  "nicknames": [
+   "圣堂"
+  ]
+ },
+ "npc_dota_hero_viper": {
+  "zh": "冥界亚龙",
+  "nicknames": [
+   "毒龙"
+  ]
+ },
+ "npc_dota_hero_luna": {
+  "zh": "露娜",
+  "nicknames": [
+   "月骑",
+   "LUNA"
+  ]
+ },
+ "npc_dota_hero_dragon_knight": {
+  "zh": "龙骑士",
+  "nicknames": [
+   "龙骑"
+  ]
+ },
+ "npc_dota_hero_dazzle": {
+  "zh": "戴泽",
+  "nicknames": [
+   "暗牧"
+  ]
+ },
+ "npc_dota_hero_rattletrap": {
+  "zh": "发条技师",
+  "nicknames": [
+   "发条"
+  ]
+ },
+ "npc_dota_hero_leshrac": {
+  "zh": "拉席克",
+  "nicknames": [
+   "小马",
+   "老鹿"
+  ]
+ },
+ "npc_dota_hero_furion": {
+  "zh": "自然先知",
+  "nicknames": [
+   "先知",
+   "树人"
+  ]
+ },
+ "npc_dota_hero_life_stealer": {
+  "zh": "噬魂鬼",
+  "nicknames": [
+   "小狗"
+  ]
+ },
+ "npc_dota_hero_dark_seer": {
+  "zh": "黑暗贤者",
+  "nicknames": [
+   "黑贤",
+   "兔子"
+  ]
+ },
+ "npc_dota_hero_clinkz": {
+  "zh": "克林克兹",
+  "nicknames": [
+   "骷髅射手",
+   "骨弓",
+   "小骷髅"
+  ]
+ },
+ "npc_dota_hero_omniknight": {
+  "zh": "全能骑士",
+  "nicknames": [
+   "全能"
+  ]
+ },
+ "npc_dota_hero_enchantress": {
+  "zh": "魅惑魔女",
+  "nicknames": [
+   "小鹿"
+  ]
+ },
+ "npc_dota_hero_huskar": {
+  "zh": "哈斯卡",
+  "nicknames": [
+   "神灵",
+   "神灵武士"
+  ]
+ },
+ "npc_dota_hero_night_stalker": {
+  "zh": "暗夜魔王",
+  "nicknames": [
+   "夜魔"
+  ]
+ },
+ "npc_dota_hero_broodmother": {
+  "zh": "育母蜘蛛",
+  "nicknames": [
+   "蜘蛛",
+   "母蜘蛛"
+  ]
+ },
+ "npc_dota_hero_bounty_hunter": {
+  "zh": "赏金猎人",
+  "nicknames": [
+   "赏金",
+   "赏金狗"
+  ]
+ },
+ "npc_dota_hero_weaver": {
+  "zh": "编织者",
+  "nicknames": [
+   "蚂蚁",
+   "缩地蚂蚁"
+  ]
+ },
+ "npc_dota_hero_jakiro": {
+  "zh": "杰奇洛",
+  "nicknames": [
+   "双头龙",
+   "双头"
+  ]
+ },
+ "npc_dota_hero_batrider": {
+  "zh": "蝙蝠骑士",
+  "nicknames": [
+   "蝙蝠",
+   "蝙蝠侠"
+  ]
+ },
+ "npc_dota_hero_chen": {
+  "zh": "陈",
+  "nicknames": [
+   "CHEN",
+   "圣骑士"
+  ]
+ },
+ "npc_dota_hero_spectre": {
+  "zh": "幽鬼",
+  "nicknames": []
+ },
+ "npc_dota_hero_doom_bringer": {
+  "zh": "末日使者",
+  "nicknames": [
+   "末日"
+  ]
+ },
+ "npc_dota_hero_ancient_apparition": {
+  "zh": "远古冰魄",
+  "nicknames": [
+   "冰魄",
+   "冰魂",
+   "冰冰"
+  ]
+ },
+ "npc_dota_hero_ursa": {
+  "zh": "熊战士",
+  "nicknames": [
+   "熊战",
+   "拍拍熊",
+   "拍拍"
+  ]
+ },
+ "npc_dota_hero_spirit_breaker": {
+  "zh": "裂魂人",
+  "nicknames": [
+   "白牛"
+  ]
+ },
+ "npc_dota_hero_gyrocopter": {
+  "zh": "矮人直升机",
+  "nicknames": [
+   "飞机"
+  ]
+ },
+ "npc_dota_hero_alchemist": {
+  "zh": "炼金术士",
+  "nicknames": [
+   "炼金"
+  ]
+ },
+ "npc_dota_hero_invoker": {
+  "zh": "祈求者",
+  "nicknames": [
+   "卡尔"
+  ]
+ },
+ "npc_dota_hero_silencer": {
+  "zh": "沉默术士",
+  "nicknames": []
+ },
+ "npc_dota_hero_obsidian_destroyer": {
+  "zh": "殁境神蚀者",
+  "nicknames": [
+   "黑鸟"
+  ]
+ },
+ "npc_dota_hero_lycan": {
+  "zh": "狼人",
+  "nicknames": []
+ },
+ "npc_dota_hero_brewmaster": {
+  "zh": "酒仙",
+  "nicknames": [
+   "熊猫",
+   "酒桶"
+  ]
+ },
+ "npc_dota_hero_shadow_demon": {
+  "zh": "暗影恶魔",
+  "nicknames": [
+   "毒狗"
+  ]
+ },
+ "npc_dota_hero_lone_druid": {
+  "zh": "独行德鲁伊",
+  "nicknames": [
+   "熊德",
+   "德鲁伊"
+  ]
+ },
+ "npc_dota_hero_chaos_knight": {
+  "zh": "混沌骑士",
+  "nicknames": [
+   "混沌"
+  ]
+ },
+ "npc_dota_hero_treant": {
+  "zh": "树精卫士",
+  "nicknames": [
+   "大树"
+  ]
+ },
+ "npc_dota_hero_meepo": {
+  "zh": "米波",
+  "nicknames": [
+   "地卜师",
+   "狗头",
+   "多多"
+  ]
+ },
+ "npc_dota_hero_ogre_magi": {
+  "zh": "食人魔魔法师",
+  "nicknames": [
+   "蓝胖",
+   "蓝胖子"
+  ]
+ },
+ "npc_dota_hero_undying": {
+  "zh": "不朽尸王",
+  "nicknames": [
+   "尸王"
+  ]
+ },
+ "npc_dota_hero_rubick": {
+  "zh": "拉比克",
+  "nicknames": [
+   "拉比"
+  ]
+ },
+ "npc_dota_hero_disruptor": {
+  "zh": "干扰者",
+  "nicknames": [
+   "萨尔",
+   "干扰"
+  ]
+ },
+ "npc_dota_hero_nyx_assassin": {
+  "zh": "司夜刺客",
+  "nicknames": [
+   "司夜",
+   "小强"
+  ]
+ },
+ "npc_dota_hero_naga_siren": {
+  "zh": "娜迦海妖",
+  "nicknames": [
+   "小娜迦",
+   "NAGA"
+  ]
+ },
+ "npc_dota_hero_keeper_of_the_light": {
+  "zh": "光之守卫",
+  "nicknames": [
+   "光法"
+  ]
+ },
+ "npc_dota_hero_visage": {
+  "zh": "维萨吉",
+  "nicknames": [
+   "死灵龙"
+  ]
+ },
+ "npc_dota_hero_wisp": {
+  "zh": "艾欧",
+  "nicknames": [
+   "小精灵",
+   "精灵"
+  ]
+ },
+ "npc_dota_hero_slark": {
+  "zh": "斯拉克",
+  "nicknames": [
+   "小鱼",
+   "小鱼人"
+  ]
+ },
+ "npc_dota_hero_medusa": {
+  "zh": "美杜莎",
+  "nicknames": [
+   "蛇女",
+   "一姐",
+   "大娜迦"
+  ]
+ },
+ "npc_dota_hero_troll_warlord": {
+  "zh": "巨魔战将",
+  "nicknames": [
+   "巨魔"
+  ]
+ },
+ "npc_dota_hero_centaur": {
+  "zh": "半人马战行者",
+  "nicknames": [
+   "人马",
+   "半人马"
+  ]
+ },
+ "npc_dota_hero_magnataur": {
+  "zh": "马格纳斯",
+  "nicknames": [
+   "猛犸"
+  ]
+ },
+ "npc_dota_hero_shredder": {
+  "zh": "伐木机",
+  "nicknames": [
+   "伐木"
+  ]
+ },
+ "npc_dota_hero_bristleback": {
+  "zh": "钢背兽",
+  "nicknames": [
+   "钢背"
+  ]
+ },
+ "npc_dota_hero_tusk": {
+  "zh": "巨牙海民",
+  "nicknames": [
+   "海民"
+  ]
+ },
+ "npc_dota_hero_skywrath_mage": {
+  "zh": "天怒法师",
+  "nicknames": [
+   "天怒"
+  ]
+ },
+ "npc_dota_hero_abaddon": {
+  "zh": "亚巴顿",
+  "nicknames": [
+   "死骑"
+  ]
+ },
+ "npc_dota_hero_elder_titan": {
+  "zh": "上古巨神",
+  "nicknames": []
+ },
+ "npc_dota_hero_legion_commander": {
+  "zh": "军团指挥官",
+  "nicknames": [
+   "军团"
+  ]
+ },
+ "npc_dota_hero_ember_spirit": {
+  "zh": "灰烬之灵",
+  "nicknames": [
+   "火猫"
+  ]
+ },
+ "npc_dota_hero_earth_spirit": {
+  "zh": "大地之灵",
+  "nicknames": [
+   "土猫"
+  ]
+ },
+ "npc_dota_hero_abyssal_underlord": {
+  "zh": "孽主",
+  "nicknames": [
+   "深渊巨兽",
+   "大屁股"
+  ]
+ },
+ "npc_dota_hero_phoenix": {
+  "zh": "凤凰",
+  "nicknames": []
+ },
+ "npc_dota_hero_terrorblade": {
+  "zh": "恐怖利刃",
+  "nicknames": [
+   "魂守"
+  ]
+ },
+ "npc_dota_hero_oracle": {
+  "zh": "神谕者",
+  "nicknames": [
+   "神谕"
+  ]
+ },
+ "npc_dota_hero_techies": {
+  "zh": "工程师",
+  "nicknames": [
+   "炸弹人",
+   "地精工程师"
+  ]
+ },
+ "npc_dota_hero_winter_wyvern": {
+  "zh": "寒冬飞龙",
+  "nicknames": [
+   "飞龙",
+   "冰龙"
+  ]
+ },
+ "npc_dota_hero_arc_warden": {
+  "zh": "天穹守望者",
+  "nicknames": [
+   "天穹",
+   "电狗"
+  ]
+ },
+ "npc_dota_hero_monkey_king": {
+  "zh": "齐天大圣",
+  "nicknames": [
+   "大圣"
+  ]
+ },
+ "npc_dota_hero_pangolier": {
+  "zh": "石鳞剑士",
+  "nicknames": [
+   "穿山甲",
+   "滚滚"
+  ]
+ },
+ "npc_dota_hero_dark_willow": {
+  "zh": "邪影芳灵",
+  "nicknames": [
+   "芳灵",
+   "小花",
+   "花仙"
+  ]
+ },
+ "npc_dota_hero_grimstroke": {
+  "zh": "天涯墨客",
+  "nicknames": [
+   "墨客"
+  ]
+ },
+ "npc_dota_hero_mars": {
+  "zh": "玛尔斯",
+  "nicknames": [
+   "火星"
+  ]
+ },
+ "npc_dota_hero_snapfire": {
+  "zh": "电炎绝手",
+  "nicknames": [
+   "老奶奶"
+  ]
+ },
+ "npc_dota_hero_void_spirit": {
+  "zh": "虚无之灵",
+  "nicknames": [
+   "空猫",
+   "紫猫"
+  ]
+ },
+ "npc_dota_hero_hoodwink": {
+  "zh": "森海飞霞",
+  "nicknames": [
+   "松鼠"
+  ]
+ },
+ "npc_dota_hero_dawnbreaker": {
+  "zh": "破晓辰星",
+  "nicknames": [
+   "大锤",
+   "破晓",
+   "锤妹"
+  ]
+ },
+ "npc_dota_hero_marci": {
+  "zh": "玛西",
+  "nicknames": []
+ },
+ "npc_dota_hero_primal_beast": {
+  "zh": "獸",
+  "nicknames": [
+   "原始野兽",
+   "兽"
+  ]
+ },
+ "npc_dota_hero_muerta": {
+  "zh": "琼英碧灵",
+  "nicknames": [
+   "亡灵女",
+   "奶绿"
+  ]
+ },
+ "npc_dota_hero_ringmaster": {
+  "zh": "百戏大王",
+  "nicknames": [
+   "小丑"
+  ]
+ },
+ "npc_dota_hero_kez": {
+  "zh": "凯",
+  "nicknames": []
+ },
+ "npc_dota_hero_largo": {
+  "zh": "朗戈",
+  "nicknames": []
+ },
+ "item_grisgris": {
+  "zh": "驱邪护符",
+  "nicknames": []
+ },
+ "item_black_grimoire": {
+  "zh": "Black Grimoire\n(Warlock)",
+  "nicknames": []
+ },
+ "item_abyssal_blade": {
+  "zh": "深渊之刃",
+  "nicknames": [
+   "大晕锤"
+  ]
+ },
+ "item_arcane_ring": {
+  "zh": "奥术指环",
+  "nicknames": []
+ },
+ "item_armlet": {
+  "zh": "莫尔迪基安的臂章",
+  "nicknames": [
+   "臂章"
+  ]
+ },
+ "item_assault": {
+  "zh": "强袭胸甲",
+  "nicknames": [
+   "强袭"
+  ]
+ },
+ "item_basher": {
+  "zh": "碎颅锤",
+  "nicknames": [
+   "晕锤"
+  ]
+ },
+ "item_belt_of_strength": {
+  "zh": "力量腰带",
+  "nicknames": [
+   "腰带"
+  ]
+ },
+ "item_bfury": {
+  "zh": "狂战斧",
+  "nicknames": []
+ },
+ "item_black_king_bar": {
+  "zh": "黑皇杖",
+  "nicknames": [
+   "BKB",
+   "黑黄",
+   "黑皇"
+  ]
+ },
+ "item_blade_mail": {
+  "zh": "刃甲",
+  "nicknames": [
+   "反甲"
+  ]
+ },
+ "item_blades_of_attack": {
+  "zh": "攻击之爪",
+  "nicknames": [
+   "爪子",
+   "攻击爪"
+  ]
+ },
+ "item_blade_of_alacrity": {
+  "zh": "欢欣之刃",
+  "nicknames": []
+ },
+ "item_blink": {
+  "zh": "闪烁匕首",
+  "nicknames": [
+   "跳刀",
+   "闪现"
+  ]
+ },
+ "item_bloodstone": {
+  "zh": "血精石",
+  "nicknames": [
+   "血精"
+  ]
+ },
+ "item_boots": {
+  "zh": "速度之靴",
+  "nicknames": []
+ },
+ "item_boots_of_elves": {
+  "zh": "精灵布带",
+  "nicknames": [
+   "布带"
+  ]
+ },
+ "item_bottle": {
+  "zh": "魔瓶",
+  "nicknames": [
+   "瓶子"
+  ]
+ },
+ "item_bottle_double_damage": {
+  "zh": "神符：增伤",
+  "nicknames": []
+ },
+ "item_bottle_haste": {
+  "zh": "神符：极速",
+  "nicknames": []
+ },
+ "item_bottle_illusion": {
+  "zh": "神符：幻象",
+  "nicknames": []
+ },
+ "item_bottle_invisible": {
+  "zh": "神符：隐身",
+  "nicknames": []
+ },
+ "item_bottle_regeneration": {
+  "zh": "神符：恢复",
+  "nicknames": []
+ },
+ "item_bottle_bounty": {
+  "zh": "神符：赏金",
+  "nicknames": []
+ },
+ "item_bottle_xp": {
+  "zh": "神符：智慧",
+  "nicknames": []
+ },
+ "item_bottle_shield": {
+  "zh": "神符：护盾",
+  "nicknames": []
+ },
+ "item_bottle_arcane": {
+  "zh": "神符：奥术",
+  "nicknames": []
+ },
+ "item_bottle_water": {
+  "zh": "神符：圣水",
+  "nicknames": []
+ },
+ "item_bracer": {
+  "zh": "护腕",
+  "nicknames": []
+ },
+ "item_branches": {
+  "zh": "铁树枝干",
+  "nicknames": [
+   "树枝"
+  ]
+ },
+ "item_broadsword": {
+  "zh": "阔剑",
+  "nicknames": []
+ },
+ "item_buckler": {
+  "zh": "玄冥盾牌",
+  "nicknames": [
+   "玄冥"
+  ]
+ },
+ "item_butterfly": {
+  "zh": "蝴蝶",
+  "nicknames": []
+ },
+ "item_chainmail": {
+  "zh": "锁子甲",
+  "nicknames": []
+ },
+ "item_circlet": {
+  "zh": "圆环",
+  "nicknames": [
+   "头环"
+  ]
+ },
+ "item_crown": {
+  "zh": "王冠",
+  "nicknames": []
+ },
+ "item_clarity": {
+  "zh": "净化药水",
+  "nicknames": []
+ },
+ "item_shawl": {
+  "zh": "披巾",
+  "nicknames": []
+ },
+ "item_cloak": {
+  "zh": "抗魔斗篷",
+  "nicknames": []
+ },
+ "item_faerie_fire": {
+  "zh": "仙灵之火",
+  "nicknames": [
+   "仙灵火"
+  ]
+ },
+ "item_infused_raindrop": {
+  "zh": "凝魂之露",
+  "nicknames": [
+   "眼泪",
+   "魂露"
+  ]
+ },
+ "item_banana": {
+  "zh": "香蕉",
+  "nicknames": []
+ },
+ "item_tome_of_knowledge": {
+  "zh": "知识之书",
+  "nicknames": []
+ },
+ "item_wind_lace": {
+  "zh": "风灵之纹",
+  "nicknames": [
+   "鞋垫",
+   "风灵"
+  ]
+ },
+ "item_blight_stone": {
+  "zh": "枯萎之珠",
+  "nicknames": [
+   "减甲球"
+  ]
+ },
+ "item_dragon_lance": {
+  "zh": "魔龙枪",
+  "nicknames": []
+ },
+ "item_aether_lens": {
+  "zh": "以太透镜",
+  "nicknames": [
+   "以太"
+  ]
+ },
+ "item_claymore": {
+  "zh": "大剑",
+  "nicknames": []
+ },
+ "item_meteor_hammer": {
+  "zh": "陨星锤",
+  "nicknames": [
+   "陨星",
+   "流星",
+   "锤子",
+   "磨塔"
+  ]
+ },
+ "item_nullifier": {
+  "zh": "否决坠饰",
+  "nicknames": []
+ },
+ "item_aeon_disk": {
+  "zh": "永恒之盘",
+  "nicknames": [
+   "盘子"
+  ]
+ },
+ "item_kaya": {
+  "zh": "慧光",
+  "nicknames": []
+ },
+ "item_recipe_kaya": {
+  "zh": "图纸（慧光）",
+  "nicknames": []
+ },
+ "item_kaya_and_sange": {
+  "zh": "散慧对剑",
+  "nicknames": [
+   "紫双刀"
+  ]
+ },
+ "item_recipe_kaya_and_sange": {
+  "zh": "图纸（散慧对剑）",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya": {
+  "zh": "慧夜对剑",
+  "nicknames": [
+   "蓝双刀"
+  ]
+ },
+ "item_recipe_yasha_and_kaya": {
+  "zh": "图纸（慧夜对剑）",
+  "nicknames": []
+ },
+ "item_recipe_trident": {
+  "zh": "图纸（三元重戟）",
+  "nicknames": []
+ },
+ "item_recipe_spirit_vessel": {
+  "zh": "图纸（魂之灵瓮）",
+  "nicknames": []
+ },
+ "item_spirit_vessel": {
+  "zh": "魂之灵瓮",
+  "nicknames": [
+   "灵瓮",
+   "大骨灰",
+   "骨灰"
+  ]
+ },
+ "item_recipe_essence_distiller": {
+  "zh": "图纸（精之灵器）",
+  "nicknames": []
+ },
+ "item_essence_distiller": {
+  "zh": "精之灵器",
+  "nicknames": []
+ },
+ "item_crimson_guard": {
+  "zh": "赤红甲",
+  "nicknames": []
+ },
+ "item_consecrated_wraps": {
+  "zh": "圣化护服",
+  "nicknames": []
+ },
+ "item_courier": {
+  "zh": "动物信使",
+  "nicknames": []
+ },
+ "item_crellas_crozier": {
+  "zh": "克莱拉牧杖",
+  "nicknames": []
+ },
+ "item_flying_courier": {
+  "zh": "飞行信使",
+  "nicknames": []
+ },
+ "item_wind_waker": {
+  "zh": "风之杖",
+  "nicknames": [
+   "大吹风",
+   "大风杖",
+   "吹风",
+   "风杖"
+  ]
+ },
+ "item_cyclone": {
+  "zh": "Eul的神圣法杖",
+  "nicknames": []
+ },
+ "item_dagon": {
+  "zh": "达贡之神力",
+  "nicknames": []
+ },
+ "item_dagon_2": {
+  "zh": "达贡之神力",
+  "nicknames": []
+ },
+ "item_dagon_3": {
+  "zh": "达贡之神力",
+  "nicknames": []
+ },
+ "item_dagon_4": {
+  "zh": "达贡之神力",
+  "nicknames": []
+ },
+ "item_dagon_5": {
+  "zh": "达贡之神力",
+  "nicknames": []
+ },
+ "item_demon_edge": {
+  "zh": "恶魔刀锋",
+  "nicknames": [
+   "恶魔"
+  ]
+ },
+ "item_desolator": {
+  "zh": "黯灭",
+  "nicknames": []
+ },
+ "item_diffusal_blade": {
+  "zh": "净魂之刃",
+  "nicknames": []
+ },
+ "item_dust": {
+  "zh": "显影之尘",
+  "nicknames": [
+   "粉"
+  ]
+ },
+ "item_eagle": {
+  "zh": "鹰歌弓",
+  "nicknames": [
+   "鹰角弓"
+  ]
+ },
+ "item_energy_booster": {
+  "zh": "能量之球",
+  "nicknames": [
+   "能量球"
+  ]
+ },
+ "item_ethereal_blade": {
+  "zh": "虚灵之刃",
+  "nicknames": [
+   "虚灵刀",
+   "虚灵"
+  ]
+ },
+ "item_flask": {
+  "zh": "治疗药膏",
+  "nicknames": [
+   "大药",
+   "药膏"
+  ]
+ },
+ "item_force_staff": {
+  "zh": "原力法杖",
+  "nicknames": []
+ },
+ "item_recipe_force_staff": {
+  "zh": "图纸（原力法杖）",
+  "nicknames": []
+ },
+ "item_gauntlets": {
+  "zh": "力量手套",
+  "nicknames": [
+   "拳套"
+  ]
+ },
+ "item_gem": {
+  "zh": "真视宝石",
+  "nicknames": [
+   "宝石"
+  ]
+ },
+ "item_ghost": {
+  "zh": "幽魂权杖",
+  "nicknames": [
+   "绿杖"
+  ]
+ },
+ "item_gloves": {
+  "zh": "加速手套",
+  "nicknames": []
+ },
+ "item_greater_crit": {
+  "zh": "代达罗斯之殇",
+  "nicknames": [
+   "大炮"
+  ]
+ },
+ "item_hand_of_midas": {
+  "zh": "迈达斯之手",
+  "nicknames": [
+   "迈达斯",
+   "点金手",
+   "点金",
+   "团队之手"
+  ]
+ },
+ "item_headdress": {
+  "zh": "恢复头巾",
+  "nicknames": [
+   "头巾"
+  ]
+ },
+ "item_heart": {
+  "zh": "恐鳌之心",
+  "nicknames": [
+   "恐鳌",
+   "龙心"
+  ]
+ },
+ "item_helm_of_iron_will": {
+  "zh": "铁意头盔",
+  "nicknames": [
+   "铁艺",
+   "铁意"
+  ]
+ },
+ "item_helm_of_the_dominator": {
+  "zh": "支配头盔",
+  "nicknames": []
+ },
+ "item_helm_of_the_overlord": {
+  "zh": "统御头盔",
+  "nicknames": [
+   "大支配"
+  ]
+ },
+ "item_hood_of_defiance": {
+  "zh": "挑战头巾",
+  "nicknames": []
+ },
+ "item_eternal_shroud": {
+  "zh": "永世法衣",
+  "nicknames": [
+   "法衣"
+  ]
+ },
+ "item_hyperstone": {
+  "zh": "振奋宝石",
+  "nicknames": [
+   "绿牌"
+  ]
+ },
+ "item_invis_sword": {
+  "zh": "影刃",
+  "nicknames": [
+   "隐刀",
+   "洛萨"
+  ]
+ },
+ "item_silver_edge": {
+  "zh": "白银之锋",
+  "nicknames": [
+   "大隐刀"
+  ]
+ },
+ "item_glimmer_cape": {
+  "zh": "微光披风",
+  "nicknames": [
+   "微光"
+  ]
+ },
+ "item_octarine_core": {
+  "zh": "玲珑心",
+  "nicknames": [
+   "减cd"
+  ]
+ },
+ "item_iron_talon": {
+  "zh": "寒铁钢爪",
+  "nicknames": [
+   "打野爪"
+  ]
+ },
+ "item_enchanted_mango": {
+  "zh": "魔法芒果",
+  "nicknames": [
+   "芒果"
+  ]
+ },
+ "item_famango": {
+  "zh": "疗伤莲花",
+  "nicknames": []
+ },
+ "item_great_famango": {
+  "zh": "大疗伤莲花",
+  "nicknames": []
+ },
+ "item_greater_famango": {
+  "zh": "巨大疗伤莲花",
+  "nicknames": []
+ },
+ "item_lotus_orb": {
+  "zh": "清莲宝珠",
+  "nicknames": [
+   "莲花",
+   "青莲",
+   "清莲"
+  ]
+ },
+ "item_guardian_greaves": {
+  "zh": "卫士胫甲",
+  "nicknames": [
+   "梅肯鞋",
+   "大鞋"
+  ]
+ },
+ "item_ward_dispenser": {
+  "zh": "侦察·岗哨守卫",
+  "nicknames": []
+ },
+ "item_solar_crest": {
+  "zh": "炎阳纹章",
+  "nicknames": [
+   "大勋章",
+   "纹章"
+  ]
+ },
+ "item_javelin": {
+  "zh": "标枪",
+  "nicknames": []
+ },
+ "item_lesser_crit": {
+  "zh": "水晶剑",
+  "nicknames": []
+ },
+ "item_lifesteal": {
+  "zh": "吸血面具",
+  "nicknames": []
+ },
+ "item_voodoo_mask": {
+  "zh": "巫毒面具",
+  "nicknames": []
+ },
+ "item_sphere": {
+  "zh": "林肯法球",
+  "nicknames": [
+   "林肯"
+  ]
+ },
+ "item_maelstrom": {
+  "zh": "漩涡",
+  "nicknames": [
+   "电锤"
+  ]
+ },
+ "item_magic_stick": {
+  "zh": "魔棒",
+  "nicknames": []
+ },
+ "item_magic_wand": {
+  "zh": "魔杖",
+  "nicknames": []
+ },
+ "item_manta": {
+  "zh": "幻影斧",
+  "nicknames": [
+   "分身斧"
+  ]
+ },
+ "item_mantle": {
+  "zh": "智力斗篷",
+  "nicknames": [
+   "斗篷"
+  ]
+ },
+ "item_mask_of_madness": {
+  "zh": "疯狂面具",
+  "nicknames": [
+   "疯脸"
+  ]
+ },
+ "item_mekansm": {
+  "zh": "梅肯斯姆",
+  "nicknames": [
+   "梅肯",
+   "奶推"
+  ]
+ },
+ "item_mithril_hammer": {
+  "zh": "秘银锤",
+  "nicknames": [
+   "秘银",
+   "小电"
+  ]
+ },
+ "item_mjollnir": {
+  "zh": "雷神之锤",
+  "nicknames": [
+   "雷锤",
+   "大电锤",
+   "大电"
+  ]
+ },
+ "item_monkey_king_bar": {
+  "zh": "金箍棒",
+  "nicknames": [
+   "猴棒",
+   "MKB"
+  ]
+ },
+ "item_mystic_staff": {
+  "zh": "神秘法杖",
+  "nicknames": [
+   "法杖"
+  ]
+ },
+ "item_necronomicon": {
+  "zh": "死灵书",
+  "nicknames": []
+ },
+ "item_necronomicon_2": {
+  "zh": "死灵书",
+  "nicknames": []
+ },
+ "item_necronomicon_3": {
+  "zh": "死灵书",
+  "nicknames": []
+ },
+ "item_null_talisman": {
+  "zh": "空灵挂件",
+  "nicknames": [
+   "挂件"
+  ]
+ },
+ "item_hurricane_pike": {
+  "zh": "飓风长戟",
+  "nicknames": [
+   "大推推",
+   "推推"
+  ]
+ },
+ "item_oblivion_staff": {
+  "zh": "空明杖",
+  "nicknames": [
+   "空明"
+  ]
+ },
+ "item_witch_blade": {
+  "zh": "巫师之刃",
+  "nicknames": [
+   "巫师刃"
+  ]
+ },
+ "item_ogre_axe": {
+  "zh": "食人魔之斧",
+  "nicknames": []
+ },
+ "item_orchid": {
+  "zh": "紫怨",
+  "nicknames": []
+ },
+ "item_bloodthorn": {
+  "zh": "血棘",
+  "nicknames": [
+   "大紫怨",
+   "血辣"
+  ]
+ },
+ "item_pers": {
+  "zh": "坚韧球",
+  "nicknames": []
+ },
+ "item_phase_boots": {
+  "zh": "相位鞋",
+  "nicknames": [
+   "相位"
+  ]
+ },
+ "item_pipe": {
+  "zh": "洞察烟斗",
+  "nicknames": [
+   "烟斗",
+   "长笛"
+  ]
+ },
+ "item_platemail": {
+  "zh": "板甲",
+  "nicknames": []
+ },
+ "item_point_booster": {
+  "zh": "精气之球",
+  "nicknames": [
+   "精气球"
+  ]
+ },
+ "item_poor_mans_shield": {
+  "zh": "穷鬼盾",
+  "nicknames": []
+ },
+ "item_power_treads": {
+  "zh": "动力鞋",
+  "nicknames": [
+   "假腿"
+  ]
+ },
+ "item_power_treads_str": {
+  "zh": "力量",
+  "nicknames": []
+ },
+ "item_power_treads_agi": {
+  "zh": "敏捷",
+  "nicknames": []
+ },
+ "item_power_treads_int": {
+  "zh": "智力",
+  "nicknames": []
+ },
+ "item_quarterstaff": {
+  "zh": "短棍",
+  "nicknames": []
+ },
+ "item_blitz_knuckles": {
+  "zh": "闪电指套",
+  "nicknames": [
+   "指套"
+  ]
+ },
+ "item_echo_sabre": {
+  "zh": "回音战刃",
+  "nicknames": [
+   "回音刀"
+  ]
+ },
+ "item_quelling_blade": {
+  "zh": "压制之刃",
+  "nicknames": [
+   "补刀斧"
+  ]
+ },
+ "item_radiance": {
+  "zh": "辉耀",
+  "nicknames": []
+ },
+ "item_rapier": {
+  "zh": "圣剑",
+  "nicknames": []
+ },
+ "item_recipe_rapier": {
+  "zh": "图纸（圣剑）",
+  "nicknames": []
+ },
+ "item_reaver": {
+  "zh": "掠夺者之斧",
+  "nicknames": [
+   "大斧头",
+   "力量斧",
+   "掠夺斧"
+  ]
+ },
+ "item_refresher": {
+  "zh": "刷新球",
+  "nicknames": []
+ },
+ "item_splintmail": {
+  "zh": "片甲",
+  "nicknames": []
+ },
+ "item_aegis": {
+  "zh": "不朽之守护",
+  "nicknames": []
+ },
+ "item_cheese": {
+  "zh": "奶酪",
+  "nicknames": []
+ },
+ "item_refresher_shard": {
+  "zh": "刷新球碎片",
+  "nicknames": []
+ },
+ "item_relic": {
+  "zh": "圣者遗物",
+  "nicknames": [
+   "遗物"
+  ]
+ },
+ "item_ring_of_basilius": {
+  "zh": "王者之戒",
+  "nicknames": [
+   "王者戒",
+   "王者",
+   "圣殿"
+  ]
+ },
+ "item_recipe_ring_of_basilius": {
+  "zh": "图纸（王者之戒）",
+  "nicknames": []
+ },
+ "item_holy_locket": {
+  "zh": "圣洁吊坠",
+  "nicknames": [
+   "吊坠",
+   "大魔棒",
+   "大大魔棒"
+  ]
+ },
+ "item_recipe_holy_locket": {
+  "zh": "图纸（圣洁吊坠）",
+  "nicknames": []
+ },
+ "item_recipe_witch_blade": {
+  "zh": "图纸（巫师之刃）",
+  "nicknames": []
+ },
+ "item_ring_of_health": {
+  "zh": "治疗指环",
+  "nicknames": [
+   "回五",
+   "回5"
+  ]
+ },
+ "item_ring_of_protection": {
+  "zh": "守护指环",
+  "nicknames": []
+ },
+ "item_ring_of_regen": {
+  "zh": "回复戒指",
+  "nicknames": [
+   "回2"
+  ]
+ },
+ "item_ring_of_tarrasque": {
+  "zh": "恐鳌之戒",
+  "nicknames": [
+   "恐鳌戒",
+   "a牌"
+  ]
+ },
+ "item_robe": {
+  "zh": "法师长袍",
+  "nicknames": [
+   "长袍"
+  ]
+ },
+ "item_rod_of_atos": {
+  "zh": "阿托斯之棍",
+  "nicknames": [
+   "阿托斯"
+  ]
+ },
+ "item_sange": {
+  "zh": "散华",
+  "nicknames": []
+ },
+ "item_heavens_halberd": {
+  "zh": "天堂之戟",
+  "nicknames": [
+   "天堂"
+  ]
+ },
+ "item_sange_and_yasha": {
+  "zh": "散夜对剑",
+  "nicknames": [
+   "黄双刀"
+  ]
+ },
+ "item_satanic": {
+  "zh": "撒旦之邪力",
+  "nicknames": [
+   "大吸",
+   "撒旦"
+  ]
+ },
+ "item_sheepstick": {
+  "zh": "邪恶镰刀",
+  "nicknames": [
+   "羊刀"
+  ]
+ },
+ "item_recipe_sheepstick": {
+  "zh": "图纸（邪恶镰刀）",
+  "nicknames": []
+ },
+ "item_shivas_guard": {
+  "zh": "希瓦的守护",
+  "nicknames": [
+   "西瓦",
+   "希瓦",
+   "冰甲"
+  ]
+ },
+ "item_skadi": {
+  "zh": "斯嘉蒂之眼",
+  "nicknames": [
+   "斯嘉蒂",
+   "冰眼"
+  ]
+ },
+ "item_recipe_skadi": {
+  "zh": "图纸（斯嘉蒂之眼）",
+  "nicknames": []
+ },
+ "item_slippers": {
+  "zh": "敏捷便鞋",
+  "nicknames": [
+   "袜子"
+  ]
+ },
+ "item_sobi_mask": {
+  "zh": "贤者面罩",
+  "nicknames": []
+ },
+ "item_soul_booster": {
+  "zh": "振魂石",
+  "nicknames": [
+   "镇魂石"
+  ]
+ },
+ "item_soul_ring": {
+  "zh": "灵魂之戒",
+  "nicknames": [
+   "婚戒",
+   "魂戒"
+  ]
+ },
+ "item_staff_of_wizardry": {
+  "zh": "魔力法杖",
+  "nicknames": []
+ },
+ "item_stout_shield": {
+  "zh": "圆盾",
+  "nicknames": []
+ },
+ "item_moon_shard": {
+  "zh": "银月之晶",
+  "nicknames": [
+   "银月"
+  ]
+ },
+ "item_talisman_of_evasion": {
+  "zh": "闪避护符",
+  "nicknames": []
+ },
+ "item_tango": {
+  "zh": "树之祭祀",
+  "nicknames": [
+   "吃树"
+  ]
+ },
+ "item_tango_single": {
+  "zh": "树之祭祀（共享）",
+  "nicknames": []
+ },
+ "item_tpscroll": {
+  "zh": "回城卷轴",
+  "nicknames": [
+   "回城",
+   "回程"
+  ]
+ },
+ "item_boots_of_bearing": {
+  "zh": "宽容之靴",
+  "nicknames": [
+   "大绿鞋"
+  ]
+ },
+ "item_tranquil_boots": {
+  "zh": "静谧之鞋",
+  "nicknames": [
+   "绿鞋"
+  ]
+ },
+ "item_recipe_tranquil_boots": {
+  "zh": "图纸（静谧之鞋）",
+  "nicknames": []
+ },
+ "item_travel_boots": {
+  "zh": "远行鞋",
+  "nicknames": [
+   "团队之鞋"
+  ]
+ },
+ "item_recipe_travel_boots": {
+  "zh": "图纸（远行鞋）",
+  "nicknames": []
+ },
+ "item_travel_boots_2": {
+  "zh": "远行鞋",
+  "nicknames": [
+   "飞鞋",
+   "大飞",
+   "大飞鞋"
+  ]
+ },
+ "item_ultimate_orb": {
+  "zh": "极限法球",
+  "nicknames": [
+   "极限球"
+  ]
+ },
+ "item_ultimate_scepter": {
+  "zh": "阿哈利姆神杖",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_2": {
+  "zh": "阿哈利姆福佑",
+  "nicknames": [
+   "蓝杖"
+  ]
+ },
+ "item_ultimate_scepter_roshan": {
+  "zh": "阿哈利姆福佑 - 肉山",
+  "nicknames": []
+ },
+ "item_recipe_ultimate_scepter_2": {
+  "zh": "阿哈利姆福佑",
+  "nicknames": []
+ },
+ "item_aghanims_shard": {
+  "zh": "阿哈利姆魔晶",
+  "nicknames": [
+   "魔晶"
+  ]
+ },
+ "item_aghanims_shard_roshan": {
+  "zh": "阿哈利姆魔晶 - 消耗品",
+  "nicknames": []
+ },
+ "item_aghanims_shard_2": {
+  "zh": "阿哈利姆魔晶（已消耗）",
+  "nicknames": []
+ },
+ "item_recipe_aghanims_shard": {
+  "zh": "图纸（阿哈利姆魔晶）",
+  "nicknames": []
+ },
+ "item_recipe_aghanims_shard_2": {
+  "zh": "图纸（阿哈利姆魔晶已消耗）",
+  "nicknames": []
+ },
+ "item_urn_of_shadows": {
+  "zh": "影之灵龛",
+  "nicknames": [
+   "骨灰盒"
+  ]
+ },
+ "item_recipe_urn_of_shadows": {
+  "zh": "图纸（影之灵龛）",
+  "nicknames": []
+ },
+ "item_recipe_falcon_blade": {
+  "zh": "图纸（猎鹰战刃）",
+  "nicknames": []
+ },
+ "item_recipe_mage_slayer": {
+  "zh": "图纸（巫师之刃）",
+  "nicknames": []
+ },
+ "item_recipe_overwhelming_blink": {
+  "zh": "图纸（盛势闪光）",
+  "nicknames": []
+ },
+ "item_recipe_swift_blink": {
+  "zh": "图纸（迅疾闪光）",
+  "nicknames": []
+ },
+ "item_recipe_arcane_blink": {
+  "zh": "图纸（秘奥闪光）",
+  "nicknames": []
+ },
+ "item_recipe_boots_of_bearing": {
+  "zh": "图纸（宽容之靴）",
+  "nicknames": []
+ },
+ "item_recipe_ethereal_blade": {
+  "zh": "图纸（虚灵之刃）",
+  "nicknames": []
+ },
+ "item_recipe_crellas_crozier": {
+  "zh": "图纸（克莱拉牧杖）",
+  "nicknames": []
+ },
+ "item_wizard_hat": {
+  "zh": "巫师帽",
+  "nicknames": []
+ },
+ "item_fluffy_hat": {
+  "zh": "毛毛帽",
+  "nicknames": []
+ },
+ "item_falcon_blade": {
+  "zh": "猎鹰战刃",
+  "nicknames": [
+   "猎鹰",
+   "骗钱刀"
+  ]
+ },
+ "item_mage_slayer": {
+  "zh": "法师克星",
+  "nicknames": [
+   "法克"
+  ]
+ },
+ "item_overwhelming_blink": {
+  "zh": "盛势闪光",
+  "nicknames": [
+   "力量跳",
+   "力跳"
+  ]
+ },
+ "item_swift_blink": {
+  "zh": "迅疾闪光",
+  "nicknames": [
+   "敏捷跳",
+   "敏跳"
+  ]
+ },
+ "item_arcane_blink": {
+  "zh": "秘奥闪光",
+  "nicknames": [
+   "智力跳",
+   "智跳"
+  ]
+ },
+ "item_vanguard": {
+  "zh": "先锋盾",
+  "nicknames": [
+   "先锋"
+  ]
+ },
+ "item_vitality_booster": {
+  "zh": "活力之球",
+  "nicknames": [
+   "活力球"
+  ]
+ },
+ "item_vladmir": {
+  "zh": "弗拉迪米尔的祭品",
+  "nicknames": [
+   "祭品",
+   "弗拉迪米尔"
+  ]
+ },
+ "item_recipe_vladmir": {
+  "zh": "图纸（弗拉迪米尔的祭品）",
+  "nicknames": []
+ },
+ "item_wraith_pact": {
+  "zh": "怨灵之契",
+  "nicknames": []
+ },
+ "item_void_stone": {
+  "zh": "虚无宝石",
+  "nicknames": [
+   "回蓝"
+  ]
+ },
+ "item_tiara_of_selemene": {
+  "zh": "赛莉蒙妮之冠",
+  "nicknames": [
+   "赛莉蒙妮"
+  ]
+ },
+ "item_ward_observer": {
+  "zh": "侦察守卫",
+  "nicknames": [
+   "假眼"
+  ]
+ },
+ "item_ward_sentry": {
+  "zh": "岗哨守卫",
+  "nicknames": [
+   "真眼"
+  ]
+ },
+ "item_wraith_band": {
+  "zh": "怨灵系带",
+  "nicknames": []
+ },
+ "item_yasha": {
+  "zh": "夜叉",
+  "nicknames": []
+ },
+ "item_arcane_boots": {
+  "zh": "奥术鞋",
+  "nicknames": [
+   "秘法",
+   "秘法鞋"
+  ]
+ },
+ "item_orb_of_venom": {
+  "zh": "淬毒之珠",
+  "nicknames": [
+   "毒球"
+  ]
+ },
+ "item_ancient_janggo": {
+  "zh": "韧鼓",
+  "nicknames": [
+   "战鼓"
+  ]
+ },
+ "item_medallion_of_courage": {
+  "zh": "勇气勋章",
+  "nicknames": []
+ },
+ "item_smoke_of_deceit": {
+  "zh": "诡计之雾",
+  "nicknames": [
+   "诡计",
+   "雾",
+   "开雾",
+   "开5"
+  ]
+ },
+ "item_veil_of_discord": {
+  "zh": "纷争面纱",
+  "nicknames": [
+   "纷争",
+   "面纱"
+  ]
+ },
+ "item_revenants_brooch": {
+  "zh": "英灵胸针",
+  "nicknames": [
+   "胸针",
+   "英灵"
+  ]
+ },
+ "item_devastator": {
+  "zh": "圣斧",
+  "nicknames": [
+   "大巫师",
+   "绿斧头",
+   "绿斧"
+  ]
+ },
+ "item_ring_of_aquila": {
+  "zh": "天鹰之戒",
+  "nicknames": []
+ },
+ "item_shadow_amulet": {
+  "zh": "暗影护符",
+  "nicknames": [
+   "小微光",
+   "小隐刀"
+  ]
+ },
+ "item_river_painter": {
+  "zh": "河水药瓶：液铬",
+  "nicknames": []
+ },
+ "item_river_painter2": {
+  "zh": "河水药瓶：干涸",
+  "nicknames": []
+ },
+ "item_river_painter3": {
+  "zh": "河水药瓶：烂泥",
+  "nicknames": []
+ },
+ "item_river_painter4": {
+  "zh": "河水药瓶：油污",
+  "nicknames": []
+ },
+ "item_river_painter5": {
+  "zh": "河水药瓶：导电",
+  "nicknames": []
+ },
+ "item_river_painter6": {
+  "zh": "河水药瓶：魔水",
+  "nicknames": []
+ },
+ "item_river_painter7": {
+  "zh": "河水药瓶：血红",
+  "nicknames": []
+ },
+ "item_mutation_tombstone": {
+  "zh": "墓碑",
+  "nicknames": []
+ },
+ "item_pocket_tower": {
+  "zh": "袖珍高塔",
+  "nicknames": []
+ },
+ "item_pocket_roshan": {
+  "zh": "袖珍肉山",
+  "nicknames": []
+ },
+ "item_keen_optic": {
+  "zh": "基恩镜片",
+  "nicknames": []
+ },
+ "item_grove_bow": {
+  "zh": "林野长弓",
+  "nicknames": []
+ },
+ "item_quickening_charm": {
+  "zh": "加速护符",
+  "nicknames": []
+ },
+ "item_philosophers_stone": {
+  "zh": "贤者石",
+  "nicknames": []
+ },
+ "item_force_boots": {
+  "zh": "原力鞋",
+  "nicknames": []
+ },
+ "item_desolator_2": {
+  "zh": "寂灭",
+  "nicknames": []
+ },
+ "item_phoenix_ash": {
+  "zh": "凤凰余烬",
+  "nicknames": []
+ },
+ "item_seer_stone": {
+  "zh": "先哲之石",
+  "nicknames": []
+ },
+ "item_elixer": {
+  "zh": "万灵药水",
+  "nicknames": []
+ },
+ "item_vampire_fangs": {
+  "zh": "吸血鬼獠牙",
+  "nicknames": []
+ },
+ "item_craggy_coat": {
+  "zh": "崎岖外衣",
+  "nicknames": []
+ },
+ "item_greater_faerie_fire": {
+  "zh": "高级仙灵之火",
+  "nicknames": []
+ },
+ "item_timeless_relic": {
+  "zh": "永恒遗物",
+  "nicknames": []
+ },
+ "item_mirror_shield": {
+  "zh": "神镜盾",
+  "nicknames": []
+ },
+ "item_ironwood_tree": {
+  "zh": "铁树之木",
+  "nicknames": []
+ },
+ "item_royal_jelly": {
+  "zh": "蜂王浆",
+  "nicknames": []
+ },
+ "item_pupils_gift": {
+  "zh": "学徒之礼",
+  "nicknames": []
+ },
+ "item_tome_of_aghanim": {
+  "zh": "阿哈利姆之书",
+  "nicknames": []
+ },
+ "item_repair_kit": {
+  "zh": "维修器具",
+  "nicknames": []
+ },
+ "item_mind_breaker": {
+  "zh": "智灭",
+  "nicknames": []
+ },
+ "item_third_eye": {
+  "zh": "第三只眼",
+  "nicknames": []
+ },
+ "item_spell_prism": {
+  "zh": "法术棱镜",
+  "nicknames": []
+ },
+ "item_fusion_rune": {
+  "zh": "聚合神符",
+  "nicknames": []
+ },
+ "item_princes_knife": {
+  "zh": "亲王短刀",
+  "nicknames": []
+ },
+ "item_spider_legs": {
+  "zh": "网虫腿",
+  "nicknames": []
+ },
+ "item_helm_of_the_undying": {
+  "zh": "不朽尸王的头盔",
+  "nicknames": []
+ },
+ "item_mango_tree": {
+  "zh": "芒果树",
+  "nicknames": []
+ },
+ "item_vambrace": {
+  "zh": "臂甲",
+  "nicknames": []
+ },
+ "item_witless_shako": {
+  "zh": "无知小帽",
+  "nicknames": []
+ },
+ "item_imp_claw": {
+  "zh": "魔童之爪",
+  "nicknames": []
+ },
+ "item_flicker": {
+  "zh": "闪灵",
+  "nicknames": []
+ },
+ "item_spy_gadget": {
+  "zh": "望远镜",
+  "nicknames": []
+ },
+ "item_ocean_heart": {
+  "zh": "海洋之心",
+  "nicknames": []
+ },
+ "item_broom_handle": {
+  "zh": "扫帚柄",
+  "nicknames": []
+ },
+ "item_trusty_shovel": {
+  "zh": "可靠铁铲",
+  "nicknames": []
+ },
+ "item_nether_shawl": {
+  "zh": "幽冥披巾",
+  "nicknames": []
+ },
+ "item_dragon_scale": {
+  "zh": "炎龙之鳞",
+  "nicknames": []
+ },
+ "item_essence_ring": {
+  "zh": "精华指环",
+  "nicknames": []
+ },
+ "item_clumsy_net": {
+  "zh": "笨拙渔网",
+  "nicknames": []
+ },
+ "item_enchanted_quiver": {
+  "zh": "魔力箭袋",
+  "nicknames": []
+ },
+ "item_ninja_gear": {
+  "zh": "忍者用具",
+  "nicknames": []
+ },
+ "item_illusionsts_cape": {
+  "zh": "幻术师披风",
+  "nicknames": []
+ },
+ "item_havoc_hammer": {
+  "zh": "浩劫巨锤",
+  "nicknames": []
+ },
+ "item_panic_button": {
+  "zh": "神妙明灯",
+  "nicknames": []
+ },
+ "item_apex": {
+  "zh": "极",
+  "nicknames": []
+ },
+ "item_ballista": {
+  "zh": "弩炮",
+  "nicknames": []
+ },
+ "item_woodland_striders": {
+  "zh": "林地神行靴",
+  "nicknames": []
+ },
+ "item_trident": {
+  "zh": "三元重戟",
+  "nicknames": []
+ },
+ "item_demonicon": {
+  "zh": "冥灵书",
+  "nicknames": []
+ },
+ "item_fallen_sky": {
+  "zh": "天崩",
+  "nicknames": []
+ },
+ "item_recipe_fallen_sky": {
+  "zh": "图纸（天崩）",
+  "nicknames": []
+ },
+ "item_pirate_hat": {
+  "zh": "海盗帽",
+  "nicknames": []
+ },
+ "item_ex_machina": {
+  "zh": "机械之心",
+  "nicknames": []
+ },
+ "item_faded_broach": {
+  "zh": "暗淡胸针",
+  "nicknames": []
+ },
+ "item_paladin_sword": {
+  "zh": "骑士剑",
+  "nicknames": []
+ },
+ "item_minotaur_horn": {
+  "zh": "恶牛角",
+  "nicknames": []
+ },
+ "item_orb_of_destruction": {
+  "zh": "毁灭灵球",
+  "nicknames": []
+ },
+ "item_the_leveller": {
+  "zh": "平世剑",
+  "nicknames": []
+ },
+ "item_titan_sliver": {
+  "zh": "巨神残铁",
+  "nicknames": []
+ },
+ "item_chipped_vest": {
+  "zh": "碎裂背心",
+  "nicknames": []
+ },
+ "item_orb_of_corrosion": {
+  "zh": "腐蚀之珠",
+  "nicknames": [
+   "大毒球",
+   "大冰球"
+  ]
+ },
+ "item_orb_of_frost": {
+  "zh": "冰霜之珠",
+  "nicknames": [
+   "冰球",
+   "小冰眼"
+  ]
+ },
+ "item_elven_tunic": {
+  "zh": "精灵外衣",
+  "nicknames": []
+ },
+ "item_cloak_of_flames": {
+  "zh": "火焰斗篷",
+  "nicknames": []
+ },
+ "item_trickster_cloak": {
+  "zh": "欺诈师斗篷",
+  "nicknames": []
+ },
+ "item_possessed_mask": {
+  "zh": "附魂面具",
+  "nicknames": []
+ },
+ "item_force_field": {
+  "zh": "秘术师铠甲",
+  "nicknames": []
+ },
+ "item_black_powder_bag": {
+  "zh": "雷火弹",
+  "nicknames": []
+ },
+ "item_ascetic_cap": {
+  "zh": "简朴短帽",
+  "nicknames": []
+ },
+ "item_pogo_stick": {
+  "zh": "杂技玩具",
+  "nicknames": []
+ },
+ "item_paintball": {
+  "zh": "仙灵榴弹",
+  "nicknames": []
+ },
+ "item_heavy_blade": {
+  "zh": "行巫之祸",
+  "nicknames": []
+ },
+ "item_unstable_wand": {
+  "zh": "豚杆",
+  "nicknames": []
+ },
+ "item_misericorde": {
+  "zh": "飞贼之刃",
+  "nicknames": []
+ },
+ "item_stormcrafter": {
+  "zh": "风暴宝器",
+  "nicknames": []
+ },
+ "item_mysterious_hat": {
+  "zh": "仙灵饰品",
+  "nicknames": []
+ },
+ "item_penta_edged_sword": {
+  "zh": "五锋长剑",
+  "nicknames": []
+ },
+ "item_gungir": {
+  "zh": "缚灵索",
+  "nicknames": [
+   "雷托斯"
+  ]
+ },
+ "item_psychic_headband": {
+  "zh": "通灵头带",
+  "nicknames": []
+ },
+ "item_ceremonial_robe": {
+  "zh": "祭礼长袍",
+  "nicknames": []
+ },
+ "item_book_of_shadows": {
+  "zh": "暗影邪典",
+  "nicknames": []
+ },
+ "item_giants_ring": {
+  "zh": "巨人之戒",
+  "nicknames": []
+ },
+ "item_bullwhip": {
+  "zh": "凌厉长鞭",
+  "nicknames": []
+ },
+ "item_quicksilver_amulet": {
+  "zh": "银闪护符",
+  "nicknames": []
+ },
+ "item_seeds_of_serenity": {
+  "zh": "宁静种籽",
+  "nicknames": []
+ },
+ "item_lance_of_pursuit": {
+  "zh": "追击之矛",
+  "nicknames": []
+ },
+ "item_occult_bracelet": {
+  "zh": "玄奥手镯",
+  "nicknames": []
+ },
+ "item_ogre_seal_totem": {
+  "zh": "食人魔海豹图腾",
+  "nicknames": []
+ },
+ "item_eye_of_the_vizier": {
+  "zh": "维齐尔之眼",
+  "nicknames": []
+ },
+ "item_specialists_array": {
+  "zh": "行家阵列",
+  "nicknames": []
+ },
+ "item_dagger_of_ristul": {
+  "zh": "瑞斯图尔尖匕",
+  "nicknames": []
+ },
+ "item_disperser": {
+  "zh": "散魂剑",
+  "nicknames": [
+   "净化刀",
+   "散失",
+   "大散失"
+  ]
+ },
+ "item_harpoon": {
+  "zh": "鱼叉",
+  "nicknames": []
+ },
+ "item_phylactery": {
+  "zh": "灵匣",
+  "nicknames": []
+ },
+ "item_angels_demise": {
+  "zh": "绝刃",
+  "nicknames": []
+ },
+ "item_diadem": {
+  "zh": "宝冕",
+  "nicknames": []
+ },
+ "item_defiant_shell": {
+  "zh": "不羁甲壳",
+  "nicknames": []
+ },
+ "item_blood_grenade": {
+  "zh": "血腥榴弹",
+  "nicknames": [
+   "榴弹"
+  ]
+ },
+ "item_spark_of_courage": {
+  "zh": "勇气之光",
+  "nicknames": []
+ },
+ "item_duelist_gloves": {
+  "zh": "决斗家手套",
+  "nicknames": []
+ },
+ "item_ancient_guardian": {
+  "zh": "遗迹守护者",
+  "nicknames": []
+ },
+ "item_dandelion_amulet": {
+  "zh": "蒲公英护符",
+  "nicknames": []
+ },
+ "item_safety_bubble": {
+  "zh": "安全泡泡",
+  "nicknames": []
+ },
+ "item_whisper_of_the_dread": {
+  "zh": "邪道私语",
+  "nicknames": []
+ },
+ "item_nemesis_curse": {
+  "zh": "天诛之咒",
+  "nicknames": []
+ },
+ "item_avianas_feather": {
+  "zh": "艾维娜之羽",
+  "nicknames": []
+ },
+ "item_unwavering_condition": {
+  "zh": "坚毅之件",
+  "nicknames": []
+ },
+ "item_vindicators_axe": {
+  "zh": "正义之斧",
+  "nicknames": []
+ },
+ "item_martyrs_plate": {
+  "zh": "烈士鳞甲",
+  "nicknames": []
+ },
+ "item_cornucopia": {
+  "zh": "丰饶之环",
+  "nicknames": []
+ },
+ "item_tier1_token": {
+  "zh": "第1级代币",
+  "nicknames": []
+ },
+ "item_tier2_token": {
+  "zh": "第2级代币",
+  "nicknames": []
+ },
+ "item_tier3_token": {
+  "zh": "第3级代币",
+  "nicknames": []
+ },
+ "item_tier4_token": {
+  "zh": "第4级代币",
+  "nicknames": []
+ },
+ "item_tier5_token": {
+  "zh": "第5级代币",
+  "nicknames": []
+ },
+ "item_pavise": {
+  "zh": "长盾",
+  "nicknames": []
+ },
+ "item_gossamer_cape": {
+  "zh": "蛛丝斗篷",
+  "nicknames": []
+ },
+ "item_light_collector": {
+  "zh": "集光器",
+  "nicknames": []
+ },
+ "item_rattlecage": {
+  "zh": "回响之笼",
+  "nicknames": []
+ },
+ "item_doubloon": {
+  "zh": "双面币",
+  "nicknames": []
+ },
+ "item_roshans_banner": {
+  "zh": "肉山的战旗",
+  "nicknames": []
+ },
+ "item_enhancement_mystical": {
+  "zh": "神秘",
+  "nicknames": []
+ },
+ "item_enhancement_brawny": {
+  "zh": "壮实",
+  "nicknames": []
+ },
+ "item_enhancement_alert": {
+  "zh": "警觉",
+  "nicknames": []
+ },
+ "item_enhancement_tough": {
+  "zh": "坚强",
+  "nicknames": []
+ },
+ "item_enhancement_quickened": {
+  "zh": "迅速",
+  "nicknames": []
+ },
+ "item_enhancement_keen_eyed": {
+  "zh": "犀利",
+  "nicknames": []
+ },
+ "item_enhancement_vast": {
+  "zh": "高远",
+  "nicknames": []
+ },
+ "item_enhancement_greedy": {
+  "zh": "贪婪",
+  "nicknames": []
+ },
+ "item_enhancement_vampiric": {
+  "zh": "吸血鬼",
+  "nicknames": []
+ },
+ "item_enhancement_timeless": {
+  "zh": "永恒",
+  "nicknames": []
+ },
+ "item_enhancement_titanic": {
+  "zh": "巨神",
+  "nicknames": []
+ },
+ "item_enhancement_crude": {
+  "zh": "粗暴",
+  "nicknames": []
+ },
+ "item_enhancement_feverish": {
+  "zh": "狂热",
+  "nicknames": []
+ },
+ "item_enhancement_fleetfooted": {
+  "zh": "捷足",
+  "nicknames": []
+ },
+ "item_enhancement_audacious": {
+  "zh": "冒险",
+  "nicknames": []
+ },
+ "item_enhancement_evolved": {
+  "zh": "进化",
+  "nicknames": []
+ },
+ "item_enhancement_boundless": {
+  "zh": "无边",
+  "nicknames": []
+ },
+ "item_enhancement_wise": {
+  "zh": "睿智",
+  "nicknames": []
+ },
+ "item_mana_draught": {
+  "zh": "魔力药水",
+  "nicknames": []
+ },
+ "item_rippers_lash": {
+  "zh": "撕裂之鞭",
+  "nicknames": []
+ },
+ "item_crippling_crossbow": {
+  "zh": "致残之弩",
+  "nicknames": []
+ },
+ "item_gale_guard": {
+  "zh": "烈风护体",
+  "nicknames": []
+ },
+ "item_gunpowder_gauntlets": {
+  "zh": "火药手套",
+  "nicknames": []
+ },
+ "item_searing_signet": {
+  "zh": "炽热纹章",
+  "nicknames": []
+ },
+ "item_serrated_shiv": {
+  "zh": "锯齿短刀",
+  "nicknames": []
+ },
+ "item_polliwog_charm": {
+  "zh": "蝌蚪护符",
+  "nicknames": []
+ },
+ "item_unrelenting_eye": {
+  "zh": "不屈之眼",
+  "nicknames": []
+ },
+ "item_magnifying_monocle": {
+  "zh": "放大单片镜",
+  "nicknames": []
+ },
+ "item_pyrrhic_cloak": {
+  "zh": "皮洛士斗篷",
+  "nicknames": []
+ },
+ "item_kobold_cup": {
+  "zh": "狗头人酒杯",
+  "nicknames": []
+ },
+ "item_dormant_curio": {
+  "zh": "休眠珍品",
+  "nicknames": []
+ },
+ "item_jidi_pollen_bag": {
+  "zh": "基迪花粉袋",
+  "nicknames": []
+ },
+ "item_outworld_staff": {
+  "zh": "殁境法杖",
+  "nicknames": []
+ },
+ "item_dezun_bloodrite": {
+  "zh": "德尊血式",
+  "nicknames": []
+ },
+ "item_giant_maul": {
+  "zh": "巨人之槌",
+  "nicknames": []
+ },
+ "item_divine_regalia": {
+  "zh": "天赐华冠",
+  "nicknames": []
+ },
+ "item_divine_regalia_broken": {
+  "zh": "失节华冠",
+  "nicknames": []
+ },
+ "item_sisters_shroud": {
+  "zh": "魅影之衣",
+  "nicknames": []
+ },
+ "item_eldwurms_edda": {
+  "zh": "古龙诗集",
+  "nicknames": []
+ },
+ "item_spellslinger": {
+  "zh": "咏咒之坠",
+  "nicknames": []
+ },
+ "item_weighted_dice": {
+  "zh": "加重骰子",
+  "nicknames": []
+ },
+ "item_ash_legion_shield": {
+  "zh": "余烬军团战盾",
+  "nicknames": []
+ },
+ "item_prophets_pendulum": {
+  "zh": "先知灵摆",
+  "nicknames": []
+ },
+ "item_riftshadow_prism": {
+  "zh": "影墟棱晶",
+  "nicknames": []
+ },
+ "item_stonefeather_satchel": {
+  "zh": "石羽小包",
+  "nicknames": []
+ },
+ "item_stonefeather_satchel_feathers": {
+  "zh": "一磅羽毛",
+  "nicknames": []
+ },
+ "item_stonefeather_satchel_rocks": {
+  "zh": "一磅石头",
+  "nicknames": []
+ },
+ "item_metamorphic_mandible": {
+  "zh": "变态上颚",
+  "nicknames": []
+ },
+ "item_falconers_glove": {
+  "zh": "猎鹰手套",
+  "nicknames": []
+ },
+ "item_enchanters_bauble": {
+  "zh": "附魔师之椟",
+  "nicknames": []
+ },
+ "item_idol_of_screeauk": {
+  "zh": "丝奎奥克神像",
+  "nicknames": []
+ },
+ "item_flayers_bota": {
+  "zh": "剥皮血囊",
+  "nicknames": []
+ },
+ "item_harmonizer": {
+  "zh": "协和",
+  "nicknames": []
+ },
+ "item_zealots_helm": {
+  "zh": "狂热者之盔",
+  "nicknames": []
+ },
+ "item_hydras_breath": {
+  "zh": "怪蛇之息",
+  "nicknames": []
+ },
+ "item_conjurers_catalyst": {
+  "zh": "咒术师触媒",
+  "nicknames": []
+ },
+ "item_enhancement_fierce": {
+  "zh": "凶猛",
+  "nicknames": []
+ },
+ "item_enhancement_dominant": {
+  "zh": "专横",
+  "nicknames": []
+ },
+ "item_enhancement_restorative": {
+  "zh": "滋补",
+  "nicknames": []
+ },
+ "item_enhancement_thick": {
+  "zh": "厚重",
+  "nicknames": []
+ },
+ "item_enhancement_curious": {
+  "zh": "觉醒",
+  "nicknames": []
+ },
+ "item_foragers_kit": {
+  "zh": "采菌套具",
+  "nicknames": []
+ },
+ "item_partisans_brand": {
+  "zh": "天游烙印",
+  "nicknames": []
+ },
+ "item_enhancement_nimble": {
+  "zh": "轻快",
+  "nicknames": []
+ },
+ "item_enhancement_vital": {
+  "zh": "活力",
+  "nicknames": []
+ },
+ "item_enhancement_hulking": {
+  "zh": "笨重",
+  "nicknames": []
+ },
+ "item_enhancement_manic": {
+  "zh": "癫狂",
+  "nicknames": []
+ },
+ "item_thorn_armor": {
+  "zh": "Thorn Armor",
+  "nicknames": []
+ },
+ "item_chasm_stone": {
+  "zh": "裂隙之石",
+  "nicknames": []
+ },
+ "item_furion_gold_bag": {
+  "zh": "金袋",
+  "nicknames": []
+ },
+ "item_tidehunter_fish": {
+  "zh": "利维坦的鱼",
+  "nicknames": []
+ },
+ "item_recipe_aeon_disk": {
+  "zh": "图纸（永恒之盘）",
+  "nicknames": []
+ },
+ "item_recipe_bracer": {
+  "zh": "图纸（护腕）",
+  "nicknames": []
+ },
+ "item_recipe_wind_waker": {
+  "zh": "图纸（风之杖）",
+  "nicknames": []
+ },
+ "item_recipe_cyclone": {
+  "zh": "图纸（Eul的神圣法杖）",
+  "nicknames": []
+ },
+ "item_recipe_silver_edge": {
+  "zh": "图纸（白银之锋）",
+  "nicknames": []
+ },
+ "item_recipe_solar_crest": {
+  "zh": "图纸（炎阳纹章）",
+  "nicknames": []
+ },
+ "item_recipe_maelstrom": {
+  "zh": "图纸（漩涡）",
+  "nicknames": []
+ },
+ "item_recipe_shivas_guard": {
+  "zh": "图纸（希瓦的守护）",
+  "nicknames": []
+ },
+ "item_recipe_diffusal_blade": {
+  "zh": "图纸（净魂之刃）",
+  "nicknames": []
+ },
+ "item_recipe_ancient_janggo": {
+  "zh": "图纸（韧鼓）",
+  "nicknames": []
+ },
+ "item_recipe_orchid": {
+  "zh": "图纸（紫怨）",
+  "nicknames": []
+ },
+ "item_recipe_bloodstone": {
+  "zh": "图纸（血精石）",
+  "nicknames": []
+ },
+ "item_recipe_manta": {
+  "zh": "图纸（幻影斧）",
+  "nicknames": []
+ },
+ "item_recipe_hurricane_pike": {
+  "zh": "图纸（飓风长戟）",
+  "nicknames": []
+ },
+ "item_recipe_refresher": {
+  "zh": "图纸（刷新球）",
+  "nicknames": []
+ },
+ "item_recipe_sphere": {
+  "zh": "图纸（林肯法球）",
+  "nicknames": []
+ },
+ "item_recipe_greater_crit": {
+  "zh": "图纸（代达罗斯之殇）",
+  "nicknames": []
+ },
+ "item_recipe_hand_of_midas": {
+  "zh": "图纸（迈达斯之手）",
+  "nicknames": []
+ },
+ "item_recipe_mekansm": {
+  "zh": "图纸（梅肯斯姆）",
+  "nicknames": []
+ },
+ "item_recipe_assault": {
+  "zh": "图纸（强袭胸甲）",
+  "nicknames": []
+ },
+ "item_recipe_pipe": {
+  "zh": "图纸（洞察烟斗）",
+  "nicknames": []
+ },
+ "item_recipe_eternal_shroud": {
+  "zh": "图纸（永世法衣）",
+  "nicknames": []
+ },
+ "item_recipe_consecrated_wraps": {
+  "zh": "图纸（圣化护服）",
+  "nicknames": []
+ },
+ "item_recipe_magic_wand": {
+  "zh": "图纸（魔杖）",
+  "nicknames": []
+ },
+ "item_recipe_heart": {
+  "zh": "图纸（恐鳌之心）",
+  "nicknames": []
+ },
+ "item_recipe_bloodthorn": {
+  "zh": "图纸（血棘）",
+  "nicknames": []
+ },
+ "item_recipe_guardian_greaves": {
+  "zh": "图纸（卫士胫甲）",
+  "nicknames": []
+ },
+ "item_recipe_mjollnir": {
+  "zh": "图纸（雷神之锤）",
+  "nicknames": []
+ },
+ "item_recipe_abyssal_blade": {
+  "zh": "图纸（深渊之刃）",
+  "nicknames": []
+ },
+ "item_recipe_black_king_bar": {
+  "zh": "图纸（黑皇杖）",
+  "nicknames": []
+ },
+ "item_recipe_dagon": {
+  "zh": "图纸（达贡之神力）",
+  "nicknames": []
+ },
+ "item_recipe_soul_ring": {
+  "zh": "图纸（灵魂之戒）",
+  "nicknames": []
+ },
+ "item_recipe_yasha": {
+  "zh": "图纸（夜叉）",
+  "nicknames": []
+ },
+ "item_recipe_octarine_core": {
+  "zh": "图纸（玲珑心）",
+  "nicknames": []
+ },
+ "item_recipe_satanic": {
+  "zh": "图纸（撒旦之邪力）",
+  "nicknames": []
+ },
+ "item_recipe_blade_mail": {
+  "zh": "图纸（刃甲）",
+  "nicknames": []
+ },
+ "item_recipe_heavens_halberd": {
+  "zh": "图纸（天堂之戟）",
+  "nicknames": []
+ },
+ "item_recipe_crimson_guard": {
+  "zh": "图纸（赤红甲）",
+  "nicknames": []
+ },
+ "item_recipe_necronomicon": {
+  "zh": "图纸（死灵书）",
+  "nicknames": []
+ },
+ "item_recipe_sange": {
+  "zh": "图纸（散华）",
+  "nicknames": []
+ },
+ "item_recipe_basher": {
+  "zh": "图纸（碎颅锤）",
+  "nicknames": []
+ },
+ "item_recipe_aether_lens": {
+  "zh": "图纸（以太透镜）",
+  "nicknames": []
+ },
+ "item_recipe_veil_of_discord": {
+  "zh": "图纸（纷争面纱）",
+  "nicknames": []
+ },
+ "item_recipe_revenants_brooch": {
+  "zh": "图纸（英灵胸针）",
+  "nicknames": []
+ },
+ "item_recipe_devastator": {
+  "zh": "图纸（圣斧）",
+  "nicknames": []
+ },
+ "item_recipe_buckler": {
+  "zh": "图纸（玄冥盾牌）",
+  "nicknames": []
+ },
+ "item_recipe_dragon_lance": {
+  "zh": "图纸（魔龙枪）",
+  "nicknames": []
+ },
+ "item_recipe_lesser_crit": {
+  "zh": "图纸（水晶剑）",
+  "nicknames": []
+ },
+ "item_recipe_mask_of_madness": {
+  "zh": "图纸（疯狂面具）",
+  "nicknames": []
+ },
+ "item_recipe_headdress": {
+  "zh": "图纸（恢复头巾）",
+  "nicknames": []
+ },
+ "item_recipe_wraith_band": {
+  "zh": "图纸（怨灵系带）",
+  "nicknames": []
+ },
+ "item_recipe_helm_of_the_dominator": {
+  "zh": "图纸（支配头盔）",
+  "nicknames": []
+ },
+ "item_recipe_helm_of_the_overlord": {
+  "zh": "图纸（统御头盔）",
+  "nicknames": []
+ },
+ "item_recipe_armlet": {
+  "zh": "图纸（莫尔迪基安的臂章）",
+  "nicknames": []
+ },
+ "item_recipe_null_talisman": {
+  "zh": "图纸（空灵挂件）",
+  "nicknames": []
+ },
+ "item_recipe_iron_talon": {
+  "zh": "图纸（寒铁钢爪）",
+  "nicknames": []
+ },
+ "item_recipe_radiance": {
+  "zh": "图纸（辉耀）",
+  "nicknames": []
+ },
+ "item_recipe_rod_of_atos": {
+  "zh": "图纸（阿托斯之棍）",
+  "nicknames": []
+ },
+ "item_recipe_nullifier": {
+  "zh": "图纸（否决坠饰）",
+  "nicknames": []
+ },
+ "item_recipe_bfury": {
+  "zh": "图纸（狂战斧）",
+  "nicknames": []
+ },
+ "item_recipe_monkey_king_bar": {
+  "zh": "图纸（金箍棒）",
+  "nicknames": []
+ },
+ "item_recipe_glimmer_cape": {
+  "zh": "图纸（微光披风）",
+  "nicknames": []
+ },
+ "item_recipe_orb_of_corrosion": {
+  "zh": "图纸（腐蚀之珠）",
+  "nicknames": []
+ },
+ "item_recipe_gungir": {
+  "zh": "图纸（缚灵索）",
+  "nicknames": []
+ },
+ "item_recipe_meteor_hammer": {
+  "zh": "图纸（陨星锤）",
+  "nicknames": []
+ },
+ "item_recipe_arcane_boots": {
+  "zh": "图纸（奥术鞋）",
+  "nicknames": []
+ },
+ "item_recipe_disperser": {
+  "zh": "图纸（散魂剑）",
+  "nicknames": []
+ },
+ "item_recipe_phylactery": {
+  "zh": "图纸（灵匣）",
+  "nicknames": []
+ },
+ "item_recipe_angels_demise": {
+  "zh": "图纸（绝刃）",
+  "nicknames": []
+ },
+ "item_recipe_pavise": {
+  "zh": "图纸（长盾）",
+  "nicknames": []
+ },
+ "item_recipe_lotus_orb": {
+  "zh": "图纸（清莲宝珠）",
+  "nicknames": []
+ },
+ "item_recipe_harpoon": {
+  "zh": "图纸（鱼叉）",
+  "nicknames": []
+ },
+ "item_abyssal_blade_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_abyssal_blade_slow_resistance": {
+  "zh": "%+<font color='#9ec8e3'>减速抗性</font>",
+  "nicknames": []
+ },
+ "item_abyssal_blade_hp_regen_amp": {
+  "zh": "%+$restoration_amp",
+  "nicknames": []
+ },
+ "item_abyssal_blade_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_armlet_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_armlet_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_armlet_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_armlet_bonus_magical_armor": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_armlet_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_assault_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_assault_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_basher_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_basher_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_basher_abilitydraft_note": {
+  "zh": "裂魂人、虚空假面和斯拉达在技能征召中<b>可以</b>触发碎颅锤的重击效果。即使选择了时间锁定等技能，重击依然可以触发。",
+  "nicknames": []
+ },
+ "item_belt_of_strength_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_bfury_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_bfury_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_bfury_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_black_king_bar_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_black_king_bar_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_blade_mail_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_blade_mail_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_blades_of_attack_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_blade_of_alacrity_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_overwhelming_blink_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_swift_blink_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_arcane_blink_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_bloodstone_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_bloodstone_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_bloodstone_bonus_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_bloodstone_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_bloodstone_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_boots_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_boots_of_elves_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_bracer_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_bracer_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_bracer_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_bracer_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_bracer_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_bracer_bonus_slow_resistance": {
+  "zh": "%+$slow_resistance",
+  "nicknames": []
+ },
+ "item_branches_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_broadsword_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_buckler_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_butterfly_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_butterfly_bonus_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_butterfly_bonus_attack_speed_pct": {
+  "zh": "%+$attack_pct",
+  "nicknames": []
+ },
+ "item_butterfly_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_chainmail_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_refresher_shard_lore": {
+  "zh": "无尽之战时代的前前后后，不朽者的求胜之志始终从未动摇。",
+  "nicknames": []
+ },
+ "item_refresher_shard_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_refresher_shard_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_refresher_shard_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_circlet_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_wizard_hat_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_fluffy_hat_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_falcon_blade_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_falcon_blade_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_falcon_blade_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_mage_slayer_bonus_magical_armor": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_mage_slayer_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_mage_slayer_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_mage_slayer_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_crown_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_diadem_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_faerie_fire_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_infused_raindrop_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_magic_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_bloodthorn_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_bloodthorn_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_bloodthorn_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_bloodthorn_upgrade_bonuses": {
+  "zh": "<b><font color='#7d7d7d'>奖励</font></b>：+30% 血棘致命一击",
+  "nicknames": []
+ },
+ "item_bloodthorn_upgrade_description": {
+  "zh": "灵魂撕裂10名敌方英雄。",
+  "nicknames": []
+ },
+ "item_echo_sabre_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_echo_sabre_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_echo_sabre_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_echo_sabre_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_echo_sabre_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_wind_lace_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_dragon_lance_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_dragon_lance_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_dragon_lance_base_attack_range": {
+  "zh": "+$attack_range",
+  "nicknames": []
+ },
+ "item_hurricane_pike_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_hurricane_pike_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_hurricane_pike_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_hurricane_pike_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_hurricane_pike_base_attack_range": {
+  "zh": "+$attack_range",
+  "nicknames": []
+ },
+ "item_aether_lens_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_aether_lens_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_aether_lens_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_claymore_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_cloak_tooltip_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_shawl_tooltip_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_cyclone_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_cyclone_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_cyclone_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_wind_waker_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_wind_waker_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_wind_waker_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_wind_waker_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_dagon_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_dagon_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_dagon_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_dagon_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_dagon_2_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_dagon_2_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_dagon_2_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_dagon_2_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_dagon_3_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_dagon_3_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_dagon_3_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_dagon_3_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_dagon_4_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_dagon_4_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_dagon_4_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_dagon_4_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_dagon_5_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_dagon_5_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_dagon_5_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_dagon_5_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_demon_edge_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_desolator_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_diffusal_blade_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_diffusal_blade_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_disperser_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_disperser_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_disperser_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_harpoon_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_phylactery_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_phylactery_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_phylactery_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_angels_demise_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_angels_demise_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_angels_demise_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_angels_demise_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_angels_demise_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_eagle_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_energy_booster_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_ethereal_blade_bonus_agility": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_ethereal_blade_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_force_staff_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_force_staff_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_gauntlets_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_ghost_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_crellas_crozier_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_crellas_crozier_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_crellas_crozier_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_gloves_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_greater_crit_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_hand_of_midas_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_headdress_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_heart_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_heart_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_heart_hp_regen": {
+  "zh": "%+最大生命值恢复",
+  "nicknames": []
+ },
+ "item_helm_of_iron_will_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_helm_of_iron_will_bonus_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_helm_of_the_dominator_bonus_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_helm_of_the_dominator_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_helm_of_the_dominator_bonus_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_helm_of_the_overlord_bonus_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_helm_of_the_overlord_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_helm_of_the_overlord_bonus_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_hood_of_defiance_tooltip_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_hood_of_defiance_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_consecrated_wraps_bonus_spell_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_consecrated_wraps_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_consecrated_wraps_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_eternal_shroud_bonus_spell_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_eternal_shroud_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_eternal_shroud_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_eternal_shroud_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_hyperstone_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_moon_shard_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_moon_shard_bonus_night_vision": {
+  "zh": "+额外夜间视野",
+  "nicknames": []
+ },
+ "item_invis_sword_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_invis_sword_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_silver_edge_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_silver_edge_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_glimmer_cape_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_glimmer_cape_bonus_magical_armor": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_octarine_core_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_octarine_core_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_octarine_core_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_octarine_core_bonus_cooldown": {
+  "zh": "%+$cooldown_reduction",
+  "nicknames": []
+ },
+ "item_enchanted_mango_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_blood_grenade_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_avianas_feather_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_avianas_feather_move_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_unwavering_condition_magic_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_ancient_guardian_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_vindicators_axe_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_vindicators_axe_bonus_slow_resist": {
+  "zh": "%+$slow_resistance",
+  "nicknames": []
+ },
+ "item_roshans_banner_health_tooltip": {
+  "zh": "可攻击次数：",
+  "nicknames": []
+ },
+ "item_roshans_banner_radius": {
+  "zh": "效果作用范围：",
+  "nicknames": []
+ },
+ "item_martyrs_plate_magic_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_martyrs_plate_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_lotus_orb_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_lotus_orb_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_lotus_orb_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_lotus_orb_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_guardian_greaves_bonus_movement": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_guardian_greaves_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_guardian_greaves_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_guardian_greaves_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_guardian_greaves_bonus_mres": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_solar_crest_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_solar_crest_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_solar_crest_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_solar_crest_self_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_solar_crest_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_lesser_crit_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_lifesteal_lifesteal_percent": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_voodoo_mask_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_sphere_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_sphere_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_sphere_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_sphere_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_maelstrom_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_maelstrom_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_gungir_bonus_aoe": {
+  "zh": "+$aoe_bonus",
+  "nicknames": []
+ },
+ "item_gungir_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_gungir_bonus_hp": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_gungir_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_quicksilver_amulet_base_movement": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_quicksilver_amulet_base_attack": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_quicksilver_amulet_projectile_increase": {
+  "zh": "%+攻击弹道速度",
+  "nicknames": []
+ },
+ "item_quicksilver_amulet_anim_increase": {
+  "zh": "%+攻击动作速度",
+  "nicknames": []
+ },
+ "item_giants_ring_model_scale": {
+  "zh": "%+模型大小",
+  "nicknames": []
+ },
+ "item_magic_wand_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_manta_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_manta_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_manta_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_manta_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_manta_bonus_movement_speed": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_mantle_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_mask_of_madness_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_mask_of_madness_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_mask_of_madness_lifesteal_percent": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_mekansm_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_mithril_hammer_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_mjollnir_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_mjollnir_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_monkey_king_bar_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_monkey_king_bar_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_monkey_king_bar_melee_attack_range": {
+  "zh": "+$attack_range_melee",
+  "nicknames": []
+ },
+ "item_mystic_staff_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_necronomicon_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_necronomicon_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_necronomicon_2_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_necronomicon_2_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_necronomicon_3_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_necronomicon_3_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_null_talisman_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_null_talisman_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_null_talisman_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_null_talisman_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_null_talisman_bonus_max_mana_percentage": {
+  "zh": "%+$max_mana_percentage",
+  "nicknames": []
+ },
+ "item_oblivion_staff_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_oblivion_staff_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_oblivion_staff_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_oblivion_staff_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_witch_blade_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_witch_blade_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_witch_blade_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_witch_blade_projectile_speed": {
+  "zh": "+$projectile_speed",
+  "nicknames": []
+ },
+ "item_witch_blade_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_ogre_axe_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_orchid_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_orchid_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_orchid_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_orchid_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_orchid_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_pers_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_pers_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_cornucopia_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_cornucopia_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_cornucopia_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_phase_boots_bonus_damage_melee": {
+  "zh": "+攻击力（近战）",
+  "nicknames": []
+ },
+ "item_phase_boots_bonus_damage_range": {
+  "zh": "+攻击力（远程）",
+  "nicknames": []
+ },
+ "item_phase_boots_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_phase_boots_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_pipe_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_pipe_magic_resistance": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_platemail_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_point_booster_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_point_booster_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_power_treads_bonus_movement_speed_ranged": {
+  "zh": "+移动速度（远程英雄）",
+  "nicknames": []
+ },
+ "item_power_treads_bonus_movement_speed_melee": {
+  "zh": "+移动速度（近战英雄）",
+  "nicknames": []
+ },
+ "item_power_treads_bonus_stat": {
+  "zh": "+$selected_attrib",
+  "nicknames": []
+ },
+ "item_power_treads_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_quarterstaff_bonus_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_quarterstaff_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_blitz_knuckles_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_radiance_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_radiance_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_rapier_bonus_damage_base": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_splintmail_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_aeon_disk_lore": {
+  "zh": "一件多年以前被偷偷运出象牙孵巢的强力宝物。很多人都相信了这个说法。",
+  "nicknames": []
+ },
+ "item_aeon_disk_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_aeon_disk_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_aeon_disk_cooldown_duration": {
+  "zh": "冷却时间：",
+  "nicknames": []
+ },
+ "item_kaya_lore": {
+  "zh": "一位闻名遐迩的女巫师手上的法杖，已经失落了上万年。",
+  "nicknames": []
+ },
+ "item_kaya_note0": {
+  "zh": "多个相同物品不会叠加。",
+  "nicknames": []
+ },
+ "item_kaya_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_kaya_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_kaya_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_reaver_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_refresher_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_refresher_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_refresher_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_orb_of_renewal_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_orb_of_renewal_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_orb_of_renewal_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_orb_of_renewal_cooldown_duration": {
+  "zh": "冷却时间：",
+  "nicknames": []
+ },
+ "item_relic_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_ring_of_basilius_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_holy_locket_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_holy_locket_use_cooldown": {
+  "zh": "冷却时间：",
+  "nicknames": []
+ },
+ "item_ring_of_health_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_ring_of_protection_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_ring_of_regen_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_ring_of_tarrasque_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_ring_of_tarrasque_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_robe_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_rod_of_atos_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_rod_of_atos_bonus_hp": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_sange_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_sange_slow_resistance": {
+  "zh": "%+<font color='#9ec8e3'>减速抗性</font>",
+  "nicknames": []
+ },
+ "item_sange_hp_regen_amp": {
+  "zh": "%+$restoration_amp",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_slow_resistance": {
+  "zh": "%+<font color='#9ec8e3'>减速抗性</font>",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_hp_regen_amp": {
+  "zh": "%+$restoration_amp",
+  "nicknames": []
+ },
+ "item_kaya_and_sange_manacost_reduction": {
+  "zh": "%+魔法消耗/魔法损失降低",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_movement_speed_percent_bonus": {
+  "zh": "%+移动速度",
+  "nicknames": []
+ },
+ "item_yasha_and_kaya_cast_speed_pct": {
+  "zh": "%+施法速度加成",
+  "nicknames": []
+ },
+ "item_heavens_halberd_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_heavens_halberd_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_heavens_halberd_bonus_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_movement_speed_percent_bonus": {
+  "zh": "%+移动速度",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_status_resistance": {
+  "zh": "%+<font color='#b99012'>状态抗性</font>",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_hp_regen_amp": {
+  "zh": "%+$restoration_amp",
+  "nicknames": []
+ },
+ "item_sange_and_yasha_slow_resistance": {
+  "zh": "%+<font color='#9ec8e3'>减速抗性</font>",
+  "nicknames": []
+ },
+ "item_satanic_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_satanic_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_satanic_lifesteal_percent": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_sheepstick_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_sheepstick_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_sheepstick_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_sheepstick_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_sheepstick_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_sheepstick_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_shivas_guard_bonus_aoe": {
+  "zh": "+$aoe_bonus",
+  "nicknames": []
+ },
+ "item_shivas_guard_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_shivas_guard_bonus_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_skadi_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_skadi_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_skadi_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_slippers_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_sobi_mask_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_soul_booster_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_soul_booster_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_soul_ring_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_soul_ring_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_staff_of_wizardry_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_talisman_of_evasion_bonus_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_tranquil_boots_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_tranquil_boots_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_travel_boots_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_travel_boots_tp_cooldown": {
+  "zh": "回城卷轴冷却时间：",
+  "nicknames": []
+ },
+ "item_travel_boots_2_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_travel_boots_2_tp_cooldown": {
+  "zh": "回城卷轴冷却时间：",
+  "nicknames": []
+ },
+ "item_travel_boots_2_tp_channel_time": {
+  "zh": "回城卷轴持续施法时间：",
+  "nicknames": []
+ },
+ "item_ultimate_orb_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_aghanims_shard_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_aghanims_shard_roshan_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_2_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_2_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_ultimate_scepter_2_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_urn_of_shadows_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_urn_of_shadows_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_urn_of_shadows_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_urn_of_shadows_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_essence_distiller_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_essence_distiller_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_essence_distiller_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_essence_distiller_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_vanguard_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_vanguard_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_crimson_guard_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_crimson_guard_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_crimson_guard_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_vitality_booster_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_vladmir_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_vladmir_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_void_stone_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_tiara_of_selemene_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_ward_dispenser_observer_vision_range_tooltip": {
+  "zh": "侦察视野范围：",
+  "nicknames": []
+ },
+ "item_ward_dispenser_observer_duration_minutes_tooltip": {
+  "zh": "侦察持续时间（分钟）：",
+  "nicknames": []
+ },
+ "item_ward_dispenser_true_sight_range": {
+  "zh": "岗哨守卫真实视域范围：",
+  "nicknames": []
+ },
+ "item_ward_dispenser_sentry_duration_minutes_tooltip": {
+  "zh": "岗哨守卫持续时间（分钟）：",
+  "nicknames": []
+ },
+ "item_wraith_band_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_wraith_band_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_wraith_band_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_wraith_band_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_wraith_band_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_yasha_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_yasha_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_yasha_movement_speed_percent_bonus": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_arcane_boots_bonus_movement": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_arcane_boots_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_arcane_boots_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_boots_of_bearing_bonus_str": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_boots_of_bearing_bonus_int": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_boots_of_bearing_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_boots_of_bearing_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_ancient_janggo_bonus_str": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_ancient_janggo_bonus_int": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_pavise_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_pavise_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_pavise_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_devastator_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_devastator_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_devastator_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_devastator_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_devastator_projectile_speed": {
+  "zh": "+$projectile_speed",
+  "nicknames": []
+ },
+ "item_revenants_brooch_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_revenants_brooch_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_veil_of_discord_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_veil_of_discord_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_veil_of_discord_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_ring_of_aquila_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_ring_of_aquila_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_ring_of_aquila_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_ring_of_aquila_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_shadow_amulet_fade_time": {
+  "zh": "渐隐时间：",
+  "nicknames": []
+ },
+ "item_meteor_hammer_lore": {
+  "zh": "一柄带有魔力的战锤，铸造所用的金属发掘自被流星雨摧毁的村庄废墟之内。",
+  "nicknames": []
+ },
+ "item_meteor_hammer_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_meteor_hammer_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_meteor_hammer_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_meteor_hammer_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_meteor_hammer_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_nullifier_lore": {
+  "zh": "危险的武器，盗自一个反维度。",
+  "nicknames": []
+ },
+ "item_nullifier_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_nullifier_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_nullifier_bonus_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_nullifier_slow_pct": {
+  "zh": "%移动速度减缓：",
+  "nicknames": []
+ },
+ "item_spirit_vessel_lore": {
+  "zh": "由一位神铸造，用来俘获同类的灵魂。",
+  "nicknames": []
+ },
+ "item_spirit_vessel_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_spirit_vessel_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_spirit_vessel_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_spirit_vessel_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_spirit_vessel_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_keen_optic_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_keen_optic_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_quickening_charm_bonus_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_quickening_charm_bonus_cooldown": {
+  "zh": "%+$cooldown_reduction",
+  "nicknames": []
+ },
+ "item_philosophers_stone_bonus_gpm": {
+  "zh": "+额外每分钟金钱",
+  "nicknames": []
+ },
+ "item_philosophers_stone_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_philosophers_stone_bonus_damage": {
+  "zh": "-<font color='#e03e2e'>攻击力</font>",
+  "nicknames": []
+ },
+ "item_force_boots_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_force_boots_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_seer_stone_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_seer_stone_vision_bonus": {
+  "zh": "+额外视野",
+  "nicknames": []
+ },
+ "item_seer_stone_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_vampire_fangs_attack_lifesteal": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_vampire_fangs_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_greater_faerie_fire_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_timeless_relic_debuff_amp": {
+  "zh": "%+$debuff_amp",
+  "nicknames": []
+ },
+ "item_timeless_relic_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_mirror_shield_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_ironwood_tree_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_royal_jelly_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_royal_jelly_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_pupils_gift_secondary_stats": {
+  "zh": "+次属性",
+  "nicknames": []
+ },
+ "item_repair_kit_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_third_eye_bonus_vision": {
+  "zh": "+额外视野",
+  "nicknames": []
+ },
+ "item_third_eye_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_spell_prism_bonus_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_spell_prism_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_spell_prism_bonus_cooldown": {
+  "zh": "%+$cooldown_reduction",
+  "nicknames": []
+ },
+ "item_princes_knife_projectile_bonus": {
+  "zh": "%+攻击弹道速度",
+  "nicknames": []
+ },
+ "item_flicker_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_spy_gadget_scan_cooldown_reduction": {
+  "zh": "%扫描冷却时间减少：",
+  "nicknames": []
+ },
+ "item_spy_gadget_attack_range": {
+  "zh": "光环的攻击距离加成（仅远程）：",
+  "nicknames": []
+ },
+ "item_spy_gadget_cast_range": {
+  "zh": "光环的施法距离加成：",
+  "nicknames": []
+ },
+ "item_ocean_heart_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_broom_handle_melee_attack_range": {
+  "zh": "+$attack_range_melee",
+  "nicknames": []
+ },
+ "item_broom_handle_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_broom_handle_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_nether_shawl_bonus_magic_resistance": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_nether_shawl_bonus_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_nether_shawl_bonus_armor": {
+  "zh": "-<font color='#e03e2e'>护甲</font>",
+  "nicknames": []
+ },
+ "item_illusionsts_cape_illusion_duration": {
+  "zh": "镜像持续时间：",
+  "nicknames": []
+ },
+ "item_illusionsts_cape_outgoing_damage_tooltip": {
+  "zh": "%镜像攻击力：",
+  "nicknames": []
+ },
+ "item_illusionsts_cape_tooltip_incoming_damage_total_pct": {
+  "zh": "%镜像承受伤害：",
+  "nicknames": []
+ },
+ "item_illusionsts_cape_bonus_agi": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_illusionsts_cape_bonus_str": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_havoc_hammer_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_havoc_hammer_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_apex_primary_stat": {
+  "zh": "+$primary_attribute",
+  "nicknames": []
+ },
+ "item_ballista_attack_range_bonus": {
+  "zh": "+$attack_range",
+  "nicknames": []
+ },
+ "item_woodland_striders_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_woodland_striders_bonus_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_trident_bonus_intellect": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_trident_bonus_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_trident_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_trident_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_trident_mana_regen_multiplier": {
+  "zh": "%+魔法恢复增强",
+  "nicknames": []
+ },
+ "item_trident_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_trident_movement_speed_percent_bonus": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_trident_status_resistance": {
+  "zh": "%+<font color='#b99012'>状态抗性</font>",
+  "nicknames": []
+ },
+ "item_trident_hp_regen_amp": {
+  "zh": "%+生命恢复和吸血增强",
+  "nicknames": []
+ },
+ "item_trident_magic_damage_attack": {
+  "zh": "+魔法伤害攻击",
+  "nicknames": []
+ },
+ "item_trident_spell_lifesteal_amp": {
+  "zh": "%+技能吸血增强",
+  "nicknames": []
+ },
+ "item_faded_broach_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_faded_broach_bonus_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_paladin_sword_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_paladin_sword_bonus_lifesteal": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_paladin_sword_bonus_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_orb_of_destruction_armor_reduction": {
+  "zh": "护甲降低：",
+  "nicknames": []
+ },
+ "item_orb_of_destruction_slow_melee": {
+  "zh": "%移动速度减缓（近战）：",
+  "nicknames": []
+ },
+ "item_orb_of_destruction_slow_range": {
+  "zh": "%移动速度减缓（远程）：",
+  "nicknames": []
+ },
+ "item_orb_of_destruction_duration": {
+  "zh": "持续时间：",
+  "nicknames": []
+ },
+ "item_titan_sliver_base_attack_damage": {
+  "zh": "%+基础攻击力",
+  "nicknames": []
+ },
+ "item_titan_sliver_status_resistance": {
+  "zh": "%+$status_resist",
+  "nicknames": []
+ },
+ "item_orb_of_corrosion_bonus_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_elven_tunic_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_elven_tunic_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_elven_tunic_movment": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_possessed_mask_primary_attribute": {
+  "zh": "+$primary_attribute",
+  "nicknames": []
+ },
+ "item_black_powder_bag_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_paintball_movespeed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_lance_of_pursuit_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_eye_of_the_vizier_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_eye_of_the_vizier_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_eye_of_the_vizier_mana_reduction_pct": {
+  "zh": "%-<font color='#e03e2e'>最大魔法值</font>",
+  "nicknames": []
+ },
+ "item_specialists_array_all_stats": {
+  "zh": "+$all",
+  "nicknames": []
+ },
+ "item_specialists_array_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_specialists_array_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_hydras_breath_strength": {
+  "zh": "+$str",
+  "nicknames": []
+ },
+ "item_hydras_breath_agility": {
+  "zh": "+$agi",
+  "nicknames": []
+ },
+ "item_hydras_breath_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_hydras_breath_base_attack_range": {
+  "zh": "+$attack_range",
+  "nicknames": []
+ },
+ "item_dagger_of_ristul_aspd": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_mysterious_hat_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_mysterious_hat_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_mysterious_hat_manacost_reduction": {
+  "zh": "%+$manacost_reduction",
+  "nicknames": []
+ },
+ "item_penta_edged_sword_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_penta_edged_sword_melee_attack_range": {
+  "zh": "+$attack_range_melee",
+  "nicknames": []
+ },
+ "item_witless_shako_max_health": {
+  "zh": "+最大生命值提升",
+  "nicknames": []
+ },
+ "item_witless_shako_max_mana": {
+  "zh": "-<font color='#e03e2e'>最大魔法值</font>",
+  "nicknames": []
+ },
+ "item_enhancement_vast_attack_range": {
+  "zh": "+$attack_range_all",
+  "nicknames": []
+ },
+ "item_enhancement_vast_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_enhancement_vast_bonus_armor": {
+  "zh": "-<font color='#e03e2e'>护甲</font>",
+  "nicknames": []
+ },
+ "item_enhancement_quickened_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_enhancement_quickened_max_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_enhancement_quickened_evasion": {
+  "zh": "%+$evasion",
+  "nicknames": []
+ },
+ "item_enhancement_audacious_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_enhancement_audacious_magic_damage": {
+  "zh": "+魔法攻击伤害",
+  "nicknames": []
+ },
+ "item_enhancement_audacious_incoming_damage": {
+  "zh": "%+<font color='#e03e2e'>承受伤害</font>",
+  "nicknames": []
+ },
+ "item_enhancement_mystical_max_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_enhancement_mystical_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_enhancement_mystical_magic_res": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_enhancement_mystical_bonus_cast_range": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_enhancement_mystical_manacost_reduction": {
+  "zh": "%+魔法消耗/魔法损失降低",
+  "nicknames": []
+ },
+ "item_enhancement_alert_bonus_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_enhancement_alert_bonus_night_vision": {
+  "zh": "+额外夜间视野",
+  "nicknames": []
+ },
+ "item_enhancement_alert_bonus_attack_range": {
+  "zh": "+$attack_range_all",
+  "nicknames": []
+ },
+ "item_enhancement_brawny_health_bonus": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_enhancement_brawny_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_enhancement_brawny_slow_resist": {
+  "zh": "%+$slow_resistance",
+  "nicknames": []
+ },
+ "item_enhancement_tough_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_enhancement_tough_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_enhancement_tough_knockback_resist": {
+  "zh": "%+击退抗性",
+  "nicknames": []
+ },
+ "item_enhancement_feverish_cooldown_reduction": {
+  "zh": "%+$cooldown_reduction",
+  "nicknames": []
+ },
+ "item_enhancement_feverish_max_mana": {
+  "zh": "%-<font color='#e03e2e'>最大魔法值</font>",
+  "nicknames": []
+ },
+ "item_enhancement_fleetfooted_movespeed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_enhancement_crude_health_restoration": {
+  "zh": "%+生命回复",
+  "nicknames": []
+ },
+ "item_enhancement_crude_bat_reduce": {
+  "zh": "%-基础攻击间隔",
+  "nicknames": []
+ },
+ "item_enhancement_crude_intelligence_pct": {
+  "zh": "%-<font color='#e03e2e'>智力</font>",
+  "nicknames": []
+ },
+ "item_enhancement_greedy_bonus_gpm": {
+  "zh": "+额外每分钟金钱",
+  "nicknames": []
+ },
+ "item_enhancement_greedy_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_enhancement_greedy_bonus_damage": {
+  "zh": "-<font color='#e03e2e'>攻击力</font>",
+  "nicknames": []
+ },
+ "item_enhancement_vampiric_attack_lifesteal": {
+  "zh": "%+$lifesteal",
+  "nicknames": []
+ },
+ "item_enhancement_vampiric_spell_lifesteal": {
+  "zh": "%+$spell_lifesteal",
+  "nicknames": []
+ },
+ "item_enhancement_vampiric_bonus_night_vision": {
+  "zh": "+夜间视野",
+  "nicknames": []
+ },
+ "item_enhancement_keen_eyed_cast_range_bonus": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_enhancement_keen_eyed_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_enhancement_keen_eyed_mana_reduction_pct": {
+  "zh": "%-<font color='#e03e2e'>最大魔法值</font>",
+  "nicknames": []
+ },
+ "item_enhancement_evolved_primary_stat": {
+  "zh": "+$primary_attribute",
+  "nicknames": []
+ },
+ "item_enhancement_titanic_base_attack_damage": {
+  "zh": "%+基础攻击力",
+  "nicknames": []
+ },
+ "item_enhancement_titanic_status_resistance": {
+  "zh": "%+$status_resist",
+  "nicknames": []
+ },
+ "item_enhancement_titanic_attack_speed": {
+  "zh": "%-<font color='#e03e2e'>攻击速度</font>",
+  "nicknames": []
+ },
+ "item_enhancement_timeless_debuff_amp": {
+  "zh": "%+$debuff_amp",
+  "nicknames": []
+ },
+ "item_enhancement_timeless_spell_amp": {
+  "zh": "%+技能增强",
+  "nicknames": []
+ },
+ "item_enhancement_boundless_bonus_attack_range": {
+  "zh": "+$attack_range_all",
+  "nicknames": []
+ },
+ "item_enhancement_boundless_bonus_cast_range": {
+  "zh": "+$cast_range",
+  "nicknames": []
+ },
+ "item_enhancement_wise_max_mana_pct": {
+  "zh": "%+$max_mana_percentage",
+  "nicknames": []
+ },
+ "item_enhancement_fierce_movement_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_enhancement_fierce_bonus_night_vision": {
+  "zh": "+额外夜间视野",
+  "nicknames": []
+ },
+ "item_enhancement_fierce_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_enhancement_dominant_attack_speed": {
+  "zh": "+$attack",
+  "nicknames": []
+ },
+ "item_enhancement_dominant_magic_resist": {
+  "zh": "%+$spell_resist",
+  "nicknames": []
+ },
+ "item_enhancement_dominant_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_enhancement_restorative_bonus_mana": {
+  "zh": "+$mana",
+  "nicknames": []
+ },
+ "item_enhancement_restorative_bonus_hp_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_enhancement_restorative_heal_amp": {
+  "zh": "%+$healing_amp",
+  "nicknames": []
+ },
+ "item_enhancement_thick_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_enhancement_thick_bonus_mana_regen": {
+  "zh": "+$mana_regen",
+  "nicknames": []
+ },
+ "item_enhancement_thick_bonus_armor": {
+  "zh": "+$armor",
+  "nicknames": []
+ },
+ "item_enhancement_vital_health_regen": {
+  "zh": "+$hp_regen",
+  "nicknames": []
+ },
+ "item_enhancement_hulking_max_health": {
+  "zh": "%+$health",
+  "nicknames": []
+ },
+ "item_enhancement_hulking_max_health_regen": {
+  "zh": "%+最大生命值恢复",
+  "nicknames": []
+ },
+ "item_enhancement_hulking_attack_speed": {
+  "zh": "%-<font color='#e03e2e'>攻击速度</font>",
+  "nicknames": []
+ },
+ "item_enhancement_manic_bat_reduce": {
+  "zh": "%-基础攻击间隔",
+  "nicknames": []
+ },
+ "item_enhancement_manic_cast_speed": {
+  "zh": "%+施法速度加成",
+  "nicknames": []
+ },
+ "item_enhancement_manic_vision_reduce": {
+  "zh": "%-<font color='#e03e2e'>视野</font>",
+  "nicknames": []
+ },
+ "item_enhancement_nimble_movespeed_pct": {
+  "zh": "%+$move_speed",
+  "nicknames": []
+ },
+ "item_enhancement_nimble_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_enhancement_nimble_hp_regen_reduce": {
+  "zh": "-<font color='#e03e2e'>生命恢复</font>",
+  "nicknames": []
+ },
+ "item_foragers_health": {
+  "zh": "活力伞菌",
+  "nicknames": []
+ },
+ "item_foragers_health_bonus_damage": {
+  "zh": "+$damage",
+  "nicknames": []
+ },
+ "item_foragers_stats": {
+  "zh": "铁树坚果",
+  "nicknames": []
+ },
+ "item_foragers_stats_bonus_move_speed": {
+  "zh": "+$move_speed",
+  "nicknames": []
+ },
+ "item_foragers_mana": {
+  "zh": "托莫干伞盖",
+  "nicknames": []
+ },
+ "item_foragers_mana_bonus_int": {
+  "zh": "+$int",
+  "nicknames": []
+ },
+ "item_enhancement_curious_item_potency": {
+  "zh": "%+宝物威力",
+  "nicknames": []
+ },
+ "item_rippers_lash_bonus_damage_hero": {
+  "zh": "额外伤害（对英雄）：",
+  "nicknames": []
+ },
+ "item_rippers_lash_bonus_damage_creep": {
+  "zh": "额外伤害（对非英雄）：",
+  "nicknames": []
+ },
+ "item_madstone_bundle": {
+  "zh": "狂石包",
+  "nicknames": []
+ },
+ "item_chasm_stone_bonus_health": {
+  "zh": "+$health",
+  "nicknames": []
+ },
+ "item_chasm_stone_aoe_bonus": {
+  "zh": "+$aoe_bonus",
+  "nicknames": []
+ },
+ "item_enchanters_bauble_current_bonus": {
+  "zh": "%当前加成：",
+  "nicknames": []
+ },
+ "item_halloween_candy_corn": {
+  "zh": "小贪魔太妃糖",
+  "nicknames": []
+ },
+ "item_muertas_gun": {
+  "zh": "仁慈与恩泽",
+  "nicknames": []
+ },
+ "item_muertas_gun_bonus_spell_amp": {
+  "zh": "%技能增强：",
+  "nicknames": []
+ },
+ "item_muertas_gun_health_pct_penalty": {
+  "zh": "%<font color='#e03e2e'>生命值惩罚：</font>",
+  "nicknames": []
+ },
+ "item_muertas_gun_bonus_cast_pct": {
+  "zh": "%施法距离加成：",
+  "nicknames": []
+ },
+ "item_ofrenda": {
+  "zh": "挚爱回忆",
+  "nicknames": []
+ },
+ "item_ofrenda_shovel": {
+  "zh": "占卜之铲",
+  "nicknames": []
+ },
+ "item_ofrenda_pledge": {
+  "zh": "先祖的财富",
+  "nicknames": []
+ },
+ "item_royale_with_cheese": {
+  "zh": "奶酪块",
+  "nicknames": []
+ }
+}

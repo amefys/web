@@ -18,13 +18,23 @@ locally with no Node toolchain.
 cp ../amefys/src/shared/data/heroes.json _generator/data/
 cp ../amefys/src/shared/data/items.json  _generator/data/
 cp ../amefys/src/shared/data/builds.json _generator/data/
+# Official Chinese names + player nicknames (from the glossary build):
+node _generator/extract-names.mjs ../amefys/src/shared/data/glossary/terms.json
 node _generator/build.mjs
+npm test
 git add heroes/ items/ sitemap.xml _generator/data/
 git commit -m "chore(seo): refresh hero + item data snapshot"
 ```
 
-The script clears `heroes/` and `items/` before writing, so removed
-items don't linger.
+The script clears `heroes/` and `items/` before writing, so items removed
+from the game don't linger. An item page that is already in `sitemap.xml`
+is kept while the item still exists, even when it falls out of every
+hero's top builds — indexed pages must not turn into 404s.
+
+`builds.json` in the app can be months old. For a fresher site snapshot run
+`npm run data:fetch-builds` in amefys and copy the result here without
+committing it there (it also changes the desktop item recommender).
+OpenDota rate-limits after ~100 heroes; refetch the failures slowly.
 
 ## What gets emitted
 

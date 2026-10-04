@@ -3,10 +3,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DOTA 2 装备出装数据库 · AMEFYS</title>
-<meta name="description" content="DOTA 2 主流装备数据库，每件装备的推荐英雄、出场频率与 AMEFYS 实时关键道具提醒。">
+<meta name="description" content="DOTA 2 装备大全：跳刀、BKB、阿哈利姆神杖等主流装备的价格、类别，以及最常出这件装备的英雄。">
 <link rel="canonical" href="https://amefys.com/items/">
 <meta property="og:title" content="DOTA 2 装备出装数据库 · AMEFYS">
-<meta property="og:description" content="DOTA 2 主流装备数据库，每件装备的推荐英雄、出场频率与 AMEFYS 实时关键道具提醒。">
+<meta property="og:description" content="DOTA 2 装备大全：跳刀、BKB、阿哈利姆神杖等主流装备的价格、类别，以及最常出这件装备的英雄。">
 <meta property="og:url" content="https://amefys.com/items/">
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta name="applicable-device" content="pc,mobile">
@@ -38,8 +38,10 @@
     border-bottom: 0.5px solid var(--hairline); }
   .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
     display: flex; align-items: center; gap: 24px; padding: 0 24px;
-    font-size: 12.5px; font-weight: 500; }
-  .nav-inner a { color: var(--text-2); }
+    font-size: 12.5px; font-weight: 500;
+    overflow-x: auto; scrollbar-width: none; }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-inner a { color: var(--text-2); white-space: nowrap; flex-shrink: 0; }
   .nav-inner a:hover { color: var(--text); text-decoration: none; }
   .brand { display: flex; align-items: center; gap: 8px; color: var(--text) !important; font-weight: 600; }
   .brand img { width: 20px; height: 20px; }
@@ -104,211 +106,210 @@
 
 <div class="breadcrumb"><a href="/">首页</a> · 装备列表</div>
 <h1>DOTA 2 装备出装数据库</h1>
-<p class="tagline">167 件主流装备的推荐英雄、出场频率与 AMEFYS 实时提醒适配。数据来源：OpenDota 公开统计。</p>
+<p class="tagline">170 件主流装备：每件装备最常被哪些英雄出、出场多少次。数据来源：OpenDota 公开统计。</p>
 
 <h2>顶级（33）</h2>
 <ul class="grid-list">
-  <li><a href="/items/abyssal-blade.html">Abyssal Blade</a></li>
-  <li><a href="/items/aeon-disk.html">Aeon Disk</a></li>
-  <li><a href="/items/armlet.html">Armlet of Mordiggian</a></li>
-  <li><a href="/items/assault.html">Assault Cuirass</a></li>
-  <li><a href="/items/bfury.html">Battle Fury</a></li>
-  <li><a href="/items/black-king-bar.html">Black King Bar</a></li>
-  <li><a href="/items/blade-mail.html">Blade Mail</a></li>
-  <li><a href="/items/bloodstone.html">Bloodstone</a></li>
-  <li><a href="/items/bloodthorn.html">Bloodthorn</a></li>
-  <li><a href="/items/butterfly.html">Butterfly</a></li>
-  <li><a href="/items/consecrated-wraps.html">Consecrated Wraps</a></li>
-  <li><a href="/items/crellas-crozier.html">Crella's Crozier</a></li>
-  <li><a href="/items/crimson-guard.html">Crimson Guard</a></li>
-  <li><a href="/items/lesser-crit.html">Crystalys</a></li>
-  <li><a href="/items/greater-crit.html">Daedalus</a></li>
-  <li><a href="/items/rapier.html">Divine Rapier</a></li>
-  <li><a href="/items/ethereal-blade.html">Ethereal Blade</a></li>
-  <li><a href="/items/heart.html">Heart of Tarrasque</a></li>
-  <li><a href="/items/hurricane-pike.html">Hurricane Pike</a></li>
-  <li><a href="/items/kaya.html">Kaya</a></li>
-  <li><a href="/items/sphere.html">Linken's Sphere</a></li>
-  <li><a href="/items/lotus-orb.html">Lotus Orb</a></li>
-  <li><a href="/items/manta.html">Manta Style</a></li>
-  <li><a href="/items/meteor-hammer.html">Meteor Hammer</a></li>
-  <li><a href="/items/monkey-king-bar.html">Monkey King Bar</a></li>
-  <li><a href="/items/nullifier.html">Nullifier</a></li>
-  <li><a href="/items/radiance.html">Radiance</a></li>
-  <li><a href="/items/invis-sword.html">Shadow Blade</a></li>
-  <li><a href="/items/shivas-guard.html">Shiva's Guard</a></li>
-  <li><a href="/items/silver-edge.html">Silver Edge</a></li>
-  <li><a href="/items/basher.html">Skull Basher</a></li>
-  <li><a href="/items/soul-booster.html">Soul Booster</a></li>
-  <li><a href="/items/vanguard.html">Vanguard</a></li>
+  <li><a href="/items/silver-edge.html">白银之锋</a></li>
+  <li><a href="/items/crimson-guard.html">赤红甲</a></li>
+  <li><a href="/items/greater-crit.html">代达罗斯之殇</a></li>
+  <li><a href="/items/nullifier.html">否决坠饰</a></li>
+  <li><a href="/items/black-king-bar.html">黑皇杖</a></li>
+  <li><a href="/items/butterfly.html">蝴蝶</a></li>
+  <li><a href="/items/manta.html">幻影斧</a></li>
+  <li><a href="/items/radiance.html">辉耀</a></li>
+  <li><a href="/items/kaya.html">慧光</a></li>
+  <li><a href="/items/monkey-king-bar.html">金箍棒</a></li>
+  <li><a href="/items/hurricane-pike.html">飓风长戟</a></li>
+  <li><a href="/items/crellas-crozier.html">克莱拉牧杖</a></li>
+  <li><a href="/items/heart.html">恐鳌之心</a></li>
+  <li><a href="/items/bfury.html">狂战斧</a></li>
+  <li><a href="/items/sphere.html">林肯法球</a></li>
+  <li><a href="/items/armlet.html">莫尔迪基安的臂章</a></li>
+  <li><a href="/items/assault.html">强袭胸甲</a></li>
+  <li><a href="/items/lotus-orb.html">清莲宝珠</a></li>
+  <li><a href="/items/blade-mail.html">刃甲</a></li>
+  <li><a href="/items/abyssal-blade.html">深渊之刃</a></li>
+  <li><a href="/items/consecrated-wraps.html">圣化护服</a></li>
+  <li><a href="/items/rapier.html">圣剑</a></li>
+  <li><a href="/items/lesser-crit.html">水晶剑</a></li>
+  <li><a href="/items/basher.html">碎颅锤</a></li>
+  <li><a href="/items/shivas-guard.html">希瓦的守护</a></li>
+  <li><a href="/items/vanguard.html">先锋盾</a></li>
+  <li><a href="/items/ethereal-blade.html">虚灵之刃</a></li>
+  <li><a href="/items/bloodthorn.html">血棘</a></li>
+  <li><a href="/items/bloodstone.html">血精石</a></li>
+  <li><a href="/items/invis-sword.html">影刃</a></li>
+  <li><a href="/items/aeon-disk.html">永恒之盘</a></li>
+  <li><a href="/items/meteor-hammer.html">陨星锤</a></li>
+  <li><a href="/items/soul-booster.html">振魂石</a></li>
 </ul>
 
-<h2>高级（38）</h2>
+<h2>高级（41）</h2>
 <ul class="grid-list">
-  <li><a href="/items/aether-lens.html">Aether Lens</a></li>
-  <li><a href="/items/ultimate-scepter-2.html">Aghanim's Blessing</a></li>
-  <li><a href="/items/ultimate-scepter.html">Aghanim's Scepter</a></li>
-  <li><a href="/items/aghanims-shard.html">Aghanim's Shard</a></li>
-  <li><a href="/items/arcane-boots.html">Arcane Boots</a></li>
-  <li><a href="/items/boots-of-bearing.html">Boots of Bearing</a></li>
-  <li><a href="/items/dagon.html">Dagon</a></li>
-  <li><a href="/items/dagon-2.html">Dagon</a></li>
-  <li><a href="/items/dagon-3.html">Dagon</a></li>
-  <li><a href="/items/dagon-4.html">Dagon</a></li>
-  <li><a href="/items/dagon-5.html">Dagon</a></li>
-  <li><a href="/items/ancient-janggo.html">Drum of Endurance</a></li>
-  <li><a href="/items/essence-distiller.html">Essence Distiller</a></li>
-  <li><a href="/items/cyclone.html">Eul's Scepter of Divinity</a></li>
-  <li><a href="/items/falcon-blade.html">Falcon Blade</a></li>
-  <li><a href="/items/force-staff.html">Force Staff</a></li>
-  <li><a href="/items/glimmer-cape.html">Glimmer Cape</a></li>
-  <li><a href="/items/guardian-greaves.html">Guardian Greaves</a></li>
-  <li><a href="/items/headdress.html">Headdress</a></li>
-  <li><a href="/items/holy-locket.html">Holy Locket</a></li>
-  <li><a href="/items/mage-slayer.html">Mage Slayer</a></li>
-  <li><a href="/items/mekansm.html">Mekansm</a></li>
-  <li><a href="/items/octarine-core.html">Octarine Core</a></li>
-  <li><a href="/items/orb-of-frost.html">Orb of Frost</a></li>
-  <li><a href="/items/orchid.html">Orchid Malevolence</a></li>
-  <li><a href="/items/devastator.html">Parasma</a></li>
-  <li><a href="/items/pavise.html">Pavise</a></li>
-  <li><a href="/items/pipe.html">Pipe of Insight</a></li>
-  <li><a href="/items/refresher.html">Refresher Orb</a></li>
-  <li><a href="/items/rod-of-atos.html">Rod of Atos</a></li>
-  <li><a href="/items/sheepstick.html">Scythe of Vyse</a></li>
-  <li><a href="/items/solar-crest.html">Solar Crest</a></li>
-  <li><a href="/items/specialists-array.html">Specialist's Array</a></li>
-  <li><a href="/items/spirit-vessel.html">Spirit Vessel</a></li>
-  <li><a href="/items/tranquil-boots.html">Tranquil Boots</a></li>
-  <li><a href="/items/urn-of-shadows.html">Urn of Shadows</a></li>
-  <li><a href="/items/veil-of-discord.html">Veil of Discord</a></li>
-  <li><a href="/items/vladmir.html">Vladmir's Offering</a></li>
+  <li><a href="/items/ultimate-scepter-2.html">阿哈利姆福佑</a></li>
+  <li><a href="/items/aghanims-shard.html">阿哈利姆魔晶</a></li>
+  <li><a href="/items/ultimate-scepter.html">阿哈利姆神杖</a></li>
+  <li><a href="/items/rod-of-atos.html">阿托斯之棍</a></li>
+  <li><a href="/items/arcane-boots.html">奥术鞋</a></li>
+  <li><a href="/items/orb-of-frost.html">冰霜之珠</a></li>
+  <li><a href="/items/dagon.html">达贡之神力 1 级</a></li>
+  <li><a href="/items/dagon-2.html">达贡之神力 2 级</a></li>
+  <li><a href="/items/dagon-3.html">达贡之神力 3 级</a></li>
+  <li><a href="/items/dagon-4.html">达贡之神力 4 级</a></li>
+  <li><a href="/items/dagon-5.html">达贡之神力 5 级</a></li>
+  <li><a href="/items/pipe.html">洞察烟斗</a></li>
+  <li><a href="/items/mage-slayer.html">法师克星</a></li>
+  <li><a href="/items/veil-of-discord.html">纷争面纱</a></li>
+  <li><a href="/items/wind-waker.html">风之杖</a></li>
+  <li><a href="/items/vladmir.html">弗拉迪米尔的祭品</a></li>
+  <li><a href="/items/orb-of-corrosion.html">腐蚀之珠</a></li>
+  <li><a href="/items/hydras-breath.html">怪蛇之息</a></li>
+  <li><a href="/items/headdress.html">恢复头巾</a></li>
+  <li><a href="/items/spirit-vessel.html">魂之灵瓮</a></li>
+  <li><a href="/items/essence-distiller.html">精之灵器</a></li>
+  <li><a href="/items/tranquil-boots.html">静谧之鞋</a></li>
+  <li><a href="/items/boots-of-bearing.html">宽容之靴</a></li>
+  <li><a href="/items/falcon-blade.html">猎鹰战刃</a></li>
+  <li><a href="/items/octarine-core.html">玲珑心</a></li>
+  <li><a href="/items/mekansm.html">梅肯斯姆</a></li>
+  <li><a href="/items/ancient-janggo.html">韧鼓</a></li>
+  <li><a href="/items/devastator.html">圣斧</a></li>
+  <li><a href="/items/holy-locket.html">圣洁吊坠</a></li>
+  <li><a href="/items/refresher.html">刷新球</a></li>
+  <li><a href="/items/glimmer-cape.html">微光披风</a></li>
+  <li><a href="/items/guardian-greaves.html">卫士胫甲</a></li>
+  <li><a href="/items/sheepstick.html">邪恶镰刀</a></li>
+  <li><a href="/items/specialists-array.html">行家阵列</a></li>
+  <li><a href="/items/solar-crest.html">炎阳纹章</a></li>
+  <li><a href="/items/aether-lens.html">以太透镜</a></li>
+  <li><a href="/items/urn-of-shadows.html">影之灵龛</a></li>
+  <li><a href="/items/force-staff.html">原力法杖</a></li>
+  <li><a href="/items/pavise.html">长盾</a></li>
+  <li><a href="/items/orchid.html">紫怨</a></li>
+  <li><a href="/items/cyclone.html">Eul的神圣法杖</a></li>
 </ul>
 
 <h2>基础（15）</h2>
 <ul class="grid-list">
-  <li><a href="/items/travel-boots.html">Boots of Travel</a></li>
-  <li><a href="/items/travel-boots-2.html">Boots of Travel 2</a></li>
-  <li><a href="/items/bottle.html">Bottle</a></li>
-  <li><a href="/items/bracer.html">Bracer</a></li>
-  <li><a href="/items/hand-of-midas.html">Hand of Midas</a></li>
-  <li><a href="/items/magic-wand.html">Magic Wand</a></li>
-  <li><a href="/items/null-talisman.html">Null Talisman</a></li>
-  <li><a href="/items/oblivion-staff.html">Oblivion Staff</a></li>
-  <li><a href="/items/pers.html">Perseverance</a></li>
-  <li><a href="/items/phase-boots.html">Phase Boots</a></li>
-  <li><a href="/items/phylactery.html">Phylactery</a></li>
-  <li><a href="/items/power-treads.html">Power Treads</a></li>
-  <li><a href="/items/soul-ring.html">Soul Ring</a></li>
-  <li><a href="/items/witch-blade.html">Witch Blade</a></li>
-  <li><a href="/items/wraith-band.html">Wraith Band</a></li>
+  <li><a href="/items/power-treads.html">动力鞋</a></li>
+  <li><a href="/items/bracer.html">护腕</a></li>
+  <li><a href="/items/pers.html">坚韧球</a></li>
+  <li><a href="/items/null-talisman.html">空灵挂件</a></li>
+  <li><a href="/items/oblivion-staff.html">空明杖</a></li>
+  <li><a href="/items/soul-ring.html">灵魂之戒</a></li>
+  <li><a href="/items/phylactery.html">灵匣</a></li>
+  <li><a href="/items/hand-of-midas.html">迈达斯之手</a></li>
+  <li><a href="/items/bottle.html">魔瓶</a></li>
+  <li><a href="/items/magic-wand.html">魔杖</a></li>
+  <li><a href="/items/witch-blade.html">巫师之刃</a></li>
+  <li><a href="/items/phase-boots.html">相位鞋</a></li>
+  <li><a href="/items/travel-boots.html">远行鞋</a></li>
+  <li><a href="/items/travel-boots-2.html">远行鞋</a></li>
+  <li><a href="/items/wraith-band.html">怨灵系带</a></li>
 </ul>
 
 <h2>秘密商店（12）</h2>
 <ul class="grid-list">
-  <li><a href="/items/demon-edge.html">Demon Edge</a></li>
-  <li><a href="/items/eagle.html">Eaglesong</a></li>
-  <li><a href="/items/energy-booster.html">Energy Booster</a></li>
-  <li><a href="/items/hyperstone.html">Hyperstone</a></li>
-  <li><a href="/items/mystic-staff.html">Mystic Staff</a></li>
-  <li><a href="/items/platemail.html">Platemail</a></li>
-  <li><a href="/items/point-booster.html">Point Booster</a></li>
-  <li><a href="/items/reaver.html">Reaver</a></li>
-  <li><a href="/items/relic.html">Sacred Relic</a></li>
-  <li><a href="/items/talisman-of-evasion.html">Talisman of Evasion</a></li>
-  <li><a href="/items/ultimate-orb.html">Ultimate Orb</a></li>
-  <li><a href="/items/vitality-booster.html">Vitality Booster</a></li>
+  <li><a href="/items/platemail.html">板甲</a></li>
+  <li><a href="/items/demon-edge.html">恶魔刀锋</a></li>
+  <li><a href="/items/vitality-booster.html">活力之球</a></li>
+  <li><a href="/items/ultimate-orb.html">极限法球</a></li>
+  <li><a href="/items/point-booster.html">精气之球</a></li>
+  <li><a href="/items/reaver.html">掠夺者之斧</a></li>
+  <li><a href="/items/energy-booster.html">能量之球</a></li>
+  <li><a href="/items/talisman-of-evasion.html">闪避护符</a></li>
+  <li><a href="/items/mystic-staff.html">神秘法杖</a></li>
+  <li><a href="/items/relic.html">圣者遗物</a></li>
+  <li><a href="/items/eagle.html">鹰歌弓</a></li>
+  <li><a href="/items/hyperstone.html">振奋宝石</a></li>
+</ul>
+
+<h2>配件（38）</h2>
+<ul class="grid-list">
+  <li><a href="/items/diadem.html">宝冕</a></li>
+  <li><a href="/items/javelin.html">标枪</a></li>
+  <li><a href="/items/claymore.html">大剑</a></li>
+  <li><a href="/items/wind-lace.html">风灵之纹</a></li>
+  <li><a href="/items/blades-of-attack.html">攻击之爪</a></li>
+  <li><a href="/items/blade-of-alacrity.html">欢欣之刃</a></li>
+  <li><a href="/items/ring-of-regen.html">回复戒指</a></li>
+  <li><a href="/items/gloves.html">加速手套</a></li>
+  <li><a href="/items/cloak.html">抗魔斗篷</a></li>
+  <li><a href="/items/ring-of-tarrasque.html">恐鳌之戒</a></li>
+  <li><a href="/items/blight-stone.html">枯萎之珠</a></li>
+  <li><a href="/items/broadsword.html">阔剑</a></li>
+  <li><a href="/items/gauntlets.html">力量手套</a></li>
+  <li><a href="/items/chasm-stone.html">裂隙之石</a></li>
+  <li><a href="/items/mithril-hammer.html">秘银锤</a></li>
+  <li><a href="/items/slippers.html">敏捷便鞋</a></li>
+  <li><a href="/items/magic-stick.html">魔棒</a></li>
+  <li><a href="/items/staff-of-wizardry.html">魔力法杖</a></li>
+  <li><a href="/items/splintmail.html">片甲</a></li>
+  <li><a href="/items/tiara-of-selemene.html">赛莉蒙妮之冠</a></li>
+  <li><a href="/items/blitz-knuckles.html">闪电指套</a></li>
+  <li><a href="/items/blink.html">闪烁匕首</a></li>
+  <li><a href="/items/overwhelming-blink.html">盛势闪光</a></li>
+  <li><a href="/items/ogre-axe.html">食人魔之斧</a></li>
+  <li><a href="/items/ring-of-protection.html">守护指环</a></li>
+  <li><a href="/items/boots.html">速度之靴</a></li>
+  <li><a href="/items/chainmail.html">锁子甲</a></li>
+  <li><a href="/items/helm-of-iron-will.html">铁意头盔</a></li>
+  <li><a href="/items/voodoo-mask.html">巫毒面具</a></li>
+  <li><a href="/items/lifesteal.html">吸血面具</a></li>
+  <li><a href="/items/sobi-mask.html">贤者面罩</a></li>
+  <li><a href="/items/void-stone.html">虚无宝石</a></li>
+  <li><a href="/items/swift-blink.html">迅疾闪光</a></li>
+  <li><a href="/items/quelling-blade.html">压制之刃</a></li>
+  <li><a href="/items/ghost.html">幽魂权杖</a></li>
+  <li><a href="/items/circlet.html">圆环</a></li>
+  <li><a href="/items/ring-of-health.html">治疗指环</a></li>
+  <li><a href="/items/mantle.html">智力斗篷</a></li>
 </ul>
 
 <h2>其他（2）</h2>
 <ul class="grid-list">
-  <li><a href="/items/harpoon.html">Harpoon</a></li>
-  <li><a href="/items/shadow-amulet.html">Shadow Amulet</a></li>
+  <li><a href="/items/shadow-amulet.html">暗影护符</a></li>
+  <li><a href="/items/harpoon.html">鱼叉</a></li>
 </ul>
 
 <h2>神器（19）</h2>
 <ul class="grid-list">
-  <li><a href="/items/desolator.html">Desolator</a></li>
-  <li><a href="/items/diffusal-blade.html">Diffusal Blade</a></li>
-  <li><a href="/items/disperser.html">Disperser</a></li>
-  <li><a href="/items/dragon-lance.html">Dragon Lance</a></li>
-  <li><a href="/items/echo-sabre.html">Echo Sabre</a></li>
-  <li><a href="/items/skadi.html">Eye of Skadi</a></li>
-  <li><a href="/items/gungir.html">Gleipnir</a></li>
-  <li><a href="/items/heavens-halberd.html">Heaven's Halberd</a></li>
-  <li><a href="/items/helm-of-the-dominator.html">Helm of the Dominator</a></li>
-  <li><a href="/items/helm-of-the-overlord.html">Helm of the Overlord</a></li>
-  <li><a href="/items/kaya-and-sange.html">Kaya and Sange</a></li>
-  <li><a href="/items/maelstrom.html">Maelstrom</a></li>
-  <li><a href="/items/mask-of-madness.html">Mask of Madness</a></li>
-  <li><a href="/items/mjollnir.html">Mjollnir</a></li>
-  <li><a href="/items/sange.html">Sange</a></li>
-  <li><a href="/items/sange-and-yasha.html">Sange and Yasha</a></li>
-  <li><a href="/items/satanic.html">Satanic</a></li>
-  <li><a href="/items/yasha.html">Yasha</a></li>
-  <li><a href="/items/yasha-and-kaya.html">Yasha and Kaya</a></li>
+  <li><a href="/items/desolator.html">黯灭</a></li>
+  <li><a href="/items/mask-of-madness.html">疯狂面具</a></li>
+  <li><a href="/items/gungir.html">缚灵索</a></li>
+  <li><a href="/items/echo-sabre.html">回音战刃</a></li>
+  <li><a href="/items/yasha-and-kaya.html">慧夜对剑</a></li>
+  <li><a href="/items/diffusal-blade.html">净魂之刃</a></li>
+  <li><a href="/items/mjollnir.html">雷神之锤</a></li>
+  <li><a href="/items/dragon-lance.html">魔龙枪</a></li>
+  <li><a href="/items/satanic.html">撒旦之邪力</a></li>
+  <li><a href="/items/sange.html">散华</a></li>
+  <li><a href="/items/kaya-and-sange.html">散慧对剑</a></li>
+  <li><a href="/items/disperser.html">散魂剑</a></li>
+  <li><a href="/items/sange-and-yasha.html">散夜对剑</a></li>
+  <li><a href="/items/skadi.html">斯嘉蒂之眼</a></li>
+  <li><a href="/items/heavens-halberd.html">天堂之戟</a></li>
+  <li><a href="/items/helm-of-the-overlord.html">统御头盔</a></li>
+  <li><a href="/items/maelstrom.html">漩涡</a></li>
+  <li><a href="/items/yasha.html">夜叉</a></li>
+  <li><a href="/items/helm-of-the-dominator.html">支配头盔</a></li>
 </ul>
 
-<h2>消耗品（9）</h2>
+<h2>消耗品（10）</h2>
 <ul class="grid-list">
-  <li><a href="/items/blood-grenade.html">Blood Grenade</a></li>
-  <li><a href="/items/clarity.html">Clarity</a></li>
-  <li><a href="/items/enchanted-mango.html">Enchanted Mango</a></li>
-  <li><a href="/items/faerie-fire.html">Faerie Fire</a></li>
-  <li><a href="/items/branches.html">Iron Branch</a></li>
-  <li><a href="/items/ward-observer.html">Observer Ward</a></li>
-  <li><a href="/items/ward-sentry.html">Sentry Ward</a></li>
-  <li><a href="/items/smoke-of-deceit.html">Smoke of Deceit</a></li>
-  <li><a href="/items/tango.html">Tango</a></li>
+  <li><a href="/items/ward-sentry.html">岗哨守卫</a></li>
+  <li><a href="/items/smoke-of-deceit.html">诡计之雾</a></li>
+  <li><a href="/items/clarity.html">净化药水</a></li>
+  <li><a href="/items/enchanted-mango.html">魔法芒果</a></li>
+  <li><a href="/items/tango.html">树之祭祀</a></li>
+  <li><a href="/items/branches.html">铁树枝干</a></li>
+  <li><a href="/items/faerie-fire.html">仙灵之火</a></li>
+  <li><a href="/items/blood-grenade.html">血腥榴弹</a></li>
+  <li><a href="/items/ward-dispenser.html">侦察·岗哨守卫</a></li>
+  <li><a href="/items/ward-observer.html">侦察守卫</a></li>
 </ul>
 
-<h2>component（38）</h2>
-<ul class="grid-list">
-  <li><a href="/items/blade-of-alacrity.html">Blade of Alacrity</a></li>
-  <li><a href="/items/blades-of-attack.html">Blades of Attack</a></li>
-  <li><a href="/items/blink.html">Blink Dagger</a></li>
-  <li><a href="/items/blitz-knuckles.html">Blitz Knuckles</a></li>
-  <li><a href="/items/boots.html">Boots of Speed</a></li>
-  <li><a href="/items/broadsword.html">Broadsword</a></li>
-  <li><a href="/items/chainmail.html">Chainmail</a></li>
-  <li><a href="/items/chasm-stone.html">Chasm Stone</a></li>
-  <li><a href="/items/circlet.html">Circlet</a></li>
-  <li><a href="/items/claymore.html">Claymore</a></li>
-  <li><a href="/items/cloak.html">Cloak</a></li>
-  <li><a href="/items/diadem.html">Diadem</a></li>
-  <li><a href="/items/gauntlets.html">Gauntlets of Strength</a></li>
-  <li><a href="/items/ghost.html">Ghost Scepter</a></li>
-  <li><a href="/items/gloves.html">Gloves of Haste</a></li>
-  <li><a href="/items/helm-of-iron-will.html">Helm of Iron Will</a></li>
-  <li><a href="/items/javelin.html">Javelin</a></li>
-  <li><a href="/items/magic-stick.html">Magic Stick</a></li>
-  <li><a href="/items/mantle.html">Mantle of Intelligence</a></li>
-  <li><a href="/items/mithril-hammer.html">Mithril Hammer</a></li>
-  <li><a href="/items/lifesteal.html">Morbid Mask</a></li>
-  <li><a href="/items/ogre-axe.html">Ogre Axe</a></li>
-  <li><a href="/items/blight-stone.html">Orb of Blight</a></li>
-  <li><a href="/items/overwhelming-blink.html">Overwhelming Blink</a></li>
-  <li><a href="/items/quelling-blade.html">Quelling Blade</a></li>
-  <li><a href="/items/ring-of-health.html">Ring of Health</a></li>
-  <li><a href="/items/ring-of-protection.html">Ring of Protection</a></li>
-  <li><a href="/items/ring-of-regen.html">Ring of Regen</a></li>
-  <li><a href="/items/ring-of-tarrasque.html">Ring of Tarrasque</a></li>
-  <li><a href="/items/sobi-mask.html">Sage's Mask</a></li>
-  <li><a href="/items/slippers.html">Slippers of Agility</a></li>
-  <li><a href="/items/splintmail.html">Splintmail</a></li>
-  <li><a href="/items/staff-of-wizardry.html">Staff of Wizardry</a></li>
-  <li><a href="/items/swift-blink.html">Swift Blink</a></li>
-  <li><a href="/items/tiara-of-selemene.html">Tiara of Selemene</a></li>
-  <li><a href="/items/void-stone.html">Void Stone</a></li>
-  <li><a href="/items/voodoo-mask.html">Voodoo Mask</a></li>
-  <li><a href="/items/wind-lace.html">Wind Lace</a></li>
-</ul>
-
-<h2>consumable;laning（1）</h2>
-<ul class="grid-list">
-  <li><a href="/items/ward-dispenser.html">Observer and Sentry Wards</a></li>
-</ul>
-
-<p class="disclaimer">数据快照 · 2026-09-08。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
+<p class="disclaimer">数据快照 · 2026-10-04。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
 </main>
 </body></html>
