@@ -120,3 +120,15 @@ test('matchups: game counts read naturally and the capped value is not a fake ex
   assert.equal(formatPp(5.25), '+5.3')
   assert.equal(formatPp(-2), '-2.0')
 })
+
+test('hero and item pages carry a BreadcrumbList that parses', async () => {
+  const { renderHeroPage, renderItemPage } = await load()
+  for (const html of [renderHeroPage(hero('npc_dota_hero_axe'), new Set()), renderItemPage(item('item_blink'))]) {
+    const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
+    assert.ok(m, 'no JSON-LD')
+    const ld = JSON.parse(m[1])
+    assert.equal(ld['@type'], 'BreadcrumbList')
+    assert.equal(ld.itemListElement.length, 3)
+    assert.equal(ld.itemListElement[0].item, 'https://amefys.com/')
+  }
+})

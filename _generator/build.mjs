@@ -237,7 +237,25 @@ function nav() {
 </div></nav>`
 }
 
-function shell({ title, description, canonical, body, lang = 'zh', note = '' }) {
+/**
+ * BreadcrumbList JSON-LD for `[[name, url], …]`; search engines show it as the
+ * path under the result title. `<` is escaped so a name can't close the tag.
+ */
+export function breadcrumbLd(trail) {
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map(([name, item], i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name,
+      item
+    }))
+  }
+  return `<script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>`
+}
+
+function shell({ title, description, canonical, body, lang = 'zh', note = '', breadcrumb = null }) {
   return `<!DOCTYPE html>
 <html lang="${lang}"><head>
 <meta charset="utf-8">
@@ -257,6 +275,7 @@ function shell({ title, description, canonical, body, lang = 'zh', note = '' }) 
 <meta property="og:image" content="${SITE}/assets/icon-512.png?v=2">
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+${breadcrumb ? breadcrumbLd(breadcrumb) : ''}
 ${HEAD_STYLE}
 </head><body>
 ${nav()}
@@ -407,6 +426,11 @@ ${relatedSection}
     title,
     description,
     canonical: `${SITE}/heroes/${slug}.html`,
+    breadcrumb: [
+      ['首页', `${SITE}/`],
+      ['英雄列表', `${SITE}/heroes/`],
+      [zh, `${SITE}/heroes/${slug}.html`]
+    ],
     body,
     note: DRAFT && matchups ? `克制与搭档来自 OpenDota 公开天梯对局，${escape(DRAFT.window.from)} 至 ${escape(DRAFT.window.to)}。` : ''
   })
@@ -533,6 +557,11 @@ ${heroes.length === 0 ? `<p>最近的公开对局里，${escape(zh)}不在任何
     title,
     description,
     canonical: `${SITE}/items/${slug}.html`,
+    breadcrumb: [
+      ['首页', `${SITE}/`],
+      ['装备列表', `${SITE}/items/`],
+      [zh, `${SITE}/items/${slug}.html`]
+    ],
     body
   })
 }
