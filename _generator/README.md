@@ -20,6 +20,8 @@ cp ../amefys/src/shared/data/items.json  _generator/data/
 cp ../amefys/src/shared/data/builds.json _generator/data/
 # Official Chinese names + player nicknames (from the glossary build):
 node _generator/extract-names.mjs ../amefys/src/shared/data/glossary/terms.json
+# Counters / partners: the latest BP draft pack from cdn.amefys.com/draft:
+node _generator/fetch-draft.mjs
 node _generator/build.mjs
 npm test
 git add heroes/ items/ sitemap.xml _generator/data/
