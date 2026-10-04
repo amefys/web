@@ -20,7 +20,7 @@ on:
     inputs:
       limit:
         description: "URLs to push this run"
-        default: "20"
+        default: "10"
 
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
         if: ${{ env.BAIDU_PUSH_TOKEN != '' }}
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
-          LIMIT: ${{ github.event.inputs.limit || '20' }}
+          LIMIT: ${{ github.event.inputs.limit || '10' }}
         run: node scripts/baidu-push.mjs --limit "$LIMIT"
       - name: Skipped
         if: ${{ env.BAIDU_PUSH_TOKEN == '' }}
