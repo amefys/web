@@ -19,8 +19,8 @@ const h1 = (html) => html.match(/<h1>(.*?)<\/h1>/)[1]
 test('hero pages lead with the official Chinese name and carry the nickname', async () => {
   const { renderHeroPage } = await load()
   const html = renderHeroPage(hero('npc_dota_hero_axe'), new Set(['blink']))
-  assert.match(title(html), /^斧王出装攻略（Axe）/)
-  assert.equal(h1(html), '斧王出装攻略')
+  assert.match(title(html), /^斧王出装与克制（Axe）/)
+  assert.equal(h1(html), '斧王出装与克制')
   assert.match(html, /也叫斧子/)
   assert.match(html, /先手/)
   assert.doesNotMatch(html, /Initiator/)
@@ -74,4 +74,49 @@ test('an item page already in the sitemap survives a data refresh', async () => 
   )
   assert.equal(shouldEmitItem(unbuilt, new Set()), false)
   assert.equal(shouldEmitItem(unbuilt, new Set(['dagon-5'])), true)
+})
+
+// 2026-10-04: hero pages carry counters and partners from the BP draft pack.
+const pack = JSON.parse(readFileSync(resolve(DATA, 'draft-pack.json'), 'utf8'))
+const loadMu = () => import('../_generator/matchups.mjs')
+
+test('matchups: each list is signed right, thick enough and at most 5 long', async () => {
+  const { matchupReader, MIN_GAMES, LIST_SIZE } = await loadMu()
+  const read = matchupReader(pack)
+  for (const h of heroes) {
+    const m = read(h.internalName)
+    assert.ok(m, `${h.internalName} missing from the pack`)
+    for (const [list, sign] of [[m.counters, 1], [m.counteredBy, -1], [m.partners, 1]]) {
+      assert.ok(list.length <= LIST_SIZE)
+      for (const p of list) {
+        assert.ok(sign * p.pp > 0, `${h.internalName} ${p.hero} ${p.pp}`)
+        assert.ok(p.games >= MIN_GAMES)
+        assert.notEqual(p.hero, h.internalName)
+      }
+    }
+    // Sorted strongest first.
+    const pps = m.counters.map((p) => p.pp)
+    assert.deepEqual(pps, [...pps].sort((a, b) => b - a))
+  }
+})
+
+test('matchups: the hero page shows them with links and puts them in the description', async () => {
+  const { renderHeroPage } = await load()
+  const { matchupReader } = await loadMu()
+  const top = matchupReader(pack)('npc_dota_hero_axe').counters[0]
+  const html = renderHeroPage(hero('npc_dota_hero_axe'), new Set())
+  assert.match(html, /<h2>斧王克制谁、怕谁、和谁搭<\/h2>/)
+  const slug = top.hero.replace('npc_dota_hero_', '').replace(/_/g, '-')
+  assert.match(html, new RegExp(`href="/heroes/${slug}.html"`))
+  assert.match(html, /<meta name="description" content="[^"]*克制[^"]*怕/)
+  assert.match(html, /href="\/bp\/"/)
+})
+
+test('matchups: game counts read naturally and the capped value is not a fake exact number', async () => {
+  const { formatGames, formatPp, GAMES_CAP } = await loadMu()
+  assert.equal(formatGames(32767), '3.3 万局')
+  assert.equal(formatGames(3157), '3,200 局')
+  assert.equal(formatGames(GAMES_CAP), '6.3 万局以上')
+  assert.equal(formatPp(5.25), '+5.3')
+  assert.equal(formatPp(-2), '-2.0')
 })

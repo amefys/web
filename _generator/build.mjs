@@ -23,6 +23,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'node:fs'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { dirname, resolve } from 'node:path'
+import { formatGames, formatPp, matchupReader, MIN_GAMES } from './matchups.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -34,6 +35,16 @@ const ITEMS = JSON.parse(readFileSync(resolve(DATA_DIR, 'items.json'), 'utf8'))
 const BUILDS = JSON.parse(readFileSync(resolve(DATA_DIR, 'builds.json'), 'utf8'))
 // Official Chinese names + player nicknames, from extract-names.mjs.
 const NAMES = JSON.parse(readFileSync(resolve(DATA_DIR, 'names.json'), 'utf8'))
+// The BP draft pack (fetch-draft.mjs): counters and partners. Optional — the
+// hero pages simply leave the section out without it.
+const DRAFT = (() => {
+  try {
+    return JSON.parse(readFileSync(resolve(DATA_DIR, 'draft-pack.json'), 'utf8'))
+  } catch {
+    return null
+  }
+})()
+const MATCHUPS = DRAFT ? matchupReader(DRAFT) : () => null
 
 const BUILD_BY_HERO = new Map(BUILDS.builds.map((b) => [b.internalName, b]))
 const ITEM_BY_NAME = new Map(ITEMS.map((i) => [i.internalName, i]))
@@ -188,6 +199,21 @@ const HEAD_STYLE = `
   .breadcrumb a { color: var(--text-2); }
   .disclaimer { font-size: 12px; color: var(--text-3); margin-top: 48px;
     border-top: 0.5px solid var(--hairline); padding-top: 16px; }
+  .mu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px; margin: 8px 0 8px; }
+  .mu-card { background: var(--surface); border: 0.5px solid var(--hairline);
+    border-radius: var(--r-md); padding: 12px 14px; }
+  .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
+  .mu-card ol { list-style: none; margin: 0; padding: 0; }
+  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+    border-top: 0.5px solid var(--hairline); font-size: 14px; }
+  .mu-card li:first-child { border-top: 0; }
+  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .mu-up { color: var(--radiant); }
+  .mu-down { color: var(--dire); }
+  .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
+  .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
@@ -211,7 +237,7 @@ function nav() {
 </div></nav>`
 }
 
-function shell({ title, description, canonical, body, lang = 'zh' }) {
+function shell({ title, description, canonical, body, lang = 'zh', note = '' }) {
   return `<!DOCTYPE html>
 <html lang="${lang}"><head>
 <meta charset="utf-8">
@@ -236,7 +262,7 @@ ${HEAD_STYLE}
 ${nav()}
 <main class="wrap">
 ${body}
-<p class="disclaimer">数据快照 · ${DATA_DATE}。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
+<p class="disclaimer">数据快照 · ${DATA_DATE}。${note}AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>
 </main>
 </body></html>`
 }
@@ -259,6 +285,51 @@ export const ROLE_LABEL = {
 }
 const role = (r) => ROLE_LABEL[r] ?? r
 
+function matchupList(title, pairs, tone) {
+  if (!pairs.length) return ''
+  return `<div class="mu-card"><h3>${title}</h3><ol>
+${pairs
+  .map(
+    (p) =>
+      `  <li><a href="/heroes/${heroSlug(p.hero)}.html">${escape(zhName(p.hero, p.hero))}</a><span class="mu-pp mu-${tone}">${formatPp(p.pp)}</span><span class="mu-games">${formatGames(p.games)}</span></li>`
+  )
+  .join('\n')}
+</ol></div>`
+}
+
+/** 克制 / 被克制 / 搭档 from the BP draft pack; '' when there is no data. */
+export function matchupSection(hero) {
+  const m = MATCHUPS(hero.internalName)
+  if (!m) return ''
+  const zh = zhName(hero.internalName, hero.displayName)
+  const cards = [
+    matchupList(`${escape(zh)}克制`, m.counters, 'up'),
+    matchupList(`克制${escape(zh)}`, m.counteredBy, 'down'),
+    matchupList(`${escape(zh)}的最佳搭档`, m.partners, 'up')
+  ].join('\n')
+  if (!cards.trim()) return ''
+  const matches = (DRAFT.ranked.matches / 10000).toFixed(0)
+  return `
+<h2>${escape(zh)}克制谁、怕谁、和谁搭</h2>
+<p class="mu-note">最近 ${DRAFT.window.days} 天 ${matches} 万场天梯（${escape(DRAFT.patch)}）。数字是胜率差（百分点），已经扣掉两个英雄本身的强弱，只看这一对的关系；少于 ${MIN_GAMES.toLocaleString('en-US')} 局的组合不列出。</p>
+<div class="mu-grid">
+${cards}
+</div>
+<p class="mu-note">选人时想按双方阵容实时算：<a href="/bp/">手机版 BP 推荐</a>，或在电脑客户端里打开 BP 面板。</p>`
+}
+
+/** "克制敌法师、幻影长矛手；怕噬魂鬼、幽鬼" for the meta description. */
+function matchupSummary(hero) {
+  const m = MATCHUPS(hero.internalName)
+  if (!m) return ''
+  const names = (pairs) => pairs.slice(0, 2).map((p) => zhName(p.hero, p.hero)).join('、')
+  const parts = [
+    m.counters.length ? `克制${names(m.counters)}` : '',
+    m.counteredBy.length ? `怕${names(m.counteredBy)}` : ''
+  ].filter(Boolean)
+  return parts.length ? `${parts.join('；')}。` : ''
+}
+
 function renderHeroPage(hero, emittedItemSlugs) {
   const slug = heroSlug(hero.internalName)
   const build = BUILD_BY_HERO.get(hero.internalName)
@@ -266,8 +337,11 @@ function renderHeroPage(hero, emittedItemSlugs) {
   const also = nicknameLine(hero.internalName)
   const attr = ATTR_LABEL[hero.primaryAttr] ?? hero.primaryAttr
   const attack = ATTACK_LABEL[hero.attackType] ?? hero.attackType
-  const title = `${zh}出装攻略（${hero.displayName}）· DOTA 2 · AMEFYS`
-  const description = `DOTA 2 ${zh}（${hero.displayName}${also ? `，${also}` : ''}）出装：开局、前期、中期、后期常见装备与出场次数。${attr}${attack}英雄，定位${hero.roles.map(role).join('、')}。`
+  const matchups = matchupSection(hero)
+  const title = matchups
+    ? `${zh}出装与克制（${hero.displayName}）· DOTA 2 · AMEFYS`
+    : `${zh}出装攻略（${hero.displayName}）· DOTA 2 · AMEFYS`
+  const description = `DOTA 2 ${zh}（${hero.displayName}${also ? `，${also}` : ''}）${matchups ? '出装与克制关系' : '出装'}：${matchupSummary(hero)}开局到后期常见装备与出场次数。${attr}${attack}英雄，定位${hero.roles.map(role).join('、')}。`
 
   const phaseSection = (phase, label) => {
     const list = build?.[phase]?.slice(0, 8) ?? []
@@ -309,7 +383,7 @@ ${sameRoleHeroes
 
   const body = `
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/heroes/">英雄列表</a> · ${escape(zh)}</div>
-<h1>${escape(zh)}出装攻略</h1>
+<h1>${escape(zh)}${matchups ? '出装与克制' : '出装攻略'}</h1>
 <p class="tagline">${escape(hero.displayName)}${also ? ` · ${escape(also)}` : ''} · 主属性 ${attr} · ${attack}</p>
 <div>
   ${hero.roles.map((r) => `<span class="pill">${escape(role(r))}</span>`).join('')}
@@ -319,6 +393,7 @@ ${sameRoleHeroes
   <div class="meta-cell"><div class="meta-label">攻击距离</div><div class="meta-value">${attack}</div></div>
   <div class="meta-cell"><div class="meta-label">定位</div><div class="meta-value">${escape(hero.roles.map(role).join(' / '))}</div></div>
 </div>
+${matchups}
 ${phaseSection('start', '开局出装')}
 ${phaseSection('early', '前期出装')}
 ${phaseSection('mid', '中期核心')}
@@ -332,7 +407,8 @@ ${relatedSection}
     title,
     description,
     canonical: `${SITE}/heroes/${slug}.html`,
-    body
+    body,
+    note: DRAFT && matchups ? `克制与搭档来自 OpenDota 公开天梯对局，${escape(DRAFT.window.from)} 至 ${escape(DRAFT.window.to)}。` : ''
   })
 }
 
