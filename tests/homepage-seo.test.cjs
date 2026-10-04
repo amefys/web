@@ -17,7 +17,8 @@ test('every JSON-LD block parses', () => {
 })
 
 test('softwareVersion is the newest release in the changelog', () => {
-  const latest = read('changelog.html').match(/<h2>(\d+\.\d+\.\d+)/)[1]
+  // Stable releases only: a beta at the top of the changelog is not what the download serves.
+  const latest = read('changelog.html').match(/<article class="release" [^>]*>\s*<header><h2>(\d+\.\d+\.\d+)</)[1]
   assert.equal(byType('SoftwareApplication').softwareVersion, latest)
 })
 
