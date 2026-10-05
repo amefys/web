@@ -139,10 +139,10 @@ async function serveFromR2(bucket, key, request, channel, file) {
   object.writeHttpMetadata(headers)
   headers.set('etag', object.httpEtag)
   headers.set('Accept-Ranges', 'bytes')
-  headers.set('Content-Disposition', `attachment; filename="${file}"`)
+  headers.set('Content-Disposition', disposition(file))
   headers.set('X-Content-Type-Options', 'nosniff')
   headers.set('X-AMEFYS-Source', 'r2')
-  if (!headers.has('Content-Type')) headers.set('Content-Type', contentType(file))
+  if (!headers.has('Content-Type') || isVideo(file)) headers.set('Content-Type', contentType(file))
   // Versioned objects are immutable; channel aliases move on every release.
   headers.set(
     'Cache-Control',
@@ -178,7 +178,19 @@ function contentType(file) {
   if (file.endsWith('.json')) return 'application/json; charset=utf-8'
   if (file.endsWith('.dmg')) return 'application/x-apple-diskimage'
   if (file.endsWith('.exe')) return 'application/vnd.microsoft.portable-executable'
+  if (isVideo(file)) return 'video/mp4'
   return 'application/octet-stream'
+}
+
+// The homepage demo video plays in a <video> tag: it must arrive as video/mp4
+// and inline. GitHub labels every release asset octet-stream, which Safari
+// refuses to play.
+function isVideo(file) {
+  return /\.mp4$/i.test(file)
+}
+
+function disposition(file) {
+  return `${isVideo(file) ? 'inline' : 'attachment'}; filename="${file}"`
 }
 
 /**
@@ -222,9 +234,10 @@ async function serveFromGitHub(channel, file, request, ctx) {
 
   const headers = new Headers(upstream.headers)
   headers.set('Cache-Control', `public, max-age=${ttl}${TAG_RE.test(channel) ? ', immutable' : ''}`)
-  headers.set('Content-Disposition', `attachment; filename="${file}"`)
+  headers.set('Content-Disposition', disposition(file))
   headers.set('X-Content-Type-Options', 'nosniff')
   headers.set('X-AMEFYS-Source', 'github')
+  if (isVideo(file)) headers.set('Content-Type', contentType(file))
   const response = new Response(upstream.body, {
     status: upstream.status,
     statusText: upstream.statusText,

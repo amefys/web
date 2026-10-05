@@ -1,0 +1,107 @@
+/* ─────────────────────────────────────────────────────────────
+   AMEFYS · homepage polish shared by / and /en/
+   Loaded after each page's inline <style>, so rules here win at
+   equal specificity. Accessibility, motion, rhythm and the few
+   components that used to be hand-styled inline.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── Keyboard access ─────────────────────────────────────────── */
+.skip-link {
+  position: fixed; top: 8px; left: 8px; z-index: 100;
+  padding: 8px 14px; border-radius: 10px;
+  background: var(--gold); color: #23170a; font-size: 13px; font-weight: 700;
+  transform: translateY(-160%); transition: transform .16s ease;
+}
+.skip-link:focus { transform: none; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+.btn-cta:focus-visible, .btn-pill:focus-visible { outline-offset: 4px; border-radius: 999px; }
+summary:focus-visible { outline-offset: 6px; }
+.btn-cta:active, .btn-pill:active, .hc-arrow:active { transform: translateY(1px) scale(0.98); }
+.btn-cta.ghost, .btn-cta.ghost:hover { transition: background .2s ease, transform .12s ease; }
+
+/* ── Nav: never wrap the language toggle or the download pill ── */
+.nav .lang-switch, .nav .lang-switch a, .nav .btn-pill { white-space: nowrap; flex-shrink: 0; }
+.nav .links { min-width: 0; }
+
+/* ── Type: no orphaned last words ────────────────────────────── */
+h1, h2, h3, .section-title, .bento-h, .hc-title, .pipe-h { text-wrap: balance; }
+p, .section-lead, .bento-p, .pipe-p, figcaption { text-wrap: pretty; }
+html { scroll-behavior: smooth; }
+
+/* ── Rhythm: sections were 120px top and bottom, which left
+      half-empty screens between blocks. Bottom a touch larger. ── */
+section { padding: 88px 24px 100px; }
+.section-gap-sm { margin-top: 44px; }
+@media (max-width: 760px) { section { padding: 60px 18px 68px; } }
+
+/* ── Translation languages ───────────────────────────────────── */
+.lang-headline { font-size: 24px; font-weight: 700; letter-spacing: -.4px; line-height: 1.3; }
+.lang-note { font-size: 13.5px; color: var(--text-2); margin-top: 14px; line-height: 1.6; }
+
+/* ── Quick-reply mock (was ~40 inline style attributes) ──────── */
+.qr-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.qr-chip {
+  height: 30px; padding: 0 14px; border-radius: 15px; cursor: default;
+  background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline-strong);
+  color: var(--text); font-size: 12.5px; font-weight: 600; letter-spacing: .3px;
+}
+.qr-chip.hot { background: var(--gold); border-color: var(--gold); color: #23170a; font-weight: 700; }
+.qr-queue { margin-top: 14px; padding: 12px; border-radius: 10px; background: rgba(232,199,121,0.05); border: 0.5px solid var(--hairline-strong); }
+.qr-queue h6 { margin: 0 0 8px; font-size: 10.5px; color: var(--gold); font-weight: 700; letter-spacing: .8px; }
+.qr-row { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text); padding: 3px 0; }
+.qr-row .st { width: 14px; height: 14px; border-radius: 50%; background: var(--gold); color: #23170a; font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.qr-row.pending .st { background: rgba(232,199,121,0.3); color: #fff; }
+.qr-row .when { margin-left: auto; color: var(--text-3); font-family: ui-monospace, monospace; font-size: 9.5px; }
+.qr-row.pending .when { color: var(--gold); }
+.qr-files { margin-top: 10px; display: flex; gap: 8px; font-size: 11px; color: var(--text-3); }
+.qr-files span { padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.04); border: 0.5px solid var(--hairline); }
+.qr-steps { margin-top: 24px; display: flex; flex-direction: column; gap: 14px; }
+.qr-step { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: var(--text-2); line-height: 1.5; }
+.qr-step b { color: var(--text); }
+.qr-step .n { width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--gold); background: rgba(232,199,121,0.12); border: 0.5px solid rgba(232,199,121,0.4); }
+.packs-cta { margin-top: 32px; text-align: center; }
+.packs-cta a { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 22px; border-radius: 22px; background: var(--gold); color: #23170a; font-size: 14px; font-weight: 700; transition: transform .12s ease, box-shadow .2s ease; }
+.packs-cta a:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(232,199,121,0.3); }
+.packs-cta .sub { margin-top: 10px; font-size: 12.5px; color: var(--text-3); }
+
+/* ── Skins: five real skins, shown as a strip ────────────────── */
+.skin-strip { margin-top: 44px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.skin-chip { border-radius: 14px; padding: 16px; min-height: 120px; border: 0.5px solid var(--hairline); display: flex; flex-direction: column; justify-content: flex-end; }
+.skin-chip b { font-size: 14px; }
+.skin-chip span { font-size: 11.5px; color: var(--text-2); margin-top: 4px; line-height: 1.5; }
+.skin-chip.dark { background: linear-gradient(160deg, #1b1e26, #0f1116); }
+.skin-chip.light { background: linear-gradient(160deg, #f4f1ea, #dcd6c8); color: #1c1a16; }
+.skin-chip.light span { color: rgba(28,26,22,0.7); }
+.skin-chip.gold { background: radial-gradient(80% 70% at 20% 0%, rgba(232,199,121,0.35), transparent 70%), #17110a; border-color: rgba(232,199,121,0.4); }
+.skin-chip.cyber { background: repeating-linear-gradient(60deg, transparent 0 19px, rgba(224,154,102,0.1) 19px 20px), #0a0e1a; border-color: rgba(224,154,102,0.45); }
+.skin-chip.glass { background: radial-gradient(60% 50% at 25% 25%, rgba(221,136,102,0.3), transparent), radial-gradient(60% 50% at 80% 70%, rgba(96,165,250,0.25), transparent), #0e1018; border-color: rgba(255,255,255,0.2); }
+@media (max-width: 900px) { .skin-strip { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Small helpers replacing repeated inline styles ──────────── */
+.em-gold { color: var(--gold); font-style: normal; }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+.eyebrow.center { display: flex; justify-content: center; }
+.mono-meta { margin-left: auto; color: var(--text-3); font-family: ui-monospace, monospace; }
+.footnote { font-size: 12px; color: var(--text-3); margin-top: 14px; line-height: 1.6; }
+.ft-brand .brand-logo { width: 22px; height: 22px; border-radius: 6px; display: block; }
+
+/* ── Motion: the particles, carousel slide and hovers all respect
+      the OS "reduce motion" setting (the JS also stops autoplay). ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .particle { animation: none !important; opacity: 0 !important; }
+  .hc-track { transition: none !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* ── Same item card in three UI languages ────────────────────── */
+.i18n-card-sm { background: rgba(20,22,28,0.72); border: 0.5px solid var(--hairline); border-radius: 14px; overflow: hidden; }
+.i18n-card-h { padding: 8px 12px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-2); }
+.i18n-card-h .tag { min-width: 20px; height: 14px; padding: 0 3px; border-radius: 3px; background: rgba(232,199,121,0.16); border: 0.5px solid rgba(232,199,121,0.4); color: var(--text); font-size: 9.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.i18n-card-b { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.i18n-card-b .meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.i18n-card-b .row { display: flex; align-items: center; gap: 10px; }
+.i18n-card-b .ic { width: 42px; height: 42px; border-radius: 9px; flex-shrink: 0; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #23170a; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.i18n-card-b .nm { font-size: 13px; font-weight: 700; }
+.i18n-card-b .sb { font-size: 11px; color: var(--gold); margin-top: 2px; }
+.lang-chip .num { color: var(--gold); }
