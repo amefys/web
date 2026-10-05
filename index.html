@@ -537,14 +537,14 @@
   .hc-carousel:active { cursor: grabbing; }
   .hc-track {
     display: flex;
-    width: 600%;   /* 6 slides */
+    width: 700%;   /* 7 slides */
     height: 100%;
     transition: transform .55s cubic-bezier(.4, 0, .2, 1);
     will-change: transform;
   }
   .hc-track[data-dragging='true'] { transition: none; }
   .hc-slide {
-    width: 16.6667%;    /* 100% / 6 */
+    width: 14.2857%;    /* 100% / 7 */
     height: 100%;
     flex-shrink: 0;
     position: relative;
@@ -989,6 +989,59 @@
   .hc-res-vs .row.them2 .bar > span { background: linear-gradient(90deg, var(--dire), #b91c1c); width: 72%; }
   .hc-res-vs .row.us .val { color: var(--emerald); }
 
+  /* ──── Slide · BP draft — real app screenshots, desktop + phone ──── */
+  .hc-slide-bp {
+    background:
+      radial-gradient(90% 80% at 78% 40%, rgba(212,175,106,0.18), transparent 62%),
+      linear-gradient(180deg, #0d0b07, #08070a);
+    --accent: var(--gold);
+  }
+  .hc-slide-bp .hc-title em { background: linear-gradient(135deg, #F3D88F, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-bp .hc-eyebrow .bar { background: var(--gold); }
+  .hc-slide-bp .hc-sub { max-width: 330px; }
+  .hc-bp-stage { position: absolute; right: 13%; top: 50%; transform: translateY(-50%); width: 50%; z-index: 3; }
+  .hc-bp-desk {
+    position: relative; border-radius: 12px; overflow: hidden;
+    border: 0.5px solid rgba(232,199,121,0.28);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(176,138,69,0.14);
+  }
+  .hc-bp-phone {
+    position: absolute; right: -11%; bottom: -16%; width: 25%;
+    border-radius: 18px; overflow: hidden;
+    border: 3px solid #1d1a14;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(232,199,121,0.35);
+  }
+  .hc-bp-desk img, .hc-bp-phone img { display: block; width: 100%; height: auto; }
+  .hc-bp-label {
+    position: absolute; z-index: 4; white-space: nowrap;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.68); backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(232,199,121,0.45);
+    color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .3px;
+  }
+  .hc-bp-label b { color: var(--gold); font-weight: 700; }
+  .hc-bp-label.desk { top: -13px; left: 14px; }
+  .hc-bp-label.phone { right: -11%; bottom: calc(-16% - 30px); }
+
+  /* ──── BP showcase section — real screenshots ──── */
+  .bp-show { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 26px; margin-top: 44px; align-items: start; }
+  .bp-shot { margin: 0; }
+  .bp-shot img {
+    display: block; width: 100%; height: auto; border-radius: 14px;
+    border: 0.5px solid rgba(232,199,121,0.25);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(176,138,69,0.10);
+  }
+  .bp-shot-phone img { border-radius: 24px; border: 3px solid #1d1a14; box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(232,199,121,0.35); }
+  .bp-shot figcaption { margin-top: 14px; font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
+  .bp-shot figcaption b { display: block; margin-bottom: 2px; color: var(--gold); font-size: 14.5px; }
+  .bp-shot figcaption a { color: var(--gold); }
+  .bp-shot kbd { padding: 1px 6px; border-radius: 5px; border: 0.5px solid rgba(232,199,121,0.4); background: rgba(232,199,121,0.08); font: 12px ui-monospace, monospace; color: #fff; }
+  .bp-note { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: var(--text-3, var(--text-2)); }
+  @media (max-width: 760px) {
+    .bp-show { grid-template-columns: 1fr; gap: 34px; }
+    .bp-shot-phone { max-width: 250px; }
+  }
+
   /* Mobile — narrower carousel */
   @media (max-width: 720px) {
     .hc-title { font-size: 28px; letter-spacing: -0.8px; }
@@ -1039,6 +1092,14 @@
     .hc-callout, .hc-hud, .hc-game-tint { display: none !important; }
     .hc-arrow { display: none; }
     .hc-dots { bottom: 18px; }
+    .hc-bp-stage { position: relative; inset: auto; transform: none; width: 74%; margin: 4px 0 18px; }
+    /* The screenshots carry their own 桌面版 / 手机版 labels; the stage tag
+       would only collide with the dots on a 4:5 phone carousel. */
+    .hc-slide-bp .hc-stage-tag { display: none !important; }
+    .hc-bp-phone { right: -16%; bottom: -14%; width: 30%; border-width: 2px; border-radius: 12px; }
+    .hc-bp-label { font-size: 10px; padding: 3px 8px; }
+    .hc-bp-label.phone { display: none; }
+    .hc-slide-bp .hc-sub { max-width: none; }
 
     /* Translate / quick-reply demo panels */
     .translate-left { padding: 32px 22px; }
@@ -1091,7 +1152,8 @@
     <div class="nav-inner">
       <a class="brand" href="#"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
-        <a href="#pillars">五大特性</a>
+        <a href="#pillars">六大特性</a>
+        <a href="#draft">BP 推荐</a>
         <a href="#trash">文斗 1v9</a>
         <a href="#assist">实时助手</a>
         <a href="#skins">多主题</a>
@@ -1311,8 +1373,25 @@
         <div class="hc-track" data-hc-track>
 
           <!-- ═══════════ SLIDE 1 · 主界面 ═══════════ -->
-          <div class="hc-slide hc-slide-1" data-slide="0">
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 01 · 桌面应用</div>
+          <div class="hc-slide hc-slide-bp" data-slide="0">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 01 · BP 选人推荐</div>
+            <h2 class="hc-title">选人阶段，<br>先看<em>推荐</em>再锁。</h2>
+            <p class="hc-sub">按你的分段统计近 7 天天梯的胜率、克制和配合，告诉你选谁、禁谁、为什么。电脑上开，手机上也能看。</p>
+            <div class="hc-bp-stage">
+              <div class="hc-bp-desk">
+                <img src="assets/screens/bp-desktop.jpg" width="1600" height="950" alt="AMEFYS 桌面版 BP 面板：双方已选英雄、推荐列表、胜率与克制加分" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label desk"><b>桌面版</b> · 选人时 Alt+Shift+B</span>
+              <div class="hc-bp-phone">
+                <img src="assets/screens/bp-mobile.jpg" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容与推荐选" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label phone"><b>手机版</b> · amefys.com/bp</span>
+            </div>
+            <div class="hc-stage-tag"><span class="dot"></span>BP 推荐 · 桌面版 + 手机版</div>
+          </div>
+
+          <div class="hc-slide hc-slide-1" data-slide="1">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 02 · 桌面应用</div>
             <h2 class="hc-title">不是网页，<br>是<em>真桌面应用</em>。</h2>
             <p class="hc-sub">macOS + Windows 双平台原生包，离线可用。4 大模块 + 完整 Settings + 多账号登录。</p>
             <div class="hc-app">
@@ -1348,7 +1427,7 @@
           </div>
 
           <!-- ═══════════ SLIDE 2 · Glass 悬浮窗（over 游戏画面） ═══════════ -->
-          <div class="hc-slide hc-slide-2" data-slide="1">
+          <div class="hc-slide hc-slide-2" data-slide="2">
             <div class="hc-game-bg">
               <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
                 <defs>
@@ -1393,7 +1472,7 @@
               <div class="team d">31</div>
               <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot empty"></div></div>
             </div>
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 02 · 悬浮窗</div>
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 03 · 悬浮窗</div>
             <h2 class="hc-title">浮在游戏之上，<br>像<em>一层雾玻璃</em>。</h2>
             <p class="hc-sub">聊天翻译、一键回复、圆盘选频道、透明度调节——所有操作不离开游戏窗口。</p>
 
@@ -1458,8 +1537,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 3 · 多主题 ═══════════ -->
-          <div class="hc-slide hc-slide-3" data-slide="2">
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 03 · 多主题</div>
+          <div class="hc-slide hc-slide-3" data-slide="3">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 04 · 多主题</div>
             <h2 class="hc-title" style="text-align:center;left:50%;transform:translateX(-50%);top:32px;max-width:none;">同一个面板，<em>三种灵魂</em>。</h2>
             <div class="hc-3split">
               <div class="hc-3pane cy">
@@ -1499,8 +1578,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 4 · GSI 实时 ═══════════ -->
-          <div class="hc-slide hc-slide-4" data-slide="3">
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 04 · GSI 实时</div>
+          <div class="hc-slide hc-slide-4" data-slide="4">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 05 · GSI 实时</div>
             <h2 class="hc-title">Valve 官方接口，<br><em>1Hz</em> 同步对局。</h2>
             <p class="hc-sub">实时获取英雄状态、经济、装备、技能。出装引擎给主推 / Top3 / 时间线 / 反制四视图。</p>
             <div class="hc-gsi">
@@ -1546,8 +1625,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 5 · 聊天识别 ═══════════ -->
-          <div class="hc-slide hc-slide-5" data-slide="4">
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 05 · 聊天识别</div>
+          <div class="hc-slide hc-slide-5" data-slide="5">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 06 · 聊天识别</div>
             <h2 class="hc-title">他打的那行字，<br>框一下<em>就懂</em>。</h2>
             <p class="hc-sub">框住聊天框，识别在本机完成。<br>截图不上传，也不碰游戏进程。</p>
             <div class="hc-res">
@@ -1580,8 +1659,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 6 · 语音 ═══════════ -->
-          <div class="hc-slide hc-slide-6" data-slide="5">
-            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 06 · 语音</div>
+          <div class="hc-slide hc-slide-6" data-slide="6">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 07 · 语音</div>
             <h2 class="hc-title">他开麦三句，<br>你<em>看到</em>三行字。</h2>
             <p class="hc-sub">按住说话，中文变成他读得懂的话；<br>他开麦，你看到字幕。</p>
             <div class="hc-res">
@@ -1622,6 +1701,7 @@
           <button class="hc-dot" data-hc-go="3" aria-label="第 4 张"></button>
           <button class="hc-dot" data-hc-go="4" aria-label="第 5 张"></button>
           <button class="hc-dot" data-hc-go="5" aria-label="第 6 张"></button>
+          <button class="hc-dot" data-hc-go="6" aria-label="第 7 张"></button>
         </div>
       </div>
     </div>
@@ -1656,14 +1736,39 @@
           <div class="pipe-h">界面随阵营实时切换</div>
           <p class="pipe-p">天辉时翡翠绿日光感；夜魇时辉夜紫月光感。氛围实时贴合你所在的一方，而不是固定皮肤。</p>
         </div>
+        <a class="pipe-card" href="#draft" style="text-decoration:none;border-color: rgba(243,216,143,0.45); background: linear-gradient(180deg, rgba(243,216,143,0.09), var(--bg-2));">
+          <div class="pipe-num" style="color:#F3D88F;">06 / DRAFT</div>
+          <div class="pipe-h">BP 选人推荐，电脑手机都能看</div>
+          <p class="pipe-p">按双方已选英雄实时推荐选谁、禁谁，附胜率、克制与配合的理由。电脑上是悬浮窗，手机浏览器打开 amefys.com/bp 也能用。</p>
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- BP draft — real app screenshots, desktop + phone -->
+  <section id="draft" style="background: linear-gradient(180deg, transparent, rgba(212,175,106,0.05), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--gold);"><span class="bar" style="background:var(--gold);"></span>特性 01 · BP 选人推荐</div>
+      <h2 class="section-title">选谁、禁谁、为什么，<br><em style="color:var(--gold);font-style:normal;">电脑</em>和<em style="color:#F3D88F;font-style:normal;">手机</em>都能看。</h2>
+      <p class="section-lead">按你的分段统计近 7 天几百万局公开天梯对局，跟着双方已选的英雄实时算推荐选、建议禁和阵容短板，每一条都写明胜率、克制与配合的加减分。登录就能用。</p>
+      <div class="bp-show">
+        <figure class="bp-shot bp-shot-desk">
+          <img src="assets/screens/bp-desktop.jpg" width="1600" height="950" alt="AMEFYS 桌面版 BP 面板：双方已选英雄、禁用位、英雄池和右侧推荐列表" loading="lazy" decoding="async" />
+          <figcaption><b>桌面版 · 悬浮窗</b>选人阶段按 <kbd>Alt+Shift+B</kbd> 打开。左键我方选、右键敌方选、Ctrl+点击禁用；右侧分「推荐 / 建议 Ban / 阵容」三页。</figcaption>
+        </figure>
+        <figure class="bp-shot bp-shot-phone">
+          <img src="assets/screens/bp-mobile.jpg" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容、禁用和推荐选列表" loading="lazy" decoding="async" />
+          <figcaption><b>手机版 · 浏览器</b>打开 <a href="/bp/">amefys.com/bp</a>，或在桌面版点「手机版」扫码。按住按钮说英雄名就能录入，不挡游戏画面。</figcaption>
+        </figure>
+      </div>
+      <p class="bp-note">两张都是 AMEFYS 的原生界面截图。推荐基于公开历史对局统计（数据来自 OpenDota）与本地算法，仅供参考；选人需要你手动录入，AMEFYS 不读取游戏内存。</p>
     </div>
   </section>
 
   <!-- Translate showcase / Trash-talk + Quick replies -->
   <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(217,83,79,0.04), rgba(52,211,153,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>特性 01 · 文斗 1 vs 9 · 翻译 + 一键回复</div>
+      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>特性 02 · 文斗 1 vs 9 · 翻译 + 一键回复</div>
       <h2 class="section-title">他骂俄语。<br>你听<em style="color:var(--dire);font-style:normal;">中文</em>。<br><em style="color:var(--emerald);font-style:normal;">一键</em>回他一整段。</h2>
       <p class="section-lead">9 国语言双向实时互译，端到端延迟 &lt; 600ms。回敬走「点一下标签 → 翻译 → 写入剪贴板 → 唤起 DOTA 聊天框 → 粘贴 → 回车」全自动链路：GG / GLHF / NP / WP 单条直发，<strong style="color:var(--emerald);">消息块</strong>按 100ms – 10s 间隔依次推入聊天框。预设之外可建无限组自定义包，按 portable JSON 导入 / 导出与社区互通。文斗不再单方面被动挨骂——这是公平的国际局。</p>
 
@@ -1785,7 +1890,7 @@
   <!-- Assistant feature (renamed) -->
   <section id="assist">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>特性 02 · 实时助手</div>
+      <div class="eyebrow"><span class="bar"></span>特性 03 · 实时助手</div>
       <h2 class="section-title">官方付费助手能做的，<br>这里 <em style="color:var(--emerald);font-style:normal;">¥0</em> 给你。</h2>
       <p class="section-lead">主推 / Top 3 / 时间线 / 反制四视图，置信度、缺口金币、出现时机一应俱全。通过 Valve 官方 GSI 接口，1Hz 同步对局状态——出装建议、对局记录、悬浮窗这些跑在你电脑上的功能完全免费；云端翻译与语音识别每天有免费额度，会员只用来提升额度。不卖广告、不卖你的对局数据。</p>
 
@@ -1972,7 +2077,7 @@
   <!-- Multi-skin support -->
   <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(224,154,102,0.04), rgba(221,136,102,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>特性 03 · 多主题皮肤</div>
+      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>特性 04 · 多主题皮肤</div>
       <h2 class="section-title">不只是<em style="color:var(--gold);font-style:normal;">换个颜色</em>。<br>整套界面，<em style="color:#E09A66;font-style:normal;">换个灵魂</em>。</h2>
       <p class="section-lead">默认主题之外，AMEFYS 内置两套完整皮肤：<strong style="color:#E09A66;">Cyberpunk</strong> 与 <strong style="color:#E8C779;">Liquid Glass</strong>。每一套都是 token + decoration 双层重塑——背景纹理、字体、卡片切角、悬浮窗轮廓、动效一并替换。皮肤设置同步上云，多设备一致。</p>
 
@@ -2032,7 +2137,7 @@
   <!-- i18n / Multi-language -->
   <section id="i18n" style="background: linear-gradient(180deg, transparent, rgba(240,162,60,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>特性 04 · 语言</div>
+      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>特性 05 · 语言</div>
       <h2 class="section-title">你打中文，<br>队友看到<br>他的<em style="color:var(--warn);font-style:normal;">母语</em>。</h2>
       <p class="section-lead">分两层：<strong style="color:var(--warn);">界面</strong>有中文、英文、俄文三种，<strong style="color:var(--warn);">英雄名、装备名、分路 / 位置、决策提示信息、技能描述、复盘词包</strong>跟着一起走；<strong style="color:var(--warn);">聊天翻译</strong>再多覆盖越南语、印尼语、菲律宾语，够用在东南亚服开局。中文里看「黑皇杖 · 4 号位 · 防守推塔」，英文里看「BKB · Soft Support · Defend tower」，俄语里看「Чёрный Скипетр · Поддержка · Защита башни」。</p>
 
@@ -2190,7 +2295,7 @@
   <!-- Faction split (DOTA2 inspired) -->
   <section id="faction" style="background: var(--bg-2);">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>特性 05 · 阵营氛围实时切换</div>
+      <div class="eyebrow"><span class="bar"></span>特性 06 · 阵营氛围实时切换</div>
       <h2 class="section-title">天辉的<em style="color:var(--emerald);font-style:normal;">日光</em>，<br>夜魇的<em style="color:var(--gold);font-style:normal;">月色</em>，<br>界面跟着你走。</h2>
       <p class="section-lead">不只是换个皮肤。AMEFYS 在你被分配到天辉时切换为翡翠绿日光氛围，分配到夜魇时切换为辉夜紫月光氛围——背景纹理、强调色、悬浮窗轮廓全部跟随，让助手永远像是「我方」。</p>
 
