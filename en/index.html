@@ -470,9 +470,9 @@
     cursor: grab; user-select: none; touch-action: pan-y;
   }
   .hc-carousel:active { cursor: grabbing; }
-  .hc-track { display: flex; width: 600%; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .hc-track { display: flex; width: 700%; height: 100%; transition: transform .55s cubic-bezier(.4,0,.2,1); will-change: transform; }
   .hc-track[data-dragging='true'] { transition: none; }
-  .hc-slide { width: 16.6667%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
+  .hc-slide { width: 14.2857%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
 
   .hc-eyebrow { position: absolute; top: 36px; left: 44px; z-index: 5; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; text-shadow: 0 0 12px rgba(0,0,0,0.5); }
   .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--gold); }
@@ -723,6 +723,35 @@
   .hc-res-vs .row.them2 .bar > span { background: linear-gradient(90deg, var(--dire), #b91c1c); width: 72%; }
   .hc-res-vs .row.us .val { color: var(--emerald); }
 
+  /* ──── Slide · BP draft — real app screenshots, desktop + phone ──── */
+  .hc-slide-bp { background: radial-gradient(90% 80% at 78% 40%, rgba(212,175,106,0.18), transparent 62%), linear-gradient(180deg, #0d0b07, #08070a); --accent: var(--gold); }
+  .hc-slide-bp .hc-title em { background: linear-gradient(135deg, #F3D88F, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-bp .hc-eyebrow .bar { background: var(--gold); }
+  .hc-slide-bp .hc-sub { max-width: 330px; }
+  .hc-bp-stage { position: absolute; right: 13%; top: 50%; transform: translateY(-50%); width: 50%; z-index: 3; }
+  .hc-bp-desk { position: relative; border-radius: 12px; overflow: hidden; border: 0.5px solid rgba(232,199,121,0.28); box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(176,138,69,0.14); }
+  .hc-bp-phone { position: absolute; right: -11%; bottom: -16%; width: 25%; border-radius: 18px; overflow: hidden; border: 3px solid #1d1a14; box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(232,199,121,0.35); }
+  .hc-bp-desk img, .hc-bp-phone img { display: block; width: 100%; height: auto; }
+  .hc-bp-label { position: absolute; z-index: 4; white-space: nowrap; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.68); backdrop-filter: blur(12px); border: 0.5px solid rgba(232,199,121,0.45); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .3px; }
+  .hc-bp-label b { color: var(--gold); font-weight: 700; }
+  .hc-bp-label.desk { top: -13px; left: 14px; }
+  .hc-bp-label.phone { right: -11%; bottom: calc(-16% - 30px); }
+
+  /* ──── BP showcase section — real screenshots ──── */
+  .bp-show { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 26px; margin-top: 44px; align-items: start; }
+  .bp-shot { margin: 0; }
+  .bp-shot img { display: block; width: 100%; height: auto; border-radius: 14px; border: 0.5px solid rgba(232,199,121,0.25); box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(176,138,69,0.10); }
+  .bp-shot-phone img { border-radius: 24px; border: 3px solid #1d1a14; box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(232,199,121,0.35); }
+  .bp-shot figcaption { margin-top: 14px; font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
+  .bp-shot figcaption b { display: block; margin-bottom: 2px; color: var(--gold); font-size: 14.5px; }
+  .bp-shot figcaption a { color: var(--gold); }
+  .bp-shot kbd { padding: 1px 6px; border-radius: 5px; border: 0.5px solid rgba(232,199,121,0.4); background: rgba(232,199,121,0.08); font: 12px ui-monospace, monospace; color: #fff; }
+  .bp-note { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: var(--text-3, var(--text-2)); }
+  @media (max-width: 760px) {
+    .bp-show { grid-template-columns: 1fr; gap: 34px; }
+    .bp-shot-phone { max-width: 250px; }
+  }
+
   @media (max-width: 720px) {
     .hc-title { font-size: 28px; letter-spacing: -0.8px; }
     .hc-sub { font-size: 12px; max-width: 280px; top: 170px; }
@@ -765,6 +794,14 @@
     .hc-callout, .hc-hud, .hc-game-tint { display: none !important; }
     .hc-arrow { display: none; }
     .hc-dots { bottom: 18px; }
+    .hc-bp-stage { position: relative; inset: auto; transform: none; width: 74%; margin: 4px 0 18px; }
+    /* The screenshots carry their own Desktop / Phone labels; the stage tag
+       would only collide with the dots on a 4:5 phone carousel. */
+    .hc-slide-bp .hc-stage-tag { display: none !important; }
+    .hc-bp-phone { right: -16%; bottom: -14%; width: 30%; border-width: 2px; border-radius: 12px; }
+    .hc-bp-label { font-size: 10px; padding: 3px 8px; }
+    .hc-bp-label.phone { display: none; }
+    .hc-slide-bp .hc-sub { max-width: none; }
 
     .translate-left { padding: 32px 22px; }
     .translate-right { padding: 24px 18px; }
@@ -801,6 +838,7 @@
       <a class="brand" href="index.html"><img class="brand-mark" src="../assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
         <a href="#pillars">Features</a>
+        <a href="#draft">Draft</a>
         <a href="#trash">Trash-talk 1v9</a>
         <a href="#assist">Assistant</a>
         <a href="#skins">Skins</a>
@@ -896,8 +934,25 @@
         <div class="hc-track" data-hc-track>
 
           <!-- ═══════════ SLIDE 1 · Main UI ═══════════ -->
-          <div class="hc-slide hc-slide-1" data-slide="0">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 01 · Desktop app</div>
+          <div class="hc-slide hc-slide-bp" data-slide="0">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 01 · Draft picks &amp; bans</div>
+            <h2 class="hc-title">Before you lock in,<br>see the <em>picks</em>.</h2>
+            <p class="hc-sub">Win rates, counters and synergies from the last 7 days of ranked games in your bracket — who to pick, who to ban, and why. On your PC, or on your phone.</p>
+            <div class="hc-bp-stage">
+              <div class="hc-bp-desk">
+                <img src="../assets/screens/bp-desktop-en.jpg" width="1600" height="950" alt="AMEFYS desktop draft overlay: both teams' picks, bans, the hero grid and ranked pick suggestions" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label desk"><b>Desktop</b> · Alt+Shift+B in draft</span>
+              <div class="hc-bp-phone">
+                <img src="../assets/screens/bp-mobile-en.jpg" width="665" height="1440" alt="AMEFYS phone draft page: both line-ups and suggested picks" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label phone"><b>Phone</b> · amefys.com/bp</span>
+            </div>
+            <div class="hc-stage-tag"><span class="dot"></span>Draft · desktop + phone</div>
+          </div>
+
+          <div class="hc-slide hc-slide-1" data-slide="1">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 02 · Desktop app</div>
             <h2 class="hc-title">Not a web app —<br>a <em>real desktop app</em>.</h2>
             <p class="hc-sub">Native packages for macOS + Windows. 4 modules + full Settings + multi-account login.</p>
             <div class="hc-app">
@@ -933,7 +988,7 @@
           </div>
 
           <!-- ═══════════ SLIDE 2 · Glass overlay over game ═══════════ -->
-          <div class="hc-slide hc-slide-2" data-slide="1">
+          <div class="hc-slide hc-slide-2" data-slide="2">
             <div class="hc-game-bg">
               <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
                 <defs>
@@ -965,7 +1020,7 @@
               <div class="team d">31</div>
               <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot empty"></div></div>
             </div>
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 02 · Overlay</div>
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 03 · Overlay</div>
             <h2 class="hc-title">Floats over the game,<br>like <em>frosted glass</em>.</h2>
             <p class="hc-sub">Live translation, one-tap reply, radial channel select, opacity — never leave the game window.</p>
 
@@ -1030,8 +1085,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 3 · Themes ═══════════ -->
-          <div class="hc-slide hc-slide-3" data-slide="2">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 03 · Multi-skin</div>
+          <div class="hc-slide hc-slide-3" data-slide="3">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 04 · Multi-skin</div>
             <h2 class="hc-title" style="text-align:center;left:50%;transform:translateX(-50%);top:32px;max-width:none;">Same UI, <em>three souls</em>.</h2>
             <div class="hc-3split">
               <div class="hc-3pane cy">
@@ -1071,8 +1126,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 4 · GSI realtime ═══════════ -->
-          <div class="hc-slide hc-slide-4" data-slide="3">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 04 · GSI realtime</div>
+          <div class="hc-slide hc-slide-4" data-slide="4">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 05 · GSI realtime</div>
             <h2 class="hc-title">Valve's official API,<br><em>1Hz</em> match sync.</h2>
             <p class="hc-sub">Live hero state, gold, items, ability CD. The recommender renders Top / Top3 / Timeline / Counter.</p>
             <div class="hc-gsi">
@@ -1118,8 +1173,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 5 · Chat OCR ═══════════ -->
-          <div class="hc-slide hc-slide-5" data-slide="4">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 05 · Chat OCR</div>
+          <div class="hc-slide hc-slide-5" data-slide="5">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 06 · Chat OCR</div>
             <h2 class="hc-title">That line you can't read?<br><em>Frame it</em>.</h2>
             <p class="hc-sub">Frame the chat box.<br>Recognition runs here; the screenshot stays here.</p>
             <div class="hc-res">
@@ -1152,8 +1207,8 @@
           </div>
 
           <!-- ═══════════ SLIDE 6 · Voice ═══════════ -->
-          <div class="hc-slide hc-slide-6" data-slide="5">
-            <div class="hc-eyebrow"><span class="bar"></span>Feature 06 · Voice</div>
+          <div class="hc-slide hc-slide-6" data-slide="6">
+            <div class="hc-eyebrow"><span class="bar"></span>Feature 07 · Voice</div>
             <h2 class="hc-title">He opens mic,<br>you <em>read</em> it.</h2>
             <p class="hc-sub">Hold to talk, land it in his language.<br>He talks, you get subtitles.</p>
             <div class="hc-res">
@@ -1193,6 +1248,7 @@
           <button class="hc-dot" data-hc-go="3" aria-label="Slide 4"></button>
           <button class="hc-dot" data-hc-go="4" aria-label="Slide 5"></button>
           <button class="hc-dot" data-hc-go="5" aria-label="Slide 6"></button>
+          <button class="hc-dot" data-hc-go="6" aria-label="Slide 7"></button>
         </div>
       </div>
     </div>
@@ -1227,14 +1283,39 @@
           <div class="pipe-h">UI shifts with your side</div>
           <p class="pipe-p">Emerald daylight when you load into Radiant. Lavender moonlight when you draw Dire. The mood follows you — not a static skin.</p>
         </div>
+        <a class="pipe-card" href="#draft" style="text-decoration:none;border-color: rgba(243,216,143,0.45); background: linear-gradient(180deg, rgba(243,216,143,0.09), var(--bg-2));">
+          <div class="pipe-num" style="color:#F3D88F;">06 / DRAFT</div>
+          <div class="pipe-h">Draft picks, on PC and phone</div>
+          <p class="pipe-p">Live pick and ban suggestions from both teams' heroes, each with the win rate, counter and synergy behind it. A desktop overlay — or open amefys.com/bp on your phone.</p>
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- BP draft — real app screenshots, desktop + phone -->
+  <section id="draft" style="background: linear-gradient(180deg, transparent, rgba(212,175,106,0.05), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--gold);"><span class="bar" style="background:var(--gold);"></span>Feature 01 · Draft picks &amp; bans</div>
+      <h2 class="section-title">Who to pick, who to ban.<br>On your <em style="color:var(--gold);font-style:normal;">PC</em> and your <em style="color:#F3D88F;font-style:normal;">phone</em>.</h2>
+      <p class="section-lead">Built from the last 7 days of public ranked games in your bracket — millions of them. As both teams pick, it ranks suggested picks, suggested bans and line-up gaps, and every line shows the win rate, counter and synergy behind it. Free with an account.</p>
+      <div class="bp-show">
+        <figure class="bp-shot bp-shot-desk">
+          <img src="../assets/screens/bp-desktop-en.jpg" width="1600" height="950" alt="AMEFYS desktop draft overlay: picks, bans, the hero grid and ranked pick suggestions" loading="lazy" decoding="async" />
+          <figcaption><b>Desktop · overlay</b>Press <kbd>Alt+Shift+B</kbd> during the draft. Left click: our pick, right click: their pick, Ctrl+click: ban. Three tabs on the right: Picks / Bans / Line-ups.</figcaption>
+        </figure>
+        <figure class="bp-shot bp-shot-phone">
+          <img src="../assets/screens/bp-mobile-en.jpg" width="665" height="1440" alt="AMEFYS phone draft page: both line-ups, bans and suggested picks" loading="lazy" decoding="async" />
+          <figcaption><b>Phone · browser</b>Open <a href="/bp/">amefys.com/bp</a>, or click “On phone” in the desktop app and scan the code. Tap heroes to fill the board — nothing to install, nothing over your game.</figcaption>
+        </figure>
+      </div>
+      <p class="bp-note">Both are native AMEFYS screenshots. Suggestions come from public match statistics (data: OpenDota) and a local algorithm, for reference only. You enter the draft yourself — AMEFYS never reads game memory.</p>
     </div>
   </section>
 
   <!-- Trash-talk / Translate -->
   <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(217,83,79,0.04), rgba(52,211,153,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>Feature 01 · Trash-talk 1v9 · Translate + One-tap reply</div>
+      <div class="eyebrow" style="color:var(--dire);"><span class="bar" style="background:var(--dire);"></span>Feature 02 · Trash-talk 1v9 · Translate + One-tap reply</div>
       <h2 class="section-title">They flame Russian.<br>You read <em style="color:var(--dire);font-style:normal;">English</em>.<br><em style="color:var(--emerald);font-style:normal;">One tap</em>, full reply sent.</h2>
       <p class="section-lead">Nine languages, real-time, end-to-end under 600 ms. The reply path is one click: tap a chip → translate → write clipboard → bring up the Dota chat box → paste → enter. GG / GLHF / NP / WP fire a single line; <strong style="color:var(--emerald);">block</strong> chips push N lines in order with a 100ms – 10s configurable gap. Beyond the presets, build unlimited custom packs and trade them as portable JSON. The chat war is no longer one-sided — finally a fair international match.</p>
 
@@ -1355,7 +1436,7 @@
   <!-- Assistant feature -->
   <section id="assist">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>Feature 02 · Free Real-time Coach</div>
+      <div class="eyebrow"><span class="bar"></span>Feature 03 · Free Real-time Coach</div>
       <h2 class="section-title">Everything Dota Plus charges for,<br>here for <em style="color:var(--emerald);font-style:normal;">$0</em>.</h2>
       <p class="section-lead">Top pick · Top 3 · Timeline · Counter — four views, with confidence scores, gold gaps, and timing windows. Synced over Valve's official Game State Integration at 1 Hz. Item picks, match history and the overlay all run on your machine and are free; cloud translation and speech recognition come with a daily free allowance, and membership only raises it. We don't sell ads, we don't sell your match data.</p>
 
@@ -1526,7 +1607,7 @@
   <!-- Multi-skin support -->
   <section id="skins" style="background: linear-gradient(180deg, transparent, rgba(224,154,102,0.04), rgba(221,136,102,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>Feature 03 · Multi-skin engine</div>
+      <div class="eyebrow" style="color:#60a5fa;"><span class="bar" style="background:#60a5fa;"></span>Feature 04 · Multi-skin engine</div>
       <h2 class="section-title">More than a <em style="color:var(--gold);font-style:normal;">color swap</em>.<br>A whole <em style="color:#E09A66;font-style:normal;">new soul</em>.</h2>
       <p class="section-lead">On top of the default theme, AMEFYS ships two complete skin packs: <strong style="color:#E09A66;">Cyberpunk</strong> and <strong style="color:#E8C779;">Liquid Glass</strong>. Each pack rebuilds the UI at two layers — design tokens (color, type, radius) plus a decoration layer (background, card corners, overlays, motion). Your pick syncs to the cloud so every device looks identical.</p>
 
@@ -1586,7 +1667,7 @@
   <!-- i18n / Multi-language -->
   <section id="i18n" style="background: linear-gradient(180deg, transparent, rgba(240,162,60,0.04), transparent);">
     <div class="container">
-      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>Feature 04 · Languages</div>
+      <div class="eyebrow" style="color:var(--warn);"><span class="bar" style="background:var(--warn);"></span>Feature 05 · Languages</div>
       <h2 class="section-title">You type English,<br>your team reads<br>their<em style="color:var(--warn);font-style:normal;"> own language</em>.</h2>
       <p class="section-lead">Two layers. The <strong style="color:var(--warn);">interface</strong> comes in English, Chinese and Russian — and <strong style="color:var(--warn);">hero names, item names, lane / role, decision hints, ability tooltips and post-match review packs</strong> travel with it. <strong style="color:var(--warn);">Chat translation</strong> covers three more: Vietnamese, Indonesian and Filipino. You see "BKB · Soft Support · Defend tower" in English; "黑皇杖 · 4 号位 · 防守推塔" in Chinese; "Чёрный Скипетр · Поддержка · Защита башни" in Russian.</p>
 
@@ -1740,7 +1821,7 @@
   <!-- Faction split -->
   <section id="faction" style="background: var(--bg-2);">
     <div class="container">
-      <div class="eyebrow"><span class="bar"></span>Feature 05 · Faction-aware UI</div>
+      <div class="eyebrow"><span class="bar"></span>Feature 06 · Faction-aware UI</div>
       <h2 class="section-title">Radiant <em style="color:var(--emerald);font-style:normal;">daylight</em>,<br>Dire <em style="color:var(--gold);font-style:normal;">moonlight</em>,<br>UI follows you.</h2>
       <p class="section-lead">Not just a skin. When you load into Radiant, AMEFYS shifts to emerald daylight — when you're on Dire, it flips to lavender moonlight. Backdrop texture, accent colour, overlay outline — they all follow your side, so the assistant always feels like <em>your team</em>.</p>
 
@@ -1851,6 +1932,10 @@
         <details open="">
           <summary>Where does the name "AMEFYS" come from?</summary>
           <p>It's a tribute from the Dota community: <span style="color:var(--gold);">AME</span> + <span style="color:var(--gold);">FY</span> + <span style="color:var(--gold);">Somethings</span>.</p>
+        </details>
+        <details>
+          <summary>Can I use the draft suggestions on my phone?</summary>
+          <p>Yes. Open <a href="/bp/" style="color:var(--gold);">amefys.com/bp</a> in your phone's browser and sign in with the same account as the desktop app — there is no app to install, and nothing runs on your gaming PC. Tap heroes to fill the board; picks and bans come from the same data as the desktop overlay. Hold-to-talk voice input currently understands Chinese hero names only.</p>
         </details>
         <details open="">
           <summary>Will using AMEFYS get me VAC-banned?</summary>
