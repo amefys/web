@@ -157,13 +157,30 @@ async function serveFromR2(bucket, key, request, channel, file) {
   // actually asked for a range, otherwise plain downloads would see a partial
   // status (observed as 206 on every GET/HEAD, 2026-09-05).
   if (object.range && request.headers.has('Range')) {
-    const { offset, length } = normaliseRange(object.range, object.size)
+    const { offset, length } =
+      parseRange(request.headers.get('Range'), object.size) ?? normaliseRange(object.range, object.size)
     headers.set('Content-Range', `bytes ${offset}-${offset + length - 1}/${object.size}`)
     headers.set('Content-Length', String(length))
     return new Response(request.method === 'HEAD' ? null : object.body, { status: 206, headers })
   }
   headers.set('Content-Length', String(object.size))
   return new Response(request.method === 'HEAD' ? null : object.body, { status: 200, headers })
+}
+
+// The request's own single byte range, clamped to the object — what R2 served.
+// R2's reported range object proved unreliable for open-ended ranges
+// ("bytes=100-" still came out NaN-NaN), so this is the primary source.
+function parseRange(header, size) {
+  const m = /^bytes=(\d*)-(\d*)$/.exec((header || '').trim())
+  if (!m || (m[1] === '' && m[2] === '')) return null
+  if (m[1] === '') {
+    const n = Math.min(Number(m[2]), size)
+    return { offset: size - n, length: n }
+  }
+  const offset = Number(m[1])
+  const end = m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1)
+  if (offset > end) return null
+  return { offset, length: end - offset + 1 }
 }
 
 function normaliseRange(range, size) {
