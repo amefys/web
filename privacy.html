@@ -188,7 +188,7 @@
       <div class="eyebrow">隐私政策</div>
       <h1>你的数据，你做主</h1>
       <p>用最简单的话说清楚：我们收集了什么、为什么、给谁。</p>
-      <div class="updated">生效日期：2026-09-09（上一版 2026-05-24）</div>
+      <div class="updated">生效日期：2026-10-05（上一版 2026-09-09）</div>
     </div>
 
     <!-- 三条原则 -->
@@ -286,6 +286,12 @@
             <td>修 bug</td>
             <td><span class="tag tag-third">Sentry</span> — 默认开启，设置里可关</td>
           </tr>
+          <tr>
+            <td>OCR 诊断（可选，v0.30.0 起）</td>
+            <td>每次截屏识别的<strong>计数与类别</strong>：识别出几行、各过滤规则去掉了几行、识别置信度、各文字系统（拉丁 / 西里尔 / 中日韩）的字符数、每行翻译是成功还是失败及失败原因（网络 / 超时 / 服务端 / 额度等）、识别与翻译语言设置、翻译通道（官方代理 / 自备密钥）与识别引擎、App 与系统版本、框选区域的宽和高。<strong>不含识别出的任何文字、截图、框选在屏幕上的位置和玩家名</strong></td>
+            <td>排查「识别 / 翻译不对劲」到底是哪一步出了问题</td>
+            <td><span class="tag tag-cloud">Supabase</span> 仅登录用户，<strong>关联你的账号 ID</strong>；其中网络失败、服务端错误等少数类别同时发给 <span class="tag tag-third">Sentry</span>。与错误上报共用同一个开关，默认开启，设置里可关</td>
+          </tr>
         </tbody>
       </table>
     </section>
@@ -327,7 +333,8 @@
         <li><strong>本地翻译缓存</strong>：SQLite 表 <code>translation_cache</code>，从不上传（注意这与上面的<a href="#share-cache" class="link">共享翻译缓存</a>是两张不同的表 — 后者默认会匿名收录 80 字以内的译文）</li>
         <li><strong>App 设置</strong>：本地 JSON 文件 <code>~/Library/.../amefys.json</code></li>
         <li><strong>未登录用户的对局历史</strong>：仅本地 SQLite，从不上传</li>
-        <li><strong>OCR 截图原图</strong>：文字识别由系统自带引擎在本机完成，截图既不上传也不落盘；离开本机的只有识别出的文字（且仅在需要翻译时）</li>
+        <li><strong>OCR 截图原图</strong>：文字识别由系统自带引擎在本机完成，截图既不上传也不落盘；离开本机的只有识别出的文字（且仅在需要翻译时）。上面的 OCR 诊断只上报次数和类别，不含文字</li>
+        <li><strong>「复制诊断信息」</strong>：OCR 设置里的这个按钮只把最近 10 次截屏的诊断摘要复制到你的剪贴板，发不发给我们由你决定；内容同样只有次数和类别</li>
         <li><strong>语音字幕</strong>：队友语音转写出的字幕只在你的悬浮窗里显示，不上传、不归档</li>
       </ul>
     </section>
@@ -338,11 +345,11 @@
       <table class="pv-table">
         <thead><tr><th>服务</th><th>数据</th><th>政策</th></tr></thead>
         <tbody>
-          <tr><td>Supabase</td><td>邮箱 + 密码 + 登录用户的对局数据</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener" class="link">supabase.com/privacy</a></td></tr>
+          <tr><td>Supabase</td><td>邮箱 + 密码 + 登录用户的对局数据 + OCR 诊断计数（可关）</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener" class="link">supabase.com/privacy</a></td></tr>
           <tr><td>翻译引擎（火山 / Azure / Claude / OpenAI / Gemini）</td><td>你的翻译原文 + 译文</td><td>详见各引擎方政策</td></tr>
           <tr><td>语音识别（火山引擎，或你自备密钥的服务商）</td><td>语音输入 / 语音侦听的音频与转写文本</td><td><a href="https://www.volcengine.com/docs/6291/65568" class="link" target="_blank" rel="noopener">volcengine.com</a> / 详见你所选服务商政策</td></tr>
           <tr><td>OpenDota API</td><td>（可选）读取你的 Steam 公开对局战绩</td><td><a href="https://www.opendota.com/api-keys" target="_blank" rel="noopener" class="link">opendota.com</a></td></tr>
-          <tr><td>Sentry（可选）</td><td>崩溃栈 + 设备 OS 版本</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
+          <tr><td>Sentry（可选）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
           <tr><td>爱发电（afdian.com）</td><td>购买 Pro 会员时的付款；我们只收到订单号、金额、付款人的爱发电账号 ID 和你填写的留言，<strong>看不到你的手机号、邮箱和支付信息</strong></td><td><a href="https://afdian.com" target="_blank" rel="noopener" class="link">afdian.com</a></td></tr>
           <tr><td>Cloudflare</td><td>主题资源下载（英雄/装备图标已从 Steam CDN 直取，不经 CF）</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
           <tr><td>Cloudflare Workers / D1 / Turnstile</td><td>官网留言板：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
@@ -369,7 +376,7 @@
       </ul>
       <h3>关闭可选功能</h3>
       <ul class="clean">
-        <li>错误上报：设置 → 数据与隐私 → 关闭"发送匿名崩溃报告"</li>
+        <li>错误上报与 OCR 诊断：设置 → 数据与隐私 → 关闭"发送匿名崩溃报告"（同一个开关，关闭后两者都立即停止）</li>
         <li><a href="#share-cache" class="link">共享翻译缓存</a>：设置 → 数据与隐私 → 数据共享 → 关闭"贡献匿名翻译缓存"</li>
         <li>云端同步：不登录 = 完全不上传</li>
         <li>翻译：不输入文字 = 不发送任何内容</li>
@@ -387,6 +394,7 @@
         <li><strong><a href="#share-cache" class="link">共享翻译缓存</a></strong>：匿名短句译文，90 天内未被命中即清除</li>
         <li><strong>速率限制记录</strong>：仅计数窗口，1 小时后自动清除</li>
         <li><strong>Sentry 崩溃报告</strong>：Sentry 默认 30 天，我们不延长</li>
+        <li><strong>OCR 诊断记录</strong>：30 天后自动清除；注销账号时一并删除</li>
       </ul>
     </section>
 
