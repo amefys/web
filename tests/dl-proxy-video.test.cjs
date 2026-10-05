@@ -71,3 +71,30 @@ test('installers still download as attachments', async () => {
   const res = await worker.fetch(new Request('https://amefys.com/dl/v0.30.1/AMEFYS-Setup.exe'), env, {})
   assert.match(res.headers.get('Content-Disposition'), /^attachment/)
 })
+
+// R2's range object exposes `suffix` even for an offset range (as undefined),
+// so `'suffix' in range` picked the suffix branch and every 206 since
+// 2026-09-05 carried "Content-Range: bytes NaN-NaN/<size>". Safari rejects
+// that for video, and resumable installer downloads got the same header.
+test('R2: a byte range answers with a numeric Content-Range', async () => {
+  const worker = await loadWorker()
+  const size = 7366510
+  const bucket = {
+    async get(key, opts) {
+      if (key !== 'v0.31.0-demo/amefys-demo-zh.mp4') return null
+      const h = opts && opts.range
+      const m = h && h.get && /bytes=(\d+)-(\d*)/.exec(h.get('Range') || '')
+      const range = m
+        ? { offset: Number(m[1]), length: m[2] ? Number(m[2]) - Number(m[1]) + 1 : undefined, suffix: undefined }
+        : undefined
+      return { body: 'x', size, httpEtag: '"e"', range, writeHttpMetadata() {} }
+    }
+  }
+  const req = (r) => new Request(`https://amefys.com${VIDEO}`, { headers: { Range: r } })
+  let res = await worker.fetch(req('bytes=0-1023'), { DL: bucket }, {})
+  assert.strictEqual(res.status, 206)
+  assert.strictEqual(res.headers.get('Content-Range'), `bytes 0-1023/${size}`)
+  assert.strictEqual(res.headers.get('Content-Length'), '1024')
+  res = await worker.fetch(req('bytes=100-'), { DL: bucket }, {})
+  assert.strictEqual(res.headers.get('Content-Range'), `bytes 100-${size - 1}/${size}`)
+})

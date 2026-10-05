@@ -167,7 +167,10 @@ async function serveFromR2(bucket, key, request, channel, file) {
 }
 
 function normaliseRange(range, size) {
-  if ('suffix' in range) return { offset: size - range.suffix, length: range.suffix }
+  // R2's range object carries a `suffix` key even for offset ranges (value
+  // undefined), so test the value, not the key — `'suffix' in range` made every
+  // Content-Range "NaN-NaN" (2026-09-05 → 2026-10-05).
+  if (typeof range.suffix === 'number') return { offset: size - range.suffix, length: range.suffix }
   const offset = range.offset ?? 0
   const length = range.length ?? size - offset
   return { offset, length }
