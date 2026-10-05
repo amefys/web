@@ -51,6 +51,8 @@ for (const [lang, html] of Object.entries(PAGES)) {
     assert.match(html, /href="\/assets\/home\.css/)
     assert.match(css, /@media \(prefers-reduced-motion: reduce\)/)
     assert.match(css, /:focus-visible/)
+    // Outline only: a border-radius here squared off the round carousel dots.
+    assert.doesNotMatch(css, /:focus-visible[^{]*\{[^}]*border-radius/)
     assert.match(html, /class="skip-link"/)
     assert.match(html, /id="main"/)
   })
@@ -58,6 +60,17 @@ for (const [lang, html] of Object.entries(PAGES)) {
   test(`${lang}: footer brand shows the real logo, not an empty gradient box`, () => {
     const footer = html.slice(html.indexOf('<footer'))
     assert.match(footer, /<img[^>]+src="[^"]*icon\.svg/)
+  })
+
+  test(`${lang}: markup stays balanced and the carousel keeps its dots container`, () => {
+    // A slide cleanup once deleted <div class="hc-dots"> along with the old dots,
+    // leaving a stray </div> that closed the carousel early.
+    const body = html.slice(html.indexOf('<body'))
+    assert.strictEqual((body.match(/<div[\s>]/g) || []).length, (body.match(/<\/div>/g) || []).length)
+    const dots = html.match(/<div class="hc-dots" data-hc-dots>([\s\S]*?)<\/div>/)
+    assert.ok(dots, 'hc-dots container missing')
+    const slides = (html.match(/class="hc-slide /g) || []).length
+    assert.strictEqual((dots[1].match(/data-hc-go=/g) || []).length, slides)
   })
 
   test(`${lang}: demo video is current and streams as video`, () => {
