@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>页面不存在 · AMEFYS</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<style>
+  :root {
+    --bg: #0d0a07; --bg-3: #1c1610;
+    --hairline: rgba(232,199,121,0.12); --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8; --text-2: rgba(242,234,216,0.62); --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779; --gold-deep: #9A7B3F;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  body { min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 40px 16px;
+    background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(176,138,69,0.28), transparent 65%), var(--bg); }
+  main { max-width: 520px; text-align: center; }
+  .logo { width: 56px; height: 56px; border-radius: 14px; display: block; margin: 0 auto 28px;
+    box-shadow: 0 0 28px rgba(212,175,106,0.35); }
+  .code { font-size: 13px; font-weight: 700; letter-spacing: .24em; color: var(--gold); }
+  h1 { font-size: 34px; line-height: 1.15; letter-spacing: -0.8px; margin: 10px 0 12px; text-wrap: balance; }
+  p { color: var(--text-2); margin: 0 0 28px; text-wrap: pretty; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  a { color: inherit; text-decoration: none; }
+  .btn { display: inline-flex; align-items: center; height: 42px; padding: 0 20px; border-radius: 21px; font-size: 14px; font-weight: 600;
+    border: 0.5px solid var(--hairline-strong); background: rgba(255,255,255,0.06); transition: background .2s ease, transform .12s ease; }
+  .btn:hover { background: rgba(255,255,255,0.1); }
+  .btn.primary { background: linear-gradient(180deg, #D9AE5F, var(--gold-deep)); border: 0; color: #fff; }
+  .btn:active { transform: translateY(1px) scale(0.98); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 21px; }
+  .en { margin-top: 36px; font-size: 13px; color: var(--text-3); }
+  .en a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="/assets/icon.svg?v=2" alt="AMEFYS" width="56" height="56">
+  <div class="code">404</div>
+  <h1>这个页面不存在</h1>
+  <p>链接可能写错了，或者页面已经搬走。从下面几个入口继续：</p>
+  <div class="links">
+    <a class="btn primary" href="/">回到首页</a>
+    <a class="btn" href="/bp/">手机版 BP</a>
+    <a class="btn" href="/heroes/">英雄库</a>
+    <a class="btn" href="/changelog.html">更新日志</a>
+  </div>
+  <div class="en">Page not found. <a href="/en/">Go to the English homepage</a></div>
+</main>
+</body></html>
