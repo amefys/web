@@ -98,3 +98,23 @@ test('R2: a byte range answers with a numeric Content-Range', async () => {
   res = await worker.fetch(req('bytes=100-'), { DL: bucket }, {})
   assert.strictEqual(res.headers.get('Content-Range'), `bytes 100-${size - 1}/${size}`)
 })
+
+// Live R2 still answered "bytes=100-" with NaN after the suffix fix: its range
+// object shape for open-ended ranges is not what the docs suggest. The header
+// is now computed from the request's own Range, whatever R2 reports.
+test('R2: Content-Range comes from the request even if R2 reports an odd range', async () => {
+  const worker = await loadWorker()
+  const size = 1000
+  const bucket = {
+    async get() {
+      return { body: 'x', size, httpEtag: '"e"', range: { offset: undefined, length: undefined, suffix: undefined }, writeHttpMetadata() {} }
+    }
+  }
+  const at = async (r) => {
+    const res = await worker.fetch(new Request(`https://amefys.com${VIDEO}`, { headers: { Range: r } }), { DL: bucket }, {})
+    return [res.status, res.headers.get('Content-Range'), res.headers.get('Content-Length')]
+  }
+  assert.deepStrictEqual(await at('bytes=100-'), [206, 'bytes 100-999/1000', '900'])
+  assert.deepStrictEqual(await at('bytes=0-1023'), [206, 'bytes 0-999/1000', '1000'])
+  assert.deepStrictEqual(await at('bytes=-200'), [206, 'bytes 800-999/1000', '200'])
+})
