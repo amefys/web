@@ -75,3 +75,15 @@ test('a branded 404 page exists', () => {
   assert.ok(existsSync(resolve(__dirname, '..', '404.html')))
   assert.match(read('404.html'), /icon\.svg/)
 })
+
+test('every 404 hero has self-hosted art and an existing hero page', () => {
+  const page = read('404.html')
+  const ids = [...page.matchAll(/\{ id: '([a-z-]+)', slug: '([a-z-]+)'/g)]
+  assert.ok(ids.length >= 4)
+  for (const [, id, slug] of ids) {
+    assert.ok(existsSync(resolve(__dirname, '..', 'assets', '404', `${id}.webp`)), id)
+    assert.ok(existsSync(resolve(__dirname, '..', 'heroes', `${slug}.html`)), slug)
+  }
+  // Credit Valve for the art.
+  assert.match(page, /Valve/)
+})

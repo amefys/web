@@ -5,50 +5,196 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="preload" as="image" href="/assets/404/pudge.webp">
 <style>
   :root {
-    --bg: #0d0a07; --bg-3: #1c1610;
-    --hairline: rgba(232,199,121,0.12); --hairline-strong: rgba(232,199,121,0.20);
-    --text: #f2ead8; --text-2: rgba(242,234,216,0.62); --text-3: rgba(242,234,216,0.40);
+    --bg: #0d0a07; --bg-2: #141009;
+    --hairline: rgba(232,199,121,0.12); --hairline-strong: rgba(232,199,121,0.22);
+    --text: #f2ead8; --text-2: rgba(242,234,216,0.66); --text-3: rgba(242,234,216,0.42);
     --gold: #E8C779; --gold-deep: #9A7B3F;
+    --tint: 232,199,121; /* per-hero glow, set from the script */
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text);
+  html, body { margin: 0; background: var(--bg); color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
     -webkit-font-smoothing: antialiased; line-height: 1.5; }
-  body { min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 40px 16px;
-    background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(176,138,69,0.28), transparent 65%), var(--bg); }
-  main { max-width: 520px; text-align: center; }
-  .logo { width: 56px; height: 56px; border-radius: 14px; display: block; margin: 0 auto 28px;
-    box-shadow: 0 0 28px rgba(212,175,106,0.35); }
-  .code { font-size: 13px; font-weight: 700; letter-spacing: .24em; color: var(--gold); }
-  h1 { font-size: 34px; line-height: 1.15; letter-spacing: -0.8px; margin: 10px 0 12px; text-wrap: balance; }
-  p { color: var(--text-2); margin: 0 0 28px; text-wrap: pretty; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  body { min-height: 100dvh; display: flex; flex-direction: column; overflow-x: hidden;
+    background:
+      radial-gradient(ellipse 60% 55% at 30% 62%, rgba(var(--tint),0.20), transparent 70%),
+      radial-gradient(ellipse 80% 40% at 50% 115%, rgba(176,138,69,0.22), transparent 70%),
+      var(--bg);
+    transition: background .6s ease; }
   a { color: inherit; text-decoration: none; }
-  .btn { display: inline-flex; align-items: center; height: 42px; padding: 0 20px; border-radius: 21px; font-size: 14px; font-weight: 600;
-    border: 0.5px solid var(--hairline-strong); background: rgba(255,255,255,0.06); transition: background .2s ease, transform .12s ease; }
-  .btn:hover { background: rgba(255,255,255,0.1); }
-  .btn.primary { background: linear-gradient(180deg, #D9AE5F, var(--gold-deep)); border: 0; color: #fff; }
+
+  .top { display: flex; align-items: center; gap: 10px; padding: 20px 28px; font-weight: 700; letter-spacing: -0.2px; }
+  .top img { width: 24px; height: 24px; border-radius: 6px; display: block; }
+
+  main { flex: 1; width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 28px 48px;
+    display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 24px; }
+
+  /* Left: the hero standing in front of a huge 404 */
+  .stage { position: relative; aspect-ratio: 1; max-width: 560px; width: 100%; justify-self: center; }
+  .stage .big { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: clamp(120px, 22vw, 260px); font-weight: 800; letter-spacing: -0.06em; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1.5px rgba(var(--tint),0.45); user-select: none; }
+  .stage .floor { position: absolute; left: 18%; right: 18%; bottom: 9%; height: 7%;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.55), transparent 70%); filter: blur(6px); }
+  .stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+    filter: drop-shadow(0 24px 40px rgba(0,0,0,0.5)); transition: opacity .45s ease, transform .45s ease; }
+  .stage img.leaving { opacity: 0; transform: translateY(10px) scale(0.98); }
+
+  /* Right: the excuse */
+  .copy { max-width: 470px; }
+  .code { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .22em; color: var(--gold); }
+  .code::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  h1 { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.08; letter-spacing: -1.2px; margin: 14px 0 14px; text-wrap: balance; }
+  h1 em { font-style: normal; color: var(--gold); }
+  .sub { font-size: 17px; color: var(--text-2); margin: 0 0 30px; text-wrap: pretty; }
+  .who { font-size: 12.5px; color: var(--text-3); margin: -18px 0 26px; }
+  .who a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 22px;
+    font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: var(--text);
+    border: 0.5px solid var(--hairline-strong); background: rgba(255,255,255,0.06);
+    transition: background .2s ease, transform .12s ease; }
+  .btn:hover { background: rgba(255,255,255,0.11); }
   .btn:active { transform: translateY(1px) scale(0.98); }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 21px; }
-  .en { margin-top: 36px; font-size: 13px; color: var(--text-3); }
-  .en a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
-  @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+  .btn.primary { background: linear-gradient(180deg, #D9AE5F, var(--gold-deep)); border: 0; color: #fff;
+    box-shadow: 0 8px 26px rgba(176,138,69,0.4); }
+  .btn.ghost { background: none; border-color: transparent; color: var(--text-2); padding: 0 12px; }
+  .btn.ghost:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 22px; }
+
+  .more { margin-top: 34px; padding-top: 18px; border-top: 0.5px solid var(--hairline);
+    display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--text-3); }
+  .more a { color: var(--text-2); }
+  .more a:hover { color: var(--text); }
+
+  footer { padding: 18px 28px 26px; font-size: 11.5px; color: var(--text-3); text-align: center; }
+
+  /* Idle breathing: slow and small — no flashes */
+  @keyframes idle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .stage img:not(.leaving) { animation: idle 5s ease-in-out infinite; }
+
+  @media (max-width: 820px) {
+    main { grid-template-columns: 1fr; gap: 0; padding-bottom: 32px; }
+    .stage { max-width: 340px; }
+    .copy { text-align: center; margin: 0 auto; }
+    .code { justify-content: center; }
+    .actions, .more { justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stage img, body { transition: none; animation: none !important; }
+  }
 </style>
 </head>
 <body>
+<header class="top">
+  <a href="/" style="display:flex;align-items:center;gap:10px;"><img src="/assets/icon.svg?v=2" alt="" width="24" height="24">AMEFYS</a>
+</header>
+
 <main>
-  <img class="logo" src="/assets/icon.svg?v=2" alt="AMEFYS" width="56" height="56">
-  <div class="code">404</div>
-  <h1>这个页面不存在</h1>
-  <p>链接可能写错了，或者页面已经搬走。从下面几个入口继续：</p>
-  <div class="links">
-    <a class="btn primary" href="/">回到首页</a>
-    <a class="btn" href="/bp/">手机版 BP</a>
-    <a class="btn" href="/heroes/">英雄库</a>
-    <a class="btn" href="/changelog.html">更新日志</a>
+  <div class="stage" aria-hidden="true">
+    <div class="big">404</div>
+    <div class="floor"></div>
+    <img id="art" src="/assets/404/pudge.webp" alt="" width="640" height="640">
   </div>
-  <div class="en">Page not found. <a href="/en/">Go to the English homepage</a></div>
+
+  <div class="copy">
+    <div class="code" id="code">404 · 页面不存在</div>
+    <h1 id="title">这个页面被<em>钩</em>走了。</h1>
+    <p class="sub" id="sub">帕吉的肉钩刚好从这里经过，你要找的页面被拖进了树林。</p>
+    <p class="who" id="who">出场英雄：<a id="hero-link" href="/heroes/pudge.html">帕吉</a></p>
+    <div class="actions">
+      <a class="btn primary" href="/" id="home">回泉水（首页）</a>
+      <a class="btn" href="/bp/" id="bp">去 BP 推荐</a>
+      <button class="btn ghost" type="button" id="next">换个英雄 ↻</button>
+    </div>
+    <nav class="more" id="more" aria-label="常用页面">
+      <a href="/heroes/">英雄库</a>
+      <a href="/items/">装备库</a>
+      <a href="/changelog.html">更新日志</a>
+      <a href="/en/">English</a>
+    </nav>
+  </div>
 </main>
+
+<footer id="foot">英雄形象来自 DOTA 2，版权归 Valve 所有 · AMEFYS 与 Valve 无关联</footer>
+
+<script>
+  (function () {
+    // Each excuse is something the hero actually does in the game.
+    var HEROES = [
+      { id: 'pudge', slug: 'pudge', tint: '200,90,80',
+        zh: { name: '帕吉', t: '这个页面被<em>钩</em>走了。', s: '帕吉的肉钩刚好从这里经过，你要找的页面被拖进了树林。' },
+        en: { name: 'Pudge', t: 'This page got <em>hooked</em>.', s: 'Pudge’s Meat Hook passed through here and dragged the page into the trees.' } },
+      { id: 'rubick', slug: 'rubick', tint: '110,210,90',
+        zh: { name: '拉比克', t: '这个页面被<em>偷</em>走了。', s: '拉比克顺手把它偷走了，用得说不定比原主人还好。' },
+        en: { name: 'Rubick', t: 'This page was <em>stolen</em>.', s: 'Rubick lifted it — and is probably using it better than the original owner.' } },
+      { id: 'furion', slug: 'furion', tint: '120,190,110',
+        zh: { name: '自然先知', t: '这个页面<em>传送</em>走了。', s: '自然先知把它传送到了地图另一头的野区，现在谁也不知道在哪。' },
+        en: { name: 'Nature’s Prophet', t: 'This page <em>teleported</em> away.', s: 'Nature’s Prophet sent it to a jungle camp on the other side of the map.' } },
+      { id: 'faceless-void', slug: 'faceless-void', tint: '150,110,230',
+        zh: { name: '虚空假面', t: '页面卡在<em>时间结界</em>里。', s: '虚空假面刚开了大，结界里的东西都动不了，这个页面也一样。' },
+        en: { name: 'Faceless Void', t: 'Stuck in a <em>Chronosphere</em>.', s: 'Faceless Void just ulted. Nothing inside can move — this page included.' } },
+      { id: 'kunkka', slug: 'kunkka', tint: '90,170,220',
+        zh: { name: '昆卡', t: '<em>X</em> 标记，原地返回。', s: '昆卡在这里给你标了个 X，你被拉回原地，可这里本来就什么都没有。' },
+        en: { name: 'Kunkka', t: '<em>X</em> marks the spot.', s: 'Kunkka marked you and pulled you back. There was never anything here.' } },
+      { id: 'techies', slug: 'techies', tint: '230,170,80',
+        zh: { name: '工程师', t: '这条路上<em>有雷</em>。', s: '工程师在这里埋了地雷，你要找的页面没能走过去。' },
+        en: { name: 'Techies', t: 'Someone stepped on a <em>mine</em>.', s: 'Techies seeded this lane. The page you wanted didn’t make it.' } }
+    ]
+
+    var path = location.pathname || '/'
+    // Under /en/ always English; elsewhere follow the browser, Chinese for zh-*.
+    var lang = path.indexOf('/en/') === 0 ? 'en' : /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
+
+    var UI = {
+      zh: { code: '404 · 页面不存在', who: '出场英雄：', home: '回泉水（首页）', bp: '去 BP 推荐', next: '换个英雄 ↻',
+            more: [['/heroes/', '英雄库'], ['/items/', '装备库'], ['/changelog.html', '更新日志'], ['/en/', 'English']],
+            foot: '英雄形象来自 DOTA 2，版权归 Valve 所有 · AMEFYS 与 Valve 无关联', title: '页面不存在 · AMEFYS', homeHref: '/' },
+      en: { code: '404 · Page not found', who: 'Starring: ', home: 'Back to the fountain', bp: 'Draft picks', next: 'Another hero ↻',
+            more: [['/heroes/', 'Heroes (中文)'], ['/items/', 'Items (中文)'], ['/changelog.html', 'Changelog'], ['/', '中文首页']],
+            foot: 'Hero art from DOTA 2, © Valve · AMEFYS is not affiliated with Valve', title: 'Page not found · AMEFYS', homeHref: '/en/' }
+    }
+    var ui = UI[lang]
+    var $ = function (id) { return document.getElementById(id) }
+    document.documentElement.lang = lang
+    document.title = ui.title
+    $('code').textContent = ui.code
+    $('home').textContent = ui.home
+    $('home').setAttribute('href', ui.homeHref)
+    $('bp').textContent = ui.bp
+    $('next').textContent = ui.next
+    $('foot').textContent = ui.foot
+    $('more').innerHTML = ui.more.map(function (m) { return '<a href="' + m[0] + '">' + m[1] + '</a>' }).join('')
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    var art = $('art')
+    var current = -1
+
+    function render(i) {
+      var h = HEROES[i], c = h[lang]
+      current = i
+      document.documentElement.style.setProperty('--tint', h.tint)
+      $('title').innerHTML = c.t
+      $('sub').textContent = c.s
+      $('who').firstChild.textContent = ui.who
+      $('hero-link').textContent = c.name
+      $('hero-link').setAttribute('href', '/heroes/' + h.slug + '.html')
+      var src = '/assets/404/' + h.id + '.webp'
+      if (reduce) { art.src = src; return }
+      art.classList.add('leaving')
+      setTimeout(function () {
+        var done = function () { art.classList.remove('leaving') }
+        art.onload = done; art.onerror = done
+        art.src = src
+      }, 300)
+    }
+
+    $('next').addEventListener('click', function () { render((current + 1) % HEROES.length) })
+    render(Math.floor(Math.random() * HEROES.length))
+  })()
+</script>
 </body></html>
