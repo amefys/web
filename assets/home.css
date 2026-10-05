@@ -13,8 +13,8 @@
   transform: translateY(-160%); transition: transform .16s ease;
 }
 .skip-link:focus { transform: none; }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
-.btn-cta:focus-visible, .btn-pill:focus-visible { outline-offset: 4px; border-radius: 999px; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.btn-cta:focus-visible, .btn-pill:focus-visible { outline-offset: 4px; }
 summary:focus-visible { outline-offset: 6px; }
 .btn-cta:active, .btn-pill:active, .hc-arrow:active { transform: translateY(1px) scale(0.98); }
 .btn-cta.ghost, .btn-cta.ghost:hover { transition: background .2s ease, transform .12s ease; }
@@ -27,6 +27,7 @@ summary:focus-visible { outline-offset: 6px; }
 h1, h2, h3, .section-title, .bento-h, .hc-title, .pipe-h { text-wrap: balance; }
 p, .section-lead, .bento-p, .pipe-p, figcaption { text-wrap: pretty; }
 html { scroll-behavior: smooth; }
+section[id], header[id] { scroll-margin-top: 56px; }
 
 /* ── Rhythm: sections were 120px top and bottom, which left
       half-empty screens between blocks. Bottom a touch larger. ── */

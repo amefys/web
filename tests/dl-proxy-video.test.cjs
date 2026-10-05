@@ -49,6 +49,22 @@ test('GitHub fallback: an mp4 is re-labelled video/mp4, inline', async (t) => {
   assert.match(res.headers.get('Content-Disposition'), /^inline/)
 })
 
+test('GitHub fallback: a response already in the edge cache is re-labelled too', async (t) => {
+  // The first request cached GitHub's octet-stream answer for 30 days; a
+  // cache hit used to be returned as-is, bypassing the video headers.
+  const worker = await loadWorker()
+  const realCaches = globalThis.caches
+  const stale = new Response('x', {
+    status: 200,
+    headers: { 'Content-Type': 'application/octet-stream', 'Content-Disposition': 'attachment; filename="amefys-demo-zh.mp4"' }
+  })
+  globalThis.caches = { default: { match: async () => stale, put: async () => {} } }
+  t.after(() => { globalThis.caches = realCaches })
+  const res = await worker.fetch(new Request(`https://amefys.com${VIDEO}`), {}, { waitUntil() {} })
+  assert.strictEqual(res.headers.get('Content-Type'), 'video/mp4')
+  assert.match(res.headers.get('Content-Disposition'), /^inline/)
+})
+
 test('installers still download as attachments', async () => {
   const worker = await loadWorker()
   const env = { DL: r2With(['v0.30.1/AMEFYS-Setup.exe']) }

@@ -5,7 +5,6 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
-<link rel="preload" as="image" href="/assets/404/pudge.webp">
 <style>
   :root {
     --bg: #0d0a07; --bg-2: #141009;
@@ -64,7 +63,7 @@
     box-shadow: 0 8px 26px rgba(176,138,69,0.4); }
   .btn.ghost { background: none; border-color: transparent; color: var(--text-2); padding: 0 12px; }
   .btn.ghost:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 22px; }
+  :focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
 
   .more { margin-top: 34px; padding-top: 18px; border-top: 0.5px solid var(--hairline);
     display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 13px; color: var(--text-3); }
@@ -174,7 +173,7 @@
     var art = $('art')
     var current = -1
 
-    function render(i) {
+    function render(i, animate) {
       var h = HEROES[i], c = h[lang]
       current = i
       document.documentElement.style.setProperty('--tint', h.tint)
@@ -184,7 +183,7 @@
       $('hero-link').textContent = c.name
       $('hero-link').setAttribute('href', '/heroes/' + h.slug + '.html')
       var src = '/assets/404/' + h.id + '.webp'
-      if (reduce) { art.src = src; return }
+      if (reduce || !animate) { art.src = src; return }
       art.classList.add('leaving')
       setTimeout(function () {
         var done = function () { art.classList.remove('leaving') }
@@ -193,7 +192,7 @@
       }, 300)
     }
 
-    $('next').addEventListener('click', function () { render((current + 1) % HEROES.length) })
+    $('next').addEventListener('click', function () { render((current + 1) % HEROES.length, true) })
     render(Math.floor(Math.random() * HEROES.length))
   })()
 </script>

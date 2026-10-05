@@ -193,6 +193,15 @@ function disposition(file) {
   return `${isVideo(file) ? 'inline' : 'attachment'}; filename="${file}"`
 }
 
+// Edge-cache entries written before the video headers existed (immutable for
+// 30 days) must not keep serving octet-stream + attachment.
+function asVideo(response, file) {
+  const headers = new Headers(response.headers)
+  headers.set('Content-Type', contentType(file))
+  headers.set('Content-Disposition', disposition(file))
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers })
+}
+
 /**
  * GitHub proxy — the pre-R2 path, kept as fallback. Objects over 100 MB are
  * never cached at the edge on this plan, so this is slow by nature; it only
@@ -217,7 +226,7 @@ async function serveFromGitHub(channel, file, request, ctx) {
   const cache = caches.default
   const cacheKey = new Request(new URL(request.url).toString(), { method: 'GET' })
   const cached = await cache.match(cacheKey)
-  if (cached) return cached
+  if (cached) return isVideo(file) ? asVideo(cached, file) : cached
 
   // cacheTtlByStatus, not cacheTtl: a plain cacheTtl also pins error
   // responses, so one request for a not-yet-published tag poisoned that
