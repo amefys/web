@@ -146,8 +146,9 @@
     ]
 
     var path = location.pathname || '/'
-    // Under /en/ always English; elsewhere follow the browser, Chinese for zh-*.
-    var lang = path.indexOf('/en/') === 0 ? 'en' : /^zh/i.test(navigator.language || '') ? 'zh' : 'en'
+    // Same rule as the rest of the site: the path picks the language, not the
+    // browser. /en/… is the English site; everything else is the Chinese site.
+    var lang = path === '/en' || path.indexOf('/en/') === 0 ? 'en' : 'zh'
 
     var UI = {
       zh: { code: '404 · 页面不存在', who: '出场英雄：', home: '回泉水（首页）', bp: '去 BP 推荐', next: '换个英雄 ↻',
