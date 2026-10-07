@@ -223,14 +223,31 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.0</h3>
-        <p>比正式版 0.31.0 多三项：<strong>游戏开着却连不上数据时，提示会直接说出原因</strong>（没带启动参数、配置装到了另一份 Dota、要重启游戏，还是被加速器拦了）；<strong>用快捷键打开的 BP 面板点「收起」没反应</strong>的问题修好了；<strong>从 OpenDota 导入的对局会显示英雄和 GPM/XPM</strong>。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.1</h3>
+        <p>比正式版 0.31.0 多五项：<strong>游戏开着却连不上数据时，提示会直接说出原因</strong>；<strong>翻译和语音识别没成功时，会轻轻提示是网络、服务还是密钥的问题</strong>；<strong>关键时间提示条不再挡住游戏里的鼠标</strong>；用快捷键打开的 BP 面板点「收起」没反应的问题修好了；从 OpenDota 导入的对局会显示英雄和 GPM/XPM。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.32.0-beta.1 ── -->
+    <article class="release beta" id="v0-32-0-beta-1">
+      <header><h2>0.32.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-07</span></header>
+      <p class="lead">翻译没出来、语音没识别，现在会告诉你为什么。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>翻译失败说原因：</strong>以前翻译没成功时，要么只提示「翻译失败」，要么什么都不说，看起来就像没翻译。现在会在角落轻轻提示一句，告诉你是网络连不上翻译服务（常见于加速器）、翻译服务暂时出错，还是自己填的翻译密钥没填或被拒绝。同一个原因 20 秒内只提示一次，不会刷屏。</li>
+          <li><strong>语音识别密钥错误不再显示成「网络异常」：</strong>用自己的语音密钥时，密钥填错或没开通服务会直接告诉你是密钥的问题。游戏语音设置里的「采集异常」也从一串错误代码改成了能看懂的原因。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>关键时间提示条挡鼠标：</strong>悬浮窗关着时弹出的提示条，在它显示的几秒里会挡住那一块的点击，右键走位或推屏幕边缘移动视角会失灵。现在提示条对鼠标是透明的，只有「喊队友」按钮还能点。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.32.0-beta.0 ── -->
     <article class="release beta" id="v0-32-0-beta-0">
