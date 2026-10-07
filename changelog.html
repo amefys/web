@@ -223,14 +223,31 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.31.0-beta.5</h3>
-        <p><strong>正式版已经走到 0.31.0，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.0</h3>
+        <p>比正式版 0.31.0 多三项：<strong>游戏开着却连不上数据时，提示会直接说出原因</strong>（没带启动参数、配置装到了另一份 Dota、要重启游戏，还是被加速器拦了）；<strong>用快捷键打开的 BP 面板点「收起」没反应</strong>的问题修好了；<strong>从 OpenDota 导入的对局会显示英雄和 GPM/XPM</strong>。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.32.0-beta.0 ── -->
+    <article class="release beta" id="v0-32-0-beta-0">
+      <header><h2>0.32.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-07</span></header>
+      <p class="lead">游戏开着却没数据？现在它会告诉你卡在哪。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>连不上数据时说清原因：</strong>以前 Dota 2 开着但 AMEFYS 收不到数据，只会给一张检查清单让你自己排查。现在它会看一眼正在运行的游戏，直接告诉你是哪一种：启动参数里没有 <code>-gamestateintegration</code>（附一键复制）；配置装到了另一份 Dota 里（一键装到正在运行的这份）；配置是游戏开着时才装的，需要重启一次 Dota；或者一切都对但还是没数据，多半是加速器或安全软件拦住了。「复制诊断信息」里也多了这些内容，反馈问题时直接贴过来就行。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>BP 面板点「收起」没反应：</strong>悬浮窗关着的时候用快捷键打开 BP，整个面板点不动，「收起」也点不了。现在怎么打开都能正常点。</li>
+          <li><strong>OpenDota 导入的对局缺英雄：</strong>在设置里点「从 OpenDota 获取」导入的对局，以前英雄显示「—」、GPM/XPM 是 0，还会拉低首页的平均值。现在英雄、GPM/XPM、补刀都会带上，导入完对局记录自动刷新；之前导入的那些再点一次获取就会补齐。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.31.0 ── -->
     <article class="release" id="v0-31-0">
