@@ -215,8 +215,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.30.1</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版 BP 面板多了「手机版」按钮，扫码就能在手机上看选人推荐。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.31.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版 <strong>BP 面板可以按住说英雄名录入阵容</strong>，悬浮窗关着时关键时间提醒也会弹提示条。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -224,7 +224,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.31.0-beta.5</h3>
-        <p>比正式版 0.30.1 多四项：<strong>BP 面板可以按住说英雄名录入阵容</strong>（和手机版一样），聊天语音也更认得英雄外号了；<strong>悬浮窗关着时，关键时间提醒也会弹出提示条</strong>（以前只有声音）；<strong>软件里和任务栏右键菜单里都能直接退出</strong>；<strong>第一次安装后悬浮窗会自己打开</strong>。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
+        <p><strong>正式版已经走到 0.31.0，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -232,85 +232,30 @@
       </div>
     </section>
 
-    <!-- ── 0.31.0-beta.5 ── -->
-    <article class="release beta" id="v0-31-0-beta-5">
-      <header><h2>0.31.0-beta.5</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-07</span></header>
-      <p class="lead">第一次装好，悬浮窗就摆在眼前。</p>
-      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
-        <ul>
-          <li><strong>首次启动自动打开悬浮窗：</strong>以前装好后悬浮窗默认是收起的，不少新玩家不知道还有它。现在第一次打开软件时，悬浮窗会自己出现在屏幕左上角，不会抢走游戏的焦点；之后关掉它就一直保持关闭，不会每次都弹。老用户升级不受影响。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.31.0-beta.4 ── -->
-    <article class="release beta" id="v0-31-0-beta-4">
-      <header><h2>0.31.0-beta.4</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-06</span></header>
-      <p class="lead">聊天语音里说英雄外号，更容易听对了。</p>
-      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
-        <ul>
-          <li><strong>聊天语音认外号：</strong>按住说话发聊天时，「小Y」「屠夫」「火女」这类英雄外号以前常被听成别的字，现在会优先往英雄外号上识别，和 BP 语音用的是同一份词表。识别语言选中文或自动时生效；用自己 API 密钥的也有效。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.31.0-beta.3 ── -->
-    <article class="release beta" id="v0-31-0-beta-3">
-      <header><h2>0.31.0-beta.3</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-06</span></header>
+    <!-- ── 0.31.0 ── -->
+    <article class="release" id="v0-31-0">
+      <header><h2>0.31.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-07</span></header>
       <p class="lead">电脑上的 BP 面板也能说话录入阵容了。</p>
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
         <ul>
-          <li><strong>BP 语音录入：</strong>BP 面板里双方阵容下面多了一行按钮。按住「我方选」「敌方选」「禁用」说英雄名，松开就录进去，可以连说几个，比如按住「敌方选」说「小Y 敌法 斧王」。按住「按住说口令」可以一句话里自己带上哪一方，比如「我方斧王，禁小小」，也能说「撤销」「重置」。外号照样认，和手机版是同一套。</li>
+          <li><strong>BP 语音录入：</strong>BP 面板双方阵容下面多了一行按钮，按住「我方选」「敌方选」「禁用」说英雄名，松开就录进去，可以连说几个；也能按住「按住说口令」一句话说完，比如「我方斧王，禁小小」。「小Y」「屠夫」这类外号也认得，和手机版是同一套。登录就能用，每天 1 小时，和手机版共用，目前只认中文英雄名。</li>
+          <li><strong>悬浮窗关着也弹提醒：</strong>以前关掉悬浮窗，赏金、莲花这些关键时间到点时只有提示音。现在会在悬浮窗原来的位置单独弹出提示条，3 秒后自己消失，「喊队友」照样能点。不想要可以到「设置 → 关键时间提醒」关掉。</li>
+          <li><strong>退出更方便：</strong>侧边栏最下面多了电源图标，任务栏图标右键也多了「退出 AMEFYS」。点窗口右上角的 × 还是缩到托盘。</li>
         </ul>
       </div>
-      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
+      <div class="group"><h4><span class="dot dot-fix"></span>改进与修复</h4>
         <ul>
-          <li><strong>「小Y」能听懂了：</strong>以前说「小Y」（暗影萨满）经常识别不出来，现在说「小Y」「小歪」都能认出来，手机版也一样。</li>
+          <li><strong>聊天语音认外号：</strong>按住说话发聊天时，英雄外号不容易再被听成别的字。</li>
+          <li><strong>第一次安装自动打开悬浮窗：</strong>新玩家装好就能看到它，关掉之后不会再自己弹出来。老用户不受影响。</li>
+          <li><strong>个别电脑一打开就闪退：</strong>少数电脑上软件的显卡渲染一启动就失败，导致每次打开都闪退。现在闪退一次后，下次启动会自动换成更稳的显示方式。</li>
+          <li>英文界面里克制英雄、默认消息块两处漏翻已补上；点链接打不开浏览器、OCR 语言检测被安全软件拦截时，不再弹出错误。</li>
         </ul>
       </div>
-      <div class="callout">语音录入登录就能用，每天有 1 小时，和手机版共用。第一次按住时会请你允许麦克风。目前只认中文英雄名。这个 Beta 想确认 Windows 上按住说话的手感和麦克风授权，遇到问题欢迎到留言板说一声。</div>
-    </article>
-
-    <!-- ── 0.31.0-beta.2 ── -->
-    <article class="release beta" id="v0-31-0-beta-2">
-      <header><h2>0.31.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-05</span></header>
-      <p class="lead">英文界面里漏翻的两处补上了。</p>
-      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
-        <ul>
-          <li><strong>克制你的英雄显示英文名：</strong>英文界面下，悬浮窗「Hard counters to you」那一栏以前显示的是 treant、nyx_assassin 这样的内部代号，现在是 Treant Protector、Nyx Assassin 这样的正式英文名。</li>
-          <li><strong>「默认消息块」有英文了：</strong>自带的那个连发示例回复，在英文界面里叫 Default block，俄文界面里也有对应翻译。你自己建的回复名字不受影响。</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── 0.31.0-beta.1 ── -->
-    <article class="release beta" id="v0-31-0-beta-1">
-      <header><h2>0.31.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-05</span></header>
-      <p class="lead">退出 AMEFYS 不用再去托盘里找了。</p>
-      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
-        <ul>
-          <li><strong>主界面退出按钮：</strong>侧边栏最下面、账号那一行右边的电源图标，点一下就退出。</li>
-          <li><strong>任务栏右键退出：</strong>在任务栏的 AMEFYS 图标上右键，多了一项「退出 AMEFYS」。以前右键只有「关闭窗口」，点了只是缩到托盘，程序还在后台运行。</li>
-        </ul>
-      </div>
-      <div class="callout">点窗口右上角的 × 还是和以前一样缩到托盘——悬浮窗和快捷键要靠它在后台待命。真想退出用上面两个入口。</div>
-    </article>
-
-    <!-- ── 0.31.0-beta.0 ── -->
-    <article class="release beta" id="v0-31-0-beta-0">
-      <header><h2>0.31.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-04</span></header>
-      <p class="lead">悬浮窗关着，关键时间提醒也能看到了。</p>
-      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
-        <ul>
-          <li><strong>悬浮窗关闭时也弹提醒：</strong>以前把悬浮窗关掉，赏金、莲花这些关键时间到点时只有提示音，提示条画在看不见的悬浮窗里。现在会在悬浮窗原来的位置单独弹出同样的提示条，3 秒后自己消失，「喊队友」照样能点；悬浮窗开着时和以前一样。不想要可以到「设置 → 关键时间提醒」关掉「悬浮窗关闭时也弹出」。</li>
-        </ul>
-      </div>
-      <div class="callout">这个 Beta 主要想确认 Windows 上的表现：提示条能不能浮在游戏上面、点「喊队友」时游戏会不会没声音。遇到问题欢迎到留言板说一声。</div>
     </article>
 
     <!-- ── 0.30.1 ── -->
     <article class="release" id="v0-30-1">
-      <header><h2>0.30.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-04</span></header>
+      <header><h2>0.30.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-10-04</span></header>
       <p class="lead">BP 里搜英雄，叫外号也能搜到了。</p>
       <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
         <ul>
