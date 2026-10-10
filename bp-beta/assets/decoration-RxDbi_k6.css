@@ -1,0 +1,78 @@
+/*
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  DOTA Gold v1 — antique-gold decoration                          ║
+ * ║  Source: docs/skin-dota-gold-demo.html (V1 基准 · 古铜金)          ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
+ * Visual language ingredients:
+ *   - Warm brown-black hull with two static gold radial glows painted
+ *     into the body backdrop (top-left ember + bottom-right candle)
+ *   - Gold-foil hairlines come from tokens; decoration only adds an
+ *     inset top-edge glint on .glass panels (inset-only — overlay-safe,
+ *     see theme-development-rules §10.1 red line #2)
+ *   - Cinzel display face for h1-h4 / brand (body text stays system
+ *     stack for CJK readability)
+ *   - Primary CTA gets a warm inner bevel; no glow animation
+ *
+ * Performance gating (driven by html[data-effects]):
+ *   full     — everything below (all static; tier is 'standard')
+ *   reduced  — identical except the body glows drop to half opacity
+ *   off      — applySkin removes this <link> entirely
+ *
+ * No @keyframes in this skin — nothing to gate for prefers-reduced-motion.
+ * Component targeting uses STABLE selectors only (data-component, element
+ * type, .glass utility) — never CSS-module hashed class names.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=optional');
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* BODY BACKDROP — static warm radial glows                            */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+html[data-skin='dota-gold-v1'] body[data-stage='default'],
+html[data-skin='dota-gold-v1'] body[data-stage='inGame'] {
+  background:
+    radial-gradient(90% 70% at 12% 0%, rgba(212, 175, 106, 0.07) 0%, transparent 55%),
+    radial-gradient(80% 60% at 92% 100%, rgba(176, 138, 69, 0.06) 0%, transparent 50%),
+    var(--color-bg);
+}
+
+html[data-skin='dota-gold-v1'][data-effects='reduced'] body[data-stage='default'],
+html[data-skin='dota-gold-v1'][data-effects='reduced'] body[data-stage='inGame'] {
+  background:
+    radial-gradient(90% 70% at 12% 0%, rgba(212, 175, 106, 0.035) 0%, transparent 55%),
+    radial-gradient(80% 60% at 92% 100%, rgba(176, 138, 69, 0.03) 0%, transparent 50%),
+    var(--color-bg);
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* TYPOGRAPHY — Cinzel display for headings/brand only                 */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+html[data-skin='dota-gold-v1'] h1,
+html[data-skin='dota-gold-v1'] h2,
+html[data-skin='dota-gold-v1'] h3,
+html[data-skin='dota-gold-v1'] h4 {
+  font-family: var(--display-stack);
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* .glass OVERRIDE — gold-foil top glint (inset only: overlay-safe)    */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+html[data-skin='dota-gold-v1'] .glass {
+  box-shadow:
+    inset 0 1px 0 rgba(232, 199, 121, 0.09),
+    inset 0 0 0 0.5px rgba(232, 199, 121, 0.05);
+}
+
+/* Active nav entries glint a little stronger — still inset only */
+html[data-skin='dota-gold-v1'] .glass button[data-active='true'] {
+  box-shadow: inset 0 0 0 0.5px rgba(232, 199, 121, 0.28);
+}
+
+/* Primary-CTA ink is handled by the onAccent token (--color-on-accent),
+   not CSS here — tokens reach both the main window and the overlay
+   uniformly, decoration.css does not. */
