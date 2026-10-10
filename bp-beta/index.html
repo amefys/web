@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <script>(function rescue(scope, cachePrefix, key) {
+    <script>(function rescue(scope, cachePrefix, key, gapMs) {
   const go = () => {
     try {
-      if (sessionStorage.getItem(key)) return;
-      sessionStorage.setItem(key, "1");
+      const last = Number(sessionStorage.getItem(key)) || 0;
+      if (Date.now() - last < gapMs) return;
+      sessionStorage.setItem(key, String(Date.now()));
     } catch {
       return;
     }
@@ -32,13 +33,13 @@
     "error",
     (e) => {
       const t = e.target;
-      const url = t && ("src" in t ? t.src : "href" in t ? t.href : "");
+      const url = t && t.tagName === "SCRIPT" ? t.src : t && t.tagName === "LINK" ? t.href : "";
       if (url && url.indexOf(ours) === 0) go();
     },
     true
   );
   window.addEventListener("vite:preloadError", go);
-})("/bp-beta/","bpbeta-","amefys-boot-rescue")</script>
+})("/bp-beta/","bpbeta-","amefys-boot-rescue:/bp-beta/",300000)</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0d0a07" />
@@ -77,7 +78,7 @@
         "description": "DOTA 2 选人推荐手机版：说英雄名录入双方阵容，实时推荐该选谁、该禁谁。"
       }
     </script>
-    <script type="module" crossorigin src="/bp-beta/assets/index-CAgNDhCL.js"></script>
+    <script type="module" crossorigin src="/bp-beta/assets/index-CLY1xZ38.js"></script>
     <link rel="stylesheet" crossorigin href="/bp-beta/assets/index-DCg7tVSO.css">
   </head>
   <body>
