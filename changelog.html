@@ -223,14 +223,31 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.1</h3>
-        <p>比正式版 0.31.0 多五项：<strong>游戏开着却连不上数据时，提示会直接说出原因</strong>；<strong>翻译和语音识别没成功时，会轻轻提示是网络、服务还是密钥的问题</strong>；<strong>关键时间提示条不再挡住游戏里的鼠标</strong>；用快捷键打开的 BP 面板点「收起」没反应的问题修好了；从 OpenDota 导入的对局会显示英雄和 GPM/XPM。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.2</h3>
+        <p>比正式版 0.31.0 多的重点：<strong>悬浮窗可以锁定，锁定后鼠标点击直接穿过它落到游戏里</strong>；<strong>游戏开着却连不上数据时，提示会直接说出原因</strong>；<strong>翻译和语音识别没成功时，会轻轻提示是网络、服务还是密钥的问题</strong>；关键时间提示条不再挡住游戏里的鼠标；设置里可以一次导入 OpenDota 上的全部对局。想帮忙在 Windows 上实机试一下的可以装这个；不在意的话继续用正式版就好。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.32.0-beta.2 ── -->
+    <article class="release beta" id="v0-32-0-beta-2">
+      <header><h2>0.32.0-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-11</span></header>
+      <p class="lead">悬浮窗挡鼠标？锁上它，点击直接穿过去。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>锁定悬浮窗：</strong>点悬浮窗标题栏上的锁，或者按 <code>Alt+Shift+L</code>，悬浮窗就只显示、不挡鼠标——内容照常更新，右键走位、点技能都直接落到游戏里。锁定后悬浮窗会变淡一些，鼠标经过时再淡一点，不挡视线；淡到多少、要不要经过时变淡，可以在设置的悬浮窗一栏里调。想解锁就再按一次快捷键，或者点标题栏那颗金色的锁（锁定时只有它还能点，鼠标放上去会提示快捷键）。打开 BP 时会自动解锁。</li>
+          <li><strong>导入全部历史对局：</strong>设置里多了「导入全部历史对局」，一键把你在 OpenDota 上打过的所有比赛放进「历史对局」，已经记录过的不会被覆盖。需要先在 DOTA 里打开「公开比赛数据」。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>BP 选满了还在推荐：</strong>我方五个英雄都选好之后，面板不再继续推荐选人。</li>
+        </ul>
+      </div>
+    </article>
 
     <!-- ── 0.32.0-beta.1 ── -->
     <article class="release beta" id="v0-32-0-beta-1">
