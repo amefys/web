@@ -215,8 +215,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.32.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版 <strong>悬浮窗可以锁定，锁定后鼠标点击直接穿过它落到游戏里</strong>；游戏开着却连不上数据时，提示会直接说出原因。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.32.1</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版 <strong>对方发的外语消息会翻译成你的界面语言</strong>（以前「翻译目标」设成英语时收到的英文不会翻）；<strong>悬浮窗可以锁定，锁定后鼠标点击直接穿过它落到游戏里</strong>；游戏开着却连不上数据时，提示会直接说出原因。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -224,7 +224,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.32.0-beta.2</h3>
-        <p><strong>正式版已经走到 0.32.0，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.32.1，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -232,9 +232,27 @@
       </div>
     </section>
 
+    <!-- ── 0.32.1 ── -->
+    <article class="release" id="v0-32-1">
+      <header><h2>0.32.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-11</span></header>
+      <p class="lead">框选翻译「识别了却没翻译」的问题修好了。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>收到的消息没翻译：</strong>以前「翻译目标语言」同时管发出去和收到的消息——为了跟外国队友聊天把它设成英语，收到的英文就会「翻译成英文」原样显示，也不会提示。现在收到的消息（框选翻译、语音字幕）一律翻译成你的界面语言，发出去的消息照旧翻译成你选的语言。设置里这一项也改名为「发送翻译成」。</li>
+          <li><strong>历史对局没有英雄头像：</strong>对局记录列表里英雄那一栏现在会显示头像，导入的对局也一样。</li>
+          <li><strong>关于页的更新渠道：</strong>以前不管装的是哪个版本都显示 Stable，现在会如实显示你装的是正式版还是 Beta。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>锁定后的解锁按钮更显眼：</strong>悬浮窗锁定后，右上角会出现一颗大一点的金色锁，点它或按 <code>Alt+Shift+L</code> 就能解锁。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.32.0 ── -->
     <article class="release" id="v0-32-0">
-      <header><h2>0.32.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-11</span></header>
+      <header><h2>0.32.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-10-11</span></header>
       <p class="lead">悬浮窗挡鼠标？锁上它，点击直接穿过去。</p>
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
         <ul>
