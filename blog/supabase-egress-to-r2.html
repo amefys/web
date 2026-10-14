@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2 — AMEFYS 技术博客</title>
+<meta name="description" content="Supabase 发来警告：Cached Egress 用到免费额度的 289%，3 天后整个项目停服。排查发现前面那层 Cloudflare 缓存一直没生效，原因是一个 Set-Cookie 头。这篇记录排查过程、止血、升级还是不升级的决定，以及一天内把静态文件迁到 R2 的全过程。">
+<link rel="canonical" href="https://amefys.com/blog/supabase-egress-to-r2.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2">
+<meta property="og:description" content="前面那层 Cloudflare 缓存一直没生效，原因是一个 Set-Cookie 头。排查、止血、决策和迁移的全过程。">
+<meta property="og:url" content="https://amefys.com/blog/supabase-egress-to-r2.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-14">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=2">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","datePublished":"2026-10-14","dateModified":"2026-10-14","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/supabase-egress-to-r2.html","keywords":"Supabase, Cached Egress, Cloudflare Workers, Cache API, R2, 成本优化"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">Supabase</span><span class="tag">Cloudflare</span><span class="tag">R2</span><span class="tag">成本优化</span><span class="tag">事故复盘</span></div>
+    <h1>免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2</h1>
+    <p class="sub">一封「3 天后停服」的警告邮件，把我们引到了一个藏了很久的问题：前面那层 Cloudflare 缓存，从上线那天起就没有真正生效过。罪魁祸首是一个 <code>Set-Cookie</code> 响应头。</p>
+    <div class="meta"><span>2026-10-14</span><span>阅读约 12 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">TL;DR</div>
+    <ul>
+      <li>Supabase 的 <strong>Cached Egress（缓存出流量）</strong>用到免费额度的 289%，每天还在涨约 1 GB。</li>
+      <li>流量是真实新用户下载英雄图片产生的，不是被刷；但本该挡在前面的 Cloudflare 缓存<strong>一直没生效</strong>。</li>
+      <li>根因：Supabase 的每个响应都带 <code>Set-Cookie: __cf_bm</code>，而 Cloudflare 默认<strong>不缓存带 Set-Cookie 的响应</strong>。</li>
+      <li>处理：当天先升级 Pro 保住服务 → 改用 Cache API 止血 → 静态文件全部迁到 R2，域名直挂 R2，Worker 退出这条路径。</li>
+      <li>结果：Supabase 不再承担任何静态文件流量；英雄图体积降了 80%；Cloudflare Worker 调用量降了约 70%。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">一封「3 天后停服」的邮件</a></li>
+      <li><a href="#s2">先弄清楚：Cached Egress 是什么</a></li>
+      <li><a href="#s3">排查：一天 1 GB 从哪来</a></li>
+      <li><a href="#s4">根因：缓存为什么没挡住</a></li>
+      <li><a href="#s5">止血：用 Cache API 把缓存放回自己这边</a></li>
+      <li><a href="#s6">决定：先花 25 美元，保住整个项目</a></li>
+      <li><a href="#s7">迁移：一天之内搬到 R2</a></li>
+      <li><a href="#s8">顺手做掉的几件事</a></li>
+      <li><a href="#s9">结果</a></li>
+      <li><a href="#s10">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>一封「3 天后停服」的邮件</h2>
+
+  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面辅助工具，一个人开发，后端用的是 Supabase（登录、数据库、函数和文件存储），前面套了一层 Cloudflare。整个项目一直跑在两家的免费套餐上。</p>
+
+  <p>10 月 13 日收到 Supabase 的邮件，大意是：</p>
+
+  <blockquote>你的用量在上次通知后继续大幅超出套餐额度……你现在有 3 天时间（到 10 月 16 日）采取措施，否则合理使用政策生效，你的项目将停止工作。<br>Cached egress (Bandwidth): 13.23 GB of 5.5 GB</blockquote>
+
+  <p>「项目停止工作」指的不只是文件下载，而是<strong>整个项目返回 402</strong>：登录、数据库、翻译和语音代理全部不可用。对一个有真实用户在用的产品来说，这等于全面停服。</p>
+
+  <p>我当时的第一个问题很直接：<strong>为什么会用这么多缓存流量？</strong>存储里一共才几十 MB 的文件。</p>
+
+  <h2 id="s2"><span class="no">02</span>先弄清楚：Cached Egress 是什么</h2>
+
+  <p>Supabase 把出流量分成两类，各有各的额度，互不相通（<a href="https://supabase.com/docs/guides/platform/manage-your-usage/egress" rel="noopener">官方说明</a>）：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>类型</th><th>是什么</th><th>我们这边主要来自</th></tr>
+    <tr><td><strong>Egress</strong>（非缓存）</td><td>需要回到源站处理的请求</td><td>登录、数据库查询、函数调用</td></tr>
+    <tr><td><strong>Cached Egress</strong></td><td>由 Supabase 自己的 CDN 从缓存直接返回的流量，主要是 Storage 里的文件</td><td>英雄图片、BP 数据包、皮肤文件</td></tr>
+  </table></div>
+
+  <p>控制台首页的概览卡片只显示了 Egress（1.2 / 5 GB，看起来很健康），<strong>Cached Egress 要点进 Usage 详情页才看得到</strong>：14.46 / 5 GB，289%。这也是为什么一开始看控制台会觉得「没超啊」。</p>
+
+  <p>问题在于：这些文件我们本来是不打算让 Supabase 来送的。下面是当时的请求路径：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 230" role="img" aria-label="改之前的请求路径：客户端经 cdn.amefys.com 的 Worker 到 Supabase Storage">
+        <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9A7B3F"/></marker></defs>
+        <rect x="14" y="70" width="150" height="76" rx="14" fill="#1c1610" stroke="rgba(232,199,121,0.25)"/>
+        <text x="89" y="102" fill="#f2ead8" font-size="15" text-anchor="middle" font-weight="600">客户端</text>
+        <text x="89" y="124" fill="rgba(242,234,216,0.55)" font-size="12" text-anchor="middle">桌面端 / 手机网页</text>
+        <line x1="166" y1="108" x2="252" y2="108" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a1)"/>
+        <rect x="256" y="52" width="200" height="112" rx="14" fill="#1c1610" stroke="rgba(232,199,121,0.45)"/>
+        <text x="356" y="84" fill="#E8C779" font-size="14" text-anchor="middle" font-weight="600">cdn.amefys.com</text>
+        <text x="356" y="106" fill="#f2ead8" font-size="13" text-anchor="middle">Cloudflare Worker</text>
+        <text x="356" y="134" fill="#34D399" font-size="12" text-anchor="middle">「这里有边缘缓存，</text>
+        <text x="356" y="152" fill="#34D399" font-size="12" text-anchor="middle">Supabase 几乎不出流量」</text>
+        <line x1="458" y1="108" x2="544" y2="108" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a1)"/>
+        <rect x="548" y="52" width="158" height="112" rx="14" fill="#1c1610" stroke="rgba(242,182,106,0.5)"/>
+        <text x="627" y="84" fill="#f2ead8" font-size="14" text-anchor="middle" font-weight="600">Supabase</text>
+        <text x="627" y="104" fill="#f2ead8" font-size="13" text-anchor="middle">Storage</text>
+        <text x="627" y="132" fill="#F2B66A" font-size="12" text-anchor="middle">自带 CDN 命中</text>
+        <text x="627" y="150" fill="#F2B66A" font-size="12" text-anchor="middle">= Cached Egress 计费</text>
+        <text x="356" y="206" fill="rgba(242,234,216,0.45)" font-size="12" text-anchor="middle">设计意图写在 Worker 的注释里：边缘缓存把上游出流量降到接近零</text>
+      </svg>
+    </div>
+    <figcaption>图 1　改之前：客户端 → 我们的 Worker（cdn.amefys.com）→ Supabase Storage</figcaption>
+  </figure>
+
+  <p>当初加这层 Worker 有两个目的：一是用自己的域名（Supabase 自定义域名要付费），二是靠 Cloudflare 边缘缓存把 Supabase 的出流量压到接近零。代码注释里也是这么写的。<strong>如果缓存真的生效，Supabase 不可能送出 13 GB。</strong></p>
+
+  <h2 id="s3"><span class="no">03</span>排查：一天 1 GB 从哪来</h2>
+
+  <p>第一步是排除「被刷了」。Cloudflare 的 GraphQL Analytics API 可以按域名、路径、客户端、IP 拆分请求和流量，cdn.amefys.com 最近 3 天的数据是：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>日期（24 小时窗口）</th><th>流量</th></tr>
+    <tr><td>10-11</td><td class="num">1.05 GB</td></tr>
+    <tr><td>10-12</td><td class="num">0.82 GB</td></tr>
+    <tr><td>10-13</td><td class="num">1.02 GB</td></tr>
+  </table></div>
+
+  <p>一天约 1 GB，乘以账期里过去的天数，正好对上账单上的 13 GB。再按客户端拆开看：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 200" role="img" aria-label="一天约 1 GB 的流量构成：桌面端约 630 MB，手机网页约 300 MB，其他约 90 MB">
+        <g font-size="13" fill="#f2ead8">
+          <text x="10" y="46">Windows 桌面端</text>
+          <rect x="170" y="30" width="460" height="24" rx="6" fill="#E8C779"/>
+          <text x="640" y="47" fill="#E8C779" font-family="ui-monospace,Menlo,monospace">≈630 MB</text>
+          <text x="10" y="96">手机网页</text>
+          <rect x="170" y="80" width="219" height="24" rx="6" fill="#8FB4E8"/>
+          <text x="399" y="97" fill="#8FB4E8" font-family="ui-monospace,Menlo,monospace">≈300 MB</text>
+          <text x="10" y="146">其他（Mac、数据包等）</text>
+          <rect x="170" y="130" width="66" height="24" rx="6" fill="rgba(242,234,216,0.35)"/>
+          <text x="246" y="147" fill="rgba(242,234,216,0.6)" font-family="ui-monospace,Menlo,monospace">≈90 MB</text>
+        </g>
+        <text x="10" y="188" font-size="12" fill="rgba(242,234,216,0.45)">桌面端以英雄头像、立绘、图标为主；手机网页以头像和拍照识别数据包为主</text>
+      </svg>
+    </div>
+    <figcaption>图 2　cdn.amefys.com 一天约 1 GB 的流量构成（10-13）</figcaption>
+  </figure>
+
+  <p>桌面端一天 1.5 万次请求，看着很多。但按 IP 一拆就清楚了：<strong>一天来自 103 个 IP，每个 IP 大约 370 次请求</strong>，正好约等于「127 个英雄 × 3 种图」下载一遍。也就是说，这是<strong>新装机的首次下载</strong>：桌面端第一次打开 BP 面板时，会把全部英雄图预下载到本地磁盘，之后都从磁盘读。本地缓存是正常的。</p>
+
+  <div class="callout tip"><span class="t">结论</span>Storage 里一共只有 22 MB 文件，没有被刷，也没有客户端在反复下载。是每天几十个新用户、每人约 18 MB 的首次下载，一天下来就是 1 GB。用户在涨是好事，问题是这些流量全算到了 Supabase 头上。</div>
+
+  <h2 id="s4"><span class="no">04</span>根因：缓存为什么没挡住</h2>
+
+  <p>用 curl 连续请求同一张图，响应头里明明写着缓存命中：</p>
+
+<pre><code>$ curl -sI https://cdn.amefys.com/hero-art/v1/portraits/axe.png
+HTTP/2 200
+<span class="h">cf-cache-status: HIT</span>
+cache-control: public, max-age=31536000, immutable
+<span class="h">sb-gateway-mode: direct</span>
+<span class="h">sb-gateway-version: 1</span></code></pre>
+
+  <p>第一眼看会以为缓存是好的。但仔细看，旁边的 <code>sb-gateway-*</code> 是 <strong>Supabase 的响应头</strong>：我们的 Worker 把上游的响应头原样转发了。所以这个 <code>HIT</code> 说的是 <strong>Supabase 那一侧的 CDN 命中</strong>，恰恰就是账单上的 Cached Egress。我们自己这一侧的缓存到底有没有命中，这个头根本看不出来。</p>
+
+  <p>那我们这边为什么不缓存？直接请求一次 Supabase Storage：</p>
+
+<pre><code>$ curl -sI https://&lt;project&gt;.supabase.co/storage/v1/object/public/hero-art/v1/icons/axe.png
+HTTP/2 200
+cf-cache-status: HIT
+cache-control: public, max-age=31536000, immutable
+<span class="bad">set-cookie: __cf_bm=…; HttpOnly; Secure; Path=/; Domain=supabase.co</span></code></pre>
+
+  <p>每个响应都带一个 <code>Set-Cookie: __cf_bm</code>。这是 Cloudflare Bot Management 的 cookie：supabase.co 本身也是 Cloudflare 的客户，开了机器人防护。</p>
+
+  <p>Cloudflare 的官方排障文档专门写过这种情况（<a href="https://developers.cloudflare.com/cache/troubleshooting/bot-management-o2o-cache-bypass/" rel="noopener">Bot Management cookie causes cache bypass in O2O setups</a>）：当你的 Cloudflare zone 去请求另一个也在 Cloudflare 上的源站（所谓 orange-to-orange，O2O）时，源站那边返回的 <code>__cf_bm</code> cookie 会让你这一侧<strong>跳过缓存</strong>，因为 Cloudflare 默认不缓存带 <code>Set-Cookie</code> 的响应。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Set-Cookie 导致我们这一侧不缓存，每次请求都穿透到 Supabase">
+        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9A7B3F"/></marker><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#F08A7E"/></marker></defs>
+        <g font-size="13" text-anchor="middle">
+          <text x="90" y="26" fill="#f2ead8" font-weight="600">客户端</text>
+          <text x="360" y="26" fill="#E8C779" font-weight="600">我们的 Worker / 边缘缓存</text>
+          <text x="630" y="20" fill="#f2ead8" font-weight="600">Supabase</text><text x="630" y="35" fill="rgba(242,234,216,0.5)" font-size="11">（也在 Cloudflare 上）</text>
+        </g>
+        <line x1="90" y1="42" x2="90" y2="240" stroke="rgba(242,234,216,0.15)" stroke-dasharray="4 4"/>
+        <line x1="360" y1="42" x2="360" y2="240" stroke="rgba(232,199,121,0.25)" stroke-dasharray="4 4"/>
+        <line x1="630" y1="42" x2="630" y2="240" stroke="rgba(242,234,216,0.15)" stroke-dasharray="4 4"/>
+        <line x1="92" y1="64" x2="356" y2="64" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a2)"/>
+        <text x="224" y="56" fill="rgba(242,234,216,0.7)" font-size="12" text-anchor="middle">① 请求英雄图</text>
+        <line x1="362" y1="96" x2="626" y2="96" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a2)"/>
+        <text x="494" y="88" fill="rgba(242,234,216,0.7)" font-size="12" text-anchor="middle">② 本地没缓存，回源</text>
+        <line x1="626" y1="134" x2="364" y2="134" stroke="#F08A7E" stroke-width="2" marker-end="url(#a3)"/>
+        <text x="494" y="126" fill="#F08A7E" font-size="12" text-anchor="middle">③ 200 + Set-Cookie: __cf_bm（计入 Cached Egress）</text>
+        <rect x="270" y="150" width="180" height="40" rx="10" fill="rgba(240,138,126,0.12)" stroke="rgba(240,138,126,0.5)"/>
+        <text x="360" y="175" fill="#F08A7E" font-size="12.5" text-anchor="middle">带 Set-Cookie → 不缓存</text>
+        <line x1="356" y1="214" x2="94" y2="214" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a2)"/>
+        <text x="224" y="206" fill="rgba(242,234,216,0.7)" font-size="12" text-anchor="middle">④ 返回给客户端</text>
+        <text x="360" y="244" fill="rgba(242,234,216,0.45)" font-size="12" text-anchor="middle">下一个请求从 ① 重来，每次都到 Supabase</text>
+      </svg>
+    </div>
+    <figcaption>图 3　每次请求都穿透到 Supabase：问题出在第 ③ 步的 Set-Cookie</figcaption>
+  </figure>
+
+  <p>Worker 里写的 <code>cf: { cacheTtl, cacheEverything: true }</code> 看起来是「强制缓存」，但遇到带 <code>Set-Cookie</code> 的响应照样不存。这层缓存从上线那天起就没真正工作过，只是之前流量小，免费额度扛得住，一直没人发现。</p>
+
+  <div class="callout lesson"><span class="t">心得</span>看到 <code>cf-cache-status: HIT</code> 先别高兴，要分清<strong>这个头是谁加的</strong>。中间层原样转发上游响应头，会把上游的缓存状态伪装成你自己的。最好在自己的那一层加一个专门的头（比如下面的 <code>X-Amefys-Cache</code>），只说自己的事。</div>
+
+  <h2 id="s5"><span class="no">05</span>止血：用 Cache API 把缓存放回自己这边</h2>
+
+  <p>最快的修法是不再依赖 <code>fetch</code> 的缓存参数，改用 Workers 的 <a href="https://developers.cloudflare.com/workers/runtime-apis/cache/" rel="noopener">Cache API</a>（<code>caches.default</code>）自己存、自己取，并且<strong>在存之前把 Set-Cookie 去掉</strong>。核心逻辑大概是这样（已简化）：</p>
+
+<pre><code><span class="k">const</span> cache = caches.default
+<span class="c">// 一个路径一份缓存：忽略 query（防止 ?随机数 绕过缓存），HEAD 和 GET 共用</span>
+<span class="k">const</span> key = <span class="k">new</span> Request(<span class="s">`${url.origin}${url.pathname}`</span>, { method: <span class="s">'GET'</span> })
+
+<span class="k">const</span> hit = <span class="k">await</span> cache.match(key)
+<span class="k">if</span> (hit) <span class="k">return</span> withHeaders(hit, { <span class="s">'X-Amefys-Cache'</span>: <span class="s">'HIT'</span> })
+
+<span class="k">const</span> upstream = <span class="k">await</span> fetch(storageUrl)
+<span class="k">if</span> (upstream.ok) {
+  <span class="k">const</span> headers = <span class="k">new</span> Headers(upstream.headers)
+  headers.delete(<span class="s">'Set-Cookie'</span>)                      <span class="c">// 关键一行</span>
+  headers.set(<span class="s">'Cache-Control'</span>, <span class="s">`public, max-age=${ttl}`</span>)
+  ctx.waitUntil(cache.put(key, <span class="k">new</span> Response(upstream.clone().body, { headers })))
+}
+<span class="k">return</span> withHeaders(upstream, { <span class="s">'X-Amefys-Cache'</span>: <span class="s">'MISS'</span> })</code></pre>
+
+  <p>失败的响应不缓存，带版本号的文件缓存一年，索引文件只缓存 5 分钟。部署后马上验证：</p>
+
+<pre><code>$ for i in 1 2 3; do curl -sI https://cdn.amefys.com/hero-art/v1/portraits/axe.png | grep x-amefys-cache; done
+x-amefys-cache: <span class="bad">MISS</span>
+x-amefys-cache: <span class="ok">HIT</span>
+x-amefys-cache: <span class="ok">HIT</span></code></pre>
+
+  <p>能省多少？Cache API 的缓存按 Cloudflare 机房各自存储，所以最坏情况是：每个机房、每个文件，每天都要回源一次。用 3 天的实际数据（每天 20–31 个机房）算一下：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>日期</th><th>实际总流量</th><th>最坏情况回源量</th><th>占比</th></tr>
+    <tr><td>10-11</td><td class="num">1.05 GB</td><td class="num">99 MB</td><td class="num">9.4%</td></tr>
+    <tr><td>10-12</td><td class="num">0.82 GB</td><td class="num">102 MB</td><td class="num">12.4%</td></tr>
+    <tr><td>10-13</td><td class="num">1.02 GB</td><td class="num">87 MB</td><td class="num">8.5%</td></tr>
+  </table></div>
+
+  <p>更重要的是，回源量从此和用户数脱钩：它只和「机房数 × 文件总量」有关，用户翻倍也不会跟着翻倍。修复的同时补了 8 个测试，其中 5 个在旧代码上会失败，防止以后有人改回去。</p>
+
+  <h2 id="s6"><span class="no">06</span>决定：先花 25 美元，保住整个项目</h2>
+
+  <p>修好缓存不等于问题解决。这个账期已经用掉的 13 GB 退不回来，再怎么优化，账上还是 289%；而超额的后果是<strong>整个项目</strong>返回 402，不只是文件。</p>
+
+  <p>所以当天的决定是：<strong>先升级 Supabase Pro（每月 25 美元）保住服务，同时继续做优化</strong>，等下个账期确认用量稳定在免费额度以内，再决定要不要降回来。几个细节：</p>
+
+  <ul>
+    <li><strong>确认 Spend Cap（花费上限）是开着的</strong>：开着时超出额度只会被限速，不会额外扣钱，每月最多 25 美元。</li>
+    <li><strong>不要「先升级、马上取消」</strong>：Supabase 的取消订阅等于立即降回免费版，不是到期才生效。「怕下个月忘了取消」的问题，用日历提醒解决，而不是提前点取消。</li>
+    <li>升级后账期重新开始计算。Pro 的 Cached Egress 额度是 250 GB，16 号的停服风险解除。</li>
+  </ul>
+
+  <div class="callout warn"><span class="t">注意</span>免费套餐的超额处罚，波及范围往往是整个项目。一个静态文件的问题，最后差点让登录和数据库一起停掉。评估这类风险时，要按「最大波及范围」来算，而不是按出问题的那个功能来算。</div>
+
+  <h2 id="s7"><span class="no">07</span>迁移：一天之内搬到 R2</h2>
+
+  <p>Cache API 是止血，长期的问题还在：这些文件本来就不该由 Supabase 来送。Cloudflare R2 是对象存储，<strong>出流量免费</strong>，免费额度包括 10 GB 存储和每月 1000 万次读取。我们的文件一共 22 MB，前面还有缓存挡着，完全用不完。</p>
+
+  <p>迁移的原则是<strong>每一步都能回落，任何一步漏了都不断服务</strong>：</p>
+
+  <ol class="timeline">
+    <li><span class="when">第 1 步　对象键 = URL 路径</span>R2 里的对象键直接用 CDN 路径（去掉开头的 <code>/</code>），比如 <code>draft/index.json</code>、<code>hero-art/v2/icons/axe.webp</code>。不需要映射表，客户端的地址一个字都不用改。</li>
+    <li><span class="when">第 2 步　R2 优先，Supabase 兜底</span>Worker 先读 R2，读不到（或者 R2 出错）再回落到 Supabase。这样迁移过程中任何文件漏了，也只是走回老路。</li>
+    <li><span class="when">第 3 步　复制并逐个核对</span>把 Supabase 存储里的 423 个文件全部复制到 R2，第一轮有 2 个因为网络中断失败，补齐后按文件大小逐个核对，全部一致。</li>
+    <li><span class="when">第 4 步　发布脚本改写 R2</span>BP 数据包、英雄图镜像、拍照识别数据包、皮肤 4 个发布脚本统一改成写 R2。手动触发一次每天自动运行的数据包发布任务，确认 CI 能直接写进 R2。</li>
+    <li><span class="when">第 5 步　顺手换成 WebP</span>英雄图是 Valve 原样的 PNG/JPEG。新版本镜像转成 WebP（质量 90），放大 2 倍看也和原图没区别，总体积从 15.3 MB 降到 3.1 MB。旧版本的 PNG 保留，给已经发出去的旧客户端继续用。</li>
+    <li><span class="when">第 6 步　去掉 Worker</span>既然文件都在 R2，Worker 就只剩「加缓存头、加跨域头」两件事，而这两件事 Cloudflare 的规则就能做。于是把 cdn.amefys.com 直接绑成 R2 的自定义域名：缓存时间用缓存规则配置（索引 5 分钟、英雄图 1 年、其他带版本号的文件 30 天），跨域用响应头规则加上桶的 CORS 策略，ETag 和 304 是原生支持的。</li>
+  </ol>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 150" role="img" aria-label="英雄图体积对比：v1 PNG 15.3 MB，v2 WebP 3.1 MB">
+        <g font-size="13" fill="#f2ead8">
+          <text x="10" y="46">v1　Valve 原图</text>
+          <rect x="150" y="30" width="480" height="26" rx="6" fill="rgba(242,234,216,0.35)"/>
+          <text x="640" y="48" fill="rgba(242,234,216,0.7)" font-family="ui-monospace,Menlo,monospace">15.3 MB</text>
+          <text x="10" y="98">v2　WebP q90</text>
+          <rect x="150" y="82" width="97" height="26" rx="6" fill="#34D399"/>
+          <text x="257" y="100" fill="#34D399" font-family="ui-monospace,Menlo,monospace">3.1 MB（−80%）</text>
+        </g>
+        <text x="10" y="140" font-size="12" fill="rgba(242,234,216,0.45)">127 个英雄 × 头像 / 立绘 / 图标；单张头像 66.8 KB → 7.7 KB</text>
+      </svg>
+    </div>
+    <figcaption>图 4　英雄图镜像 v1 与 v2 的总体积</figcaption>
+  </figure>
+
+  <p>第 6 步是唯一会造成中断的操作：解绑 Worker 的域名、再绑到 R2，中间 Cloudflare 要签发证书，大约用了 5 分钟。事后查日志，真正受影响的是北京时间 17:50–17:51 这 2 分钟里 3–4 个手机用户的大约 30 次图片请求。手机端加载图片失败会自动换成 Valve 的原图，失败结果也不会写进离线缓存，所以没有留下坏图；桌面端这段时间没有失败请求。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 260" role="img" aria-label="改之后的架构：静态文件走 R2，Supabase 只负责登录、数据库和函数">
+        <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9A7B3F"/></marker></defs>
+        <rect x="14" y="92" width="150" height="76" rx="14" fill="#1c1610" stroke="rgba(232,199,121,0.25)"/>
+        <text x="89" y="124" fill="#f2ead8" font-size="15" text-anchor="middle" font-weight="600">客户端</text>
+        <text x="89" y="146" fill="rgba(242,234,216,0.55)" font-size="12" text-anchor="middle">桌面端 / 手机网页</text>
+        <line x1="166" y1="116" x2="250" y2="62" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a4)"/>
+        <line x1="166" y1="146" x2="250" y2="198" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a4)"/>
+        <rect x="254" y="22" width="230" height="84" rx="14" fill="#1c1610" stroke="rgba(52,211,153,0.5)"/>
+        <text x="369" y="50" fill="#34D399" font-size="14" text-anchor="middle" font-weight="600">cdn.amefys.com</text>
+        <text x="369" y="72" fill="#f2ead8" font-size="12.5" text-anchor="middle">R2 自定义域名（无 Worker）</text>
+        <text x="369" y="92" fill="rgba(242,234,216,0.55)" font-size="12" text-anchor="middle">缓存规则 + 跨域规则</text>
+        <line x1="486" y1="64" x2="560" y2="64" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a4)"/>
+        <rect x="564" y="30" width="142" height="68" rx="14" fill="#1c1610" stroke="rgba(52,211,153,0.5)"/>
+        <text x="635" y="58" fill="#f2ead8" font-size="14" text-anchor="middle" font-weight="600">Cloudflare R2</text>
+        <text x="635" y="80" fill="#34D399" font-size="12" text-anchor="middle">出流量免费</text>
+        <rect x="254" y="156" width="230" height="84" rx="14" fill="#1c1610" stroke="rgba(232,199,121,0.35)"/>
+        <text x="369" y="184" fill="#E8C779" font-size="14" text-anchor="middle" font-weight="600">api.amefys.com</text>
+        <text x="369" y="206" fill="#f2ead8" font-size="12.5" text-anchor="middle">Worker 反向代理</text>
+        <text x="369" y="226" fill="rgba(242,234,216,0.55)" font-size="12" text-anchor="middle">只放行用到的 API 路径</text>
+        <line x1="486" y1="198" x2="560" y2="198" stroke="#9A7B3F" stroke-width="2" marker-end="url(#a4)"/>
+        <rect x="564" y="164" width="142" height="68" rx="14" fill="#1c1610" stroke="rgba(232,199,121,0.35)"/>
+        <text x="635" y="192" fill="#f2ead8" font-size="14" text-anchor="middle" font-weight="600">Supabase</text>
+        <text x="635" y="214" fill="rgba(242,234,216,0.6)" font-size="12" text-anchor="middle">登录 / 数据库 / 函数</text>
+      </svg>
+    </div>
+    <figcaption>图 5　改之后：静态文件全部走 R2，Supabase 只做它擅长的事</figcaption>
+  </figure>
+
+  <p>切换完成后，用国内家宽网络的探测节点（移动、联通、电信都有）测了一遍新的 CDN，12 个节点里 11 个正常访问。唯一失败的一次是连接被重置，和平时的零星波动在同一水平。</p>
+
+  <h2 id="s8"><span class="no">08</span>顺手做掉的几件事</h2>
+
+  <p>既然在看用量，就把 Supabase 和 Cloudflare 两边的请求都过了一遍，又找到几处能省的：</p>
+
+  <ul>
+    <li><strong>对局记录上传太频繁</strong>：桌面端在对局中每 30 秒往云端写一次，进入结算界面后更是每收到一次游戏数据就写一次，占了全部 API 请求的 58%。而云端这份记录只在换新电脑登录时才会用到。改成开局一次、每 10 分钟一次、结算一次。代码审查时还发现一个边界情况：刚进结算那一刻，游戏可能还没给出胜负，因此胜负出来后会再补传一次。</li>
+    <li><strong>英雄池保存合并发送</strong>：手机上每点一下就保存一次，一个用户一天 70–110 次。改成停顿 1.5 秒后合并成一次；改动本身立刻在本地生效，页面切到后台时也会立刻补传。</li>
+    <li><strong>浏览器预检请求在边缘应答</strong>：手机网页每次调接口前，浏览器会先发一个 OPTIONS 预检。现在由我们的代理直接回答，不再转给 Supabase。</li>
+    <li><strong>挡掉扫描器</strong>：API 域名每天有不少扫描器在试 <code>/.env</code>、<code>/phpinfo.php</code> 这类路径。加了一条防火墙规则，只放行客户端真正用到的几个 API 前缀，其余在进 Worker 之前就拦掉。</li>
+    <li><strong>关掉 Early Hints</strong>：查日志时发现一批成对出现的 204/504，来自 Cloudflare 的 Early Hints 预取。它对我们的接口和页面没有任何作用，而且全部超时，直接关掉。</li>
+  </ul>
+
+  <h2 id="s9"><span class="no">09</span>结果</h2>
+
+  <div class="table-wrap"><table>
+    <tr><th>指标</th><th>之前</th><th>之后</th></tr>
+    <tr><td>Supabase Cached Egress 增长</td><td class="num">≈1 GB / 天</td><td class="num up">0（静态文件不再经过 Supabase）</td></tr>
+    <tr><td>英雄图镜像体积</td><td class="num">15.3 MB</td><td class="num up">3.1 MB（−80%）</td></tr>
+    <tr><td>新装机首次下载英雄图</td><td class="num">≈18 MB</td><td class="num up">≈3.5 MB</td></tr>
+    <tr><td>Cloudflare Worker 调用</td><td class="num">≈4.5 万 / 天</td><td class="num up">≈1.3 万 / 天（CDN 不再经过 Worker）</td></tr>
+    <tr><td>API 请求（随新版本普及）</td><td class="num">≈1.1 万 / 天</td><td class="num up">预计减半</td></tr>
+    <tr><td>用户可感知的中断</td><td colspan="2">切换域名那 2 分钟，约 30 次手机图片请求自动换成了原图</td></tr>
+  </table></div>
+
+  <p>Supabase 现在只负责登录、数据库和函数，这也是当初选它的原因。等下个账期的数据出来，再决定 Pro 要不要降回免费版。</p>
+
+  <h2 id="s10"><span class="no">10</span>几点心得</h2>
+
+  <ol>
+    <li><strong>额度告警要设在超额之前，而且每一项都要有。</strong>我们的本地运维面板盯着翻译额度、构建分钟数这些，却没有盯 Cached Egress。等官方邮件来的时候，已经是 289%。</li>
+    <li><strong>缓存要验证，不要假设。</strong>代码注释里写着「上游出流量接近零」，实际上从第一天起就没生效。加一个只属于自己这一层的响应头，部署后亲眼看到 MISS 变成 HIT 才算数。</li>
+    <li><strong>中间层的响应头要分清来源。</strong>原样转发上游的头，会把别人的缓存状态伪装成自己的。</li>
+    <li><strong>迁移设计成可回落的。</strong>R2 优先、Supabase 兜底，再逐个核对、最后才切流量。这样整个迁移在一天内完成，用户几乎无感。</li>
+    <li><strong>保服务优先，钱可以晚点省。</strong>超额的后果是整个项目停服时，花 25 美元买一个月的确定性，比赶在 3 天内把所有优化都做完更稳。</li>
+  </ol>
+
+  <p>最后补一句：这次的排查、迁移、测试和发版，是我和 AI 编程助手（Claude Code）一起在一天内完成的。数据查询、根因定位、方案取舍和每一步的线上验证，都在同一个对话里推进。哪些事交给 AI、哪些决定必须自己拍板，以后会单独写一篇。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>遇到类似的问题？</strong>如果你也在用 Supabase、Cloudflare 这类免费额度起步，碰到了成本、缓存或国内访问的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+</script>
+</body></html>

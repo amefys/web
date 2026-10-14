@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>AMEFYS 技术博客</title>
+  <link>https://amefys.com/blog/</link>
+  <atom:link href="https://amefys.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>一个人借助 AI 把 AMEFYS 从零做到上线：踩过的坑、做过的决定和真实的数据。</description>
+  <language>zh-cn</language>
+  <lastBuildDate>Wed, 14 Oct 2026 12:00:00 GMT</lastBuildDate>
+  <item>
+    <title>免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2</title>
+    <link>https://amefys.com/blog/supabase-egress-to-r2.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/supabase-egress-to-r2.html</guid>
+    <pubDate>Wed, 14 Oct 2026 12:00:00 GMT</pubDate>
+    <description>前面那层 Cloudflare 缓存一直没生效，原因是一个 Set-Cookie 头。排查、止血、升级决定和一天内迁到 R2 的全过程。</description>
+  </item>
+</channel>
+</rss>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>技术博客 — AMEFYS</title>
+<meta name="description" content="一个人借助 AI 把 AMEFYS 从零做到上线，过程中踩过的坑、做过的决定和真实的数据：成本、缓存、国内网络、桌面端工程、AI 协作开发。">
+<link rel="canonical" href="https://amefys.com/blog/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="AMEFYS 技术博客">
+<meta property="og:description" content="一个人借助 AI 把 AMEFYS 从零做到上线，过程中踩过的坑、做过的决定和真实的数据：成本、缓存、国内网络、桌面端工程、AI 协作开发。">
+<meta property="og:url" content="https://amefys.com/blog/">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=2">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="https://github.com/amefys/web/releases/latest" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<main class="blog-page">
+  <header class="blog-hero">
+    <div class="eyebrow">AMEFYS · Engineering</div>
+    <h1>技术博客</h1>
+    <p>一个人借助 AI，把 AMEFYS 从一个念头做到上线、运营。这里记录过程中真实发生的事：踩过的坑、做过的取舍、拿得出手的数据。每一篇都来自线上真实发生过的问题。</p>
+    <a class="rss" href="/blog/feed.xml"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="2" fill="currentColor"/><path d="M1 7a8 8 0 0 1 8 8M1 2a13 13 0 0 1 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>RSS 订阅</a>
+  </header>
+
+  <a class="post-card" href="/blog/supabase-egress-to-r2.html">
+    <div class="meta"><span>2026-10-14</span><span>阅读约 12 分钟</span></div>
+    <h2>免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2</h2>
+    <p>一封「3 天后停服」的警告邮件，把我们引到了一个藏了很久的问题：前面那层 Cloudflare 缓存，从上线那天起就没有真正生效过，罪魁祸首是一个 Set-Cookie 头。排查、止血、要不要升级的决定，以及一天内把静态文件迁到 R2 的全过程。</p>
+    <div class="tags"><span class="tag">Supabase</span><span class="tag">Cloudflare</span><span class="tag">R2</span><span class="tag">成本优化</span><span class="tag">事故复盘</span></div>
+  </a>
+
+  <p class="blog-empty">更多文章陆续更新中。</p>
+</main>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+</script>
+</body></html>
