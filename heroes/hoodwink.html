@@ -89,19 +89,30 @@
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -122,7 +133,7 @@
 <main class="wrap">
 
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/heroes/">英雄列表</a> · 森海飞霞</div>
-<h1>森海飞霞出装与克制</h1>
+<div class="page-head"><img class="art-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="128" height="72" alt="" decoding="async" onerror="this.style.visibility='hidden'"><h1>森海飞霞出装与克制</h1></div>
 <p class="tagline">Hoodwink · 也叫松鼠 · 主属性 敏捷 · 远程</p>
 <div>
   <span class="pill">辅助</span><span class="pill">爆发</span><span class="pill">逃生</span><span class="pill">控制</span>
@@ -137,25 +148,25 @@
 <p class="mu-note">最近 7 天 352 万场天梯（7.41f）。数字是胜率差（百分点），已经扣掉两个英雄本身的强弱，只看这一对的关系；少于 1,000 局的组合不列出。</p>
 <div class="mu-grid">
 <div class="mu-card"><h3>森海飞霞克制</h3><ol>
-  <li><a href="/heroes/bristleback.html">钢背兽</a><span class="mu-pp mu-up">+3.0</span><span class="mu-games">1.3 万局</span></li>
-  <li><a href="/heroes/lycan.html">狼人</a><span class="mu-pp mu-up">+2.3</span><span class="mu-games">2,800 局</span></li>
-  <li><a href="/heroes/antimage.html">敌法师</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">2.5 万局</span></li>
-  <li><a href="/heroes/huskar.html">哈斯卡</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">7,500 局</span></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">1.3 万局</span></li>
+  <li><a href="/heroes/bristleback.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a><span class="mu-pp mu-up">+3.0</span><span class="mu-games">1.3 万局</span></li>
+  <li><a href="/heroes/lycan.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lycan.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狼人</a><span class="mu-pp mu-up">+2.3</span><span class="mu-games">2,800 局</span></li>
+  <li><a href="/heroes/antimage.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/antimage.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">敌法师</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">2.5 万局</span></li>
+  <li><a href="/heroes/huskar.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/huskar.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">哈斯卡</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">7,500 局</span></li>
+  <li><a href="/heroes/storm-spirit.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">1.3 万局</span></li>
 </ol></div>
 <div class="mu-card"><h3>克制森海飞霞</h3><ol>
-  <li><a href="/heroes/shredder.html">伐木机</a><span class="mu-pp mu-down">-2.0</span><span class="mu-games">1.1 万局</span></li>
-  <li><a href="/heroes/primal-beast.html">獸</a><span class="mu-pp mu-down">-1.8</span><span class="mu-games">6,900 局</span></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a><span class="mu-pp mu-down">-1.5</span><span class="mu-games">3.7 万局</span></li>
-  <li><a href="/heroes/bounty-hunter.html">赏金猎人</a><span class="mu-pp mu-down">-1.3</span><span class="mu-games">1.9 万局</span></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a><span class="mu-pp mu-down">-1.3</span><span class="mu-games">1.4 万局</span></li>
+  <li><a href="/heroes/shredder.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shredder.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">伐木机</a><span class="mu-pp mu-down">-2.0</span><span class="mu-games">1.1 万局</span></li>
+  <li><a href="/heroes/primal-beast.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/primal_beast.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">獸</a><span class="mu-pp mu-down">-1.8</span><span class="mu-games">6,900 局</span></li>
+  <li><a href="/heroes/spirit-breaker.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a><span class="mu-pp mu-down">-1.5</span><span class="mu-games">3.7 万局</span></li>
+  <li><a href="/heroes/bounty-hunter.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bounty_hunter.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">赏金猎人</a><span class="mu-pp mu-down">-1.3</span><span class="mu-games">1.9 万局</span></li>
+  <li><a href="/heroes/centaur.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a><span class="mu-pp mu-down">-1.3</span><span class="mu-games">1.4 万局</span></li>
 </ol></div>
 <div class="mu-card"><h3>森海飞霞的最佳搭档</h3><ol>
-  <li><a href="/heroes/enchantress.html">魅惑魔女</a><span class="mu-pp mu-up">+2.3</span><span class="mu-games">3,400 局</span></li>
-  <li><a href="/heroes/lone-druid.html">独行德鲁伊</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">7,200 局</span></li>
-  <li><a href="/heroes/sand-king.html">沙王</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">6,900 局</span></li>
-  <li><a href="/heroes/bristleback.html">钢背兽</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">1.4 万局</span></li>
-  <li><a href="/heroes/oracle.html">神谕者</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">4,700 局</span></li>
+  <li><a href="/heroes/enchantress.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enchantress.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魅惑魔女</a><span class="mu-pp mu-up">+2.3</span><span class="mu-games">3,400 局</span></li>
+  <li><a href="/heroes/lone-druid.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lone_druid.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">独行德鲁伊</a><span class="mu-pp mu-up">+1.8</span><span class="mu-games">7,200 局</span></li>
+  <li><a href="/heroes/sand-king.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">6,900 局</span></li>
+  <li><a href="/heroes/bristleback.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">1.4 万局</span></li>
+  <li><a href="/heroes/oracle.html"><img class="ic-row-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="36" height="20" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者</a><span class="mu-pp mu-up">+1.5</span><span class="mu-games">4,700 局</span></li>
 </ol></div>
 </div>
 <p class="mu-note">选人时想按双方阵容实时算：<a href="/bp/">手机版 BP 推荐</a>，或在电脑客户端里打开 BP 面板。</p>
@@ -164,14 +175,14 @@
 <table class="table">
   <thead><tr><th>装备</th><th>出场次数</th></tr></thead>
   <tbody>
-    <tr><td><a href="/items/branches.html">铁树枝干</a></td><td>188</td></tr>
-    <tr><td><a href="/items/tango.html">树之祭祀</a></td><td>105</td></tr>
-    <tr><td><a href="/items/ward-dispenser.html">侦察·岗哨守卫</a></td><td>100</td></tr>
-    <tr><td><a href="/items/blood-grenade.html">血腥榴弹</a></td><td>99</td></tr>
-    <tr><td><a href="/items/faerie-fire.html">仙灵之火</a></td><td>97</td></tr>
-    <tr><td><a href="/items/ward-sentry.html">岗哨守卫</a></td><td>61</td></tr>
-    <tr><td><a href="/items/circlet.html">圆环</a></td><td>52</td></tr>
-    <tr><td><a href="/items/smoke-of-deceit.html">诡计之雾</a></td><td>34</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/branches.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/branches.html">铁树枝干</a></td><td>188</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/tango.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/tango.html">树之祭祀</a></td><td>105</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/ward_dispenser.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/ward-dispenser.html">侦察·岗哨守卫</a></td><td>100</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/blood_grenade.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/blood-grenade.html">血腥榴弹</a></td><td>99</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/faerie_fire.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/faerie-fire.html">仙灵之火</a></td><td>97</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/ward_sentry.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/ward-sentry.html">岗哨守卫</a></td><td>61</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/circlet.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/circlet.html">圆环</a></td><td>52</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/smoke_of_deceit.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/smoke-of-deceit.html">诡计之雾</a></td><td>34</td></tr>
   </tbody>
 </table>
 
@@ -179,11 +190,11 @@
 <table class="table">
   <thead><tr><th>装备</th><th>出场次数</th></tr></thead>
   <tbody>
-    <tr><td><a href="/items/boots.html">速度之靴</a></td><td>95</td></tr>
-    <tr><td><a href="/items/urn-of-shadows.html">影之灵龛</a></td><td>13</td></tr>
-    <tr><td><a href="/items/power-treads.html">动力鞋</a></td><td>1</td></tr>
-    <tr><td><a href="/items/wraith-band.html">怨灵系带</a></td><td>1</td></tr>
-    <tr><td><a href="/items/arcane-boots.html">奥术鞋</a></td><td>1</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/boots.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/boots.html">速度之靴</a></td><td>95</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/urn_of_shadows.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/urn-of-shadows.html">影之灵龛</a></td><td>13</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/power_treads.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/power-treads.html">动力鞋</a></td><td>1</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/wraith_band.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/wraith-band.html">怨灵系带</a></td><td>1</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/arcane_boots.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/arcane-boots.html">奥术鞋</a></td><td>1</td></tr>
   </tbody>
 </table>
 
@@ -191,14 +202,14 @@
 <table class="table">
   <thead><tr><th>装备</th><th>出场次数</th></tr></thead>
   <tbody>
-    <tr><td><a href="/items/essence-distiller.html">精之灵器</a></td><td>60</td></tr>
-    <tr><td><a href="/items/arcane-boots.html">奥术鞋</a></td><td>36</td></tr>
-    <tr><td><a href="/items/staff-of-wizardry.html">魔力法杖</a></td><td>35</td></tr>
-    <tr><td><a href="/items/force-staff.html">原力法杖</a></td><td>18</td></tr>
-    <tr><td><a href="/items/blink.html">闪烁匕首</a></td><td>17</td></tr>
-    <tr><td><a href="/items/aghanims-shard.html">阿哈利姆魔晶</a></td><td>11</td></tr>
-    <tr><td><a href="/items/power-treads.html">动力鞋</a></td><td>9</td></tr>
-    <tr><td><a href="/items/cyclone.html">Eul的神圣法杖</a></td><td>8</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/essence_distiller.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/essence-distiller.html">精之灵器</a></td><td>60</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/arcane_boots.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/arcane-boots.html">奥术鞋</a></td><td>36</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/staff_of_wizardry.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/staff-of-wizardry.html">魔力法杖</a></td><td>35</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/force_staff.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/force-staff.html">原力法杖</a></td><td>18</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/blink.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/blink.html">闪烁匕首</a></td><td>17</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/aghanims_shard.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/aghanims-shard.html">阿哈利姆魔晶</a></td><td>11</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/power_treads.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/power-treads.html">动力鞋</a></td><td>9</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/cyclone.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/cyclone.html">Eul的神圣法杖</a></td><td>8</td></tr>
   </tbody>
 </table>
 
@@ -206,14 +217,14 @@
 <table class="table">
   <thead><tr><th>装备</th><th>出场次数</th></tr></thead>
   <tbody>
-    <tr><td><a href="/items/blink.html">闪烁匕首</a></td><td>37</td></tr>
-    <tr><td><a href="/items/mystic-staff.html">神秘法杖</a></td><td>28</td></tr>
-    <tr><td><a href="/items/force-staff.html">原力法杖</a></td><td>26</td></tr>
-    <tr><td><a href="/items/cyclone.html">Eul的神圣法杖</a></td><td>20</td></tr>
-    <tr><td><a href="/items/sheepstick.html">邪恶镰刀</a></td><td>16</td></tr>
-    <tr><td><a href="/items/glimmer-cape.html">微光披风</a></td><td>12</td></tr>
-    <tr><td><a href="/items/wind-waker.html">风之杖</a></td><td>9</td></tr>
-    <tr><td><a href="/items/travel-boots.html">远行鞋</a></td><td>5</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/blink.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/blink.html">闪烁匕首</a></td><td>37</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/mystic_staff.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/mystic-staff.html">神秘法杖</a></td><td>28</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/force_staff.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/force-staff.html">原力法杖</a></td><td>26</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/cyclone.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/cyclone.html">Eul的神圣法杖</a></td><td>20</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/sheepstick.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/sheepstick.html">邪恶镰刀</a></td><td>16</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/glimmer_cape.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/glimmer-cape.html">微光披风</a></td><td>12</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/wind_waker.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/wind-waker.html">风之杖</a></td><td>9</td></tr>
+    <tr><td><img class="ic-row" src="https://cdn.amefys.com/item-art/v1/travel_boots.webp" width="30" height="22" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'"><a href="/items/travel-boots.html">远行鞋</a></td><td>5</td></tr>
   </tbody>
 </table>
 <h2>关于 AMEFYS 实时建议</h2>
@@ -222,18 +233,18 @@
 
 <h2>同类英雄</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/bane.html">祸乱之源</a></li>
-  <li><a href="/heroes/crystal-maiden.html">水晶室女</a></li>
-  <li><a href="/heroes/earthshaker.html">撼地者</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/lina.html">莉娜</a></li>
-  <li><a href="/heroes/lion.html">莱恩</a></li>
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/witch-doctor.html">巫医</a></li>
+  <li><a class="has-img" href="/heroes/bane.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bane.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祸乱之源</a></li>
+  <li><a class="has-img" href="/heroes/crystal-maiden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/crystal_maiden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">水晶室女</a></li>
+  <li><a class="has-img" href="/heroes/earthshaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earthshaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撼地者</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/lina.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lina.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莉娜</a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/witch-doctor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/witch_doctor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫医</a></li>
 </ul>
 
 <p class="disclaimer">数据快照 · 2026-10-04。克制与搭档来自 OpenDota 公开天梯对局，2026-09-26 至 2026-10-02。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>

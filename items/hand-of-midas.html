@@ -89,19 +89,30 @@
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -122,7 +133,7 @@
 <main class="wrap">
 
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/items/">装备列表</a> · 迈达斯之手</div>
-<h1>迈达斯之手</h1>
+<div class="page-head"><img class="art-item" src="https://cdn.amefys.com/item-art/v1/hand_of_midas.webp" width="66" height="48" alt="" decoding="async" onerror="this.style.visibility='hidden'"><h1>迈达斯之手</h1></div>
 <p class="tagline">Hand of Midas · 也叫迈达斯、点金手、点金、团队之手 · 基础 · 价格 2200 金</p>
 <div class="meta-grid">
   <div class="meta-cell"><div class="meta-label">类别</div><div class="meta-value">基础</div></div>
@@ -130,12 +141,12 @@
 </div>
 <h2>哪些英雄常出迈达斯之手</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/arc-warden.html">天穹守望者</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">88 场</span></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">45 场</span></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">35 场</span></li>
-  <li><a href="/heroes/spectre.html">幽鬼</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">9 场</span></li>
-  <li><a href="/heroes/lion.html">莱恩</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">1 场</span></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">1 场</span></li>
+  <li><a class="has-img" href="/heroes/arc-warden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/arc_warden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天穹守望者<span class="cnt">88 场</span></a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙<span class="cnt">45 场</span></a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师<span class="cnt">35 场</span></a></li>
+  <li><a class="has-img" href="/heroes/spectre.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spectre.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幽鬼<span class="cnt">9 场</span></a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩<span class="cnt">1 场</span></a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士<span class="cnt">1 场</span></a></li>
 </ul>
 <h2>关键道具实时提醒</h2>
 <p>AMEFYS 桌面助手通过 DOTA 2 官方 GSI 接口实时跟踪你的装备栏，在迈达斯之手等关键道具做出来的那一刻提醒你，不错过发力期。所有数据来自官方接口，不修改任何游戏内容。</p>

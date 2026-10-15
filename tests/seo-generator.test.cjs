@@ -132,3 +132,42 @@ test('hero and item pages carry a BreadcrumbList that parses', async () => {
     assert.equal(ld.itemListElement[0].item, 'https://amefys.com/')
   }
 })
+
+// 2026-10-15: a data refresh used to stamp today's date on every URL in the
+// sitemap, blog posts and the home page included.
+test('sitemap: only generated pages get a new lastmod', async () => {
+  const { renderSitemap, previousLastmods } = await load()
+  const prev = previousLastmods(
+    '<url><loc>https://amefys.com/blog/amefys-architecture.html</loc><lastmod>2026-10-14</lastmod></url>' +
+      '<url><loc>https://amefys.com/heroes/axe.html</loc><lastmod>2026-10-04</lastmod></url>'
+  )
+  const xml = renderSitemap(['axe'], [], prev)
+  const at = (loc) => xml.match(new RegExp(`<loc>${loc}</loc><lastmod>([^<]+)`))[1]
+  const today = new Date().toISOString().slice(0, 10)
+  assert.equal(at('https://amefys.com/blog/amefys-architecture.html'), '2026-10-14')
+  assert.equal(at('https://amefys.com/heroes/axe.html'), today)
+  assert.equal(at('https://amefys.com/about.html'), today, 'no previous date → build date')
+})
+
+// 2026-10-15: pages show item icons and hero portraits from our CDN — never
+// Valve's servers, which are slow or blocked in mainland China.
+test('pages carry images from cdn.amefys.com with a fixed size', async () => {
+  const { renderHeroPage, renderItemPage, renderItemIndex } = await load()
+  const pages = [
+    renderHeroPage(hero('npc_dota_hero_axe'), new Set(['blink'])),
+    renderItemPage(item('item_magic_stick')),
+    renderItemIndex([item('item_magic_stick')])
+  ]
+  for (const html of pages) {
+    const imgs = [...html.matchAll(/<img [^>]*>/g)].map((m) => m[0]).filter((t) => !t.includes('icon.svg'))
+    assert.ok(imgs.length > 0)
+    for (const t of imgs) {
+      assert.match(t, /src="https:\/\/cdn\.amefys\.com\/(item-art\/v1|hero-art\/v2\/portraits)\/[a-z0-9_]+\.webp"/)
+      assert.match(t, /width="\d+" height="\d+"/)
+      assert.match(t, /onerror=/)
+    }
+    assert.doesNotMatch(html, /steamstatic|akamai/)
+  }
+  assert.match(pages[1], /item-art\/v1\/magic_stick\.webp/)
+  assert.match(pages[0], /hero-art\/v2\/portraits\/axe\.webp/)
+})

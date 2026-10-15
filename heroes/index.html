@@ -89,19 +89,30 @@
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -127,525 +138,525 @@
 
 <h2>核心（72）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/gyrocopter.html">矮人直升机</a></li>
-  <li><a href="/heroes/night-stalker.html">暗夜魔王</a></li>
-  <li><a href="/heroes/weaver.html">编织者</a></li>
-  <li><a href="/heroes/morphling.html">变体精灵</a></li>
-  <li><a href="/heroes/tidehunter.html">潮汐猎人</a></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a></li>
-  <li><a href="/heroes/antimage.html">敌法师</a></li>
-  <li><a href="/heroes/lone-druid.html">独行德鲁伊</a></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/axe.html">斧王</a></li>
-  <li><a href="/heroes/bristleback.html">钢背兽</a></li>
-  <li><a href="/heroes/huskar.html">哈斯卡</a></li>
-  <li><a href="/heroes/phantom-assassin.html">幻影刺客</a></li>
-  <li><a href="/heroes/phantom-lancer.html">幻影长矛手</a></li>
-  <li><a href="/heroes/ember-spirit.html">灰烬之灵</a></li>
-  <li><a href="/heroes/chaos-knight.html">混沌骑士</a></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a></li>
-  <li><a href="/heroes/sniper.html">狙击手</a></li>
-  <li><a href="/heroes/troll-warlord.html">巨魔战将</a></li>
-  <li><a href="/heroes/legion-commander.html">军团指挥官</a></li>
-  <li><a href="/heroes/kez.html">凯</a></li>
-  <li><a href="/heroes/clinkz.html">克林克兹</a></li>
-  <li><a href="/heroes/terrorblade.html">恐怖利刃</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/leshrac.html">拉席克</a></li>
-  <li><a href="/heroes/lycan.html">狼人</a></li>
-  <li><a href="/heroes/razor.html">雷泽</a></li>
-  <li><a href="/heroes/riki.html">力丸</a></li>
-  <li><a href="/heroes/lina.html">莉娜</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/luna.html">露娜</a></li>
-  <li><a href="/heroes/mars.html">玛尔斯</a></li>
-  <li><a href="/heroes/marci.html">玛西</a></li>
-  <li><a href="/heroes/medusa.html">美杜莎</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/skeleton-king.html">冥魂大帝</a></li>
-  <li><a href="/heroes/viper.html">冥界亚龙</a></li>
-  <li><a href="/heroes/doom-bringer.html">末日使者</a></li>
-  <li><a href="/heroes/obsidian-destroyer.html">殁境神蚀者</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/dawnbreaker.html">破晓辰星</a></li>
-  <li><a href="/heroes/monkey-king.html">齐天大圣</a></li>
-  <li><a href="/heroes/invoker.html">祈求者</a></li>
-  <li><a href="/heroes/muerta.html">琼英碧灵</a></li>
-  <li><a href="/heroes/templar-assassin.html">圣堂刺客</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/life-stealer.html">噬魂鬼</a></li>
-  <li><a href="/heroes/slardar.html">斯拉达</a></li>
-  <li><a href="/heroes/slark.html">斯拉克</a></li>
-  <li><a href="/heroes/sven.html">斯温</a></li>
-  <li><a href="/heroes/death-prophet.html">死亡先知</a></li>
-  <li><a href="/heroes/arc-warden.html">天穹守望者</a></li>
-  <li><a href="/heroes/queenofpain.html">痛苦女王</a></li>
-  <li><a href="/heroes/necrolyte.html">瘟疫法师</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/ursa.html">熊战士</a></li>
-  <li><a href="/heroes/tinker.html">修补匠</a></li>
-  <li><a href="/heroes/faceless-void.html">虚空假面</a></li>
-  <li><a href="/heroes/void-spirit.html">虚无之灵</a></li>
-  <li><a href="/heroes/bloodseeker.html">血魔</a></li>
-  <li><a href="/heroes/abaddon.html">亚巴顿</a></li>
-  <li><a href="/heroes/nevermore.html">影魔</a></li>
-  <li><a href="/heroes/spectre.html">幽鬼</a></li>
-  <li><a href="/heroes/broodmother.html">育母蜘蛛</a></li>
-  <li><a href="/heroes/zuus.html">宙斯</a></li>
-  <li><a href="/heroes/juggernaut.html">主宰</a></li>
-  <li><a href="/heroes/drow-ranger.html">卓尔游侠</a></li>
-  <li><a href="/heroes/furion.html">自然先知</a></li>
+  <li><a class="has-img" href="/heroes/gyrocopter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/gyrocopter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">矮人直升机</a></li>
+  <li><a class="has-img" href="/heroes/night-stalker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/night_stalker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗夜魔王</a></li>
+  <li><a class="has-img" href="/heroes/weaver.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/weaver.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">编织者</a></li>
+  <li><a class="has-img" href="/heroes/morphling.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/morphling.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">变体精灵</a></li>
+  <li><a class="has-img" href="/heroes/tidehunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tidehunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">潮汐猎人</a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士</a></li>
+  <li><a class="has-img" href="/heroes/antimage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/antimage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">敌法师</a></li>
+  <li><a class="has-img" href="/heroes/lone-druid.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lone_druid.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">独行德鲁伊</a></li>
+  <li><a class="has-img" href="/heroes/storm-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/axe.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/axe.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斧王</a></li>
+  <li><a class="has-img" href="/heroes/bristleback.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a></li>
+  <li><a class="has-img" href="/heroes/huskar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/huskar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">哈斯卡</a></li>
+  <li><a class="has-img" href="/heroes/phantom-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影刺客</a></li>
+  <li><a class="has-img" href="/heroes/phantom-lancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_lancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影长矛手</a></li>
+  <li><a class="has-img" href="/heroes/ember-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ember_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灰烬之灵</a></li>
+  <li><a class="has-img" href="/heroes/chaos-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chaos_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">混沌骑士</a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙</a></li>
+  <li><a class="has-img" href="/heroes/sniper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sniper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狙击手</a></li>
+  <li><a class="has-img" href="/heroes/troll-warlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/troll_warlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨魔战将</a></li>
+  <li><a class="has-img" href="/heroes/legion-commander.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/legion_commander.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">军团指挥官</a></li>
+  <li><a class="has-img" href="/heroes/kez.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kez.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凯</a></li>
+  <li><a class="has-img" href="/heroes/clinkz.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/clinkz.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">克林克兹</a></li>
+  <li><a class="has-img" href="/heroes/terrorblade.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/terrorblade.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恐怖利刃</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/leshrac.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/leshrac.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉席克</a></li>
+  <li><a class="has-img" href="/heroes/lycan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lycan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狼人</a></li>
+  <li><a class="has-img" href="/heroes/razor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/razor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">雷泽</a></li>
+  <li><a class="has-img" href="/heroes/riki.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/riki.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">力丸</a></li>
+  <li><a class="has-img" href="/heroes/lina.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lina.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莉娜</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/spirit-breaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/luna.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/luna.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">露娜</a></li>
+  <li><a class="has-img" href="/heroes/mars.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mars.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛尔斯</a></li>
+  <li><a class="has-img" href="/heroes/marci.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/marci.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛西</a></li>
+  <li><a class="has-img" href="/heroes/medusa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/medusa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">美杜莎</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/skeleton-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skeleton_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥魂大帝</a></li>
+  <li><a class="has-img" href="/heroes/viper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/viper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥界亚龙</a></li>
+  <li><a class="has-img" href="/heroes/doom-bringer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/doom_bringer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">末日使者</a></li>
+  <li><a class="has-img" href="/heroes/obsidian-destroyer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/obsidian_destroyer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">殁境神蚀者</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/dawnbreaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dawnbreaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">破晓辰星</a></li>
+  <li><a class="has-img" href="/heroes/monkey-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/monkey_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">齐天大圣</a></li>
+  <li><a class="has-img" href="/heroes/invoker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/invoker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祈求者</a></li>
+  <li><a class="has-img" href="/heroes/muerta.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/muerta.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">琼英碧灵</a></li>
+  <li><a class="has-img" href="/heroes/templar-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/templar_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣堂刺客</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/life-stealer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/life_stealer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">噬魂鬼</a></li>
+  <li><a class="has-img" href="/heroes/slardar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slardar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉达</a></li>
+  <li><a class="has-img" href="/heroes/slark.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slark.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉克</a></li>
+  <li><a class="has-img" href="/heroes/sven.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sven.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯温</a></li>
+  <li><a class="has-img" href="/heroes/death-prophet.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/death_prophet.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">死亡先知</a></li>
+  <li><a class="has-img" href="/heroes/arc-warden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/arc_warden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天穹守望者</a></li>
+  <li><a class="has-img" href="/heroes/queenofpain.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/queenofpain.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">痛苦女王</a></li>
+  <li><a class="has-img" href="/heroes/necrolyte.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/necrolyte.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">瘟疫法师</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/ursa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ursa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">熊战士</a></li>
+  <li><a class="has-img" href="/heroes/tinker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tinker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">修补匠</a></li>
+  <li><a class="has-img" href="/heroes/faceless-void.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/faceless_void.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚空假面</a></li>
+  <li><a class="has-img" href="/heroes/void-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/void_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚无之灵</a></li>
+  <li><a class="has-img" href="/heroes/bloodseeker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bloodseeker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血魔</a></li>
+  <li><a class="has-img" href="/heroes/abaddon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abaddon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">亚巴顿</a></li>
+  <li><a class="has-img" href="/heroes/nevermore.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nevermore.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">影魔</a></li>
+  <li><a class="has-img" href="/heroes/spectre.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spectre.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幽鬼</a></li>
+  <li><a class="has-img" href="/heroes/broodmother.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/broodmother.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">育母蜘蛛</a></li>
+  <li><a class="has-img" href="/heroes/zuus.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/zuus.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">宙斯</a></li>
+  <li><a class="has-img" href="/heroes/juggernaut.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/juggernaut.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">主宰</a></li>
+  <li><a class="has-img" href="/heroes/drow-ranger.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/drow_ranger.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">卓尔游侠</a></li>
+  <li><a class="has-img" href="/heroes/furion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/furion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">自然先知</a></li>
 </ul>
 
 <h2>辅助（48）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/wisp.html">艾欧</a></li>
-  <li><a href="/heroes/shadow-demon.html">暗影恶魔</a></li>
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/ringmaster.html">百戏大王</a></li>
-  <li><a href="/heroes/undying.html">不朽尸王</a></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a></li>
-  <li><a href="/heroes/chen.html">陈</a></li>
-  <li><a href="/heroes/dazzle.html">戴泽</a></li>
-  <li><a href="/heroes/snapfire.html">电炎绝手</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/disruptor.html">干扰者</a></li>
-  <li><a href="/heroes/keeper-of-the-light.html">光之守卫</a></li>
-  <li><a href="/heroes/winter-wyvern.html">寒冬飞龙</a></li>
-  <li><a href="/heroes/earthshaker.html">撼地者</a></li>
-  <li><a href="/heroes/bane.html">祸乱之源</a></li>
-  <li><a href="/heroes/jakiro.html">杰奇洛</a></li>
-  <li><a href="/heroes/venomancer.html">剧毒术士</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/rubick.html">拉比克</a></li>
-  <li><a href="/heroes/leshrac.html">拉席克</a></li>
-  <li><a href="/heroes/lion.html">莱恩</a></li>
-  <li><a href="/heroes/largo.html">朗戈</a></li>
-  <li><a href="/heroes/lina.html">莉娜</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/marci.html">玛西</a></li>
-  <li><a href="/heroes/enchantress.html">魅惑魔女</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/skeleton-king.html">冥魂大帝</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/abyssal-underlord.html">孽主</a></li>
-  <li><a href="/heroes/omniknight.html">全能骑士</a></li>
-  <li><a href="/heroes/hoodwink.html">森海飞霞</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/oracle.html">神谕者</a></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a></li>
-  <li><a href="/heroes/warlock.html">术士</a></li>
-  <li><a href="/heroes/treant.html">树精卫士</a></li>
-  <li><a href="/heroes/crystal-maiden.html">水晶室女</a></li>
-  <li><a href="/heroes/skywrath-mage.html">天怒法师</a></li>
-  <li><a href="/heroes/grimstroke.html">天涯墨客</a></li>
-  <li><a href="/heroes/visage.html">维萨吉</a></li>
-  <li><a href="/heroes/lich.html">巫妖</a></li>
-  <li><a href="/heroes/witch-doctor.html">巫医</a></li>
-  <li><a href="/heroes/dark-willow.html">邪影芳灵</a></li>
-  <li><a href="/heroes/abaddon.html">亚巴顿</a></li>
-  <li><a href="/heroes/ancient-apparition.html">远古冰魄</a></li>
+  <li><a class="has-img" href="/heroes/wisp.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/wisp.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">艾欧</a></li>
+  <li><a class="has-img" href="/heroes/shadow-demon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_demon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影恶魔</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/ringmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ringmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">百戏大王</a></li>
+  <li><a class="has-img" href="/heroes/undying.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/undying.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">不朽尸王</a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士</a></li>
+  <li><a class="has-img" href="/heroes/chen.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chen.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">陈</a></li>
+  <li><a class="has-img" href="/heroes/dazzle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dazzle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">戴泽</a></li>
+  <li><a class="has-img" href="/heroes/snapfire.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/snapfire.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">电炎绝手</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/disruptor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/disruptor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">干扰者</a></li>
+  <li><a class="has-img" href="/heroes/keeper-of-the-light.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/keeper_of_the_light.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">光之守卫</a></li>
+  <li><a class="has-img" href="/heroes/winter-wyvern.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/winter_wyvern.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">寒冬飞龙</a></li>
+  <li><a class="has-img" href="/heroes/earthshaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earthshaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撼地者</a></li>
+  <li><a class="has-img" href="/heroes/bane.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bane.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祸乱之源</a></li>
+  <li><a class="has-img" href="/heroes/jakiro.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/jakiro.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">杰奇洛</a></li>
+  <li><a class="has-img" href="/heroes/venomancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/venomancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">剧毒术士</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/rubick.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rubick.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉比克</a></li>
+  <li><a class="has-img" href="/heroes/leshrac.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/leshrac.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉席克</a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩</a></li>
+  <li><a class="has-img" href="/heroes/largo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/largo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">朗戈</a></li>
+  <li><a class="has-img" href="/heroes/lina.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lina.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莉娜</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/marci.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/marci.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛西</a></li>
+  <li><a class="has-img" href="/heroes/enchantress.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enchantress.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魅惑魔女</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/skeleton-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skeleton_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥魂大帝</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/abyssal-underlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abyssal_underlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">孽主</a></li>
+  <li><a class="has-img" href="/heroes/omniknight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/omniknight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">全能骑士</a></li>
+  <li><a class="has-img" href="/heroes/hoodwink.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">森海飞霞</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/oracle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者</a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师</a></li>
+  <li><a class="has-img" href="/heroes/warlock.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/warlock.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">术士</a></li>
+  <li><a class="has-img" href="/heroes/treant.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/treant.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树精卫士</a></li>
+  <li><a class="has-img" href="/heroes/crystal-maiden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/crystal_maiden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">水晶室女</a></li>
+  <li><a class="has-img" href="/heroes/skywrath-mage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skywrath_mage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天怒法师</a></li>
+  <li><a class="has-img" href="/heroes/grimstroke.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/grimstroke.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天涯墨客</a></li>
+  <li><a class="has-img" href="/heroes/visage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/visage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">维萨吉</a></li>
+  <li><a class="has-img" href="/heroes/lich.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lich.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫妖</a></li>
+  <li><a class="has-img" href="/heroes/witch-doctor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/witch_doctor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫医</a></li>
+  <li><a class="has-img" href="/heroes/dark-willow.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_willow.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪影芳灵</a></li>
+  <li><a class="has-img" href="/heroes/abaddon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abaddon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">亚巴顿</a></li>
+  <li><a class="has-img" href="/heroes/ancient-apparition.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ancient_apparition.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远古冰魄</a></li>
 </ul>
 
 <h2>爆发（89）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/gyrocopter.html">矮人直升机</a></li>
-  <li><a href="/heroes/wisp.html">艾欧</a></li>
-  <li><a href="/heroes/night-stalker.html">暗夜魔王</a></li>
-  <li><a href="/heroes/shadow-demon.html">暗影恶魔</a></li>
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/ringmaster.html">百戏大王</a></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a></li>
-  <li><a href="/heroes/morphling.html">变体精灵</a></li>
-  <li><a href="/heroes/undying.html">不朽尸王</a></li>
-  <li><a href="/heroes/tidehunter.html">潮汐猎人</a></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a></li>
-  <li><a href="/heroes/earth-spirit.html">大地之灵</a></li>
-  <li><a href="/heroes/dazzle.html">戴泽</a></li>
-  <li><a href="/heroes/antimage.html">敌法师</a></li>
-  <li><a href="/heroes/snapfire.html">电炎绝手</a></li>
-  <li><a href="/heroes/rattletrap.html">发条技师</a></li>
-  <li><a href="/heroes/shredder.html">伐木机</a></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/disruptor.html">干扰者</a></li>
-  <li><a href="/heroes/bristleback.html">钢背兽</a></li>
-  <li><a href="/heroes/techies.html">工程师</a></li>
-  <li><a href="/heroes/keeper-of-the-light.html">光之守卫</a></li>
-  <li><a href="/heroes/winter-wyvern.html">寒冬飞龙</a></li>
-  <li><a href="/heroes/earthshaker.html">撼地者</a></li>
-  <li><a href="/heroes/phantom-lancer.html">幻影长矛手</a></li>
-  <li><a href="/heroes/ember-spirit.html">灰烬之灵</a></li>
-  <li><a href="/heroes/bane.html">祸乱之源</a></li>
-  <li><a href="/heroes/jakiro.html">杰奇洛</a></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a></li>
-  <li><a href="/heroes/sniper.html">狙击手</a></li>
-  <li><a href="/heroes/tusk.html">巨牙海民</a></li>
-  <li><a href="/heroes/venomancer.html">剧毒术士</a></li>
-  <li><a href="/heroes/legion-commander.html">军团指挥官</a></li>
-  <li><a href="/heroes/terrorblade.html">恐怖利刃</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/rubick.html">拉比克</a></li>
-  <li><a href="/heroes/leshrac.html">拉席克</a></li>
-  <li><a href="/heroes/lion.html">莱恩</a></li>
-  <li><a href="/heroes/razor.html">雷泽</a></li>
-  <li><a href="/heroes/lina.html">莉娜</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/luna.html">露娜</a></li>
-  <li><a href="/heroes/magnataur.html">马格纳斯</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/doom-bringer.html">末日使者</a></li>
-  <li><a href="/heroes/obsidian-destroyer.html">殁境神蚀者</a></li>
-  <li><a href="/heroes/abyssal-underlord.html">孽主</a></li>
-  <li><a href="/heroes/pugna.html">帕格纳</a></li>
-  <li><a href="/heroes/pudge.html">帕吉</a></li>
-  <li><a href="/heroes/puck.html">帕克</a></li>
-  <li><a href="/heroes/invoker.html">祈求者</a></li>
-  <li><a href="/heroes/muerta.html">琼英碧灵</a></li>
-  <li><a href="/heroes/omniknight.html">全能骑士</a></li>
-  <li><a href="/heroes/hoodwink.html">森海飞霞</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/bounty-hunter.html">赏金猎人</a></li>
-  <li><a href="/heroes/elder-titan.html">上古巨神</a></li>
-  <li><a href="/heroes/oracle.html">神谕者</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a></li>
-  <li><a href="/heroes/beastmaster.html">兽王</a></li>
-  <li><a href="/heroes/crystal-maiden.html">水晶室女</a></li>
-  <li><a href="/heroes/nyx-assassin.html">司夜刺客</a></li>
-  <li><a href="/heroes/slark.html">斯拉克</a></li>
-  <li><a href="/heroes/sven.html">斯温</a></li>
-  <li><a href="/heroes/death-prophet.html">死亡先知</a></li>
-  <li><a href="/heroes/skywrath-mage.html">天怒法师</a></li>
-  <li><a href="/heroes/arc-warden.html">天穹守望者</a></li>
-  <li><a href="/heroes/grimstroke.html">天涯墨客</a></li>
-  <li><a href="/heroes/queenofpain.html">痛苦女王</a></li>
-  <li><a href="/heroes/visage.html">维萨吉</a></li>
-  <li><a href="/heroes/necrolyte.html">瘟疫法师</a></li>
-  <li><a href="/heroes/lich.html">巫妖</a></li>
-  <li><a href="/heroes/witch-doctor.html">巫医</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/dark-willow.html">邪影芳灵</a></li>
-  <li><a href="/heroes/tinker.html">修补匠</a></li>
-  <li><a href="/heroes/void-spirit.html">虚无之灵</a></li>
-  <li><a href="/heroes/bloodseeker.html">血魔</a></li>
-  <li><a href="/heroes/nevermore.html">影魔</a></li>
-  <li><a href="/heroes/broodmother.html">育母蜘蛛</a></li>
-  <li><a href="/heroes/ancient-apparition.html">远古冰魄</a></li>
-  <li><a href="/heroes/zuus.html">宙斯</a></li>
-  <li><a href="/heroes/furion.html">自然先知</a></li>
+  <li><a class="has-img" href="/heroes/gyrocopter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/gyrocopter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">矮人直升机</a></li>
+  <li><a class="has-img" href="/heroes/wisp.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/wisp.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">艾欧</a></li>
+  <li><a class="has-img" href="/heroes/night-stalker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/night_stalker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗夜魔王</a></li>
+  <li><a class="has-img" href="/heroes/shadow-demon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_demon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影恶魔</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/ringmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ringmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">百戏大王</a></li>
+  <li><a class="has-img" href="/heroes/centaur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a></li>
+  <li><a class="has-img" href="/heroes/morphling.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/morphling.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">变体精灵</a></li>
+  <li><a class="has-img" href="/heroes/undying.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/undying.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">不朽尸王</a></li>
+  <li><a class="has-img" href="/heroes/tidehunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tidehunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">潮汐猎人</a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士</a></li>
+  <li><a class="has-img" href="/heroes/earth-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earth_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大地之灵</a></li>
+  <li><a class="has-img" href="/heroes/dazzle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dazzle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">戴泽</a></li>
+  <li><a class="has-img" href="/heroes/antimage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/antimage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">敌法师</a></li>
+  <li><a class="has-img" href="/heroes/snapfire.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/snapfire.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">电炎绝手</a></li>
+  <li><a class="has-img" href="/heroes/rattletrap.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rattletrap.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">发条技师</a></li>
+  <li><a class="has-img" href="/heroes/shredder.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shredder.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">伐木机</a></li>
+  <li><a class="has-img" href="/heroes/storm-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/disruptor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/disruptor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">干扰者</a></li>
+  <li><a class="has-img" href="/heroes/bristleback.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a></li>
+  <li><a class="has-img" href="/heroes/techies.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/techies.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">工程师</a></li>
+  <li><a class="has-img" href="/heroes/keeper-of-the-light.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/keeper_of_the_light.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">光之守卫</a></li>
+  <li><a class="has-img" href="/heroes/winter-wyvern.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/winter_wyvern.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">寒冬飞龙</a></li>
+  <li><a class="has-img" href="/heroes/earthshaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earthshaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撼地者</a></li>
+  <li><a class="has-img" href="/heroes/phantom-lancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_lancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影长矛手</a></li>
+  <li><a class="has-img" href="/heroes/ember-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ember_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灰烬之灵</a></li>
+  <li><a class="has-img" href="/heroes/bane.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bane.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祸乱之源</a></li>
+  <li><a class="has-img" href="/heroes/jakiro.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/jakiro.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">杰奇洛</a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙</a></li>
+  <li><a class="has-img" href="/heroes/sniper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sniper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狙击手</a></li>
+  <li><a class="has-img" href="/heroes/tusk.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tusk.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨牙海民</a></li>
+  <li><a class="has-img" href="/heroes/venomancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/venomancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">剧毒术士</a></li>
+  <li><a class="has-img" href="/heroes/legion-commander.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/legion_commander.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">军团指挥官</a></li>
+  <li><a class="has-img" href="/heroes/terrorblade.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/terrorblade.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恐怖利刃</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/rubick.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rubick.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉比克</a></li>
+  <li><a class="has-img" href="/heroes/leshrac.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/leshrac.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉席克</a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩</a></li>
+  <li><a class="has-img" href="/heroes/razor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/razor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">雷泽</a></li>
+  <li><a class="has-img" href="/heroes/lina.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lina.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莉娜</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/luna.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/luna.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">露娜</a></li>
+  <li><a class="has-img" href="/heroes/magnataur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/magnataur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">马格纳斯</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/doom-bringer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/doom_bringer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">末日使者</a></li>
+  <li><a class="has-img" href="/heroes/obsidian-destroyer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/obsidian_destroyer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">殁境神蚀者</a></li>
+  <li><a class="has-img" href="/heroes/abyssal-underlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abyssal_underlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">孽主</a></li>
+  <li><a class="has-img" href="/heroes/pugna.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pugna.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕格纳</a></li>
+  <li><a class="has-img" href="/heroes/pudge.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pudge.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕吉</a></li>
+  <li><a class="has-img" href="/heroes/puck.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/puck.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕克</a></li>
+  <li><a class="has-img" href="/heroes/invoker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/invoker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祈求者</a></li>
+  <li><a class="has-img" href="/heroes/muerta.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/muerta.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">琼英碧灵</a></li>
+  <li><a class="has-img" href="/heroes/omniknight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/omniknight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">全能骑士</a></li>
+  <li><a class="has-img" href="/heroes/hoodwink.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">森海飞霞</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/bounty-hunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bounty_hunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">赏金猎人</a></li>
+  <li><a class="has-img" href="/heroes/elder-titan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/elder_titan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">上古巨神</a></li>
+  <li><a class="has-img" href="/heroes/oracle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师</a></li>
+  <li><a class="has-img" href="/heroes/beastmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/beastmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">兽王</a></li>
+  <li><a class="has-img" href="/heroes/crystal-maiden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/crystal_maiden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">水晶室女</a></li>
+  <li><a class="has-img" href="/heroes/nyx-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nyx_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">司夜刺客</a></li>
+  <li><a class="has-img" href="/heroes/slark.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slark.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉克</a></li>
+  <li><a class="has-img" href="/heroes/sven.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sven.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯温</a></li>
+  <li><a class="has-img" href="/heroes/death-prophet.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/death_prophet.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">死亡先知</a></li>
+  <li><a class="has-img" href="/heroes/skywrath-mage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skywrath_mage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天怒法师</a></li>
+  <li><a class="has-img" href="/heroes/arc-warden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/arc_warden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天穹守望者</a></li>
+  <li><a class="has-img" href="/heroes/grimstroke.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/grimstroke.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天涯墨客</a></li>
+  <li><a class="has-img" href="/heroes/queenofpain.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/queenofpain.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">痛苦女王</a></li>
+  <li><a class="has-img" href="/heroes/visage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/visage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">维萨吉</a></li>
+  <li><a class="has-img" href="/heroes/necrolyte.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/necrolyte.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">瘟疫法师</a></li>
+  <li><a class="has-img" href="/heroes/lich.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lich.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫妖</a></li>
+  <li><a class="has-img" href="/heroes/witch-doctor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/witch_doctor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫医</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/dark-willow.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_willow.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪影芳灵</a></li>
+  <li><a class="has-img" href="/heroes/tinker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tinker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">修补匠</a></li>
+  <li><a class="has-img" href="/heroes/void-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/void_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚无之灵</a></li>
+  <li><a class="has-img" href="/heroes/bloodseeker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bloodseeker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血魔</a></li>
+  <li><a class="has-img" href="/heroes/nevermore.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nevermore.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">影魔</a></li>
+  <li><a class="has-img" href="/heroes/broodmother.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/broodmother.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">育母蜘蛛</a></li>
+  <li><a class="has-img" href="/heroes/ancient-apparition.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ancient_apparition.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远古冰魄</a></li>
+  <li><a class="has-img" href="/heroes/zuus.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/zuus.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">宙斯</a></li>
+  <li><a class="has-img" href="/heroes/furion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/furion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">自然先知</a></li>
 </ul>
 
 <h2>控制（95）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/gyrocopter.html">矮人直升机</a></li>
-  <li><a href="/heroes/night-stalker.html">暗夜魔王</a></li>
-  <li><a href="/heroes/shadow-demon.html">暗影恶魔</a></li>
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/ringmaster.html">百戏大王</a></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a></li>
-  <li><a href="/heroes/batrider.html">蝙蝠骑士</a></li>
-  <li><a href="/heroes/morphling.html">变体精灵</a></li>
-  <li><a href="/heroes/undying.html">不朽尸王</a></li>
-  <li><a href="/heroes/tidehunter.html">潮汐猎人</a></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a></li>
-  <li><a href="/heroes/earth-spirit.html">大地之灵</a></li>
-  <li><a href="/heroes/dazzle.html">戴泽</a></li>
-  <li><a href="/heroes/snapfire.html">电炎绝手</a></li>
-  <li><a href="/heroes/rattletrap.html">发条技师</a></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a></li>
-  <li><a href="/heroes/axe.html">斧王</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/disruptor.html">干扰者</a></li>
-  <li><a href="/heroes/techies.html">工程师</a></li>
-  <li><a href="/heroes/keeper-of-the-light.html">光之守卫</a></li>
-  <li><a href="/heroes/winter-wyvern.html">寒冬飞龙</a></li>
-  <li><a href="/heroes/earthshaker.html">撼地者</a></li>
-  <li><a href="/heroes/dark-seer.html">黑暗贤者</a></li>
-  <li><a href="/heroes/ember-spirit.html">灰烬之灵</a></li>
-  <li><a href="/heroes/chaos-knight.html">混沌骑士</a></li>
-  <li><a href="/heroes/bane.html">祸乱之源</a></li>
-  <li><a href="/heroes/jakiro.html">杰奇洛</a></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a></li>
-  <li><a href="/heroes/troll-warlord.html">巨魔战将</a></li>
-  <li><a href="/heroes/tusk.html">巨牙海民</a></li>
-  <li><a href="/heroes/venomancer.html">剧毒术士</a></li>
-  <li><a href="/heroes/legion-commander.html">军团指挥官</a></li>
-  <li><a href="/heroes/kez.html">凯</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/rubick.html">拉比克</a></li>
-  <li><a href="/heroes/leshrac.html">拉席克</a></li>
-  <li><a href="/heroes/lion.html">莱恩</a></li>
-  <li><a href="/heroes/largo.html">朗戈</a></li>
-  <li><a href="/heroes/riki.html">力丸</a></li>
-  <li><a href="/heroes/lina.html">莉娜</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/magnataur.html">马格纳斯</a></li>
-  <li><a href="/heroes/mars.html">玛尔斯</a></li>
-  <li><a href="/heroes/marci.html">玛西</a></li>
-  <li><a href="/heroes/medusa.html">美杜莎</a></li>
-  <li><a href="/heroes/enchantress.html">魅惑魔女</a></li>
-  <li><a href="/heroes/enigma.html">谜团</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/skeleton-king.html">冥魂大帝</a></li>
-  <li><a href="/heroes/viper.html">冥界亚龙</a></li>
-  <li><a href="/heroes/doom-bringer.html">末日使者</a></li>
-  <li><a href="/heroes/obsidian-destroyer.html">殁境神蚀者</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/abyssal-underlord.html">孽主</a></li>
-  <li><a href="/heroes/pudge.html">帕吉</a></li>
-  <li><a href="/heroes/puck.html">帕克</a></li>
-  <li><a href="/heroes/monkey-king.html">齐天大圣</a></li>
-  <li><a href="/heroes/invoker.html">祈求者</a></li>
-  <li><a href="/heroes/muerta.html">琼英碧灵</a></li>
-  <li><a href="/heroes/hoodwink.html">森海飞霞</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/elder-titan.html">上古巨神</a></li>
-  <li><a href="/heroes/oracle.html">神谕者</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a></li>
-  <li><a href="/heroes/life-stealer.html">噬魂鬼</a></li>
-  <li><a href="/heroes/beastmaster.html">兽王</a></li>
-  <li><a href="/heroes/primal-beast.html">獸</a></li>
-  <li><a href="/heroes/warlock.html">术士</a></li>
-  <li><a href="/heroes/treant.html">树精卫士</a></li>
-  <li><a href="/heroes/crystal-maiden.html">水晶室女</a></li>
-  <li><a href="/heroes/nyx-assassin.html">司夜刺客</a></li>
-  <li><a href="/heroes/slardar.html">斯拉达</a></li>
-  <li><a href="/heroes/slark.html">斯拉克</a></li>
-  <li><a href="/heroes/sven.html">斯温</a></li>
-  <li><a href="/heroes/death-prophet.html">死亡先知</a></li>
-  <li><a href="/heroes/skywrath-mage.html">天怒法师</a></li>
-  <li><a href="/heroes/grimstroke.html">天涯墨客</a></li>
-  <li><a href="/heroes/visage.html">维萨吉</a></li>
-  <li><a href="/heroes/necrolyte.html">瘟疫法师</a></li>
-  <li><a href="/heroes/witch-doctor.html">巫医</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/dark-willow.html">邪影芳灵</a></li>
-  <li><a href="/heroes/ursa.html">熊战士</a></li>
-  <li><a href="/heroes/faceless-void.html">虚空假面</a></li>
-  <li><a href="/heroes/void-spirit.html">虚无之灵</a></li>
-  <li><a href="/heroes/bloodseeker.html">血魔</a></li>
-  <li><a href="/heroes/ancient-apparition.html">远古冰魄</a></li>
-  <li><a href="/heroes/drow-ranger.html">卓尔游侠</a></li>
+  <li><a class="has-img" href="/heroes/gyrocopter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/gyrocopter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">矮人直升机</a></li>
+  <li><a class="has-img" href="/heroes/night-stalker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/night_stalker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗夜魔王</a></li>
+  <li><a class="has-img" href="/heroes/shadow-demon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_demon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影恶魔</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/ringmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ringmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">百戏大王</a></li>
+  <li><a class="has-img" href="/heroes/centaur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a></li>
+  <li><a class="has-img" href="/heroes/batrider.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/batrider.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">蝙蝠骑士</a></li>
+  <li><a class="has-img" href="/heroes/morphling.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/morphling.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">变体精灵</a></li>
+  <li><a class="has-img" href="/heroes/undying.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/undying.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">不朽尸王</a></li>
+  <li><a class="has-img" href="/heroes/tidehunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tidehunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">潮汐猎人</a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士</a></li>
+  <li><a class="has-img" href="/heroes/earth-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earth_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大地之灵</a></li>
+  <li><a class="has-img" href="/heroes/dazzle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dazzle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">戴泽</a></li>
+  <li><a class="has-img" href="/heroes/snapfire.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/snapfire.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">电炎绝手</a></li>
+  <li><a class="has-img" href="/heroes/rattletrap.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rattletrap.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">发条技师</a></li>
+  <li><a class="has-img" href="/heroes/storm-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰</a></li>
+  <li><a class="has-img" href="/heroes/axe.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/axe.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斧王</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/disruptor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/disruptor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">干扰者</a></li>
+  <li><a class="has-img" href="/heroes/techies.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/techies.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">工程师</a></li>
+  <li><a class="has-img" href="/heroes/keeper-of-the-light.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/keeper_of_the_light.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">光之守卫</a></li>
+  <li><a class="has-img" href="/heroes/winter-wyvern.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/winter_wyvern.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">寒冬飞龙</a></li>
+  <li><a class="has-img" href="/heroes/earthshaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earthshaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撼地者</a></li>
+  <li><a class="has-img" href="/heroes/dark-seer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_seer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">黑暗贤者</a></li>
+  <li><a class="has-img" href="/heroes/ember-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ember_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灰烬之灵</a></li>
+  <li><a class="has-img" href="/heroes/chaos-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chaos_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">混沌骑士</a></li>
+  <li><a class="has-img" href="/heroes/bane.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bane.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祸乱之源</a></li>
+  <li><a class="has-img" href="/heroes/jakiro.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/jakiro.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">杰奇洛</a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙</a></li>
+  <li><a class="has-img" href="/heroes/troll-warlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/troll_warlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨魔战将</a></li>
+  <li><a class="has-img" href="/heroes/tusk.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tusk.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨牙海民</a></li>
+  <li><a class="has-img" href="/heroes/venomancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/venomancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">剧毒术士</a></li>
+  <li><a class="has-img" href="/heroes/legion-commander.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/legion_commander.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">军团指挥官</a></li>
+  <li><a class="has-img" href="/heroes/kez.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kez.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凯</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/rubick.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rubick.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉比克</a></li>
+  <li><a class="has-img" href="/heroes/leshrac.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/leshrac.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉席克</a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩</a></li>
+  <li><a class="has-img" href="/heroes/largo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/largo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">朗戈</a></li>
+  <li><a class="has-img" href="/heroes/riki.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/riki.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">力丸</a></li>
+  <li><a class="has-img" href="/heroes/lina.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lina.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莉娜</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/spirit-breaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/magnataur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/magnataur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">马格纳斯</a></li>
+  <li><a class="has-img" href="/heroes/mars.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mars.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛尔斯</a></li>
+  <li><a class="has-img" href="/heroes/marci.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/marci.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛西</a></li>
+  <li><a class="has-img" href="/heroes/medusa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/medusa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">美杜莎</a></li>
+  <li><a class="has-img" href="/heroes/enchantress.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enchantress.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魅惑魔女</a></li>
+  <li><a class="has-img" href="/heroes/enigma.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enigma.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">谜团</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/skeleton-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skeleton_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥魂大帝</a></li>
+  <li><a class="has-img" href="/heroes/viper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/viper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥界亚龙</a></li>
+  <li><a class="has-img" href="/heroes/doom-bringer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/doom_bringer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">末日使者</a></li>
+  <li><a class="has-img" href="/heroes/obsidian-destroyer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/obsidian_destroyer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">殁境神蚀者</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/abyssal-underlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abyssal_underlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">孽主</a></li>
+  <li><a class="has-img" href="/heroes/pudge.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pudge.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕吉</a></li>
+  <li><a class="has-img" href="/heroes/puck.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/puck.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕克</a></li>
+  <li><a class="has-img" href="/heroes/monkey-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/monkey_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">齐天大圣</a></li>
+  <li><a class="has-img" href="/heroes/invoker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/invoker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祈求者</a></li>
+  <li><a class="has-img" href="/heroes/muerta.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/muerta.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">琼英碧灵</a></li>
+  <li><a class="has-img" href="/heroes/hoodwink.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">森海飞霞</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/elder-titan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/elder_titan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">上古巨神</a></li>
+  <li><a class="has-img" href="/heroes/oracle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师</a></li>
+  <li><a class="has-img" href="/heroes/life-stealer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/life_stealer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">噬魂鬼</a></li>
+  <li><a class="has-img" href="/heroes/beastmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/beastmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">兽王</a></li>
+  <li><a class="has-img" href="/heroes/primal-beast.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/primal_beast.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">獸</a></li>
+  <li><a class="has-img" href="/heroes/warlock.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/warlock.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">术士</a></li>
+  <li><a class="has-img" href="/heroes/treant.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/treant.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树精卫士</a></li>
+  <li><a class="has-img" href="/heroes/crystal-maiden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/crystal_maiden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">水晶室女</a></li>
+  <li><a class="has-img" href="/heroes/nyx-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nyx_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">司夜刺客</a></li>
+  <li><a class="has-img" href="/heroes/slardar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slardar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉达</a></li>
+  <li><a class="has-img" href="/heroes/slark.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slark.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉克</a></li>
+  <li><a class="has-img" href="/heroes/sven.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sven.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯温</a></li>
+  <li><a class="has-img" href="/heroes/death-prophet.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/death_prophet.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">死亡先知</a></li>
+  <li><a class="has-img" href="/heroes/skywrath-mage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skywrath_mage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天怒法师</a></li>
+  <li><a class="has-img" href="/heroes/grimstroke.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/grimstroke.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天涯墨客</a></li>
+  <li><a class="has-img" href="/heroes/visage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/visage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">维萨吉</a></li>
+  <li><a class="has-img" href="/heroes/necrolyte.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/necrolyte.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">瘟疫法师</a></li>
+  <li><a class="has-img" href="/heroes/witch-doctor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/witch_doctor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫医</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/dark-willow.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_willow.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪影芳灵</a></li>
+  <li><a class="has-img" href="/heroes/ursa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ursa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">熊战士</a></li>
+  <li><a class="has-img" href="/heroes/faceless-void.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/faceless_void.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚空假面</a></li>
+  <li><a class="has-img" href="/heroes/void-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/void_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚无之灵</a></li>
+  <li><a class="has-img" href="/heroes/bloodseeker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bloodseeker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血魔</a></li>
+  <li><a class="has-img" href="/heroes/ancient-apparition.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ancient_apparition.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远古冰魄</a></li>
+  <li><a class="has-img" href="/heroes/drow-ranger.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/drow_ranger.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">卓尔游侠</a></li>
 </ul>
 
 <h2>先手（55）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/night-stalker.html">暗夜魔王</a></li>
-  <li><a href="/heroes/shadow-demon.html">暗影恶魔</a></li>
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a></li>
-  <li><a href="/heroes/batrider.html">蝙蝠骑士</a></li>
-  <li><a href="/heroes/tidehunter.html">潮汐猎人</a></li>
-  <li><a href="/heroes/silencer.html">沉默术士</a></li>
-  <li><a href="/heroes/earth-spirit.html">大地之灵</a></li>
-  <li><a href="/heroes/rattletrap.html">发条技师</a></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a></li>
-  <li><a href="/heroes/axe.html">斧王</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/disruptor.html">干扰者</a></li>
-  <li><a href="/heroes/bristleback.html">钢背兽</a></li>
-  <li><a href="/heroes/huskar.html">哈斯卡</a></li>
-  <li><a href="/heroes/earthshaker.html">撼地者</a></li>
-  <li><a href="/heroes/dark-seer.html">黑暗贤者</a></li>
-  <li><a href="/heroes/ember-spirit.html">灰烬之灵</a></li>
-  <li><a href="/heroes/chaos-knight.html">混沌骑士</a></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a></li>
-  <li><a href="/heroes/tusk.html">巨牙海民</a></li>
-  <li><a href="/heroes/venomancer.html">剧毒术士</a></li>
-  <li><a href="/heroes/legion-commander.html">军团指挥官</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/lion.html">莱恩</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/magnataur.html">马格纳斯</a></li>
-  <li><a href="/heroes/mars.html">玛尔斯</a></li>
-  <li><a href="/heroes/marci.html">玛西</a></li>
-  <li><a href="/heroes/enigma.html">谜团</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/skeleton-king.html">冥魂大帝</a></li>
-  <li><a href="/heroes/viper.html">冥界亚龙</a></li>
-  <li><a href="/heroes/doom-bringer.html">末日使者</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/pudge.html">帕吉</a></li>
-  <li><a href="/heroes/puck.html">帕克</a></li>
-  <li><a href="/heroes/monkey-king.html">齐天大圣</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/elder-titan.html">上古巨神</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a></li>
-  <li><a href="/heroes/beastmaster.html">兽王</a></li>
-  <li><a href="/heroes/primal-beast.html">獸</a></li>
-  <li><a href="/heroes/warlock.html">术士</a></li>
-  <li><a href="/heroes/treant.html">树精卫士</a></li>
-  <li><a href="/heroes/nyx-assassin.html">司夜刺客</a></li>
-  <li><a href="/heroes/slardar.html">斯拉达</a></li>
-  <li><a href="/heroes/sven.html">斯温</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/faceless-void.html">虚空假面</a></li>
-  <li><a href="/heroes/bloodseeker.html">血魔</a></li>
+  <li><a class="has-img" href="/heroes/night-stalker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/night_stalker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗夜魔王</a></li>
+  <li><a class="has-img" href="/heroes/shadow-demon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_demon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影恶魔</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/centaur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a></li>
+  <li><a class="has-img" href="/heroes/batrider.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/batrider.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">蝙蝠骑士</a></li>
+  <li><a class="has-img" href="/heroes/tidehunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tidehunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">潮汐猎人</a></li>
+  <li><a class="has-img" href="/heroes/silencer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/silencer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沉默术士</a></li>
+  <li><a class="has-img" href="/heroes/earth-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earth_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大地之灵</a></li>
+  <li><a class="has-img" href="/heroes/rattletrap.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rattletrap.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">发条技师</a></li>
+  <li><a class="has-img" href="/heroes/storm-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰</a></li>
+  <li><a class="has-img" href="/heroes/axe.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/axe.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斧王</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/disruptor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/disruptor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">干扰者</a></li>
+  <li><a class="has-img" href="/heroes/bristleback.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a></li>
+  <li><a class="has-img" href="/heroes/huskar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/huskar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">哈斯卡</a></li>
+  <li><a class="has-img" href="/heroes/earthshaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earthshaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撼地者</a></li>
+  <li><a class="has-img" href="/heroes/dark-seer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_seer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">黑暗贤者</a></li>
+  <li><a class="has-img" href="/heroes/ember-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ember_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灰烬之灵</a></li>
+  <li><a class="has-img" href="/heroes/chaos-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chaos_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">混沌骑士</a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙</a></li>
+  <li><a class="has-img" href="/heroes/tusk.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tusk.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨牙海民</a></li>
+  <li><a class="has-img" href="/heroes/venomancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/venomancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">剧毒术士</a></li>
+  <li><a class="has-img" href="/heroes/legion-commander.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/legion_commander.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">军团指挥官</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/lion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莱恩</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/spirit-breaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/magnataur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/magnataur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">马格纳斯</a></li>
+  <li><a class="has-img" href="/heroes/mars.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mars.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛尔斯</a></li>
+  <li><a class="has-img" href="/heroes/marci.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/marci.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛西</a></li>
+  <li><a class="has-img" href="/heroes/enigma.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enigma.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">谜团</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/skeleton-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skeleton_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥魂大帝</a></li>
+  <li><a class="has-img" href="/heroes/viper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/viper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥界亚龙</a></li>
+  <li><a class="has-img" href="/heroes/doom-bringer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/doom_bringer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">末日使者</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/pudge.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pudge.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕吉</a></li>
+  <li><a class="has-img" href="/heroes/puck.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/puck.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕克</a></li>
+  <li><a class="has-img" href="/heroes/monkey-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/monkey_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">齐天大圣</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/elder-titan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/elder_titan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">上古巨神</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师</a></li>
+  <li><a class="has-img" href="/heroes/beastmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/beastmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">兽王</a></li>
+  <li><a class="has-img" href="/heroes/primal-beast.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/primal_beast.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">獸</a></li>
+  <li><a class="has-img" href="/heroes/warlock.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/warlock.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">术士</a></li>
+  <li><a class="has-img" href="/heroes/treant.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/treant.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树精卫士</a></li>
+  <li><a class="has-img" href="/heroes/nyx-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nyx_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">司夜刺客</a></li>
+  <li><a class="has-img" href="/heroes/slardar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slardar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉达</a></li>
+  <li><a class="has-img" href="/heroes/sven.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sven.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯温</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/faceless-void.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/faceless_void.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚空假面</a></li>
+  <li><a class="has-img" href="/heroes/bloodseeker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bloodseeker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血魔</a></li>
 </ul>
 
 <h2>耐久（50）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/night-stalker.html">暗夜魔王</a></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a></li>
-  <li><a href="/heroes/morphling.html">变体精灵</a></li>
-  <li><a href="/heroes/undying.html">不朽尸王</a></li>
-  <li><a href="/heroes/tidehunter.html">潮汐猎人</a></li>
-  <li><a href="/heroes/earth-spirit.html">大地之灵</a></li>
-  <li><a href="/heroes/lone-druid.html">独行德鲁伊</a></li>
-  <li><a href="/heroes/rattletrap.html">发条技师</a></li>
-  <li><a href="/heroes/shredder.html">伐木机</a></li>
-  <li><a href="/heroes/axe.html">斧王</a></li>
-  <li><a href="/heroes/bristleback.html">钢背兽</a></li>
-  <li><a href="/heroes/huskar.html">哈斯卡</a></li>
-  <li><a href="/heroes/chaos-knight.html">混沌骑士</a></li>
-  <li><a href="/heroes/bane.html">祸乱之源</a></li>
-  <li><a href="/heroes/brewmaster.html">酒仙</a></li>
-  <li><a href="/heroes/troll-warlord.html">巨魔战将</a></li>
-  <li><a href="/heroes/legion-commander.html">军团指挥官</a></li>
-  <li><a href="/heroes/kunkka.html">昆卡</a></li>
-  <li><a href="/heroes/lycan.html">狼人</a></li>
-  <li><a href="/heroes/largo.html">朗戈</a></li>
-  <li><a href="/heroes/razor.html">雷泽</a></li>
-  <li><a href="/heroes/alchemist.html">炼金术士</a></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/mars.html">玛尔斯</a></li>
-  <li><a href="/heroes/medusa.html">美杜莎</a></li>
-  <li><a href="/heroes/enchantress.html">魅惑魔女</a></li>
-  <li><a href="/heroes/skeleton-king.html">冥魂大帝</a></li>
-  <li><a href="/heroes/viper.html">冥界亚龙</a></li>
-  <li><a href="/heroes/doom-bringer.html">末日使者</a></li>
-  <li><a href="/heroes/abyssal-underlord.html">孽主</a></li>
-  <li><a href="/heroes/pudge.html">帕吉</a></li>
-  <li><a href="/heroes/dawnbreaker.html">破晓辰星</a></li>
-  <li><a href="/heroes/omniknight.html">全能骑士</a></li>
-  <li><a href="/heroes/elder-titan.html">上古巨神</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/ogre-magi.html">食人魔魔法师</a></li>
-  <li><a href="/heroes/life-stealer.html">噬魂鬼</a></li>
-  <li><a href="/heroes/beastmaster.html">兽王</a></li>
-  <li><a href="/heroes/primal-beast.html">獸</a></li>
-  <li><a href="/heroes/treant.html">树精卫士</a></li>
-  <li><a href="/heroes/slardar.html">斯拉达</a></li>
-  <li><a href="/heroes/sven.html">斯温</a></li>
-  <li><a href="/heroes/visage.html">维萨吉</a></li>
-  <li><a href="/heroes/necrolyte.html">瘟疫法师</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/ursa.html">熊战士</a></li>
-  <li><a href="/heroes/faceless-void.html">虚空假面</a></li>
-  <li><a href="/heroes/abaddon.html">亚巴顿</a></li>
-  <li><a href="/heroes/spectre.html">幽鬼</a></li>
+  <li><a class="has-img" href="/heroes/night-stalker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/night_stalker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗夜魔王</a></li>
+  <li><a class="has-img" href="/heroes/centaur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a></li>
+  <li><a class="has-img" href="/heroes/morphling.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/morphling.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">变体精灵</a></li>
+  <li><a class="has-img" href="/heroes/undying.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/undying.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">不朽尸王</a></li>
+  <li><a class="has-img" href="/heroes/tidehunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tidehunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">潮汐猎人</a></li>
+  <li><a class="has-img" href="/heroes/earth-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earth_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大地之灵</a></li>
+  <li><a class="has-img" href="/heroes/lone-druid.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lone_druid.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">独行德鲁伊</a></li>
+  <li><a class="has-img" href="/heroes/rattletrap.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rattletrap.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">发条技师</a></li>
+  <li><a class="has-img" href="/heroes/shredder.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shredder.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">伐木机</a></li>
+  <li><a class="has-img" href="/heroes/axe.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/axe.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斧王</a></li>
+  <li><a class="has-img" href="/heroes/bristleback.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bristleback.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">钢背兽</a></li>
+  <li><a class="has-img" href="/heroes/huskar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/huskar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">哈斯卡</a></li>
+  <li><a class="has-img" href="/heroes/chaos-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chaos_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">混沌骑士</a></li>
+  <li><a class="has-img" href="/heroes/bane.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bane.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祸乱之源</a></li>
+  <li><a class="has-img" href="/heroes/brewmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/brewmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">酒仙</a></li>
+  <li><a class="has-img" href="/heroes/troll-warlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/troll_warlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨魔战将</a></li>
+  <li><a class="has-img" href="/heroes/legion-commander.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/legion_commander.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">军团指挥官</a></li>
+  <li><a class="has-img" href="/heroes/kunkka.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kunkka.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">昆卡</a></li>
+  <li><a class="has-img" href="/heroes/lycan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lycan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狼人</a></li>
+  <li><a class="has-img" href="/heroes/largo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/largo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">朗戈</a></li>
+  <li><a class="has-img" href="/heroes/razor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/razor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">雷泽</a></li>
+  <li><a class="has-img" href="/heroes/alchemist.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/alchemist.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炼金术士</a></li>
+  <li><a class="has-img" href="/heroes/spirit-breaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/mars.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mars.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛尔斯</a></li>
+  <li><a class="has-img" href="/heroes/medusa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/medusa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">美杜莎</a></li>
+  <li><a class="has-img" href="/heroes/enchantress.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enchantress.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魅惑魔女</a></li>
+  <li><a class="has-img" href="/heroes/skeleton-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/skeleton_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥魂大帝</a></li>
+  <li><a class="has-img" href="/heroes/viper.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/viper.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冥界亚龙</a></li>
+  <li><a class="has-img" href="/heroes/doom-bringer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/doom_bringer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">末日使者</a></li>
+  <li><a class="has-img" href="/heroes/abyssal-underlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abyssal_underlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">孽主</a></li>
+  <li><a class="has-img" href="/heroes/pudge.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pudge.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕吉</a></li>
+  <li><a class="has-img" href="/heroes/dawnbreaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dawnbreaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">破晓辰星</a></li>
+  <li><a class="has-img" href="/heroes/omniknight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/omniknight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">全能骑士</a></li>
+  <li><a class="has-img" href="/heroes/elder-titan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/elder_titan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">上古巨神</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/ogre-magi.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ogre_magi.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔魔法师</a></li>
+  <li><a class="has-img" href="/heroes/life-stealer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/life_stealer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">噬魂鬼</a></li>
+  <li><a class="has-img" href="/heroes/beastmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/beastmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">兽王</a></li>
+  <li><a class="has-img" href="/heroes/primal-beast.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/primal_beast.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">獸</a></li>
+  <li><a class="has-img" href="/heroes/treant.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/treant.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树精卫士</a></li>
+  <li><a class="has-img" href="/heroes/slardar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slardar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉达</a></li>
+  <li><a class="has-img" href="/heroes/sven.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sven.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯温</a></li>
+  <li><a class="has-img" href="/heroes/visage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/visage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">维萨吉</a></li>
+  <li><a class="has-img" href="/heroes/necrolyte.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/necrolyte.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">瘟疫法师</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/ursa.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ursa.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">熊战士</a></li>
+  <li><a class="has-img" href="/heroes/faceless-void.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/faceless_void.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚空假面</a></li>
+  <li><a class="has-img" href="/heroes/abaddon.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abaddon.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">亚巴顿</a></li>
+  <li><a class="has-img" href="/heroes/spectre.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spectre.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幽鬼</a></li>
 </ul>
 
 <h2>逃生（53）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/wisp.html">艾欧</a></li>
-  <li><a href="/heroes/ringmaster.html">百戏大王</a></li>
-  <li><a href="/heroes/centaur.html">半人马战行者</a></li>
-  <li><a href="/heroes/weaver.html">编织者</a></li>
-  <li><a href="/heroes/batrider.html">蝙蝠骑士</a></li>
-  <li><a href="/heroes/morphling.html">变体精灵</a></li>
-  <li><a href="/heroes/earth-spirit.html">大地之灵</a></li>
-  <li><a href="/heroes/antimage.html">敌法师</a></li>
-  <li><a href="/heroes/snapfire.html">电炎绝手</a></li>
-  <li><a href="/heroes/shredder.html">伐木机</a></li>
-  <li><a href="/heroes/storm-spirit.html">风暴之灵</a></li>
-  <li><a href="/heroes/windrunner.html">风行者</a></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a></li>
-  <li><a href="/heroes/vengefulspirit.html">复仇之魂</a></li>
-  <li><a href="/heroes/dark-seer.html">黑暗贤者</a></li>
-  <li><a href="/heroes/phantom-assassin.html">幻影刺客</a></li>
-  <li><a href="/heroes/phantom-lancer.html">幻影长矛手</a></li>
-  <li><a href="/heroes/ember-spirit.html">灰烬之灵</a></li>
-  <li><a href="/heroes/kez.html">凯</a></li>
-  <li><a href="/heroes/clinkz.html">克林克兹</a></li>
-  <li><a href="/heroes/lycan.html">狼人</a></li>
-  <li><a href="/heroes/riki.html">力丸</a></li>
-  <li><a href="/heroes/spirit-breaker.html">裂魂人</a></li>
-  <li><a href="/heroes/magnataur.html">马格纳斯</a></li>
-  <li><a href="/heroes/marci.html">玛西</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/abyssal-underlord.html">孽主</a></li>
-  <li><a href="/heroes/puck.html">帕克</a></li>
-  <li><a href="/heroes/monkey-king.html">齐天大圣</a></li>
-  <li><a href="/heroes/invoker.html">祈求者</a></li>
-  <li><a href="/heroes/hoodwink.html">森海飞霞</a></li>
-  <li><a href="/heroes/sand-king.html">沙王</a></li>
-  <li><a href="/heroes/bounty-hunter.html">赏金猎人</a></li>
-  <li><a href="/heroes/oracle.html">神谕者</a></li>
-  <li><a href="/heroes/templar-assassin.html">圣堂刺客</a></li>
-  <li><a href="/heroes/pangolier.html">石鳞剑士</a></li>
-  <li><a href="/heroes/life-stealer.html">噬魂鬼</a></li>
-  <li><a href="/heroes/treant.html">树精卫士</a></li>
-  <li><a href="/heroes/nyx-assassin.html">司夜刺客</a></li>
-  <li><a href="/heroes/slardar.html">斯拉达</a></li>
-  <li><a href="/heroes/slark.html">斯拉克</a></li>
-  <li><a href="/heroes/arc-warden.html">天穹守望者</a></li>
-  <li><a href="/heroes/grimstroke.html">天涯墨客</a></li>
-  <li><a href="/heroes/queenofpain.html">痛苦女王</a></li>
-  <li><a href="/heroes/dark-willow.html">邪影芳灵</a></li>
-  <li><a href="/heroes/faceless-void.html">虚空假面</a></li>
-  <li><a href="/heroes/void-spirit.html">虚无之灵</a></li>
-  <li><a href="/heroes/spectre.html">幽鬼</a></li>
-  <li><a href="/heroes/broodmother.html">育母蜘蛛</a></li>
-  <li><a href="/heroes/juggernaut.html">主宰</a></li>
-  <li><a href="/heroes/furion.html">自然先知</a></li>
+  <li><a class="has-img" href="/heroes/wisp.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/wisp.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">艾欧</a></li>
+  <li><a class="has-img" href="/heroes/ringmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ringmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">百戏大王</a></li>
+  <li><a class="has-img" href="/heroes/centaur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/centaur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">半人马战行者</a></li>
+  <li><a class="has-img" href="/heroes/weaver.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/weaver.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">编织者</a></li>
+  <li><a class="has-img" href="/heroes/batrider.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/batrider.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">蝙蝠骑士</a></li>
+  <li><a class="has-img" href="/heroes/morphling.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/morphling.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">变体精灵</a></li>
+  <li><a class="has-img" href="/heroes/earth-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/earth_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大地之灵</a></li>
+  <li><a class="has-img" href="/heroes/antimage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/antimage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">敌法师</a></li>
+  <li><a class="has-img" href="/heroes/snapfire.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/snapfire.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">电炎绝手</a></li>
+  <li><a class="has-img" href="/heroes/shredder.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shredder.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">伐木机</a></li>
+  <li><a class="has-img" href="/heroes/storm-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/storm_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风暴之灵</a></li>
+  <li><a class="has-img" href="/heroes/windrunner.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/windrunner.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风行者</a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰</a></li>
+  <li><a class="has-img" href="/heroes/vengefulspirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/vengefulspirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">复仇之魂</a></li>
+  <li><a class="has-img" href="/heroes/dark-seer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_seer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">黑暗贤者</a></li>
+  <li><a class="has-img" href="/heroes/phantom-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影刺客</a></li>
+  <li><a class="has-img" href="/heroes/phantom-lancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_lancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影长矛手</a></li>
+  <li><a class="has-img" href="/heroes/ember-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ember_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灰烬之灵</a></li>
+  <li><a class="has-img" href="/heroes/kez.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/kez.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凯</a></li>
+  <li><a class="has-img" href="/heroes/clinkz.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/clinkz.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">克林克兹</a></li>
+  <li><a class="has-img" href="/heroes/lycan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lycan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狼人</a></li>
+  <li><a class="has-img" href="/heroes/riki.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/riki.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">力丸</a></li>
+  <li><a class="has-img" href="/heroes/spirit-breaker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spirit_breaker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂魂人</a></li>
+  <li><a class="has-img" href="/heroes/magnataur.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/magnataur.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">马格纳斯</a></li>
+  <li><a class="has-img" href="/heroes/marci.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/marci.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玛西</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/abyssal-underlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/abyssal_underlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">孽主</a></li>
+  <li><a class="has-img" href="/heroes/puck.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/puck.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕克</a></li>
+  <li><a class="has-img" href="/heroes/monkey-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/monkey_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">齐天大圣</a></li>
+  <li><a class="has-img" href="/heroes/invoker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/invoker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祈求者</a></li>
+  <li><a class="has-img" href="/heroes/hoodwink.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">森海飞霞</a></li>
+  <li><a class="has-img" href="/heroes/sand-king.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/sand_king.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">沙王</a></li>
+  <li><a class="has-img" href="/heroes/bounty-hunter.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/bounty_hunter.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">赏金猎人</a></li>
+  <li><a class="has-img" href="/heroes/oracle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者</a></li>
+  <li><a class="has-img" href="/heroes/templar-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/templar_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣堂刺客</a></li>
+  <li><a class="has-img" href="/heroes/pangolier.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pangolier.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">石鳞剑士</a></li>
+  <li><a class="has-img" href="/heroes/life-stealer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/life_stealer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">噬魂鬼</a></li>
+  <li><a class="has-img" href="/heroes/treant.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/treant.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树精卫士</a></li>
+  <li><a class="has-img" href="/heroes/nyx-assassin.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/nyx_assassin.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">司夜刺客</a></li>
+  <li><a class="has-img" href="/heroes/slardar.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slardar.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉达</a></li>
+  <li><a class="has-img" href="/heroes/slark.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/slark.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯拉克</a></li>
+  <li><a class="has-img" href="/heroes/arc-warden.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/arc_warden.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天穹守望者</a></li>
+  <li><a class="has-img" href="/heroes/grimstroke.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/grimstroke.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天涯墨客</a></li>
+  <li><a class="has-img" href="/heroes/queenofpain.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/queenofpain.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">痛苦女王</a></li>
+  <li><a class="has-img" href="/heroes/dark-willow.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_willow.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪影芳灵</a></li>
+  <li><a class="has-img" href="/heroes/faceless-void.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/faceless_void.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚空假面</a></li>
+  <li><a class="has-img" href="/heroes/void-spirit.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/void_spirit.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚无之灵</a></li>
+  <li><a class="has-img" href="/heroes/spectre.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/spectre.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幽鬼</a></li>
+  <li><a class="has-img" href="/heroes/broodmother.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/broodmother.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">育母蜘蛛</a></li>
+  <li><a class="has-img" href="/heroes/juggernaut.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/juggernaut.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">主宰</a></li>
+  <li><a class="has-img" href="/heroes/furion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/furion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">自然先知</a></li>
 </ul>
 
 <h2>推进（29）</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/shadow-shaman.html">暗影萨满</a></li>
-  <li><a href="/heroes/chen.html">陈</a></li>
-  <li><a href="/heroes/lone-druid.html">独行德鲁伊</a></li>
-  <li><a href="/heroes/phantom-lancer.html">幻影长矛手</a></li>
-  <li><a href="/heroes/chaos-knight.html">混沌骑士</a></li>
-  <li><a href="/heroes/jakiro.html">杰奇洛</a></li>
-  <li><a href="/heroes/troll-warlord.html">巨魔战将</a></li>
-  <li><a href="/heroes/venomancer.html">剧毒术士</a></li>
-  <li><a href="/heroes/clinkz.html">克林克兹</a></li>
-  <li><a href="/heroes/terrorblade.html">恐怖利刃</a></li>
-  <li><a href="/heroes/leshrac.html">拉席克</a></li>
-  <li><a href="/heroes/lycan.html">狼人</a></li>
-  <li><a href="/heroes/razor.html">雷泽</a></li>
-  <li><a href="/heroes/dragon-knight.html">龙骑士</a></li>
-  <li><a href="/heroes/luna.html">露娜</a></li>
-  <li><a href="/heroes/enchantress.html">魅惑魔女</a></li>
-  <li><a href="/heroes/enigma.html">谜团</a></li>
-  <li><a href="/heroes/meepo.html">米波</a></li>
-  <li><a href="/heroes/naga-siren.html">娜迦海妖</a></li>
-  <li><a href="/heroes/pugna.html">帕格纳</a></li>
-  <li><a href="/heroes/invoker.html">祈求者</a></li>
-  <li><a href="/heroes/death-prophet.html">死亡先知</a></li>
-  <li><a href="/heroes/visage.html">维萨吉</a></li>
-  <li><a href="/heroes/tiny.html">小小</a></li>
-  <li><a href="/heroes/tinker.html">修补匠</a></li>
-  <li><a href="/heroes/broodmother.html">育母蜘蛛</a></li>
-  <li><a href="/heroes/juggernaut.html">主宰</a></li>
-  <li><a href="/heroes/drow-ranger.html">卓尔游侠</a></li>
-  <li><a href="/heroes/furion.html">自然先知</a></li>
+  <li><a class="has-img" href="/heroes/shadow-shaman.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/shadow_shaman.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影萨满</a></li>
+  <li><a class="has-img" href="/heroes/chen.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chen.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">陈</a></li>
+  <li><a class="has-img" href="/heroes/lone-druid.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lone_druid.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">独行德鲁伊</a></li>
+  <li><a class="has-img" href="/heroes/phantom-lancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phantom_lancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影长矛手</a></li>
+  <li><a class="has-img" href="/heroes/chaos-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/chaos_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">混沌骑士</a></li>
+  <li><a class="has-img" href="/heroes/jakiro.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/jakiro.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">杰奇洛</a></li>
+  <li><a class="has-img" href="/heroes/troll-warlord.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/troll_warlord.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巨魔战将</a></li>
+  <li><a class="has-img" href="/heroes/venomancer.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/venomancer.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">剧毒术士</a></li>
+  <li><a class="has-img" href="/heroes/clinkz.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/clinkz.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">克林克兹</a></li>
+  <li><a class="has-img" href="/heroes/terrorblade.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/terrorblade.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恐怖利刃</a></li>
+  <li><a class="has-img" href="/heroes/leshrac.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/leshrac.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉席克</a></li>
+  <li><a class="has-img" href="/heroes/lycan.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/lycan.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狼人</a></li>
+  <li><a class="has-img" href="/heroes/razor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/razor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">雷泽</a></li>
+  <li><a class="has-img" href="/heroes/dragon-knight.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dragon_knight.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">龙骑士</a></li>
+  <li><a class="has-img" href="/heroes/luna.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/luna.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">露娜</a></li>
+  <li><a class="has-img" href="/heroes/enchantress.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enchantress.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魅惑魔女</a></li>
+  <li><a class="has-img" href="/heroes/enigma.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/enigma.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">谜团</a></li>
+  <li><a class="has-img" href="/heroes/meepo.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/meepo.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米波</a></li>
+  <li><a class="has-img" href="/heroes/naga-siren.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/naga_siren.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">娜迦海妖</a></li>
+  <li><a class="has-img" href="/heroes/pugna.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/pugna.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">帕格纳</a></li>
+  <li><a class="has-img" href="/heroes/invoker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/invoker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">祈求者</a></li>
+  <li><a class="has-img" href="/heroes/death-prophet.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/death_prophet.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">死亡先知</a></li>
+  <li><a class="has-img" href="/heroes/visage.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/visage.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">维萨吉</a></li>
+  <li><a class="has-img" href="/heroes/tiny.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tiny.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">小小</a></li>
+  <li><a class="has-img" href="/heroes/tinker.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/tinker.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">修补匠</a></li>
+  <li><a class="has-img" href="/heroes/broodmother.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/broodmother.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">育母蜘蛛</a></li>
+  <li><a class="has-img" href="/heroes/juggernaut.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/juggernaut.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">主宰</a></li>
+  <li><a class="has-img" href="/heroes/drow-ranger.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/drow_ranger.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">卓尔游侠</a></li>
+  <li><a class="has-img" href="/heroes/furion.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/furion.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">自然先知</a></li>
 </ul>
 
 <p class="disclaimer">数据快照 · 2026-10-04。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>

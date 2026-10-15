@@ -90,6 +90,22 @@ function itemSlug(internalName) {
   return internalName.replace(/^item_/, '').replace(/_/g, '-')
 }
 
+// ── Images (mirrored on cdn.amefys.com, never Valve's servers) ──
+// Valve's CDN is slow or unreachable from mainland China, so the art lives in
+// our R2 bucket: item icons via amefys `npm run item-art`, hero portraits via
+// `npm run mobile:hero-art`. Every <img> carries width/height so the layout is
+// fixed before it loads, and hides itself (keeping its box) if it fails.
+const CDN = 'https://cdn.amefys.com'
+export function itemIconUrl(internalName) {
+  return `${CDN}/item-art/v1/${internalName.replace(/^item_/, '')}.webp`
+}
+export function heroPortraitUrl(internalName) {
+  return `${CDN}/hero-art/v2/portraits/${internalName.replace(/^npc_dota_hero_/, '')}.webp`
+}
+export function img(src, cls, w, h, { lazy = true } = {}) {
+  return `<img class="${cls}" src="${src}" width="${w}" height="${h}" alt=""${lazy ? ' loading="lazy"' : ''} decoding="async" onerror="this.style.visibility='hidden'">`
+}
+
 function escape(s) {
   return String(s ?? '')
     .replace(/&/g, '&amp;')
@@ -205,19 +221,30 @@ const HEAD_STYLE = `
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -311,7 +338,7 @@ function matchupList(title, pairs, tone) {
 ${pairs
   .map(
     (p) =>
-      `  <li><a href="/heroes/${heroSlug(p.hero)}.html">${escape(zhName(p.hero, p.hero))}</a><span class="mu-pp mu-${tone}">${formatPp(p.pp)}</span><span class="mu-games">${formatGames(p.games)}</span></li>`
+      `  <li><a href="/heroes/${heroSlug(p.hero)}.html">${img(heroPortraitUrl(p.hero), 'ic-row-hero', 36, 20)}${escape(zhName(p.hero, p.hero))}</a><span class="mu-pp mu-${tone}">${formatPp(p.pp)}</span><span class="mu-games">${formatGames(p.games)}</span></li>`
   )
   .join('\n')}
 </ol></div>`
@@ -377,7 +404,8 @@ ${list
     const name = item ? itemName(item) : entry.itemName.replace(/^item_/, '')
     const slug = itemSlug(entry.itemName)
     const linkable = item && emittedItemSlugs.has(slug)
-    return `    <tr><td>${linkable ? `<a href="/items/${slug}.html">${escape(name)}</a>` : escape(name)}</td><td>${entry.count}</td></tr>`
+    const icon = img(itemIconUrl(entry.itemName), 'ic-row', 30, 22)
+    return `    <tr><td>${icon}${linkable ? `<a href="/items/${slug}.html">${escape(name)}</a>` : escape(name)}</td><td>${entry.count}</td></tr>`
   })
   .join('\n')}
   </tbody>
@@ -396,14 +424,14 @@ ${list
 <h2>同类英雄</h2>
 <ul class="grid-list">
 ${sameRoleHeroes
-  .map((h) => `  <li><a href="/heroes/${heroSlug(h.internalName)}.html">${escape(zhName(h.internalName, h.displayName))}</a></li>`)
+  .map((h) => `  <li><a class="has-img" href="/heroes/${heroSlug(h.internalName)}.html">${img(heroPortraitUrl(h.internalName), 'ic-hero', 48, 27)}${escape(zhName(h.internalName, h.displayName))}</a></li>`)
   .join('\n')}
 </ul>`
       : ''
 
   const body = `
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/heroes/">英雄列表</a> · ${escape(zh)}</div>
-<h1>${escape(zh)}${matchups ? '出装与克制' : '出装攻略'}</h1>
+<div class="page-head">${img(heroPortraitUrl(hero.internalName), 'art-hero', 128, 72, { lazy: false })}<h1>${escape(zh)}${matchups ? '出装与克制' : '出装攻略'}</h1></div>
 <p class="tagline">${escape(hero.displayName)}${also ? ` · ${escape(also)}` : ''} · 主属性 ${attr} · ${attack}</p>
 <div>
   ${hero.roles.map((r) => `<span class="pill">${escape(role(r))}</span>`).join('')}
@@ -466,7 +494,7 @@ ${byRole
   .sort((a, b) => ZH_ORDER.compare(a.zh, b.zh))
   .map(
     ({ h, zh }) =>
-      `  <li><a href="/heroes/${heroSlug(h.internalName)}.html">${escape(zh)}</a></li>`
+      `  <li><a class="has-img" href="/heroes/${heroSlug(h.internalName)}.html">${img(heroPortraitUrl(h.internalName), 'ic-hero', 48, 27)}${escape(zh)}</a></li>`
   )
   .join('\n')}
 </ul>`
@@ -535,14 +563,14 @@ function renderItemPage(item) {
     .map((entry) => {
       const hero = HERO_BY_NAME.get(entry.hero)
       if (!hero) return ''
-      return `  <li><a href="/heroes/${heroSlug(entry.hero)}.html">${escape(zhName(hero.internalName, hero.displayName))}</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">${entry.count} 场</span></li>`
+      return `  <li><a class="has-img" href="/heroes/${heroSlug(entry.hero)}.html">${img(heroPortraitUrl(entry.hero), 'ic-hero', 48, 27)}${escape(zhName(hero.internalName, hero.displayName))}<span class="cnt">${entry.count} 场</span></a></li>`
     })
     .filter(Boolean)
     .join('\n')
 
   const body = `
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/items/">装备列表</a> · ${escape(zh)}</div>
-<h1>${escape(zh)}</h1>
+<div class="page-head">${img(itemIconUrl(item.internalName), 'art-item', 66, 48, { lazy: false })}<h1>${escape(zh)}</h1></div>
 <p class="tagline">${escape(item.displayName)}${also ? ` · ${escape(also)}` : ''} · ${escape(kind)} · 价格 ${item.cost} 金</p>
 <div class="meta-grid">
   <div class="meta-cell"><div class="meta-label">类别</div><div class="meta-value">${escape(kind)}</div></div>
@@ -591,7 +619,7 @@ ${arr
   .sort((a, b) => ZH_ORDER.compare(a.zh, b.zh))
   .map(
     ({ it, zh }) =>
-      `  <li><a href="/items/${itemSlug(it.internalName)}.html">${escape(zh)}</a></li>`
+      `  <li><a class="has-img" href="/items/${itemSlug(it.internalName)}.html">${img(itemIconUrl(it.internalName), 'ic-item', 33, 24)}${escape(zh)}</a></li>`
   )
   .join('\n')}
 </ul>`
@@ -608,7 +636,14 @@ ${arr
 
 // ── Sitemap ─────────────────────────────────────────────────────
 
-function renderSitemap(heroFiles, itemFiles) {
+// Only pages this script writes get today's date; hand-written pages (home,
+// blog posts, …) keep the lastmod they already had, so a data refresh does
+// not tell search engines that every page on the site changed.
+export function previousLastmods(xml) {
+  return new Map([...xml.matchAll(/<loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)].map((m) => [m[1], m[2]]))
+}
+
+function renderSitemap(heroFiles, itemFiles, prev = new Map()) {
   const urls = [
     { loc: `${SITE}/`, priority: '1.0' },
     { loc: `${SITE}/compliance.html`, priority: '0.8' },
@@ -640,14 +675,14 @@ function renderSitemap(heroFiles, itemFiles) {
 ${urls
   .map(
     (u) =>
-      `  <url><loc>${u.loc}</loc><lastmod>${BUILD_DATE}</lastmod><changefreq>weekly</changefreq><priority>${u.priority}</priority></url>`
+      `  <url><loc>${u.loc}</loc><lastmod>${/\/(heroes|items)\//.test(u.loc) ? BUILD_DATE : prev.get(u.loc) ?? BUILD_DATE}</lastmod><changefreq>weekly</changefreq><priority>${u.priority}</priority></url>`
   )
   .join('\n')}
 </urlset>
 `
 }
 
-export { renderHeroPage, renderItemPage, renderHeroIndex, renderItemIndex, shouldEmitItem }
+export { renderHeroPage, renderItemPage, renderHeroIndex, renderItemIndex, renderSitemap, shouldEmitItem }
 
 // ── Main ────────────────────────────────────────────────────────
 
@@ -686,7 +721,10 @@ function main() {
   }
   writeFileSync(resolve(heroesOut, 'index.html'), renderHeroIndex())
 
-  writeFileSync(resolve(REPO_ROOT, 'sitemap.xml'), renderSitemap(heroSlugs, itemSlugs))
+  const sitemapPath = resolve(REPO_ROOT, 'sitemap.xml')
+  let prevSitemap = ''
+  try { prevSitemap = readFileSync(sitemapPath, 'utf8') } catch { /* first build */ }
+  writeFileSync(sitemapPath, renderSitemap(heroSlugs, itemSlugs, previousLastmods(prevSitemap)))
 
   // Optional robots.txt — only create if missing so we never trample a custom one.
   const robotsPath = resolve(REPO_ROOT, 'robots.txt')
