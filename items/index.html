@@ -89,19 +89,30 @@
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -127,204 +138,204 @@
 
 <h2>顶级（33）</h2>
 <ul class="grid-list">
-  <li><a href="/items/silver-edge.html">白银之锋</a></li>
-  <li><a href="/items/crimson-guard.html">赤红甲</a></li>
-  <li><a href="/items/greater-crit.html">代达罗斯之殇</a></li>
-  <li><a href="/items/nullifier.html">否决坠饰</a></li>
-  <li><a href="/items/black-king-bar.html">黑皇杖</a></li>
-  <li><a href="/items/butterfly.html">蝴蝶</a></li>
-  <li><a href="/items/manta.html">幻影斧</a></li>
-  <li><a href="/items/radiance.html">辉耀</a></li>
-  <li><a href="/items/kaya.html">慧光</a></li>
-  <li><a href="/items/monkey-king-bar.html">金箍棒</a></li>
-  <li><a href="/items/hurricane-pike.html">飓风长戟</a></li>
-  <li><a href="/items/crellas-crozier.html">克莱拉牧杖</a></li>
-  <li><a href="/items/heart.html">恐鳌之心</a></li>
-  <li><a href="/items/bfury.html">狂战斧</a></li>
-  <li><a href="/items/sphere.html">林肯法球</a></li>
-  <li><a href="/items/armlet.html">莫尔迪基安的臂章</a></li>
-  <li><a href="/items/assault.html">强袭胸甲</a></li>
-  <li><a href="/items/lotus-orb.html">清莲宝珠</a></li>
-  <li><a href="/items/blade-mail.html">刃甲</a></li>
-  <li><a href="/items/abyssal-blade.html">深渊之刃</a></li>
-  <li><a href="/items/consecrated-wraps.html">圣化护服</a></li>
-  <li><a href="/items/rapier.html">圣剑</a></li>
-  <li><a href="/items/lesser-crit.html">水晶剑</a></li>
-  <li><a href="/items/basher.html">碎颅锤</a></li>
-  <li><a href="/items/shivas-guard.html">希瓦的守护</a></li>
-  <li><a href="/items/vanguard.html">先锋盾</a></li>
-  <li><a href="/items/ethereal-blade.html">虚灵之刃</a></li>
-  <li><a href="/items/bloodthorn.html">血棘</a></li>
-  <li><a href="/items/bloodstone.html">血精石</a></li>
-  <li><a href="/items/invis-sword.html">影刃</a></li>
-  <li><a href="/items/aeon-disk.html">永恒之盘</a></li>
-  <li><a href="/items/meteor-hammer.html">陨星锤</a></li>
-  <li><a href="/items/soul-booster.html">振魂石</a></li>
+  <li><a class="has-img" href="/items/silver-edge.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/silver_edge.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">白银之锋</a></li>
+  <li><a class="has-img" href="/items/crimson-guard.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/crimson_guard.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">赤红甲</a></li>
+  <li><a class="has-img" href="/items/greater-crit.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/greater_crit.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">代达罗斯之殇</a></li>
+  <li><a class="has-img" href="/items/nullifier.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/nullifier.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">否决坠饰</a></li>
+  <li><a class="has-img" href="/items/black-king-bar.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/black_king_bar.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">黑皇杖</a></li>
+  <li><a class="has-img" href="/items/butterfly.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/butterfly.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">蝴蝶</a></li>
+  <li><a class="has-img" href="/items/manta.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/manta.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幻影斧</a></li>
+  <li><a class="has-img" href="/items/radiance.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/radiance.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">辉耀</a></li>
+  <li><a class="has-img" href="/items/kaya.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/kaya.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">慧光</a></li>
+  <li><a class="has-img" href="/items/monkey-king-bar.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/monkey_king_bar.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">金箍棒</a></li>
+  <li><a class="has-img" href="/items/hurricane-pike.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/hurricane_pike.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">飓风长戟</a></li>
+  <li><a class="has-img" href="/items/crellas-crozier.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/crellas_crozier.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">克莱拉牧杖</a></li>
+  <li><a class="has-img" href="/items/heart.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/heart.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恐鳌之心</a></li>
+  <li><a class="has-img" href="/items/bfury.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/bfury.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">狂战斧</a></li>
+  <li><a class="has-img" href="/items/sphere.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/sphere.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">林肯法球</a></li>
+  <li><a class="has-img" href="/items/armlet.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/armlet.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">莫尔迪基安的臂章</a></li>
+  <li><a class="has-img" href="/items/assault.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/assault.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">强袭胸甲</a></li>
+  <li><a class="has-img" href="/items/lotus-orb.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/lotus_orb.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">清莲宝珠</a></li>
+  <li><a class="has-img" href="/items/blade-mail.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blade_mail.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">刃甲</a></li>
+  <li><a class="has-img" href="/items/abyssal-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/abyssal_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">深渊之刃</a></li>
+  <li><a class="has-img" href="/items/consecrated-wraps.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/consecrated_wraps.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣化护服</a></li>
+  <li><a class="has-img" href="/items/rapier.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/rapier.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣剑</a></li>
+  <li><a class="has-img" href="/items/lesser-crit.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/lesser_crit.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">水晶剑</a></li>
+  <li><a class="has-img" href="/items/basher.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/basher.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">碎颅锤</a></li>
+  <li><a class="has-img" href="/items/shivas-guard.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/shivas_guard.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">希瓦的守护</a></li>
+  <li><a class="has-img" href="/items/vanguard.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/vanguard.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">先锋盾</a></li>
+  <li><a class="has-img" href="/items/ethereal-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ethereal_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚灵之刃</a></li>
+  <li><a class="has-img" href="/items/bloodthorn.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/bloodthorn.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血棘</a></li>
+  <li><a class="has-img" href="/items/bloodstone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/bloodstone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血精石</a></li>
+  <li><a class="has-img" href="/items/invis-sword.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/invis_sword.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">影刃</a></li>
+  <li><a class="has-img" href="/items/aeon-disk.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/aeon_disk.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">永恒之盘</a></li>
+  <li><a class="has-img" href="/items/meteor-hammer.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/meteor_hammer.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">陨星锤</a></li>
+  <li><a class="has-img" href="/items/soul-booster.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/soul_booster.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">振魂石</a></li>
 </ul>
 
 <h2>高级（41）</h2>
 <ul class="grid-list">
-  <li><a href="/items/ultimate-scepter-2.html">阿哈利姆福佑</a></li>
-  <li><a href="/items/aghanims-shard.html">阿哈利姆魔晶</a></li>
-  <li><a href="/items/ultimate-scepter.html">阿哈利姆神杖</a></li>
-  <li><a href="/items/rod-of-atos.html">阿托斯之棍</a></li>
-  <li><a href="/items/arcane-boots.html">奥术鞋</a></li>
-  <li><a href="/items/orb-of-frost.html">冰霜之珠</a></li>
-  <li><a href="/items/dagon.html">达贡之神力 1 级</a></li>
-  <li><a href="/items/dagon-2.html">达贡之神力 2 级</a></li>
-  <li><a href="/items/dagon-3.html">达贡之神力 3 级</a></li>
-  <li><a href="/items/dagon-4.html">达贡之神力 4 级</a></li>
-  <li><a href="/items/dagon-5.html">达贡之神力 5 级</a></li>
-  <li><a href="/items/pipe.html">洞察烟斗</a></li>
-  <li><a href="/items/mage-slayer.html">法师克星</a></li>
-  <li><a href="/items/veil-of-discord.html">纷争面纱</a></li>
-  <li><a href="/items/wind-waker.html">风之杖</a></li>
-  <li><a href="/items/vladmir.html">弗拉迪米尔的祭品</a></li>
-  <li><a href="/items/orb-of-corrosion.html">腐蚀之珠</a></li>
-  <li><a href="/items/hydras-breath.html">怪蛇之息</a></li>
-  <li><a href="/items/headdress.html">恢复头巾</a></li>
-  <li><a href="/items/spirit-vessel.html">魂之灵瓮</a></li>
-  <li><a href="/items/essence-distiller.html">精之灵器</a></li>
-  <li><a href="/items/tranquil-boots.html">静谧之鞋</a></li>
-  <li><a href="/items/boots-of-bearing.html">宽容之靴</a></li>
-  <li><a href="/items/falcon-blade.html">猎鹰战刃</a></li>
-  <li><a href="/items/octarine-core.html">玲珑心</a></li>
-  <li><a href="/items/mekansm.html">梅肯斯姆</a></li>
-  <li><a href="/items/ancient-janggo.html">韧鼓</a></li>
-  <li><a href="/items/devastator.html">圣斧</a></li>
-  <li><a href="/items/holy-locket.html">圣洁吊坠</a></li>
-  <li><a href="/items/refresher.html">刷新球</a></li>
-  <li><a href="/items/glimmer-cape.html">微光披风</a></li>
-  <li><a href="/items/guardian-greaves.html">卫士胫甲</a></li>
-  <li><a href="/items/sheepstick.html">邪恶镰刀</a></li>
-  <li><a href="/items/specialists-array.html">行家阵列</a></li>
-  <li><a href="/items/solar-crest.html">炎阳纹章</a></li>
-  <li><a href="/items/aether-lens.html">以太透镜</a></li>
-  <li><a href="/items/urn-of-shadows.html">影之灵龛</a></li>
-  <li><a href="/items/force-staff.html">原力法杖</a></li>
-  <li><a href="/items/pavise.html">长盾</a></li>
-  <li><a href="/items/orchid.html">紫怨</a></li>
-  <li><a href="/items/cyclone.html">Eul的神圣法杖</a></li>
+  <li><a class="has-img" href="/items/ultimate-scepter-2.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ultimate_scepter_2.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">阿哈利姆福佑</a></li>
+  <li><a class="has-img" href="/items/aghanims-shard.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/aghanims_shard.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">阿哈利姆魔晶</a></li>
+  <li><a class="has-img" href="/items/ultimate-scepter.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ultimate_scepter.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">阿哈利姆神杖</a></li>
+  <li><a class="has-img" href="/items/rod-of-atos.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/rod_of_atos.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">阿托斯之棍</a></li>
+  <li><a class="has-img" href="/items/arcane-boots.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/arcane_boots.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">奥术鞋</a></li>
+  <li><a class="has-img" href="/items/orb-of-frost.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/orb_of_frost.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">冰霜之珠</a></li>
+  <li><a class="has-img" href="/items/dagon.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dagon.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">达贡之神力 1 级</a></li>
+  <li><a class="has-img" href="/items/dagon-2.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dagon_2.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">达贡之神力 2 级</a></li>
+  <li><a class="has-img" href="/items/dagon-3.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dagon_3.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">达贡之神力 3 级</a></li>
+  <li><a class="has-img" href="/items/dagon-4.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dagon_4.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">达贡之神力 4 级</a></li>
+  <li><a class="has-img" href="/items/dagon-5.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dagon_5.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">达贡之神力 5 级</a></li>
+  <li><a class="has-img" href="/items/pipe.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/pipe.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">洞察烟斗</a></li>
+  <li><a class="has-img" href="/items/mage-slayer.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mage_slayer.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">法师克星</a></li>
+  <li><a class="has-img" href="/items/veil-of-discord.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/veil_of_discord.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">纷争面纱</a></li>
+  <li><a class="has-img" href="/items/wind-waker.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/wind_waker.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风之杖</a></li>
+  <li><a class="has-img" href="/items/vladmir.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/vladmir.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">弗拉迪米尔的祭品</a></li>
+  <li><a class="has-img" href="/items/orb-of-corrosion.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/orb_of_corrosion.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">腐蚀之珠</a></li>
+  <li><a class="has-img" href="/items/hydras-breath.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/hydras_breath.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">怪蛇之息</a></li>
+  <li><a class="has-img" href="/items/headdress.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/headdress.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恢复头巾</a></li>
+  <li><a class="has-img" href="/items/spirit-vessel.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/spirit_vessel.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魂之灵瓮</a></li>
+  <li><a class="has-img" href="/items/essence-distiller.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/essence_distiller.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">精之灵器</a></li>
+  <li><a class="has-img" href="/items/tranquil-boots.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/tranquil_boots.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">静谧之鞋</a></li>
+  <li><a class="has-img" href="/items/boots-of-bearing.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/boots_of_bearing.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">宽容之靴</a></li>
+  <li><a class="has-img" href="/items/falcon-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/falcon_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">猎鹰战刃</a></li>
+  <li><a class="has-img" href="/items/octarine-core.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/octarine_core.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">玲珑心</a></li>
+  <li><a class="has-img" href="/items/mekansm.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mekansm.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">梅肯斯姆</a></li>
+  <li><a class="has-img" href="/items/ancient-janggo.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ancient_janggo.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">韧鼓</a></li>
+  <li><a class="has-img" href="/items/devastator.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/devastator.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣斧</a></li>
+  <li><a class="has-img" href="/items/holy-locket.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/holy_locket.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣洁吊坠</a></li>
+  <li><a class="has-img" href="/items/refresher.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/refresher.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">刷新球</a></li>
+  <li><a class="has-img" href="/items/glimmer-cape.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/glimmer_cape.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">微光披风</a></li>
+  <li><a class="has-img" href="/items/guardian-greaves.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/guardian_greaves.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">卫士胫甲</a></li>
+  <li><a class="has-img" href="/items/sheepstick.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/sheepstick.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪恶镰刀</a></li>
+  <li><a class="has-img" href="/items/specialists-array.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/specialists_array.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">行家阵列</a></li>
+  <li><a class="has-img" href="/items/solar-crest.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/solar_crest.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">炎阳纹章</a></li>
+  <li><a class="has-img" href="/items/aether-lens.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/aether_lens.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">以太透镜</a></li>
+  <li><a class="has-img" href="/items/urn-of-shadows.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/urn_of_shadows.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">影之灵龛</a></li>
+  <li><a class="has-img" href="/items/force-staff.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/force_staff.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">原力法杖</a></li>
+  <li><a class="has-img" href="/items/pavise.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/pavise.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">长盾</a></li>
+  <li><a class="has-img" href="/items/orchid.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/orchid.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">紫怨</a></li>
+  <li><a class="has-img" href="/items/cyclone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/cyclone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">Eul的神圣法杖</a></li>
 </ul>
 
 <h2>基础（15）</h2>
 <ul class="grid-list">
-  <li><a href="/items/power-treads.html">动力鞋</a></li>
-  <li><a href="/items/bracer.html">护腕</a></li>
-  <li><a href="/items/pers.html">坚韧球</a></li>
-  <li><a href="/items/null-talisman.html">空灵挂件</a></li>
-  <li><a href="/items/oblivion-staff.html">空明杖</a></li>
-  <li><a href="/items/soul-ring.html">灵魂之戒</a></li>
-  <li><a href="/items/phylactery.html">灵匣</a></li>
-  <li><a href="/items/hand-of-midas.html">迈达斯之手</a></li>
-  <li><a href="/items/bottle.html">魔瓶</a></li>
-  <li><a href="/items/magic-wand.html">魔杖</a></li>
-  <li><a href="/items/witch-blade.html">巫师之刃</a></li>
-  <li><a href="/items/phase-boots.html">相位鞋</a></li>
-  <li><a href="/items/travel-boots.html">远行鞋</a></li>
-  <li><a href="/items/travel-boots-2.html">远行鞋</a></li>
-  <li><a href="/items/wraith-band.html">怨灵系带</a></li>
+  <li><a class="has-img" href="/items/power-treads.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/power_treads.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">动力鞋</a></li>
+  <li><a class="has-img" href="/items/bracer.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/bracer.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">护腕</a></li>
+  <li><a class="has-img" href="/items/pers.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/pers.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">坚韧球</a></li>
+  <li><a class="has-img" href="/items/null-talisman.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/null_talisman.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">空灵挂件</a></li>
+  <li><a class="has-img" href="/items/oblivion-staff.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/oblivion_staff.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">空明杖</a></li>
+  <li><a class="has-img" href="/items/soul-ring.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/soul_ring.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灵魂之戒</a></li>
+  <li><a class="has-img" href="/items/phylactery.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/phylactery.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">灵匣</a></li>
+  <li><a class="has-img" href="/items/hand-of-midas.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/hand_of_midas.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">迈达斯之手</a></li>
+  <li><a class="has-img" href="/items/bottle.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/bottle.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔瓶</a></li>
+  <li><a class="has-img" href="/items/magic-wand.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/magic_wand.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔杖</a></li>
+  <li><a class="has-img" href="/items/witch-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/witch_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫师之刃</a></li>
+  <li><a class="has-img" href="/items/phase-boots.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/phase_boots.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">相位鞋</a></li>
+  <li><a class="has-img" href="/items/travel-boots.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/travel_boots.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远行鞋</a></li>
+  <li><a class="has-img" href="/items/travel-boots-2.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/travel_boots_2.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远行鞋</a></li>
+  <li><a class="has-img" href="/items/wraith-band.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/wraith_band.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">怨灵系带</a></li>
 </ul>
 
 <h2>秘密商店（12）</h2>
 <ul class="grid-list">
-  <li><a href="/items/platemail.html">板甲</a></li>
-  <li><a href="/items/demon-edge.html">恶魔刀锋</a></li>
-  <li><a href="/items/vitality-booster.html">活力之球</a></li>
-  <li><a href="/items/ultimate-orb.html">极限法球</a></li>
-  <li><a href="/items/point-booster.html">精气之球</a></li>
-  <li><a href="/items/reaver.html">掠夺者之斧</a></li>
-  <li><a href="/items/energy-booster.html">能量之球</a></li>
-  <li><a href="/items/talisman-of-evasion.html">闪避护符</a></li>
-  <li><a href="/items/mystic-staff.html">神秘法杖</a></li>
-  <li><a href="/items/relic.html">圣者遗物</a></li>
-  <li><a href="/items/eagle.html">鹰歌弓</a></li>
-  <li><a href="/items/hyperstone.html">振奋宝石</a></li>
+  <li><a class="has-img" href="/items/platemail.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/platemail.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">板甲</a></li>
+  <li><a class="has-img" href="/items/demon-edge.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/demon_edge.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恶魔刀锋</a></li>
+  <li><a class="has-img" href="/items/vitality-booster.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/vitality_booster.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">活力之球</a></li>
+  <li><a class="has-img" href="/items/ultimate-orb.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ultimate_orb.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">极限法球</a></li>
+  <li><a class="has-img" href="/items/point-booster.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/point_booster.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">精气之球</a></li>
+  <li><a class="has-img" href="/items/reaver.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/reaver.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">掠夺者之斧</a></li>
+  <li><a class="has-img" href="/items/energy-booster.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/energy_booster.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">能量之球</a></li>
+  <li><a class="has-img" href="/items/talisman-of-evasion.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/talisman_of_evasion.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">闪避护符</a></li>
+  <li><a class="has-img" href="/items/mystic-staff.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mystic_staff.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神秘法杖</a></li>
+  <li><a class="has-img" href="/items/relic.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/relic.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圣者遗物</a></li>
+  <li><a class="has-img" href="/items/eagle.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/eagle.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">鹰歌弓</a></li>
+  <li><a class="has-img" href="/items/hyperstone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/hyperstone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">振奋宝石</a></li>
 </ul>
 
 <h2>配件（38）</h2>
 <ul class="grid-list">
-  <li><a href="/items/diadem.html">宝冕</a></li>
-  <li><a href="/items/javelin.html">标枪</a></li>
-  <li><a href="/items/claymore.html">大剑</a></li>
-  <li><a href="/items/wind-lace.html">风灵之纹</a></li>
-  <li><a href="/items/blades-of-attack.html">攻击之爪</a></li>
-  <li><a href="/items/blade-of-alacrity.html">欢欣之刃</a></li>
-  <li><a href="/items/ring-of-regen.html">回复戒指</a></li>
-  <li><a href="/items/gloves.html">加速手套</a></li>
-  <li><a href="/items/cloak.html">抗魔斗篷</a></li>
-  <li><a href="/items/ring-of-tarrasque.html">恐鳌之戒</a></li>
-  <li><a href="/items/blight-stone.html">枯萎之珠</a></li>
-  <li><a href="/items/broadsword.html">阔剑</a></li>
-  <li><a href="/items/gauntlets.html">力量手套</a></li>
-  <li><a href="/items/chasm-stone.html">裂隙之石</a></li>
-  <li><a href="/items/mithril-hammer.html">秘银锤</a></li>
-  <li><a href="/items/slippers.html">敏捷便鞋</a></li>
-  <li><a href="/items/magic-stick.html">魔棒</a></li>
-  <li><a href="/items/staff-of-wizardry.html">魔力法杖</a></li>
-  <li><a href="/items/splintmail.html">片甲</a></li>
-  <li><a href="/items/tiara-of-selemene.html">赛莉蒙妮之冠</a></li>
-  <li><a href="/items/blitz-knuckles.html">闪电指套</a></li>
-  <li><a href="/items/blink.html">闪烁匕首</a></li>
-  <li><a href="/items/overwhelming-blink.html">盛势闪光</a></li>
-  <li><a href="/items/ogre-axe.html">食人魔之斧</a></li>
-  <li><a href="/items/ring-of-protection.html">守护指环</a></li>
-  <li><a href="/items/boots.html">速度之靴</a></li>
-  <li><a href="/items/chainmail.html">锁子甲</a></li>
-  <li><a href="/items/helm-of-iron-will.html">铁意头盔</a></li>
-  <li><a href="/items/voodoo-mask.html">巫毒面具</a></li>
-  <li><a href="/items/lifesteal.html">吸血面具</a></li>
-  <li><a href="/items/sobi-mask.html">贤者面罩</a></li>
-  <li><a href="/items/void-stone.html">虚无宝石</a></li>
-  <li><a href="/items/swift-blink.html">迅疾闪光</a></li>
-  <li><a href="/items/quelling-blade.html">压制之刃</a></li>
-  <li><a href="/items/ghost.html">幽魂权杖</a></li>
-  <li><a href="/items/circlet.html">圆环</a></li>
-  <li><a href="/items/ring-of-health.html">治疗指环</a></li>
-  <li><a href="/items/mantle.html">智力斗篷</a></li>
+  <li><a class="has-img" href="/items/diadem.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/diadem.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">宝冕</a></li>
+  <li><a class="has-img" href="/items/javelin.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/javelin.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">标枪</a></li>
+  <li><a class="has-img" href="/items/claymore.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/claymore.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">大剑</a></li>
+  <li><a class="has-img" href="/items/wind-lace.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/wind_lace.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">风灵之纹</a></li>
+  <li><a class="has-img" href="/items/blades-of-attack.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blades_of_attack.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">攻击之爪</a></li>
+  <li><a class="has-img" href="/items/blade-of-alacrity.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blade_of_alacrity.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">欢欣之刃</a></li>
+  <li><a class="has-img" href="/items/ring-of-regen.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ring_of_regen.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">回复戒指</a></li>
+  <li><a class="has-img" href="/items/gloves.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/gloves.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">加速手套</a></li>
+  <li><a class="has-img" href="/items/cloak.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/cloak.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">抗魔斗篷</a></li>
+  <li><a class="has-img" href="/items/ring-of-tarrasque.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ring_of_tarrasque.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">恐鳌之戒</a></li>
+  <li><a class="has-img" href="/items/blight-stone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blight_stone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">枯萎之珠</a></li>
+  <li><a class="has-img" href="/items/broadsword.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/broadsword.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">阔剑</a></li>
+  <li><a class="has-img" href="/items/gauntlets.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/gauntlets.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">力量手套</a></li>
+  <li><a class="has-img" href="/items/chasm-stone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/chasm_stone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">裂隙之石</a></li>
+  <li><a class="has-img" href="/items/mithril-hammer.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mithril_hammer.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">秘银锤</a></li>
+  <li><a class="has-img" href="/items/slippers.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/slippers.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">敏捷便鞋</a></li>
+  <li><a class="has-img" href="/items/magic-stick.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/magic_stick.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔棒</a></li>
+  <li><a class="has-img" href="/items/staff-of-wizardry.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/staff_of_wizardry.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔力法杖</a></li>
+  <li><a class="has-img" href="/items/splintmail.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/splintmail.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">片甲</a></li>
+  <li><a class="has-img" href="/items/tiara-of-selemene.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/tiara_of_selemene.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">赛莉蒙妮之冠</a></li>
+  <li><a class="has-img" href="/items/blitz-knuckles.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blitz_knuckles.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">闪电指套</a></li>
+  <li><a class="has-img" href="/items/blink.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blink.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">闪烁匕首</a></li>
+  <li><a class="has-img" href="/items/overwhelming-blink.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/overwhelming_blink.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">盛势闪光</a></li>
+  <li><a class="has-img" href="/items/ogre-axe.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ogre_axe.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">食人魔之斧</a></li>
+  <li><a class="has-img" href="/items/ring-of-protection.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ring_of_protection.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">守护指环</a></li>
+  <li><a class="has-img" href="/items/boots.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/boots.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">速度之靴</a></li>
+  <li><a class="has-img" href="/items/chainmail.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/chainmail.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">锁子甲</a></li>
+  <li><a class="has-img" href="/items/helm-of-iron-will.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/helm_of_iron_will.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">铁意头盔</a></li>
+  <li><a class="has-img" href="/items/voodoo-mask.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/voodoo_mask.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">巫毒面具</a></li>
+  <li><a class="has-img" href="/items/lifesteal.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/lifesteal.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">吸血面具</a></li>
+  <li><a class="has-img" href="/items/sobi-mask.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/sobi_mask.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">贤者面罩</a></li>
+  <li><a class="has-img" href="/items/void-stone.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/void_stone.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">虚无宝石</a></li>
+  <li><a class="has-img" href="/items/swift-blink.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/swift_blink.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">迅疾闪光</a></li>
+  <li><a class="has-img" href="/items/quelling-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/quelling_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">压制之刃</a></li>
+  <li><a class="has-img" href="/items/ghost.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ghost.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">幽魂权杖</a></li>
+  <li><a class="has-img" href="/items/circlet.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/circlet.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">圆环</a></li>
+  <li><a class="has-img" href="/items/ring-of-health.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ring_of_health.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">治疗指环</a></li>
+  <li><a class="has-img" href="/items/mantle.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mantle.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">智力斗篷</a></li>
 </ul>
 
 <h2>其他（2）</h2>
 <ul class="grid-list">
-  <li><a href="/items/shadow-amulet.html">暗影护符</a></li>
-  <li><a href="/items/harpoon.html">鱼叉</a></li>
+  <li><a class="has-img" href="/items/shadow-amulet.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/shadow_amulet.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">暗影护符</a></li>
+  <li><a class="has-img" href="/items/harpoon.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/harpoon.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">鱼叉</a></li>
 </ul>
 
 <h2>神器（19）</h2>
 <ul class="grid-list">
-  <li><a href="/items/desolator.html">黯灭</a></li>
-  <li><a href="/items/mask-of-madness.html">疯狂面具</a></li>
-  <li><a href="/items/gungir.html">缚灵索</a></li>
-  <li><a href="/items/echo-sabre.html">回音战刃</a></li>
-  <li><a href="/items/yasha-and-kaya.html">慧夜对剑</a></li>
-  <li><a href="/items/diffusal-blade.html">净魂之刃</a></li>
-  <li><a href="/items/mjollnir.html">雷神之锤</a></li>
-  <li><a href="/items/dragon-lance.html">魔龙枪</a></li>
-  <li><a href="/items/satanic.html">撒旦之邪力</a></li>
-  <li><a href="/items/sange.html">散华</a></li>
-  <li><a href="/items/kaya-and-sange.html">散慧对剑</a></li>
-  <li><a href="/items/disperser.html">散魂剑</a></li>
-  <li><a href="/items/sange-and-yasha.html">散夜对剑</a></li>
-  <li><a href="/items/skadi.html">斯嘉蒂之眼</a></li>
-  <li><a href="/items/heavens-halberd.html">天堂之戟</a></li>
-  <li><a href="/items/helm-of-the-overlord.html">统御头盔</a></li>
-  <li><a href="/items/maelstrom.html">漩涡</a></li>
-  <li><a href="/items/yasha.html">夜叉</a></li>
-  <li><a href="/items/helm-of-the-dominator.html">支配头盔</a></li>
+  <li><a class="has-img" href="/items/desolator.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/desolator.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">黯灭</a></li>
+  <li><a class="has-img" href="/items/mask-of-madness.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mask_of_madness.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">疯狂面具</a></li>
+  <li><a class="has-img" href="/items/gungir.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/gungir.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">缚灵索</a></li>
+  <li><a class="has-img" href="/items/echo-sabre.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/echo_sabre.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">回音战刃</a></li>
+  <li><a class="has-img" href="/items/yasha-and-kaya.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/yasha_and_kaya.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">慧夜对剑</a></li>
+  <li><a class="has-img" href="/items/diffusal-blade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/diffusal_blade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">净魂之刃</a></li>
+  <li><a class="has-img" href="/items/mjollnir.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/mjollnir.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">雷神之锤</a></li>
+  <li><a class="has-img" href="/items/dragon-lance.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/dragon_lance.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔龙枪</a></li>
+  <li><a class="has-img" href="/items/satanic.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/satanic.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">撒旦之邪力</a></li>
+  <li><a class="has-img" href="/items/sange.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/sange.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">散华</a></li>
+  <li><a class="has-img" href="/items/kaya-and-sange.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/kaya_and_sange.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">散慧对剑</a></li>
+  <li><a class="has-img" href="/items/disperser.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/disperser.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">散魂剑</a></li>
+  <li><a class="has-img" href="/items/sange-and-yasha.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/sange_and_yasha.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">散夜对剑</a></li>
+  <li><a class="has-img" href="/items/skadi.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/skadi.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">斯嘉蒂之眼</a></li>
+  <li><a class="has-img" href="/items/heavens-halberd.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/heavens_halberd.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天堂之戟</a></li>
+  <li><a class="has-img" href="/items/helm-of-the-overlord.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/helm_of_the_overlord.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">统御头盔</a></li>
+  <li><a class="has-img" href="/items/maelstrom.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/maelstrom.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">漩涡</a></li>
+  <li><a class="has-img" href="/items/yasha.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/yasha.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">夜叉</a></li>
+  <li><a class="has-img" href="/items/helm-of-the-dominator.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/helm_of_the_dominator.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">支配头盔</a></li>
 </ul>
 
 <h2>消耗品（10）</h2>
 <ul class="grid-list">
-  <li><a href="/items/ward-sentry.html">岗哨守卫</a></li>
-  <li><a href="/items/smoke-of-deceit.html">诡计之雾</a></li>
-  <li><a href="/items/clarity.html">净化药水</a></li>
-  <li><a href="/items/enchanted-mango.html">魔法芒果</a></li>
-  <li><a href="/items/tango.html">树之祭祀</a></li>
-  <li><a href="/items/branches.html">铁树枝干</a></li>
-  <li><a href="/items/faerie-fire.html">仙灵之火</a></li>
-  <li><a href="/items/blood-grenade.html">血腥榴弹</a></li>
-  <li><a href="/items/ward-dispenser.html">侦察·岗哨守卫</a></li>
-  <li><a href="/items/ward-observer.html">侦察守卫</a></li>
+  <li><a class="has-img" href="/items/ward-sentry.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ward_sentry.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">岗哨守卫</a></li>
+  <li><a class="has-img" href="/items/smoke-of-deceit.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/smoke_of_deceit.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">诡计之雾</a></li>
+  <li><a class="has-img" href="/items/clarity.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/clarity.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">净化药水</a></li>
+  <li><a class="has-img" href="/items/enchanted-mango.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/enchanted_mango.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">魔法芒果</a></li>
+  <li><a class="has-img" href="/items/tango.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/tango.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">树之祭祀</a></li>
+  <li><a class="has-img" href="/items/branches.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/branches.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">铁树枝干</a></li>
+  <li><a class="has-img" href="/items/faerie-fire.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/faerie_fire.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">仙灵之火</a></li>
+  <li><a class="has-img" href="/items/blood-grenade.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/blood_grenade.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">血腥榴弹</a></li>
+  <li><a class="has-img" href="/items/ward-dispenser.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ward_dispenser.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">侦察·岗哨守卫</a></li>
+  <li><a class="has-img" href="/items/ward-observer.html"><img class="ic-item" src="https://cdn.amefys.com/item-art/v1/ward_observer.webp" width="33" height="24" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">侦察守卫</a></li>
 </ul>
 
 <p class="disclaimer">数据快照 · 2026-10-04。AMEFYS 与 Valve / Dota 2 无任何官方关联，仅作为信息辅助使用。出装频率来自 OpenDota 公开数据。</p>

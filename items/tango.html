@@ -89,19 +89,30 @@
     border-radius: var(--r-md); padding: 12px 14px; }
   .mu-card h3 { font-size: 14px; margin: 0 0 8px; color: var(--text-2); font-weight: 600; }
   .mu-card ol { list-style: none; margin: 0; padding: 0; }
-  .mu-card li { display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+  .mu-card li { display: flex; align-items: center; gap: 8px; padding: 6px 0;
     border-top: 0.5px solid var(--hairline); font-size: 14px; }
   .mu-card li:first-child { border-top: 0; }
-  .mu-card li a { flex: 1; min-width: 0; }
+  .mu-card li a { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .mu-pp { font-weight: 700; font-variant-numeric: tabular-nums; }
   .mu-up { color: var(--radiant); }
   .mu-down { color: var(--dire); }
   .mu-games { color: var(--text-3); font-size: 12px; min-width: 6.5em; text-align: right; }
   .mu-note { color: var(--text-3); font-size: 12.5px; margin: 0 0 4px; }
+  .grid-list a.has-img { display: flex; align-items: center; gap: 10px; padding: 8px 10px; }
+  .grid-list .cnt { margin-left: auto; color: var(--text-3); font-size: 12px; white-space: nowrap; }
+  .ic-item { width: 33px; height: 24px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-hero { width: 48px; height: 27px; border-radius: 4px; flex-shrink: 0; background: var(--bg-2); }
+  .ic-row { width: 30px; height: 22px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .ic-row-hero { width: 36px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 8px; background: var(--bg-2); }
+  .page-head { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+  .page-head h1 { margin: 0; }
+  .art-item { width: 66px; height: 48px; border-radius: 8px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
+  .art-hero { width: 128px; height: 72px; border-radius: 10px; flex-shrink: 0; background: var(--bg-2); box-shadow: 0 0 0 0.5px var(--hairline); }
   @media (max-width: 560px) {
     .nav-inner { gap: 14px; padding: 0 14px; font-size: 12px; }
     .wrap { padding: 28px 18px 80px; }
     h1 { font-size: 27px; }
+    .art-hero { width: 96px; height: 54px; }
     .table th, .table td { padding: 9px 8px; font-size: 13px; }
   }
 </style>
@@ -122,7 +133,7 @@
 <main class="wrap">
 
 <div class="breadcrumb"><a href="/">首页</a> · <a href="/items/">装备列表</a> · 树之祭祀</div>
-<h1>树之祭祀</h1>
+<div class="page-head"><img class="art-item" src="https://cdn.amefys.com/item-art/v1/tango.webp" width="66" height="48" alt="" decoding="async" onerror="this.style.visibility='hidden'"><h1>树之祭祀</h1></div>
 <p class="tagline">Tango · 也叫吃树 · 消耗品 · 价格 90 金</p>
 <div class="meta-grid">
   <div class="meta-cell"><div class="meta-label">类别</div><div class="meta-value">消耗品</div></div>
@@ -130,18 +141,18 @@
 </div>
 <h2>哪些英雄常出树之祭祀</h2>
 <ul class="grid-list">
-  <li><a href="/heroes/dark-willow.html">邪影芳灵</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">115 场</span></li>
-  <li><a href="/heroes/techies.html">工程师</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">110 场</span></li>
-  <li><a href="/heroes/rubick.html">拉比克</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">105 场</span></li>
-  <li><a href="/heroes/hoodwink.html">森海飞霞</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">105 场</span></li>
-  <li><a href="/heroes/oracle.html">神谕者</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">104 场</span></li>
-  <li><a href="/heroes/winter-wyvern.html">寒冬飞龙</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">104 场</span></li>
-  <li><a href="/heroes/phoenix.html">凤凰</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">103 场</span></li>
-  <li><a href="/heroes/grimstroke.html">天涯墨客</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">103 场</span></li>
-  <li><a href="/heroes/mirana.html">米拉娜</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">102 场</span></li>
-  <li><a href="/heroes/ancient-apparition.html">远古冰魄</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">102 场</span></li>
-  <li><a href="/heroes/disruptor.html">干扰者</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">102 场</span></li>
-  <li><a href="/heroes/ringmaster.html">百戏大王</a> <span style="color:var(--text-3);font-size:12px;margin-left:6px;">102 场</span></li>
+  <li><a class="has-img" href="/heroes/dark-willow.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/dark_willow.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">邪影芳灵<span class="cnt">115 场</span></a></li>
+  <li><a class="has-img" href="/heroes/techies.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/techies.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">工程师<span class="cnt">110 场</span></a></li>
+  <li><a class="has-img" href="/heroes/rubick.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/rubick.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">拉比克<span class="cnt">105 场</span></a></li>
+  <li><a class="has-img" href="/heroes/hoodwink.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/hoodwink.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">森海飞霞<span class="cnt">105 场</span></a></li>
+  <li><a class="has-img" href="/heroes/oracle.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/oracle.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">神谕者<span class="cnt">104 场</span></a></li>
+  <li><a class="has-img" href="/heroes/winter-wyvern.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/winter_wyvern.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">寒冬飞龙<span class="cnt">104 场</span></a></li>
+  <li><a class="has-img" href="/heroes/phoenix.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/phoenix.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">凤凰<span class="cnt">103 场</span></a></li>
+  <li><a class="has-img" href="/heroes/grimstroke.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/grimstroke.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">天涯墨客<span class="cnt">103 场</span></a></li>
+  <li><a class="has-img" href="/heroes/mirana.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/mirana.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">米拉娜<span class="cnt">102 场</span></a></li>
+  <li><a class="has-img" href="/heroes/ancient-apparition.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ancient_apparition.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">远古冰魄<span class="cnt">102 场</span></a></li>
+  <li><a class="has-img" href="/heroes/disruptor.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/disruptor.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">干扰者<span class="cnt">102 场</span></a></li>
+  <li><a class="has-img" href="/heroes/ringmaster.html"><img class="ic-hero" src="https://cdn.amefys.com/hero-art/v2/portraits/ringmaster.webp" width="48" height="27" alt="" loading="lazy" decoding="async" onerror="this.style.visibility='hidden'">百戏大王<span class="cnt">102 场</span></a></li>
 </ul>
 <h2>关键道具实时提醒</h2>
 <p>AMEFYS 桌面助手通过 DOTA 2 官方 GSI 接口实时跟踪你的装备栏，在树之祭祀等关键道具做出来的那一刻提醒你，不错过发力期。所有数据来自官方接口，不修改任何游戏内容。</p>
