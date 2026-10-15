@@ -618,6 +618,7 @@ function renderSitemap(heroFiles, itemFiles) {
     { loc: `${SITE}/packs/`, priority: '0.7' },
     { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
     { loc: `${SITE}/blog/`, priority: '0.7' },
+    { loc: `${SITE}/blog/amefys-architecture.html`, priority: '0.6' },
     { loc: `${SITE}/blog/supabase-egress-to-r2.html`, priority: '0.6' },
     { loc: `${SITE}/about.html`, priority: '0.6' },
     { loc: `${SITE}/donate.html`, priority: '0.6' },
