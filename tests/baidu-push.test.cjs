@@ -44,3 +44,15 @@ test('--urls picks exact pages, with or without the site prefix, and drops other
   assert.deepEqual(explicitUrls('https://evil.example/a'), [])
   assert.deepEqual(explicitUrls(''), [])
 })
+
+// 2026-10-15: blog pages go ahead of the rotation; the rotation still fills the quota.
+test('--first puts pages ahead of the rotation window without duplicates or overflow', async () => {
+  const { withFirst } = await load()
+  const win = ['https://amefys.com/a', 'https://amefys.com/blog/', 'https://amefys.com/b']
+  assert.deepEqual(withFirst(['https://amefys.com/blog/'], win, 3), [
+    'https://amefys.com/blog/',
+    'https://amefys.com/a',
+    'https://amefys.com/b'
+  ])
+  assert.deepEqual(withFirst([], win, 2), win.slice(0, 2))
+})

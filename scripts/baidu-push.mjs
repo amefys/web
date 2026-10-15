@@ -16,6 +16,8 @@
  *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs --urls /blog/,/blog/new-post.html
  *     (just these pages, ahead of the rotation — a new blog post would otherwise wait
  *      weeks for its turn; still capped by today's quota)
+ *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs --first /blog/new-post.html
+ *     (these first, then today's rotation fills the rest of the quota)
  *
  * Token: ziyuan.baidu.com → 资源提交 → 普通收录 → API 提交 (per site).
  */
@@ -64,6 +66,14 @@ export function explicitUrls(arg) {
     .filter((u) => u.startsWith(SITE + '/'))
 }
 
+/** `first` ahead of today's rotation window, no duplicates, `size` in total. */
+export function withFirst(first, window, size) {
+  const seen = new Set()
+  const out = []
+  for (const u of [...first, ...window]) if (!seen.has(u)) { seen.add(u); out.push(u) }
+  return out.slice(0, size)
+}
+
 async function push(token, urls) {
   const res = await fetch(ENDPOINT + token, {
     method: 'POST',
@@ -88,7 +98,11 @@ async function main() {
   const all = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
   const urlsArg = args.indexOf('--urls')
   const picked = urlsArg >= 0 ? explicitUrls(args[urlsArg + 1]) : []
-  const urls = picked.length ? picked.slice(0, limit) : windowFor(orderUrls(all), limit)
+  const firstArg = args.indexOf('--first')
+  const ahead = firstArg >= 0 ? explicitUrls(args[firstArg + 1]) : []
+  const urls = picked.length
+    ? picked.slice(0, limit)
+    : withFirst(ahead, windowFor(orderUrls(all), limit), limit)
 
   if (dryRun) {
     console.log(urls.join('\n'))
