@@ -194,7 +194,7 @@ footer a:hover { color: var(--text-2); }
 
 .tldr { margin: 28px 0 8px; padding: 22px 24px; border-radius: var(--r-lg);
   background: linear-gradient(180deg, var(--tint), var(--tint-soft)); border: 0.5px solid var(--hairline-strong); }
-.tldr .label { font: 600 12px/1 var(--mono); letter-spacing: .16em; color: var(--gold); margin-bottom: 12px; }
+.tldr .label { font-size: 13.5px; font-weight: 650; line-height: 1; letter-spacing: .12em; color: var(--gold); margin-bottom: 12px; }
 .tldr ul { margin: 0; padding-left: 1.2em; font-size: 15px; line-height: 1.8; color: var(--text-2); }
 .tldr li { margin: .3em 0; }
 
