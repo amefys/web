@@ -1125,6 +1125,20 @@
     .ft-grid { grid-template-columns: 1fr 1fr; }
     .btn-cta { font-size: 13px; padding: 0 18px; }
   }
+
+  /* ──── Live numbers (worker/site-stats.js → cdn.amefys.com/stats.json) ────
+     Hidden until stats.json loads; a failed fetch leaves the page as it was. */
+  .stats-proof { margin-top: 14px; font-size: 13px; color: var(--text-2); display: flex; gap: 6px 14px; justify-content: center; flex-wrap: wrap; }
+  .stats-proof b { color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stats-proof .sep { opacity: .35; }
+  .bp-stat { margin: 18px 0 26px; display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 14px;
+    background: rgba(212,175,106,.08); border: .5px solid rgba(232,199,121,.28); }
+  .bp-stat .big { font-size: 26px; font-weight: 750; color: var(--gold); letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
+  .bp-stat .txt { font-size: 13px; line-height: 1.55; color: var(--text-2); }
+  .bp-stat .txt small { display: block; color: var(--text-3); font-size: 11.5px; }
+  .final-proof { margin-top: 10px; font-size: 13px; color: var(--text-2); }
+  .final-proof b { color: var(--gold); font-variant-numeric: tabular-nums; }
+  [data-live][hidden] { display: none !important; }
 </style>
 <link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
 <script src="/assets/mobile-nav.js?v=2" defer></script>
@@ -1369,6 +1383,7 @@
       <a class="btn-cta ghost" href="#demo" data-open-demo rel="noopener">观看 60 秒演示 →</a>
     </div>
     <div class="platforms">macOS 13+ · Windows 11 · 核心功能免费 · 无广告</div>
+    <div class="stats-proof" data-live hidden><span data-part="users"><b data-stat="users"></b> 玩家注册</span><span class="sep" data-part="downloads">·</span><span data-part="downloads">下载 <b data-stat="downloads"></b> 次</span><span class="sep" data-part="releases">·</span><span data-part="releases"><span data-stat="months"></span>个月 <b data-stat="releases"></b> 个版本</span><span class="sep" data-part="updated">·</span><span data-part="updated">最近更新：<b data-stat="updated"></b></span></div>
 
     <div class="preview-wrap" style="position:relative;">
       <div class="hc-carousel" data-hc>
@@ -1635,7 +1650,8 @@
     <div class="container">
       <div class="eyebrow" style="color:var(--gold);"><span class="bar" style="background:var(--gold);"></span>特性 01 · BP 选人推荐</div>
       <h2 class="section-title">选谁、禁谁、为什么，<br><em style="color:var(--gold);font-style:normal;">电脑</em>和<em style="color:#F3D88F;font-style:normal;">手机</em>都能看。</h2>
-      <p class="section-lead">按你的分段统计近 7 天几百万局公开天梯对局，跟着双方已选的英雄实时算推荐选、建议禁和阵容短板，每一条都写明胜率、克制与配合的加减分。登录就能用。</p>
+      <p class="section-lead">按你的分段统计近 7 天<span data-stat-text="ranked">几百万局</span>公开天梯对局，跟着双方已选的英雄实时算推荐选、建议禁和阵容短板，每一条都写明胜率、克制与配合的加减分。登录就能用。</p>
+      <div class="bp-stat" data-live hidden><div class="big" data-stat="bp"></div><div class="txt">近 7 天公开对局，每天重算<small>天梯 <span data-stat="ranked"></span> · 加速 <span data-stat="turbo"></span> · 数据更新于 <span data-stat="bp-built"></span></small></div></div>
       <div class="bp-show">
         <figure class="bp-shot bp-shot-desk">
           <img src="assets/screens/bp-desktop.jpg" width="1600" height="950" alt="AMEFYS 桌面版 BP 面板：双方已选英雄、禁用位、英雄池和右侧推荐列表" loading="lazy" decoding="async" />
@@ -2018,6 +2034,7 @@
   <section class="final-cta">
     <h2>文斗 1v9，<br>全球<em>无敌手</em>。</h2>
     <p>免费下载 AMEFYS，1 分钟完成首次配置，从下一场对局起感受变化。</p>
+    <p class="final-proof" data-live hidden>已有 <b data-stat="users"></b> 玩家注册，安装包下载 <b data-stat="downloads"></b> 次</p>
     <div class="cta-row" style="justify-content:center;">
       <a class="btn-cta primary" href="https://amefys.com/dl/AMEFYS.dmg" rel="noopener">macOS 下载</a>
       <a class="btn-cta ghost" href="https://amefys.com/dl/AMEFYS-Setup.exe" rel="noopener">Windows 下载</a>
@@ -2272,4 +2289,45 @@
   })()
 </script>
 
+
+<script>
+  // Live numbers from worker/site-stats.js (hourly). Rounded DOWN — 1,764 shows
+  // as 1,700+ — so the page never claims more than is true. Any field the file
+  // lacks stays hidden; a failed fetch changes nothing on the page.
+  ;(function () {
+    function floorPlus(n) { var p = Math.pow(10, Math.max(0, String(Math.floor(n)).length - 2)); return (Math.floor(n / p) * p).toLocaleString('en-US') + '+' }
+    function wan(n) { return Math.floor(n / 10000) + ' 万' }
+    function bjDay(ms) { return new Date(ms + 8 * 3600e3).toISOString().slice(0, 10) }
+    function ago(day) {
+      var d = Math.round((Date.parse(bjDay(Date.now())) - Date.parse(day)) / 864e5)
+      return d <= 0 ? '今天' : d === 1 ? '昨天' : d + ' 天前'
+    }
+    function set(name, text) { document.querySelectorAll('[data-stat="' + name + '"]').forEach(function (el) { el.textContent = text }) }
+    function hidePart(name) { document.querySelectorAll('[data-part="' + name + '"]').forEach(function (el) { el.remove() }) }
+    var ctrl = window.AbortController ? new AbortController() : null
+    if (ctrl) setTimeout(function () { ctrl.abort() }, 6000)
+    fetch('https://cdn.amefys.com/stats.json', ctrl ? { signal: ctrl.signal } : {})
+      .then(function (r) { return r.ok ? r.json() : null })
+      .then(function (S) {
+        if (!S || S.schema !== 1) return
+        var hasUsers = S.users > 0, hasDl = S.downloads > 0, R = S.releases, B = S.bp
+        if (hasUsers) set('users', floorPlus(S.users)); else hidePart('users')
+        if (hasDl) set('downloads', floorPlus(S.downloads)); else hidePart('downloads')
+        if (R && R.count) {
+          set('releases', R.count)
+          set('months', Math.max(1, Math.round((Date.now() - Date.parse(R.first)) / (30.44 * 864e5))) + ' ')
+          set('updated', ago(R.last))
+        } else { hidePart('releases'); hidePart('updated') }
+        if (hasUsers || hasDl || (R && R.count)) document.querySelector('.stats-proof').hidden = false
+        if (hasUsers && hasDl) document.querySelector('.final-proof').hidden = false
+        if (B && B.matches > 0) {
+          set('bp', wan(B.matches)); set('ranked', wan(B.ranked)); set('turbo', wan(B.turbo))
+          set('bp-built', B.builtAt ? (bjDay(Date.parse(B.builtAt)).slice(5).replace('-', ' 月 ') + ' 日') : '')
+          document.querySelectorAll('[data-stat-text="ranked"]').forEach(function (el) { el.textContent = ' ' + wan(B.ranked) + '局' })
+          document.querySelector('.bp-stat').hidden = false
+        }
+      })
+      .catch(function () { /* keep the page as it was */ })
+  })();
+</script>
 </body></html>
