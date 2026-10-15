@@ -36,8 +36,9 @@
   --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
 }
-/* Light theme: follows the system unless the reader picked one (data-theme on <html>,
-   set before first paint by the inline script in each page's <head>). */
+/* Light theme. The blog defaults to light (2026-10-15): the inline script in each page's <head>
+   sets data-theme before first paint — the reader's saved choice, else light. The
+   prefers-color-scheme block only matters if that script cannot run. */
 :root[data-theme="light"] {
   color-scheme: light;
   --bg: #faf6ee;
