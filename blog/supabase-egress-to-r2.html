@@ -71,9 +71,9 @@
   <div class="tldr">
     <div class="label">要点速览</div>
     <ul>
-      <li>Supabase 的 <strong>Cached Egress（缓存出流量）</strong>用到免费额度的 289%，每天还在涨约 1 GB。</li>
-      <li>流量是真实新用户下载英雄图片产生的，不是被刷；但本该挡在前面的 Cloudflare 缓存<strong>一直没生效</strong>。</li>
-      <li>根因：Supabase 的每个响应都带 <code>Set-Cookie: __cf_bm</code>，而 Cloudflare 默认<strong>不缓存带 Set-Cookie 的响应</strong>。</li>
+      <li>Supabase 的 Cached Egress（缓存出流量）用到免费额度的 289%，每天还在涨约 1 GB。</li>
+      <li>流量是真实新用户下载英雄图片产生的，不是被刷；但本该挡在前面的 Cloudflare 缓存一直没生效。</li>
+      <li>根因：Supabase 的每个响应都带 <code>Set-Cookie: __cf_bm</code>，而 Cloudflare 默认不缓存带 Set-Cookie 的响应。</li>
       <li>处理：当天先升级 Pro 保住服务 → 改用 Cache API 止血 → 静态文件全部迁到 R2，域名直挂 R2，Worker 退出这条路径。</li>
       <li>结果：Supabase 不再承担任何静态文件流量；英雄图体积降了 80%；Cloudflare Worker 调用量降了约 70%。</li>
     </ul>
@@ -105,7 +105,7 @@
 
   <blockquote>你的用量在上次通知后继续大幅超出套餐额度……你现在有 3 天时间（到 10 月 16 日）采取措施，否则合理使用政策生效，你的项目将停止工作。<br>Cached egress (Bandwidth): 13.23 GB of 5.5 GB</blockquote>
 
-  <p>「项目停止工作」指的不只是文件下载，而是<strong>整个项目返回 402</strong>：登录、数据库、翻译和语音代理全部不可用。对一个有真实用户在用的产品来说，这等于全面停服。</p>
+  <p>「项目停止工作」指的不只是文件下载，而是整个项目返回 402：登录、数据库、翻译和语音代理全部不可用。对一个有真实用户在用的产品来说，这等于全面停服。</p>
 
   <p>我当时的第一个问题很直接：<strong>为什么会用这么多缓存流量？</strong>存储里一共才几十 MB 的文件。</p>
 
@@ -115,11 +115,11 @@
 
   <div class="table-wrap"><table>
     <tr><th>类型</th><th>是什么</th><th>我们这边主要来自</th></tr>
-    <tr><td><strong>Egress</strong>（非缓存）</td><td>需要回到源站处理的请求</td><td>登录、数据库查询、函数调用</td></tr>
-    <tr><td><strong>Cached Egress</strong></td><td>由 Supabase 自己的 CDN 从缓存直接返回的流量，主要是 Storage 里的文件</td><td>英雄图片、BP 数据包、皮肤文件</td></tr>
+    <tr><td>Egress（非缓存）</td><td>需要回到源站处理的请求</td><td>登录、数据库查询、函数调用</td></tr>
+    <tr><td>Cached Egress</td><td>由 Supabase 自己的 CDN 从缓存直接返回的流量，主要是 Storage 里的文件</td><td>英雄图片、BP 数据包、皮肤文件</td></tr>
   </table></div>
 
-  <p>控制台首页的概览卡片只显示了 Egress（1.2 / 5 GB，看起来很健康），<strong>Cached Egress 要点进 Usage 详情页才看得到</strong>：14.46 / 5 GB，289%。这也是为什么一开始看控制台会觉得「没超啊」。</p>
+  <p>控制台首页的概览卡片只显示了 Egress（1.2 / 5 GB，看起来很健康），Cached Egress 要点进 Usage 详情页才看得到：14.46 / 5 GB，289%。这也是为什么一开始看控制台会觉得「没超啊」。</p>
 
   <p>问题在于：这些文件我们本来是不打算让 Supabase 来送的。下面是当时的请求路径：</p>
 
@@ -183,7 +183,7 @@
     <figcaption>图 2　cdn.amefys.com 一天约 1 GB 的流量构成（10-13）</figcaption>
   </figure>
 
-  <p>桌面端一天 1.5 万次请求，看着很多。但按 IP 一拆就清楚了：<strong>一天来自 103 个 IP，每个 IP 大约 370 次请求</strong>，正好约等于「127 个英雄 × 3 种图」下载一遍。也就是说，这是<strong>新装机的首次下载</strong>：桌面端第一次打开 BP 面板时，会把全部英雄图预下载到本地磁盘，之后都从磁盘读。本地缓存是正常的。</p>
+  <p>桌面端一天 1.5 万次请求，看着很多。但按 IP 一拆就清楚了：一天来自 103 个 IP，每个 IP 大约 370 次请求，正好约等于「127 个英雄 × 3 种图」下载一遍。也就是说，这是新装机的首次下载：桌面端第一次打开 BP 面板时，会把全部英雄图预下载到本地磁盘，之后都从磁盘读。本地缓存是正常的。</p>
 
   <div class="callout tip"><span class="t">结论</span>Storage 里一共只有 22 MB 文件，没有被刷，也没有客户端在反复下载。是每天几十个新用户、每人约 18 MB 的首次下载，一天下来就是 1 GB。用户在涨是好事，问题是这些流量全算到了 Supabase 头上。</div>
 
@@ -198,7 +198,7 @@ cache-control: public, max-age=31536000, immutable
 <span class="h">sb-gateway-mode: direct</span>
 <span class="h">sb-gateway-version: 1</span></code></pre>
 
-  <p>第一眼看会以为缓存是好的。但仔细看，旁边的 <code>sb-gateway-*</code> 是 <strong>Supabase 的响应头</strong>：我们的 Worker 把上游的响应头原样转发了。所以这个 <code>HIT</code> 说的是 <strong>Supabase 那一侧的 CDN 命中</strong>，恰恰就是账单上的 Cached Egress。我们自己这一侧的缓存到底有没有命中，这个头根本看不出来。</p>
+  <p>第一眼看会以为缓存是好的。但仔细看，旁边的 <code>sb-gateway-*</code> 是 Supabase 的响应头：我们的 Worker 把上游的响应头原样转发了。所以这个 <code>HIT</code> 说的是 <strong>Supabase 那一侧的 CDN 命中</strong>，恰恰就是账单上的 Cached Egress。我们自己这一侧的缓存到底有没有命中，这个头根本看不出来。</p>
 
   <p>那我们这边为什么不缓存？直接请求一次 Supabase Storage：</p>
 
@@ -242,7 +242,7 @@ cache-control: public, max-age=31536000, immutable
 
   <p>Worker 里写的 <code>cf: { cacheTtl, cacheEverything: true }</code> 看起来是「强制缓存」，但遇到带 <code>Set-Cookie</code> 的响应照样不存。这层缓存从上线那天起就没真正工作过，只是之前流量小，免费额度扛得住，一直没人发现。</p>
 
-  <div class="callout lesson"><span class="t">心得</span>看到 <code>cf-cache-status: HIT</code> 先别高兴，要分清<strong>这个头是谁加的</strong>。中间层原样转发上游响应头，会把上游的缓存状态伪装成你自己的。最好在自己的那一层加一个专门的头（比如下面的 <code>X-Amefys-Cache</code>），只说自己的事。</div>
+  <div class="callout lesson"><span class="t">心得</span>看到 <code>cf-cache-status: HIT</code> 先别高兴，要分清这个头是谁加的。中间层原样转发上游响应头，会把上游的缓存状态伪装成你自己的。最好在自己的那一层加一个专门的头（比如下面的 <code>X-Amefys-Cache</code>），只说自己的事。</div>
 
   <h2 id="s5"><span class="no">05</span>止血：用 Cache API 把缓存放回自己这边</h2>
 
@@ -284,23 +284,19 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
 
   <h2 id="s6"><span class="no">06</span>决定：先花 25 美元，保住整个项目</h2>
 
-  <p>修好缓存不等于问题解决。这个账期已经用掉的 13 GB 退不回来，再怎么优化，账上还是 289%；而超额的后果是<strong>整个项目</strong>返回 402，不只是文件。</p>
+  <p>修好缓存不等于问题解决。这个账期已经用掉的 13 GB 退不回来，再怎么优化，账上还是 289%；而超额的后果是整个项目返回 402，不只是文件。</p>
 
-  <p>所以当天的决定是：<strong>先升级 Supabase Pro（每月 25 美元）保住服务，同时继续做优化</strong>，等下个账期确认用量稳定在免费额度以内，再决定要不要降回来。几个细节：</p>
+  <p>所以当天的决定是：<strong>先升级 Supabase Pro（每月 25 美元）保住服务，同时继续做优化</strong>。等下个账期确认用量稳定在免费额度以内，再决定要不要降回来。</p>
 
-  <ul>
-    <li><strong>确认 Spend Cap（花费上限）是开着的</strong>：开着时超出额度只会被限速，不会额外扣钱，每月最多 25 美元。</li>
-    <li><strong>不要「先升级、马上取消」</strong>：Supabase 的取消订阅等于立即降回免费版，不是到期才生效。「怕下个月忘了取消」的问题，用日历提醒解决，而不是提前点取消。</li>
-    <li>升级后账期重新开始计算。Pro 的 Cached Egress 额度是 250 GB，16 号的停服风险解除。</li>
-  </ul>
+  <p>升级时有两点要注意。一是确认 Spend Cap（花费上限）开着，开着时超出额度只会被限速，不会额外扣钱，每月最多就是 25 美元。二是别「先升级、马上取消」：Supabase 的取消订阅等于立即降回免费版，不是到期才生效。怕下个月忘了取消，就设个日历提醒。升级后账期重新开始算，Pro 的 Cached Egress 额度是 250 GB，16 号的停服风险也就解除了。</p>
 
-  <div class="callout warn"><span class="t">注意</span>免费套餐的超额处罚，波及范围往往是整个项目。一个静态文件的问题，最后差点让登录和数据库一起停掉。评估这类风险时，要按「最大波及范围」来算，而不是按出问题的那个功能来算。</div>
+  <div class="callout warn"><span class="t">注意</span>免费套餐的超额处罚，波及范围往往是整个项目。一个静态文件的问题，最后差点让登录和数据库一起停掉。评估这类风险时，要按「最大波及范围」来算，别只盯着出问题的那个功能。</div>
 
   <h2 id="s7"><span class="no">07</span>迁移：一天之内搬到 R2</h2>
 
-  <p>Cache API 是止血，长期的问题还在：这些文件本来就不该由 Supabase 来送。Cloudflare R2 是对象存储，<strong>出流量免费</strong>，免费额度包括 10 GB 存储和每月 1000 万次读取。我们的文件一共 22 MB，前面还有缓存挡着，完全用不完。</p>
+  <p>Cache API 是止血，长期的问题还在：这些文件本来就不该由 Supabase 来送。Cloudflare R2 是对象存储，出流量免费，免费额度包括 10 GB 存储和每月 1000 万次读取。我们的文件一共 22 MB，前面还有缓存挡着，完全用不完。</p>
 
-  <p>迁移的原则是<strong>每一步都能回落，任何一步漏了都不断服务</strong>：</p>
+  <p>迁移只守一条原则：每一步都能回落，任何一步漏了都不能断服务。下面是按顺序做的六步。</p>
 
   <ol class="timeline">
     <li><span class="when">第 1 步　对象键 = URL 路径</span>R2 里的对象键直接用 CDN 路径（去掉开头的 <code>/</code>），比如 <code>draft/index.json</code>、<code>hero-art/v2/icons/axe.webp</code>。不需要映射表，客户端的地址一个字都不用改。</li>
@@ -364,15 +360,15 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
 
   <h2 id="s8"><span class="no">08</span>顺手做掉的几件事</h2>
 
-  <p>既然在看用量，就把 Supabase 和 Cloudflare 两边的请求都过了一遍，又找到几处能省的：</p>
+  <p>既然在看用量，我把 Supabase 和 Cloudflare 两边的请求都过了一遍，又找到几处能省的。</p>
 
-  <ul>
-    <li><strong>对局记录上传太频繁</strong>：桌面端在对局中每 30 秒往云端写一次，进入结算界面后更是每收到一次游戏数据就写一次，占了全部 API 请求的 58%。而云端这份记录只在换新电脑登录时才会用到。改成开局一次、每 10 分钟一次、结算一次。代码审查时还发现一个边界情况：刚进结算那一刻，游戏可能还没给出胜负，因此胜负出来后会再补传一次。</li>
-    <li><strong>英雄池保存合并发送</strong>：手机上每点一下就保存一次，一个用户一天 70–110 次。改成停顿 1.5 秒后合并成一次；改动本身立刻在本地生效，页面切到后台时也会立刻补传。</li>
-    <li><strong>浏览器预检请求在边缘应答</strong>：手机网页每次调接口前，浏览器会先发一个 OPTIONS 预检。现在由我们的代理直接回答，不再转给 Supabase。</li>
-    <li><strong>挡掉扫描器</strong>：API 域名每天有不少扫描器在试 <code>/.env</code>、<code>/phpinfo.php</code> 这类路径。加了一条防火墙规则，只放行客户端真正用到的几个 API 前缀，其余在进 Worker 之前就拦掉。</li>
-    <li><strong>关掉 Early Hints</strong>：查日志时发现一批成对出现的 204/504，来自 Cloudflare 的 Early Hints 预取。它对我们的接口和页面没有任何作用，而且全部超时，直接关掉。</li>
-  </ul>
+  <p>最大的一处是对局记录上传太频繁。桌面端在对局中每 30 秒往云端写一次，进了结算界面更是每收到一次游戏数据就写一次，占了全部 API 请求的 58%。可云端这份记录只在换新电脑登录时才用得到。现在改成开局一次、每 10 分钟一次、结算一次。代码审查时还发现一个边界情况：刚进结算那一刻，游戏可能还没给出胜负，所以胜负出来后会再补传一次。</p>
+
+  <p>手机上的英雄池是每点一下就保存一次，一个用户一天 70–110 次。改成停顿 1.5 秒后合并成一次保存；改动本身照样立刻在本地生效，页面切到后台时也会马上补传。</p>
+
+  <p>手机网页每次调接口前，浏览器会先发一个 OPTIONS 预检请求，现在由我们的代理直接回答，不再转给 Supabase。API 域名每天还有不少扫描器在试 <code>/.env</code>、<code>/phpinfo.php</code> 这类路径，加了一条防火墙规则，只放行客户端真正用到的几个 API 前缀，其余在进 Worker 之前就拦掉。</p>
+
+  <p>最后，查日志时看到一批成对出现的 204/504，来自 Cloudflare 的 Early Hints 预取。它对我们的接口和页面没有任何作用，还全部超时，就直接关了。</p>
 
   <h2 id="s9"><span class="no">09</span>结果</h2>
 
@@ -390,13 +386,15 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
 
   <h2 id="s10"><span class="no">10</span>几点心得</h2>
 
-  <ol>
-    <li><strong>额度告警要设在超额之前，而且每一项都要有。</strong>我们的本地运维面板盯着翻译额度、构建分钟数这些，却没有盯 Cached Egress。等官方邮件来的时候，已经是 289%。</li>
-    <li><strong>缓存要验证，不要假设。</strong>代码注释里写着「上游出流量接近零」，实际上从第一天起就没生效。加一个只属于自己这一层的响应头，部署后亲眼看到 MISS 变成 HIT 才算数。</li>
-    <li><strong>中间层的响应头要分清来源。</strong>原样转发上游的头，会把别人的缓存状态伪装成自己的。</li>
-    <li><strong>迁移设计成可回落的。</strong>R2 优先、Supabase 兜底，再逐个核对、最后才切流量。这样整个迁移在一天内完成，用户几乎无感。</li>
-    <li><strong>保服务优先，钱可以晚点省。</strong>超额的后果是整个项目停服时，花 25 美元买一个月的确定性，比赶在 3 天内把所有优化都做完更稳。</li>
-  </ol>
+  <p>额度告警要设在超额之前，而且每一项都要有。我的本地运维面板盯着翻译额度、构建分钟数这些，偏偏没盯 Cached Egress，等官方邮件来的时候已经是 289%。</p>
+
+  <p>缓存要验证，不能假设。代码注释里写着「上游出流量接近零」，实际上从第一天起就没生效过。在自己这一层加一个专门的响应头，部署后亲眼看到 MISS 变成 HIT，才算数。</p>
+
+  <p>中间层的响应头要分清来源。原样转发上游的头，会把别人的缓存状态伪装成自己的。</p>
+
+  <p>迁移要设计成可回落的。R2 优先、Supabase 兜底，逐个核对完再切流量，整个迁移一天做完，用户几乎没感觉。</p>
+
+  <p>保服务优先，钱可以晚点省。超额的后果是整个项目停服时，花 25 美元买一个月的确定性，比赶在 3 天内把所有优化都做完更稳。</p>
 
   <p>最后补一句：这次的排查、迁移、测试和发版，是我和 AI 编程助手（Claude Code）一起在一天内完成的。数据查询、根因定位、方案取舍和每一步的线上验证，都在同一个对话里推进。哪些事交给 AI、哪些决定必须自己拍板，以后会单独写一篇。</p>
 
