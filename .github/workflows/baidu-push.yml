@@ -47,18 +47,25 @@ jobs:
           URLS: ${{ github.event.inputs.urls || '' }}
           BEFORE: ${{ github.event.before }}
         run: |
-          # A deploy that adds or edits blog posts pushes those pages first — otherwise a new
-          # post waits weeks for its turn in the rotation (and the deploy's own run would
-          # spend the day's quota on other pages).
-          if [ -z "$URLS" ] && [ "${{ github.event_name }}" = push ] && git cat-file -e "$BEFORE" 2>/dev/null; then
-            URLS=$(git diff --name-only --diff-filter=AM "$BEFORE" "$GITHUB_SHA" -- 'blog/*.html' \
-              | sed -e 's#index\.html$##' -e 's#^#/#' | paste -sd, -)
+          # Blog pages go first, ahead of the rotation — a new post would otherwise wait
+          # weeks for its turn. On a deploy: the posts this push added or edited. On the
+          # daily run: posts touched in the last 3 days, which catches the ones whose
+          # deploy hit a quota already spent that day (2026-10-15). The rest of the
+          # quota still goes to the rotation.
+          if [ -z "$URLS" ]; then
+            if [ "${{ github.event_name }}" = push ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+              FIRST=$(git diff --name-only --diff-filter=AM "$BEFORE" "$GITHUB_SHA" -- 'blog/*.html')
+            else
+              FIRST=$(git log --since='3 days ago' --name-only --diff-filter=AM --pretty=format: -- 'blog/*.html' | sort -u)
+            fi
+            FIRST=$(printf '%s\n' $FIRST | grep . | sed -e 's#index\.html$##' -e 's#^#/#' | paste -sd, -)
           fi
           if [ -n "$URLS" ]; then
-            echo "pushing: $URLS"
+            echo "pushing only: $URLS"
             node scripts/baidu-push.mjs --limit "$LIMIT" --urls "$URLS"
           else
-            node scripts/baidu-push.mjs --limit "$LIMIT"
+            echo "first: ${FIRST:-<none>}"
+            node scripts/baidu-push.mjs --limit "$LIMIT" --first "$FIRST"
           fi
       - name: Skipped
         if: ${{ env.BAIDU_PUSH_TOKEN == '' }}
