@@ -32,3 +32,15 @@ test('never asks for more urls than the list has', async () => {
   assert.equal(windowFor([site('/')], 10, 0).length, 1)
   assert.deepEqual(windowFor([], 10, 0), [])
 })
+
+// 2026-10-15: a new blog post would wait weeks for its turn in the rotation.
+test('--urls picks exact pages, with or without the site prefix, and drops other hosts', async () => {
+  const { explicitUrls } = await load()
+  assert.deepEqual(explicitUrls('/blog/, blog/a.html,https://amefys.com/x.html'), [
+    'https://amefys.com/blog/',
+    'https://amefys.com/blog/a.html',
+    'https://amefys.com/x.html'
+  ])
+  assert.deepEqual(explicitUrls('https://evil.example/a'), [])
+  assert.deepEqual(explicitUrls(''), [])
+})
