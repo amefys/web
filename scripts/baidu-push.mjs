@@ -13,6 +13,9 @@
  *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs            # push
  *   node scripts/baidu-push.mjs --dry-run                       # print the list
  *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs --limit 10
+ *   BAIDU_PUSH_TOKEN=xxx node scripts/baidu-push.mjs --urls /blog/,/blog/new-post.html
+ *     (just these pages, ahead of the rotation — a new blog post would otherwise wait
+ *      weeks for its turn; still capped by today's quota)
  *
  * Token: ziyuan.baidu.com → 资源提交 → 普通收录 → API 提交 (per site).
  */
@@ -51,6 +54,16 @@ export function windowFor(urls, size, now = Date.now()) {
   return [...urls.slice(start), ...urls.slice(0, start)].slice(0, Math.min(size, urls.length))
 }
 
+/** `--urls` value → absolute amefys.com URLs; paths may be given with or without the site. */
+export function explicitUrls(arg) {
+  return String(arg || '')
+    .split(/[,\s]+/)
+    .map((u) => u.trim())
+    .filter(Boolean)
+    .map((u) => (u.startsWith('http') ? u : SITE + (u.startsWith('/') ? u : '/' + u)))
+    .filter((u) => u.startsWith(SITE + '/'))
+}
+
 async function push(token, urls) {
   const res = await fetch(ENDPOINT + token, {
     method: 'POST',
@@ -73,7 +86,9 @@ async function main() {
 
   const sitemap = readFileSync(resolve(import.meta.dirname, '..', 'sitemap.xml'), 'utf8')
   const all = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1])
-  const urls = windowFor(orderUrls(all), limit)
+  const urlsArg = args.indexOf('--urls')
+  const picked = urlsArg >= 0 ? explicitUrls(args[urlsArg + 1]) : []
+  const urls = picked.length ? picked.slice(0, limit) : windowFor(orderUrls(all), limit)
 
   if (dryRun) {
     console.log(urls.join('\n'))

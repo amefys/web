@@ -15,12 +15,16 @@ on:
       - "*.html"
       - "packs/**"
       - "guides/**"
+      - "blog/**"
       - "sitemap.xml"
   workflow_dispatch:
     inputs:
       limit:
         description: "URLs to push this run"
         default: "10"
+      urls:
+        description: "Only these pages, comma-separated (e.g. /blog/,/blog/post.html). Empty = daily rotation"
+        default: ""
 
 permissions:
   contents: read
@@ -38,7 +42,10 @@ jobs:
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
           LIMIT: ${{ github.event.inputs.limit || '10' }}
-        run: node scripts/baidu-push.mjs --limit "$LIMIT"
+          URLS: ${{ github.event.inputs.urls || '' }}
+        run: |
+          if [ -n "$URLS" ]; then node scripts/baidu-push.mjs --limit "$LIMIT" --urls "$URLS"
+          else node scripts/baidu-push.mjs --limit "$LIMIT"; fi
       - name: Skipped
         if: ${{ env.BAIDU_PUSH_TOKEN == '' }}
         env:
