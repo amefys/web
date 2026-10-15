@@ -1131,6 +1131,7 @@
   .stats-proof { margin-top: 14px; font-size: 13px; color: var(--text-2); display: flex; gap: 6px 14px; justify-content: center; flex-wrap: wrap; }
   .stats-proof b { color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
   .stats-proof .sep { opacity: .35; }
+  .stats-proof > .sep:first-child { display: none; }
   .bp-stat { margin: 18px 0 26px; display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 14px;
     background: rgba(212,175,106,.08); border: .5px solid rgba(232,199,121,.28); }
   .bp-stat .big { font-size: 26px; font-weight: 750; color: var(--gold); letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
@@ -2304,26 +2305,33 @@
     }
     function set(name, text) { document.querySelectorAll('[data-stat="' + name + '"]').forEach(function (el) { el.textContent = text }) }
     function hidePart(name) { document.querySelectorAll('[data-part="' + name + '"]').forEach(function (el) { el.remove() }) }
+    // Every value is checked before it is used: a partly broken file shows only
+    // the parts that are sound, never "NaN" — and never rewrites the BP copy wrongly.
+    function n(v, min) { return typeof v === 'number' && isFinite(v) && v >= min ? v : 0 }
+    function day(v) { return typeof v === 'string' && !isNaN(Date.parse(v)) ? v : '' }
     var ctrl = window.AbortController ? new AbortController() : null
     if (ctrl) setTimeout(function () { ctrl.abort() }, 6000)
     fetch('https://cdn.amefys.com/stats.json', ctrl ? { signal: ctrl.signal } : {})
       .then(function (r) { return r.ok ? r.json() : null })
       .then(function (S) {
-        if (!S || S.schema !== 1) return
-        var hasUsers = S.users > 0, hasDl = S.downloads > 0, R = S.releases, B = S.bp
-        if (hasUsers) set('users', floorPlus(S.users)); else hidePart('users')
-        if (hasDl) set('downloads', floorPlus(S.downloads)); else hidePart('downloads')
-        if (R && R.count) {
-          set('releases', R.count)
-          set('months', Math.max(1, Math.round((Date.now() - Date.parse(R.first)) / (30.44 * 864e5))) + ' ')
-          set('updated', ago(R.last))
+        if (!S || typeof S !== 'object' || S.schema !== 1) return
+        var users = n(S.users, 1), dl = n(S.downloads, 1)
+        var R = S.releases || {}, rCount = n(R.count, 1), rFirst = day(R.first), rLast = day(R.last)
+        var B = S.bp || {}, bp = n(B.matches, 1e4), ranked = n(B.ranked, 1e4), turbo = n(B.turbo, 1e4), built = day(B.builtAt)
+        if (users) set('users', floorPlus(users)); else hidePart('users')
+        if (dl) set('downloads', floorPlus(dl)); else hidePart('downloads')
+        var hasRel = rCount && rFirst && rLast
+        if (hasRel) {
+          set('releases', rCount)
+          set('months', Math.max(1, Math.round((Date.now() - Date.parse(rFirst)) / (30.44 * 864e5))) + ' ')
+          set('updated', ago(rLast))
         } else { hidePart('releases'); hidePart('updated') }
-        if (hasUsers || hasDl || (R && R.count)) document.querySelector('.stats-proof').hidden = false
-        if (hasUsers && hasDl) document.querySelector('.final-proof').hidden = false
-        if (B && B.matches > 0) {
-          set('bp', wan(B.matches)); set('ranked', wan(B.ranked)); set('turbo', wan(B.turbo))
-          set('bp-built', B.builtAt ? (bjDay(Date.parse(B.builtAt)).slice(5).replace('-', ' 月 ') + ' 日') : '')
-          document.querySelectorAll('[data-stat-text="ranked"]').forEach(function (el) { el.textContent = ' ' + wan(B.ranked) + '局' })
+        if (users || dl || hasRel) document.querySelector('.stats-proof').hidden = false
+        if (users && dl) document.querySelector('.final-proof').hidden = false
+        if (bp && ranked && turbo && built) {
+          set('bp', wan(bp)); set('ranked', wan(ranked)); set('turbo', wan(turbo))
+          set('bp-built', bjDay(Date.parse(built)).slice(5).replace('-', ' 月 ') + ' 日')
+          document.querySelectorAll('[data-stat-text="ranked"]').forEach(function (el) { el.textContent = ' ' + wan(ranked) + '局' })
           document.querySelector('.bp-stat').hidden = false
         }
       })
