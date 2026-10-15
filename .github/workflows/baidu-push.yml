@@ -34,6 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -43,9 +45,21 @@ jobs:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
           LIMIT: ${{ github.event.inputs.limit || '10' }}
           URLS: ${{ github.event.inputs.urls || '' }}
+          BEFORE: ${{ github.event.before }}
         run: |
-          if [ -n "$URLS" ]; then node scripts/baidu-push.mjs --limit "$LIMIT" --urls "$URLS"
-          else node scripts/baidu-push.mjs --limit "$LIMIT"; fi
+          # A deploy that adds or edits blog posts pushes those pages first — otherwise a new
+          # post waits weeks for its turn in the rotation (and the deploy's own run would
+          # spend the day's quota on other pages).
+          if [ -z "$URLS" ] && [ "${{ github.event_name }}" = push ] && git cat-file -e "$BEFORE" 2>/dev/null; then
+            URLS=$(git diff --name-only --diff-filter=AM "$BEFORE" "$GITHUB_SHA" -- 'blog/*.html' \
+              | sed -e 's#index\.html$##' -e 's#^#/#' | paste -sd, -)
+          fi
+          if [ -n "$URLS" ]; then
+            echo "pushing: $URLS"
+            node scripts/baidu-push.mjs --limit "$LIMIT" --urls "$URLS"
+          else
+            node scripts/baidu-push.mjs --limit "$LIMIT"
+          fi
       - name: Skipped
         if: ${{ env.BAIDU_PUSH_TOKEN == '' }}
         env:
