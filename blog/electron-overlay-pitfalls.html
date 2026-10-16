@@ -66,18 +66,18 @@
   <header class="post-head">
     <div class="tags"><span class="tag">Electron</span><span class="tag">Windows</span><span class="tag">macOS</span><span class="tag">桌面应用</span><span class="tag">踩坑</span></div>
     <h1>用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃</h1>
-    <p class="sub">AMEFYS 的桌面端是 Electron 写的，核心是一个盖在全屏游戏上的透明置顶悬浮窗。它把 Electron 在 Windows 上的很多角落都碰了一遍。这篇按类别整理开发以来踩过的坑，每条配一张图，写清根因、修法，以及有没有在 Windows 实机上验证过。</p>
+    <p class="sub">AMEFYS 的桌面端是 Electron 写的，核心是一个盖在全屏游戏上的透明置顶悬浮窗。它把 Electron 在 Windows 上的很多角落都碰了一遍。这篇按类别整理开发以来踩过的坑，配了 10 张图和几张表，写清根因、修法，以及有没有在 Windows 实机上验证过。</p>
     <div class="meta"><span>2026-10-17</span><span>阅读约 15 分钟</span><span>AMEFYS</span></div>
   </header>
 
   <div class="tldr">
     <div class="label">要点速览</div>
     <ul>
-      <li>Windows 上对透明窗口调 <code>setOpacity()</code>，会把逐像素透明换成整窗透明，CSS 圆角外的四个角全变黑。前四次修复都在 CSS 里打转，第五次才找到这个根因。</li>
+      <li>Windows 上对透明窗口调 <code>setOpacity()</code>，会把逐像素透明换成整窗透明，CSS 圆角外的四个角全变黑。前四次修复都在 CSS 和窗口参数上打转，第五次才找到这个根因。</li>
       <li>游戏悬浮窗的第一原则是别抢前台：DOTA 2 失去前台就静音。「鼠标能点」和「能获得焦点」是两回事，要分开设置。</li>
       <li><code>setIgnoreMouseEvents(true, { forward: true })</code> 在 Windows 上会装一个全局低级鼠标钩子，主线程一卡，整台电脑的鼠标跟着卡。我们改成每 50 毫秒轮询光标位置。</li>
-      <li>Electron 41.8.0 以前，在 <code>render-process-gone</code> 回调里同步 <code>reload()</code> 会让主进程崩溃（上游 #51900）。推迟一个 task 再 reload，崩溃从此归零。</li>
-      <li>空闲时整个应用约 490 MB，GPU 进程占 164 MB。主线程上的同步读盘（<code>electron-store.get()</code> 每次读整个文件）出现过两次。</li>
+      <li>Electron 41.8.0 以前，在 <code>render-process-gone</code> 回调里同步 <code>reload()</code> 会让主进程崩溃（上游 #51900）。推迟一个 task 再 reload，同时升到 41.10.7，0.29.4 起这个崩溃在 Sentry 上归零。</li>
+      <li>macOS 上空闲时整个应用约 490 MB，GPU 进程占 164 MB。主线程上的同步读盘（<code>electron-store.get()</code> 每次读整个文件）出现过两次。</li>
     </ul>
   </div>
 
@@ -147,7 +147,7 @@
 
   <h2 id="s2"><span class="no">02</span>透明窗口：修了五次的黑角</h2>
 
-  <p>6 月初，Windows 上悬浮窗的四个角是不透明的黑色，macOS 上正常。前四次修复都在 CSS 和窗口参数上打转，第五次才找到根因：Windows 上有两种透明方式，互相排斥。</p>
+  <p>6 月初，Windows 上悬浮窗的四个角是不透明的黑色，macOS 上正常。前四次修复都在 CSS 和窗口参数上打转，第五次才找到根因：Windows 的分层窗口有两种透明方式，逐像素透明（<code>UpdateLayeredWindow</code>）和整窗透明（<code>SetLayeredWindowAttributes</code> 加 <code>LWA_ALPHA</code>），两者互相排斥。</p>
 
   <figure>
     <div class="fig">
@@ -175,7 +175,7 @@
     <figcaption>图 2　同一个窗口，换了一种透明方式，圆角外的四块就从透明变成了黑</figcaption>
   </figure>
 
-  <p>我们的悬浮窗有一个「透明度」设置，默认值 0.8 一定会被保存，所以每次启动都会调一次 <code>setOpacity()</code>，透明效果每次开机都被毁掉。<strong>修法是在 Windows 上完全不碰原生透明度，改用 CSS 的 <code>opacity</code>。</strong>后来的截图闪框、锁定暗化也都只用 CSS。这条写成了文档红线，目前还没有自动化的守卫测试。</p>
+  <p>我们的悬浮窗有一个「透明度」设置，默认值 0.8 一定会被保存，所以每次启动都会调一次 <code>setOpacity()</code>，透明效果也就每次都被毁掉。<strong>修法是在 Windows 上完全不碰原生透明度，改用 CSS 的 <code>opacity</code>。</strong>后来的截图闪框、锁定暗化也都只用 CSS。这条写成了文档红线，目前还没有自动化的守卫测试。</p>
 
   <p>同一个黑角，还有两个次要原因：</p>
 
@@ -237,7 +237,9 @@
 
   <p>图里最后一行来自一位用户的反馈：「我刚开始打开的时候，Ctrl加左键右键都没有禁用成功，后来又试了几次才成功」。我们的分析是 Chromium 读修饰键用的是线程级的按键状态，而键盘消息不会发给无焦点窗口。</p>
 
-  <p>置顶和任务栏状态在 Windows 上也会悄悄丢。全屏游戏切换或 <code>setFocusable()</code> 之后，悬浮窗可能被埋到游戏下面，或者出现在任务栏里。用户在任务栏右键一关，窗口就被销毁，之后所有打开入口都静默失效。现在每次显示都重设 <code>setAlwaysOnTop(true, 'screen-saver')</code>、<code>setSkipTaskbar(true)</code> 和 <code>moveTop()</code>；所有入口走同一个「确保窗口存在，没有就重建」的函数，关闭改成隐藏。「新开一局后不显示」到底是哪个原因，还没在 Windows 日志里实锤。</p>
+  <p>置顶和任务栏状态在 Windows 上也会悄悄丢。按代码注释里的判断，全屏游戏切换或 <code>setFocusable()</code> 会重置置顶层级和 skipTaskbar，悬浮窗于是可能被埋到游戏下面，或者出现在任务栏里。用户在任务栏右键一关，窗口就被销毁，之后所有打开入口都静默失效。</p>
+
+  <p>现在每次显示都重设 <code>setAlwaysOnTop(true, 'screen-saver')</code>、<code>setSkipTaskbar(true)</code> 和 <code>moveTop()</code>；所有入口走同一个「确保窗口存在，没有就重建」的函数，关闭改成隐藏。「新开一局后不显示」到底是渲染进程崩了，还是全屏切换弄丢了置顶层级，还没在 Windows 日志里实锤。</p>
 
   <h2 id="s4"><span class="no">04</span>一个布尔参数背后的全局鼠标钩子</h2>
 
@@ -282,7 +284,7 @@
     <figcaption>图 4　forward 参数把系统的每一次鼠标移动都挂到了 Electron 主线程上；改成轮询以后，主线程卡住只影响我们自己</figcaption>
   </figure>
 
-  <p>从此系统里每一次鼠标移动，都要等这个线程处理完。主线程被垃圾回收或一次同步写盘占住几十毫秒，整台电脑的光标就冻住几十毫秒。macOS 上 forward 不装全局钩子，所以只在 Windows 上出现。</p>
+  <p>从此系统里每一次鼠标移动，都要等这个线程处理完。主线程被垃圾回收或一次同步写盘占住几十毫秒，整台电脑的光标就冻住几十毫秒。macOS 上 forward 只是让这个窗口接收鼠标移动事件，不装全局钩子，所以只在 Windows 上出现。</p>
 
   <p>新做法完全不用 forward：渲染进程把可点区域（我们叫它「洞」）报给主进程，主进程每 50 毫秒读一次光标位置。守卫测试会扫描主进程源码，出现带 forward 的调用就失败。</p>
 
@@ -328,7 +330,7 @@
     <figcaption>图 5　同一个 reload，同步调用会把整个应用带崩，推迟一个 task 就是正常恢复</figcaption>
   </figure>
 
-  <p>Electron 41.8.0 以前，Chromium 还在遍历「进程死亡」的观察者时，Electron 就发出了 <code>render-process-gone</code>，这时同步 <code>reload()</code> 会撞上 Chromium 的一个断言。上游在 <a href="https://github.com/electron/electron/pull/51900">electron/electron#51900</a> 修了它，首个含修复的 41.x 版本是 41.8.0；我们写的是 <code>~41.5.1</code>，一直拿不到。</p>
+  <p>Electron 41.8.0 以前，Chromium 还在遍历「进程死亡」的观察者时，Electron 就发出了 <code>render-process-gone</code>，这时同步 <code>reload()</code> 会撞上 Chromium 的一个断言。上游在 <a href="https://github.com/electron/electron/pull/51900">electron/electron#51900</a> 修了它，首个含修复的 41.x 版本是 41.8.0；我们在 package.json 里写的是 <code>~41.5.1</code>，只会在 41.5.x 里升级，所以一直拿不到。</p>
 
   <p>修法是 reload 用 <code>setTimeout(..., 0)</code> 推迟一个 task，同时升到 41.10.7。验证分三步：独立复现脚本里，41.5.1 同步 reload 第一次崩溃就退出（退出码 133），推迟后不崩；真实应用里连续杀 3 次渲染进程都自动恢复，第 4 次触发上限，应用依然活着；0.29.4 发出后，这个崩溃在 Sentry 上归零。渲染进程本身为什么会挂，还没有解释。</p>
 
@@ -424,7 +426,7 @@
 
   <p>页面这边再用 <code>window.screenX/Y</code> 做一次偏移修正兜底。Electron 的行为拿不准时，写一个几十行的验证脚本直接跑，比读文档快。</p>
 
-  <p>窗口位置恢复也有坑：保存的位置可能在屏幕外，连标题栏都拖不回来。不换显示器也能触发，悬浮窗默认高 660，1080p 屏幕开 150% 缩放后工作区约 680 再减任务栏，默认值本身就放不下。拖动的边界原来按主显示器算，拖不到第二块屏幕上。现在统一按窗口所在显示器（<code>screen.getDisplayMatching</code>）的工作区来限制，先限尺寸，再定位置。</p>
+  <p>窗口位置恢复也有坑：保存的位置可能在屏幕外，连标题栏都拖不回来。不换显示器也能触发，悬浮窗默认高 660 个逻辑像素。1080p 屏幕开 150% 缩放后逻辑高度只有 720，去掉任务栏，工作区剩 680 左右，和 660 只差 20，保存的位置稍微偏下一点就会超出屏幕。拖动的边界原来按主显示器算，拖不到第二块屏幕上。现在统一按窗口所在显示器（<code>screen.getDisplayMatching</code>）的工作区来限制，先限尺寸，再定位置。</p>
 
   <h2 id="s7"><span class="no">07</span>原生模块与打包</h2>
 
@@ -460,7 +462,7 @@
 
   <h2 id="s8"><span class="no">08</span>主线程上的同步读盘，和 490 MB 内存</h2>
 
-  <p>悬浮窗和游戏同时常驻，空闲开销比峰值性能更重要。主线程上最隐蔽的开销是同步读盘：<code>electron-store</code> 的 <code>get()</code> 每次都同步读整个配置文件，对局中计时提醒加起来每秒 20 多次，就在处理游戏数据的那条线程上。改成读一次、配置变化时失效的缓存。第四节锁定状态那次是它第二次出现。</p>
+  <p>悬浮窗和游戏同时常驻，空闲开销比峰值性能更重要。主线程上最隐蔽的开销是同步读盘，也就是第四节提到的 <code>electron-store.get()</code> 每次读整个配置文件。它第一次出现是 9 月底：对局中计时提醒加起来每秒读 20 多次，就在处理游戏数据的那条线程上，后来改成读一次、配置变化时失效的缓存。第四节锁定状态那次是第二次。</p>
 
   <div class="table-wrap"><table>
     <tr><th>主线程上的开销</th><th>改之前</th><th>改之后</th></tr>
@@ -472,9 +474,9 @@
 
   <figure>
     <div class="fig">
-      <svg viewBox="0 0 720 166" role="img" aria-label="空闲内存约 492 MB：GPU 进程 164、主进程 130、主窗口 82、悬浮窗 70、语音隐藏窗口 36、网络等 10">
+      <svg viewBox="0 0 720 166" role="img" aria-label="空闲内存约 490 MB：GPU 进程 164、主进程 130、主窗口 82、悬浮窗 70、语音隐藏窗口 36、网络等 10">
 <text x="16" y="22" font-size="12" text-anchor="start" style="fill:var(--d-text3)">0.33.0 空闲 1 分钟，按进程（MB）</text>
-<text x="704" y="22" font-size="13" text-anchor="end" font-weight="600" style="fill:var(--d-text)">合计约 492 MB</text>
+<text x="704" y="22" font-size="13" text-anchor="end" font-weight="600" style="fill:var(--d-text)">合计约 490 MB</text>
 <rect x="16.0" y="36" width="227.3" height="34" rx="5" style="fill:var(--d-red)"/>
 <text x="130.667" y="58" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-box)">164</text>
 <rect x="245.3" y="36" width="179.8" height="34" rx="5" style="fill:var(--d-gold)"/>
@@ -500,10 +502,10 @@
 <text x="16" y="152" font-size="12" text-anchor="start" style="fill:var(--d-text3)">语音隐藏窗口已改为用到时才创建；macOS 活动监视器口径，Windows 和对局中尚未实测</text>
 </svg>
     </div>
-    <figcaption>图 10　空闲时约 490 MB：GPU 进程最大，透明悬浮窗和毛玻璃效果是它的主要来源</figcaption>
+    <figcaption>图 10　空闲时约 490 MB：GPU 进程最大，我们估计主要来自透明悬浮窗和毛玻璃效果</figcaption>
   </figure>
 
-  <p>这组数字是 0.33.0 在 macOS 上空闲 1 分钟时用活动监视器看的。语音隐藏窗口已改为用到时才创建，省约 36 MB；懒创建时发给它的命令要排队到页面加载完，否则「检测虚拟声卡」会误报。主窗口隐藏后要不要销毁还没定：留着多占约 40 MB，恢复只要 10 毫秒左右，重建要 1.5 秒。Windows 上和对局中的内存都还没测过。</p>
+  <p>这组数字是 0.33.0 在 macOS 上空闲 1 分钟时用活动监视器看的。语音隐藏窗口已改为用到时才创建，macOS 用户和没开语音的 Windows 用户省约 36 MB；懒创建时发给它的命令要排队到页面加载完，否则「检测虚拟声卡」会误报。主窗口隐藏后要不要销毁还没定：按 5 月的估算，留着多占约 40 MB，恢复只要 10 毫秒左右，重建要 1.5 秒。Windows 上和对局中的内存都还没测过。</p>
 
   <h2 id="s9"><span class="no">09</span>和操作系统打交道</h2>
 
@@ -512,7 +514,7 @@
     <tr><td>macOS</td><td><code>tell application "Dota 2" to activate</code> 在游戏没运行时会把它启动起来；0.24.0 把它接到了高频路径上，用户打完字就拉起了 DOTA 和 Steam</td><td>改用 System Events，只对正在运行的进程设置前台（这个问题是跑单测时把开发机的 Steam 拉起来才发现的）</td></tr>
     <tr><td>Windows</td><td>PowerShell 子进程会在全屏游戏上弹出控制台窗口</td><td>每个子进程都设 <code>windowsHide</code></td></tr>
     <tr><td>Windows</td><td>查询已安装语言时 PowerShell 挂住，OCR 快捷键一直失效到重启</td><td>加超时，超时就结束子进程</td></tr>
-    <tr><td>Windows</td><td><code>$ErrorActionPreference = "Stop"</code> 让脚本提前终止，PowerShell 把约 90 行脚本回显进错误信息，铺满了悬浮窗</td><td>脚本改用标准错误输出写诊断，退出码得以保留；传上来的信息截短，横幅限制高度</td></tr>
+    <tr><td>Windows</td><td><code>$ErrorActionPreference = "Stop"</code> 把 <code>Write-Error</code> 变成终止错误，脚本自己的 <code>exit 4</code> 跑不到，PowerShell 还把约 90 行脚本回显进错误信息，铺满了悬浮窗</td><td>脚本改用标准错误输出写诊断，退出码得以保留；传上来的信息截短，横幅限制高度</td></tr>
     <tr><td>Windows</td><td>OCR 是独立的可选组件，「添加语言」不会带上它；安装命令对编造的组件名也不报错</td><td>装完再查一次安装状态才算数</td></tr>
     <tr><td>Windows</td><td>普通权限的父进程读不到提权子进程的输出；拿到的退出码可能是空值，转成 0 和成功分不清</td><td>结果写文件；测试机的用户账户控制是静音的，「没弹框」不代表没执行</td></tr>
     <tr><td>Windows</td><td><code>&lt;select&gt;</code> 下拉层按浅色画白底，字又是白色；滑块和复选框用了系统蓝</td><td>主窗口加 <code>color-scheme</code> 和 <code>accent-color</code>；悬浮窗故意不加 <code>color-scheme</code>，它会改透明窗口的画布底色</td></tr>
@@ -520,11 +522,11 @@
 
   <h2 id="s10"><span class="no">10</span>自动更新与签名</h2>
 
-  <p>5 月，0.7.1 自动更新到 0.7.2 失败，提示新版本「is not signed by the application owner」。electron-builder 配置里的 <code>publisherName</code> 一个字段管两件事：告诉签名工具写什么名字，也告诉 electron-updater 以后校验新包的发布者。我们的 CI 根本没签名，这个字段却已经写进了用户装好的 0.7.x 里，于是它拒绝了所有没签名的新版本。</p>
+  <p>5 月，0.7.1 自动更新到 0.7.2 失败，提示新版本「is not signed by the application owner」。electron-builder 配置里的 <code>signtoolOptions.publisherName</code> 一个字段管两件事：告诉签名工具写什么名字，也告诉 electron-updater 以后校验新包的发布者。我们的 CI 根本没签名，这个字段却已经写进了用户装好的 0.7.x 的 <code>app-update.yml</code> 里，于是它拒绝了所有没签名的新版本。</p>
 
-  <p>删掉这个字段以后，0.7.1 和 0.7.2 的用户只能去官网手动装一次新版。自动更新的校验配置会随安装包发到用户手里，错一次就得让用户手动装一次。目前两个平台都还没签名，配置文件里留了注释，防止将来买了证书只加回一半。</p>
+  <p>删掉这个字段以后，0.7.1 和 0.7.2 的用户只能去官网手动装一次新版：校验配置跟着安装包到了用户手里，后面的更新改不动它。目前两个平台都还没签名，配置文件里留了注释，防止将来买了证书只加回一半。</p>
 
-  <p>还有一个和国内用户相关的：退出的代理软件会留下一个失效的系统代理，更新检查因此失败。现在遇到这类错误，就把会话切成直连重试一次，本次运行内保持直连。</p>
+  <p>还有一个和国内用户相关的：退出的代理软件会留下一个失效的系统代理，更新检查因此失败。现在遇到 <code>ERR_PROXY_CONNECTION_FAILED</code> 这类代理错误，就用 <code>session.setProxy({ mode: 'direct' })</code> 切成直连重试一次，本次运行内保持直连。</p>
 
   <h2 id="s11"><span class="no">11</span>哪些在 Windows 实机上验证过</h2>
 
@@ -544,7 +546,7 @@
     <tr><td>窗口恢复到屏幕外</td><td>按所在显示器的工作区限制</td><td>没有实机记录</td></tr>
   </table></div>
 
-  <p>没验证过的不等于没修好，但不该和验证过的混在一起。每次发版的记录里，我们都写明了「零真机验证」的项、要看的日志关键字，以及出问题时回滚到哪个版本。</p>
+  <p>没验证过的不等于没修好，但不该和验证过的混在一起。涉及这些修复的发版记录里，我们写明了「零真机验证」的项、要看的日志关键字，以及出问题时回滚到哪个版本。</p>
 
   <h2 id="s12"><span class="no">12</span>几点心得</h2>
 

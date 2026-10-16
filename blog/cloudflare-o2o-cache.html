@@ -75,7 +75,7 @@
     <ul>
       <li>Worker 去 fetch 另一个 Cloudflare 客户的地址时，按 Cloudflare 文档的说法，会「读穿那个 zone 的缓存」。命中算在对方头上，对我们来说就是 Supabase 账单上每天约 1 GB 的 Cached Egress。</li>
       <li>上游每个响应都带 <code>Set-Cookie: __cf_bm</code>，而 Cloudflare 默认不缓存带 Set-Cookie 的响应，这是官方排障文档点名的 O2O 缓存失效原因。</li>
-      <li>响应头里的 <code>cf-cache-status: HIT</code> 可能是上游 zone 的；用 <code>curl -I</code> 验证 R2 自定义域名，HEAD 请求每次都是 <code>DYNAMIC</code>，GET 才是 HIT。两个头都会误导判断。</li>
+      <li>响应头里的 <code>cf-cache-status: HIT</code> 可能是上游 zone 的；用 <code>curl -I</code>（HEAD 请求）验证 R2 自定义域名，每次都是 <code>DYNAMIC</code>，GET 才是 HIT。这两种情况都会误导判断。</li>
       <li>三种修法：Cache API 自己存（当天止血，按机房各存一份，用不了分层缓存）；把文件搬到自己的 R2（最终方案）；买上游的自定义域名（要付费，而且依旧是 O2O）。</li>
       <li>判断方法归结成一句：在自己那一层加一个只说自己的响应头，部署后亲眼看到 MISS 变 HIT。</li>
     </ul>
@@ -101,11 +101,13 @@
 
   <p>10 月 13 日，Supabase 发邮件说我们的 Cached Egress 用到了免费额度的 289%，三天内不处理就停掉整个项目。排查、升级决定、一天之内迁到 R2 的全过程写在<a href="/blog/supabase-egress-to-r2.html">《免费额度用到 289%》</a>里。那篇讲的是事故怎么处理，缓存为什么失效只用了一节。</p>
 
-  <p>这篇只讲那一节背后的机制。我想把它单独写出来，原因是：用 Worker 给某个服务套一层自己的域名和缓存，是 Cloudflare 上很常见的做法，而很多服务本身就跑在 Cloudflare 上。只要上游也是 Cloudflare 的客户，就会碰到同样的问题，而且很难从响应头里看出来。</p>
+  <p>这篇只讲那一节背后的机制。单独写出来，是因为用 Worker 给某个服务套一层自己的域名和缓存，是 Cloudflare 上很常见的做法，而很多服务本身就跑在 Cloudflare 上。只要上游也是 Cloudflare 的客户，就会碰到同样的问题，而且很难从响应头里看出来。</p>
 
   <h2 id="s2"><span class="no">02</span>O2O：一个请求经过两个 zone</h2>
 
-  <p>Cloudflare 把每个接入的域名叫一个 zone。我们的 cdn.amefys.com 是一个 zone，Worker 跑在它上面；supabase.co 是另一个 zone，属于 Supabase 的账户。请求先经过我们的 zone，再经过他们的 zone，Cloudflare 管这种两个 zone 串联的情况叫 orange-to-orange，简称 O2O（橙色云朵是 Cloudflare 控制台里「经过代理」的图标）。<a href="https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/">官方说明</a>里写的是：前一个 zone 的设置先生效，后一个 zone 的设置再生效。</p>
+  <p>Cloudflare 把每个接入的域名叫一个 zone。我们的 cdn.amefys.com 是一个 zone，Worker 跑在它上面；supabase.co 是另一个 zone，属于 Supabase 的账户。请求先经过我们的 zone，再经过他们的 zone。Cloudflare 把两个 zone 串联的路由叫 orange-to-orange，简称 O2O（橙色云朵是 Cloudflare 控制台里「经过代理」的图标）。</p>
+
+  <p><a href="https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/">官方说明</a>里的 O2O 特指一种配置：主机名接入 SaaS 服务商的自定义主机名，己方 zone 用代理的 CNAME 指过去，两个 zone 分属不同账户；前一个 zone 的设置先生效，后一个 zone 的设置再生效。我们是 Worker 直接 fetch supabase.co，不完全是这种配置，但请求同样先后经过两个 zone，下文借用这个叫法。</p>
 
   <p>判断上游是不是 Cloudflare 的客户很简单，直接请求一次看响应头，有 <code>server: cloudflare</code> 和 <code>cf-ray</code> 就是：</p>
 
@@ -180,15 +182,15 @@ cf-cache-status: MISS
 
   <p>两篇文档都没有直接写「O2O 下 <code>cacheTtl</code> 无效」。我能确定的是实测结果：Supabase 的 Cached Egress 每天涨约 1 GB，和 cdn.amefys.com 一天的总流量差不多。如果我们这一侧哪怕缓存住一部分，Supabase 那边的数字都应该明显小于总流量。换成下一节的 Cache API 之后，同一个文件第二次请求就是 <code>X-Amefys-Cache: HIT</code>，也印证了问题出在「谁来存」。</p>
 
-  <div class="callout warn"><span class="t">文档里的「不管响应上有什么头」</span>这句话说的是缓存规则怎么定，前提是请求真的走到了你这一侧的缓存。目标地址属于另一个 zone 时，请求读的是对方的缓存，你给的参数在对方那一层能起多大作用、会不会被对方的 Set-Cookie 挡住，文档没有写清楚。遇到上游也是 Cloudflare 的情况，别从这句话推出「一定能缓存」，部署后实测。</div>
+  <div class="callout warn"><span class="t">文档里的「不管响应上有什么头」</span>我的理解是，这句话说的是缓存规则怎么定，前提是请求真的走到了你这一侧的缓存。目标地址属于另一个 zone 时，请求读的是对方的缓存，你给的参数在对方那一层能起多大作用、会不会被对方的 Set-Cookie 挡住，文档没有写清楚。遇到上游也是 Cloudflare 的情况，别从这句话推出「一定能缓存」，部署后实测。</div>
 
   <h2 id="s5"><span class="no">05</span>怎么判断是哪一层在缓存</h2>
 
-  <p>这次排查里，有两个响应头差点让我得出错误的结论。</p>
+  <p>这次排查里，有两次看响应头差点得出错误的结论。</p>
 
   <p>第一个是转发来的 <code>cf-cache-status</code>。当时请求 cdn.amefys.com，响应头里写着 HIT，旁边还有 <code>sb-gateway-mode</code> 这类 Supabase 自己的头。Worker 把上游响应头原样转发了，这个 HIT 是 Supabase 那一侧的。一个中间层如果整包转发上游的头，客户端看到的缓存状态就是上游的。</p>
 
-  <p>第二个是今天写这篇时碰到的。现在 cdn.amefys.com 直接绑在 R2 上，我习惯性地用 <code>curl -I</code> 验证，连着三次都是 <code>DYNAMIC</code>，看起来缓存规则失效了。换成 GET 请求，三次都是 HIT，<code>age</code> 也在涨：</p>
+  <p>第二个是 10 月 16 日写这篇时碰到的。现在 cdn.amefys.com 直接绑在 R2 上，我习惯性地用 <code>curl -I</code> 验证，连着三次都是 <code>DYNAMIC</code>，看起来缓存规则失效了。换成 GET 请求，三次都是 HIT，<code>age</code> 也在涨：</p>
 
 <pre><code>$ curl -sI https://cdn.amefys.com/hero-art/v2/icons/axe.webp | grep cf-cache
 <span class="bad">cf-cache-status: DYNAMIC</span>          <span class="c"># HEAD 请求，每次都是</span>
@@ -212,13 +214,11 @@ age: 1380
 
   <h2 id="s6"><span class="no">06</span>三种修法和各自的代价</h2>
 
-  <p>能选的修法有三种：</p>
-
   <div class="table-wrap"><table>
     <tr><th>修法</th><th>做法</th><th>代价</th><th>我们的选择</th></tr>
     <tr><td>Cache API</td><td>Worker 用 <code>caches.default</code> 自己存、自己取，存之前删掉 Set-Cookie</td><td>缓存只在当前机房，用不了分层缓存；缓存键、失败处理、304 都得自己写</td><td>10 月 14 日下午止血</td></tr>
     <tr><td>搬到自己的存储</td><td>文件放进自己账户下的 R2，域名直接绑 R2</td><td>要迁移文件、改发布脚本；R2 出流量免费</td><td>同一天傍晚切换，最终方案</td></tr>
-    <tr><td>用上游的自定义域名</td><td>让 Supabase 直接用我们的域名对外</td><td>Supabase 的自定义域名要付费；文件仍然由 Supabase 送，Cached Egress 照样计费</td><td>没选</td></tr>
+    <tr><td>用上游的自定义域名</td><td>让 Supabase 直接用我们的域名对外</td><td>Supabase 的自定义域名要付费；文件仍然由 Supabase 送，Cached Egress 照样计费；而且依旧是 O2O</td><td>没选</td></tr>
   </table></div>
 
   <p>Cache API 改起来最快，当天下午就上线了。它最大的限制写在 <a href="https://developers.cloudflare.com/workers/reference/how-the-cache-works/">Workers 文档</a>里：Cache API 只作用于当前机房，和分层缓存不兼容。没有分层缓存，每个机房都要各自回源一次：</p>
@@ -295,7 +295,7 @@ return toClient(upstream, request, rule, 'MISS')</code></pre>
 
   <p>缓存状态要看是谁报的。转发来的 <code>cf-cache-status</code> 可能是上游的，HEAD 请求的 DYNAMIC 也不代表 GET 不命中。自己加一个专属的头，用和用户一样的请求方法去验证。</p>
 
-  <p>文档没写的地方要实测。<code>cacheTtl</code> 的说明写着「不管响应上有什么头」，Workers 的缓存说明又写着跨 zone 的请求读的是对方的缓存，两句放在一起，O2O 下到底谁说了算，文档没有交代。这种地方部署后量一次，比读文档推理可靠。</p>
+  <p>文档没写的地方要实测。<code>cacheTtl</code> 和「跨 zone 读对方缓存」在 O2O 下谁说了算，文档没有交代（见 §04），这种地方部署后量一次，比读文档推理可靠。</p>
 
   <p>账单是最后一道验证。响应头可以被转发、被请求方法影响，账单不会。上游的计费流量和自己域名的总流量差不多大，就说明自己这一层什么都没挡住，不管响应头写的是什么。</p>
 

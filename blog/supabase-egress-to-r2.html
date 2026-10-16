@@ -66,7 +66,7 @@
   <header class="post-head">
     <div class="tags"><span class="tag">Supabase</span><span class="tag">Cloudflare</span><span class="tag">R2</span><span class="tag">成本优化</span><span class="tag">事故复盘</span></div>
     <h1>免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2</h1>
-    <p class="sub">一封「3 天后停服」的警告邮件，把我们引到了一个藏了很久的问题：前面那层 Cloudflare 缓存，从上线那天起就没有真正生效过。罪魁祸首是一个 <code>Set-Cookie</code> 响应头。</p>
+    <p class="sub">一封「3 天后停服」的警告邮件，把我们引到了一个藏了很久的问题：前面那层 Cloudflare 缓存，从上线那天起就没有真正生效过。问题出在一个 <code>Set-Cookie</code> 响应头上。</p>
     <div class="meta"><span>2026-10-14</span><span>阅读约 12 分钟</span><span>AMEFYS</span></div>
   </header>
 
@@ -107,7 +107,7 @@
 
   <blockquote>你的用量在上次通知后继续大幅超出套餐额度……你现在有 3 天时间（到 10 月 16 日）采取措施，否则合理使用政策生效，你的项目将停止工作。<br>Cached egress (Bandwidth): 13.23 GB of 5.5 GB</blockquote>
 
-  <p>「项目停止工作」指的不只是文件下载，而是整个项目返回 402：登录、数据库、翻译和语音代理全部不可用。对一个有真实用户在用的产品来说，这等于全面停服。</p>
+  <p>「项目停止工作」指整个项目返回 402：文件下载、登录、数据库、翻译和语音代理全部不可用。对一个有真实用户在用的产品来说，这等于全面停服。</p>
 
   <p>我当时的第一个问题很直接：<strong>为什么会用这么多缓存流量？</strong>存储里一共才几十 MB 的文件。</p>
 
@@ -117,13 +117,13 @@
 
   <div class="table-wrap"><table>
     <tr><th>类型</th><th>是什么</th><th>我们这边主要来自</th></tr>
-    <tr><td>Egress（非缓存）</td><td>需要回到源站处理的请求</td><td>登录、数据库查询、函数调用</td></tr>
+    <tr><td>Egress（非缓存）</td><td>没有命中缓存、由源站直接送出的流量</td><td>登录、数据库查询、函数调用</td></tr>
     <tr><td>Cached Egress</td><td>由 Supabase 自己的 CDN 从缓存直接返回的流量，主要是 Storage 里的文件</td><td>英雄图片、BP 数据包、皮肤文件</td></tr>
   </table></div>
 
   <p>控制台首页的概览卡片只显示了 Egress（1.2 / 5 GB，看起来很健康），Cached Egress 要点进 Usage 详情页才看得到：14.46 / 5 GB，289%。这也是为什么一开始看控制台会觉得「没超啊」。</p>
 
-  <p>问题在于：这些文件我们本来是不打算让 Supabase 来送的。下面是当时的请求路径：</p>
+  <p>可这些文件我们本来就没打算让 Supabase 来送。当时的请求路径是这样的：</p>
 
   <figure>
     <div class="fig">
@@ -185,9 +185,11 @@
     <figcaption>图 2　cdn.amefys.com 一天约 1 GB 的流量构成（10-13）</figcaption>
   </figure>
 
-  <p>桌面端一天 1.5 万次请求，看着很多。但按 IP 一拆就清楚了：一天来自 103 个 IP，每个 IP 大约 370 次请求，正好约等于「127 个英雄 × 3 种图」下载一遍。也就是说，这是新装机的首次下载：桌面端第一次打开 BP 面板时，会把全部英雄图预下载到本地磁盘，之后都从磁盘读。本地缓存是正常的。</p>
+  <p>桌面端一天 1.5 万次请求，看着很多。但按 IP 一拆就清楚了：这些请求来自 103 个 IP，平均每个约 150 次，流量最多的几个 IP 各约 370 次请求、18 MB 左右，正好约等于「127 个英雄 × 3 种图」下载一遍。</p>
 
-  <div class="callout tip"><span class="t">结论</span>Storage 里一共只有 22 MB 文件，没有被刷，也没有客户端在反复下载。是每天几十个新用户、每人约 18 MB 的首次下载，一天下来就是 1 GB。用户在涨是好事，问题是这些流量全算到了 Supabase 头上。</div>
+  <p>也就是说，这是新装机的首次下载：桌面端第一次打开 BP 面板时，会把全部英雄图预下载到本地磁盘，之后都从磁盘读。客户端这边的本地缓存没有问题。</p>
+
+  <div class="callout tip"><span class="t">结论</span>Storage 里一共只有 22 MB 文件，没有被刷，也没有客户端在反复下载。是每天上百台机器的首次下载（一台机器下全套约 18 MB），一天下来就是 1 GB。用户在涨是好事，问题是这些流量全算到了 Supabase 头上。</div>
 
   <h2 id="s4"><span class="no">04</span>根因：缓存为什么没挡住</h2>
 
@@ -212,7 +214,9 @@ cache-control: public, max-age=31536000, immutable
 
   <p>每个响应都带一个 <code>Set-Cookie: __cf_bm</code>。这是 Cloudflare Bot Management 的 cookie：supabase.co 本身也是 Cloudflare 的客户，开了机器人防护。</p>
 
-  <p>Cloudflare 的官方排障文档专门写过这种情况（<a href="https://developers.cloudflare.com/cache/troubleshooting/bot-management-o2o-cache-bypass/" rel="noopener">Bot Management cookie causes cache bypass in O2O setups</a>）：当你的 Cloudflare zone 去请求另一个也在 Cloudflare 上的源站（所谓 orange-to-orange，O2O）时，源站那边返回的 <code>__cf_bm</code> cookie 会让你这一侧<strong>跳过缓存</strong>，因为 Cloudflare 默认不缓存带 <code>Set-Cookie</code> 的响应。</p>
+  <p>Cloudflare 的官方排障文档专门写过这种情况（<a href="https://developers.cloudflare.com/cache/troubleshooting/bot-management-o2o-cache-bypass/" rel="noopener">Bot Management cookie causes cache bypass in O2O setups</a>）：当你的 Cloudflare zone 去请求另一个也在 Cloudflare 上的源站时（文档里叫 orange-to-orange，简称 O2O），源站那边返回的 <code>__cf_bm</code> cookie 会让你这一侧<strong>跳过缓存</strong>，因为 Cloudflare 默认不缓存带 <code>Set-Cookie</code> 的响应。</p>
+
+  <p>严格说，文档里的 O2O 特指接 SaaS 服务商自定义主机名的配置；我们是 Worker 直接请求 supabase.co，请求同样先后经过两个 zone。</p>
 
   <figure>
     <div class="fig">
@@ -242,7 +246,7 @@ cache-control: public, max-age=31536000, immutable
     <figcaption>图 3　每次请求都穿透到 Supabase：问题出在第 ③ 步的 Set-Cookie</figcaption>
   </figure>
 
-  <p>Worker 里写的 <code>cf: { cacheTtl, cacheEverything: true }</code> 看起来是「强制缓存」，但遇到带 <code>Set-Cookie</code> 的响应照样不存。这层缓存从上线那天起就没真正工作过，只是之前流量小，免费额度扛得住，一直没人发现。</p>
+  <p>Worker 里写的 <code>cf: { cacheTtl, cacheEverything: true }</code> 看起来是「强制缓存」，但我们这一侧照样没存住（为什么这组参数没起作用，续篇<a href="/blog/cloudflare-o2o-cache.html">《Cloudflare 跨账户（O2O）缓存的坑》</a>单独讲）。这层缓存从上线那天起就没真正工作过，只是之前流量小，免费额度扛得住，一直没人发现。</p>
 
   <div class="callout lesson"><span class="t">心得</span>看到 <code>cf-cache-status: HIT</code> 先别高兴，要分清这个头是谁加的。中间层原样转发上游响应头，会把上游的缓存状态伪装成你自己的。最好在自己的那一层加一个专门的头（比如下面的 <code>X-Amefys-Cache</code>），只说自己的事。</div>
 
@@ -282,7 +286,7 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
     <tr><td>10-13</td><td class="num">1.02 GB</td><td class="num">87 MB</td><td class="num">8.5%</td></tr>
   </table></div>
 
-  <p>更重要的是，回源量从此和用户数脱钩：它只和「机房数 × 文件总量」有关，用户翻倍也不会跟着翻倍。修复的同时补了 8 个测试，其中 5 个在旧代码上会失败，防止以后有人改回去。</p>
+  <p>另外，回源量从此和用户数脱钩：它只和「机房数 × 文件总量」有关，用户翻倍也不会跟着翻倍。修复的同时补了 8 个测试，其中 5 个在旧代码上会失败，防止以后有人改回去。</p>
 
   <h2 id="s6"><span class="no">06</span>决定：先花 25 美元，保住整个项目</h2>
 
@@ -290,13 +294,13 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
 
   <p>所以当天的决定是：<strong>先升级 Supabase Pro（每月 25 美元）保住服务，同时继续做优化</strong>。等下个账期确认用量稳定在免费额度以内，再决定要不要降回来。</p>
 
-  <p>升级时有两点要注意。一是确认 Spend Cap（花费上限）开着，开着时超出额度只会被限速，不会额外扣钱，每月最多就是 25 美元。二是别「先升级、马上取消」：Supabase 的取消订阅等于立即降回免费版，不是到期才生效。怕下个月忘了取消，就设个日历提醒。升级后账期重新开始算，Pro 的 Cached Egress 额度是 250 GB，16 号的停服风险也就解除了。</p>
+  <p>升级时有两点要注意。一是确认 Spend Cap（花费上限）开着，开着时超出额度的那一项会被停用到下个账期，不会额外扣钱，每月最多就是 25 美元。二是别「先升级、马上取消」：Supabase 的取消订阅等于立即降回免费版，不是到期才生效。怕下个月忘了取消，就设个日历提醒。升级后账期重新开始算，Pro 的 Cached Egress 额度是 250 GB，16 号的停服风险也就解除了。</p>
 
-  <div class="callout warn"><span class="t">注意</span>免费套餐的超额处罚，波及范围往往是整个项目。一个静态文件的问题，最后差点让登录和数据库一起停掉。评估这类风险时，要按「最大波及范围」来算，别只盯着出问题的那个功能。</div>
+  <div class="callout warn"><span class="t">注意</span>Supabase 免费套餐的超额处罚，波及的是整个项目。一个静态文件的问题，最后差点让登录和数据库一起停掉。评估这类风险时，要按「最大波及范围」来算，别只盯着出问题的那个功能。</div>
 
   <h2 id="s7"><span class="no">07</span>迁移：一天之内搬到 R2</h2>
 
-  <p>Cache API 是止血，长期的问题还在：这些文件本来就不该由 Supabase 来送。Cloudflare R2 是对象存储，出流量免费，免费额度包括 10 GB 存储和每月 1000 万次读取。我们的文件一共 22 MB，前面还有缓存挡着，完全用不完。</p>
+  <p>Cache API 是止血，长期的问题还在：这些文件本来就不该由 Supabase 来送。Cloudflare R2 是对象存储，出流量免费，免费额度包括 10 GB 存储和每月 1000 万次读取（B 类操作）。我们的文件一共 22 MB，前面还有缓存挡着，完全用不完。</p>
 
   <p>迁移只守一条原则：每一步都能回落，任何一步漏了都不能断服务。下面是按顺序做的六步。</p>
 
@@ -391,8 +395,6 @@ x-amefys-cache: <span class="ok">HIT</span></code></pre>
   <p>额度告警要设在超额之前，而且每一项都要有。我的本地运维面板盯着翻译额度、构建分钟数这些，偏偏没盯 Cached Egress，等官方邮件来的时候已经是 289%。</p>
 
   <p>缓存要验证，不能假设。代码注释里写着「上游出流量接近零」，实际上从第一天起就没生效过。在自己这一层加一个专门的响应头，部署后亲眼看到 MISS 变成 HIT，才算数。</p>
-
-  <p>中间层的响应头要分清来源。原样转发上游的头，会把别人的缓存状态伪装成自己的。</p>
 
   <p>迁移要设计成可回落的。R2 优先、Supabase 兜底，逐个核对完再切流量，整个迁移一天做完，用户几乎没感觉。</p>
 
