@@ -653,6 +653,7 @@ function renderSitemap(heroFiles, itemFiles, prev = new Map()) {
     { loc: `${SITE}/packs/`, priority: '0.7' },
     { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
     { loc: `${SITE}/blog/`, priority: '0.7' },
+    { loc: `${SITE}/blog/cloudflare-o2o-cache.html`, priority: '0.6' },
     { loc: `${SITE}/blog/github-actions-minutes.html`, priority: '0.6' },
     { loc: `${SITE}/blog/amefys-architecture.html`, priority: '0.6' },
     { loc: `${SITE}/blog/supabase-egress-to-r2.html`, priority: '0.6' },

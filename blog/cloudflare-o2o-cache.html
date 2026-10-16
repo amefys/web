@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑 — AMEFYS 技术博客</title>
+<meta name="description" content="Cloudflare Worker 代理 supabase.co 这类同样在 Cloudflare 上的服务时，cf.cacheTtl 没让自己这一侧缓存过一次：跨 zone 的 fetch 读的是对方的缓存，上游的 Set-Cookie: __cf_bm 又让缓存跳过。怎么判断是哪一层在缓存，Cache API、迁到 R2、上游自定义域名三种修法的代价。">
+<link rel="canonical" href="https://amefys.com/blog/cloudflare-o2o-cache.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑">
+<meta property="og:description" content="跨 zone 的 fetch 读的是对方的缓存，__cf_bm 让缓存跳过，转发来的 HIT 和 HEAD 的 DYNAMIC 都会骗人：O2O 缓存怎么判断、怎么修。">
+<meta property="og:url" content="https://amefys.com/blog/cloudflare-o2o-cache.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-16">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑","datePublished":"2026-10-16","dateModified":"2026-10-16","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/cloudflare-o2o-cache.html","keywords":"Cloudflare Workers, O2O, 缓存, Cache API, Supabase, __cf_bm"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">Cloudflare</span><span class="tag">Workers</span><span class="tag">缓存</span><span class="tag">Supabase</span><span class="tag">踩坑</span></div>
+    <h1>Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑</h1>
+    <p class="sub">Worker 里写了 <code>cacheTtl</code>，响应头里也是 <code>HIT</code>，可我们这一侧一次都没缓存上。上游 supabase.co 本身也是 Cloudflare 的客户，请求经过了两个 zone。这篇讲两个 zone 串在一起时缓存到底在哪一层、怎么判断，以及三种修法各自的代价。</p>
+    <div class="meta"><span>2026-10-16</span><span>阅读约 9 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>Worker 去 fetch 另一个 Cloudflare 客户的地址时，按 Cloudflare 文档的说法，会「读穿那个 zone 的缓存」。命中算在对方头上，对我们来说就是 Supabase 账单上每天约 1 GB 的 Cached Egress。</li>
+      <li>上游每个响应都带 <code>Set-Cookie: __cf_bm</code>，而 Cloudflare 默认不缓存带 Set-Cookie 的响应，这是官方排障文档点名的 O2O 缓存失效原因。</li>
+      <li>响应头里的 <code>cf-cache-status: HIT</code> 可能是上游 zone 的；用 <code>curl -I</code> 验证 R2 自定义域名，HEAD 请求每次都是 <code>DYNAMIC</code>，GET 才是 HIT。两个头都会误导判断。</li>
+      <li>三种修法：Cache API 自己存（当天止血，按机房各存一份，用不了分层缓存）；把文件搬到自己的 R2（最终方案）；买上游的自定义域名（要付费，而且依旧是 O2O）。</li>
+      <li>判断方法归结成一句：在自己那一层加一个只说自己的响应头，部署后亲眼看到 MISS 变 HIT。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">这篇和上一篇的关系</a></li>
+      <li><a href="#s2">O2O：一个请求经过两个 zone</a></li>
+      <li><a href="#s3">那段看起来没问题的代码</a></li>
+      <li><a href="#s4">缓存到底落在了哪一层</a></li>
+      <li><a href="#s5">怎么判断是哪一层在缓存</a></li>
+      <li><a href="#s6">三种修法和各自的代价</a></li>
+      <li><a href="#s7">用 Cache API 时要自己管的几件事</a></li>
+      <li><a href="#s8">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>这篇和上一篇的关系</h2>
+
+  <p>10 月 13 日，Supabase 发邮件说我们的 Cached Egress 用到了免费额度的 289%，三天内不处理就停掉整个项目。排查、升级决定、一天之内迁到 R2 的全过程写在<a href="/blog/supabase-egress-to-r2.html">《免费额度用到 289%》</a>里。那篇讲的是事故怎么处理，缓存为什么失效只用了一节。</p>
+
+  <p>这篇只讲那一节背后的机制。我想把它单独写出来，原因是：用 Worker 给某个服务套一层自己的域名和缓存，是 Cloudflare 上很常见的做法，而很多服务本身就跑在 Cloudflare 上。只要上游也是 Cloudflare 的客户，就会碰到同样的问题，而且很难从响应头里看出来。</p>
+
+  <h2 id="s2"><span class="no">02</span>O2O：一个请求经过两个 zone</h2>
+
+  <p>Cloudflare 把每个接入的域名叫一个 zone。我们的 cdn.amefys.com 是一个 zone，Worker 跑在它上面；supabase.co 是另一个 zone，属于 Supabase 的账户。请求先经过我们的 zone，再经过他们的 zone，Cloudflare 管这种两个 zone 串联的情况叫 orange-to-orange，简称 O2O（橙色云朵是 Cloudflare 控制台里「经过代理」的图标）。<a href="https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/">官方说明</a>里写的是：前一个 zone 的设置先生效，后一个 zone 的设置再生效。</p>
+
+  <p>判断上游是不是 Cloudflare 的客户很简单，直接请求一次看响应头，有 <code>server: cloudflare</code> 和 <code>cf-ray</code> 就是：</p>
+
+<pre><code>$ curl -sI https://&lt;project&gt;.supabase.co/storage/v1/object/public/hero-art/v1/icons/axe.png
+HTTP/2 200
+<span class="h">server: cloudflare</span>
+<span class="h">cf-ray: …-LAX</span>
+cf-cache-status: MISS
+<span class="h">set-cookie: __cf_bm=…; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co</span></code></pre>
+
+  <p>这是 10 月 16 日重新请求的结果，Supabase 那边的 <code>__cf_bm</code> 到今天也还在。这个 cookie 来自 Cloudflare 的机器人防护（Bot Management），每个响应都会带上。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 300" role="img" aria-label="O2O 请求路径：客户端经过我们的 zone（Worker 与我们的缓存，始终为空）再经过 supabase.co 的 zone（它的缓存命中并计入 Supabase 的 Cached Egress）到达 Storage">
+        <defs><marker id="o1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--d-line)"/></marker></defs>
+        <rect x="16" y="56" width="104" height="96" rx="14" style="fill:var(--d-box);stroke:var(--d-border)"/>
+        <text x="68" y="98" font-size="14" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">客户端</text>
+        <text x="68" y="120" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">桌面 / 手机</text>
+        <line x1="122" y1="104" x2="148" y2="104" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#o1)"/>
+        <text x="150" y="32" font-size="12" style="fill:var(--d-text3)">我们的 zone：cdn.amefys.com</text>
+        <rect x="150" y="40" width="222" height="128" rx="14" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="166" y="68" font-size="14" font-weight="600" style="fill:var(--d-text)">Worker</text>
+        <text x="166" y="90" font-size="12" style="fill:var(--d-text2)">fetch(supabase.co, {</text>
+        <text x="166" y="106" font-size="12" style="fill:var(--d-text2)">  cf: { cacheTtl, cacheEverything } })</text>
+        <rect x="166" y="120" width="190" height="34" rx="8" style="fill:var(--d-red-bg);stroke:var(--d-red)" stroke-dasharray="4 4"/>
+        <text x="261" y="142" font-size="12" text-anchor="middle" style="fill:var(--d-red)">我们的缓存：始终是空的</text>
+        <line x1="374" y1="104" x2="400" y2="104" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#o1)"/>
+        <text x="402" y="32" font-size="12" style="fill:var(--d-text3)">Supabase 的 zone：supabase.co</text>
+        <rect x="402" y="40" width="200" height="128" rx="14" style="fill:var(--d-box);stroke:var(--d-amber)"/>
+        <text x="418" y="68" font-size="14" font-weight="600" style="fill:var(--d-text)">机器人防护</text>
+        <text x="418" y="90" font-size="12" style="fill:var(--d-text2)">给每个响应加 __cf_bm</text>
+        <rect x="418" y="120" width="168" height="34" rx="8" style="fill:var(--d-box);stroke:var(--d-amber)"/>
+        <text x="502" y="142" font-size="12" text-anchor="middle" style="fill:var(--d-amber)">它的缓存：HIT</text>
+        <line x1="604" y1="104" x2="630" y2="104" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#o1)"/>
+        <rect x="632" y="56" width="72" height="96" rx="14" style="fill:var(--d-box);stroke:var(--d-border)"/>
+        <text x="668" y="98" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">Storage</text>
+        <text x="668" y="118" font-size="11" text-anchor="middle" style="fill:var(--d-text2)">源站</text>
+        <g font-size="12">
+          <text x="16" y="204" style="fill:var(--d-text)">① Worker 请求的地址属于别的 zone，按 Workers 文档，fetch 会读穿那个 zone 的缓存</text>
+          <text x="16" y="228" style="fill:var(--d-text)">② 对方的响应带着 Set-Cookie: __cf_bm，Cloudflare 默认不缓存带 Set-Cookie 的响应</text>
+          <text x="16" y="252" style="fill:var(--d-amber)">③ 命中发生在 Supabase 的 CDN 上，计入 Supabase 的 Cached Egress</text>
+          <text x="16" y="276" style="fill:var(--d-text3)">Worker 把上游响应头原样转发，客户端看到的 cf-cache-status: HIT 其实是 ③ 那一层的</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>图 1　两个 zone 串在一起：缓存命中一直发生在 Supabase 那一侧，我们这一侧的缓存是空的</figcaption>
+  </figure>
+
+  <h2 id="s3"><span class="no">03</span>那段看起来没问题的代码</h2>
+
+  <p>改之前的 Worker 是这么写的（已简化）。它做三件事：把 cdn.amefys.com 的路径映射到 Supabase Storage 的地址，带上 Cloudflare 的缓存参数去取，再给响应加上我们自己的 Cache-Control 和跨域头：</p>
+
+<pre><code>upstream = await fetch(targetUrl, {
+  method: request.method,
+  headers: upstreamHeaders,
+  <span class="c">// Cloudflare-specific edge cache hints.</span>
+  <span class="h">cf: { cacheTtl: rule.cfTtl, cacheEverything: true }</span>
+})</code></pre>
+
+  <p>按 <a href="https://developers.cloudflare.com/workers/runtime-apis/request/">Workers 文档</a>对 <code>cacheTtl</code> 的描述，它会「强制 Cloudflare 缓存这个响应，不管响应上有什么头」。照字面理解，带不带 Set-Cookie 都不该有影响。文件顶上的注释也写着设计意图：靠边缘缓存把 Supabase 的出流量压到接近零。</p>
+
+  <p>这段代码从上线那天起，我们这一侧一次都没缓存上。前几个月流量小，Supabase 的免费额度扛得住，一直没人发现。</p>
+
+  <h2 id="s4"><span class="no">04</span>缓存到底落在了哪一层</h2>
+
+  <p>我翻了 Cloudflare 的文档，和这件事直接相关的有两处。</p>
+
+  <p>第一处在 <a href="https://developers.cloudflare.com/workers/reference/how-the-cache-works/">Workers 的缓存说明</a>里：fetch 会先看目标地址是不是属于另一个 zone，如果是，就读穿那个 zone 的缓存（或者那个 zone 的 Worker）；只有不属于时，才读自己 zone 的缓存。同一页还说，缓存按子请求里的主机名存，不按 Worker 自己的主机名存。也就是说，<strong>Worker 去取 supabase.co 的文件时，问的是 supabase.co 的缓存</strong>。</p>
+
+  <p>第二处是一篇专门的<a href="https://developers.cloudflare.com/cache/troubleshooting/bot-management-o2o-cache-bypass/">排障文档</a>：在 O2O 的情况下，如果源站那一侧的 zone 开着机器人防护，它返回的 <code>__cf_bm</code> cookie 会让面向用户的这一侧跳过缓存，因为 Cloudflare 默认不缓存带 Set-Cookie 的响应。文档只描述了现象和原因，没有给解决办法，也没有提到 Workers。</p>
+
+  <p>两篇文档都没有直接写「O2O 下 <code>cacheTtl</code> 无效」。我能确定的是实测结果：Supabase 的 Cached Egress 每天涨约 1 GB，和 cdn.amefys.com 一天的总流量差不多。如果我们这一侧哪怕缓存住一部分，Supabase 那边的数字都应该明显小于总流量。换成下一节的 Cache API 之后，同一个文件第二次请求就是 <code>X-Amefys-Cache: HIT</code>，也印证了问题出在「谁来存」。</p>
+
+  <div class="callout warn"><span class="t">文档里的「不管响应上有什么头」</span>这句话说的是缓存规则怎么定，前提是请求真的走到了你这一侧的缓存。目标地址属于另一个 zone 时，请求读的是对方的缓存，你给的参数在对方那一层能起多大作用、会不会被对方的 Set-Cookie 挡住，文档没有写清楚。遇到上游也是 Cloudflare 的情况，别从这句话推出「一定能缓存」，部署后实测。</div>
+
+  <h2 id="s5"><span class="no">05</span>怎么判断是哪一层在缓存</h2>
+
+  <p>这次排查里，有两个响应头差点让我得出错误的结论。</p>
+
+  <p>第一个是转发来的 <code>cf-cache-status</code>。当时请求 cdn.amefys.com，响应头里写着 HIT，旁边还有 <code>sb-gateway-mode</code> 这类 Supabase 自己的头。Worker 把上游响应头原样转发了，这个 HIT 是 Supabase 那一侧的。一个中间层如果整包转发上游的头，客户端看到的缓存状态就是上游的。</p>
+
+  <p>第二个是今天写这篇时碰到的。现在 cdn.amefys.com 直接绑在 R2 上，我习惯性地用 <code>curl -I</code> 验证，连着三次都是 <code>DYNAMIC</code>，看起来缓存规则失效了。换成 GET 请求，三次都是 HIT，<code>age</code> 也在涨：</p>
+
+<pre><code>$ curl -sI https://cdn.amefys.com/hero-art/v2/icons/axe.webp | grep cf-cache
+<span class="bad">cf-cache-status: DYNAMIC</span>          <span class="c"># HEAD 请求，每次都是</span>
+
+$ curl -s -o /dev/null -D - https://cdn.amefys.com/hero-art/v2/icons/axe.webp | grep -E 'cf-cache|age'
+age: 1380
+<span class="ok">cf-cache-status: HIT</span>              <span class="c"># GET 请求</span></code></pre>
+
+  <p>在我们这个 R2 自定义域名上，HEAD 请求每次都显示 DYNAMIC；真实用户发的都是 GET，不受影响。验证缓存时要用和用户一样的请求方法。</p>
+
+  <p>综合下来，我现在按这个顺序判断：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>先看</th><th>怎么看</th><th>说明什么</th></tr>
+    <tr><td>上游是不是 Cloudflare 客户</td><td>直接请求上游，看有没有 <code>server: cloudflare</code>、<code>cf-ray</code></td><td>有的话就是 O2O，后面几步都要做</td></tr>
+    <tr><td>上游有没有 Set-Cookie</td><td>直接请求上游几次，看 <code>set-cookie</code></td><td>有 <code>__cf_bm</code> 一类的 cookie，默认就不会缓存</td></tr>
+    <tr><td>响应头是谁加的</td><td>看有没有上游特有的头（如 <code>sb-gateway-*</code>）</td><td>中间层原样转发时，<code>cf-cache-status</code> 可能是上游的</td></tr>
+    <tr><td>自己这一层命中没有</td><td>在自己的代码里加一个专属头，比如 <code>X-Amefys-Cache</code>，连续用 GET 请求同一个地址</td><td>第一次 MISS、之后 HIT，才算自己缓存住了</td></tr>
+    <tr><td>账单对不对得上</td><td>拿上游的计费流量和自己域名的总流量比</td><td>两个数差不多大，说明自己这一层几乎没挡住</td></tr>
+  </table></div>
+
+  <h2 id="s6"><span class="no">06</span>三种修法和各自的代价</h2>
+
+  <p>能选的修法有三种：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>修法</th><th>做法</th><th>代价</th><th>我们的选择</th></tr>
+    <tr><td>Cache API</td><td>Worker 用 <code>caches.default</code> 自己存、自己取，存之前删掉 Set-Cookie</td><td>缓存只在当前机房，用不了分层缓存；缓存键、失败处理、304 都得自己写</td><td>10 月 14 日下午止血</td></tr>
+    <tr><td>搬到自己的存储</td><td>文件放进自己账户下的 R2，域名直接绑 R2</td><td>要迁移文件、改发布脚本；R2 出流量免费</td><td>同一天傍晚切换，最终方案</td></tr>
+    <tr><td>用上游的自定义域名</td><td>让 Supabase 直接用我们的域名对外</td><td>Supabase 的自定义域名要付费；文件仍然由 Supabase 送，Cached Egress 照样计费</td><td>没选</td></tr>
+  </table></div>
+
+  <p>Cache API 改起来最快，当天下午就上线了。它最大的限制写在 <a href="https://developers.cloudflare.com/workers/reference/how-the-cache-works/">Workers 文档</a>里：Cache API 只作用于当前机房，和分层缓存不兼容。没有分层缓存，每个机房都要各自回源一次：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 250" role="img" aria-label="Cache API 每个机房各自回源一次；分层缓存只有上层机房回源一次">
+        <defs><marker id="o2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--d-line)"/></marker></defs>
+        <text x="16" y="24" font-size="13" font-weight="600" style="fill:var(--d-text)">Cache API（caches.default）</text>
+        <text x="16" y="44" font-size="12" style="fill:var(--d-text3)">每个机房各存一份</text>
+        <g font-size="12" text-anchor="middle">
+          <rect x="16" y="64" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="62" y="87" style="fill:var(--d-text)">机房 A</text>
+          <rect x="16" y="112" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="62" y="135" style="fill:var(--d-text)">机房 B</text>
+          <rect x="16" y="160" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="62" y="183" style="fill:var(--d-text)">机房 C</text>
+          <rect x="236" y="100" width="92" height="60" rx="10" style="fill:var(--d-box);stroke:var(--d-amber)"/><text x="282" y="126" style="fill:var(--d-text)">源站</text><text x="282" y="146" style="fill:var(--d-amber)">回源 3 次</text>
+        </g>
+        <line x1="110" y1="82" x2="232" y2="118" style="stroke:var(--d-red)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="110" y1="130" x2="232" y2="130" style="stroke:var(--d-red)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="110" y1="178" x2="232" y2="142" style="stroke:var(--d-red)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="360" y1="20" x2="360" y2="210" style="stroke:var(--d-dash)"/>
+        <text x="384" y="24" font-size="13" font-weight="600" style="fill:var(--d-text)">分层缓存（只有 fetch 能用）</text>
+        <text x="384" y="44" font-size="12" style="fill:var(--d-text3)">下层机房先问上层机房</text>
+        <g font-size="12" text-anchor="middle">
+          <rect x="384" y="64" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="430" y="87" style="fill:var(--d-text)">机房 A</text>
+          <rect x="384" y="112" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="430" y="135" style="fill:var(--d-text)">机房 B</text>
+          <rect x="384" y="160" width="92" height="36" rx="8" style="fill:var(--d-box);stroke:var(--d-border)"/><text x="430" y="183" style="fill:var(--d-text)">机房 C</text>
+          <rect x="512" y="106" width="84" height="48" rx="10" style="fill:var(--d-box);stroke:var(--d-gold)"/><text x="554" y="135" style="fill:var(--d-text)">上层机房</text>
+          <rect x="624" y="100" width="80" height="60" rx="10" style="fill:var(--d-box);stroke:var(--d-green)"/><text x="664" y="126" style="fill:var(--d-text)">源站</text><text x="664" y="146" style="fill:var(--d-green)">回源 1 次</text>
+        </g>
+        <line x1="478" y1="82" x2="510" y2="120" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="478" y1="130" x2="510" y2="130" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="478" y1="178" x2="510" y2="140" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <line x1="598" y1="130" x2="620" y2="130" style="stroke:var(--d-green)" stroke-width="1.6" marker-end="url(#o2)"/>
+        <text x="16" y="236" font-size="12" style="fill:var(--d-text3)">按 Workers 文档：Cache API 只在当前机房生效，和分层缓存不兼容；要用分层缓存，得走 fetch</text>
+      </svg>
+    </div>
+    <figcaption>图 2　Cache API 只管本机房：用户分布在多少个机房，同一个文件最坏就要回源多少次</figcaption>
+  </figure>
+
+  <p>我用 10 月 11–13 日的实际数据估了一下最坏情况。那几天 cdn.amefys.com 每天的请求来自 20–31 个 Cloudflare 机房，每个机房、每个文件每天回源一次，回源量是总流量的 8.5%–12.4%。比原来的 100% 好得多，而且只和「机房数 × 文件总量」有关，用户再多也不会跟着涨。所以 Cache API 足够撑过那几天，但长期来看，这些文件本来就该放在出流量不收费、又在自己 zone 里的存储上。当天傍晚我们就迁到了 R2，cdn.amefys.com 直接绑成 R2 的自定义域名，Worker 也不再需要了。</p>
+
+  <h2 id="s7"><span class="no">07</span>用 Cache API 时要自己管的几件事</h2>
+
+  <p>换成 Cache API，等于把 Cloudflare 替你做的事接过来自己做。我们当时补了这几处，每处都配了测试，一共 8 个，其中 5 个在旧代码上会失败（代码已简化）：</p>
+
+<pre><code><span class="c">// 一个路径一份缓存：去掉 query，避免 ?随机数 绕过缓存直达上游；HEAD 和 GET 共用</span>
+const key = new Request(`${url.origin}${url.pathname}`, { method: 'GET' })
+const cached = await cache.match(key)
+if (cached) return toClient(cached, request, rule, 'HIT')
+
+<span class="c">// 回源一律用无条件 GET：存进缓存的必须是完整的响应体</span>
+const upstream = await fetch(targetUrl)
+if (!upstream.ok) return passThrough(upstream)        <span class="c">// 失败的响应不缓存</span>
+
+const stored = new Headers(upstream.headers)
+stored.set('Cache-Control', `public, max-age=${rule.cfTtl}`)
+<span class="h">stored.delete('Set-Cookie')</span>                         <span class="c">// 带 Set-Cookie 的响应永远不会被存</span>
+ctx.waitUntil(cache.put(key, new Response(upstream.clone().body, { headers: stored })))
+return toClient(upstream, request, rule, 'MISS')</code></pre>
+
+  <p>Set-Cookie 一定要删，而且删漏了不会报错。<a href="https://developers.cloudflare.com/workers/runtime-apis/cache/">Cache API 文档</a>写明带 Set-Cookie 的响应永远不会被缓存，建议存之前删掉这个头，或者设 <code>Cache-Control: private=Set-Cookie</code>；同时 <code>put()</code> 不管有没有存住都会正常返回。漏删的话，代码看起来每次都在存，实际一次都没存上，又回到了改之前的样子。这也是为什么要靠下面那个专属响应头来验证。</p>
+
+  <p>缓存键要自己定。默认按完整 URL 存，带上随便一个查询参数就是一份新缓存，等于给了别人一个绕过缓存、直接打上游的开关。我们的客户端从来不带查询参数，所以直接去掉；HEAD 请求也映射到同一个 GET 键上，只是不返回响应体。</p>
+
+  <p>304 要自己生成。Supabase Storage 不处理 <code>If-None-Match</code>，以前就是 Worker 比对 ETag 再返回 304。换成缓存以后，命中和未命中两条路都要走这个比对，否则客户端每 30 分钟轮询一次索引文件，每次都会拉一遍完整内容。</p>
+
+  <p>失败不能进缓存。上游偶尔返回 5xx，如果被缓存下来，这个机房的用户会在整个缓存有效期里一直拿到错误。我们只缓存 200。</p>
+
+  <p>还要留一个只说自己的响应头。<code>X-Amefys-Cache</code> 只在我们的代码里设置，HIT 和 MISS 都是这一层自己的状态，部署后连续请求三次就能确认缓存住了，用不着猜。</p>
+
+  <h2 id="s8"><span class="no">08</span>几点心得</h2>
+
+  <p>先确认上游是谁。给一个服务套 Worker 之前，先 curl 一次上游，看它是不是也在 Cloudflare 上、有没有 Set-Cookie。这两项都是「是」的话，就别指望 fetch 的缓存参数，直接按 Cache API 或者自己存储来设计。</p>
+
+  <p>缓存状态要看是谁报的。转发来的 <code>cf-cache-status</code> 可能是上游的，HEAD 请求的 DYNAMIC 也不代表 GET 不命中。自己加一个专属的头，用和用户一样的请求方法去验证。</p>
+
+  <p>文档没写的地方要实测。<code>cacheTtl</code> 的说明写着「不管响应上有什么头」，Workers 的缓存说明又写着跨 zone 的请求读的是对方的缓存，两句放在一起，O2O 下到底谁说了算，文档没有交代。这种地方部署后量一次，比读文档推理可靠。</p>
+
+  <p>账单是最后一道验证。响应头可以被转发、被请求方法影响，账单不会。上游的计费流量和自己域名的总流量差不多大，就说明自己这一层什么都没挡住，不管响应头写的是什么。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>遇到类似的问题？</strong>如果你也在用 Cloudflare Workers 给 Supabase 这类服务做代理，碰到了缓存不生效、出流量超额或国内访问的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/github-actions-minutes.html">上一篇：GitHub Actions 额度一个月用完两次</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>
