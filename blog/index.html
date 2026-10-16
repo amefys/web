@@ -25,7 +25,7 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","url":"https://amefys.com/blog/github-actions-minutes.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
 </head>
 <body>
 
@@ -64,6 +64,13 @@
     <p>一个人借助 AI，把 AMEFYS 从一个念头做到上线、运营。这里记录过程中真实发生的事：踩过的坑、做过的取舍、拿得出手的数据。每一篇都来自线上真实发生过的问题。</p>
     <a class="rss" href="/blog/feed.xml"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="2" fill="currentColor"/><path d="M1 7a8 8 0 0 1 8 8M1 2a13 13 0 0 1 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>RSS 订阅</a>
   </header>
+
+  <a class="post-card" href="/blog/github-actions-minutes.html">
+    <div class="meta"><span>2026-10-16</span><span>阅读约 9 分钟</span></div>
+    <h2>GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵</h2>
+    <p>9 月里两次发版都卡在最后一步，原因是组织的 Actions 额度用完了。拆开账单才发现：额度按美元扣、每个 job 单独向上取整，一次发版 77% 的钱花在只跑了 3 分半钟的 macOS 构建上。改了什么、放弃了什么，以及怎么提前看到自己的额度。</p>
+    <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span><span class="tag">成本优化</span><span class="tag">事故复盘</span></div>
+  </a>
 
   <a class="post-card" href="/blog/amefys-architecture.html">
     <div class="meta"><span>2026-10-15</span><span>阅读约 15 分钟</span></div>

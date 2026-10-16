@@ -1,0 +1,431 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵 — AMEFYS 技术博客</title>
+<meta name="description" content="9 月两次发版卡在最后一步，原因是组织的 GitHub Actions 额度用完了。拆开账单：额度按美元扣、每个 job 向上取整、macOS 一分钟顶 10 分钟 Linux，一次发版 77% 的钱花在 3 分半钟的 macOS 构建上。改法、代价和自查额度的接口。">
+<link rel="canonical" href="https://amefys.com/blog/github-actions-minutes.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵">
+<meta property="og:description" content="额度按美元扣，每个 job 向上取整，macOS 一分钟顶 10 分钟 Linux：一次发版 77% 的钱花在跑得最快的 job 上。">
+<meta property="og:url" content="https://amefys.com/blog/github-actions-minutes.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-16">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","datePublished":"2026-10-16","dateModified":"2026-10-16","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/github-actions-minutes.html","keywords":"GitHub Actions, CI/CD, 成本优化, macOS runner, 事故复盘"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">GitHub Actions</span><span class="tag">CI/CD</span><span class="tag">成本优化</span><span class="tag">事故复盘</span></div>
+    <h1>GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵</h1>
+    <p class="sub">9 月里两次发版都卡在了最后一步，原因是组织的 Actions 额度用完了。把账单拆开一看，一次发版 77% 的钱花在只跑了 3 分半钟的 macOS 构建上。这篇讲怎么查到的、改了什么、放弃了什么，以及怎么提前看到自己的额度。</p>
+    <div class="meta"><span>2026-10-16</span><span>阅读约 9 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>9 月 14 日和 28 日，两次发版的最后一步「零步骤失败」。原因只写在 check run 的注解里，运行日志里什么都没有。</li>
+      <li>私有仓库的「每月 N 分钟」实际按美元扣：N 乘以 Linux 单价。macOS 一分钟的价钱约等于 10 分钟 Linux，Windows 约等于 1.7 分钟。</li>
+      <li>每个 job 单独向上取整到分钟。改之前一次发版折合约 54 个 Linux 分钟，其中 macOS 构建占 41 个。</li>
+      <li>改法：安装包 tag 只打 Windows，macOS 包改为手动补打；CI 改为手动触发，推送前在本机把检查跑完；Actions 预算设 1 美元封顶。</li>
+      <li>10 月发版更勤（16 天 28 次），上半月只花了 3.96 美元，按这个节奏全月约 7.7 美元，不到额度的一半。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">发版卡在最后一步</a></li>
+      <li><a href="#s2">先弄清楚：额度按什么扣</a></li>
+      <li><a href="#s3">拆开一次发版的账单</a></li>
+      <li><a href="#s4">一个月的钱花在哪</a></li>
+      <li><a href="#s5">第二次卡住，和当天的改动</a></li>
+      <li><a href="#s6">省下来的钱，换掉了什么</a></li>
+      <li><a href="#s7">结果</a></li>
+      <li><a href="#s8">怎么提前看到自己的额度</a></li>
+      <li><a href="#s9">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>发版卡在最后一步</h2>
+
+  <p>AMEFYS 的桌面端是 Electron 写的，发版全靠 GitHub Actions：推一个 tag，工作流就会先建一个草稿 Release，然后在 Windows 和 macOS 两台机器上同时打包，最后由 publish 这一步把草稿转成正式版，并把安装包同步到 Cloudflare R2，官网的下载链接从那里取。代码放在 amefys 组织下的私有仓库，开发和发版都是我一个人。</p>
+
+  <p>9 月 14 日晚上发 v0.26.0-beta.4，前面几步都成功了，publish 却是红的：运行了 3 秒，一个步骤都没执行。点进去看日志，没有日志。一个没启动的 job 不会生成日志文件，网页上只有一个红叉。</p>
+
+  <p>失败原因最后是在 check run 的注解（annotations）里找到的，这个接口网页上不太显眼，要用 API 才查得到：</p>
+
+<pre><code>$ gh api repos/&lt;owner&gt;/&lt;repo&gt;/check-runs/&lt;job_id&gt;/annotations
+<span class="h">The job was not started because recent account payments have failed
+or your spending limit needs to be increased.</span></code></pre>
+
+  <p>这句话的前半句把我带偏了一阵。我先去个人账号的账单页找付款失败的记录，那里显示用量为 0。后来查清楚了：私有仓库的 Actions 是记在仓库所属的组织头上的，个人账单页和它没关系。组织的账单页也没有欠费，也没有付款失败，真正的原因是后半句：组织本月的免费额度用完了，而支出上限默认是 0 美元，超出的部分不允许花钱，GitHub 就直接不启动新的 job。</p>
+
+  <p>前面的构建 job 赶在额度用完之前跑完了，安装包已经躺在草稿 Release 里，只差 publish 那两分钟。这次我按 publish 的步骤手动做了一遍：把草稿转成正式版，下载安装包传到 R2，更新下载指针，再按字节数核对官网下载到的文件。第二天额度彻底用光，连 CI 都起不来了。</p>
+
+  <h2 id="s2"><span class="no">02</span>先弄清楚：额度按什么扣</h2>
+
+  <p>GitHub 的说法是「每月含 2,000 分钟」（Free 套餐，后来组织升级到 Team 套餐，是 3,000 分钟），很容易理解成「跑满 2,000 分钟才算完」。我用组织的计费接口把 9 月的明细拉下来对了一遍，实际规则有三条。</p>
+
+  <p>第一条，<strong>额度其实是美元</strong>。只有私有仓库扣额度，公开仓库免费；所谓「3,000 分钟」，是按 Linux 的单价折成 18 美元来扣的，9 月账单上私有仓库的减免正好是 18.00 美元。不同机器的单价差很多：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>机器</th><th>每分钟单价</th><th>一分钟折合 Linux 分钟</th></tr>
+    <tr><td>Linux（ubuntu-latest）</td><td class="num">$0.006</td><td class="num">1</td></tr>
+    <tr><td>Windows（windows-latest）</td><td class="num">$0.010</td><td class="num">≈ 1.7</td></tr>
+    <tr><td>macOS（macos-latest，3 核）</td><td class="num">$0.062</td><td class="num">≈ 10.3</td></tr>
+  </table></div>
+
+  <p>第二条，每个 job 单独计费，各自向上取整到整分钟。一个只跑 3 秒的 job 也算 1 分钟。并行跑的 job 不会因为同时进行而便宜，墙钟时间看着短，账单照样一份一份加。</p>
+
+  <p>第三条，额度用完以后会不会继续跑，取决于预算（Budgets，旧版界面里叫 spending limit）。默认是 0 美元并且到额就停，所以免费额度一用完，所有私有仓库的工作流都会立刻停下，直到下个月重置。</p>
+
+  <div class="callout warn"><span class="t">分钟数会骗人</span>计费明细里每类机器的「分钟数」是原始分钟，没乘倍率。9 月 macOS 只跑了 163 分钟，看起来是最小的一项，折成钱却是最大的一项。看账单要看金额，或者统一折成 Linux 分钟再比。</div>
+
+  <h2 id="s3"><span class="no">03</span>拆开一次发版的账单</h2>
+
+  <p>知道了规则，再看一次发版具体花了多少。我从 Actions 接口取出 9 月 14 日 v0.26.0-beta.3 每个 job 的开始和结束时间，按上面的规则算了一遍，又拿 10 月 16 日刚发的一版做对照：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 412" role="img" aria-label="一次发版各个 job 的时间线与计费：改之前合计约 53.7 个 Linux 分钟，其中 macOS 构建约 41 个；改之后约 12 个">
+<line x1="514" y1="274" x2="514" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="462" y1="274" x2="462" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="410" y1="274" x2="410" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="358" y1="274" x2="358" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="306" y1="274" x2="306" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="254" y1="274" x2="254" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="202" y1="274" x2="202" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="150" y1="274" x2="150" y2="356" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="514" y1="66" x2="514" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="462" y1="66" x2="462" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="410" y1="66" x2="410" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="358" y1="66" x2="358" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="306" y1="66" x2="306" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="254" y1="66" x2="254" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="202" y1="66" x2="202" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<line x1="150" y1="66" x2="150" y2="204" style="stroke:var(--d-dash)" stroke-dasharray="2 4"/>
+<text x="16" y="26" font-size="12" text-anchor="start" style="fill:var(--d-text3)">墙钟时间（分钟）</text>
+<text x="560" y="26" font-size="12" text-anchor="start" style="fill:var(--d-text3)">计费</text>
+<text x="704" y="26" font-size="12" text-anchor="end" style="fill:var(--d-text3)">折合 Linux 分钟</text>
+<text x="150" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">0</text>
+<text x="202" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">1</text>
+<text x="254" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">2</text>
+<text x="306" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">3</text>
+<text x="358" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">4</text>
+<text x="410" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">5</text>
+<text x="462" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">6</text>
+<text x="514" y="26" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">7</text>
+<text x="16" y="58" font-size="13" text-anchor="start" font-weight="600" style="fill:var(--d-text)">改之前：9 月 14 日，v0.26.0-beta.3（Windows + macOS）</text>
+<text x="16" y="85" font-size="12" text-anchor="start" style="fill:var(--d-text2)">setup</text>
+<rect x="150.0" y="73" width="3.0" height="16" rx="4" style="fill:var(--d-blue)"/>
+<text x="560" y="85" font-size="12" text-anchor="start" style="fill:var(--d-text2)">1 分钟</text>
+<text x="704" y="85" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">1</text>
+<text x="16" y="113" font-size="12" text-anchor="start" style="fill:var(--d-text2)">prepare-release</text>
+<rect x="156.1" y="101" width="8.7" height="16" rx="4" style="fill:var(--d-blue)"/>
+<text x="560" y="113" font-size="12" text-anchor="start" style="fill:var(--d-text2)">1 分钟</text>
+<text x="704" y="113" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">1</text>
+<text x="16" y="141" font-size="12" text-anchor="start" style="fill:var(--d-text2)">build · Windows</text>
+<rect x="167.3" y="129" width="243.5" height="16" rx="4" style="fill:var(--d-amber)"/>
+<text x="560" y="141" font-size="12" text-anchor="start" style="fill:var(--d-text2)">5 分钟 × 1.7</text>
+<text x="704" y="141" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">8.3</text>
+<text x="16" y="169" font-size="12" text-anchor="start" style="fill:var(--d-text2)">build · macOS</text>
+<rect x="169.1" y="157" width="186.3" height="16" rx="4" style="fill:var(--d-red)"/>
+<text x="560" y="169" font-size="12" text-anchor="start" style="fill:var(--d-text2)">4 分钟 × 10.3</text>
+<text x="704" y="169" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-red)">41.3</text>
+<text x="16" y="197" font-size="12" text-anchor="start" style="fill:var(--d-text2)">publish</text>
+<rect x="413.5" y="185" width="82.3" height="16" rx="4" style="fill:var(--d-blue)"/>
+<text x="560" y="197" font-size="12" text-anchor="start" style="fill:var(--d-text2)">2 分钟</text>
+<text x="704" y="197" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">2</text>
+<line x1="560" y1="206" x2="704" y2="206" style="stroke:var(--d-border)"/>
+<text x="560" y="224" font-size="12" text-anchor="start" font-weight="600" style="fill:var(--d-text)">合计 ≈ $0.32</text>
+<text x="704" y="224" font-size="13" text-anchor="end" font-weight="600" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">53.7</text>
+<text x="16" y="266" font-size="13" text-anchor="start" font-weight="600" style="fill:var(--d-text)">改之后：10 月 16 日，v0.33.3-beta.0（只打 Windows）</text>
+<text x="16" y="293" font-size="12" text-anchor="start" style="fill:var(--d-text2)">prepare-release</text>
+<rect x="150.0" y="281" width="6.9" height="16" rx="4" style="fill:var(--d-blue)"/>
+<text x="560" y="293" font-size="12" text-anchor="start" style="fill:var(--d-text2)">1 分钟</text>
+<text x="704" y="293" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">1</text>
+<text x="16" y="321" font-size="12" text-anchor="start" style="fill:var(--d-text2)">build · Windows</text>
+<rect x="159.5" y="309" width="301.6" height="16" rx="4" style="fill:var(--d-amber)"/>
+<text x="560" y="321" font-size="12" text-anchor="start" style="fill:var(--d-text2)">6 分钟 × 1.7</text>
+<text x="704" y="321" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">10</text>
+<text x="16" y="349" font-size="12" text-anchor="start" style="fill:var(--d-text2)">publish</text>
+<rect x="463.7" y="337" width="40.7" height="16" rx="4" style="fill:var(--d-blue)"/>
+<text x="560" y="349" font-size="12" text-anchor="start" style="fill:var(--d-text2)">1 分钟</text>
+<text x="704" y="349" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text)">1</text>
+<line x1="560" y1="358" x2="704" y2="358" style="stroke:var(--d-border)"/>
+<text x="560" y="376" font-size="12" text-anchor="start" font-weight="600" style="fill:var(--d-text)">合计 ≈ $0.07</text>
+<text x="704" y="376" font-size="13" text-anchor="end" font-weight="600" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">12</text>
+<rect x="16" y="390" width="12" height="12" rx="3" style="fill:var(--d-blue)"/>
+<text x="34" y="400" font-size="12" text-anchor="start" style="fill:var(--d-text2)">Linux</text>
+<rect x="112" y="390" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<text x="130" y="400" font-size="12" text-anchor="start" style="fill:var(--d-text2)">Windows</text>
+<rect x="208" y="390" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<text x="226" y="400" font-size="12" text-anchor="start" style="fill:var(--d-text2)">macOS</text>
+<text x="704" y="400" font-size="12" text-anchor="end" style="fill:var(--d-text3)">每个 job 单独向上取整到分钟，再按机器单价折算</text>
+</svg>
+    </div>
+    <figcaption>图 1　同样是一次发版：macOS 构建只跑了 3 分 35 秒，计费却占了 77%</figcaption>
+  </figure>
+
+  <p>改之前的那一次，墙钟时间不到 7 分钟。Windows 构建 4 分 41 秒，算 5 分钟，折合 8.3 个 Linux 分钟；macOS 构建 3 分 35 秒，是几个构建里最快的，算 4 分钟，折合 41.3 个。<strong>一次发版合计约 54 个 Linux 分钟，0.32 美元，macOS 一项就占了 77%。</strong>剩下的 setup、prepare-release 都只跑了几秒钟，但每个也照样算 1 分钟。</p>
+
+  <p>单看一次，0.32 美元不算什么。问题出在发版频率：9 月发版工作流一共跑了 47 次，大部分是给测试用户的 beta。月中以后 beta 已经不打 macOS 包了，全月的发版加起来仍然折合约 2,470 个 Linux 分钟，比 Free 套餐全月的额度还多。</p>
+
+  <h2 id="s4"><span class="no">04</span>一个月的钱花在哪</h2>
+
+  <p>发版只是一部分。我把 9 月和 10 月上半月所有 280 次运行的 job 都拉下来，按工作流和机器分类，统一折成 Linux 分钟：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 354" role="img" aria-label="9 月与 10 月上半月 Actions 用量构成：9 月 macOS 构建占 54%，CI 占 20%">
+<rect x="170" y="10" width="12" height="12" rx="3" style="fill:var(--d-gold)"/>
+<text x="188" y="20" font-size="12" text-anchor="start" style="fill:var(--d-text2)">9 月（全月）</text>
+<rect x="290" y="10" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="308" y="20" font-size="12" text-anchor="start" style="fill:var(--d-text2)">10 月 1–16 日</text>
+<text x="704" y="20" font-size="12" text-anchor="end" style="fill:var(--d-text3)">单位：折合 Linux 分钟</text>
+<text x="16" y="66" font-size="13" text-anchor="start" style="fill:var(--d-text)">macOS 安装包构建</text>
+<rect x="170" y="50" width="430.0" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="608" y="62" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">1,767（54%）</text>
+<rect x="170" y="68" width="45.3" height="10" rx="3" style="fill:var(--d-green)"/>
+<text x="223.263" y="77" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">186</text>
+<text x="16" y="114" font-size="13" text-anchor="start" style="fill:var(--d-text)">CI 质量检查</text>
+<rect x="170" y="98" width="160.9" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="338.855" y="110" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">661（20%）</text>
+<text x="170" y="125" font-size="11" text-anchor="start" style="fill:var(--d-green)">0（改为手动触发）</text>
+<text x="16" y="162" font-size="13" text-anchor="start" style="fill:var(--d-text)">Windows 安装包构建</text>
+<rect x="170" y="146" width="125.3" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="303.325" y="158" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">515（16%）</text>
+<rect x="170" y="164" width="60.1" height="10" rx="3" style="fill:var(--d-green)"/>
+<text x="238.108" y="173" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">247</text>
+<text x="16" y="210" font-size="13" text-anchor="start" style="fill:var(--d-text)">发版的其他步骤</text>
+<rect x="170" y="194" width="44.8" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="222.776" y="206" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">184（6%）</text>
+<rect x="170" y="212" width="14.4" height="10" rx="3" style="fill:var(--d-green)"/>
+<text x="192.358" y="221" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">59</text>
+<text x="16" y="258" font-size="13" text-anchor="start" style="fill:var(--d-text)">每日 BP 数据任务</text>
+<rect x="170" y="242" width="28.2" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="206.229" y="254" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">116</text>
+<rect x="170" y="260" width="37.0" height="10" rx="3" style="fill:var(--d-green)"/>
+<text x="214.989" y="269" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">152</text>
+<text x="16" y="306" font-size="13" text-anchor="start" style="fill:var(--d-text)">品牌检查</text>
+<rect x="170" y="290" width="2.7" height="14" rx="4" style="fill:var(--d-gold)"/>
+<text x="180.677" y="302" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">11</text>
+<rect x="170" y="308" width="2.0" height="10" rx="3" style="fill:var(--d-green)"/>
+<text x="180" y="317" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">7</text>
+<text x="16" y="342" font-size="12" text-anchor="start" style="fill:var(--d-text3)">按每个 job 的实际耗时重算，9 月合计 3,254，比账单的 3,120 多 4%（账单另有取整和跨月口径）</text>
+</svg>
+    </div>
+    <figcaption>图 2　9 月 macOS 构建占一半以上，CI 排第二；10 月 CI 归零，macOS 只剩几次手动补打</figcaption>
+  </figure>
+
+  <p>macOS 构建占 54%，这在意料之中。排第二的 CI 有点出乎意料：它每次推送 main 都会跑一遍类型检查、lint、单元测试和构建，9 月跑了 162 次，占了 20%。其中有一部分推送只改了 docs/ 下的文档和演示页，比如 9 月 15 日那天，光是改开发日记的动画页就触发了 8 次，这些检查和文档根本没关系。</p>
+
+  <p>每日 BP 数据任务和品牌检查加起来不到 4%，而且是产品真正需要的，没有动。</p>
+
+  <h2 id="s5"><span class="no">05</span>第二次卡住，和当天的改动</h2>
+
+  <p>第一次卡住之后，我做了两处小改动：beta 版不再打 macOS 包，只有正式版才打；只改了文档的推送不跑 CI。组织也升级到了 Team 套餐，额度从 2,000 分钟变成 3,000 分钟。这些改动没能撑到月底。</p>
+
+  <p>9 月 28 日发 v0.29.1，publish 又是零步骤失败，原因和上次一样。从图 3 的累计曲线可以看到，第二次卡住时累计用量刚好越过 18 美元那条线。月中那次升级只是把线往上挪了一点，用量增长的速度几乎没变：那半个月我发了好几个正式版，每个正式版照样带着一次 macOS 构建，CI 也还在每次推送时跑。</p>
+
+  <p>这次我先给组织绑了付款方式，把 Actions 的预算设成 1 美元、到额就停。这样额度用完以后还能多跑一点，最多多花 1 美元，不会出现失控的账单。然后在当天做了三处改动：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>改动</th><th>具体做法</th><th>省下的部分</th></tr>
+    <tr><td>tag 只打 Windows</td><td>正式版和 beta 都只构建 Windows 安装包；需要 macOS 包时，在 Actions 页面手动触发同一个工作流，选 platforms=mac</td><td>每次发版约 41 个 Linux 分钟</td></tr>
+    <tr><td>CI 改为手动触发</td><td>推送 main 不再自动跑；同样的检查在推送前由我在本机跑完，没在本机验证过的改动再去页面上手动触发</td><td>9 月约 661 分钟</td></tr>
+    <tr><td>合并小 job</td><td>原来单独计算构建矩阵的 setup 并进 prepare-release；R2 之后已经没用的 CDN 预热步骤删掉</td><td>每次发版 1 分钟以上</td></tr>
+  </table></div>
+
+  <h2 id="s6"><span class="no">06</span>省下来的钱，换掉了什么</h2>
+
+  <p>这三处改动都有代价，我想把它们写清楚。</p>
+
+  <p>macOS 用户拿到新版本会变慢。现在 macOS 安装包要我手动补打，补打之前，官网的 macOS 下载链接一直指向最近一次补打的版本。为了不让下载链接失效，官网的下载代理改成读 R2 上一个单独的 macOS 版本指针，只有某个版本真的有 macOS 安装包时才更新它。所以只打了 Windows 的版本，不会让 macOS 的下载变成 404，Mac 用户只是停在上一个版本。这个取舍的前提是用户结构：AMEFYS 的用户大部分在 Windows 上，测试也主要在 Windows 上做。</p>
+
+  <p>main 分支没有了自动的质量闸。推送前不在本机跑完检查，坏代码也能进 main。我的做法是把「推送前跑全量测试、类型检查、lint 和构建」写成规矩，发版工作流里保留它自己的构建和密钥泄漏检查，坏包和带密钥的包仍然发不出去。这适合一个人维护的仓库。几个人一起提交的话，我不建议关掉 CI，宁可在 paths 过滤和缓存上下功夫。</p>
+
+  <p>另外还有一处容易踩的：发版工作流按 tag 设了并发组，同一个 tag 上新的运行会取消正在跑的那一次。tag 推送触发的 Windows 构建还没结束时去补打 macOS，会把 Windows 那次取消掉，所以补打一定要等前一次跑完。</p>
+
+  <h2 id="s7"><span class="no">07</span>结果</h2>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 358" role="img" aria-label="9 月与 10 月 Actions 累计花费：9 月 14 日触到 $12、28 日触到 $18 两次被停；10 月上半月 $3.96">
+<line x1="64" y1="300" x2="664" y2="300" style="stroke:var(--d-dash)"/>
+<text x="54" y="304" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">$0</text>
+<line x1="64" y1="235" x2="664" y2="235" style="stroke:var(--d-dash)"/>
+<text x="54" y="239" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">$5</text>
+<line x1="64" y1="170" x2="664" y2="170" style="stroke:var(--d-dash)"/>
+<text x="54" y="174" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">$10</text>
+<line x1="64" y1="105" x2="664" y2="105" style="stroke:var(--d-dash)"/>
+<text x="54" y="109" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">$15</text>
+<line x1="64" y1="40" x2="664" y2="40" style="stroke:var(--d-dash)"/>
+<text x="54" y="44" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">$20</text>
+<text x="64" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">1 日</text>
+<text x="144" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">5 日</text>
+<text x="244" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">10 日</text>
+<text x="344" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">15 日</text>
+<text x="444" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">20 日</text>
+<text x="544" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">25 日</text>
+<text x="644" y="320" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">30 日</text>
+<line x1="64" y1="144" x2="664" y2="144" style="stroke:var(--d-amber)" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="72" y="138" font-size="12" text-anchor="start" style="fill:var(--d-amber)">Free 套餐的额度：2,000 分钟 = $12</text>
+<line x1="64" y1="66" x2="664" y2="66" style="stroke:var(--d-amber)" stroke-width="1.5" stroke-dasharray="6 5"/>
+<text x="72" y="60" font-size="12" text-anchor="start" style="fill:var(--d-amber)">Team 套餐的额度：3,000 分钟 = $18</text>
+<polyline points="64,299.7 84,299.7 104,293.1 124,287.0 144,284.0 164,246.4 184,234.5 204,234.5 224,207.4 244,188.6 264,162.5 284,155.8 304,150.0 324,144.0 344,144.0 364,141.1 384,137.5 404,129.3 424,119.7 444,112.2 464,105.4 484,105.4 504,98.9 524,91.6 544,80.2 564,74.1 584,67.2 604,58.6 624,58.6 644,56.6" fill="none" style="stroke:var(--d-gold)" stroke-width="2.5" stroke-linejoin="round"/>
+<polyline points="64,298.4 84,297.8 104,296.2 124,292.6 144,289.3 164,286.6 184,278.6 204,277.6 224,276.6 244,274.8 264,261.4 284,260.0 304,258.1 324,253.1 344,251.0 364,248.5" fill="none" style="stroke:var(--d-green)" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="364" y1="248.5" x2="664" y2="200.3" style="stroke:var(--d-green)" stroke-width="2" stroke-dasharray="3 5"/>
+<text x="668" y="204.257" font-size="11" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">≈$7.7</text>
+<circle cx="324" cy="144.0" r="5" style="fill:var(--d-red)"/>
+<text x="324" y="122" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-red)">9-14 第一次卡住</text>
+<circle cx="604" cy="58.6" r="5" style="fill:var(--d-red)"/>
+<text x="604" y="36.59" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-red)">9-28 第二次卡住</text>
+<text x="652" y="60.64" font-size="12" text-anchor="start" font-weight="600" style="fill:var(--d-gold)">9 月</text>
+<text x="364" y="236.52" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-green)">10 月</text>
+<text x="64" y="346" font-size="12" text-anchor="start" style="fill:var(--d-text3)">私有仓库 amefys 的 Actions 累计用量（按账单金额，UTC 日期）；虚线是按 10 月上半月的节奏推算的月底值</text>
+</svg>
+    </div>
+    <figcaption>图 3　9 月两次撞线停摆；10 月发版更勤，用量曲线却平了很多</figcaption>
+  </figure>
+
+  <div class="table-wrap"><table>
+    <tr><th>指标</th><th>9 月</th><th>10 月（1–16 日）</th></tr>
+    <tr><td>发版次数</td><td class="num">47</td><td class="num">28（含 5 次补打 macOS）</td></tr>
+    <tr><td>私有仓库 Actions 用量</td><td class="num">$18.72（3,120 Linux 分钟）</td><td class="num up">$3.96（全月预计 ≈ $7.7）</td></tr>
+    <tr><td>一次 tag 发版（折合 Linux 分钟）</td><td class="num">≈ 54（Windows + macOS），≈ $0.32</td><td class="num up">12（只打 Windows），≈ $0.07</td></tr>
+    <tr><td>额度用完被停</td><td class="num">2 次</td><td class="num up">0 次</td></tr>
+    <tr><td>超出额度实际付的钱</td><td class="num">$0.72</td><td class="num">$0</td></tr>
+  </table></div>
+
+  <p>10 月上半月发版的频率比 9 月还高，按这个节奏推算全月用量约 7.7 美元，是 9 月的 41%。剩下的大头是 Windows 构建和每天的数据任务，都是产品需要的部分。按现在的节奏，Team 套餐的额度用不到一半，预算里那 1 美元也没有动过。</p>
+
+  <h2 id="s8"><span class="no">08</span>怎么提前看到自己的额度</h2>
+
+  <p>这次最被动的地方是：两次都是发版失败了，我才知道额度用完。GitHub 的账单页能看到用量，但不会在你发版之前提醒你。我后来把下面几个接口接进了自己的本地运维面板，每次打开就能看到本月用了多少、按目前的节奏月底会到多少。</p>
+
+  <p>组织的用量明细在增强计费接口里，带 <code>year</code> 和 <code>month</code> 参数时会按天、按仓库拆开，每一行有原始分钟数、单价和金额（旧的 <code>/orgs/&lt;org&gt;/settings/billing/actions</code> 已经返回 410）：</p>
+
+<pre><code><span class="c"># 按天、按仓库的用量明细：quantity 是原始分钟，grossAmount 是金额</span>
+$ gh api "/organizations/&lt;org&gt;/settings/billing/usage?year=2026&amp;month=9"
+
+<span class="c"># 预算：budget_amount 和 prevent_further_usage（到额是否停用）</span>
+$ gh api /organizations/&lt;org&gt;/settings/billing/budgets
+
+<span class="c"># 一次运行里每个 job 的起止时间和机器标签，用来算单次发版的成本</span>
+$ gh api "repos/&lt;owner&gt;/&lt;repo&gt;/actions/runs/&lt;run_id&gt;/jobs"</code></pre>
+
+  <p>算的时候记住两点：比较各项要用金额，明细里的分钟数没乘倍率；公开仓库的用量会出现在明细里，但不扣额度，要按仓库可见性分开算。我在面板上设了两道提醒：用到额度的 80% 时提示一次，开始产生费用时标红。</p>
+
+  <h2 id="s9"><span class="no">09</span>几点心得</h2>
+
+  <p>按 job 粒度算成本。CI 的账单是一个个 job 加出来的，每个 job 有自己的机器单价和取整规则，看总时长或者看分钟数都会误判。按墙钟时间看，最慢的是 Windows 构建；按钱算，最贵的是跑得最快的 macOS。</p>
+
+  <p>报错的前半句可能是烟雾弹。「付款失败或支出上限需要提高」，真正适用的是后半句。遇到零步骤的失败，先去注解里看原因，再去对应主体的账单页核对，私有仓库要看组织的账单。</p>
+
+  <p>额度用完的后果，往往比额度本身严重。这次超额实际只付了 0.72 美元，可额度一用完，整个组织的工作流全停，发版只能手工完成。所以我把预算设成一个很小但不为零的数，既能在额度用完后撑过一次发版，又不会让账单失控。</p>
+
+  <p>频率是成本的放大器。单次发版 0.32 美元，可 9 月发版工作流跑了 47 次，光发版一项就超过了 Free 套餐全月的额度。beta 发得勤是好事，那就让每次 beta 只做测试真正需要的事。</p>
+
+  <p>省钱的改动要把代价写下来。Mac 用户拿新版本变慢、main 没有自动质量闸，这些都是有意的取舍。我把原因写进了工作流文件的注释里，以后用户结构变了、或者有人加入一起开发，要回头改的时候知道当初为什么这样做。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>遇到类似的问题？</strong>如果你也在用 GitHub Actions、Cloudflare、Supabase 这类免费额度起步，碰到了成本、发版流程或桌面端打包的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/amefys-architecture.html">上一篇：AMEFYS 的整体设计与技术架构</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>
