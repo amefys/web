@@ -90,6 +90,28 @@ Rules when touching them:
 3. Generated pages (`heroes/`, `items/`) carry a shorter nav emitted by
    `_generator/build.mjs` — update `nav()` there too, then re-run the build.
 
+## Player groups (`#community` on the homepage)
+
+QQ group, WeChat group and the 123pan mirror. `assets/community.json` is the
+single source; `scripts/community-qr.mjs` decodes a screenshot, re-encodes each
+link as a small PNG data URI (4-module quiet zone, whole px per module, padded
+to one 208px tile) and rewrites the cards between `<!-- community:start -->`
+and `<!-- community:end -->`. Never edit the cards by hand.
+
+**The WeChat group code expires after 7 days.** To rotate it (needs
+`brew install zbar imagemagick` and `npm install` once):
+
+```sh
+npm run community -- wechat ~/Downloads/new-wechat-code.png        # expires = today + 7 (China time)
+npm run community -- wechat shot.png --expires 2026-10-30          # or the date printed under the code
+npm test && git commit -am "chore(site): rotate WeChat group code" && git push
+```
+
+Past the expiry date the page hides the code by itself and points to the QQ
+group, so a missed rotation never shows a dead code. `npm run community --
+--check` exits 1 when `index.html` is stale. Same command with `qq` / `pan`
+and a screenshot or URL for the other two.
+
 ## Donate page (`donate.html`, `en/donate.html`)
 
 WeChat tip QR (`assets/qr-tip.svg`) is currently the only live channel — Buy Me
