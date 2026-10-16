@@ -189,6 +189,7 @@ section { padding: 88px 24px 100px; }
 .comm-btn.ghost { background: transparent; color: var(--gold); border-color: rgba(232,199,121,0.45); }
 .comm-btn:hover { filter: brightness(1.08); }
 .comm-note { grid-area: note; margin: 12px 0 0; font-size: 12px; line-height: 1.6; color: var(--text-3); }
+.comm-note b { color: var(--text-2); font-weight: 600; }
 .comm-phone { display: none; }
 .comm-expired { grid-area: qr; display: none; margin: 0; width: 208px; min-height: 208px; padding: 20px 16px; box-sizing: border-box;
   align-items: center; border-radius: 10px; border: 1px dashed var(--hairline-strong);
