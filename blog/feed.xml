@@ -6,7 +6,14 @@
   <atom:link href="https://amefys.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>一个人借助 AI 把 AMEFYS 从零做到上线：踩过的坑、做过的决定和真实的数据。</description>
   <language>zh-cn</language>
-  <lastBuildDate>Fri, 16 Oct 2026 12:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 16 Oct 2026 14:00:00 GMT</lastBuildDate>
+  <item>
+    <title>Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑</title>
+    <link>https://amefys.com/blog/cloudflare-o2o-cache.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/cloudflare-o2o-cache.html</guid>
+    <pubDate>Fri, 16 Oct 2026 14:00:00 GMT</pubDate>
+    <description>跨 zone 的 fetch 读的是对方的缓存，__cf_bm 让缓存跳过，转发来的 HIT 和 HEAD 的 DYNAMIC 都会骗人：O2O 缓存怎么判断、怎么修。</description>
+  </item>
   <item>
     <title>GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵</title>
     <link>https://amefys.com/blog/github-actions-minutes.html</link>
