@@ -37,3 +37,13 @@ test('the WeChat card carries its expiry and the page hides it once past', () =>
   assert.ok(card('wechat').includes(`${m} 月 ${d} 日前有效`))
   assert.match(page, /setAttribute\('data-expired', ''\)/)
 })
+
+test('lives in the hero: one chip per card, hover / tap / keyboard wired', () => {
+  const hero = page.slice(page.indexOf('<header class="hero"'), page.indexOf('class="preview-wrap"'))
+  assert.ok(hero.includes('<!-- community:start -->'), 'community block must sit in the hero')
+  for (const k of ['qq', 'wechat', 'pan']) assert.ok(block.includes(`data-comm-open="${k}"`), `${k} chip missing`)
+  assert.match(page, /matchMedia\('\(hover: hover\) and \(pointer: fine\)'\)/)
+  assert.match(page, /e\.key === 'Escape'/)
+  // a tap focuses too: focus must only open for the keyboard, or a tap could never close
+  assert.match(page, /:focus-visible/)
+})

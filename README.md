@@ -92,7 +92,9 @@ Rules when touching them:
 
 ## Player groups (`#community` on the homepage)
 
-QQ group, WeChat group and the 123pan mirror. `assets/community.json` is the
+Three chips under the hero buttons — QQ group, WeChat group, 123pan mirror.
+Mouse: hovering a chip floats its card (no layout shift); touch: a tap opens
+it in the flow; keyboard: focus shows it, Esc hides. `assets/community.json` is the
 single source; `scripts/community-qr.mjs` decodes a screenshot, re-encodes each
 link as a small PNG data URI (4-module quiet zone, whole px per module, padded
 to one 208px tile) and rewrites the cards between `<!-- community:start -->`
