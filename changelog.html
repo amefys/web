@@ -199,7 +199,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-10-16</div>
+      <div class="updated">最近更新：2026-10-17</div>
     </div>
 
     <!-- 赞助 -->
@@ -224,14 +224,26 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.33.3-beta.0</h3>
-        <p><strong>这一版修的是：开着 AMEFYS 时，电脑每隔几秒卡一下、游戏里鼠标会顿一帧。</strong>如果你遇到过这个问题，欢迎装上试试，有没有好转在玩家群里说一声。没遇到过的话，用左边的稳定版就行，验证完会并进下一个正式版。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.33.3-beta.1</h3>
+        <p><strong>这一版修了两件事：开着 AMEFYS 时鼠标隔几秒顿一下；重启后有时要重新登录。</strong>遇到过其中任何一个的话，欢迎装上试试，有没有好转在玩家群里说一声。没遇到过的话，用左边的稳定版就行，验证完会并进下一个正式版。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.33.3-beta.1 ── -->
+    <article class="release beta" id="v0-33-3-beta-1">
+      <header><h2>0.33.3-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-17</span></header>
+      <p class="lead">关掉再打开，不用再重新登录。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>重启后要重新登录：</strong>AMEFYS 开着超过一小时，下次打开时经常要重新登录，更新版本后也一样。原因是登录凭证每小时会自动换新，但换来的新凭证没有存下来，下次打开时拿着旧凭证去登录就被拒绝了。现在每次换新都会存好。另外，打开时如果网络暂时不通，也不会再把你登出，网络恢复后会自动重新登录。</li>
+        </ul>
+      </div>
+      <div class="callout">从旧版本升级到这一版后，第一次打开可能还要再登录一次（旧版本存下的凭证已经失效了）。之后就不会了。</div>
+    </article>
 
     <!-- ── 0.33.3-beta.0 ── -->
     <article class="release beta" id="v0-33-3-beta-0">
