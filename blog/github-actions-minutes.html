@@ -22,6 +22,8 @@
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
 <link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
 <link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/blog-comments.css?v=1">
+<script src="/assets/blog-comments.js?v=1" defer></script>
 <link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
@@ -384,6 +386,13 @@ $ gh api "repos/&lt;owner&gt;/&lt;repo&gt;/actions/runs/&lt;run_id&gt;/jobs"</co
   <div class="post-end">
     <strong>遇到类似的问题？</strong>如果你也在用 GitHub Actions、Cloudflare、Supabase 这类免费额度起步，碰到了成本、发版流程或桌面端打包的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
   </div>
+
+  <section class="post-comments" aria-label="评论">
+    <h2 id="comments">评论</h2>
+    <p class="note">评论审核后显示，通常一天内处理；邮箱只用于回复通知，不会公开。提交即表示同意<a href="/privacy.html">隐私政策</a>。</p>
+    <div id="waline" data-path="/blog/github-actions-minutes.html"></div>
+    <div class="comments-fallback">评论组件没有加载出来。可以直接发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或稍后刷新再试。</div>
+  </section>
 
   <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/amefys-architecture.html">上一篇：AMEFYS 的整体设计与技术架构</a>　·　<a href="/blog/cloudflare-o2o-cache.html">下一篇：Worker 前面加了缓存却没生效</a></div>
 </article>

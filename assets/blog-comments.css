@@ -1,0 +1,54 @@
+/* Comments under tech-blog posts (Waline). Colours come from blog.css tokens,
+   so the box follows the light / dark switch. Loaded on every post page;
+   /assets/blog-comments.js only fetches Waline itself near the end of the post.
+   Covered by /tests/blog-comments.test.cjs. */
+
+.post-comments { margin-top: 48px; padding-top: 28px; border-top: 0.5px solid var(--hairline); }
+.post-comments h2 { font-size: 21px; letter-spacing: -0.3px; margin: 0 0 8px; color: var(--text); }
+.post-comments .note { font-size: 13px; line-height: 1.7; color: var(--text-3); margin: 0 0 18px; }
+.post-comments .note a { color: var(--text-2); border-bottom: 1px solid var(--hairline-strong); }
+.comments-fallback { display: none; padding: 14px 16px; border: 1px dashed var(--hairline-strong); border-radius: 12px; font-size: 13px; color: var(--text-2); }
+.comments-fallback a { color: var(--gold); }
+#waline:empty + .comments-fallback { display: block; }
+
+#waline {
+  --waline-font-size: 14px;
+  --waline-white: var(--bg-2);
+  --waline-light-grey: var(--text-3);
+  --waline-dark-grey: var(--text-2);
+  --waline-color: var(--text);
+  --waline-bg-color: var(--bg-2);
+  --waline-bg-color-light: var(--surface);
+  --waline-bg-color-hover: var(--hover-bg);
+  --waline-border-color: var(--hairline-strong);
+  --waline-disable-bg-color: var(--tint-soft);
+  --waline-disable-color: var(--text-3);
+  --waline-code-bg-color: var(--code-bg);
+  --waline-theme-color: var(--gold);
+  --waline-active-color: var(--gold-deep);
+  --waline-info-bg-color: var(--tint-soft);
+  --waline-info-color: var(--text-2);
+  --waline-border: 1px solid var(--waline-border-color);
+  --waline-avatar-radius: 50%;
+  --waline-box-shadow: none;
+  --waline-badge-color: var(--gold);
+  --waline-badge-font-size: 11px;
+  color: var(--text);
+}
+#waline .wl-panel { border-radius: 14px; background: var(--surface); }
+#waline .wl-editor, #waline .wl-input { color: var(--text); }
+#waline .wl-btn.primary { color: var(--bg); font-weight: 600; }
+/* While submitting, Waline disables the primary button and swaps the label for
+   a currentColor spinner; with the colour above it would be an empty box (the
+   guestbook hit this, tests/guestbook-styles.test.cjs). Give it its own state. */
+#waline .wl-btn.primary:disabled,
+#waline .wl-btn.primary:disabled:hover,
+#waline .wl-btn.primary:disabled:active {
+  min-width: 6em;
+  border-color: var(--hairline-strong);
+  background: var(--tint-soft);
+  color: var(--gold);
+  cursor: progress;
+}
+#waline .wl-card .wl-head .wl-nick { color: var(--gold); }
+#waline .wl-card .wl-content a { color: var(--gold); }
