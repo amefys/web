@@ -65,7 +65,7 @@
     <div class="tags"><span class="tag">国内访问</span><span class="tag">Cloudflare</span><span class="tag">Supabase</span><span class="tag">网络排查</span><span class="tag">事故复盘</span></div>
     <h1>国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测</h1>
     <p class="sub">AMEFYS 的用户绝大部分在国内，服务却都在境外：Supabase 在新加坡，前面是 Cloudflare 免费版，官网放在 GitHub Pages。五个月里，登录突然失败、下载慢、头像加载半天、手机网页打不开、用户被跳到赌博站，每次都得先回答同一个问题：到底是国内连不上，还是别的原因。这篇把这些事汇总起来，重点讲怎么用国内家宽节点拨测，以及本机和机房节点为什么测不准。</p>
-    <div class="meta"><span>2026-10-17</span><span>阅读约 18 分钟</span><span>AMEFYS</span></div>
+    <div class="meta"><span>2026-10-17</span><span>阅读约 20 分钟</span><span>AMEFYS</span></div>
   </header>
 
   <div class="tldr">
@@ -75,7 +75,7 @@
       <li>修法是在自己的域名上加一条转发线路 api.amefys.com，客户端先走转发、连不上再直连。10 月 16 日两轮拨测：Supabase 原域名在 15 个家宽节点里固定有 6 个被重置，转发线路只有零星超时。</li>
       <li>测国内能不能连，本机和机房节点都会骗人：开发机的 DNS 被本地代理软件换成了 198.18 段的假地址，机房节点 6/6 都能连上被阻断的域名。要用家宽节点，每次带一个已知被阻断的对照组。</li>
       <li>秒级 <code>ECONNRESET</code> 是阻断，TLS 握手超时多半是拥塞。国庆期间的「登录不了」就是拥塞，复测一轮从 20/24 回到 23/24。</li>
-      <li>其他坑：用户被跳到赌博站（开了 HSTS 和 preload）、厂商浏览器拦截新域名（推断）、安装包从没被缓存住（Cloudflare 免费版单个文件缓存上限 100 MB）、崩溃上报被广告规则拦掉。治本的路是备案和国内节点，已经在准备。</li>
+      <li>其他坑：用户被跳到赌博站（开了 HSTS 和 preload）、厂商浏览器拦截新域名（推断）、安装包从没被缓存住（Cloudflare 免费版单个文件缓存上限 100 MB）、崩溃上报被广告规则拦掉。89 个节点的测速显示，国内请求大多由阿姆斯特丹和洛杉矶的机房应答，联通 27 个节点只有 6 个完整打开。治本的路是备案和国内节点，已经在准备。</li>
     </ul>
   </div>
 
@@ -92,8 +92,9 @@
       <li><a href="#s8">图片、字体和人机验证</a></li>
       <li><a href="#s9">监控数据也会骗人</a></li>
       <li><a href="#s10">开了代理也不行的三处网络栈</a></li>
-      <li><a href="#s11">治本：备案和国内节点</a></li>
-      <li><a href="#s12">几点心得</a></li>
+      <li><a href="#s11">89 个节点的基线：请求绕到了阿姆斯特丹和洛杉矶</a></li>
+      <li><a href="#s12">治本：备案和国内节点</a></li>
+      <li><a href="#s13">几点心得</a></li>
     </ol>
   </nav>
 
@@ -509,15 +510,169 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>第三处是 Windows 的 OCR 语言组件。下载慢的时候我问过一句「如果开了代理是不是就没这个问题了」。查了微软的文档，组件下载走的是以系统账户运行的后台服务，它不继承用户级的系统代理设置，所以开了也不走。安装向导的文案因此不该写「请开代理」，只写技术事实。</p>
 
-  <h2 id="s11"><span class="no">11</span>治本：备案和国内节点</h2>
+  <h2 id="s11"><span class="no">11</span>89 个节点的基线：请求绕到了阿姆斯特丹和洛杉矶</h2>
+
+  <p>Globalping 一次只有十几个家宽节点，看不出全国的样子。10 月 17 日凌晨，我又用 <a href="https://www.boce.com/http/20261017_30d94b009ee615063a52d6613a860440.html">boce.com</a> 测了一次 <code>http://amefys.com</code>，覆盖 89 个国内节点：电信 31 个、移动 31 个、联通 27 个。它会记下每个节点的响应头，而 Cloudflare 响应头 <code>Cf-Ray</code> 的末尾三个字母就是应答的机房代码，于是第一次能看到国内用户的请求实际落在了哪里：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 308" role="img" aria-label="89 个国内节点打开 amefys.com：电信 31 个里 30 个完整打开，29 个落到阿姆斯特丹；移动 31 个里 28 个，落到洛杉矶和亚特兰大；联通 27 个只有 6 个完整打开，15 个连接失败">
+<text x="16" y="20" font-size="12" text-anchor="start" style="fill:var(--d-text3)">每个点是一个节点：横轴是打开首页的总耗时，颜色是请求落到的 Cloudflare 机房</text>
+<line x1="90" y1="36" x2="90" y2="236" style="stroke:var(--d-dash)"/>
+<text x="90" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">0 秒</text>
+<line x1="182" y1="36" x2="182" y2="236" style="stroke:var(--d-dash)"/>
+<text x="182" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">2 秒</text>
+<line x1="274" y1="36" x2="274" y2="236" style="stroke:var(--d-dash)"/>
+<text x="274" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">4 秒</text>
+<line x1="366" y1="36" x2="366" y2="236" style="stroke:var(--d-dash)"/>
+<text x="366" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">6 秒</text>
+<line x1="458" y1="36" x2="458" y2="236" style="stroke:var(--d-dash)"/>
+<text x="458" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">8 秒</text>
+<line x1="550" y1="36" x2="550" y2="236" style="stroke:var(--d-dash)"/>
+<text x="550" y="252" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">10 秒</text>
+<text x="630" y="30" font-size="11" text-anchor="middle" style="fill:var(--d-red)">连接失败</text>
+<text x="16" y="66" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">电信</text>
+<text x="16" y="84" font-size="11" text-anchor="start" style="fill:var(--d-text3)">31 个节点</text>
+<circle cx="155.3" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="158.5" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="168.7" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="169.6" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="172.8" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="175.1" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="175.6" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="182.0" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="183.4" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="186.1" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="188.0" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="192.6" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="197.2" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="202.2" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="204.5" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="205.0" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="206.8" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="209.6" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="215.6" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="225.7" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="252.8" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="274.0" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="283.2" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="284.1" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="287.8" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="291.0" cy="58" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="294.2" cy="66" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="313.1" cy="74" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="375.7" cy="50" r="4.5" style="fill:var(--d-blue)" fill-opacity="0.85"/>
+<circle cx="452.0" cy="58" r="4.5" style="fill:var(--d-gray)" fill-opacity="0.85"/>
+<circle cx="550.0" cy="66" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<text x="704" y="84" font-size="12" text-anchor="end" font-weight="600" style="fill:var(--d-green)">完整打开 30/31</text>
+<text x="16" y="136" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">移动</text>
+<text x="16" y="154" font-size="11" text-anchor="start" style="fill:var(--d-text3)">31 个节点</text>
+<circle cx="142.0" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="147.0" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="152.1" cy="136" r="4.5" style="fill:var(--d-green)" fill-opacity="0.85"/>
+<circle cx="169.6" cy="144" r="4.5" style="fill:var(--d-green)" fill-opacity="0.85"/>
+<circle cx="176.5" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="177.9" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="179.7" cy="136" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="184.8" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="186.1" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="188.4" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="188.4" cy="136" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="190.3" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="196.3" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="202.7" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="211.4" cy="136" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="219.3" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="234.4" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="238.1" cy="128" r="4.5" style="fill:var(--d-green)" fill-opacity="0.85"/>
+<circle cx="247.3" cy="136" r="4.5" style="fill:var(--d-green)" fill-opacity="0.85"/>
+<circle cx="256.1" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="267.6" cy="120" r="4.5" style="fill:var(--d-green)" fill-opacity="0.85"/>
+<circle cx="280.9" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="281.4" cy="136" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="318.2" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="328.7" cy="120" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="360.9" cy="128" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="386.7" cy="136" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="392.7" cy="144" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<path d="M586.5 116.5L593.5 123.5M593.5 116.5L586.5 123.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M596.5 116.5L603.5 123.5M603.5 116.5L596.5 123.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M606.5 116.5L613.5 123.5M613.5 116.5L606.5 123.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<text x="704" y="154" font-size="12" text-anchor="end" font-weight="600" style="fill:var(--d-green)">完整打开 28/31</text>
+<text x="16" y="206" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">联通</text>
+<text x="16" y="224" font-size="11" text-anchor="start" style="fill:var(--d-text3)">27 个节点</text>
+<circle cx="266.6" cy="190" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="277.7" cy="198" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="320.5" cy="206" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="358.2" cy="214" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="436.8" cy="190" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="536.2" cy="198" r="4.5" style="fill:var(--d-gold)" fill-opacity="0.85"/>
+<circle cx="550.0" cy="206" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<circle cx="550.0" cy="214" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<circle cx="550.0" cy="190" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<circle cx="550.0" cy="198" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<circle cx="550.0" cy="206" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<circle cx="550.0" cy="214" r="4.5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M586.5 186.5L593.5 193.5M593.5 186.5L586.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M596.5 186.5L603.5 193.5M603.5 186.5L596.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M606.5 186.5L613.5 193.5M613.5 186.5L606.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M616.5 186.5L623.5 193.5M623.5 186.5L616.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M626.5 186.5L633.5 193.5M633.5 186.5L626.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M636.5 186.5L643.5 193.5M643.5 186.5L636.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M646.5 186.5L653.5 193.5M653.5 186.5L646.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M656.5 186.5L663.5 193.5M663.5 186.5L656.5 193.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M586.5 196.5L593.5 203.5M593.5 196.5L586.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M596.5 196.5L603.5 203.5M603.5 196.5L596.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M606.5 196.5L613.5 203.5M613.5 196.5L606.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M616.5 196.5L623.5 203.5M623.5 196.5L616.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M626.5 196.5L633.5 203.5M633.5 196.5L626.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M636.5 196.5L643.5 203.5M643.5 196.5L636.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<path d="M646.5 196.5L653.5 203.5M653.5 196.5L646.5 203.5" style="stroke:var(--d-red)" stroke-width="1.6"/>
+<text x="704" y="224" font-size="12" text-anchor="end" font-weight="600" style="fill:var(--d-red)">完整打开 6/27</text>
+<circle cx="22" cy="272" r="5" style="fill:var(--d-blue)"/>
+<text x="32" y="276" font-size="12" text-anchor="start" style="fill:var(--d-text2)">阿姆斯特丹（AMS）</text>
+<circle cx="152" cy="272" r="5" style="fill:var(--d-gold)"/>
+<text x="162" y="276" font-size="12" text-anchor="start" style="fill:var(--d-text2)">洛杉矶（LAX）</text>
+<circle cx="282" cy="272" r="5" style="fill:var(--d-green)"/>
+<text x="292" y="276" font-size="12" text-anchor="start" style="fill:var(--d-text2)">亚特兰大（ATL）</text>
+<circle cx="412" cy="272" r="5" style="fill:none;stroke:var(--d-red)" stroke-width="1.6"/>
+<text x="422" y="276" font-size="12" text-anchor="start" style="fill:var(--d-text2)">跑满 10 秒、没拿到完整页面</text>
+<text x="16" y="298" font-size="11" text-anchor="start" style="fill:var(--d-text3)">boce.com HTTP 测速，http://amefys.com，2026-10-17 00:14，89 个节点各测一次；耗时含 DNS 解析；机房取自响应头 Cf-Ray</text>
+</svg>
+    </div>
+    <figcaption>图 3　电信的请求大多由阿姆斯特丹应答，移动落在洛杉矶和亚特兰大，联通 27 个节点只有 6 个完整打开</figcaption>
+  </figure>
+
+  <p>电信 31 个节点里 30 个完整打开，完整打开的节点耗时中位数 2.5 秒，其中 29 个由阿姆斯特丹机房应答。移动 31 个里 28 个完整打开，中位数也是 2.5 秒，23 个落在洛杉矶、5 个落在亚特兰大。联通最差：27 个节点只有 6 个完整打开，15 个连接失败，另有 6 个跑满 10 秒也没拿到完整页面。<strong>一个国内用户打开官网首页，请求要先绕到欧洲或美国再回来。</strong>落到哪个机房取决于各家运营商和 Cloudflare 之间怎么互联，我们这一侧左右不了。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>分组</th><th>平均响应时间</th><th>最快的节点</th><th>最慢的节点</th></tr>
+    <tr><td>全部 89 个</td><td class="num">3.99 秒</td><td>黑龙江大庆移动 1.13 秒</td><td>重庆联通 10.02 秒</td></tr>
+    <tr><td>电信</td><td class="num">3.26 秒</td><td>江苏苏州电信 1.42 秒</td><td>湖北天门电信 10 秒</td></tr>
+    <tr><td>移动</td><td class="num">3.09 秒</td><td>黑龙江大庆移动 1.13 秒</td><td>山西长治移动 6.58 秒</td></tr>
+    <tr><td>联通</td><td class="num">8.00 秒</td><td>安徽马鞍山联通 3.84 秒</td><td>重庆联通 10.02 秒</td></tr>
+    <tr><td>东北</td><td class="num">2.78 秒</td><td>黑龙江大庆移动 1.13 秒</td><td>吉林长春移动 3.86 秒</td></tr>
+    <tr><td>华北</td><td class="num">3.32 秒</td><td>天津移动 1.73 秒</td><td>山西长治移动 6.58 秒</td></tr>
+    <tr><td>华南</td><td class="num">3.67 秒</td><td>广东广州电信 1.71 秒</td><td>广东深圳联通 10 秒</td></tr>
+    <tr><td>华东</td><td class="num">3.99 秒</td><td>安徽六安移动 1.35 秒</td><td>上海联通 9.7 秒</td></tr>
+    <tr><td>西北</td><td class="num">4.12 秒</td><td>甘肃兰州移动 1.24 秒</td><td>新疆昌吉联通 10.01 秒</td></tr>
+    <tr><td>西南</td><td class="num">4.52 秒</td><td>四川成都电信 2 秒</td><td>重庆联通 10.02 秒</td></tr>
+    <tr><td>华中</td><td class="num">5.34 秒</td><td>湖南长沙电信 1.85 秒</td><td>湖北天门电信 10 秒</td></tr>
+  </table></div>
+
+  <p>上表是 boce 报告页自己给出的分组统计。看这组数字要注意几点：每个节点只测了一次，时间是凌晨，不是晚高峰；耗时里包含冷启动的 DNS 解析，所以比用户第二次打开要慢；boce 没说明这些节点是机房还是家宽。联通这么差，和前一个小时 Globalping 的家宽结果也对不上，那边联通节点访问官网基本都通，原因还要再查。但两边的方向一致：Cloudflare 免费版在大陆没有节点，国内的请求只能出境去找海外机房。</p>
+
+  <p>这组数字会作为我们的基线。下一节说的国内节点上线以后，我会用同一个测速网站、同样覆盖三家运营商的节点再测一次，把前后对比单独写一篇。</p>
+
+  <h2 id="s12"><span class="no">12</span>治本：备案和国内节点</h2>
 
   <p>上面这些大多是在境外的架构上打补丁。治本的路是备案，再加国内的服务器和 CDN。不备案，很多事都卡着：没备案的域名不能用在大陆服务器的 80 和 443 端口上；国内对象存储加 CDN 能让安装包下载快很多，但自有域名要备案；百度对境外的新站很少主动收录，也不给「官网」标识；厂商浏览器拦截新域名，也和没备案有关。</p>
 
-  <p>10 月 8 日我们开始准备：注册了 amefys.cn，在北京准备了一台服务器，后端、函数、缓存都在分支上跑通了，客户端改成按构建版本选择入口：国内版先走 <code>api.amefys.cn</code>，再走 api.amefys.com，最后才直连 Supabase。在北京的机器上实测，真实的火山翻译请求 0.6 到 0.7 秒，语音识别建连 86 毫秒。这些都要等备案通过后才能对外。</p>
+  <p>上一节那组基线，就是这件事要解决的问题。10 月 8 日我们开始准备：注册了 amefys.cn，在北京准备了一台服务器，后端、函数、缓存都在分支上跑通了，客户端改成按构建版本选择入口：国内版先走 <code>api.amefys.cn</code>，再走 api.amefys.com，最后才直连 Supabase。在北京的机器上实测，真实的火山翻译请求 0.6 到 0.7 秒，语音识别建连 86 毫秒。这些都要等备案通过后才能对外。</p>
 
   <p>有一条原则从一开始就定下了：已经发出去的客户端里写死的每一个主机名，api.amefys.com、cdn.amefys.com、amefys.com/dl、supabase.co 的直连兜底，一个都不能下线，只能换它们背后的服务。用户手里的旧版本，我们改不了。</p>
 
-  <h2 id="s12"><span class="no">12</span>几点心得</h2>
+  <h2 id="s13"><span class="no">13</span>几点心得</h2>
 
   <p>本机测不出国内的问题。开发机多半开着网络工具，DNS 和流量都被接管了，curl 永远是通的。机房节点也一样，它们的线路不受这类阻断影响。要用国内的家宽节点，分运营商看。</p>
 
