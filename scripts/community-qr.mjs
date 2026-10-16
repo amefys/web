@@ -127,8 +127,8 @@ async function render(data) {
         code: qq,
         alt: 'AMEFYS QQ 群二维码',
         actions: `<a class="comm-btn" href="${esc(data.qq.url)}" rel="noopener" target="_blank">打开 QQ 加群</a><button type="button" class="comm-btn ghost" data-copy="${esc(data.qq.group)}">复制群号</button>`,
-        desk: '用手机 QQ 扫码，或在 QQ 里搜群号。',
-        phone: '点「打开 QQ 加群」直接跳到 QQ；也可以复制群号到 QQ 里搜。'
+        desk: '用手机 QQ 扫码，或在 QQ 里搜群号。进群后在<b>群文件</b>里也能下载安装包。',
+        phone: '点「打开 QQ 加群」直接跳到 QQ；也可以复制群号到 QQ 里搜。进群后在<b>群文件</b>里也能下载安装包。'
       })}${card({
         key: 'wechat',
         title: '微信群',
