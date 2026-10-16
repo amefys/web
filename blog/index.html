@@ -25,7 +25,7 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑","url":"https://amefys.com/blog/cloudflare-o2o-cache.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","url":"https://amefys.com/blog/github-actions-minutes.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","url":"https://amefys.com/blog/ai-assisted-dev-rules.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃","url":"https://amefys.com/blog/electron-overlay-pitfalls.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测","url":"https://amefys.com/blog/china-reachability.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑","url":"https://amefys.com/blog/cloudflare-o2o-cache.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","url":"https://amefys.com/blog/github-actions-minutes.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
 </head>
 <body>
 
@@ -64,6 +64,27 @@
     <p>一个人借助 AI，把 AMEFYS 从一个念头做到上线、运营。这里记录过程中真实发生的事：踩过的坑、做过的取舍、拿得出手的数据。每一篇都来自线上真实发生过的问题。</p>
     <a class="rss" href="/blog/feed.xml"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="2" fill="currentColor"/><path d="M1 7a8 8 0 0 1 8 8M1 2a13 13 0 0 1 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>RSS 订阅</a>
   </header>
+
+  <a class="post-card" href="/blog/ai-assisted-dev-rules.html">
+    <div class="meta"><span>2026-10-17</span><span>阅读约 14 分钟</span></div>
+    <h2>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故</h2>
+    <p>AMEFYS 大部分代码由 AI 写。161 天里它汇报过不存在的推送、照着 logo 抄出走样的副本、把仓库里的代码当成线上的服务。把这些事和它们留下的规矩放在一起讲：规矩分几层、怎么写才管用、哪些变成了自动检查，以及哪些事始终由人拍板。</p>
+    <div class="tags"><span class="tag">AI 协作开发</span><span class="tag">Claude Code</span><span class="tag">工程规范</span><span class="tag">事故复盘</span></div>
+  </a>
+
+  <a class="post-card" href="/blog/electron-overlay-pitfalls.html">
+    <div class="meta"><span>2026-10-17</span><span>阅读约 19 分钟</span></div>
+    <h2>用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃</h2>
+    <p>一个盖在全屏游戏上的透明置顶悬浮窗，把 Electron 在 Windows 上的很多角落碰了一遍：修了五次的黑角，一拿焦点游戏就静音，一个布尔参数背后是全局鼠标钩子，自动恢复的代码反而把整个应用带崩。每条写清根因、修法，以及有没有在 Windows 实机验证过。</p>
+    <div class="tags"><span class="tag">Electron</span><span class="tag">Windows</span><span class="tag">macOS</span><span class="tag">桌面应用</span><span class="tag">踩坑</span></div>
+  </a>
+
+  <a class="post-card" href="/blog/china-reachability.html">
+    <div class="meta"><span>2026-10-17</span><span>阅读约 18 分钟</span></div>
+    <h2>国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测</h2>
+    <p>用户 89% 在国内，服务全在境外。supabase.co 被部分运营商 SNI 阻断、国庆线路拥塞、用户被跳到赌博站、手机网页被浏览器拦截、安装包缓存从没生效：每次都要先判断是不是国内连不上。重点讲怎么用家宽节点加对照组拨测，以及本机和机房节点为什么测不准。</p>
+    <div class="tags"><span class="tag">国内访问</span><span class="tag">Cloudflare</span><span class="tag">Supabase</span><span class="tag">网络排查</span><span class="tag">事故复盘</span></div>
+  </a>
 
   <a class="post-card" href="/blog/cloudflare-o2o-cache.html">
     <div class="meta"><span>2026-10-16</span><span>阅读约 9 分钟</span></div>

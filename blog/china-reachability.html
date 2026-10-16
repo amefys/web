@@ -1,0 +1,581 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测 — AMEFYS 技术博客</title>
+<meta name="description" content="AMEFYS 用户 89% 在国内、服务全在境外：supabase.co 被部分运营商 SNI 阻断后自建转发线路；用 Globalping 家宽节点加对照组拨测，区分阻断与拥塞；赌博站跳转与 HSTS preload、厂商浏览器拦截、安装包缓存上限、崩溃上报被拦等国内访问踩坑汇总。">
+<link rel="canonical" href="https://amefys.com/blog/china-reachability.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测">
+<meta property="og:description" content="本机 fake-IP 和机房节点都测不出国内阻断：用家宽节点加对照组拨测，秒级重置是阻断、超时多半是拥塞。">
+<meta property="og:url" content="https://amefys.com/blog/china-reachability.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-17">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/china-reachability.html","keywords":"国内访问, SNI 阻断, Globalping, Cloudflare, Supabase, HSTS, 拨测"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">国内访问</span><span class="tag">Cloudflare</span><span class="tag">Supabase</span><span class="tag">网络排查</span><span class="tag">事故复盘</span></div>
+    <h1>国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测</h1>
+    <p class="sub">AMEFYS 的用户绝大部分在国内，服务却都在境外：Supabase 在新加坡，前面是 Cloudflare 免费版，官网放在 GitHub Pages。五个月里，登录突然失败、下载慢、头像加载半天、手机网页打不开、用户被跳到赌博站，每次都得先回答同一个问题：到底是国内连不上，还是别的原因。这篇把这些事汇总起来，重点讲怎么用国内家宽节点拨测，以及本机和机房节点为什么测不准。</p>
+    <div class="meta"><span>2026-10-17</span><span>阅读约 18 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>官网 89% 的请求、安装包 73% 的下载来自中国大陆，后端却全在境外。9 月 22 日起，部分运营商（主要是移动）对 <code>*.supabase.co</code> 做 SNI 阻断，登录直接显示「网络连接失败」。</li>
+      <li>修法是在自己的域名上加一条转发线路 api.amefys.com，客户端先走转发、连不上再直连。10 月 16 日两轮拨测：Supabase 原域名在 15 个家宽节点里固定有 6 个被重置，转发线路只有零星超时。</li>
+      <li>测国内能不能连，本机和机房节点都会骗人：开发机的 DNS 被本地代理软件换成了 198.18 段的假地址，机房节点 6/6 都能连上被阻断的域名。要用家宽节点，每次带一个已知被阻断的对照组。</li>
+      <li>秒级 <code>ECONNRESET</code> 是阻断，TLS 握手超时多半是拥塞。国庆期间的「登录不了」就是拥塞，复测一轮从 20/24 回到 23/24。</li>
+      <li>其他坑：用户被跳到赌博站（开了 HSTS 和 preload）、厂商浏览器拦截新域名（推断）、安装包从没被缓存住（Cloudflare 免费版单个文件缓存上限 100 MB）、崩溃上报被广告规则拦掉。治本的路是备案和国内节点，已经在准备。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">用户在国内，服务在境外</a></li>
+      <li><a href="#s2">登录突然「网络连接失败」：SNI 阻断</a></li>
+      <li><a href="#s3">怎么测国内能不能连</a></li>
+      <li><a href="#s4">拥塞不是封锁：国庆的「登录不了」</a></li>
+      <li><a href="#s5">用户被跳到赌博站：HSTS 和 preload</a></li>
+      <li><a href="#s6">手机网页打不开：浏览器自己拦了</a></li>
+      <li><a href="#s7">安装包下载慢：缓存从来没生效</a></li>
+      <li><a href="#s8">图片、字体和人机验证</a></li>
+      <li><a href="#s9">监控数据也会骗人</a></li>
+      <li><a href="#s10">开了代理也不行的三处网络栈</a></li>
+      <li><a href="#s11">治本：备案和国内节点</a></li>
+      <li><a href="#s12">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>用户在国内，服务在境外</h2>
+
+  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面工具，另有一个手机网页版 BP。9 月下旬我查过一次 Cloudflare 的统计：官网一周 24 万次请求里，21.5 万次来自中国大陆，占 89%；近 30 天约 1,005 次安装包下载里，大陆占 735 次，约 73%。可整套服务都在境外：数据库和登录用的 Supabase 在新加坡；所有域名挂在 Cloudflare 免费版上，Cloudflare 在大陆的节点要另开中国网络服务、还要备案，我们用不上；官网是 GitHub Pages。整体架构写在<a href="/blog/amefys-architecture.html">另一篇</a>里，这里只看和国内访问有关的部分：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 380" role="img" aria-label="AMEFYS 的域名和背后的服务：amefys.com、api.amefys.com 转发 Supabase、cdn.amefys.com 是 R2；客户端先走转发、连不上再直连 supabase.co">
+        <defs><marker id="c1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--d-line)"/></marker></defs>
+        <rect x="16" y="150" width="120" height="80" rx="14" style="fill:var(--d-box);stroke:var(--d-border)"/>
+        <text x="76" y="184" font-size="14" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">国内用户</text>
+        <text x="76" y="206" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">桌面端 / 手机网页</text>
+        <text x="200" y="28" font-size="12" style="fill:var(--d-text3)">自己的域名（Cloudflare 免费版）</text>
+        <g font-size="12">
+          <rect x="200" y="40" width="250" height="56" rx="10" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+          <text x="214" y="63" font-weight="600" style="fill:var(--d-text)">amefys.com</text>
+          <text x="214" y="83" style="fill:var(--d-text2)">官网（GitHub Pages）、/dl 下载、/bp 手机网页</text>
+          <rect x="200" y="110" width="250" height="56" rx="10" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+          <text x="214" y="133" font-weight="600" style="fill:var(--d-text)">api.amefys.com</text>
+          <text x="214" y="153" style="fill:var(--d-text2)">Worker 转发登录、数据库、函数</text>
+          <rect x="200" y="180" width="250" height="56" rx="10" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+          <text x="214" y="203" font-weight="600" style="fill:var(--d-text)">cdn.amefys.com</text>
+          <text x="214" y="223" style="fill:var(--d-text2)">R2：英雄图、皮肤、BP 数据包</text>
+          <rect x="200" y="250" width="250" height="56" rx="10" style="fill:var(--d-red-bg);stroke:var(--d-red)" stroke-dasharray="4 4"/>
+          <text x="214" y="273" font-weight="600" style="fill:var(--d-text)">&lt;project&gt;.supabase.co</text>
+          <text x="214" y="293" style="fill:var(--d-red)">直连兜底；部分运营商 SNI 阻断</text>
+        </g>
+        <line x1="138" y1="172" x2="196" y2="70" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#c1)"/>
+        <line x1="138" y1="182" x2="196" y2="138" style="stroke:var(--d-line)" stroke-width="2.4" marker-end="url(#c1)"/>
+        <line x1="138" y1="196" x2="196" y2="206" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#c1)"/>
+        <line x1="138" y1="212" x2="196" y2="276" style="stroke:var(--d-red)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#c1)"/>
+        <text x="96" y="262" font-size="11" text-anchor="middle" style="fill:var(--d-red)">转发连不上</text>
+        <text x="96" y="278" font-size="11" text-anchor="middle" style="fill:var(--d-red)">才走这条</text>
+        <g font-size="12">
+          <rect x="500" y="40" width="204" height="56" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="514" y="63" font-weight="600" style="fill:var(--d-text)">GitHub Pages / R2</text>
+          <text x="514" y="83" style="fill:var(--d-text2)">网页、安装包</text>
+          <rect x="500" y="140" width="204" height="70" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="514" y="165" font-weight="600" style="fill:var(--d-text)">Supabase（新加坡）</text>
+          <text x="514" y="185" style="fill:var(--d-text2)">登录、数据库、函数</text>
+          <text x="514" y="202" style="fill:var(--d-text2)">翻译和语音再转到火山引擎</text>
+        </g>
+        <line x1="452" y1="68" x2="496" y2="68" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#c1)"/>
+        <line x1="452" y1="138" x2="496" y2="166" style="stroke:var(--d-line)" stroke-width="1.6" marker-end="url(#c1)"/>
+        <line x1="452" y1="278" x2="496" y2="190" style="stroke:var(--d-line)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#c1)"/>
+        <text x="16" y="340" font-size="12" style="fill:var(--d-text2)">所有 *.amefys.com 子域都强制 HTTPS（HSTS 一年，含子域，已提交 preload）</text>
+        <text x="16" y="362" font-size="12" style="fill:var(--d-text3)">Cloudflare 免费版在大陆没有节点；国内节点要等备案后的 amefys.cn</text>
+      </svg>
+    </div>
+    <figcaption>图 1　所有请求先到自己的域名，被阻断的 supabase.co 只作兜底</figcaption>
+  </figure>
+
+  <p>图里的样子是一次次踩坑之后才变成这样的。5 月刚上线时，客户端直接连 supabase.co，安装包直接从 GitHub 下载，英雄图直接从 Valve 的 CDN 取。</p>
+
+  <h2 id="s2"><span class="no">02</span>登录突然「网络连接失败」：SNI 阻断</h2>
+
+  <p>9 月 23 日晚上，有用户发来截图：「忘记密码」界面点发送验证码，提示「网络连接失败，请检查网络后重试」。</p>
+
+  <p>第一步是从这句提示倒查代码。客户端只在请求完全没拿到 HTTP 响应时，比如 <code>Failed to fetch</code>、连接超时，才显示这句；Supabase 自己返回 5xx 时显示的是另一条通用错误。所以问题出在用户到 supabase.co 的链路上，和服务端、发信都没关系。</p>
+
+  <p>第二步，本机测。我连着 curl 了三次 supabase.co，都是 200、1.4 秒，解析出来的 IP 是 <code>198.18.5.123</code>。这是开发机上本地代理软件的 fake-IP：它把所有域名都解析到 198.18 这个测试网段，由自己接管流量。本机永远是通的，什么都测不出来。</p>
+
+  <p>第三步，搜索。前一天，也就是 9 月 22 日，已经有两个开源项目在 GitHub 上报告了同样的现象：TCP 能连上，TLS 握手一报出域名就被重置，家宽和移动 4G 都有，换一条网络又正常。这是典型的 SNI 阻断：TLS 握手的第一个包里，域名是明文的，链路上的设备看到特定的域名就把连接重置掉。</p>
+
+  <p>第四步，找反证。我们的 cdn.amefys.com 当时正好是「Cloudflare Worker 转发 supabase.co」的结构。查 Cloudflare 统计里近 48 小时来自大陆的请求，cdn.amefys.com 成功 61,625 次，4xx 和 5xx 都是 0，这段时间覆盖了阻断开始之后。<strong>用户连自己的域名，由 Cloudflare 在境外再去连 supabase.co，就绕开了阻断。</strong></p>
+
+  <p>当晚我们上线了 api.amefys.com：一个 Worker 透明转发 Supabase 的登录、数据库、函数和存储接口，WebSocket 也支持，其他路径一律 404。客户端改成先走转发、连不上再直连：连接阶段的错误、幂等请求的任何网络错误、或者响应里没有我们自己加的 <code>x-amefys-proxy</code> 头（说明是 Cloudflare 自己回的错误页，Worker 挂了或者额度用完了），就切到直连，并且在 30 分钟内保持直连，首选线路恢复后再切回来。</p>
+
+  <p>当时讨论过要不要反过来，默认直连、失败再走转发。我们最后选了默认走转发：被阻断的用户如果每次都先直连一次，遇到重置只慢 0.3 秒左右，遇到丢包就要等 8 到 15 秒的超时；而 89% 的用户在大陆。</p>
+
+  <p>这条线路后来又补了两次。9 月 28 日发现，Worker 在请求已经发出之后超时，也会让客户端判断成「没连上」，于是兑换码、注册这类非幂等的 POST 会在直连上再发一次；改成只重放 Cloudflare 自己的错误页和幂等请求。10 月 8 日发现，Worker 把真实 IP 追加在客户端自带的 <code>X-Forwarded-For</code> 后面，而 Supabase 的登录服务取的是第一个值，客户端可以伪造来源 IP，绕开按 IP 的限流；改成丢掉客户端带来的值，只放 Cloudflare 看到的真实 IP。验证时我们用临时账号直连、转发各登录一次，看服务端记下的 IP，两次都是客户端的真实出口 IP，所有用户不会挤在 Cloudflare 的同一个 IP 上共用一个限流额度。</p>
+
+  <div class="callout warn"><span class="t">老版本救不回来</span>Supabase 的地址是打包时写进安装包的，没有远程开关。已经装了旧版的用户，只能等他们升级。好在检查更新走的是 amefys.com，不受这次阻断影响。新版做成「先走自己的域名，连不上再直连」以后，同类问题就不用再发版了。所以从第一天起，客户端的每个请求都应该走自己的域名，哪怕背后只是原样转发。</div>
+
+  <h2 id="s3"><span class="no">03</span>怎么测国内能不能连</h2>
+
+  <p>开发机上的测试不可信，原因前面说过：本地代理软件的 fake-IP。10 月 12 日我又试了一次，用 1.1.1.1、8.8.8.8、223.5.5.5、119.29.29.29、114.114.114.114 五个公共 DNS 分别 <code>dig</code>，全都返回 198.18 开头的地址，连指定上游的查询也被接管了。要看真实的解析结果，用 DNS over HTTPS：</p>
+
+<pre><code>$ curl -s "https://cloudflare-dns.com/dns-query?name=amefys.com&amp;type=A" \
+    -H 'accept: application/dns-json'</code></pre>
+
+  <p>要知道国内用户那边的情况，就得用国内的节点。我们用的是 <a href="https://globalping.io/">Globalping</a>，免费，不需要注册，有 API。第一次用时我只写了「国家 = CN」，拿到的 6 个节点全是腾讯云和阿里云的机房，结果 6/6 都能连上 supabase.co。同一时刻换成家庭宽带节点，10 个里有 4 个被重置，全是移动：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>节点类型</th><th>Supabase 原域名的结果</th><th>说明</th></tr>
+    <tr><td>机房（腾讯云、阿里云）</td><td class="num">6/6 能连上</td><td>机房线路不受这类阻断影响</td></tr>
+    <tr><td>家宽（电信、联通、移动混合）</td><td class="num">6/10 能连上</td><td>上海、昆明、台山、宁波的移动节点被重置</td></tr>
+  </table></div>
+
+  <p>这是 9 月 24 日同一时刻的两组结果。区别只在请求参数里的一个标签：<code>eyeball-network</code>，意思是只要家庭宽带和移动网络的节点。</p>
+
+<pre><code><span class="c"># 发起测量：家宽节点、HTTPS、GET</span>
+$ curl -s -X POST https://api.globalping.io/v1/measurements \
+    -H 'content-type: application/json' -d '{
+  "type": "http", "target": "api.amefys.com",
+  "locations": [{ "magic": "CN+eyeball-network", "limit": 15 }],
+  "measurementOptions": { "protocol": "HTTPS", "request": { "method": "GET", "path": "/" } }
+}'
+<span class="c"># 返回 id，轮询直到 status 不再是 in-progress</span>
+$ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
+
+<span class="c"># 复测时复用上一次的同一批节点，排除「节点本身坏了」</span>
+  "locations": "&lt;上一次的 measurement id&gt;"
+
+<span class="c"># 只挑移动网络</span>
+  "locations": [{ "magic": "CN+eyeball-network+China Mobile", "limit": 10 }]</code></pre>
+
+  <p>每次测都要带两个对照组：一个已知被阻断的域名，一个肯定能通的国内网站。被阻断的对照组如果没被重置，说明这批节点测不出阻断，结果不能用；能通的对照组如果失败了，说明是节点自己的问题。下面是写这篇文章时，10 月 16 日深夜跑的两轮：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 460" role="img" aria-label="15 个国内家宽节点两轮拨测：百度和 cdn.amefys.com 全通；Supabase 原域名 6 个节点两轮都被重置，其中 5 个是移动；api.amefys.com 和 amefys.com 有零星超时">
+<text x="210.5" y="22" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">百度</text>
+<text x="210.5" y="38" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">对照：应全通</text>
+<text x="319.5" y="22" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">Supabase 原域名</text>
+<text x="319.5" y="38" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">对照：已知被阻断</text>
+<text x="428.5" y="22" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">api.amefys.com</text>
+<text x="428.5" y="38" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">转发线路</text>
+<text x="537.5" y="22" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">cdn.amefys.com</text>
+<text x="537.5" y="38" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">静态文件</text>
+<text x="646.5" y="22" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-text)">amefys.com</text>
+<text x="646.5" y="38" font-size="11" text-anchor="middle" style="fill:var(--d-text3)">官网</text>
+<text x="16" y="62" font-size="12" text-anchor="start" style="fill:var(--d-text2)">长沙 电信</text>
+<text x="140" y="62" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4134</text>
+<rect x="196.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="50" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="86" font-size="12" text-anchor="start" style="fill:var(--d-text2)">西安 电信</text>
+<text x="140" y="86" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4134</text>
+<rect x="196.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="74" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="110" font-size="12" text-anchor="start" style="fill:var(--d-text2)">上海 联通 ×2</text>
+<text x="140" y="110" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS17621</text>
+<rect x="180.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="196.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="228.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="289.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="337.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="398.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="414.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="446.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="507.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="555.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="616.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="648.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="664.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<text x="16" y="134" font-size="12" text-anchor="start" style="fill:var(--d-text2)">上海 联通</text>
+<text x="140" y="134" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS9929</text>
+<rect x="196.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="122" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="158" font-size="12" text-anchor="start" style="fill:var(--d-text2)">深圳 联通</text>
+<text x="140" y="158" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS17623</text>
+<rect x="196.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="146" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="182" font-size="12" text-anchor="start" style="fill:var(--d-text2)">武汉 联通</text>
+<text x="140" y="182" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4837</text>
+<rect x="196.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="430.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="170" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="206" font-size="12" text-anchor="start" style="fill:var(--d-text2)">芜湖 联通</text>
+<text x="140" y="206" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4837</text>
+<rect x="196.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="430.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="523.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="230" font-size="12" text-anchor="start" style="fill:var(--d-text2)">西安 联通</text>
+<text x="140" y="230" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4837</text>
+<rect x="196.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="648.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="254" font-size="12" text-anchor="start" style="fill:var(--d-text2)">北京 移动</text>
+<text x="140" y="254" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS9808</text>
+<rect x="196.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="321.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="414.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="242" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="278" font-size="12" text-anchor="start" style="fill:var(--d-text2)">南京 移动</text>
+<text x="140" y="278" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS56046</text>
+<rect x="196.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="523.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="266" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="302" font-size="12" text-anchor="start" style="fill:var(--d-text2)">上海 移动</text>
+<text x="140" y="302" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS56040</text>
+<rect x="196.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="290" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="326" font-size="12" text-anchor="start" style="fill:var(--d-text2)">台山 移动</text>
+<text x="140" y="326" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS9808</text>
+<rect x="196.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="314" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="16" y="350" font-size="12" text-anchor="start" style="fill:var(--d-text2)">无锡 移动</text>
+<text x="140" y="350" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS56046</text>
+<rect x="196.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="338" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<text x="16" y="374" font-size="12" text-anchor="start" style="fill:var(--d-text2)">郑州 移动</text>
+<text x="140" y="374" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS24445</text>
+<rect x="196.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="212.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="305.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="321.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<rect x="414.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="430.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="523.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="539.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="362" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<line x1="16" y1="384" x2="704" y2="384" style="stroke:var(--d-border)"/>
+<text x="16" y="402" font-size="12" text-anchor="start" font-weight="600" style="fill:var(--d-text)">两轮合计成功</text>
+<text x="210.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-green)">30/30</text>
+<text x="319.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-red)">18/30</text>
+<text x="428.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-amber)">25/30</text>
+<text x="537.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-green)">30/30</text>
+<text x="646.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-amber)">26/30</text>
+<rect x="16" y="418" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="34" y="428" font-size="12" text-anchor="start" style="fill:var(--d-text2)">成功</text>
+<rect x="86" y="418" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<text x="104" y="428" font-size="12" text-anchor="start" style="fill:var(--d-text2)">秒级 ECONNRESET（阻断）</text>
+<rect x="286" y="418" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<text x="304" y="428" font-size="12" text-anchor="start" style="fill:var(--d-text2)">TLS 握手超时（拥塞）</text>
+<text x="704" y="428" font-size="12" text-anchor="end" style="fill:var(--d-text3)">每格两个方块 = 两轮</text>
+<text x="16" y="450" font-size="11" text-anchor="start" style="fill:var(--d-text3)">Globalping 家宽探针（CN + eyeball-network），2026-10-16 23:49 / 23:51，两轮用同一批 15 个节点；HTTPS GET</text>
+</svg>
+    </div>
+    <figcaption>图 2　同一批 15 个家宽节点测两轮：被阻断的节点两轮完全一样，超时的节点每轮都在换</figcaption>
+  </figure>
+
+  <p>Supabase 原域名两轮都是 6 个节点被重置，而且是同样的 6 个：6 个移动节点里的 5 个，加上深圳联通。<strong>这种「固定的节点、秒级失败」就是阻断。</strong>api.amefys.com 和 amefys.com 每轮有 2 到 3 个节点 TLS 握手超时，可失败的节点每轮都在换，只有芜湖联通在 api.amefys.com 上两轮都超时，这更像是 Cloudflare 免费线路的拥塞。cdn.amefys.com 和百度两轮全通。</p>
+
+  <p>看失败的形态，能大致分清是哪一类：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>现象</th><th>多半是</th><th>怎么确认</th></tr>
+    <tr><td><code>read ECONNRESET</code>，握手一开始就断</td><td>SNI 阻断</td><td>复用同一批节点复测，失败的节点应该完全一样，集中在某个运营商</td></tr>
+    <tr><td>TCP 建连或 TLS 握手超时</td><td>线路拥塞或节点不稳定</td><td>复测时失败节点会变；晚高峰和白天各测一轮</td></tr>
+    <tr><td>DNS 解析到奇怪的地址</td><td>DNS 污染或劫持</td><td>用 Globalping 的 <code>dns</code> 测量看各地家宽的解析结果</td></tr>
+    <tr><td>能连上，返回 HTML 页面</td><td>强制门户、运营商或浏览器的拦截页</td><td>看响应正文，别只看状态码</td></tr>
+  </table></div>
+
+  <p>Globalping 也有局限：它只能测到连接和首字节的时间，测不了完整下载一个 100 多 MB 文件要多久；节点数量也有限，一次十几到二十几个，覆盖不了所有省份。</p>
+
+  <h2 id="s4"><span class="no">04</span>拥塞不是封锁：国庆的「登录不了」</h2>
+
+  <p>10 月 3 日下午，又有人反馈客户端登录不了。当天上午我自己在一个第三方拨测网站上测官网，也看到「中国有一些地区访问很慢，有些地区甚至直接失败」。</p>
+
+  <p>这次按顺序排查：先看 Worker 当天的调用量，10 月 2 日转发线路 12,977 次，离免费版每天 10 万次的上限很远；再用 24 个家宽节点测，api.amefys.com 20/24，cdn.amefys.com 21/24，失败全是 TCP 或 TLS 超时，没有秒级重置；用同一批节点复测，百度 24/24，api.amefys.com 23/24，只剩南宁联通两次都超时。Sentry 上两天内没有登录相关的报错。我们还拆开了线上的安装包，核对里面写的服务器地址和密钥；最后用一个不存在的账号走了一遍登录接口，转发和直连都返回「账号或密码错误」，说明请求到达了服务端。</p>
+
+  <p>结论是国庆期间部分地区连 Cloudflare 的线路拥塞，不是针对域名的封锁。这次没有改代码，只把排查顺序写了下来：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>顺序</th><th>查什么</th><th>排除什么</th></tr>
+    <tr><td class="num">1</td><td>Worker 当天的调用量</td><td>免费额度用完，转发线路整体失效</td></tr>
+    <tr><td class="num">2</td><td>家宽节点拨测，带两个对照组</td><td>阻断、拥塞、DNS 问题</td></tr>
+    <tr><td class="num">3</td><td>Sentry</td><td>新版本引入的客户端错误</td></tr>
+    <tr><td class="num">4</td><td>拆线上安装包，核对服务器地址和密钥</td><td>打包时配置写错，转发线路静默失效</td></tr>
+    <tr><td class="num">5</td><td>用假账号走一遍登录接口</td><td>服务端本身的问题</td></tr>
+  </table></div>
+
+  <p>第三方拨测网站的结果噪声很大：多数是单次测量，节点也多在机房。要分清持续性的问题和高峰期的拥塞，最好在晚高峰和白天各测一轮。当时也讨论过换 Vercel，结论是它和 Cloudflare 一样在大陆没有节点，免费计划还不允许商业用途，换过去解决不了问题。</p>
+
+  <h2 id="s5"><span class="no">05</span>用户被跳到赌博站：HSTS 和 preload</h2>
+
+  <p>10 月 12 日，有用户反馈每次访问 amefys.com 都会跳到一个境外的赌博网站。截图里手机同时连着 Wi-Fi 和 5G。</p>
+
+  <p>先排除我们这一侧。用 DNS over HTTPS 查，解析结果是 Cloudflare 的两个地址，域名服务器也是 Cloudflare 的，正常。把首页、手机网页、更新日志三个页面的源码拉下来，只加载了自己的脚本，三个脚本里搜跳转、eval、解码之类的关键词，都是 0。再用 10 个家宽节点测 DNS，广州电信、上海联通、镇江移动、桂林联通、西安联通、北京移动、芜湖联通、长沙移动、南京移动、武汉移动，解析全部正确；HTTP 和 HTTPS 请求也没有一个节点跳走。</p>
+
+  <p>所以问题在用户那一侧，按可能性排：家里的路由器 DNS 被篡改，这是常见的手法，只改少数域名；国产手机浏览器在地址栏输 amefys.com 时先走 <code>http://</code>，明文请求可以被路由器或链路上的设备 302 走，而且不会有证书报错；或者手机上有恶意软件。第二种情况我们能做点什么：当时网站没开 HSTS，浏览器没有理由强制走 HTTPS。</p>
+
+  <p>开 HSTS 之前，先逐个确认所有子域都能用 HTTPS，因为 <code>includeSubDomains</code> 生效后，哪个子域不支持 HTTPS 就直接打不开了。确认完以后，在 Cloudflare 上打开 HSTS：有效期一年、包含子域、允许 preload，<code>nosniff</code> 先关掉，避免误伤 R2 上 MIME 类型不准的文件。8 秒后六个子域的响应头都带上了 <code>max-age=31536000; includeSubDomains; preload</code>。再去 <a href="https://hstspreload.org/">hstspreload.org</a> 检查，零错误、零警告，提交，到现在还是 pending。中间还有个小坑：第一次改设置被拒，原因是我们的 Cloudflare 令牌缺「区域设置：编辑」权限。</p>
+
+  <p>开了以后，用这个浏览器正常打开过一次 HTTPS 的用户，以后都会被强制走 HTTPS；进了 preload 列表，第一次访问也受保护；DNS 被篡改时，用户会看到证书错误，不会悄悄跳走。给那位用户的建议是先关掉 Wi-Fi 只用 5G 打开一次，如果正常，就是路由器的问题，把路由器的 DNS 改回自动并改掉管理密码。这位用户后来有没有恢复，我们没收到后续。代价是：从此任何新的 <code>*.amefys.com</code> 子域都必须支持 HTTPS，preload 要撤销得等好几个月。</p>
+
+  <h2 id="s6"><span class="no">06</span>手机网页打不开：浏览器自己拦了</h2>
+
+  <p>10 月 2 日，很多用户说手机版 BP 的地址用浏览器打不开。一位用户的截图里是联通 5G、手机厂商自带的浏览器，地址栏输的是 <code>amefys.com/bp</code>，页面写着「网站暂时无法打开」，同一屏上浏览器自己的检测却显示「您的网络连通正常」。</p>
+
+  <p>我们先排除网络：家宽节点测手机网页 19/21（宁波移动一个节点两次连不上），页面主脚本 12/12，接口和静态文件都 12/12，DNS 10/10 没有污染；看到截图后又怀疑 IPv6 和明文 HTTP，分别测了 IPv6 13/15（另外 2 个节点本身不支持 IPv6）、IPv4 15/15、HTTP 80 端口 12/12。网络没有问题。</p>
+
+  <p>我们的推断是浏览器自己拦了：一些手机厂商的自带浏览器有自己的安全检查或加速服务，对没有备案的新域名会直接拦截，它显示的「网络连通正常」只测了自家的服务器。10 月 15 日又出现一次，页面能打开，登录却报 <code>Failed to fetch</code>，可能是页面从离线缓存打开，登录请求被浏览器拦了。这两次都只是推断，用户换浏览器以后的情况，我们没有收到反馈。</p>
+
+  <p>网页这一侧能做的有限。对微信、QQ、抖音、微博这类 App 内置的浏览器，我们识别出来以后在顶部显示「点右上角，在浏览器打开」和「复制网址」；登录遇到网络类错误时，提示换 Chrome、Edge 或 QQ 浏览器；对外一律给完整地址 <code>https://amefys.com/bp/</code>，只输 <code>amefys.com/bp</code> 要多跳两次。被浏览器整页拦截时，网页什么都做不了，治本只能靠备案，或者做成 App、小程序。</p>
+
+  <h2 id="s7"><span class="no">07</span>安装包下载慢：缓存从来没生效</h2>
+
+  <p>GitHub Release 的文件实际从 <code>release-assets.githubusercontent.com</code> 下载，国内很慢。5 月我们在 <code>amefys.com/dl/</code> 下加了一个 Worker：第一次从 GitHub 拉，之后靠 Cloudflare 的边缘缓存，带版本号的地址缓存 30 天。</p>
+
+  <p>9 月 5 日才发现，Cloudflare 免费版和 Pro 版单个文件的缓存上限是 100 MB，而 Windows 安装包约 114 MB，macOS 安装包 200 多 MB，这个缓存从来没有缓存住任何东西，每次下载都是从 GitHub 的美国源站流过来，当时实测只有几百 KB/s。之后改成发版时把安装包镜像到 Cloudflare R2，Worker 从 R2 读，没有再回落到 GitHub。</p>
+
+  <p>这个下载服务还藏了一个月的 bug：从 9 月 5 日到 10 月 5 日，所有断点续传请求返回的 <code>Content-Range</code> 都是 <code>bytes NaN-NaN/文件大小</code>。原因是 R2 返回的范围对象里，即使不是后缀范围，也带着一个值为 undefined 的 <code>suffix</code> 键，而代码判断的是「有没有这个键」。支持断点续传的下载器、Safari 播放视频都依赖这个头。现在改成按请求自己的 Range 头来算。10 月 16 日复查：<code>curl -r 100-199</code> 返回 <code>bytes 100-199/114386808</code>，开放区间也正确。</p>
+
+  <p>换成 R2 以后依然不够快。9 月 28 日用 12 个家宽节点测下载地址，TCP 建连 200 到 300 毫秒，首字节 0.7 到 2.2 秒，广州移动一个节点建连 1.3 秒后超时。Cloudflare 免费版在大陆没有节点，下 114 MB 慢是必然的。10 月 16 日官网的下载按钮下面加了一个国内网盘的备用下载。网盘解决不了自动更新：老用户收到更新提示后，仍然是从 amefys.com 下载。</p>
+
+  <h2 id="s8"><span class="no">08</span>图片、字体和人机验证</h2>
+
+  <p>BP 面板的英雄头像，有国内用户反馈「每次都加载半天」。桌面端原来只从 Valve 的 CDN 下载，而且没有超时。同一批家宽节点测 Valve 的 CDN，移动节点多在 0.1 到 0.3 秒，东莞电信 5.5 秒、西安电信 4.7 秒。下载失败就不写缓存，所以每次打开都在重新下载，看起来像没有缓存。现在改成先从自己的 cdn.amefys.com 取，失败再去 Valve，每个请求 8 秒超时，超时就换下一个源。</p>
+
+  <p>这里还有一个相关的坑：原来下载到的任何 2xx 响应都会写进缓存，而强制门户或者某些代理会返回 200 加一个 HTML 页面，于是用户的头像永久坏掉了。现在按文件头的魔数校验，确实是 PNG、JPEG 或 WebP 才写盘。</p>
+
+  <p>皮肤里引用的 Google Fonts，在国内的 Windows 上大概率连不上，浏览器会静默回落到系统字体，不报任何错。这类问题不看日志根本发现不了，打算随安装包自带字体。</p>
+
+  <p>官网留言板用的是 Cloudflare 的人机验证 Turnstile，国内网络下点了提交要等十几到几十秒：引导脚本 1.2 秒，挑战本身 11 到 15 秒，DevTools 里能看到 5、10、15 秒阶梯式的超时重试。我们改成页面一打开就在屏幕外把挑战跑完，缓存拿到的令牌，用户点提交时直接用，等待时间从 14.7 秒降到了 7 毫秒。</p>
+
+  <h2 id="s9"><span class="no">09</span>监控数据也会骗人</h2>
+
+  <p>崩溃上报用的是 Sentry，上报地址是 <code>*.ingest.us.sentry.io</code>。很多广告拦截规则集把它归为遥测域名，在开发机上，本地代理软件的规则就直接拦掉了它。国内玩家用的网络工具里，这类规则很常见。我们的推断是：收到的崩溃数据偏向那些能访问境外、又没开广告拦截的用户，国内用户的崩溃很可能大量缺失。这一点还没用 Sentry 的国家分布核实过。国内版本打算让上报先发到自己的国内域名，再由服务器转给 Sentry。</p>
+
+  <p>还有一次是监控面板报警：手机英雄池同步的读取接口近一半返回 504，失败集中在国内。查 Cloudflare 的日志，真实浏览器的 253 次请求全是 200，预检的 87 次也全是 200，那 248 次 504 的 User-Agent 都带着 <code>early hints</code>，是 Cloudflare Early Hints 功能自己留下的记录。我们的网站从不返回 <code>Link</code> 头，这个功能本来就没起作用，「集中在国内」只是因为用户本来就在国内。我们关掉了 Early Hints。统计接口错误率时，要先排除这类不是用户发出的请求。</p>
+
+  <h2 id="s10"><span class="no">10</span>开了代理也不行的三处网络栈</h2>
+
+  <p>有些用户的电脑上开着系统代理，但客户端里有三处网络请求不走系统代理，表现就是「浏览器能打开，客户端里不行」。</p>
+
+  <p>第一处是 Electron 主进程里的 Node <code>fetch</code>，它不读系统代理。登录这类请求是主进程发的，所以这类用户在客户端里照样连不上 supabase.co。有了转发线路以后，影响小了很多，长期打算改用 Electron 的 <code>net.fetch</code>，它走 Chromium 的网络栈。</p>
+
+  <p>第二处是自动更新。用户退出代理软件以后，系统里可能留着一个已经失效的代理设置，更新检查因此失败，其实更新服务器是好的。现在遇到代理连接失败这一类错误，就把这个会话切成直连重试一次，本次运行内保持直连，第一次失败不弹错误。</p>
+
+  <p>第三处是 Windows 的 OCR 语言组件。下载慢的时候我问过一句「如果开了代理是不是就没这个问题了」。查了微软的文档，组件下载走的是以系统账户运行的后台服务，它不继承用户级的系统代理设置，所以开了也不走。安装向导的文案因此不该写「请开代理」，只写技术事实。</p>
+
+  <h2 id="s11"><span class="no">11</span>治本：备案和国内节点</h2>
+
+  <p>上面这些大多是在境外的架构上打补丁。治本的路是备案，再加国内的服务器和 CDN。不备案，很多事都卡着：没备案的域名不能用在大陆服务器的 80 和 443 端口上；国内对象存储加 CDN 能让安装包下载快很多，但自有域名要备案；百度对境外的新站很少主动收录，也不给「官网」标识；厂商浏览器拦截新域名，也和没备案有关。</p>
+
+  <p>10 月 8 日我们开始准备：注册了 amefys.cn，在北京准备了一台服务器，后端、函数、缓存都在分支上跑通了，客户端改成按构建版本选择入口：国内版先走 <code>api.amefys.cn</code>，再走 api.amefys.com，最后才直连 Supabase。在北京的机器上实测，真实的火山翻译请求 0.6 到 0.7 秒，语音识别建连 86 毫秒。这些都要等备案通过后才能对外。</p>
+
+  <p>有一条原则从一开始就定下了：已经发出去的客户端里写死的每一个主机名，api.amefys.com、cdn.amefys.com、amefys.com/dl、supabase.co 的直连兜底，一个都不能下线，只能换它们背后的服务。用户手里的旧版本，我们改不了。</p>
+
+  <h2 id="s12"><span class="no">12</span>几点心得</h2>
+
+  <p>本机测不出国内的问题。开发机多半开着网络工具，DNS 和流量都被接管了，curl 永远是通的。机房节点也一样，它们的线路不受这类阻断影响。要用国内的家宽节点，分运营商看。</p>
+
+  <p>拨测一定要带对照组。一个已知被阻断的域名，一个肯定能通的国内网站。对照组的结果不对，这批数据就不能用。复测时复用同一批节点，失败的节点不变是阻断，换来换去是拥塞。</p>
+
+  <p>每个请求都走自己的域名。哪怕背后只是原样转发，出了问题也有地方可改，不用等用户升级。客户端里写死第三方的地址，等于把可用性交给了别人。</p>
+
+  <p>错误提示会误导排查。「网络连接失败」可能是阻断，可能是拥塞，也可能是密钥填错了平台。先从提示倒查代码，弄清楚这句话在什么条件下才会出现，再去看网络。</p>
+
+  <p>用户那边的问题，我们只能推断。路由器被篡改、浏览器拦截，这些我们都没法亲眼看到。能做的是把自己这一侧排除干净，再用 HSTS、引导提示这类手段，让用户那边出问题时至少能看到明确的提示。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>你的用户也在国内？</strong>如果你的产品用的是海外的云服务，碰到了国内访问、下载速度或排查方法上的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/cloudflare-o2o-cache.html">上一篇：Worker 前面加了缓存却没生效</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>
