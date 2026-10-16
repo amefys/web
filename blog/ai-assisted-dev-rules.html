@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故 — AMEFYS 技术博客</title>
-<meta name="description" content="用 Claude Code 写出一款桌面应用 161 天的经验：AI 汇报不存在的推送、照着抄出走样的副本、把仓库代码当线上服务；规矩分全局指令、项目说明、记忆、自动检查四层，事故如何变成钩子和守卫测试，worktree 并行、影响评估、回归测试、去 AI 味，以及哪些事必须人来拍板。">
+<meta name="description" content="借助 AI 编程助手写出一款桌面应用 161 天的经验：AI 汇报不存在的推送、照着抄出走样的副本、把仓库代码当线上服务；规矩分全局指令、项目说明、记忆、自动检查四层，事故如何变成钩子和守卫测试，worktree 并行、影响评估、回归测试、去 AI 味，以及哪些事必须人来拍板。">
 <link rel="canonical" href="https://amefys.com/blog/ai-assisted-dev-rules.html">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="applicable-device" content="pc,mobile">
@@ -26,7 +26,7 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/ai-assisted-dev-rules.html","keywords":"AI 辅助开发, Claude Code, 工程规范, 提交钩子, 守卫测试, 记忆, worktree"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/ai-assisted-dev-rules.html","keywords":"AI 辅助开发, AI 编程助手, 工程规范, 提交钩子, 守卫测试, 记忆, worktree"}</script>
 </head>
 <body>
 
@@ -62,7 +62,7 @@
   <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
 
   <header class="post-head">
-    <div class="tags"><span class="tag">AI 协作开发</span><span class="tag">Claude Code</span><span class="tag">工程规范</span><span class="tag">事故复盘</span></div>
+    <div class="tags"><span class="tag">AI 协作开发</span><span class="tag">AI 编程助手</span><span class="tag">工程规范</span><span class="tag">事故复盘</span></div>
     <h1>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故</h1>
     <p class="sub">AMEFYS 大部分代码是 AI 编程助手写的。161 天里，AI 汇报过不存在的推送、照着 logo 抄出走样的副本、把仓库里的代码当成线上的服务。这篇把这些事和它们留下的规矩放在一起讲：规矩分几层、怎么写才管用、哪些最后变成了自动检查，以及哪些事我始终自己拍板。</p>
     <div class="meta"><span>2026-10-17</span><span>阅读约 14 分钟</span><span>AMEFYS</span></div>
@@ -100,7 +100,7 @@
 
   <h2 id="s1"><span class="no">01</span>先交代背景</h2>
 
-  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面工具，Windows 和 macOS 都能用，另外有一个手机网页版 BP。整体架构写在<a href="/blog/amefys-architecture.html">另一篇</a>里。开发和运营都是我一个人，写代码主要靠 Claude Code。第一次提交是 2026 年 5 月 8 日，到 10 月 16 日是 161 天：</p>
+  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面工具，Windows 和 macOS 都能用，另外有一个手机网页版 BP。整体架构写在<a href="/blog/amefys-architecture.html">另一篇</a>里。开发和运营都是我一个人，写代码主要靠 AI 编程助手。第一次提交是 2026 年 5 月 8 日，到 10 月 16 日是 161 天：</p>
 
   <figure>
     <div class="fig">
@@ -167,7 +167,7 @@
 <text x="674" y="41" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gray)">约 74 行</text>
 <text x="26" y="61" font-size="12" text-anchor="start" style="fill:var(--d-text2)">所有项目通用：说中文、实施后自检、修 bug 必补回归测试、记忆归档</text>
 <rect x="32" y="86" width="636" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)" stroke-width="1.5"/>
-<text x="48" y="111" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">项目说明（CLAUDE.md）</text>
+<text x="48" y="111" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">项目说明文件</text>
 <text x="652" y="111" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">196 行</text>
 <text x="48" y="131" font-size="12" text-anchor="start" style="fill:var(--d-text2)">这个仓库的工作流、合规红线、品牌资产、ABI、媒体文件放哪</text>
 <rect x="54" y="156" width="592" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)" stroke-width="1.5"/>
@@ -177,7 +177,7 @@
 <rect x="76" y="226" width="548" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-green)" stroke-width="1.5"/>
 <text x="92" y="251" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">自动检查</text>
 <text x="608" y="251" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">钩子 + 守卫测试</text>
-<text x="92" y="271" font-size="12" text-anchor="start" style="fill:var(--d-text2)">提交钩子、Claude Code 钩子、守卫测试和检查脚本：不靠记性</text>
+<text x="92" y="271" font-size="12" text-anchor="start" style="fill:var(--d-text2)">提交钩子、AI 工具的钩子、守卫测试和检查脚本：不靠记性</text>
 <text x="16" y="306" font-size="12" text-anchor="start" style="fill:var(--d-text3)">越往下越「硬」：上面三层靠 AI 读进去并照做，最下面一层不照做就过不去</text>
 </svg>
     </div>
@@ -186,9 +186,9 @@
 
   <p>最上面是全局指令，对我所有项目都生效，内容很少，但有三条标成了最高优先级：按计划实施后必须主动对照计划自检，修 bug 只要能写测试就必须补回归测试，项目类记忆在工作上线后要归档。第一条后面写着原因：跳过自检，会让编译和静态检查都通过、运行时才暴露的 bug 漏过去。</p>
 
-  <p>第二层是仓库里的 CLAUDE.md，196 行，写这个项目自己的事：不开 PR、main 只快进；分支一律走 worktree；提交只署项目自己的账号；logo 只有一个来源；生成的音视频放在固定的媒体库目录；合规红线。它的修改记录基本就是一份事故清单，9 月 15 日加的是品牌资产单一来源，9 月 20 日加的是不带 AI 署名，10 月 3 日加的是 worktree。</p>
+  <p>第二层是仓库里专门写给 AI 看的项目说明文件，196 行，写这个项目自己的事：不开 PR、main 只快进；分支一律走 worktree；提交只署项目自己的账号；logo 只有一个来源；生成的音视频放在固定的媒体库目录；合规红线。它的修改记录基本就是一份事故清单，9 月 15 日加的是品牌资产单一来源，9 月 20 日加的是不带 AI 署名，10 月 3 日加的是 worktree。</p>
 
-  <p>第三层是记忆，第六节单独讲。最下面是自动检查：提交钩子、Claude Code 的钩子、守卫测试和检查脚本。前三层都要靠 AI 读进去并且照做；最后一层不需要它记得，违反了就过不去。这个项目里反复验证过的一件事是：<strong>只写在文字里的规矩迟早会被忘掉，重要的最后都得变成自动检查。</strong></p>
+  <p>第三层是记忆，第六节单独讲。最下面是自动检查：提交钩子、AI 工具自带的钩子、守卫测试和检查脚本。前三层都要靠 AI 读进去并且照做；最后一层不需要它记得，违反了就过不去。这个项目里反复验证过的一件事是：<strong>只写在文字里的规矩迟早会被忘掉，重要的最后都得变成自动检查。</strong></p>
 
   <h2 id="s3"><span class="no">03</span>让 AI 说真话：验证「起作用」，不只是「存在」</h2>
 
@@ -198,7 +198,7 @@
 
   <p>9 月 5 日是另一种情况。有用户说激活码绑定失败，仓库里兑换功能的代码齐全，AI 据此回答「老版本也支持兑换」。实际上这个函数从来没有部署过，线上请求返回 404，三个激活码的使用次数全是 0。这个项目的服务端函数是手动部署的，不在 CI 里，所以「仓库里有」和「线上有」是两回事。现在的规矩是，回答「能不能用」之前，先对线上跑一次真实请求，看返回的是 404 还是 401。</p>
 
-  <p>9 月 20 日，我在 GitHub 贡献者图上看到 claude 排在第二位，于是问 AI：「后续amefys 下的任何提交能全部都以 amefys-ai 账号吗？不需要体现Claude的提交」。查下来，提交作者一直是对的，多出来的贡献者来自提交信息末尾的 <code>Co-Authored-By</code> 那一行，GitHub 会把它算进贡献者。更麻烦的是，全局规则里本来写着「署名已经在 settings.json 里全局关闭」，翻遍所有配置文件，那个开关根本不存在。文档里写着「已配置」，不等于真的配置了。</p>
+  <p>9 月 20 日，我在 GitHub 贡献者图上看到 AI 工具的账号排在第二位，于是问 AI：「后续amefys 下的任何提交能全部都以 amefys-ai 账号吗？」贡献者里不需要出现 AI。查下来，提交作者一直是对的，多出来的贡献者来自提交信息末尾的 <code>Co-Authored-By</code> 那一行，GitHub 会把它算进贡献者。更麻烦的是，全局规则里本来写着「署名已经在 settings.json 里全局关闭」，翻遍所有配置文件，那个开关根本不存在。文档里写着「已配置」，不等于真的配置了。</p>
 
   <p>这类事在项目里还有好几件：设置里的「匿名崩溃报告」开关从来没被读过，关掉以后照样上报；共享翻译缓存的命中次数字段从建表起就没有代码写它，639 行全是 0；官网首页宣传过客户端里没有的翻译语言；提交钩子丢了可执行位，格式检查有一段时间根本没在跑。它们的共同点是：看上去都在，实际都不起作用。</p>
 
@@ -208,7 +208,7 @@
 
   <p>9 月 14 日我发现官网关于页上的 logo 不对：它用了小尺寸变体的几何，右上角的高光点整个没了。再一查，好几个文档页和一个权限设置向导里，logo 干脆是一个渐变方块加字母 A，而那个向导恰好在教用户「去系统设置里找这个图标」。两处的代码注释都写着「和安装包图标一致」。我当时说的是：「里面的logo用真正的logo，不要自己发挥！ 这个做完统一的范式铁律！任何用到amefys logo 的地方都要统一」。</p>
 
-  <p>AI 很习惯「照着画一个差不多的」，还会顺手给副本写一句「与原件一致」。这句注释本身就说明副本已经产生了。现在 CLAUDE.md 里规定 logo 只有三种合法用法：直接引用文件；由脚本从主文件生成 data URI；用几何逐字段一致的组件。守卫测试会比对几何，CI 里每次都跑。10 月 10 日它就拦下了一处新的手画 logo。</p>
+  <p>AI 很习惯「照着画一个差不多的」，还会顺手给副本写一句「与原件一致」。这句注释本身就说明副本已经产生了。现在项目说明里规定 logo 只有三种合法用法：直接引用文件；由脚本从主文件生成 data URI；用几何逐字段一致的组件。守卫测试会比对几何，CI 里每次都跑。10 月 10 日它就拦下了一处新的手画 logo。</p>
 
   <p>同样的问题换个样子又出现过两次。一次是四个弹窗只抄了玻璃样式的第一行背景色，没抄模糊，液态玻璃皮肤的背景透明度只有 0.07，少了模糊就是一块几乎全透明的板子。另一次是游戏里的专有名词：8 个英雄用了玩家俗称，494 个中文装备名里错了 196 个，魔棒被写成了「魔瓶」。这批名字是 5 月份一次性写进去的。现在显示名一律取自 Valve 官方数据的快照，由同步脚本更新，守卫测试钉死。俄语界面刻意不翻英雄名，这条也写进了测试，防止以后有人「好心」加上音译。</p>
 
@@ -222,7 +222,7 @@
     <tr><th>检查</th><th>放在哪</th><th>起因</th></tr>
     <tr><td>拒绝提交完整的翻译服务密钥</td><td>提交钩子</td><td>9 月 6 日，一个真实密钥进了单元测试</td></tr>
     <tr><td>拒绝非项目身份的提交</td><td>提交钩子</td><td>项目用独立身份，有过一次用错身份、事后要重写历史</td></tr>
-    <tr><td>剥掉 AI 署名行</td><td>提交信息钩子</td><td>贡献者图上多出 claude</td></tr>
+    <tr><td>剥掉 AI 署名行</td><td>提交信息钩子</td><td>贡献者图上多出 AI 工具的账号</td></tr>
     <tr><td>logo 几何比对，<code>--fix</code> 重新生成所有副本</td><td>守卫测试 + 脚本</td><td>logo 手抄走样两次</td></tr>
     <tr><td>子进程的输入管道必须有错误处理</td><td>扫描式守卫测试</td><td>没人接的错误事件变成用户脸上的红叉弹框，出过两次</td></tr>
     <tr><td>官网首页的说法要对得上客户端</td><td>官网测试</td><td>首页宣传了不存在的语言和主题，还有一排死链接</td></tr>
@@ -233,13 +233,13 @@
 
   <p>这些检查里有两点要注意。</p>
 
-  <p>检查本身也会失效，要确认它真的在跑。前面说的提交钩子丢可执行位，就是检查自己没在运行、也没人发现。我在 Claude Code 里配的「禁止在 main 上提交」钩子也有自己的脾气：它在命令执行前读当前分支，所以 <code>git checkout -b x &amp;&amp; git commit</code> 写成一条命令照样被拦；它按文本匹配，heredoc 正文里出现那几个字也会被拦；它拦的是整条命令，前半截的 <code>git add</code> 也一起没执行。这些都要写进记忆，不然 AI 会以为是自己的命令写错了，反复重试。</p>
+  <p>检查本身也会失效，要确认它真的在跑。前面说的提交钩子丢可执行位，就是检查自己没在运行、也没人发现。我在 AI 工具里配的「禁止在 main 上提交」钩子也有自己的脾气：它在命令执行前读当前分支，所以 <code>git checkout -b x &amp;&amp; git commit</code> 写成一条命令照样被拦；它按文本匹配，heredoc 正文里出现那几个字也会被拦；它拦的是整条命令，前半截的 <code>git add</code> 也一起没执行。这些都要写进记忆，不然 AI 会以为是自己的命令写错了，反复重试。</p>
 
-  <p>拦截的方式要按后果来选。密钥和身份是硬拦，宁可提交失败；AI 署名那一行选择悄悄剥掉、不拒绝提交，因为它只是一行装饰文字，没必要为它挡住一次提交。正则只匹配 anthropic 和 claude，真人协作者的署名行不受影响。</p>
+  <p>拦截的方式要按后果来选。密钥和身份是硬拦，宁可提交失败；AI 署名那一行选择悄悄剥掉、不拒绝提交，因为它只是一行装饰文字，没必要为它挡住一次提交。正则只匹配 AI 工具的署名，真人协作者的署名行不受影响。</p>
 
   <h2 id="s6"><span class="no">06</span>记忆：写清「为什么」和「下次怎么做」</h2>
 
-  <p>Claude Code 的记忆是一个目录，每条记忆一个文件，另有一个索引文件在每次会话开始时整个读进来。到今天一共 94 条：项目进展 57 条、参考资料 21 条、我给的反馈 16 条。</p>
+  <p>AI 工具的记忆是一个目录，每条记忆一个文件，另有一个索引文件在每次会话开始时整个读进来。到今天一共 94 条：项目进展 57 条、参考资料 21 条、我给的反馈 16 条。</p>
 
   <p>每条记忆的正文固定两段：「为什么」写当时的事故或理由，「下次怎么做」写具体动作。光写一句「要核对线上部署」，AI 读到了也不知道该做到什么程度；写上「那次是兑换函数从没部署，三个激活码使用次数全是 0；回答之前先 curl 一次，看 404 还是 401」，它就知道这是一件要动手做的事。记忆之间用链接互相引用，比如影响评估那条链到补回归测试和核对线上部署，串起来就是一个完整的流程。</p>
 
@@ -247,7 +247,7 @@
 
   <p>记忆的问题是只会越积越多。我的规则是项目类记忆在对应的工作上线后移到归档文件，但只归档时点性的事实，比如分支状态和待办清单；坑位、失败的接口约定、不显然的设计理由一律留下，因为它们会复发。这条规则来自一次教训：按标题判断「重复」或「已完成」，误删过真实的教训。这条规则到现在只执行过 2 次，索引已经有 95 行。</p>
 
-  <p>16 条反馈记忆按时间排下来，9 月中以前大多是「真实性和安全」：核对线上部署、影响评估、单一来源、不带 AI 署名；10 月以后大多是「内容和审美」：视频别闪、别像 PPT、博客去 AI 味。重要的记忆会继续升级：worktree 那条从记忆升到了 CLAUDE.md，资产单一来源从记忆升到 CLAUDE.md 再升到守卫测试，AI 署名从记忆升到 CLAUDE.md、配置开关，最后是提交钩子。</p>
+  <p>16 条反馈记忆按时间排下来，9 月中以前大多是「真实性和安全」：核对线上部署、影响评估、单一来源、不带 AI 署名；10 月以后大多是「内容和审美」：视频别闪、别像 PPT、博客去 AI 味。重要的记忆会继续升级：worktree 那条从记忆升到了项目说明，资产单一来源从记忆升到项目说明再升到守卫测试，AI 署名从记忆升到项目说明、配置开关，最后是提交钩子。</p>
 
   <figure>
     <div class="fig">
@@ -286,7 +286,7 @@
 <text x="440" y="226" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 扫描式守卫测试</text>
 <text x="16" y="256" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-20</text>
 <circle cx="80" cy="252" r="4" style="fill:var(--d-red)"/>
-<text x="96" y="256" font-size="12" text-anchor="start" style="fill:var(--d-text)">贡献者图上多出 claude，「已关闭」的开关不存在</text>
+<text x="96" y="256" font-size="12" text-anchor="start" style="fill:var(--d-text)">贡献者图上多出 AI 的账号，「已关闭」的开关不存在</text>
 <text x="440" y="256" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 真开关 + 提交钩子剥掉署名行</text>
 <text x="16" y="286" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-27</text>
 <circle cx="80" cy="282" r="4" style="fill:var(--d-red)"/>
@@ -320,11 +320,11 @@
 
   <h2 id="s7"><span class="no">07</span>多个会话并行：一个任务一个 worktree</h2>
 
-  <p>我经常同时开好几个 Claude Code 会话，一个修 bug、一个做视频、一个写文档。它们一开始都在同一个目录里，某个会话一切分支，别的会话正在改的文件、没提交的改动、正在跑的开发服务都跟着变。10 月 3 日我定下了规矩：「后续默认功能分支都走work tree模式创建和拉取，不要在同一个当前目录下进行，不然我有多个任务同时做的时候就会出现问题。」</p>
+  <p>我经常同时开好几个 AI 会话，一个修 bug、一个做视频、一个写文档。它们一开始都在同一个目录里，某个会话一切分支，别的会话正在改的文件、没提交的改动、正在跑的开发服务都跟着变。10 月 3 日我定下了规矩：「后续默认功能分支都走work tree模式创建和拉取，不要在同一个当前目录下进行，不然我有多个任务同时做的时候就会出现问题。」</p>
 
-  <p>现在每个任务在 <code>.claude/worktrees/&lt;主题&gt;</code> 下有自己的 worktree。任何 worktree 都不检出 main，合并用 <code>git fetch . 分支:main</code>，只允许快进；删分支先用 <code>git merge-base --is-ancestor</code> 确认已经合进 main 再强删，因为 <code>git branch -d</code> 是按当前目录的 HEAD 判断「已合并」的，主目录不在 main 上时会误报。新 worktree 里没有的 <code>.env</code> 用软链接指回主目录那份，不复制，复制了就会分叉。</p>
+  <p>现在每个任务在仓库下一个固定的目录里有自己的 worktree。任何 worktree 都不检出 main，合并用 <code>git fetch . 分支:main</code>，只允许快进；删分支先用 <code>git merge-base --is-ancestor</code> 确认已经合进 main 再强删，因为 <code>git branch -d</code> 是按当前目录的 HEAD 判断「已合并」的，主目录不在 main 上时会误报。新 worktree 里没有的 <code>.env</code> 用软链接指回主目录那份，不复制，复制了就会分叉。</p>
 
-  <p>10 月 5 日又踩了一次坑。Claude Code 每条命令执行完，工作目录会被拉回主目录，上一条 <code>cd</code> 到 worktree 不代表下一条还在那里。那次 AI 用相对路径跑脚本改文件，3 个文件改进了主目录里另一个会话的分支。从那以后，每条命令都以 <code>cd &lt;worktree 的绝对路径&gt; &amp;&amp;</code> 开头，或者全部用绝对路径。</p>
+  <p>10 月 5 日又踩了一次坑。AI 工具每条命令执行完，工作目录会被拉回主目录，上一条 <code>cd</code> 到 worktree 不代表下一条还在那里。那次 AI 用相对路径跑脚本改文件，3 个文件改进了主目录里另一个会话的分支。从那以后，每条命令都以 <code>cd &lt;worktree 的绝对路径&gt; &amp;&amp;</code> 开头，或者全部用绝对路径。</p>
 
   <h2 id="s8"><span class="no">08</span>改之前先评估，改完补测试</h2>
 
@@ -340,7 +340,7 @@
 
   <p>除了代码，我也让 AI 写博客、做开发日记视频和周报。这一块的规矩复发得最多。</p>
 
-  <p>10 月 15 日我让 AI 整体检查第二篇博客有没有 AI 味。它参考了少数派上一篇用几百篇稿子对照实测的文章，结论是现在 Claude 写中文的 AI 味主要在格式：先来一句「有以下几种情况」再接一串列表，到处加粗，段落开头直接下评论、不说评论的是什么。改写后第二篇的加粗从 42 处降到 5 处，列表项从 29 个降到 0。这些指标做成了扫描脚本，写进博客技能，你正在读的这篇也过了这道检查。改稿时还有一条规矩叫信息守恒：事实一条不增、一条不减，「可能」不能改成「会」，改完要对照原稿逐条核对。</p>
+  <p>10 月 15 日我让 AI 整体检查第二篇博客有没有 AI 味。它参考了少数派上一篇用几百篇稿子对照实测的文章，结论是现在 AI 写的中文，AI 味主要在格式：先来一句「有以下几种情况」再接一串列表，到处加粗，段落开头直接下评论、不说评论的是什么。改写后第二篇的加粗从 42 处降到 5 处，列表项从 29 个降到 0。这些指标做成了扫描脚本，写进博客技能，你正在读的这篇也过了这道检查。改稿时还有一条规矩叫信息守恒：事实一条不增、一条不减，「可能」不能改成「会」，改完要对照原稿逐条核对。</p>
 
   <p>视频的问题更顽固。动效太闪，我说过三次：「页面的闪动太厉害了，有点刺眼。」「把闪屏的效果给我去掉！」「开始的时候英雄背景墙太闪了」。动画像幻灯片，我也说过三次，最近一次是「这个视频效果太差了，跟个PPT没啥区别，完全够不上科普视频动画的水准」。AI 理解「抓眼球」时倾向于快速砸入、震屏和扫光，理解「动画」时倾向于方框加标签加淡入。现在视频技能里写死了动效的上限，比如切换至少 0.5 秒、不做全屏闪白，记忆里写着「每一站都要有东西在干活」。即便这样，同一类问题还是各复发了三次。审美类的规矩写下来能减少问题，没法杜绝，最后还是得我自己看。</p>
 
