@@ -224,14 +224,26 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.33.0-beta.0</h3>
-        <p><strong>正式版已经走到 0.33.2，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.33.3-beta.0</h3>
+        <p><strong>这一版修的是：开着 AMEFYS 时，电脑每隔几秒卡一下、游戏里鼠标会顿一帧。</strong>如果你遇到过这个问题，欢迎装上试试，有没有好转在玩家群里说一声。没遇到过的话，用左边的稳定版就行，验证完会并进下一个正式版。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.33.3-beta.0 ── -->
+    <article class="release beta" id="v0-33-3-beta-0">
+      <header><h2>0.33.3-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-16</span></header>
+      <p class="lead">开着 AMEFYS，鼠标不会再隔几秒顿一下。</p>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>电脑隔几秒卡一下、游戏里鼠标顿一帧：</strong>有玩家反馈开着 AMEFYS 时，鼠标会突然停住一帧再恢复。原因是悬浮窗为了「点击穿透到游戏」的同时还能知道鼠标在哪，让系统的每一次鼠标移动都先经过 AMEFYS；AMEFYS 只要稍微忙一下，整台电脑的鼠标就跟着停一下。现在换了一种做法，鼠标移动不再经过 AMEFYS，AMEFYS 忙不忙都不会影响鼠标。</li>
+        </ul>
+      </div>
+      <div class="callout">锁定悬浮窗后，鼠标划过悬浮窗时不会再弹出提示（比如装备说明）。锁定本来就是「只看不点」，这样也不会在游戏里挡视线。锁按钮照常能点，移上去就能解锁。</div>
+    </article>
 
     <!-- ── 0.33.2 ── -->
     <article class="release" id="v0-33-2">
