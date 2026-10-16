@@ -76,8 +76,8 @@
       <li>官网 89% 的请求、安装包 73% 的下载来自中国大陆，后端却全在境外。9 月 22 日起，部分运营商（主要是移动）对 <code>*.supabase.co</code> 做 SNI 阻断，登录直接显示「网络连接失败」。</li>
       <li>修法是在自己的域名上加一条转发线路 api.amefys.com，客户端先走转发、连不上再直连。10 月 16 日两轮拨测：Supabase 原域名在 15 个家宽节点里固定有 6 个被重置，转发线路只有零星超时。</li>
       <li>测国内能不能连，本机和机房节点都会骗人：开发机的 DNS 被本地代理软件换成了 198.18 段的假地址，机房节点 6/6 都能连上被阻断的域名。要用家宽节点，每次带一个已知被阻断的对照组。</li>
-      <li>秒级 <code>ECONNRESET</code> 是阻断，TLS 握手超时多半是拥塞。国庆期间的「登录不了」就是拥塞，复测一轮从 20/24 回到 23/24。</li>
-      <li>其他坑：用户被跳到赌博站（开了 HSTS 和 preload）、厂商浏览器拦截新域名（推断）、安装包从没被缓存住（Cloudflare 免费版单个文件缓存上限 100 MB）、崩溃上报被广告规则拦掉。89 个节点的测速显示，国内请求大多由阿姆斯特丹和洛杉矶的机房应答，联通 27 个节点只有 6 个完整打开。治本的路是备案和国内节点，国内入口会放在 amefys.cn 下。</li>
+      <li>秒级 <code>ECONNRESET</code> 是阻断，TLS 握手超时多半是拥塞。国庆期间的「登录不了」我们判断是拥塞，复测一轮从 20/24 回到 23/24。</li>
+      <li>其他坑：用户被跳到赌博站（开了 HSTS 和 preload）、厂商浏览器拦截新域名（推断）、安装包从没被缓存住、崩溃上报被广告规则拦掉。89 个节点的测速显示，国内请求大多由阿姆斯特丹和洛杉矶的机房应答，联通 27 个节点只有 6 个完整打开。治本的路是备案和国内节点，国内入口会放在 amefys.cn 下。</li>
     </ul>
   </div>
 
@@ -153,7 +153,7 @@
     <figcaption>图 1　所有请求先到自己的域名，被阻断的 supabase.co 只作兜底</figcaption>
   </figure>
 
-  <p>图里的样子是一次次踩坑之后才变成这样的。5 月刚上线时，客户端直接连 supabase.co，安装包直接从 GitHub 下载，英雄图直接从 Valve 的 CDN 取。</p>
+  <p>图里这套结构是一次次踩坑攒出来的。5 月刚上线时，客户端直接连 supabase.co，安装包直接从 GitHub 下载，英雄图直接从 Valve 的 CDN 取。</p>
 
   <h2 id="s2"><span class="no">02</span>登录突然「网络连接失败」：SNI 阻断</h2>
 
@@ -163,9 +163,9 @@
 
   <p>第二步，本机测。我连着 curl 了三次 supabase.co，都是 200、1.4 秒，解析出来的 IP 是 <code>198.18.5.123</code>。这是开发机上本地代理软件的 fake-IP：它把所有域名都解析到 198.18 这个测试网段，由自己接管流量。本机永远是通的，什么都测不出来。</p>
 
-  <p>第三步，搜索。前一天，也就是 9 月 22 日，已经有两个开源项目在 GitHub 上报告了同样的现象：TCP 能连上，TLS 握手一报出域名就被重置，家宽和移动 4G 都有，换一条网络又正常。这是典型的 SNI 阻断：TLS 握手的第一个包里，域名是明文的，链路上的设备看到特定的域名就把连接重置掉。</p>
+  <p>第三步，搜索。前一天，也就是 9 月 22 日，已经有两个开源项目在 GitHub 上报告了同样的现象：TCP 能连上，TLS 握手一报出域名就被重置，家宽和移动 4G 都有，换一条网络又正常。这是典型的 SNI 阻断：TLS 握手的第一个包 ClientHello 里，SNI 字段用明文写着要访问的域名，链路上的设备看到特定域名就把连接重置掉。</p>
 
-  <p>第四步，找反证。我们的 cdn.amefys.com 当时正好是「Cloudflare Worker 转发 supabase.co」的结构。查 Cloudflare 统计里近 48 小时来自大陆的请求，cdn.amefys.com 成功 61,625 次，4xx 和 5xx 都是 0，这段时间覆盖了阻断开始之后。<strong>用户连自己的域名，由 Cloudflare 在境外再去连 supabase.co，就绕开了阻断。</strong></p>
+  <p>第四步，找反证。我们的 cdn.amefys.com 当时正好是「Cloudflare Worker 转发 supabase.co」的结构。查 Cloudflare 统计里近 48 小时来自大陆的请求，cdn.amefys.com 的 2xx 和 3xx 共 61,625 次，4xx 和 5xx 都是 0，这段时间覆盖了阻断开始之后。<strong>用户连自己的域名，由 Cloudflare 在境外再去连 supabase.co，就绕开了阻断。</strong></p>
 
   <p>当晚我们上线了 api.amefys.com：一个 Worker 透明转发 Supabase 的登录、数据库、函数和存储接口，WebSocket 也支持，其他路径一律 404。客户端怎么在两条线路之间选，看这张图：</p>
 
@@ -206,13 +206,13 @@
 
   <p>当时讨论过要不要反过来，默认直连、失败再走转发。我们最后选了默认走转发：被阻断的用户如果每次都先直连一次，遇到重置只慢 0.3 秒左右，遇到丢包就要等 8 到 15 秒的超时；而 89% 的用户在大陆。</p>
 
-  <p>这条线路后来又补了两次。第一次是 9 月 28 日，发现Worker 在请求已经发出之后超时，也会让客户端判断成「没连上」，于是兑换码、注册这类非幂等的 POST 会在直连上再发一次；改成只重放 Cloudflare 自己的错误页和幂等请求。</p>
+  <p>这条线路后来又补了两次。第一次是 9 月 28 日。Worker 连 Supabase 出错时，哪怕请求已经发出、之后才超时或被重置，也会标成「上游不可达」，客户端据此当成没连上，于是兑换码、注册这类非幂等的 POST 会在直连上再发一次；改成只重放 Cloudflare 自己的错误页和幂等请求。</p>
 
-  <p>第二次是 10 月 8 日，发现Worker 把真实 IP 追加在客户端自带的 <code>X-Forwarded-For</code> 后面，而 Supabase 的登录服务取的是第一个值，客户端可以伪造来源 IP，绕开按 IP 的限流；改成丢掉客户端带来的值，只放 Cloudflare 看到的真实 IP。</p>
+  <p>第二次是 10 月 8 日，发现 Worker 把真实 IP 追加在客户端自带的 <code>X-Forwarded-For</code> 后面，而 Supabase 的登录服务取的是第一个值，客户端可以伪造来源 IP，绕开按 IP 的限流；改成丢掉客户端带来的值，只放 Cloudflare 看到的真实 IP。</p>
 
-  <p>验证时我们用临时账号直连、转发各登录一次，看服务端记下的 IP，两次都是客户端的真实出口 IP，所有用户不会挤在 Cloudflare 的同一个 IP 上共用一个限流额度。</p>
+  <p>9 月 23 日上线时我们验证过：用临时账号直连、转发各登录一次，看服务端记下的 IP，两次都是客户端的真实出口 IP，所有用户不会挤在 Cloudflare 的同一个 IP 上共用一个限流额度。</p>
 
-  <div class="callout warn"><span class="t">老版本救不回来</span>Supabase 的地址是打包时写进安装包的，没有远程开关。已经装了旧版的用户，只能等他们升级。好在检查更新走的是 amefys.com，不受这次阻断影响。新版做成「先走自己的域名，连不上再直连」以后，同类问题就不用再发版了。所以从第一天起，客户端的每个请求都应该走自己的域名，哪怕背后只是原样转发。</div>
+  <div class="callout warn"><span class="t">老版本救不回来</span>Supabase 的地址是打包时写进安装包的，没有远程开关。已经装了旧版的用户，只能等他们升级。好在检查更新走的是 amefys.com，不受这次阻断影响。新版做成「先走自己的域名，连不上再直连」以后，同类问题就不用再发版了。</div>
 
   <h2 id="s3"><span class="no">03</span>怎么测国内能不能连</h2>
 
@@ -225,7 +225,7 @@
 
   <div class="table-wrap"><table>
     <tr><th>节点类型</th><th>Supabase 原域名的结果</th><th>说明</th></tr>
-    <tr><td>机房（腾讯云、阿里云）</td><td class="num">6/6 能连上</td><td>机房线路不受这类阻断影响</td></tr>
+    <tr><td>机房（腾讯云、阿里云）</td><td class="num">6/6 能连上</td><td>这批机房节点没有一个被重置</td></tr>
     <tr><td>家宽（电信、联通、移动混合）</td><td class="num">6/10 能连上</td><td>上海、昆明、台山、宁波的移动节点被重置</td></tr>
   </table></div>
 
@@ -306,7 +306,7 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 <rect x="555.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
 <rect x="616.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
 <rect x="632.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
-<rect x="648.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="648.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
 <rect x="664.5" y="98" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
 <text x="16" y="134" font-size="12" text-anchor="start" style="fill:var(--d-text2)">上海 联通</text>
 <text x="140" y="134" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS9929</text>
@@ -354,8 +354,8 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 <rect x="430.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
 <rect x="523.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
 <rect x="539.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
-<rect x="632.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
-<rect x="648.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<rect x="632.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<rect x="648.5" y="194" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
 <text x="16" y="230" font-size="12" text-anchor="start" style="fill:var(--d-text2)">西安 联通</text>
 <text x="140" y="230" font-size="10" text-anchor="end" style="fill:var(--d-text3)">AS4837</text>
 <rect x="196.5" y="218" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
@@ -446,7 +446,7 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 <text x="319.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-red)">18/30</text>
 <text x="428.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-amber)">25/30</text>
 <text x="537.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-green)">30/30</text>
-<text x="646.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-amber)">26/30</text>
+<text x="646.5" y="402" font-size="13" text-anchor="middle" font-weight="600" style="fill:var(--d-amber)">23/30</text>
 <rect x="16" y="418" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
 <text x="34" y="428" font-size="12" text-anchor="start" style="fill:var(--d-text2)">成功</text>
 <rect x="86" y="418" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
@@ -457,10 +457,10 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 <text x="16" y="450" font-size="11" text-anchor="start" style="fill:var(--d-text3)">Globalping 家宽探针（CN + eyeball-network），2026-10-16 23:49 / 23:51，两轮用同一批 15 个节点；HTTPS GET</text>
 </svg>
     </div>
-    <figcaption>图 3　同一批 15 个家宽节点测两轮：被阻断的节点两轮完全一样，超时的节点每轮都在换</figcaption>
+    <figcaption>图 3　同一批 15 个家宽节点测两轮：被阻断的节点两轮完全一样，超时的节点大多每轮在换</figcaption>
   </figure>
 
-  <p>Supabase 原域名两轮都是 6 个节点被重置，而且是同样的 6 个：6 个移动节点里的 5 个，加上深圳联通。<strong>这种「固定的节点、秒级失败」就是阻断。</strong>api.amefys.com 和 amefys.com 每轮有 2 到 3 个节点 TLS 握手超时，可失败的节点每轮都在换，只有芜湖联通在 api.amefys.com 上两轮都超时，这更像是 Cloudflare 免费线路的拥塞。cdn.amefys.com 和百度两轮全通。</p>
+  <p>Supabase 原域名两轮都是 6 个节点被重置，而且是同样的 6 个：6 个移动节点里的 5 个，加上深圳联通。<strong>这种「固定的节点、秒级失败」就是阻断。</strong>api.amefys.com 和 amefys.com 每轮有 2 到 4 个节点超时，多数卡在 TLS 握手，少数是下载响应时超时。失败的节点大多每轮在换，芜湖联通在这两个域名上两轮都超时，这更像是 Cloudflare 免费线路的拥塞。cdn.amefys.com 和百度两轮全通。</p>
 
   <p>看失败的形态，能大致分清是哪一类：</p>
 
@@ -478,13 +478,13 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>10 月 3 日下午，又有人反馈客户端登录不了。当天上午我自己在一个第三方拨测网站上测官网，也看到「中国有一些地区访问很慢，有些地区甚至直接失败」。</p>
 
-  <p>这次按顺序排查：先看 Worker 当天的调用量，10 月 2 日转发线路 12,977 次，离免费版每天 10 万次的上限很远。</p>
+  <p>这次按顺序排查：先看 Worker 当天的调用量。免费版每天 10 万次是账号里所有 Worker 共用的，10 月 2 日合计约 4.8 万次（其中转发线路 12,977 次），离上限还远。</p>
 
   <p>再用 24 个家宽节点测，api.amefys.com 20/24，cdn.amefys.com 21/24，失败全是 TCP 或 TLS 超时，没有秒级重置；用同一批节点复测，百度 24/24，api.amefys.com 23/24，只剩南宁联通两次都超时。</p>
 
   <p>Sentry 上两天内没有登录相关的报错。我们还拆开了线上的安装包，核对里面写的服务器地址和密钥；最后用一个不存在的账号走了一遍登录接口，转发和直连都返回「账号或密码错误」，说明请求到达了服务端。</p>
 
-  <p>结论是国庆期间部分地区连 Cloudflare 的线路拥塞，不是针对域名的封锁。这次没有改代码，只把排查顺序写了下来：</p>
+  <p>我们的判断是国庆期间部分地区连 Cloudflare 的线路拥塞，没有针对域名的封锁。这次没有改代码，只把排查顺序写了下来：</p>
 
   <div class="table-wrap"><table>
     <tr><th>顺序</th><th>查什么</th><th>排除什么</th></tr>
@@ -539,7 +539,7 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>确认完以后，在 Cloudflare 上打开 HSTS：有效期一年、包含子域、允许 preload，<code>nosniff</code> 先关掉，避免误伤 R2 上 MIME 类型不准的文件。8 秒后六个子域的响应头都带上了 <code>max-age=31536000; includeSubDomains; preload</code>。再去 <a href="https://hstspreload.org/">hstspreload.org</a> 检查，零错误、零警告，提交，到现在还是 pending。中间还有个小坑：第一次改设置被拒，原因是我们的 Cloudflare 令牌缺「区域设置：编辑」权限。</p>
 
-  <p>开了以后，用这个浏览器正常打开过一次 HTTPS 的用户，以后都会被强制走 HTTPS；进了 preload 列表，第一次访问也受保护；DNS 被篡改时，用户会看到证书错误，不会悄悄跳走。给那位用户的建议是先关掉 Wi-Fi 只用 5G 打开一次，如果正常，就是路由器的问题，把路由器的 DNS 改回自动并改掉管理密码。这位用户后来有没有恢复，我们没收到后续。代价是：从此任何新的 <code>*.amefys.com</code> 子域都必须支持 HTTPS，preload 要撤销得等好几个月。</p>
+  <p>开了以后，用户在某个浏览器里正常打开过一次 HTTPS，这个浏览器在一年有效期内都会强制走 HTTPS；等进了 preload 列表（现在还在排队），第一次访问也受保护；DNS 被篡改时，用户会看到证书错误，不会悄悄跳走。给那位用户的建议是先关掉 Wi-Fi 只用 5G 打开一次，如果正常，就是路由器的问题，把路由器的 DNS 改回自动并改掉管理密码。这位用户后来有没有恢复，我们没收到后续。代价是：从此任何新的 <code>*.amefys.com</code> 子域都必须支持 HTTPS，preload 要撤销得等好几个月。</p>
 
   <h2 id="s6"><span class="no">06</span>手机网页打不开：浏览器自己拦了</h2>
 
@@ -555,19 +555,19 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>GitHub Release 的文件实际从 <code>release-assets.githubusercontent.com</code> 下载，国内很慢。5 月我们在 <code>amefys.com/dl/</code> 下加了一个 Worker：第一次从 GitHub 拉，之后靠 Cloudflare 的边缘缓存，带版本号的地址缓存 30 天。</p>
 
-  <p>9 月 5 日才发现，Cloudflare 免费版和 Pro 版单个文件的缓存上限是 100 MB，而 Windows 安装包约 114 MB，macOS 安装包 200 多 MB，这个缓存从来没有缓存住任何东西，每次下载都是从 GitHub 的美国源站流过来，当时实测只有几百 KB/s。之后改成发版时把安装包镜像到 Cloudflare R2，Worker 从 R2 读，没有再回落到 GitHub。</p>
+  <p>9 月 5 日才发现，这个缓存从来没有缓存住任何东西，每次下载都是从 GitHub 的美国源站流过来，当时实测只有几百 KB/s。当时的提交说明把原因归到「免费版单个文件缓存上限 100 MB」，Windows 安装包约 114 MB、macOS 安装包 200 多 MB；但 Cloudflare 现在的文档写的是免费版到 Business 版上限 512 MB，100 MB 是上传请求体的上限，真正没缓存住的原因还要再核实。之后改成发版时把安装包镜像到 Cloudflare R2，Worker 先从 R2 读，R2 里没有的再回落到 GitHub。</p>
 
   <p>这个下载服务还藏了一个月的 bug：从 9 月 5 日到 10 月 5 日，所有断点续传请求返回的 <code>Content-Range</code> 都是 <code>bytes NaN-NaN/文件大小</code>。原因是 R2 返回的范围对象里，即使不是后缀范围，也带着一个值为 undefined 的 <code>suffix</code> 键，而代码判断的是「有没有这个键」。支持断点续传的下载器、Safari 播放视频都依赖这个头。现在改成按请求自己的 Range 头来算。10 月 16 日复查：<code>curl -r 100-199</code> 返回 <code>bytes 100-199/114386808</code>，开放区间也正确。</p>
 
-  <p>换成 R2 以后依然不够快。9 月 28 日用 12 个家宽节点测下载地址，TCP 建连 200 到 300 毫秒，首字节 0.7 到 2.2 秒，广州移动一个节点建连 1.3 秒后超时。Cloudflare 免费版在大陆没有节点，下 114 MB 慢是必然的。10 月 16 日官网的下载按钮下面加了一个国内网盘的备用下载。网盘解决不了自动更新：老用户收到更新提示后，仍然是从 amefys.com 下载。</p>
+  <p>换成 R2 以后依然不够快。9 月 28 日用 12 个家宽节点测下载地址，多数节点 TCP 建连 200 到 300 毫秒，首字节 0.7 到 2.2 秒，广州移动一个节点建连 1.3 秒后超时。Cloudflare 免费版在大陆没有节点，下 114 MB 慢是必然的。10 月 16 日官网的下载按钮下面加了一个国内网盘的备用下载。网盘解决不了自动更新：老用户收到更新提示后，仍然是从 amefys.com 下载。</p>
 
   <h2 id="s8"><span class="no">08</span>图片、字体和人机验证</h2>
 
-  <p>BP 面板的英雄头像，有国内用户反馈「每次都加载半天」。桌面端原来只从 Valve 的 CDN 下载，而且没有超时。同一批家宽节点测 Valve 的 CDN，移动节点多在 0.1 到 0.3 秒，东莞电信 5.5 秒、西安电信 4.7 秒。下载失败就不写缓存，所以每次打开都在重新下载，看起来像没有缓存。现在改成先从自己的 cdn.amefys.com 取，失败再去 Valve，每个请求 8 秒超时，超时就换下一个源。</p>
+  <p>BP 面板的英雄头像，有国内用户反馈「每次都加载半天」。桌面端原来只从 Valve 的 CDN 下载，而且没有超时。9 月 24 日用家宽节点测 Valve 的 CDN，移动节点多在 0.1 到 0.3 秒，东莞电信 5.5 秒、西安电信 4.7 秒。下载失败就不写缓存，所以每次打开都在重新下载，看起来像没有缓存。现在改成先从自己的 cdn.amefys.com 取，失败再去 Valve，每个请求 8 秒超时，超时就换下一个源。</p>
 
   <p>这里还有一个相关的坑：原来下载到的任何 2xx 响应都会写进缓存，而强制门户或者某些代理会返回 200 加一个 HTML 页面，于是用户的头像永久坏掉了。现在按文件头的魔数校验，确实是 PNG、JPEG 或 WebP 才写盘。</p>
 
-  <p>皮肤里引用的 Google Fonts，在国内的 Windows 上大概率连不上，浏览器会静默回落到系统字体，不报任何错。这类问题不看日志根本发现不了，打算随安装包自带字体。</p>
+  <p>皮肤里引用的 Google Fonts，在国内的 Windows 上大概率连不上，浏览器会静默回落到系统字体，不报任何错，所以日志里也看不到。我们打算随安装包自带字体。</p>
 
   <p>官网留言板用的是 Cloudflare 的人机验证 Turnstile，国内网络下点了提交要等十几到几十秒：引导脚本 1.2 秒，挑战本身 11 到 15 秒，DevTools 里能看到 5、10、15 秒阶梯式的超时重试。我们改成页面一打开就在屏幕外把挑战跑完，缓存拿到的令牌，用户点提交时直接用，等待时间从 14.7 秒降到了 7 毫秒。</p>
 
@@ -579,17 +579,17 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <h2 id="s10"><span class="no">10</span>开了代理也不行的三处网络栈</h2>
 
-  <p>有些用户的电脑上开着系统代理，但客户端里有三处网络请求不走系统代理，表现就是「浏览器能打开，客户端里不行」。</p>
+  <p>有些用户的电脑上开着代理，客户端里却有三处网络请求和浏览器的表现不一样，「浏览器能打开，客户端里不行」。</p>
 
   <p>第一处是 Electron 主进程里的 Node <code>fetch</code>，它不读系统代理。登录这类请求是主进程发的，所以这类用户在客户端里照样连不上 supabase.co。有了转发线路以后，影响小了很多，长期打算改用 Electron 的 <code>net.fetch</code>，它走 Chromium 的网络栈。</p>
 
   <p>第二处是自动更新。用户退出代理软件以后，系统里可能留着一个已经失效的代理设置，更新检查因此失败，其实更新服务器是好的。现在遇到代理连接失败这一类错误，就把这个会话切成直连重试一次，本次运行内保持直连，第一次失败不弹错误。</p>
 
-  <p>第三处是 Windows 的 OCR 语言组件。下载慢的时候我问过一句「如果开了代理是不是就没这个问题了」。查了微软的文档，组件下载走的是以系统账户运行的后台服务，它不继承用户级的系统代理设置，所以开了也不走。安装向导的文案因此不该写「请开代理」，只写技术事实。</p>
+  <p>第三处是 Windows 的 OCR 语言组件。下载慢的时候我问过一句「如果开了代理是不是就没这个问题了」。查了微软的文档，组件下载走的是 BITS 这类以 LocalSystem 账户运行的后台服务，它不继承用户级（WinINET）的代理设置；常见代理软件的「系统代理」开关改的正好是 WinINET，所以只开这个模式不管用，TUN 或全局模式才会经过代理。安装向导的文案因此不该写「请开代理」，只写技术事实。</p>
 
   <h2 id="s11"><span class="no">11</span>89 个节点的基线：请求绕到了阿姆斯特丹和洛杉矶</h2>
 
-  <p>Globalping 一次只有十几个家宽节点，看不出全国的样子。10 月 17 日凌晨，我又用 <a href="https://www.boce.com/http/20261017_30d94b009ee615063a52d6613a860440.html">boce.com</a> 测了一次 <code>http://amefys.com</code>，覆盖 89 个国内节点：电信 31 个、移动 31 个、联通 27 个。它会记下每个节点的响应头，而 Cloudflare 响应头 <code>Cf-Ray</code> 的末尾三个字母就是应答的机房代码，于是第一次能看到国内用户的请求实际落在了哪里：</p>
+  <p>Globalping 一次只有十几个家宽节点，看不出全国的样子。10 月 17 日凌晨，我又用 <a href="https://www.boce.com/http/20261017_30d94b009ee615063a52d6613a860440.html">boce.com</a> 测了一次 <code>http://amefys.com</code>，覆盖 89 个国内节点：电信 31 个、移动 31 个、联通 27 个。它会记下每个节点的响应头，而 Cloudflare 响应头 <code>Cf-Ray</code> 连字符后面的三个字母，是应答机房所在城市的机场代码（AMS 是阿姆斯特丹，LAX 是洛杉矶，ATL 是亚特兰大），于是第一次能看到国内用户的请求实际落在了哪里：</p>
 
   <figure>
     <div class="fig">
@@ -748,27 +748,27 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
     <tr><td>华中</td><td class="num">5.34 秒</td><td>湖南长沙电信 1.85 秒</td><td>湖北天门电信 10 秒</td></tr>
   </table></div>
 
-  <p>上表是 boce 报告页自己给出的分组统计。看这组数字要注意几点：每个节点只测了一次，时间是凌晨，不是晚高峰；耗时里包含冷启动的 DNS 解析，所以比用户第二次打开要慢；boce 没说明这些节点是机房还是家宽。联通这么差，和前一个小时 Globalping 的家宽结果也对不上，那边联通节点访问官网基本都通，原因还要再查。但两边的方向一致：Cloudflare 免费版在大陆没有节点，国内的请求只能出境去找海外机房。</p>
+  <p>上表直接取自 boce 报告页的分组统计。这组数字有几个前提：每个节点只测了一次，时间是凌晨，不是晚高峰；耗时里包含冷启动的 DNS 解析，所以比用户第二次打开要慢；boce 没说明这些节点是机房还是家宽。联通这么差，和半小时前 Globalping 的家宽结果差得也远：那边 7 个联通节点访问官网，两轮都是 4 个打开，比这里的 6/27 好不少，原因还要再查。但两边的方向一致：Cloudflare 免费版在大陆没有节点，国内的请求只能出境去找海外机房。</p>
 
   <p>这组数字会作为我们的基线。下一节说的国内节点上线以后，我会用同一个测速网站、同样覆盖三家运营商的节点再测一次，把前后对比单独写一篇。</p>
 
   <h2 id="s12"><span class="no">12</span>治本：备案和国内节点</h2>
 
-  <p>上面这些大多是在境外的架构上打补丁。治本的路是备案，再加国内的服务器和 CDN。不备案，很多事都卡着：没备案的域名不能用在大陆服务器的 80 和 443 端口上；国内对象存储加 CDN 能让安装包下载快很多，但自有域名要备案；百度对境外的新站很少主动收录，也不给「官网」标识；厂商浏览器拦截新域名，也和没备案有关。</p>
+  <p>上面这些大多是在境外的架构上打补丁。治本的路是备案，再加国内的服务器和 CDN。不备案，很多事都卡着：没备案的域名不能用在大陆服务器的 80 和 443 端口上；国内对象存储加 CDN 能让安装包下载快很多，但自有域名要备案；百度对境外的新站很少主动收录，也不给「官网」标识；厂商浏览器拦截新域名，我们推断也和没备案有关。</p>
 
   <p>上一节那组基线，就是这件事要解决的问题。我们已经注册了 amefys.cn，以后国内的入口会放在这个域名下，amefys.com 继续服务境外用户和已经装好的老版本。</p>
 
-  <p>有一条原则从一开始就定下了：已经发出去的客户端里写死的每一个主机名，api.amefys.com、cdn.amefys.com、amefys.com/dl、supabase.co 的直连兜底，一个都不能下线，只能换它们背后的服务。用户手里的旧版本，我们改不了。</p>
+  <p>做国内方案时先定了一条原则：已经发出去的客户端里写死的每一个地址，api.amefys.com、cdn.amefys.com、amefys.com/dl、supabase.co 的直连兜底，一个都不能下线，只能换它们背后的服务。用户手里的旧版本，我们改不了。</p>
 
   <h2 id="s13"><span class="no">13</span>几点心得</h2>
 
-  <p>本机测不出国内的问题。开发机多半开着网络工具，DNS 和流量都被接管了，curl 永远是通的。机房节点也一样，它们的线路不受这类阻断影响。要用国内的家宽节点，分运营商看。</p>
+  <p>本机测不出国内的问题。开发机多半开着网络工具，DNS 和流量都被接管了，curl 永远是通的。机房节点也测不出，9 月 24 日那 6 个全通。要用国内的家宽节点，分运营商看。</p>
 
-  <p>拨测一定要带对照组。一个已知被阻断的域名，一个肯定能通的国内网站。对照组的结果不对，这批数据就不能用。复测时复用同一批节点，失败的节点不变是阻断，换来换去是拥塞。</p>
+  <p>拨测一定要带对照组，复测要用同一批节点。10 月 16 日那两轮，被阻断的 6 个节点两轮一模一样，超时的节点大多每轮在换，靠这两条才分得清。</p>
 
   <p>每个请求都走自己的域名。哪怕背后只是原样转发，出了问题也有地方可改，不用等用户升级。客户端里写死第三方的地址，等于把可用性交给了别人。</p>
 
-  <p>错误提示会误导排查。「网络连接失败」可能是阻断，可能是拥塞，也可能是密钥填错了平台。先从提示倒查代码，弄清楚这句话在什么条件下才会出现，再去看网络。</p>
+  <p>错误提示会误导排查。「网络连接失败」「网络异常」这类提示，背后可能是阻断，可能是拥塞，也可能是密钥填错了平台（语音识别就出过一次）。先从提示倒查代码，弄清楚这句话在什么条件下才会出现，再去看网络。</p>
 
   <p>用户那边的问题，我们只能推断。路由器被篡改、浏览器拦截，这些我们都没法亲眼看到。能做的是把自己这一侧排除干净，再用 HSTS、引导提示这类手段，让用户那边出问题时至少能看到明确的提示。</p>
 
