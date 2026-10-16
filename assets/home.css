@@ -106,3 +106,22 @@ section { padding: 88px 24px 100px; }
 .i18n-card-b .nm { font-size: 13px; font-weight: 700; }
 .i18n-card-b .sb { font-size: 11px; color: var(--gold); margin-top: 2px; }
 .lang-chip .num { color: var(--gold); }
+
+/* ── Hero: the phone version is a web page, not an app ───────── */
+/* Players kept searching app stores for "AMEFYS". The note sits right
+   under the download button so nobody reads that button as the phone path. */
+.phone-web-note {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 16px; padding: 9px 16px 9px 12px; border-radius: 999px;
+  border: 1px solid rgba(232,199,121,0.38); background: rgba(232,199,121,0.08);
+  color: var(--text-2); font-size: 13.5px; line-height: 1.45; text-align: left;
+  text-decoration: none; transition: background .2s ease, border-color .2s ease;
+}
+.phone-web-note:hover { background: rgba(232,199,121,0.14); border-color: rgba(232,199,121,0.6); }
+.phone-web-note svg { flex: none; width: 18px; height: 18px; color: var(--gold); }
+.phone-web-note b { color: var(--gold); font-weight: 700; }
+.phone-web-note u { color: var(--text); text-decoration-color: rgba(232,199,121,0.6); text-underline-offset: 3px; }
+@media (max-width: 720px) {
+  .phone-web-note { display: flex; max-width: 420px; margin: 16px auto 0; border-radius: 14px; padding: 11px 14px; font-size: 14px; }
+}
