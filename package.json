@@ -3,6 +3,10 @@
   "private": true,
   "description": "AMEFYS marketing site (static). No build step; tests run on plain Node.",
   "scripts": {
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "community": "node scripts/community-qr.mjs"
+  },
+  "devDependencies": {
+    "qrcode": "1.5.4"
   }
 }
