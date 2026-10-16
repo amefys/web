@@ -100,3 +100,15 @@ test('every 404 hero has self-hosted art and an existing hero page', () => {
   // Credit Valve for the art.
   assert.match(page, /Valve/)
 })
+
+// 2026-10-16: players thought the phone version was an app and went looking in
+// app stores. The hero — not just the BP section further down — must say it is
+// a web page opened in the phone browser.
+for (const [lang, html] of Object.entries(PAGES)) {
+  test(`${lang}: hero says the phone version is a web page, not an app`, () => {
+    const hero = html.slice(html.indexOf('class="cta-row"'), html.indexOf('class="preview-wrap"'))
+    const note = hero.match(/<a class="phone-web-note" href="\/bp\/">([\s\S]*?)<\/a>/)
+    assert.ok(note, 'phone-web-note missing from the hero')
+    assert.match(text(note[1]), lang === 'zh' ? /网页，不是 App[\s\S]*浏览器[\s\S]*amefys\.com\/bp/ : /web page, not an app[\s\S]*amefys\.com\/bp[\s\S]*browser/)
+  })
+}
