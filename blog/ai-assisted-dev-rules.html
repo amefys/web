@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故 — AMEFYS 技术博客</title>
+<meta name="description" content="用 Claude Code 写出一款桌面应用 161 天的经验：AI 汇报不存在的推送、照着抄出走样的副本、把仓库代码当线上服务；规矩分全局指令、项目说明、记忆、自动检查四层，事故如何变成钩子和守卫测试，worktree 并行、影响评估、回归测试、去 AI 味，以及哪些事必须人来拍板。">
+<link rel="canonical" href="https://amefys.com/blog/ai-assisted-dev-rules.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故">
+<meta property="og:description" content="假推送、没部署的函数、走样的 logo、关不掉的开关：每条规矩背后的事故，以及怎么把规矩变成自动检查。">
+<meta property="og:url" content="https://amefys.com/blog/ai-assisted-dev-rules.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-17">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/ai-assisted-dev-rules.html","keywords":"AI 辅助开发, Claude Code, 工程规范, 提交钩子, 守卫测试, 记忆, worktree"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">AI 协作开发</span><span class="tag">Claude Code</span><span class="tag">工程规范</span><span class="tag">事故复盘</span></div>
+    <h1>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故</h1>
+    <p class="sub">AMEFYS 大部分代码是 AI 编程助手写的。161 天里，AI 汇报过不存在的推送、照着 logo 抄出走样的副本、把仓库里的代码当成线上的服务。这篇把这些事和它们留下的规矩放在一起讲：规矩分几层、怎么写才管用、哪些最后变成了自动检查，以及哪些事我始终自己拍板。</p>
+    <div class="meta"><span>2026-10-17</span><span>阅读约 14 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>2026 年 5 月 8 日到 10 月 16 日：主仓库 840 次提交、138 个版本、326 个测试文件，开发者只有我一个，大部分代码由 AI 写。</li>
+      <li>规矩分四层：全局指令约 74 行、项目说明 196 行、记忆 94 条，最下面是提交钩子和守卫测试。越往下越硬，重要的规矩最后都变成了自动检查。</li>
+      <li>最常见的一类问题是「看起来有，其实不起作用」：假推送、没部署的函数、不存在的配置开关、关不掉的上报开关。我要求 AI 验证「起作用」，不只是「存在」。</li>
+      <li>「照着抄一份」必然走样：logo 抄了两份都错，196 个装备名凭记忆写错。现在的做法是只留一个来源，副本由脚本生成并加守卫。</li>
+      <li>审美类的问题写进规矩也会复发：视频「太闪」「像 PPT」各被我否了三次。修复可以直接上线，发版、新功能和破坏性操作仍由我决定。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">先交代背景</a></li>
+      <li><a href="#s2">规矩分四层</a></li>
+      <li><a href="#s3">让 AI 说真话：验证「起作用」，不只是「存在」</a></li>
+      <li><a href="#s4">照着抄一份，就会走样</a></li>
+      <li><a href="#s5">把规矩变成自动检查</a></li>
+      <li><a href="#s6">记忆：写清「为什么」和「下次怎么做」</a></li>
+      <li><a href="#s7">多个会话并行：一个任务一个 worktree</a></li>
+      <li><a href="#s8">改之前先评估，改完补测试</a></li>
+      <li><a href="#s9">内容类的活：AI 味、闪、像 PPT</a></li>
+      <li><a href="#s10">分工：哪些交给 AI，哪些自己拍板</a></li>
+      <li><a href="#s11">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>先交代背景</h2>
+
+  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面工具，Windows 和 macOS 都能用，另外有一个手机网页版 BP。整体架构写在<a href="/blog/amefys-architecture.html">另一篇</a>里。开发和运营都是我一个人，写代码主要靠 Claude Code。第一次提交是 2026 年 5 月 8 日，到 10 月 16 日是 161 天：</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 282" role="img" aria-label="每月提交数：5 月 228，6 月 118，7、8 月几乎停摆，9 月 323 为高峰，10 月上半月 158">
+<text x="16" y="20" font-size="12" text-anchor="start" style="fill:var(--d-text3)">每月提交数</text>
+<line x1="70" y1="230.0" x2="704" y2="230.0" style="stroke:var(--d-dash)"/>
+<text x="60" y="234" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">0</text>
+<line x1="70" y1="175.5" x2="704" y2="175.5" style="stroke:var(--d-dash)"/>
+<text x="60" y="179.455" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">100</text>
+<line x1="70" y1="120.9" x2="704" y2="120.9" style="stroke:var(--d-dash)"/>
+<text x="60" y="124.909" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">200</text>
+<line x1="70" y1="66.4" x2="704" y2="66.4" style="stroke:var(--d-dash)"/>
+<text x="60" y="70.3636" font-size="11" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text3)">300</text>
+<rect x="84" y="105.6" width="30" height="124.4" rx="4" style="fill:var(--d-gold)"/>
+<text x="99" y="99.6364" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">228</text>
+<rect x="120" y="210.9" width="30" height="19.1" rx="4" style="fill:var(--d-blue)"/>
+<text x="135" y="204.909" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">35</text>
+<text x="117" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">5 月</text>
+<rect x="188" y="165.6" width="30" height="64.4" rx="4" style="fill:var(--d-gold)"/>
+<text x="203" y="159.636" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">118</text>
+<rect x="224" y="226.7" width="30" height="3.3" rx="4" style="fill:var(--d-blue)"/>
+<text x="239" y="220.727" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">6</text>
+<text x="221" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">6 月</text>
+<rect x="292" y="228.5" width="30" height="1.5" rx="4" style="fill:var(--d-gold)"/>
+<text x="307" y="222.5" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">1</text>
+<rect x="328" y="228.5" width="30" height="1.5" rx="4" style="fill:var(--d-blue)"/>
+<text x="343" y="222.5" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">1</text>
+<text x="325" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">7 月</text>
+<rect x="396" y="223.5" width="30" height="6.5" rx="4" style="fill:var(--d-gold)"/>
+<text x="411" y="217.455" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">12</text>
+<rect x="432" y="228.5" width="30" height="1.5" rx="4" style="fill:var(--d-blue)"/>
+<text x="447" y="222.5" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">0</text>
+<text x="429" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">8 月</text>
+<rect x="500" y="53.8" width="30" height="176.2" rx="4" style="fill:var(--d-gold)"/>
+<text x="515" y="47.8182" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">323</text>
+<rect x="536" y="184.2" width="30" height="45.8" rx="4" style="fill:var(--d-blue)"/>
+<text x="551" y="178.182" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">84</text>
+<text x="533" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">9 月</text>
+<rect x="604" y="143.8" width="30" height="86.2" rx="4" style="fill:var(--d-gold)"/>
+<text x="619" y="137.818" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">158</text>
+<rect x="640" y="186.9" width="30" height="43.1" rx="4" style="fill:var(--d-blue)"/>
+<text x="655" y="180.909" font-size="11" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">79</text>
+<text x="637" y="250" font-size="12" text-anchor="middle" style="fill:var(--d-text2)">10 月（1–16 日）</text>
+<rect x="70" y="258" width="12" height="12" rx="3" style="fill:var(--d-gold)"/>
+<text x="88" y="268" font-size="12" text-anchor="start" style="fill:var(--d-text2)">桌面端和手机网页（amefys，共 840）</text>
+<rect x="340" y="258" width="12" height="12" rx="3" style="fill:var(--d-blue)"/>
+<text x="358" y="268" font-size="12" text-anchor="start" style="fill:var(--d-text2)">官网（amefys-web，共 205）</text>
+</svg>
+    </div>
+    <figcaption>图 1　161 天里的提交分布：9 月是高峰，7、8 月几乎停了</figcaption>
+  </figure>
+
+  <p>主仓库 840 次提交分布在 83 天里，发了 138 个版本（91 个正式版、47 个测试版），git 里有 326 个测试文件。官网另有 205 次提交。分工上，写代码、补测试、跑检查、查线上数据交给 AI；做什么、合规红线在哪、什么时候发版，由我来定。</p>
+
+  <p>下面每一节讲的都是交给 AI 的那一半里出过的事：它说做完了，实际没做完；它说和原件一致，其实不一致。每件事后面都跟着我留下的规矩。</p>
+
+  <h2 id="s2"><span class="no">02</span>规矩分四层</h2>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 318" role="img" aria-label="规矩的四层：全局指令约 74 行、项目说明 196 行、记忆 94 条、自动检查；越往下越硬">
+<rect x="10" y="16" width="680" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-gray)" stroke-width="1.5"/>
+<text x="26" y="41" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">全局指令</text>
+<text x="674" y="41" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gray)">约 74 行</text>
+<text x="26" y="61" font-size="12" text-anchor="start" style="fill:var(--d-text2)">所有项目通用：说中文、实施后自检、修 bug 必补回归测试、记忆归档</text>
+<rect x="32" y="86" width="636" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)" stroke-width="1.5"/>
+<text x="48" y="111" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">项目说明（CLAUDE.md）</text>
+<text x="652" y="111" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-blue)">196 行</text>
+<text x="48" y="131" font-size="12" text-anchor="start" style="fill:var(--d-text2)">这个仓库的工作流、合规红线、品牌资产、ABI、媒体文件放哪</text>
+<rect x="54" y="156" width="592" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)" stroke-width="1.5"/>
+<text x="70" y="181" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">记忆</text>
+<text x="630" y="181" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-gold)">94 条</text>
+<text x="70" y="201" font-size="12" text-anchor="start" style="fill:var(--d-text2)">每条写清「为什么」和「下次怎么做」，坑位加粗进索引</text>
+<rect x="76" y="226" width="548" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-green)" stroke-width="1.5"/>
+<text x="92" y="251" font-size="14" text-anchor="start" font-weight="600" style="fill:var(--d-text)">自动检查</text>
+<text x="608" y="251" font-size="12" text-anchor="end" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-green)">钩子 + 守卫测试</text>
+<text x="92" y="271" font-size="12" text-anchor="start" style="fill:var(--d-text2)">提交钩子、Claude Code 钩子、守卫测试和检查脚本：不靠记性</text>
+<text x="16" y="306" font-size="12" text-anchor="start" style="fill:var(--d-text3)">越往下越「硬」：上面三层靠 AI 读进去并照做，最下面一层不照做就过不去</text>
+</svg>
+    </div>
+    <figcaption>图 2　规矩的四层：越往下越不依赖 AI 记不记得</figcaption>
+  </figure>
+
+  <p>最上面是全局指令，对我所有项目都生效，内容很少，但有三条标成了最高优先级：按计划实施后必须主动对照计划自检，修 bug 只要能写测试就必须补回归测试，项目类记忆在工作上线后要归档。第一条后面写着原因：跳过自检，会让编译和静态检查都通过、运行时才暴露的 bug 漏过去。</p>
+
+  <p>第二层是仓库里的 CLAUDE.md，196 行，写这个项目自己的事：不开 PR、main 只快进；分支一律走 worktree；提交只署项目自己的账号；logo 只有一个来源；生成的音视频放在固定的媒体库目录；合规红线。它的修改记录基本就是一份事故清单，9 月 15 日加的是品牌资产单一来源，9 月 20 日加的是不带 AI 署名，10 月 3 日加的是 worktree。</p>
+
+  <p>第三层是记忆，第六节单独讲。最下面是自动检查：提交钩子、Claude Code 的钩子、守卫测试和检查脚本。前三层都要靠 AI 读进去并且照做；最后一层不需要它记得，违反了就过不去。这个项目里反复验证过的一件事是：<strong>只写在文字里的规矩迟早会被忘掉，重要的最后都得变成自动检查。</strong></p>
+
+  <h2 id="s3"><span class="no">03</span>让 AI 说真话：验证「起作用」，不只是「存在」</h2>
+
+  <p>6 月 19 日发 v0.20.0 的那次会话里，AI 告诉我已经改好、提交、推送，测试也通过了。我用 <code>git log</code>、<code>git status</code>、<code>git ls-remote</code> 自己查了一遍，HEAD 没动，源码改动也没落盘。那次是会话中途工具输出出了问题，返回的结果看起来完全正常，汇报和现实已经脱节了。这次调研时还发现，那条记录里记着的两个提交号，在仓库里查不到。</p>
+
+  <p>从那以后，提交、远端分支、线上服务、数据库这些关键状态，我都要求用独立的命令核对，不以 AI 的自述为准。发版记录里也多了固定的两句：远端确认提交和 tag 已经落地，安装包按字节数核对过。</p>
+
+  <p>9 月 5 日是另一种情况。有用户说激活码绑定失败，仓库里兑换功能的代码齐全，AI 据此回答「老版本也支持兑换」。实际上这个函数从来没有部署过，线上请求返回 404，三个激活码的使用次数全是 0。这个项目的服务端函数是手动部署的，不在 CI 里，所以「仓库里有」和「线上有」是两回事。现在的规矩是，回答「能不能用」之前，先对线上跑一次真实请求，看返回的是 404 还是 401。</p>
+
+  <p>9 月 20 日，我在 GitHub 贡献者图上看到 claude 排在第二位，于是问 AI：「后续amefys 下的任何提交能全部都以 amefys-ai 账号吗？不需要体现Claude的提交」。查下来，提交作者一直是对的，多出来的贡献者来自提交信息末尾的 <code>Co-Authored-By</code> 那一行，GitHub 会把它算进贡献者。更麻烦的是，全局规则里本来写着「署名已经在 settings.json 里全局关闭」，翻遍所有配置文件，那个开关根本不存在。文档里写着「已配置」，不等于真的配置了。</p>
+
+  <p>这类事在项目里还有好几件：设置里的「匿名崩溃报告」开关从来没被读过，关掉以后照样上报；共享翻译缓存的命中次数字段从建表起就没有代码写它，639 行全是 0；官网首页宣传过客户端里没有的翻译语言；提交钩子丢了可执行位，格式检查有一段时间根本没在跑。它们的共同点是：看上去都在，实际都不起作用。</p>
+
+  <div class="callout lesson"><span class="t">我现在怎么问</span>不问「做好了吗」，问「怎么证明它起作用了」。能贴出命令输出的就贴命令输出，能用线上请求验证的就用线上请求，暂时只能在 Windows 实机上确认的，就在记录里写明「零真机验证」，并写上要看的日志关键字和出问题时回滚到哪个版本。不假装验证过，比验证本身还重要。</div>
+
+  <h2 id="s4"><span class="no">04</span>照着抄一份，就会走样</h2>
+
+  <p>9 月 14 日我发现官网关于页上的 logo 不对：它用了小尺寸变体的几何，右上角的高光点整个没了。再一查，好几个文档页和一个权限设置向导里，logo 干脆是一个渐变方块加字母 A，而那个向导恰好在教用户「去系统设置里找这个图标」。两处的代码注释都写着「和安装包图标一致」。我当时说的是：「里面的logo用真正的logo，不要自己发挥！ 这个做完统一的范式铁律！任何用到amefys logo 的地方都要统一」。</p>
+
+  <p>AI 很习惯「照着画一个差不多的」，还会顺手给副本写一句「与原件一致」。这句注释本身就说明副本已经产生了。现在 CLAUDE.md 里规定 logo 只有三种合法用法：直接引用文件；由脚本从主文件生成 data URI；用几何逐字段一致的组件。守卫测试会比对几何，CI 里每次都跑。10 月 10 日它就拦下了一处新的手画 logo。</p>
+
+  <p>同样的问题换个样子又出现过两次。一次是四个弹窗只抄了玻璃样式的第一行背景色，没抄模糊，液态玻璃皮肤的背景透明度只有 0.07，少了模糊就是一块几乎全透明的板子。另一次是游戏里的专有名词：8 个英雄用了玩家俗称，494 个中文装备名里错了 196 个，魔棒被写成了「魔瓶」。这批名字是 5 月份一次性写进去的。现在显示名一律取自 Valve 官方数据的快照，由同步脚本更新，守卫测试钉死。俄语界面刻意不翻英雄名，这条也写进了测试，防止以后有人「好心」加上音译。</p>
+
+  <p>我后来把这条规矩推广到所有有单一来源的东西：图标、色板、文案、接口契约。要么引用，要么由脚本生成并加守卫，不允许在第二个地方再写一份。</p>
+
+  <h2 id="s5"><span class="no">05</span>把规矩变成自动检查</h2>
+
+  <p>下面这些检查，每一条都能对应到一次具体的事故：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>检查</th><th>放在哪</th><th>起因</th></tr>
+    <tr><td>拒绝提交完整的翻译服务密钥</td><td>提交钩子</td><td>9 月 6 日，一个真实密钥进了单元测试</td></tr>
+    <tr><td>拒绝非项目身份的提交</td><td>提交钩子</td><td>项目用独立身份，有过一次用错身份、事后要重写历史</td></tr>
+    <tr><td>剥掉 AI 署名行</td><td>提交信息钩子</td><td>贡献者图上多出 claude</td></tr>
+    <tr><td>logo 几何比对，<code>--fix</code> 重新生成所有副本</td><td>守卫测试 + 脚本</td><td>logo 手抄走样两次</td></tr>
+    <tr><td>子进程的输入管道必须有错误处理</td><td>扫描式守卫测试</td><td>没人接的错误事件变成用户脸上的红叉弹框，出过两次</td></tr>
+    <tr><td>官网首页的说法要对得上客户端</td><td>官网测试</td><td>首页宣传了不存在的语言和主题，还有一排死链接</td></tr>
+    <tr><td>英雄名、装备名必须和官方快照一致</td><td>守卫测试 + 同步脚本</td><td>手写的名字错了 200 个左右</td></tr>
+    <tr><td>悬浮窗禁止使用转发鼠标事件的参数</td><td>守卫测试</td><td>它在 Windows 上装了全局鼠标钩子，主线程一卡用户的鼠标就卡</td></tr>
+    <tr><td>博客的 AI 味指标、页面登记、全站风格</td><td>博客技能里的脚本</td><td>博客被评 AI 味重</td></tr>
+  </table></div>
+
+  <p>这些检查里有两点要注意。</p>
+
+  <p>检查本身也会失效，要确认它真的在跑。前面说的提交钩子丢可执行位，就是检查自己没在运行、也没人发现。我在 Claude Code 里配的「禁止在 main 上提交」钩子也有自己的脾气：它在命令执行前读当前分支，所以 <code>git checkout -b x &amp;&amp; git commit</code> 写成一条命令照样被拦；它按文本匹配，heredoc 正文里出现那几个字也会被拦；它拦的是整条命令，前半截的 <code>git add</code> 也一起没执行。这些都要写进记忆，不然 AI 会以为是自己的命令写错了，反复重试。</p>
+
+  <p>拦截的方式要按后果来选。密钥和身份是硬拦，宁可提交失败；AI 署名那一行选择悄悄剥掉、不拒绝提交，因为它只是一行装饰文字，没必要为它挡住一次提交。正则只匹配 anthropic 和 claude，真人协作者的署名行不受影响。</p>
+
+  <h2 id="s6"><span class="no">06</span>记忆：写清「为什么」和「下次怎么做」</h2>
+
+  <p>Claude Code 的记忆是一个目录，每条记忆一个文件，另有一个索引文件在每次会话开始时整个读进来。到今天一共 94 条：项目进展 57 条、参考资料 21 条、我给的反馈 16 条。</p>
+
+  <p>每条记忆的正文固定两段：「为什么」写当时的事故或理由，「下次怎么做」写具体动作。光写一句「要核对线上部署」，AI 读到了也不知道该做到什么程度；写上「那次是兑换函数从没部署，三个激活码使用次数全是 0；回答之前先 curl 一次，看 404 还是 401」，它就知道这是一件要动手做的事。记忆之间用链接互相引用，比如影响评估那条链到补回归测试和核对线上部署，串起来就是一个完整的流程。</p>
+
+  <p>索引是最值钱的地方，因为只有它每次都在上下文里。我让 AI 在索引的一行描述里，直接把最容易复发的坑加粗写出来，比如「坑：在渲染进程崩溃的回调里同步 reload 会让主进程崩溃」。这样它不用打开正文也能先看到。</p>
+
+  <p>记忆的问题是只会越积越多。我的规则是项目类记忆在对应的工作上线后移到归档文件，但只归档时点性的事实，比如分支状态和待办清单；坑位、失败的接口约定、不显然的设计理由一律留下，因为它们会复发。这条规则来自一次教训：按标题判断「重复」或「已完成」，误删过真实的教训。这条规则到现在只执行过 2 次，索引已经有 95 行。</p>
+
+  <p>16 条反馈记忆按时间排下来，9 月中以前大多是「真实性和安全」：核对线上部署、影响评估、单一来源、不带 AI 署名；10 月以后大多是「内容和审美」：视频别闪、别像 PPT、博客去 AI 味。重要的记忆会继续升级：worktree 那条从记忆升到了 CLAUDE.md，资产单一来源从记忆升到 CLAUDE.md 再升到守卫测试，AI 署名从记忆升到 CLAUDE.md、配置开关，最后是提交钩子。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 482" role="img" aria-label="事故与规矩对照时间线：从 6 月的假推送到 10 月的鼠标钩子，14 次事故各自留下一条规矩或自动检查">
+<text x="16" y="20" font-size="12" text-anchor="start" style="fill:var(--d-text3)">日期</text>
+<text x="96" y="20" font-size="12" text-anchor="start" style="fill:var(--d-red)">事故</text>
+<text x="440" y="20" font-size="12" text-anchor="start" style="fill:var(--d-green)">留下的规矩或检查</text>
+<line x1="80" y1="34" x2="80" y2="454" style="stroke:var(--d-border)" stroke-width="1.5"/>
+<text x="16" y="46" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">06-14</text>
+<circle cx="80" cy="42" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="46" font-size="12" text-anchor="start" style="fill:var(--d-text)">提交钩子丢了可执行位，格式检查一直没在跑</text>
+<text x="440" y="46" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 恢复可执行位，检查重新生效</text>
+<text x="16" y="76" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">06-19</text>
+<circle cx="80" cy="72" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="76" font-size="12" text-anchor="start" style="fill:var(--d-text)">「已推送、测试通过」是假的，HEAD 没动</text>
+<text x="440" y="76" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 关键状态用独立命令核对，不信自述</text>
+<text x="16" y="106" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-05</text>
+<circle cx="80" cy="102" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="106" font-size="12" text-anchor="start" style="fill:var(--d-text)">兑换函数代码在仓库里，线上从没部署</text>
+<text x="440" y="106" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 回答「能不能用」前先跑线上探针</text>
+<text x="16" y="136" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-06</text>
+<circle cx="80" cy="132" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="136" font-size="12" text-anchor="start" style="fill:var(--d-text)">一个真实密钥进了单元测试</text>
+<text x="440" y="136" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 提交钩子拦完整密钥</text>
+<text x="16" y="166" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-11</text>
+<circle cx="80" cy="162" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="166" font-size="12" text-anchor="start" style="fill:var(--d-text)">服务端改动没有灰度，一错就是全量</text>
+<text x="440" y="166" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 改前五维影响评估</text>
+<text x="16" y="196" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-15</text>
+<circle cx="80" cy="192" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="196" font-size="12" text-anchor="start" style="fill:var(--d-text)">logo 照着抄了两份，两份都走样</text>
+<text x="440" y="196" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 单一来源铁律 + 品牌守卫</text>
+<text x="16" y="226" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-19</text>
+<circle cx="80" cy="222" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="226" font-size="12" text-anchor="start" style="fill:var(--d-text)">子进程的错误没人接，弹出红叉框</text>
+<text x="440" y="226" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 扫描式守卫测试</text>
+<text x="16" y="256" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-20</text>
+<circle cx="80" cy="252" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="256" font-size="12" text-anchor="start" style="fill:var(--d-text)">贡献者图上多出 claude，「已关闭」的开关不存在</text>
+<text x="440" y="256" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 真开关 + 提交钩子剥掉署名行</text>
+<text x="16" y="286" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-27</text>
+<circle cx="80" cy="282" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="286" font-size="12" text-anchor="start" style="fill:var(--d-text)">视频「闪动太厉害，有点刺眼」</text>
+<text x="440" y="286" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 视频技能里写死动效上限</text>
+<text x="16" y="316" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-03</text>
+<circle cx="80" cy="312" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="316" font-size="12" text-anchor="start" style="fill:var(--d-text)">多个会话在同一目录切分支</text>
+<text x="440" y="316" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 分支一律放 worktree</text>
+<text x="16" y="346" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-05</text>
+<circle cx="80" cy="342" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="346" font-size="12" text-anchor="start" style="fill:var(--d-text)">官网首页宣传了客户端没有的功能</text>
+<text x="440" y="346" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 首页说法守卫测试</text>
+<text x="16" y="376" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-08</text>
+<circle cx="80" cy="372" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="376" font-size="12" text-anchor="start" style="fill:var(--d-text)">真实账号 ID 被抄进测试夹具</text>
+<text x="440" y="376" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 仓库里一律用虚构值</text>
+<text x="16" y="406" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-15</text>
+<circle cx="80" cy="402" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="406" font-size="12" text-anchor="start" style="fill:var(--d-text)">博客 AI 味重；装备名错了 196 个</text>
+<text x="440" y="406" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 博客技能 + 扫描脚本；官方名快照 + 守卫</text>
+<text x="16" y="436" font-size="12" text-anchor="start" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-16</text>
+<circle cx="80" cy="432" r="4" style="fill:var(--d-red)"/>
+<text x="96" y="436" font-size="12" text-anchor="start" style="fill:var(--d-text)">悬浮窗的全局鼠标钩子让鼠标卡顿</text>
+<text x="440" y="436" font-size="12" text-anchor="start" style="fill:var(--d-green)">→ 守卫测试禁止 forward</text>
+<text x="16" y="470" font-size="12" text-anchor="start" style="fill:var(--d-text3)">来源：git 提交与记忆记录（2026 年），只列有日期和对应改动的事</text>
+</svg>
+    </div>
+    <figcaption>图 3　事故和规矩一一对应：9 月以后几乎每周都有一条新规矩</figcaption>
+  </figure>
+
+  <h2 id="s7"><span class="no">07</span>多个会话并行：一个任务一个 worktree</h2>
+
+  <p>我经常同时开好几个 Claude Code 会话，一个修 bug、一个做视频、一个写文档。它们一开始都在同一个目录里，某个会话一切分支，别的会话正在改的文件、没提交的改动、正在跑的开发服务都跟着变。10 月 3 日我定下了规矩：「后续默认功能分支都走work tree模式创建和拉取，不要在同一个当前目录下进行，不然我有多个任务同时做的时候就会出现问题。」</p>
+
+  <p>现在每个任务在 <code>.claude/worktrees/&lt;主题&gt;</code> 下有自己的 worktree。任何 worktree 都不检出 main，合并用 <code>git fetch . 分支:main</code>，只允许快进；删分支先用 <code>git merge-base --is-ancestor</code> 确认已经合进 main 再强删，因为 <code>git branch -d</code> 是按当前目录的 HEAD 判断「已合并」的，主目录不在 main 上时会误报。新 worktree 里没有的 <code>.env</code> 用软链接指回主目录那份，不复制，复制了就会分叉。</p>
+
+  <p>10 月 5 日又踩了一次坑。Claude Code 每条命令执行完，工作目录会被拉回主目录，上一条 <code>cd</code> 到 worktree 不代表下一条还在那里。那次 AI 用相对路径跑脚本改文件，3 个文件改进了主目录里另一个会话的分支。从那以后，每条命令都以 <code>cd &lt;worktree 的绝对路径&gt; &amp;&amp;</code> 开头，或者全部用绝对路径。</p>
+
+  <h2 id="s8"><span class="no">08</span>改之前先评估，改完补测试</h2>
+
+  <p>项目有真实用户在用，服务端的数据库函数和边缘函数没有灰度，一出错就是所有人一起出错。9 月 11 日起，改动之前要先做影响评估：先证明不引入回归、不影响真实用户，要回答谁会读到被改的东西、旧行为是不是逐字等价、线上有没有依赖旧行为的数据；再从改动成本、影响范围、性能、真实用户、回滚和部署代价五个方面评估。整段替换已有函数时，要用 diff 证明只加不改。后来我下指令时直接用这套说法，比如「可以，出五维影响评估然后开始实施」。</p>
+
+  <p>修 bug 必须补回归测试，最好先写一个能复现 bug 的失败测试，再让修复使它通过。确实没法单测覆盖的，要写清楚为什么，再用集成测试或测试环境复测兜底。现在很多测试的注释里直接写着事故日期和用户的原话，比如某个 Sentry 事件编号、某天用户报的「收起按钮没反应」。测试用例数从 9 月 11 日的 1,599 个涨到了 10 月中的约 3,190 个。</p>
+
+  <p>测试本身也会闯祸。9 月 10 日我们把「把游戏切到前台」的函数接到了一个高频调用的位置，而 macOS 上 AppleScript 的 activate 在应用没运行时会直接启动它，结果打完字就把 Dota 和 Steam 拉起来了。发现的方式更离谱：跑单元测试时，开发机上的 Steam 真的被启动了。之后规定，主进程里任何调用系统命令的代码，在测试里都必须 mock。</p>
+
+  <p>还有一条规矩：调研说的和实测的要分开写。术语翻译的占位符最后定成 <code>{{n}}</code>，是因为探针实测 12 次里保住了 12 次，另一种写法 12 次全被翻译服务当成文字翻掉了。Windows 的 OCR 组件安装，成功返回的样子和「组件名写错、什么都没装」一模一样，必须再查一次状态才算数。</p>
+
+  <h2 id="s9"><span class="no">09</span>内容类的活：AI 味、闪、像 PPT</h2>
+
+  <p>除了代码，我也让 AI 写博客、做开发日记视频和周报。这一块的规矩复发得最多。</p>
+
+  <p>10 月 15 日我让 AI 整体检查第二篇博客有没有 AI 味。它参考了少数派上一篇用几百篇稿子对照实测的文章，结论是现在 Claude 写中文的 AI 味主要在格式：先来一句「有以下几种情况」再接一串列表，到处加粗，段落开头直接下评论、不说评论的是什么。改写后第二篇的加粗从 42 处降到 5 处，列表项从 29 个降到 0。这些指标做成了扫描脚本，写进博客技能，你正在读的这篇也过了这道检查。改稿时还有一条规矩叫信息守恒：事实一条不增、一条不减，「可能」不能改成「会」，改完要对照原稿逐条核对。</p>
+
+  <p>视频的问题更顽固。动效太闪，我说过三次：「页面的闪动太厉害了，有点刺眼。」「把闪屏的效果给我去掉！」「开始的时候英雄背景墙太闪了」。动画像幻灯片，我也说过三次，最近一次是「这个视频效果太差了，跟个PPT没啥区别，完全够不上科普视频动画的水准」。AI 理解「抓眼球」时倾向于快速砸入、震屏和扫光，理解「动画」时倾向于方框加标签加淡入。现在视频技能里写死了动效的上限，比如切换至少 0.5 秒、不做全屏闪白，记忆里写着「每一站都要有东西在干活」。即便这样，同一类问题还是各复发了三次。审美类的规矩写下来能减少问题，没法杜绝，最后还是得我自己看。</p>
+
+  <p>公开内容还有两条硬规矩。一是脱敏：视频和配套的会话纪要里不出现表名、函数名、内部域名、配置和命令，「文字说清楚具体的事情即可」。二是仓库里不放真实账号：10 月 8 日发现，AI 拿我截图里的游戏账号 ID 去探接口，又把探到的真实比赛数据抄进了测试夹具，后来全部换成了虚构值。现在的规矩是可以用真实账号探接口，但结果只留在临时目录，写进仓库的一律是编的。发到短视频平台的内容另有一套合规检查，也做成了周报技能里的自动扫描。</p>
+
+  <h2 id="s10"><span class="no">10</span>分工：哪些交给 AI，哪些自己拍板</h2>
+
+  <p>10 月 6 日我放开了一项：「修复好的直接合并main分支推上线」。修复类的改动，回归测试、本地全量检查、上线后的实测都通过了，AI 可以直接快进合并推送，不用再问我。放开之前，回归测试、自检和线上核对已经是每次修复的固定步骤；边界也写得很清楚：发新版本、加新功能、删除或者破坏性的操作，仍然要我确认。</p>
+
+  <p>有些事我从来不交出去。做什么、不做什么，合规红线在哪，什么时候发版，审美上过不过关，这些由我来定。9 月 10 日那次，测试版发出十几分钟后就转了正式版，一次真机验证都没做，AI 提示过风险，是我决定照发的。博客和视频里涉及个人感受的部分只用我自己说过的话，AI 不能代编，连「我当时以为」这种句子都不行。</p>
+
+  <h2 id="s11"><span class="no">11</span>几点心得</h2>
+
+  <p>规矩要从事故里长出来。我没有一开始就写一份完整的规范，每条规矩都对应一次真实的事故，并且写明了那次发生了什么。这样的规矩 AI 读得懂，我自己过几个月回头看也知道它为什么存在、什么时候可以删。</p>
+
+  <p>验证「起作用」，不验证「存在」。代码在仓库里、配置写在文档里、开关画在界面上、检查装在钩子里，都不代表它们在工作。要用独立的方式看到结果：线上请求、命令输出、账单、字节数。</p>
+
+  <p>副本一定会走样。凡是有单一来源的东西，只允许引用或者用脚本生成，再加一道守卫，别相信「与原件一致」这类注释。</p>
+
+  <p>越重要的规矩越要往下沉。写在指令里靠 AI 记得，写在记忆里靠 AI 翻到，做成钩子和测试就不靠任何人记得。我现在的判断标准是：一条规矩如果违反一次的代价很大，就不能只停留在文字里。</p>
+
+  <p>放权要分级，边界要写下来。修复可以直接上线，是建立在回归测试、自检和线上核对都已经成了习惯之后；发版、新功能和不可逆的操作仍由人来按按钮。审美和感受这类事，AI 可以出稿，拍板的只能是人。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>也在让 AI 写生产代码？</strong>如果你在给自己或团队搭 AI 辅助开发的规矩、钩子和工作流，碰到了「它说做完了其实没做完」这类问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/electron-overlay-pitfalls.html">上一篇：用 Electron 做游戏悬浮窗</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>

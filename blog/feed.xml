@@ -6,7 +6,28 @@
   <atom:link href="https://amefys.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>一个人借助 AI 把 AMEFYS 从零做到上线：踩过的坑、做过的决定和真实的数据。</description>
   <language>zh-cn</language>
-  <lastBuildDate>Fri, 16 Oct 2026 14:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 17 Oct 2026 12:00:00 GMT</lastBuildDate>
+  <item>
+    <title>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故</title>
+    <link>https://amefys.com/blog/ai-assisted-dev-rules.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/ai-assisted-dev-rules.html</guid>
+    <pubDate>Sat, 17 Oct 2026 12:00:00 GMT</pubDate>
+    <description>假推送、没部署的函数、走样的 logo、关不掉的开关：每条规矩背后的事故，以及怎么把规矩变成自动检查。</description>
+  </item>
+  <item>
+    <title>用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃</title>
+    <link>https://amefys.com/blog/electron-overlay-pitfalls.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/electron-overlay-pitfalls.html</guid>
+    <pubDate>Sat, 17 Oct 2026 12:00:00 GMT</pubDate>
+    <description>修了五次的黑角、一拿焦点游戏就静音、一个布尔参数背后的全局鼠标钩子、自愈代码把应用带崩：Electron 游戏悬浮窗踩坑汇总。</description>
+  </item>
+  <item>
+    <title>国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测</title>
+    <link>https://amefys.com/blog/china-reachability.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/china-reachability.html</guid>
+    <pubDate>Sat, 17 Oct 2026 12:00:00 GMT</pubDate>
+    <description>本机 fake-IP 和机房节点都测不出国内阻断：用家宽节点加对照组拨测，秒级重置是阻断、超时多半是拥塞。</description>
+  </item>
   <item>
     <title>Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑</title>
     <link>https://amefys.com/blog/cloudflare-o2o-cache.html</link>

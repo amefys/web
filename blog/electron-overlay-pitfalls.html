@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃 — AMEFYS 技术博客</title>
+<meta name="description" content="AMEFYS 用 Electron 做盖在全屏游戏上的透明置顶悬浮窗踩过的坑：setOpacity 让透明窗口四角变黑、抢焦点导致游戏静音、forward:true 在 Windows 上装全局鼠标钩子、render-process-gone 里同步 reload 让主进程崩溃（#51900）、GPU 崩溃降级、原生模块 ABI、同步读盘与内存，并标明哪些在 Windows 实机验证过。">
+<link rel="canonical" href="https://amefys.com/blog/electron-overlay-pitfalls.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃">
+<meta property="og:description" content="修了五次的黑角、一拿焦点游戏就静音、一个布尔参数背后的全局鼠标钩子、自愈代码把应用带崩：Electron 游戏悬浮窗踩坑汇总。">
+<meta property="og:url" content="https://amefys.com/blog/electron-overlay-pitfalls.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-10-17">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/electron-overlay-pitfalls.html","keywords":"Electron, 透明窗口, 悬浮窗, setIgnoreMouseEvents, render-process-gone, Windows, 桌面应用"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="/#pillars">五大特性</a>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/about.html" role="menuitem">关于</a>
+            <a href="/donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">Electron</span><span class="tag">Windows</span><span class="tag">macOS</span><span class="tag">桌面应用</span><span class="tag">踩坑</span></div>
+    <h1>用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃</h1>
+    <p class="sub">AMEFYS 的桌面端是 Electron 写的，核心是一个盖在全屏游戏上的透明置顶悬浮窗。这类窗口把 Electron 在 Windows 上的很多角落都碰了一遍：修了五次才好的黑角，一拿焦点游戏就静音，一个布尔参数背后是全局鼠标钩子，自动恢复的代码反而把整个应用带崩。这篇按类别整理开发以来踩过的坑，每条写清根因、修法，以及有没有在 Windows 实机上验证过。</p>
+    <div class="meta"><span>2026-10-17</span><span>阅读约 19 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>Windows 上对透明窗口调 <code>setOpacity()</code>，会把逐像素透明换成整窗透明，CSS 圆角外的四个角全变黑。前四次修复都在 CSS 里打转，第五次才找到这个根因。</li>
+      <li>游戏悬浮窗的第一原则是别抢前台：DOTA 2 失去前台就静音。「鼠标能点」和「能获得焦点」是两回事，要分开设置。</li>
+      <li><code>setIgnoreMouseEvents(true, { forward: true })</code> 在 Windows 上会装一个全局低级鼠标钩子，主线程一卡，整台电脑的鼠标跟着卡。我们改成每 50 毫秒轮询光标位置。</li>
+      <li>Electron 41.8.0 以前，在 <code>render-process-gone</code> 回调里同步 <code>reload()</code> 会让主进程崩溃（上游 #51900）。推迟一个 task 再 reload，崩溃从此归零。</li>
+      <li>空闲时整个应用约 490 MB，GPU 进程占 164 MB。主线程上的同步读盘（<code>electron-store.get()</code> 每次读整个文件）比想象中常见，出现过两次。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">先交代背景</a></li>
+      <li><a href="#s2">透明窗口：修了五次的黑角</a></li>
+      <li><a href="#s3">别抢前台：焦点、置顶和任务栏</a></li>
+      <li><a href="#s4">一个布尔参数背后的全局鼠标钩子</a></li>
+      <li><a href="#s5">崩溃与恢复：自愈代码也会闯祸</a></li>
+      <li><a href="#s6">坐标：菜单栏和屏幕缩放</a></li>
+      <li><a href="#s7">原生模块与打包</a></li>
+      <li><a href="#s8">主线程上的同步读盘，和 490 MB 内存</a></li>
+      <li><a href="#s9">和操作系统打交道</a></li>
+      <li><a href="#s10">自动更新与签名</a></li>
+      <li><a href="#s11">哪些在 Windows 实机上验证过</a></li>
+      <li><a href="#s12">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>先交代背景</h2>
+
+  <p><a href="/">AMEFYS</a> 是一款 DOTA 2 桌面工具，支持 Windows 和 macOS，当前用的是 Electron 41.10.7。它有四类窗口：主窗口（设置、战绩、BP 大面板），对局中盖在游戏上的悬浮窗，悬浮窗隐藏时单独弹出的提醒小窗，以及一个看不见的语音窗口。整体架构写在<a href="/blog/amefys-architecture.html">另一篇</a>里。</p>
+
+  <p>麻烦几乎都出在悬浮窗上。它要透明、有圆角、永远置顶、盖在全屏游戏上；平时让鼠标穿透到游戏，需要时又要能点、能打字；而且绝不能抢走游戏的前台。下面的坑大部分只在 Windows 上出现，macOS 上一切正常，这也是它们难查的原因之一：开发机是 Mac。</p>
+
+  <h2 id="s2"><span class="no">02</span>透明窗口：修了五次的黑角</h2>
+
+  <p>6 月初，Windows 上的悬浮窗四个角是不透明的黑色：CSS 画了圆角，圆角外、窗口矩形内的那四块本该透明，实际是黑的。macOS 上没有这个问题。前四次修复都在 CSS 和窗口参数上打转，第五次才找到根因。</p>
+
+  <p>Electron 的 <code>transparent: true</code> 窗口在 Windows 上靠逐像素 alpha 合成，每个像素自己决定透明度。<code>BrowserWindow.setOpacity()</code> 走的是另一套机制，给整个窗口一个统一的透明度。<strong>两种分层窗口的模式互相排斥，一旦调用了 <code>setOpacity()</code>，所有 CSS 里透明的像素都会被画成黑色。</strong>我们的悬浮窗有一个「透明度」设置，默认值 0.8 一定会被保存下来，所以每次启动都会调一次 <code>setOpacity()</code>，透明效果每次开机都被毁掉。</p>
+
+  <p>修法是在 Windows 上完全不碰原生的透明度，改用元素级的 CSS <code>opacity</code>，用一个 CSS 变量控制。后来加的截图闪框窗口、悬浮窗的锁定暗化，也都只用 CSS。这条在文档里写成了红线：永远不要在 Windows 上对透明窗口调 <code>setOpacity()</code>。目前它还没有自动化的守卫测试，只有文档和代码注释。</p>
+
+  <p>修完这个，又冒出来两个相关的问题。一是透明窗口不能设 <code>backgroundColor</code>，哪怕写的是完全透明的 <code>#00000000</code>，在 Windows 上也可能被当成不透明；Aero Snap 的矩形边框还会画到 CSS 圆角上，所以 Windows 上要去掉 <code>backgroundColor</code> 并设 <code>thickFrame: false</code>。这条社区里常说，确实有影响，但不是我们的主因。二是皮肤：几个装饰性皮肤的 CSS 选择器优先级比全局的透明规则高，又是后注入的，不透明的背景铺满了整个窗口；悬浮窗根节点铺满窗口时，外阴影只能画进四个角里。最后悬浮窗的透明规则全部加了 <code>!important</code>，皮肤在悬浮窗里只许用内阴影。</p>
+
+  <div class="callout tip"><span class="t">主窗口是直角，先找个对照组</span>验收时有台 Windows 机器上主窗口是直角。主窗口的圆角是 Windows 11 的窗口管理器在系统层裁出来的，那台机器上资源管理器和 Edge 也是直角，说明是系统的圆角整体失效了：可能是 Windows 10、显卡驱动没装、远程桌面、没有 3D 加速的虚拟机，或者装了改任务栏的工具。这种情况不是应用的 bug。我们的主窗口跟随系统，没有为了圆角把主窗口也做成透明的，那样会丢掉贴边分屏、原生阴影和最大化行为。</div>
+
+  <h2 id="s3"><span class="no">03</span>别抢前台：焦点、置顶和任务栏</h2>
+
+  <p>9 月有用户在对局里反馈：鼠标点到悬浮窗，游戏声音没了。DOTA 2 失去前台就会静音。我们的悬浮窗虽然创建时设了 <code>focusable: false</code>，但显示它的函数里又调了 <code>setFocusable(true)</code> 和 <code>focus()</code>，一显示就把前台抢走了。</p>
+
+  <p>这里要分清三件事。能不能点由 <code>setIgnoreMouseEvents</code> 决定；能不能获得焦点由 <code>focusable</code> 决定；显示时抢不抢前台由用 <code>show()</code> 还是 <code>showInactive()</code> 决定。现在悬浮窗永远不可聚焦，显示一律 <code>showInactive()</code>。只有在聊天框里打字时临时借焦点，打完归还，并且要显式把前台还给游戏：Windows 不会自动激活上一个窗口，不还的话前台是空的，声音照样没有。</p>
+
+  <p>不可聚焦的窗口里放输入框，还有一个坑。BP 面板的英雄搜索框原本在 <code>onFocus</code> 时去请求窗口焦点，可不可聚焦的窗口里 <code>onFocus</code> 永远不会触发，于是打不了字。借焦点的时机要放在 <code>pointerdown</code>，等 IPC 往返回来，再补一次 <code>.focus()</code>。</p>
+
+  <p>无焦点窗口里，键盘状态也不可信。有用户反馈：「我刚开始打开的时候，Ctrl加左键右键都没有禁用成功，后来又试了几次才成功」。我们的分析是 Chromium 读修饰键用的是线程级的按键状态，而键盘消息根本不会发给无焦点窗口，所以 <code>MouseEvent.ctrlKey</code> 可能是旧值。现在 Ctrl 的状态由主进程通过自己写的原生模块向系统查询物理按键。</p>
+
+  <p>置顶层级和任务栏状态在 Windows 上也会悄悄丢失。全屏游戏切换、<code>setFocusable()</code> 切换之后，悬浮窗可能被埋在游戏下面，或者出现在任务栏里，用户在任务栏右键一关，窗口就被销毁了。之后所有打开它的入口都只是判断一下对象是否存在，于是静默失效，只能重启应用。现在的做法有两条：每次显示都重新设一遍 <code>setAlwaysOnTop(true, 'screen-saver')</code>、<code>setSkipTaskbar(true)</code> 和 <code>moveTop()</code>；所有入口都走同一个「确保窗口存在，没有就重建」的函数，关闭事件改成隐藏。至于「新开一局后悬浮窗不显示」到底是渲染进程崩了还是全屏切换丢了层级，到现在也没在 Windows 日志里实锤。</p>
+
+  <h2 id="s4"><span class="no">04</span>一个布尔参数背后的全局鼠标钩子</h2>
+
+  <p>10 月 16 日有用户反馈：「我的电脑开启这个软件会隔几秒卡一下，在游戏里鼠标会卡住不动一帧，然后在下一帧恢复操作」。</p>
+
+  <p>悬浮窗平时要让鼠标穿透到游戏，同时又要知道鼠标是不是移到了几个可以点的按钮上。Electron 给的办法是 <code>setIgnoreMouseEvents(true, { forward: true })</code>：穿透，但把鼠标移动事件转发给页面。我们从 5 月起就这么用，悬浮窗一创建就开着，隐藏时也不关；10 月加的提醒小窗和锁定功能也靠它。</p>
+
+  <p>问题在于它在 Windows 上的实现。我们对照了 Electron 41 的源码：<strong>只要任何一个窗口开了 forward，主进程的 UI 线程上就会装一个 <code>WH_MOUSE_LL</code> 低级鼠标钩子。</strong>从此系统里每一次鼠标移动，都要排队等这个线程处理完才能继续。主线程被垃圾回收或者一次同步写盘占住几十毫秒，整台电脑的光标就冻住几十毫秒，游戏里也一样。macOS 上 forward 不装全局钩子，所以只在 Windows 上出现。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 300" role="img" aria-label="forward 参数在 Windows 上装全局鼠标钩子，系统每次鼠标移动都要等主线程；改为渲染进程上报可点区域、主进程每 50 毫秒轮询光标位置">
+        <defs><marker id="e1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--d-line)"/></marker></defs>
+        <text x="16" y="24" font-size="13" font-weight="600" style="fill:var(--d-text)">改之前：forward: true</text>
+        <g font-size="12">
+          <rect x="16" y="40" width="150" height="54" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="91" y="63" text-anchor="middle" style="fill:var(--d-text)">系统里每一次</text><text x="91" y="81" text-anchor="middle" style="fill:var(--d-text)">鼠标移动</text>
+          <rect x="196" y="40" width="150" height="54" rx="10" style="fill:var(--d-box);stroke:var(--d-red)"/>
+          <text x="271" y="63" text-anchor="middle" style="fill:var(--d-red)">全局低级鼠标钩子</text><text x="271" y="81" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">WH_MOUSE_LL</text>
+          <rect x="376" y="40" width="160" height="54" rx="10" style="fill:var(--d-box);stroke:var(--d-red)"/>
+          <text x="456" y="63" text-anchor="middle" style="fill:var(--d-text)">Electron 主线程</text><text x="456" y="81" text-anchor="middle" style="fill:var(--d-text2)">GC、同步写盘时占住</text>
+          <rect x="566" y="40" width="138" height="54" rx="10" style="fill:var(--d-red-bg);stroke:var(--d-red)"/>
+          <text x="635" y="63" text-anchor="middle" style="fill:var(--d-red)">整台电脑的光标</text><text x="635" y="81" text-anchor="middle" style="fill:var(--d-red)">等它处理完</text>
+        </g>
+        <line x1="168" y1="67" x2="192" y2="67" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e1)"/>
+        <line x1="348" y1="67" x2="372" y2="67" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e1)"/>
+        <line x1="538" y1="67" x2="562" y2="67" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e1)"/>
+        <line x1="16" y1="122" x2="704" y2="122" style="stroke:var(--d-dash)"/>
+        <text x="16" y="152" font-size="13" font-weight="600" style="fill:var(--d-text)">改之后：不用 forward，主进程自己看光标</text>
+        <g font-size="12">
+          <rect x="16" y="168" width="196" height="64" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="114" y="192" text-anchor="middle" style="fill:var(--d-text)">渲染进程上报「洞」</text><text x="114" y="212" text-anchor="middle" style="fill:var(--d-text2)">可点区域的位置，最多 8 个</text>
+          <rect x="250" y="168" width="220" height="64" rx="10" style="fill:var(--d-box);stroke:var(--d-green)"/>
+          <text x="360" y="192" text-anchor="middle" style="fill:var(--d-text)">主进程每 50 毫秒读一次光标</text><text x="360" y="212" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">screen.getCursorScreenPoint()</text>
+          <rect x="508" y="168" width="196" height="64" rx="10" style="fill:var(--d-box);stroke:var(--d-green)"/>
+          <text x="606" y="192" text-anchor="middle" style="fill:var(--d-text)">光标在洞里才可点</text><text x="606" y="212" text-anchor="middle" style="fill:var(--d-text2)">其余时间照常穿透</text>
+        </g>
+        <line x1="214" y1="200" x2="246" y2="200" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e1)"/>
+        <line x1="472" y1="200" x2="504" y2="200" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e1)"/>
+        <text x="16" y="262" font-size="12" style="fill:var(--d-text2)">轮询只在「锁定且可见」或「提醒显示中」运行；洞的四周留 4 像素余量</text>
+        <text x="16" y="284" font-size="12" style="fill:var(--d-text3)">代价：锁定后悬浮窗里的悬停提示不再出现，锁按钮最多晚约 50 毫秒变得可点</text>
+      </svg>
+    </div>
+    <figcaption>图 1　forward 参数把系统的每一次鼠标移动都挂到了 Electron 主线程上；改成轮询以后，主线程卡住只影响我们自己</figcaption>
+  </figure>
+
+  <p>新做法完全不用 forward。渲染进程把可点区域的位置报给主进程，我们叫它「洞」，窗口尺寸变化、内容变化、动画结束时都重报一次；主进程每 50 毫秒读一次光标位置，在洞里就让窗口可点，不在就继续穿透。轮询只在锁定且可见、或者提醒正在显示时才跑。守卫测试会扫描主进程的所有源码，只要出现带 forward 的 <code>setIgnoreMouseEvents</code> 调用就失败。</p>
+
+  <p>改的过程中又踩到一个坑：新的轮询每次要读两次锁定状态，而 <code>electron-store</code> 的 <code>get()</code> 每次都会同步读整个配置文件再解析，锁定期间每秒读盘 40 次，这本身就会卡主线程。最后改成内存缓存，配置变化时再失效。这个修复 10 月 16 日随 0.33.3 测试版发出，反馈的用户已经装上了，效果还在等回复。</p>
+
+  <h2 id="s5"><span class="no">05</span>崩溃与恢复：自愈代码也会闯祸</h2>
+
+  <p>为了解决「悬浮窗突然什么都不显示」，6 月我们加了一段自愈逻辑：悬浮窗的渲染进程挂了，就在 <code>render-process-gone</code> 回调里自动 <code>reload()</code>，每分钟最多 3 次，防止陷入崩溃循环。透明窗口的渲染进程死掉时什么都不画，进程还在，窗口完全隐形，用户只会觉得悬浮窗消失了。</p>
+
+  <p>从 0.25.0 到 0.29.2，Sentry 上一直有一个原生崩溃，大约每天一次，发生在启动后 5 分钟到十几小时不等，Windows 上报的是 <code>EXCEPTION_BREAKPOINT</code>。10 月 3 日查清楚了：崩溃就出在这段自愈代码里。Electron 41.8.0 以前，Chromium 还在遍历「进程死亡」的观察者时，Electron 就把 <code>render-process-gone</code> 发了出来；这时候同步调 <code>reload()</code>，会重入进程创建流程，撞上 Chromium 里一个断言，整个浏览器进程崩溃。上游在 <a href="https://github.com/electron/electron/pull/51900">electron/electron#51900</a> 修了这个问题，回补到 41.x 的首个版本是 41.8.0。我们的依赖写的是 <code>~41.5.1</code>，只会在 41.5.x 里升级，所以一直拿不到这个修复。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 230" role="img" aria-label="渲染进程崩溃后：同步 reload 会在 Chromium 遍历观察者时重入导致主进程崩溃；推迟一个 task 再 reload 则安全恢复">
+        <defs><marker id="e2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--d-line)"/></marker></defs>
+        <g font-size="12">
+          <rect x="16" y="20" width="150" height="50" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="91" y="41" text-anchor="middle" style="fill:var(--d-text)">悬浮窗渲染进程</text><text x="91" y="59" text-anchor="middle" style="fill:var(--d-text2)">意外退出</text>
+          <rect x="196" y="20" width="200" height="50" rx="10" style="fill:var(--d-box);stroke:var(--d-border)"/>
+          <text x="296" y="41" text-anchor="middle" style="fill:var(--d-text)">Chromium 正在遍历</text><text x="296" y="59" text-anchor="middle" style="fill:var(--d-text)">「进程死亡」的观察者</text>
+          <text x="426" y="49" style="fill:var(--d-text2)">途中发出 render-process-gone</text>
+        </g>
+        <line x1="168" y1="45" x2="192" y2="45" style="stroke:var(--d-line)" stroke-width="2" marker-end="url(#e2)"/>
+        <text x="16" y="104" font-size="13" font-weight="600" style="fill:var(--d-red)">回调里同步 reload()</text>
+        <g font-size="12">
+          <rect x="196" y="86" width="200" height="40" rx="10" style="fill:var(--d-box);stroke:var(--d-red)"/>
+          <text x="296" y="111" text-anchor="middle" style="fill:var(--d-text)">重入进程创建流程</text>
+          <rect x="426" y="86" width="278" height="40" rx="10" style="fill:var(--d-red-bg);stroke:var(--d-red)"/>
+          <text x="565" y="111" text-anchor="middle" style="fill:var(--d-red)">断言失败，整个应用崩溃</text>
+        </g>
+        <line x1="398" y1="106" x2="422" y2="106" style="stroke:var(--d-red)" stroke-width="2" marker-end="url(#e2)"/>
+        <text x="16" y="164" font-size="13" font-weight="600" style="fill:var(--d-green)">推迟一个 task 再 reload()</text>
+        <g font-size="12">
+          <rect x="196" y="146" width="200" height="40" rx="10" style="fill:var(--d-box);stroke:var(--d-green)"/>
+          <text x="296" y="171" text-anchor="middle" style="fill:var(--d-text)">观察者遍历先结束</text>
+          <rect x="426" y="146" width="278" height="40" rx="10" style="fill:var(--d-box);stroke:var(--d-green)"/>
+          <text x="565" y="171" text-anchor="middle" style="fill:var(--d-green)">reload 成功，悬浮窗闪一下就恢复</text>
+        </g>
+        <line x1="398" y1="166" x2="422" y2="166" style="stroke:var(--d-green)" stroke-width="2" marker-end="url(#e2)"/>
+        <text x="16" y="218" font-size="12" style="fill:var(--d-text3)">Electron 41.8.0 起上游已修复（#51900）；我们同时做了推迟和升级</text>
+      </svg>
+    </div>
+    <figcaption>图 2　同一个 reload，同步调用会把整个应用带崩，推迟一个 task 就是正常恢复</figcaption>
+  </figure>
+
+  <p>修法有两处：reload 用 <code>setTimeout(..., 0)</code> 推迟一个 task，「窗口是否已销毁」的检查也一起挪进去；Electron 升到 41.10.7，同一个大版本，原生模块不用重编。我们写了一个独立的复现脚本：41.5.1 上同步 reload，第一次渲染进程崩溃就以退出码 133 退出；推迟以后不崩；41.10.7 上同步调用也不崩。在真实应用里用调试端口连续杀了 3 次悬浮窗的渲染进程，都自动恢复了，第 4 次触发了每分钟 3 次的上限，应用依然活着。0.29.4 发出后，这个崩溃在 Sentry 上归零，10 月 16 日复查，30 天内的 23 次全部来自 0.29.3 及更早的版本。渲染进程本身为什么会挂，到现在还没有解释。</p>
+
+  <p>另一个崩溃修不了根因，只能让下次启动更保守。Sentry 上有一台 Windows 11 机器，装的是 0.30.1，每次启动都崩，7 分钟崩了 11 次。这台机器的 GPU 进程为什么起不来，到现在也不知道。Chromium 在 GPU 进程崩溃后会换更保守的模式重启它，每种模式都崩的话，就主动结束整个浏览器进程。我们加了一个跨启动的降级守卫：GPU 进程崩溃时同步写一个标记，下次启动发现标记就升一级，第一级关掉硬件加速和 GPU 沙箱，第二级让 GPU 跑在主进程里；活过 20 秒或者正常退出就清掉标记。这些开关必须在 <code>ready</code> 之前设置，之后就改不了了。</p>
+
+  <p>这里有个反直觉的地方：<code>child-process-gone</code> 是 Chromium 异步投递的事件，在最后那次致命的回退之前，它来不及触发。所以标记不能等「最后一次」崩溃时再写，必须在前面每一次 GPU 崩溃时同步写盘。守卫本身也绝对不能抛错，一个会把启动搞挂的守卫比没有守卫更糟。0.31.0 上线后，3 台不同的机器各崩过一次，都没有再出现连续崩溃，和设计预期一致：每台机器第一次崩溃躲不掉，之后自动降级。</p>
+
+  <p>还有一类「崩溃」其实只是噪音。升级安装时，有用户看到安装器上方弹出一个错误框，内容是「Unexpected Error: the worker has exited」，看起来像升级失败了，其实没有。这是四件事连起来的结果：日志库在 worker 线程里写日志；安装器让应用退出时 worker 先退了；退出过程中再写一行日志，撞上已经关闭的流，流发出了 <code>error</code> 事件；没人监听这个事件，Node 把它升级成未捕获异常，而我们的主进程把未捕获异常显示成了错误弹框。截至 10 月 3 日，Sentry 30 天里一共 83 次上报，这个错误占了 47 次。修法是日志库自己接住这个错误，应用进入退出流程后不再弹框，所有子进程的输入管道都必须挂错误处理，守卫测试会扫描主进程源码检查这一点。每加一个子进程、流或者 socket，都先问一句：它的 <code>error</code> 谁来接。</p>
+
+  <h2 id="s6"><span class="no">06</span>坐标：菜单栏和屏幕缩放</h2>
+
+  <p>macOS 上，OCR 手动框选一直提示「未识别到文字」。原因是普通层级的窗口放到屏幕原点时，会被系统压到菜单栏下面，往下挪约 30 个逻辑像素；页面却假设窗口原点就是屏幕原点，框选坐标整体偏了约 60 个物理像素，裁剪完全错过了目标。最后靠一个最小的验证脚本试出了能用的顺序：创建窗口时不带位置、打开 <code>enableLargerThanScreen</code>，先设成 screen-saver 级别置顶，再设置边界。页面这边再用 <code>window.screenX/Y</code> 做一次偏移修正兜底。Electron 的行为拿不准时，写一个几十行的脚本直接跑，比读文档快。</p>
+
+  <p>窗口位置恢复也有坑。保存下来的悬浮窗位置描述的是当时的屏幕布局，原样恢复可能落在屏幕外，连唯一能拖回来的标题栏都在外面。这件事不需要换显示器就能触发：悬浮窗默认高度 660，一块 1080p 的屏幕开 150% 缩放，工作区高度大约 680 再减去任务栏，默认值本身就放不下。拖动时的边界限制原来用的是 <code>screen.getPrimaryDisplay()</code>，窗口拖不到第二块屏幕上，也没考虑任务栏停靠在左边或上边的情况。现在统一按窗口实际所在显示器（<code>screen.getDisplayMatching</code>）的工作区来限制，先限尺寸，再定位置。</p>
+
+  <h2 id="s7"><span class="no">07</span>原生模块与打包</h2>
+
+  <p>better-sqlite3 这类原生模块，给 Node 编译的和给 Electron 编译的互不通用。<code>npm install</code> 之后跑单元测试会报 <code>ERR_DLOPEN_FAILED</code>，测完再启动开发版又会因为版本不匹配崩掉。现在的做法写成了一张表：安装后自动按 Electron 编译；跑测试前自动切到 Node 版本，用预编译包只要几秒；想从测试回到开发版，用一个专门的命令切回 Electron 版本，从源码编译要半分钟到一分钟。一句话记住：测完想跑开发版，先切回去。多个 git worktree 共用一份 <code>node_modules</code> 时，在一个 worktree 里跑测试，会把共用的那份切成 Node 版本。</p>
+
+  <p>macOS 的通用包（Intel 和 Apple 芯片合一）打包时，<code>@electron/universal</code> 会拒绝两个架构里字节完全相同的原生二进制文件。原因是 <code>@electron/rebuild</code> 把每次的编译产物缓存在包目录下的 <code>bin/</code> 里，两次架构的打包之间不清理，于是两个原生模块轮流中招。最后按目录的形状整个排除 <code>bin/</code> 缓存，不再一个个点名。</p>
+
+  <p>测试也会「伸手出去」。键盘模拟库在 Linux CI 上一加载就因为没有图形环境崩溃，只能在测试里替换掉；更离谱的一次，悬浮窗焦点的测试调用了真实的处理函数，里面会执行 AppleScript，跑单元测试时真的把开发机上的 Steam 启动了。主进程里任何调用系统命令的地方，在测试里都必须 mock。</p>
+
+  <h2 id="s8"><span class="no">08</span>主线程上的同步读盘，和 490 MB 内存</h2>
+
+  <p>悬浮窗和游戏同时常驻，空闲时的开销比峰值性能更重要。主线程上最隐蔽的一类开销是同步读盘。<code>electron-store</code> 的 <code>get()</code> 每次都会同步读整个配置文件并解析，对局中计时提醒每个游戏数据推送都读设置、每秒每个事件读两次语言，加起来每秒 20 多次同步读盘，就在处理游戏数据和 IPC 的那条线程上。我们把它改成读一次、配置变化时失效的缓存。第四节锁定状态的那次是同一个问题第二次出现。</p>
+
+  <p>6 月的性能检查里还有几项：对局中每次游戏数据推送（约每秒 2 次）都把战绩写到云端，一局 45 分钟约 5,400 次网络请求，全在主进程上，改成开局一次、之后每 30 秒一次再加赛后一次；拖动改变悬浮窗大小时，每一帧都同步写一次配置，改成停下 500 毫秒后再写；动画库被打进了悬浮窗的启动代码，启动时要解析的代码从约 1.88 MB 降到约 1.62 MB。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 166" role="img" aria-label="空闲内存约 492 MB：GPU 进程 164、主进程 130、主窗口 82、悬浮窗 70、语音隐藏窗口 36、网络等 10">
+<text x="16" y="22" font-size="12" text-anchor="start" style="fill:var(--d-text3)">0.33.0 空闲 1 分钟，按进程（MB）</text>
+<text x="704" y="22" font-size="13" text-anchor="end" font-weight="600" style="fill:var(--d-text)">合计约 492 MB</text>
+<rect x="16.0" y="36" width="227.3" height="34" rx="5" style="fill:var(--d-red)"/>
+<text x="130.667" y="58" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-box)">164</text>
+<rect x="245.3" y="36" width="179.8" height="34" rx="5" style="fill:var(--d-gold)"/>
+<text x="336.228" y="58" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-box)">130</text>
+<rect x="427.1" y="36" width="112.7" height="34" rx="5" style="fill:var(--d-blue)"/>
+<text x="484.455" y="58" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-box)">82</text>
+<rect x="541.8" y="36" width="95.9" height="34" rx="5" style="fill:var(--d-green)"/>
+<text x="590.732" y="58" font-size="12" text-anchor="middle" font-weight="600" style="fill:var(--d-box)">70</text>
+<rect x="639.7" y="36" width="48.3" height="34" rx="5" style="fill:var(--d-amber)"/>
+<rect x="690.0" y="36" width="12.0" height="34" rx="5" style="fill:var(--d-gray)"/>
+<rect x="16" y="86" width="12" height="12" rx="3" style="fill:var(--d-red)"/>
+<text x="34" y="96" font-size="12" text-anchor="start" style="fill:var(--d-text2)">GPU 进程　164 MB</text>
+<rect x="248" y="86" width="12" height="12" rx="3" style="fill:var(--d-gold)"/>
+<text x="266" y="96" font-size="12" text-anchor="start" style="fill:var(--d-text2)">主进程　130 MB</text>
+<rect x="480" y="86" width="12" height="12" rx="3" style="fill:var(--d-blue)"/>
+<text x="498" y="96" font-size="12" text-anchor="start" style="fill:var(--d-text2)">主窗口　82 MB</text>
+<rect x="16" y="110" width="12" height="12" rx="3" style="fill:var(--d-green)"/>
+<text x="34" y="120" font-size="12" text-anchor="start" style="fill:var(--d-text2)">悬浮窗　70 MB</text>
+<rect x="248" y="110" width="12" height="12" rx="3" style="fill:var(--d-amber)"/>
+<text x="266" y="120" font-size="12" text-anchor="start" style="fill:var(--d-text2)">语音隐藏窗口　36 MB</text>
+<rect x="480" y="110" width="12" height="12" rx="3" style="fill:var(--d-gray)"/>
+<text x="498" y="120" font-size="12" text-anchor="start" style="fill:var(--d-text2)">网络等　10 MB</text>
+<text x="16" y="152" font-size="12" text-anchor="start" style="fill:var(--d-text3)">语音隐藏窗口已改为用到时才创建；macOS 活动监视器口径，Windows 和对局中尚未实测</text>
+</svg>
+    </div>
+    <figcaption>图 3　空闲时约 490 MB：GPU 进程最大，透明悬浮窗和毛玻璃效果是它的主要来源</figcaption>
+  </figure>
+
+  <p>这组数字是 0.33.0 在 macOS 上空闲 1 分钟时，用活动监视器看的。我们已经让语音的隐藏窗口改成用到时才创建，省下约 36 MB；懒创建时要把发给它的命令排队，等页面加载完再执行，否则「检测虚拟声卡」会误报。主窗口隐藏后要不要销毁还没定：一直留着要多占约 40 MB，可恢复只要 10 毫秒左右，重建要 1.5 秒。Windows 上的内存和对局中的内存都还没测过。</p>
+
+  <h2 id="s9"><span class="no">09</span>和操作系统打交道</h2>
+
+  <p>macOS 上「把游戏切到前台」最直接的写法是 <code>tell application "Dota 2" to activate</code>。它有个副作用：应用没在运行时，它会把应用启动起来。以前只在发聊天消息时调用，游戏必然开着；0.24.0 把它接到了悬浮窗聊天框失焦的路径上，调用变得很频繁，结果用户打完字就把 DOTA 和 Steam 拉起来了。现在改成通过 System Events 只对正在运行的进程设置前台。</p>
+
+  <p>Windows 上调 PowerShell 的坑最多。每个 <code>powershell.exe</code> 子进程都要设 <code>windowsHide</code>，不然截图时会在全屏游戏上弹出一个控制台窗口；查询已安装语言要加超时，PowerShell 挂住会让 OCR 快捷键一直失效到重启；脚本里 <code>$ErrorActionPreference = "Stop"</code> 会让错误提前终止，脚本自己的退出码不执行，PowerShell 把整段约 90 行的脚本回显进错误信息，铺满了悬浮窗。</p>
+
+  <p>Windows 的 OCR 是一个独立的可选组件，和显示语言分开安装，「添加语言」并不会带上它。安装命令对一个编造的组件名也不报错，返回的结果和成功时长得一样，必须再查一次安装状态才算数。提权的安装进程还有两个问题：普通权限的父进程读不到提权子进程的输出，结果只能写文件；等待它结束时拿到的退出码可能是空值，而空值转成退出码就是 0，和成功分不清。还有一点，测试机的用户账户控制是静音的，「没弹框」不代表没执行。</p>
+
+  <p>浏览器自己画的控件不认皮肤。<code>&lt;select&gt;</code> 的下拉层没声明 <code>color-scheme</code>，浏览器按浅色画白底，我们的 CSS 又把字设成了白色，变成白底白字；滑块和复选框没设 <code>accent-color</code>，用的是 Windows 的系统蓝。悬浮窗故意不加 <code>color-scheme</code>，因为它会连带改变浏览器默认的画布底色，而悬浮窗是透明窗口，有过黑块的前科；<code>accent-color</code> 只染控件，可以放心加。</p>
+
+  <h2 id="s10"><span class="no">10</span>自动更新与签名</h2>
+
+  <p>5 月，0.7.1 自动更新到 0.7.2 失败，提示新版本「is not signed by the application owner」。原因是 electron-builder 配置里的 <code>publisherName</code> 一个字段管两件事：告诉签名工具往安装包里写什么名字，也告诉 electron-updater 以后要校验新安装包的发布者。我们的 CI 根本没签名，但这个字段已经被写进了用户装好的 0.7.x 里，于是它拒绝了所有没签名的新版本。删掉这个字段以后，0.7.1 和 0.7.2 的用户只能去官网手动装一次新版。自动更新的校验配置会随安装包发到用户手里，错一次就得让用户手动装一次。目前两个平台都还没签名，配置文件里留了注释，防止将来买了证书只加回一半。</p>
+
+  <p>还有一个和国内用户相关的：退出的代理软件会留下一个已经失效的系统代理，更新检查因此失败，其实更新服务器是好的。现在遇到代理连接失败这类错误，就把会话的代理切成直连再试一次，本次运行内一直保持直连。</p>
+
+  <h2 id="s11"><span class="no">11</span>哪些在 Windows 实机上验证过</h2>
+
+  <p>开发机是 Mac，Windows 上的验证要靠测试机和用户。下面照实列出来：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>问题</th><th>修复</th><th>验证情况</th></tr>
+    <tr><td>透明窗口四角变黑</td><td>不用 <code>setOpacity()</code>，改 CSS</td><td class="up">Windows 实机通过（6 月）</td></tr>
+    <tr><td>皮肤让四角出现色块</td><td>透明规则加 <code>!important</code></td><td class="up">Windows 实机通过，五个皮肤都切过</td></tr>
+    <tr><td>同步 reload 导致整个应用崩溃</td><td>推迟一个 task + 升级 Electron</td><td class="up">本机复现 + Sentry 归零；没有 Windows 冒烟</td></tr>
+    <tr><td>GPU 进程启动即崩</td><td>跨启动降级守卫</td><td class="up">Sentry 数据符合设计</td></tr>
+    <tr><td>退出时弹出错误框</td><td>接住 error、退出时不弹框</td><td class="up">Sentry 上自然消退</td></tr>
+    <tr><td>全局鼠标钩子导致卡顿</td><td>改轮询</td><td>用户已安装测试，结果未回</td></tr>
+    <tr><td>拿焦点导致游戏静音</td><td>永不聚焦，打字时借还焦点</td><td>没有实机验证</td></tr>
+    <tr><td>新对局后悬浮窗不显示</td><td>按需重建、每次显示重设层级</td><td>修复已发，根因没实锤</td></tr>
+    <tr><td>macOS 框选坐标偏移</td><td>调整窗口设置顺序</td><td>验证脚本实证，游戏内没测</td></tr>
+    <tr><td>窗口恢复到屏幕外</td><td>按所在显示器的工作区限制</td><td>没有实机记录</td></tr>
+  </table></div>
+
+  <p>没验证过的不等于没修好，但写文章时不该把它们和验证过的混在一起。我们在每次发版的记录里都写明了「零真机验证」的项、要看的日志关键字，以及出问题时回滚到哪个版本。</p>
+
+  <h2 id="s12"><span class="no">12</span>几点心得</h2>
+
+  <p>症状在像素，病根可能在窗口的合成方式。黑角修了五次，前四次都在 CSS 里打转。透明窗口在 Windows 上出问题时，先问一句：是谁改变了这个窗口的合成方式。</p>
+
+  <p>Windows 的窗口状态会被别人改掉。置顶层级、任务栏状态、窗口对象本身，都可能在你不知道的时候变了。每次显示都重新声明一遍，所有入口走同一个「确保存在」的函数，比创建时设一次可靠。</p>
+
+  <p>一个参数背后可能是一个系统级的机制。<code>forward: true</code> 看起来只是转发鼠标事件，实际是一个全局钩子。用到 Electron 里和系统交互的选项时，去翻一下它在各平台上的实现，比读 API 文档更能看清代价。</p>
+
+  <p>自愈代码要和业务代码一样认真测。在进程死亡的回调里同步做重活，会把「悬浮窗闪一下」变成「整个应用退出」。降级守卫要在崩溃之前写好状态，守卫本身绝不能抛错。</p>
+
+  <p>主线程上没有小开销。同步读盘、每帧写配置、高频网络请求，单独看都不大，放在一个要和全屏游戏共存的应用里，就是用户能感觉到的卡顿。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>也在做桌面端？</strong>如果你在用 Electron 做悬浮窗、多窗口、自动更新或崩溃治理，碰到了类似的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
+  </div>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/china-reachability.html">上一篇：国内可达性踩坑实录</a>　·　<a href="/blog/ai-assisted-dev-rules.html">下一篇：一个人和 AI 写了 840 次提交</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>
