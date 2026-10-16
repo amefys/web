@@ -112,3 +112,27 @@ for (const [lang, html] of Object.entries(PAGES)) {
     assert.match(text(note[1]), lang === 'zh' ? /网页，不是 App[\s\S]*浏览器[\s\S]*amefys\.com\/bp/ : /web page, not an app[\s\S]*amefys\.com\/bp[\s\S]*browser/)
   })
 }
+
+// 2026-10-16: download buttons rendered github.com/…/releases/latest until JS
+// swapped them — slow or unreachable from mainland China, and what phones,
+// Linux and no-JS visitors kept. They now land on the #download section.
+const { execSync } = require('node:child_process')
+test('no site page links download buttons to GitHub Releases', () => {
+  const files = execSync('git ls-files "*.html"', { cwd: resolve(__dirname, '..') })
+    .toString().split('\n').filter((f) => f && !f.startsWith('preview/'))
+  const offenders = files.filter((f) => read(f).includes('github.com/amefys/web/releases/latest'))
+  assert.deepEqual(offenders, [])
+})
+
+for (const [lang, html] of Object.entries(PAGES)) {
+  test(`${lang}: download buttons fall back to #download, phones get the web version`, () => {
+    assert.match(html, /<section class="final-cta" id="download">[\s\S]*?amefys\.com\/dl\/AMEFYS-Setup\.exe/)
+    const hero = html.match(/<a class="btn-cta primary js-dl-cta"[^>]*>/)[0]
+    assert.match(hero, /href="#download"/)
+    assert.match(hero, /data-mobile-href="\/bp\/"/)
+    assert.match(hero, /data-mobile-label="[^"]+"/)
+    // The swap script must handle phones and iPadOS (which reports a Mac UA).
+    assert.match(html, /data-mobile-href'\)/)
+    assert.match(html, /maxTouchPoints > 1/)
+  })
+}
