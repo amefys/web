@@ -115,7 +115,11 @@ async function render(data) {
           <p class="comm-note comm-desk">${desk}</p>
           <p class="comm-note comm-phone">${phone}</p>
         </div>`
+  const chip = (key, label) =>
+    `<button type="button" class="comm-chip" data-comm-open="${key}" aria-expanded="false" aria-controls="comm-panel">${icon(key)}${label}</button>`
   return `${START}
+      <div class="comm-chips"><span class="comm-chips-label">加入玩家群</span>${chip('qq', 'QQ 群')}${chip('wechat', '微信群')}${chip('pan', '网盘下载')}</div>
+      <div class="comm-panel" id="comm-panel" hidden>
       <div class="comm-grid">${card({
         key: 'qq',
         title: 'QQ 群',
@@ -145,6 +149,7 @@ async function render(data) {
         desk: '官网下载太慢或打不开时，从这里下载安装包。',
         phone: '官网下载太慢或打不开时，从这里下载安装包。'
       })}
+      </div>
       </div>
       ${END}`
 }
