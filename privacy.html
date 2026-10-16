@@ -258,7 +258,7 @@
             <td><span class="tag tag-cloud">语音识别服务</span> 转写后即丢弃，<strong>不留存原始音频</strong>；字幕<span class="tag tag-local">仅本机显示</span>，不标记说话人身份</td>
           </tr>
           <tr>
-            <td>官网留言板</td>
+            <td>官网留言板、技术博客评论</td>
             <td>昵称、留言内容、邮箱、IP、浏览器 UA（仅在你主动留言时产生）</td>
             <td>展示留言、人工审核、反垃圾；邮箱只用于回复通知，不公开</td>
             <td><span class="tag tag-cloud">Cloudflare D1</span>（海外边缘节点，与 App 数据完全隔离）</td>
@@ -360,7 +360,7 @@
           <tr><td>Sentry（可选）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
           <tr><td>爱发电（afdian.com）</td><td>购买 Pro 会员时的付款；我们只收到订单号、金额、付款人的爱发电账号 ID 和你填写的留言，<strong>看不到你的手机号、邮箱和支付信息</strong></td><td><a href="https://afdian.com" target="_blank" rel="noopener" class="link">afdian.com</a></td></tr>
           <tr><td>Cloudflare</td><td>主题资源下载（英雄/装备图标已从 Steam CDN 直取，不经 CF）</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
-          <tr><td>Cloudflare Workers / D1 / Turnstile</td><td>官网留言板：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
+          <tr><td>Cloudflare Workers / D1 / Turnstile</td><td>官网留言板和技术博客评论：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
         </tbody>
       </table>
     </section>
@@ -380,7 +380,7 @@
         <li>本地数据：设置 → 数据与隐私 → 清空对局历史 / 清空翻译缓存</li>
         <li>云端数据：设置 → 账号 → 注销账号（删除所有 Supabase 端关联数据，48 小时内生效）</li>
         <li>完整卸载：删除 <code>~/Library/Application Support/amefys/</code> 目录即清除全部本地痕迹</li>
-        <li>官网留言：用留言时填写的邮箱发信到 <a href="mailto:amefys@gmail.com" class="link">amefys@gmail.com</a>，我们会在 7 天内删除该留言及其邮箱、IP 记录</li>
+        <li>官网留言和博客评论：用留言时填写的邮箱发信到 <a href="mailto:amefys@gmail.com" class="link">amefys@gmail.com</a>，我们会在 7 天内删除该留言及其邮箱、IP 记录</li>
       </ul>
       <h3>关闭可选功能</h3>
       <ul class="clean">

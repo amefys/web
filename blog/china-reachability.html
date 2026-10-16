@@ -22,6 +22,8 @@
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
 <link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
 <link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/blog-comments.css?v=1">
+<script src="/assets/blog-comments.js?v=1" defer></script>
 <link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
@@ -720,6 +722,17 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>电信 31 个节点里 30 个完整打开，完整打开的节点耗时中位数 2.5 秒，其中 29 个由阿姆斯特丹机房应答。移动 31 个里 28 个完整打开，中位数也是 2.5 秒，23 个落在洛杉矶、5 个落在亚特兰大。联通最差：27 个节点只有 6 个完整打开，15 个连接失败，另有 6 个跑满 10 秒也没拿到完整页面。<strong>一个国内用户打开官网首页，请求要先绕到欧洲或美国再回来。</strong>落到哪个机房取决于各家运营商和 Cloudflare 之间怎么互联，我们这一侧左右不了。</p>
 
+  <p>直接失败的地区，按运营商列出来。「连接失败」是 boce 报告里状态码为 0、连 HTTP 响应都没拿到的节点；「没拿到完整页面」是跑满 10 秒、只收到部分内容或者一点内容都没有的节点：</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>运营商</th><th>连接失败</th><th>跑满 10 秒，没拿到完整页面</th></tr>
+    <tr><td>电信</td><td>无</td><td>湖北天门</td></tr>
+    <tr><td>移动</td><td>福建泉州、广西梧州、云南昆明（3 个）</td><td>无</td></tr>
+    <tr><td>联通</td><td>北京、福建三明、广西梧州、海南三亚、河北廊坊、河南洛阳、黑龙江大庆、湖南邵阳、吉林长春、江苏、辽宁大连、山东济南、山西临汾、陕西西安、浙江金华（15 个）</td><td>广东深圳、贵州遵义、湖北武汉、新疆昌吉、云南昆明、重庆（6 个）</td></tr>
+  </table></div>
+
+  <p>联通的失败分布在南北十几个省份，不集中在某个地区；广西梧州和云南昆明两个城市，移动和联通的节点都没打开。</p>
+
   <div class="table-wrap"><table>
     <tr><th>分组</th><th>平均响应时间</th><th>最快的节点</th><th>最慢的节点</th></tr>
     <tr><td>全部 89 个</td><td class="num">3.99 秒</td><td>黑龙江大庆移动 1.13 秒</td><td>重庆联通 10.02 秒</td></tr>
@@ -764,6 +777,13 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
   <div class="post-end">
     <strong>你的用户也在国内？</strong>如果你的产品用的是海外的云服务，碰到了国内访问、下载速度或排查方法上的问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
   </div>
+
+  <section class="post-comments" aria-label="评论">
+    <h2 id="comments">评论</h2>
+    <p class="note">评论审核后显示，通常一天内处理；邮箱只用于回复通知，不会公开。提交即表示同意<a href="/privacy.html">隐私政策</a>。</p>
+    <div id="waline" data-path="/blog/china-reachability.html"></div>
+    <div class="comments-fallback">评论组件没有加载出来。可以直接发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或稍后刷新再试。</div>
+  </section>
 
   <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/cloudflare-o2o-cache.html">上一篇：Worker 前面加了缓存却没生效</a></div>
 </article>

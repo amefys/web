@@ -22,6 +22,8 @@
 <link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
 <link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
 <link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/blog-comments.css?v=1">
+<script src="/assets/blog-comments.js?v=1" defer></script>
 <link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
@@ -320,6 +322,13 @@
   <div class="post-end">
     <strong>想聊聊你的项目？</strong>如果你也在一个人（或一个小团队）借助 AI 做产品，在架构选型、成本控制、国内访问或桌面端工程上遇到问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。
   </div>
+
+  <section class="post-comments" aria-label="评论">
+    <h2 id="comments">评论</h2>
+    <p class="note">评论审核后显示，通常一天内处理；邮箱只用于回复通知，不会公开。提交即表示同意<a href="/privacy.html">隐私政策</a>。</p>
+    <div id="waline" data-path="/blog/amefys-architecture.html"></div>
+    <div class="comments-fallback">评论组件没有加载出来。可以直接发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或稍后刷新再试。</div>
+  </section>
 
   <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/supabase-egress-to-r2.html">上一篇：免费额度用到 289%</a>　·　<a href="/blog/github-actions-minutes.html">下一篇：GitHub Actions 额度一个月用完两次</a></div>
 </article>
