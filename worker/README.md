@@ -123,3 +123,20 @@ and the top 3 cards get rank medals (🥇/🥈/🥉).
 The gallery JS handles the worker not being deployed yet: `stats.json`
 404 → leaderboard band stays hidden, no medals shown, downloads still
 work normally via GitHub Pages.
+
+## `studio-inquiry.js` — `/api/studio`, the /studio/ contact form (2026-10-17)
+
+POST JSON from `studio/index.html`. Order: validate → Turnstile (widget
+**amefys studio**, invisible, domain amefys.com) → per-IP limit (5/hour) →
+store in KV → email via Resend. The inquiry is stored before the email is
+tried, so an email failure never loses it.
+
+- KV namespace `studio-inquiries` bound as `INQUIRIES` (keys `inq:<ISO time>:<rand>`,
+  kept 400 days; `rl:<hour>:<ip>` counters expire after 1 hour).
+- Route `amefys.com/api/studio` → `studio-inquiry` (created via the API on 2026-10-17).
+- Secrets: `TURNSTILE_SECRET` (read it back from the widget via the API when
+  redeploying), `RESEND_API_KEY` (optional; without it inquiries are only stored).
+- Deploy: `worker/deploy-studio-inquiry.sh` (needs `KV_ID`, `TURNSTILE_SECRET`).
+
+Read stored inquiries: `wrangler kv key list --namespace-id <KV_ID> --prefix inq:`
+then `wrangler kv key get --namespace-id <KV_ID> <key>`.
