@@ -46,9 +46,12 @@
   function mount(el) {
     window.AMEFYS_TURNSTILE_KEY = SITE_KEY
     addStyle('/assets/vendor/waline/waline.css')
+    // waline-session.js must finish before import(): it clears an expired
+    // stored login, and Waline reads that storage when its module loads.
     Promise.all([
       addScript('/assets/waline-captcha.js?v=2'),
-      addScript('/assets/waline-turnstile-prewarm.js?v=3')
+      addScript('/assets/waline-turnstile-prewarm.js?v=3'),
+      addScript('/assets/waline-session.js?v=2')
     ])
       .catch(function () {}) // the client still works without the helpers, just slower
       .then(function () { return import('/assets/vendor/waline/waline.js') })
@@ -58,7 +61,9 @@
           serverURL: SERVER,
           path: el.getAttribute('data-path'),
           lang: 'zh-CN',
-          login: 'disable',
+          // Clears an expired stored login first; 'enable' only for a live one
+          // or #admin (waline-session.js). Falls back to 'disable' if it failed to load.
+          login: window.AmefysWalineSession ? window.AmefysWalineSession.mode : 'disable',
           meta: ['nick', 'mail'],
           requiredMeta: ['nick', 'mail'],
           wordLimit: [0, 1000],
