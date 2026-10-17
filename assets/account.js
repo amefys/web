@@ -195,7 +195,9 @@
   }
   $('ref-copy').addEventListener('click', copyRef)
   $('acc-signout').addEventListener('click', function () {
-    client.auth.signOut().then(function () { render(null) }, function () { render(null) })
+    // 'local': this browser only. The default ('global') revokes every
+    // session of the account — it would sign the player out of the desktop app too.
+    client.auth.signOut({ scope: 'local' }).then(function () { render(null) }, function () { render(null) })
   })
   setMode('login')
 

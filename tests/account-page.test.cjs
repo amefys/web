@@ -74,3 +74,9 @@ test('every element account.js looks up exists on the page', () => {
 test('page is kept out of search results', () => {
   assert.match(html, /<meta name="robots" content="noindex,nofollow">/)
 })
+
+test('signing out here leaves the desktop app and other devices signed in', () => {
+  const calls = js.match(/auth\.signOut\([^)]*\)/g) || []
+  assert.ok(calls.length > 0, 'signOut call not found')
+  for (const c of calls) assert.match(c, /scope: 'local'/, c)
+})
