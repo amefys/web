@@ -116,6 +116,8 @@ and a screenshot or URL for the other two.
 
 ## Donate page (`donate.html`, `en/donate.html`)
 
-WeChat tip QR (`assets/qr-tip.svg`) is currently the only live channel — Buy Me
+WeChat tip QR (`assets/qr-tip.png`, generated from `tip.url` in
+`assets/community.json`: `npm run community -- tip <screenshot|wxp://…>`) is
+currently the only live channel — Buy Me
 a Coffee is not set up, so nothing should link to it. The page also states that
 a tip is a voluntary gift, not a purchase; keep that wording when editing.

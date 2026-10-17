@@ -16,6 +16,11 @@
 //   node scripts/community-qr.mjs wechat <shot>   new WeChat group code (expires in 7 days)
 //   node scripts/community-qr.mjs wechat <shot> --expires 2026-10-30
 //   node scripts/community-qr.mjs qq|pan <shot|url>
+//   node scripts/community-qr.mjs tip <shot|wxp://…>   WeChat tip code → assets/qr-tip.png
+//
+// The tip code is a file, not a homepage block: the donate page and the
+// 「赞助一杯咖啡」 modals (changelog / about / guestbook) all load
+// assets/qr-tip.png. A PNG so phones can long-press save it to the album.
 //
 // Decoding needs zbarimg (brew install zbar) and, for WeChat screenshots whose
 // big centre logo defeats zbar, ImageMagick to crop and threshold first.
@@ -29,12 +34,14 @@ import QRCode from 'qrcode'
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = join(ROOT, 'assets/community.json')
 const PAGE = join(ROOT, 'index.html')
+const TIP_PNG = join(ROOT, 'assets/qr-tip.png')
 const START = '<!-- community:start -->'
 const END = '<!-- community:end -->'
 const HOSTS = {
   qq: /^https:\/\/qm\.qq\.com\//,
   wechat: /^https:\/\/weixin\.qq\.com\/g\//,
-  pan: /^https:\/\/[\w.-]*123pan\.(cn|com)\//
+  pan: /^https:\/\/[\w.-]*123pan\.(cn|com)\//,
+  tip: /^wxp:\/\//
 }
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
@@ -177,6 +184,10 @@ async function main() {
     }
     writeFileSync(DATA, JSON.stringify(data, null, 2) + '\n')
     console.log(`${cmd}: ${url}${cmd === 'wechat' ? ` (expires ${data.wechat.expires})` : ''}`)
+  }
+  if (data.tip?.url && cmd !== '--check') {
+    await QRCode.toFile(TIP_PNG, data.tip.url, { errorCorrectionLevel: 'M', margin: QUIET, scale: 12, color: { dark: '#000000', light: '#ffffff' } })
+    console.log('assets/qr-tip.png updated')
   }
   const page = readFileSync(PAGE, 'utf8')
   const next = splice(page, await render(data))
