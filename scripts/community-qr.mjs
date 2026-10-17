@@ -21,6 +21,9 @@
 // The tip code is a file, not a homepage block: the donate page and the
 // 「赞助一杯咖啡」 modals (changelog / about / guestbook) all load
 // assets/qr-tip.png. A PNG so phones can long-press save it to the album.
+// It carries the AMEFYS logo (assets/icon.svg, rendered by rsvg-convert) in
+// the middle: error correction H, logo 18% of the width on a white plate,
+// and the result is decoded again before it is written.
 //
 // Decoding needs zbarimg (brew install zbar) and, for WeChat screenshots whose
 // big centre logo defeats zbar, ImageMagick to crop and threshold first.
@@ -35,6 +38,9 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const DATA = join(ROOT, 'assets/community.json')
 const PAGE = join(ROOT, 'index.html')
 const TIP_PNG = join(ROOT, 'assets/qr-tip.png')
+const LOGO_SVG = join(ROOT, 'assets/icon.svg')
+// 0.22 no longer scans with zbar (2026-10-17); 0.18 keeps a margin for photos of a screen
+const LOGO_SHARE = 0.18
 const START = '<!-- community:start -->'
 const END = '<!-- community:end -->'
 const HOSTS = {
@@ -161,6 +167,22 @@ async function render(data) {
       ${END}`
 }
 
+/** The tip code with the logo in the middle; refuses to write one that does not scan. */
+async function tipPng(url) {
+  const dir = mkdtempSync(join(tmpdir(), 'community-tip-'))
+  const qr = join(dir, 'qr.png'), logo = join(dir, 'logo.png'), out = join(dir, 'out.png')
+  await QRCode.toFile(qr, url, { errorCorrectionLevel: 'H', margin: QUIET, scale: 12, color: { dark: '#000000', light: '#ffffff' } })
+  const size = Number(execFileSync('magick', ['identify', '-format', '%w', qr], { encoding: 'utf8' }))
+  const l = Math.round(size * LOGO_SHARE), plate = Math.round(l * 1.18), r = Math.round(plate * 0.22)
+  execFileSync('rsvg-convert', ['-w', String(l), '-h', String(l), LOGO_SVG, '-o', logo])
+  execFileSync('magick', [qr,
+    '(', '-size', `${plate}x${plate}`, 'xc:none', '-fill', 'white', '-draw', `roundrectangle 0,0,${plate - 1},${plate - 1},${r},${r}`, ')',
+    '-gravity', 'center', '-composite', logo, '-gravity', 'center', '-composite', '-strip', out])
+  const read = execFileSync('zbarimg', ['-q', '--raw', out], { encoding: 'utf8' }).trim()
+  if (read !== url) throw new Error(`tip QR with logo does not scan back (got ${read || 'nothing'})`)
+  writeFileSync(TIP_PNG, readFileSync(out))
+}
+
 function splice(page, block) {
   const a = page.indexOf(START)
   const b = page.indexOf(END)
@@ -186,7 +208,7 @@ async function main() {
     console.log(`${cmd}: ${url}${cmd === 'wechat' ? ` (expires ${data.wechat.expires})` : ''}`)
   }
   if (data.tip?.url && cmd !== '--check') {
-    await QRCode.toFile(TIP_PNG, data.tip.url, { errorCorrectionLevel: 'M', margin: QUIET, scale: 12, color: { dark: '#000000', light: '#ffffff' } })
+    await tipPng(data.tip.url)
     console.log('assets/qr-tip.png updated')
   }
   const page = readFileSync(PAGE, 'utf8')
