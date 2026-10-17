@@ -139,6 +139,30 @@
   .step span { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
   .step code { font-family: ui-monospace,"SF Mono",Consolas,monospace; color: var(--gold); background: rgba(232,199,121,.08); padding: 1px 6px; border-radius: 4px; }
 
+
+  /* how to buy: text + real screenshot per step */
+  .how { display: flex; flex-direction: column; gap: 22px; }
+  .how-step { display: grid; grid-template-columns: 300px 1fr; gap: 26px; align-items: center;
+    padding: 22px; border-radius: var(--r-xl); background: var(--surface); border: 0.5px solid var(--hairline); }
+  .how-text i { font-style: normal; display: inline-flex; width: 30px; height: 30px; border-radius: 50%; align-items: center; justify-content: center;
+    font-weight: 800; color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); margin-bottom: 12px; }
+  .how-text b { display: block; font-size: 17px; margin-bottom: 8px; }
+  .how-text span { display: block; font-size: 14px; color: var(--text-2); line-height: 1.7; }
+  .how-text span strong { color: var(--text); }
+  .how-text .tip { margin-top: 10px; font-size: 12.5px; color: var(--text-3); }
+  .how-text code { font-family: ui-monospace,"SF Mono",Consolas,monospace; color: var(--gold); background: rgba(232,199,121,.08); padding: 1px 6px; border-radius: 4px; }
+  .shot { position: relative; margin: 0; border-radius: 14px; overflow: hidden; border: 0.5px solid var(--hairline-strong); box-shadow: 0 20px 50px rgba(0,0,0,.45); }
+  .shot img { display: block; width: 100%; }
+  .shot .mark { position: absolute; font-style: normal; border: 2.5px solid #F0C75E; border-radius: 10px; box-shadow: 0 0 0 4px rgba(240,199,94,.18), 0 0 24px rgba(240,199,94,.35); }
+  .shot .mark u { position: absolute; left: 0; top: 100%; margin-top: 6px; text-decoration: none; white-space: nowrap;
+    font-size: 12px; font-weight: 700; color: #1a1206; background: #F0C75E; padding: 2px 8px; border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.5); }
+  .shot .mark.up u { top: auto; bottom: 100%; margin: 0 0 6px; }
+  .shot .mark.right u { left: auto; right: 0; }
+  .shot.placeholder { min-height: 260px; display: flex; align-items: center; justify-content: center; text-align: center;
+    border-style: dashed; color: var(--text-3); font-size: 15px; background: rgba(255,255,255,.02); box-shadow: none; }
+  .shot.placeholder small { font-size: 12px; }
+
   /* sponsor */
   .sponsor { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
   .sponsor div { padding: 20px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); }
@@ -164,7 +188,7 @@
 
   @media (max-width: 760px) {
     .hero h1 { font-size: 34px; }
-    .why, .plans, .steps, .sponsor { grid-template-columns: 1fr; }
+    .why, .plans, .steps, .sponsor, .how-step { grid-template-columns: 1fr; }
     .cmp th, .cmp td { padding: 11px 10px; font-size: 13px; }
     .nav .links { display: none; }
   }
@@ -269,11 +293,30 @@
 
     <section class="s" id="how">
       <h2>怎么买</h2>
-      <p class="lead">付款后一般 1 分钟内自动开通。</p>
-      <div class="steps">
-        <div class="step"><b>在软件里复制识别码</b><span>登录 AMEFYS，打开「设置 → 账号」，在会员卡片上选一个时长，识别码（<code>AMF-</code> 开头）会自动复制。</span></div>
-        <div class="step"><b>去爱发电付款</b><span>浏览器会打开爱发电的购买页。第一次用要用手机号或微信登录一下爱发电。付款时把识别码粘贴到<strong>留言</strong>里。</span></div>
-        <div class="step"><b>自动开通</b><span>回到 AMEFYS，会员卡片会显示 Pro 和新的有效期。以后用同一个爱发电账号续费，不填识别码也能认出来。</span></div>
+      <p class="lead">三步，付款后一般 1 分钟内自动开通。下面都是软件里的真实界面。</p>
+      <div class="how">
+        <div class="how-step">
+          <div class="how-text"><i>1</i><b>在软件里选时长</b>
+            <span>登录 AMEFYS，打开「设置 → 账号」。在会员卡片上点一个时长，<strong>识别码会自动复制</strong>，同时浏览器打开爱发电的购买页。</span>
+            <span class="tip">识别码是 <code>AMF-</code> 开头的 6 位码，每个账号固定一个。</span></div>
+          <figure class="shot"><img src="assets/pro/how-1.jpg" alt="设置 → 账号里的会员卡片：选年付后识别码已复制" loading="lazy">
+            <em class="mark up right" style="left:66%;top:45.6%;width:32.2%;height:19.6%"><u>点一个时长</u></em>
+            <em class="mark" style="left:1.6%;top:66.4%;width:33%;height:7.8%"><u>识别码已复制</u></em></figure>
+        </div>
+        <div class="how-step">
+          <div class="how-text"><i>2</i><b>在爱发电付款，识别码粘贴到「留言」</b>
+            <span>选好型号后付款，<strong>付款前把识别码粘贴到「留言」里</strong>，系统靠它认出是你。支持微信和支付宝。</span>
+            <span class="tip">第一次用爱发电，要用手机号或微信登录一下，这是爱发电自己的账号。</span></div>
+          <figure class="shot placeholder"><div>爱发电付款页截图（待补）<br><small>标出「留言」框的位置</small></div></figure>
+        </div>
+        <div class="how-step">
+          <div class="how-text"><i>3</i><b>回到软件，自动开通</b>
+            <span>付款完成后回到 AMEFYS，会员卡片会显示 <strong>Pro 版</strong>和新的有效期，额度马上提升。</span>
+            <span class="tip">以后用同一个爱发电账号续费，不填识别码也能认出来。</span></div>
+          <figure class="shot"><img src="assets/pro/how-3.jpg" alt="开通后会员卡片显示 Pro 版和有效期" loading="lazy">
+            <em class="mark" style="left:6.6%;top:5.6%;width:7.8%;height:11.4%"><u>Pro 版</u></em>
+            <em class="mark right" style="left:81%;top:5.6%;width:17.4%;height:11.4%"><u>新的有效期</u></em></figure>
+        </div>
       </div>
     </section>
 
