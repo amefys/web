@@ -1,0 +1,61 @@
+/* /studio/ — services page. Colours come from blog.css tokens (light / dark). */
+
+.studio { max-width: 920px; margin: 0 auto; padding: 72px 24px 64px; }
+.studio section { margin-top: 64px; }
+.studio h2 { font-size: 26px; letter-spacing: -0.4px; margin: 0 0 10px; color: var(--text); }
+.studio .lead { font-size: 15.5px; line-height: 1.8; color: var(--text-2); margin: 0 0 24px; max-width: 680px; }
+.studio p { line-height: 1.85; color: var(--prose); }
+.studio a.inline { color: var(--gold); border-bottom: 1px solid var(--hairline-strong); }
+
+.st-hero .eyebrow { font: 600 12px/1 var(--mono); letter-spacing: .18em; color: var(--gold); }
+.st-hero h1 { font-size: 40px; line-height: 1.3; letter-spacing: -1px; margin: 16px 0 16px; }
+.st-hero .sub { font-size: 17px; line-height: 1.8; color: var(--text-2); max-width: 680px; margin: 0; }
+.st-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.st-btn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: 14.5px; }
+.st-btn.primary { background: var(--gold); color: var(--bg); }
+.st-btn.ghost { border: 1px solid var(--hairline-strong); color: var(--text); }
+.st-proof { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 36px; }
+.st-proof div { padding: 16px 18px; border-radius: var(--r-md); background: var(--surface); border: 0.5px solid var(--hairline); }
+.st-proof b { display: block; font: 650 22px/1.2 var(--mono); color: var(--text); }
+.st-proof span { font-size: 12.5px; color: var(--text-3); line-height: 1.5; }
+
+.st-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.st-card { padding: 22px 24px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); }
+.st-card h3 { font-size: 17.5px; margin: 0 0 8px; color: var(--text); }
+.st-card p { font-size: 14.5px; line-height: 1.75; color: var(--text-2); margin: 0 0 10px; }
+.st-card .k { font-size: 12px; font-weight: 650; color: var(--text-3); letter-spacing: .06em; margin: 14px 0 4px; }
+.st-card ul { margin: 0; padding-left: 1.2em; font-size: 14px; line-height: 1.75; color: var(--text-2); }
+.st-card .case { margin-top: 12px; font-size: 13.5px; color: var(--text-2); }
+.st-card .case a { color: var(--gold); }
+
+.st-who { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.st-who div { padding: 18px 20px; border-radius: var(--r-md); border: 0.5px solid var(--hairline); }
+.st-who b { display: block; color: var(--text); margin-bottom: 6px; }
+.st-who span { font-size: 14px; line-height: 1.7; color: var(--text-2); }
+
+.st-steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.st-steps li { counter-increment: s; padding: 18px 18px 20px; border-radius: var(--r-md); background: var(--surface); border: 0.5px solid var(--hairline); font-size: 14px; line-height: 1.7; color: var(--text-2); }
+.st-steps li::before { content: '0' counter(s); display: block; font: 600 13px/1 var(--mono); color: var(--gold); margin-bottom: 10px; }
+.st-steps b { color: var(--text); display: block; margin-bottom: 4px; }
+
+.st-faq details { border-bottom: 0.5px solid var(--hairline); padding: 14px 0; }
+.st-faq summary { cursor: pointer; font-weight: 600; color: var(--text); font-size: 15.5px; }
+.st-faq details p { margin: 10px 0 0; font-size: 14.5px; color: var(--text-2); }
+
+.st-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 24px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); }
+.st-form label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-2); }
+.st-form .full { grid-column: 1 / -1; }
+.st-form input, .st-form select, .st-form textarea { font: inherit; font-size: 14.5px; color: var(--text); background: var(--bg-2); border: 1px solid var(--hairline-strong); border-radius: 10px; padding: 10px 12px; }
+.st-form textarea { min-height: 120px; resize: vertical; }
+.st-form .note { font-size: 12.5px; color: var(--text-3); line-height: 1.7; }
+.st-form button { justify-self: start; cursor: pointer; border: 0; }
+
+.st-todo { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 600; color: var(--amber); background: var(--warn-bg); border: 1px solid var(--warn-line); vertical-align: middle; }
+.st-draft { margin: 0 0 28px; padding: 12px 16px; border-radius: 10px; font-size: 13px; line-height: 1.7; color: var(--text-2); background: var(--warn-bg); border: 1px solid var(--warn-line); }
+
+@media (max-width: 760px) {
+  .st-hero h1 { font-size: 29px; }
+  .st-proof { grid-template-columns: repeat(2, 1fr); }
+  .st-grid, .st-who, .st-steps, .st-form { grid-template-columns: 1fr; }
+  .studio section { margin-top: 48px; }
+}
