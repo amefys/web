@@ -1152,7 +1152,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"AMEFYS 是什么？","acceptedAnswer":{"@type":"Answer","text":"AMEFYS 是一款免费的 DOTA 2 实时辅助工具（Windows / macOS）：实时翻译队友和对手的聊天并一键回复、根据对局推荐出装、用快捷回复一键发送预制文本。数据只来自 Valve 官方 GSI 接口，不读游戏内存，对局记录默认只存本机。"}},
-{"@type":"Question","name":"手机上能用 AMEFYS 的 BP 推荐吗？","acceptedAnswer":{"@type":"Answer","text":"能。手机浏览器打开 amefys.com/bp，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。按住「我方选 / 敌方选 / 禁用」说英雄名就能录入阵容，俗称也认，也可以直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。"}},
+{"@type":"Question","name":"手机上能用 AMEFYS 的 BP 推荐吗？","acceptedAnswer":{"@type":"Answer","text":"能。手机浏览器打开 amefys.com/bp，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。最快的是点「拍照识别」，对着电脑拍一张选人界面，禁用和已选会自动填进去（目前只认中文客户端）；也可以按住「我方选 / 敌方选 / 禁用」说英雄名，俗称也认，或者直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。"}},
 {"@type":"Question","name":"使用 AMEFYS 会被 Valve 封号吗？","acceptedAnswer":{"@type":"Answer","text":"不会。AMEFYS 只使用 Valve 官方的 Game State Integration 接口读取对局状态；发送消息走 DOTA 内置聊天热键加剪贴板粘贴，与手动操作等价。不读取游戏内存、不修改客户端文件、不拦截网络流量，不在 VAC 的检测范围内。"}},
 {"@type":"Question","name":"怎么让 AMEFYS 连上 DOTA 2？","acceptedAnswer":{"@type":"Answer","text":"首次打开有 GSI 配置向导：一键写入配置文件到 DOTA 2 的 cfg/gamestate_integration 目录，再把 -gamestateintegration 粘贴到 Steam 启动选项，进入游戏主菜单即自动连接，约 30 秒。"}},
 {"@type":"Question","name":"正式天梯能看到敌方装备 / 队友经济 / 小地图位置吗？","acceptedAnswer":{"@type":"Answer","text":"不能。正式对局中 GSI 只推送你自己英雄的数据，AMEFYS 不会也无法绕过这一限制，所有建议基于你自己的状态与选人阶段公开的双方阵容。"}},
@@ -1513,7 +1513,7 @@
               </div>
               <span class="hc-bp-label desk"><b>桌面版</b> · 选人时 Alt+Shift+B</span>
               <div class="hc-bp-phone">
-                <img src="assets/screens/bp-mobile.jpg" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容与推荐选" loading="eager" decoding="async" />
+                <img src="assets/screens/bp-mobile.jpg?v=2" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容、推荐选和拍照识别按钮" loading="eager" decoding="async" />
               </div>
               <span class="hc-bp-label phone"><b>手机版</b> · amefys.com/bp</span>
             </div>
@@ -1771,8 +1771,8 @@
           <figcaption><b>桌面版 · 悬浮窗</b>选人阶段按 <kbd>Alt+Shift+B</kbd> 打开。左键我方选、右键敌方选、Ctrl+点击禁用；右侧分「推荐 / 建议 Ban / 阵容」三页。</figcaption>
         </figure>
         <figure class="bp-shot bp-shot-phone">
-          <img src="assets/screens/bp-mobile.jpg" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容、禁用和推荐选列表" loading="lazy" decoding="async" />
-          <figcaption><b>手机版 · 浏览器</b>打开 <a href="/bp/">amefys.com/bp</a>，或在桌面版点「手机版」扫码。按住按钮说英雄名就能录入，不挡游戏画面。</figcaption>
+          <img src="assets/screens/bp-mobile.jpg?v=2" width="665" height="1440" alt="AMEFYS 手机版 BP 页：双方阵容、禁用、推荐选列表和拍照识别按钮" loading="lazy" decoding="async" />
+          <figcaption><b>手机版 · 浏览器</b>打开 <a href="/bp/">amefys.com/bp</a>，或在桌面版点「手机版」扫码。对着电脑拍一张选人界面，禁用和已选自动填进去；也可以按住按钮说英雄名。不挡游戏画面。</figcaption>
         </figure>
       </div>
       <p class="bp-note">两张都是 AMEFYS 的原生界面截图。推荐基于公开历史对局统计（数据来自 OpenDota）与本地算法，仅供参考；选人需要你手动录入，AMEFYS 不读取游戏内存。</p>
@@ -2101,7 +2101,7 @@
         </details>
         <details>
           <summary>手机上能用 AMEFYS 的 BP 推荐吗？</summary>
-          <p>能。手机浏览器打开 <a href="/bp/">amefys.com/bp</a>，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。按住「我方选 / 敌方选 / 禁用」说英雄名就能录入阵容，俗称也认，也可以直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。</p>
+          <p>能。手机浏览器打开 <a href="/bp/">amefys.com/bp</a>，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。最快的是点「拍照识别」，对着电脑拍一张选人界面，禁用和已选会自动填进去（目前只认中文客户端）；也可以按住「我方选 / 敌方选 / 禁用」说英雄名，俗称也认，或者直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。</p>
         </details>
         <details open="">
           <summary>使用 AMEFYS 会被 Valve 封号吗？</summary>
