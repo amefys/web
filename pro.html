@@ -102,6 +102,11 @@
   .cmp td:first-child { color: var(--text); font-weight: 600; width: 38%; }
   .cmp td small { display: block; font-weight: 400; color: var(--text-3); font-size: 12px; margin-top: 2px; }
   .cmp tr.group td { background: rgba(255,255,255,.015); color: var(--text-3); font-size: 12px; font-weight: 700; letter-spacing: .5px; padding: 9px 18px; }
+  .cmp tr.group.daily td { background: linear-gradient(90deg, rgba(232,199,121,.16), rgba(232,199,121,.03));
+    color: var(--gold); font-size: 16px; letter-spacing: .3px; padding: 14px 18px; box-shadow: inset 4px 0 0 var(--gold); }
+  .cmp tr.group.daily td span { margin-left: 10px; font-size: 12.5px; font-weight: 600; color: var(--text-2); }
+  .cmp .per-day { font-weight: 500; color: var(--text-3); font-size: 12.5px; margin-left: 3px; }
+  .cmp td.pro .per-day { color: rgba(232,199,121,.75); }
   .cmp tr:last-child td { border-bottom: 0; }
   .yes { color: var(--emerald); font-weight: 700; }
   .note { font-size: 12.5px; color: var(--text-3); margin-top: 12px; line-height: 1.7; }
@@ -224,12 +229,12 @@
       <table class="cmp">
         <thead><tr><th></th><th>免费</th><th class="pro">Pro</th></tr></thead>
         <tbody>
-          <tr class="group"><td colspan="3">每天的额度</td></tr>
-          <tr><td>聊天实时翻译<small>队友、对手的聊天，以及你发出去的话</small></td><td>2,000 字</td><td class="pro">20,000 字</td></tr>
-          <tr><td>聊天语音输入<small>按住说话，自动转文字并翻译</small></td><td>5 分钟</td><td class="pro">60 分钟</td></tr>
-          <tr><td>BP 语音录入<small>选人时说英雄名，电脑和手机共用</small></td><td>10 分钟</td><td class="pro">60 分钟</td></tr>
+          <tr class="group daily"><td colspan="3">每天的额度<span>每天重置，当天用完第二天又有</span></td></tr>
+          <tr><td>聊天实时翻译<small>队友、对手的聊天，以及你发出去的话</small></td><td>2,000 字<span class="per-day">/ 天</span></td><td class="pro">20,000 字<span class="per-day">/ 天</span></td></tr>
+          <tr><td>聊天语音输入<small>按住说话，自动转文字并翻译</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span></td></tr>
+          <tr><td>BP 语音录入<small>选人时说英雄名，电脑和手机共用</small></td><td>10 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span></td></tr>
           <tr><td>翻译请求频率</td><td>每分钟 20 次</td><td class="pro">每分钟 60 次</td></tr>
-          <tr class="group"><td colspan="3">两边都有</td></tr>
+          <tr class="group"><td colspan="3">功能（两边都有）</td></tr>
           <tr><td>BP 选人推荐（电脑 + 手机）</td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
           <tr><td>出装建议、关键时间提醒</td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
           <tr><td>截屏识别聊天（OCR）、快捷回复、主题皮肤</td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
