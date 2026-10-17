@@ -216,8 +216,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.33.2</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版<strong>在 Windows 上少占一些内存</strong>；上一版<strong>修正了中文界面里写错的装备名</strong>（比如魔棒显示成「魔瓶」）。上一版起 <strong>BP 推荐里的「绝活 / 常用 / 不会玩」英雄，电脑和手机两边自动同步</strong>：电脑上配好的英雄池，打开手机版 amefys.com/bp 就能直接用；BP 面板的英雄图片也更小、第一次打开更快。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.33.3</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。这一版修了两件事：<strong>开着 AMEFYS 时鼠标隔几秒顿一下</strong>，以及<strong>关掉再打开有时要重新登录</strong>。上一版在 Windows 上少占了一些内存，还修正了中文界面里写错的装备名。上一版起 <strong>BP 推荐里的「绝活 / 常用 / 不会玩」英雄，电脑和手机两边自动同步</strong>：电脑上配好的英雄池，打开手机版 amefys.com/bp 就能直接用；BP 面板的英雄图片也更小、第一次打开更快。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，把双方的选择和禁用点进去，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -225,7 +225,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.33.3-beta.2</h3>
-        <p><strong>这一版修了两件事：开着 AMEFYS 时鼠标隔几秒顿一下；重启后有时要重新登录。</strong>遇到过其中任何一个的话，欢迎装上试试，有没有好转在玩家群里说一声。没遇到过的话，用左边的稳定版就行，验证完会并进下一个正式版。</p>
+        <p><strong>正式版已经走到 0.33.3，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -233,44 +233,22 @@
       </div>
     </section>
 
-    <!-- ── 0.33.3-beta.2 ── -->
-    <article class="release beta" id="v0-33-3-beta-2">
-      <header><h2>0.33.3-beta.2</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-17</span></header>
-      <p class="lead">锁定悬浮窗后，锁按钮又能点了。</p>
+    <!-- ── 0.33.3 ── -->
+    <article class="release" id="v0-33-3">
+      <header><h2>0.33.3</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-17</span></header>
+      <p class="lead">鼠标不再隔几秒顿一下，关掉再打开也不用重新登录。</p>
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
         <ul>
-          <li><strong>锁按钮点不开：</strong>前两个测试版里，锁定悬浮窗后如果打开过设置页，悬浮窗上的锁按钮就点不动了，只能按快捷键解锁。这一版修好了。另外，鼠标移到锁按钮上之后，按钮变得可点也比之前更快。</li>
+          <li><strong>电脑隔几秒卡一下、游戏里鼠标顿一帧：</strong>有玩家反馈开着 AMEFYS 时，鼠标会突然停住一帧再恢复。原因是悬浮窗为了「点击穿透到游戏」的同时还能知道鼠标在哪，让系统的每一次鼠标移动都先经过 AMEFYS；AMEFYS 只要稍微忙一下，整台电脑的鼠标就跟着停一下。现在换了一种做法，鼠标移动不再经过 AMEFYS。</li>
+          <li><strong>重启后要重新登录：</strong>AMEFYS 开着超过一小时，下次打开时经常要重新登录，更新版本后也一样。原因是登录凭证每小时会自动换新，但换来的新凭证没有存下来。现在每次换新都会存好；打开时如果网络暂时不通，也不会再把你登出，网络恢复后会自动重新登录。</li>
         </ul>
       </div>
-    </article>
-
-    <!-- ── 0.33.3-beta.1 ── -->
-    <article class="release beta" id="v0-33-3-beta-1">
-      <header><h2>0.33.3-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-17</span></header>
-      <p class="lead">关掉再打开，不用再重新登录。</p>
-      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
-        <ul>
-          <li><strong>重启后要重新登录：</strong>AMEFYS 开着超过一小时，下次打开时经常要重新登录，更新版本后也一样。原因是登录凭证每小时会自动换新，但换来的新凭证没有存下来，下次打开时拿着旧凭证去登录就被拒绝了。现在每次换新都会存好。另外，打开时如果网络暂时不通，也不会再把你登出，网络恢复后会自动重新登录。</li>
-        </ul>
-      </div>
-      <div class="callout">从旧版本升级到这一版后，第一次打开可能还要再登录一次（旧版本存下的凭证已经失效了）。之后就不会了。</div>
-    </article>
-
-    <!-- ── 0.33.3-beta.0 ── -->
-    <article class="release beta" id="v0-33-3-beta-0">
-      <header><h2>0.33.3-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-16</span></header>
-      <p class="lead">开着 AMEFYS，鼠标不会再隔几秒顿一下。</p>
-      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
-        <ul>
-          <li><strong>电脑隔几秒卡一下、游戏里鼠标顿一帧：</strong>有玩家反馈开着 AMEFYS 时，鼠标会突然停住一帧再恢复。原因是悬浮窗为了「点击穿透到游戏」的同时还能知道鼠标在哪，让系统的每一次鼠标移动都先经过 AMEFYS；AMEFYS 只要稍微忙一下，整台电脑的鼠标就跟着停一下。现在换了一种做法，鼠标移动不再经过 AMEFYS，AMEFYS 忙不忙都不会影响鼠标。</li>
-        </ul>
-      </div>
-      <div class="callout">锁定悬浮窗后，鼠标划过悬浮窗时不会再弹出提示（比如装备说明）。锁定本来就是「只看不点」，这样也不会在游戏里挡视线。锁按钮照常能点，移上去就能解锁。</div>
+      <div class="callout">锁定悬浮窗后，鼠标划过悬浮窗时不会再弹出提示（比如装备说明）。锁定本来就是「只看不点」，这样也不会在游戏里挡视线。锁按钮照常能点，移上去就能解锁。另外，从旧版本升级到这一版后，第一次打开可能还要再登录一次（旧版本存下的凭证已经失效了），之后就不会了。</div>
     </article>
 
     <!-- ── 0.33.2 ── -->
     <article class="release" id="v0-33-2">
-      <header><h2>0.33.2</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-16</span></header>
+      <header><h2>0.33.2</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-10-16</span></header>
       <p class="lead">少占一点内存。</p>
       <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
         <ul>
