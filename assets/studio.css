@@ -59,3 +59,8 @@
   .st-grid, .st-who, .st-steps, .st-form { grid-template-columns: 1fr; }
   .studio section { margin-top: 48px; }
 }
+
+.st-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.st-submit { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.st-status { font-size: 13.5px; color: var(--text-2); }
+#studio-turnstile:empty { display: none; }

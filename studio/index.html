@@ -246,8 +246,10 @@
           <option>还在规划</option>
         </select>
       </label>
-      <p class="note full">提交后会打开你的邮件客户端，内容已经填好，确认后发送即可；也可以直接发邮件到 <a class="inline" href="mailto:amefys@gmail.com">amefys@gmail.com</a>。你填写的信息只用于回复这次咨询。</p>
-      <button class="st-btn primary" type="submit">生成邮件</button>
+      <label class="st-hp" aria-hidden="true">请留空<input name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="full" id="studio-turnstile"></div>
+      <p class="note full">你填写的信息只用于回复这次咨询。也可以直接发邮件到 <a class="inline" href="mailto:amefys@gmail.com">amefys@gmail.com</a>。</p>
+      <div class="full st-submit"><button class="st-btn primary" type="submit">提交</button><span class="st-status" id="studio-status" role="status" aria-live="polite"></span></div>
     </form>
   </section>
 
@@ -295,20 +297,85 @@
 </script>
 
 <script>
-  // Draft contact form: no backend yet, so it composes an email instead.
+  // /studio/ contact form → Worker at /api/studio (worker/studio-inquiry.js).
+  // Turnstile loads only when the form comes near the screen; a failure at any
+  // step offers a pre-filled email instead, so an inquiry is never stuck.
   ;(function () {
+    var SITE_KEY = '0x4AAAAAAFZUYJSRjb0VEegY'
     var f = document.getElementById('studio-form')
+    var status = document.getElementById('studio-status')
     if (!f) return
+    var widget = null, token = '', waiters = []
+    function onToken(t) { token = t; waiters.splice(0).forEach(function (w) { w(t) }) }
+    function loadTurnstile() {
+      if (window.__studioTs) return
+      window.__studioTs = function () {
+        widget = window.turnstile.render('#studio-turnstile', {
+          sitekey: SITE_KEY, action: 'studio',
+          callback: onToken,
+          'expired-callback': function () { token = '' },
+          'error-callback': function () { token = '' }
+        })
+      }
+      var s = document.createElement('script')
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=__studioTs&render=explicit'
+      s.async = false // see assets/waline-turnstile-prewarm.js: Cloudflare rejects some calls when api.js is async
+      document.head.appendChild(s)
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        if (es.some(function (e) { return e.isIntersecting })) { io.disconnect(); loadTurnstile() }
+      }, { rootMargin: '600px 0px' })
+      io.observe(f)
+    } else loadTurnstile()
+    f.addEventListener('focusin', loadTurnstile)
+
+    function getToken(ms) {
+      if (token) return Promise.resolve(token)
+      return new Promise(function (resolve) {
+        waiters.push(resolve)
+        setTimeout(function () { resolve(token) }, ms)
+      })
+    }
+    function val(n) { return (f.elements[n] && f.elements[n].value || '').trim() }
+    function mailtoHref() {
+      var lines = ['称呼：' + val('name'), '联系方式：' + val('contact'), '', '项目背景：', val('background'), '',
+        '想解决的问题：', val('problem'), '', '预算区间：' + val('budget'), '希望开始时间：' + val('when')]
+      return 'mailto:amefys@gmail.com?subject=' + encodeURIComponent('[工作室咨询] ' + val('name')) +
+        '&body=' + encodeURIComponent(lines.join('\n'))
+    }
+    function say(text, fallback) {
+      status.textContent = text
+      if (fallback) {
+        var a = document.createElement('a')
+        a.className = 'inline'; a.href = mailtoHref(); a.textContent = '改用邮件发送'
+        status.appendChild(document.createTextNode(' ')); status.appendChild(a)
+      }
+    }
+    var busy = false
     f.addEventListener('submit', function (e) {
       e.preventDefault()
-      var v = function (n) { return (f.elements[n] && f.elements[n].value || '').trim() }
-      var lines = [
-        '称呼：' + v('name'), '联系方式：' + v('contact'), '',
-        '项目背景：', v('background'), '', '想解决的问题：', v('problem'), '',
-        '预算区间：' + v('budget'), '希望开始时间：' + v('when')
-      ]
-      location.href = 'mailto:amefys@gmail.com?subject=' + encodeURIComponent('[工作室咨询] ' + v('name')) +
-        '&body=' + encodeURIComponent(lines.join('\n'))
+      if (busy) return
+      busy = true; loadTurnstile()
+      var btn = f.querySelector('button[type=submit]'); btn.disabled = true
+      say('正在提交……')
+      getToken(20000).then(function (t) {
+        if (!t) throw new Error('captcha')
+        var body = { turnstile: t }
+        ;['name', 'contact', 'background', 'problem', 'budget', 'when', 'website'].forEach(function (k) { body[k] = val(k) })
+        return fetch('/api/studio', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) })
+      }).then(function (res) {
+        return res.json().then(function (d) { return { ok: res.ok && d.ok, d: d } })
+      }).then(function (r) {
+        if (r.ok) { f.reset(); say('已收到，我们会在 3 个工作日内回复你。'); return }
+        if (r.d.error === 'rate_limited') say('提交得太频繁了，请稍后再试，或者', true)
+        else say('提交没有成功，可以稍后再试，或者', true)
+      }).catch(function () {
+        say('提交没有成功，可以稍后再试，或者', true)
+      }).then(function () {
+        busy = false; btn.disabled = false; token = ''
+        if (widget !== null && window.turnstile) try { window.turnstile.reset(widget) } catch (err) {}
+      })
     })
   })();
 </script>
