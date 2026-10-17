@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://api.amefys.com; object-src 'none'; base-uri 'none'; form-action 'self'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>我的账号 — AMEFYS</title>
+<meta name="description" content="登录 AMEFYS 账号，查看会员状态、今天的额度、购买识别码和订单。">
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+
+
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 20px 60px; min-height: 70vh; }
+  h1 { font-size: 32px; letter-spacing: -0.8px; font-weight: 800; margin: 0 0 6px; }
+  .sub { color: var(--text-2); font-size: 14px; margin: 0 0 28px; line-height: 1.7; }
+  .sub a, .card a.link { color: var(--gold); }
+  .card { padding: 22px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); margin-bottom: 16px; }
+  .card > h2 { font-size: 15px; margin: 0 0 14px; font-weight: 700; }
+  .card > h2 small { font-weight: 500; color: var(--text-3); font-size: 12px; margin-left: 8px; }
+  .muted { color: var(--text-3); font-size: 13px; }
+  .err { color: #f87171; font-size: 13px; margin: 10px 0 0; }
+  .ok-note { color: var(--emerald); font-size: 13px; margin: 10px 0 0; line-height: 1.6; }
+  [hidden] { display: none !important; }
+
+  /* auth */
+  .auth { max-width: 380px; margin: 0 auto; }
+  .field { display: block; margin-bottom: 14px; }
+  .field span { display: block; font-size: 12.5px; color: var(--text-2); margin-bottom: 6px; }
+  .field input { width: 100%; height: 42px; padding: 0 12px; border-radius: 10px; font-size: 15px;
+    background: rgba(255,255,255,.04); border: 0.5px solid var(--hairline-strong); color: var(--text); }
+  .field input:focus { outline: 2px solid rgba(232,199,121,.5); outline-offset: 1px; }
+  .btn-main { width: 100%; height: 42px; border: 0; border-radius: 21px; cursor: pointer; font-size: 15px; font-weight: 700;
+    background: linear-gradient(180deg,#f3d995,#b8924a); color: #1a1206; box-shadow: 0 6px 22px rgba(212,175,106,.3); margin-top: 6px; }
+  .btn-main:disabled { opacity: .55; cursor: default; }
+  .alt { display: flex; gap: 18px; justify-content: center; margin-top: 16px; }
+  .alt button { background: none; border: 0; color: var(--text-2); font-size: 13px; cursor: pointer; padding: 0; }
+  .alt button:hover { color: var(--gold); }
+  .auth .hint { text-align: center; margin-top: 18px; }
+
+  /* account */
+  .who { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+  .who span { color: var(--text-2); font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; }
+  .btn-sm { height: 30px; padding: 0 14px; border-radius: 15px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    border: 0.5px solid var(--hairline-strong); background: rgba(255,255,255,.04); color: var(--text); white-space: nowrap; }
+  .btn-sm:hover { border-color: rgba(232,199,121,.5); }
+  .btn-sm:disabled { opacity: .5; cursor: default; }
+  .tier { display: inline-block; font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
+  .tier[data-tone="pro"] { color: var(--gold); }
+  .tier[data-tone="bad"] { color: #f87171; }
+  .member-line { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .member-line p { margin: 0; color: var(--text-2); font-size: 14px; }
+  #member-upgrade { margin-top: 14px; display: inline-flex; }
+  .btn-gold { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border-radius: 17px; font-size: 13px; font-weight: 700;
+    background: linear-gradient(180deg,#f3d995,#b8924a); color: #1a1206; }
+
+  .quotas { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .q-head { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; }
+  .q-head span { color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .q-bar { height: 6px; border-radius: 3px; background: rgba(255,255,255,.07); margin: 7px 0 4px; overflow: hidden; }
+  .q-bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg,#b8924a,#f3d995); }
+  .quotas small { color: var(--text-3); font-size: 11.5px; }
+
+  .ref { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .ref code { font-family: ui-monospace,"SF Mono",Consolas,monospace; font-size: 22px; font-weight: 700; color: var(--gold);
+    letter-spacing: 1px; background: rgba(232,199,121,.08); padding: 4px 12px; border-radius: 8px; }
+  .ref-steps { margin: 12px 0 0; color: var(--text-2); font-size: 13px; line-height: 1.7; }
+
+  .orders { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .orders th, .orders td { text-align: left; padding: 10px 8px; border-bottom: 0.5px solid var(--hairline); }
+  .orders th { color: var(--text-3); font-size: 12px; font-weight: 600; }
+  .orders td { color: var(--text-2); font-variant-numeric: tabular-nums; }
+  .orders td:nth-child(2) { color: var(--text); font-weight: 600; }
+  .orders td[data-tone="ok"] { color: var(--emerald); }
+  .orders td[data-tone="warn"] { color: var(--amber); }
+  .orders td[data-tone="muted"] { color: var(--text-3); }
+  .orders tr:last-child td { border-bottom: 0; }
+  .card .foot { margin: 12px 0 0; font-size: 12.5px; color: var(--text-3); line-height: 1.7; }
+  .card .foot a { color: var(--gold); }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+
+
+  @media (max-width: 760px) {
+    .nav .links { display: none; }
+    h1 { font-size: 26px; }
+    .orders thead { display: none; }
+    .orders tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 0.5px solid var(--hairline); }
+    .orders td { padding: 0; border: 0; }
+    .orders td:nth-child(1) { grid-column: 1 / -1; font-size: 12px; color: var(--text-3); }
+    .orders td:nth-child(3) { text-align: right; }
+    .orders td:nth-child(5) { text-align: right; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="guestbook.html">留言板</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" role="menuitem">技术博客</a>
+            <a href="about.html" role="menuitem">关于</a>
+            <a href="donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main class="page">
+    <h1>我的账号</h1>
+    <p class="sub">和软件、<a href="bp/">手机版 BP</a> 用的是同一个账号。这里只能查看，购买请看 <a href="pro.html">Pro 会员</a>。</p>
+
+    <p id="state-loading" class="muted">正在读取登录状态…</p>
+    <p id="load-error" class="err" hidden>页面没能加载完整，请刷新重试。</p>
+
+    <section id="view-auth" class="card auth" hidden>
+      <h2 id="auth-title">登录</h2>
+      <form id="auth-form" novalidate>
+        <label class="field"><span>邮箱</span><input id="auth-email" type="email" autocomplete="email" required></label>
+        <label class="field" id="auth-password-field"><span>密码</span><input id="auth-password" type="password" autocomplete="current-password" minlength="6" required></label>
+        <button id="auth-submit" class="btn-main" type="submit">登录</button>
+        <p id="auth-error" class="err" role="alert" hidden></p>
+        <p id="auth-notice" class="ok-note" role="status" hidden></p>
+      </form>
+      <div class="alt">
+        <button type="button" data-mode="login">已有账号，去登录</button>
+        <button type="button" data-mode="register">没有账号？注册</button>
+        <button type="button" data-mode="reset">忘记密码</button>
+      </div>
+    </section>
+
+    <div id="view-account" hidden>
+      <div class="who"><span>已登录：<b id="acc-email"></b></span><button id="acc-signout" class="btn-sm" type="button">退出登录</button></div>
+
+      <section class="card">
+        <h2>会员状态</h2>
+        <div class="member-line"><span id="member-tier" class="tier">…</span><p id="member-expiry"></p></div>
+        <p id="member-source" class="muted" hidden></p>
+        <a id="member-upgrade" class="btn-gold" href="pro.html" hidden>了解 Pro 会员</a>
+        <p id="member-error" class="err" hidden>会员状态没读到，请刷新重试。</p>
+      </section>
+
+      <section id="quota-card" class="card" hidden>
+        <h2>今天的额度<small>电脑和手机共用</small></h2>
+        <ul id="quota-list" class="quotas"></ul>
+      </section>
+
+      <section class="card">
+        <h2>购买识别码<small>每个账号固定一个</small></h2>
+        <div class="ref"><code id="ref-code">AMF-······</code><button id="ref-copy" class="btn-sm" type="button" disabled>复制</button></div>
+        <p id="ref-error" class="err" hidden>识别码没读到，请刷新重试。</p>
+        <p class="ref-steps">在爱发电买 Pro 时，把识别码粘贴到「留言」里，付款后一般 1 分钟内自动开通到这个账号。<a class="link" href="pro.html#how">怎么买</a></p>
+      </section>
+
+      <section class="card">
+        <h2>我的订单<small>最近 50 笔</small></h2>
+        <table id="orders-table" class="orders" hidden>
+          <thead><tr><th>时间</th><th>内容</th><th>金额</th><th>订单号</th><th>状态</th></tr></thead>
+          <tbody id="orders-body"></tbody>
+        </table>
+        <p id="orders-empty" class="muted" hidden>还没有订单。</p>
+        <p id="orders-error" class="err" hidden>订单没读到，请刷新重试。</p>
+        <p class="foot">订单号只显示爱发电订单号的后 6 位，申请退款或咨询时报这 6 位就行。付了款但这里没有？可能是付款时没填识别码，请看 <a href="pro.html">Pro 页面</a>的常见问题或发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>。退款规则见<a href="refund.html">退款政策</a>。</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="licenses.html">许可</a>
+      <a href="pro.html">会员</a>
+      <a href="account.html">我的账号</a>
+      <a href="refund.html">退款</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script src="assets/vendor/supabase/supabase-js-2.105.4.js"></script>
+<script src="assets/account-view.js?v=1"></script>
+<script src="assets/account.js?v=1"></script>
+
+</body></html>
