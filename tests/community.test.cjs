@@ -47,3 +47,15 @@ test('lives in the hero: one chip per card, hover / tap / keyboard wired', () =>
   // a tap focuses too: focus must only open for the keyboard, or a tap could never close
   assert.match(page, /:focus-visible/)
 })
+
+// 2026-10-17: the tip code moved from a 614 KB PNG-in-SVG to a 4 KB PNG
+// generated from community.json, so it can be swapped with one command.
+test('every tip QR on the site is the generated PNG', () => {
+  assert.match(data.tip.url, /^wxp:\/\//)
+  for (const f of ['donate.html', 'en/donate.html', 'about.html', 'guestbook.html', 'changelog.html']) {
+    const html = read(f)
+    assert.doesNotMatch(html, /qr-tip\.svg/, f)
+    assert.match(html, /assets\/qr-tip\.png/, f)
+  }
+  assert.ok(readFileSync(resolve(__dirname, '..', 'assets/qr-tip.png')).length > 500)
+})
