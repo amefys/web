@@ -98,6 +98,12 @@
   .tier { display: inline-block; font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
   .tier[data-tone="pro"] { color: var(--gold); }
   .tier[data-tone="bad"] { color: #f87171; }
+  /* crown PRO badge — same mark as the desktop app (ProBadge) */
+  .pro-badge { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 9px 0 8px; border-radius: 999px;
+    border: 1px solid transparent; background: linear-gradient(#20160a,#20160a) padding-box, linear-gradient(135deg,#f0d38a,#9a7b3f) border-box;
+    color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: .12em; align-self: center;
+    box-shadow: 0 0 10px rgba(232,199,121,.4), inset 0 0 6px rgba(232,199,121,.18); }
+  .card.paid { border-color: rgba(232,199,121,.45); background: radial-gradient(120% 90% at 0 0, rgba(232,199,121,.14), transparent 60%), var(--surface); box-shadow: 0 0 24px rgba(232,199,121,.1); }
   .member-line { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
   .member-line p { margin: 0; color: var(--text-2); font-size: 14px; }
   #member-upgrade { margin-top: 14px; display: inline-flex; }
@@ -212,9 +218,9 @@
     <div id="view-account" hidden>
       <div class="who"><span>已登录：<b id="acc-email"></b></span><button id="acc-signout" class="btn-sm" type="button">退出登录</button></div>
 
-      <section class="card">
+      <section id="member-card" class="card">
         <h2>会员状态</h2>
-        <div class="member-line"><span id="member-tier" class="tier">…</span><p id="member-expiry"></p></div>
+        <div class="member-line"><span id="member-badge" class="pro-badge" hidden><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5 8 12l4-6.5 4 6.5 4.5-3.5L19 18H5z"/></svg><span id="member-badge-text">PRO</span></span><span id="member-tier" class="tier">…</span><p id="member-expiry"></p></div>
         <p id="member-source" class="muted" hidden></p>
         <a id="member-upgrade" class="btn-gold" href="pro.html" hidden>了解 Pro 会员</a>
         <p id="member-error" class="err" hidden>会员状态没读到，请刷新重试。</p>

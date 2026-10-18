@@ -88,6 +88,10 @@
     var tier = $('member-tier')
     tier.textContent = m.tier
     tier.setAttribute('data-tone', m.tone)
+    var paid = m.tone === 'pro'
+    show('member-badge', paid)
+    text('member-badge-text', m.badge || 'PRO')
+    $('member-card').classList.toggle('paid', paid)
     text('member-expiry', m.expiry)
     text('member-source', m.source || '')
     show('member-source', Boolean(m.source))

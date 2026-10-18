@@ -24,6 +24,7 @@ test('member: Pro with an end date shows the date and days left', () => {
   assert.strictEqual(m.tier, 'Pro 版')
   assert.strictEqual(m.expiry, '有效期至 ' + View.localDate(end) + '（还剩 30 天）')
   assert.strictEqual(m.source, '开通方式：爱发电')
+  assert.strictEqual(m.badge, 'PRO')
 })
 
 test('member: Pro without an end date is permanent', () => {

@@ -63,6 +63,7 @@
       banned: false,
       tier: TIER[tier] || tier,
       tone: paid ? 'pro' : 'free',
+      badge: tier === 'custom' ? '定制' : 'PRO',
       expiry: expiry,
       source: paid && SOURCE[ent.source] ? '开通方式：' + SOURCE[ent.source] : ''
     }
