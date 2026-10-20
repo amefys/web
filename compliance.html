@@ -239,7 +239,7 @@
     <section class="s">
       <h2>简要结论</h2>
       <div class="tldr">
-        <p>AMEFYS 只通过 Valve <strong>官方支持</strong>的 GSI（Game State Integration）接口读取数据，不修改游戏内存、不注入 DLL、不拦截网络、不读取敌方隐藏信息。聊天发送通过游戏自带的 <code>.cfg + alias + bind</code> 机制 — 跟用户在 console 里手动配置完全等价。</p>
+        <p>AMEFYS 只通过 Valve <strong>官方支持</strong>的 GSI（Game State Integration）接口读取数据，不修改游戏内存、不注入 DLL、不拦截网络、不读取敌方隐藏信息。发送聊天时，AMEFYS 先把文字放进剪贴板，再替你按下打开聊天框、粘贴、发送这几个键，用的是游戏自带的聊天框 — 跟你自己打字发出去完全一样。</p>
         <p>如果你在意"装这个软件会不会被 VAC 封号" — <strong>答案是不会</strong>。我们做的事情在 Valve 的政策允许范围内，跟你装一个 Steam Workshop 上的 HUD 修改器同等性质。</p>
       </div>
     </section>
@@ -255,7 +255,7 @@
             <li>通过官方 GSI 接口读取你的英雄、装备、对局状态</li>
             <li>用本地规则 + AI 给出装备推荐</li>
             <li>调用翻译 API 翻译你看到的聊天内容</li>
-            <li>通过 <code>.cfg + alias + bind</code> 帮你发送预制聊天文本</li>
+            <li>替你把选好的文字粘贴进游戏自带的聊天框并发送（剪贴板 + 模拟按键）</li>
             <li>「关键时间提醒」只读对局时钟（GSI 的 <code>map.clock_time</code>）提醒你自己；其中「到点自动发送到队伍频道」是全应用唯一一项按游戏状态自动发消息的选项 —— <strong>默认关闭</strong>、需手动开启并确认警告、每个节点每次仅发一条带时间的预制短语</li>
             <li>在本地 SQLite 存对局历史（可导出 / 删除）</li>
             <li>登录用户的对局数据可选择同步到 Supabase 云端</li>
@@ -294,9 +294,9 @@
             <td>官方支持，有公开文档</td>
           </tr>
           <tr>
-            <td>cfg / alias / bind</td>
-            <td>读不到任何信息；<strong>写</strong>聊天内容到 chat box（等价于你手动 console 命令）</td>
-            <td>游戏内置脚本机制</td>
+            <td>剪贴板 + 模拟按键</td>
+            <td>读不到任何信息；发消息时把文字放进剪贴板，再按打开聊天框（Enter，队伍频道 Shift+Enter）、粘贴（Ctrl+V）、发送（Enter），每条约 1 秒，和你自己打字一样。发完约半秒后把你原来剪贴板里的文字放回去（这期间你自己复制了新东西的话，以你的为准）</td>
+            <td>操作系统通用的键盘输入，不经过游戏的任何接口</td>
           </tr>
           <tr>
             <td>Steam Web API</td>
@@ -357,7 +357,7 @@
       <ul class="audit-list">
         <li><strong>网络层</strong>：用 Wireshark 抓 DOTA 2 进程的全部流量 — 你会发现 AMEFYS 跟它完全无关</li>
         <li><strong>进程层</strong>：用 Process Explorer 看 DOTA 2 句柄 — AMEFYS 不会出现在任何句柄持有者列表里</li>
-        <li><strong>文件层</strong>：看 DOTA 2 安装目录 — 我们只往 <code>cfg/gamestate_integration_amefys.cfg</code> 写过一个文件，其他文件从不动</li>
+        <li><strong>文件层</strong>：看 DOTA 2 安装目录 — 我们只在 <code>cfg</code> 目录里写过三个文件：GSI 必需的 <code>gamestate_integration/gamestate_integration_amefys.cfg</code>，以及早期发送方式留下的 <code>amefys_autoexec.cfg</code> 和 <code>amefys_chat.cfg</code>（现在发消息已经不用这两个文件）。其他文件从不动</li>
         <li><strong>代码层</strong>：仓库公开后（beta 阶段后）可逐行审计</li>
       </ul>
       <p>发现问题 → <a href="mailto:amefys@gmail.com?subject=AMEFYS%20安全反馈" class="link">amefys@gmail.com</a> — 我们会公开回应。</p>
