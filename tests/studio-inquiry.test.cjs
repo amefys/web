@@ -31,10 +31,10 @@ function fakeFetch({ turnstile = true, resend = 200 } = {}) {
 
 const GOOD = { name: '张先生', contact: 'zhang@example.com', background: '三人团队做 SaaS', problem: '国内登录时好时坏', budget: '1 万–10 万元', when: '一个月内', turnstile: 'tok' }
 const ENV = (over = {}) => ({ INQUIRIES: kv(), TURNSTILE_SECRET: 's', RESEND_API_KEY: 'r', RESEND_FROM: 'AMEFYS 工作室 <studio@amefys.com>', NOTIFY_TO: 'amefys@gmail.com', ...over })
-const req = (body, { method = 'POST', ip = '203.0.113.9' } = {}) =>
+const req = (body, { method = 'POST', ip = '203.0.113.9', origin } = {}) =>
   new Request('https://amefys.com/api/studio', {
     method,
-    headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip },
+    headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip, ...(origin ? { origin } : {}) },
     body: method === 'POST' ? (typeof body === 'string' ? body : JSON.stringify(body)) : undefined
   })
 const inquiries = (env) => [...env.INQUIRIES.data.keys()].filter((k) => k.startsWith('inq:'))
@@ -112,6 +112,30 @@ test('only POST is accepted', async () => {
   const { handle } = await load()
   const res = await handle(req(null, { method: 'GET' }), ENV(), { fetch: fakeFetch().f })
   assert.equal(res.status, 405)
+})
+
+test('the amefys.cn mirror may post cross-origin; other origins get no CORS grant', async () => {
+  const { handle } = await load()
+  const { f } = fakeFetch()
+  const pre = await handle(req(null, { method: 'OPTIONS', origin: 'https://amefys.cn' }), ENV(), { fetch: f })
+  assert.equal(pre.status, 204)
+  assert.equal(pre.headers.get('access-control-allow-origin'), 'https://amefys.cn')
+  assert.match(pre.headers.get('access-control-allow-methods'), /POST/)
+  assert.match(pre.headers.get('access-control-allow-headers'), /content-type/)
+
+  const env = ENV()
+  const ok = await handle(req(GOOD, { origin: 'https://amefys.cn' }), env, { fetch: f })
+  assert.equal(ok.status, 200)
+  assert.equal(ok.headers.get('access-control-allow-origin'), 'https://amefys.cn')
+  assert.equal(ok.headers.get('vary'), 'Origin')
+  const refused = await handle(req({}, { origin: 'https://amefys.cn' }), env, { fetch: f })
+  assert.equal(refused.headers.get('access-control-allow-origin'), 'https://amefys.cn', 'errors are readable too')
+
+  const evil = await handle(req(null, { method: 'OPTIONS', origin: 'https://evil.example' }), ENV(), { fetch: f })
+  assert.equal(evil.status, 405)
+  assert.equal(evil.headers.get('access-control-allow-origin'), null)
+  const same = await handle(req(GOOD), ENV(), { fetch: f })
+  assert.equal(same.headers.get('access-control-allow-origin'), null, 'same-origin posts are unchanged')
 })
 
 test('the page posts to the Worker and keeps the email fallback', () => {

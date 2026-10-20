@@ -127,7 +127,7 @@ work normally via GitHub Pages.
 ## `studio-inquiry.js` — `/api/studio`, the /studio/ contact form (2026-10-17)
 
 POST JSON from `studio/index.html`. Order: validate → Turnstile (widget
-**amefys studio**, invisible, domain amefys.com) → per-IP limit (5/hour) →
+**amefys studio**, invisible, domains amefys.com + amefys.cn) → per-IP limit (5/hour) →
 store in KV → email via Resend. The inquiry is stored before the email is
 tried, so an email failure never loses it.
 
@@ -136,7 +136,10 @@ tried, so an email failure never loses it.
 - Route `amefys.com/api/studio` → `studio-inquiry` (created via the API on 2026-10-17).
 - Secrets: `TURNSTILE_SECRET` (read it back from the widget via the API when
   redeploying), `RESEND_API_KEY` (optional; without it inquiries are only stored).
-- Deploy: `worker/deploy-studio-inquiry.sh` (needs `KV_ID`, `TURNSTILE_SECRET`).
+- Deploy: `worker/deploy-studio-inquiry.sh` (needs `KV_ID`; secrets are kept across uploads,
+  pass `TURNSTILE_SECRET` / `RESEND_API_KEY` only to change them).
+- CORS: only `https://amefys.cn` (the mainland mirror on ali-99) may post cross-origin
+  (`ALLOWED_ORIGINS`); it posts here directly so the per-IP limit and Turnstile see the visitor.
 
 Read stored inquiries: `wrangler kv key list --namespace-id <KV_ID> --prefix inq:`
 then `wrangler kv key get --namespace-id <KV_ID> <key>`.

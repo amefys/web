@@ -3,7 +3,9 @@
  *
  * POST https://amefys.com/api/studio  (Worker route on the amefys.com zone, so
  * the form posts same-origin: no CORS, and no workers.dev hostname, which is
- * often unreachable from mainland China).
+ * often unreachable from mainland China). The amefys.cn mirror (ali-99) posts
+ * here cross-origin (ALLOWED_ORIGINS), so inquiries stay in one place and the
+ * per-IP limit sees the visitor, not a proxy.
  *
  * Order matters: validate → Turnstile → rate limit → store → email.
  * The inquiry is written to KV *before* the email goes out, so a Resend outage
@@ -97,7 +99,33 @@ async function sendEmail(fetchImpl, env, f, meta) {
   }
 }
 
+/** Other sites whose /studio/ page posts here: the amefys.cn mirror. */
+export const ALLOWED_ORIGINS = ['https://amefys.cn']
+
+function corsHeaders(request) {
+  const origin = request.headers.get('origin')
+  return origin && ALLOWED_ORIGINS.includes(origin) ? { 'access-control-allow-origin': origin, vary: 'Origin' } : null
+}
+
 export async function handle(request, env, deps = {}) {
+  const cors = corsHeaders(request)
+  if (request.method === 'OPTIONS' && cors) {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        ...cors,
+        'access-control-allow-methods': 'POST',
+        'access-control-allow-headers': 'content-type',
+        'access-control-max-age': '86400'
+      }
+    })
+  }
+  const res = await respond(request, env, deps)
+  if (cors) for (const [k, v] of Object.entries(cors)) res.headers.set(k, v)
+  return res
+}
+
+async function respond(request, env, deps) {
   const fetchImpl = deps.fetch || fetch
   const now = deps.now || Date.now()
   if (request.method !== 'POST') return json(405, { ok: false, error: 'method' })
