@@ -363,7 +363,7 @@
       <ul class="audit-list">
         <li><strong>网络层</strong>：用 Wireshark 抓 DOTA 2 进程的全部流量 — 你会发现 AMEFYS 跟它完全无关</li>
         <li><strong>进程层</strong>：用 Process Explorer 看 DOTA 2 句柄 — AMEFYS 不会出现在任何句柄持有者列表里</li>
-        <li><strong>文件层</strong>：看 DOTA 2 安装目录 — 我们只在 <code>cfg</code> 目录里写过三个文件：GSI 必需的 <code>gamestate_integration/gamestate_integration_amefys.cfg</code>，以及早期发送方式留下的 <code>amefys_autoexec.cfg</code> 和 <code>amefys_chat.cfg</code>（现在发消息已经不用这两个文件）。其他文件从不动</li>
+        <li><strong>文件层</strong>：看 DOTA 2 安装目录 — 我们只在 <code>cfg</code> 目录里写 GSI 必需的 <code>gamestate_integration/gamestate_integration_amefys.cfg</code> 这一个文件。用过早期版本的话，那时留下的 <code>amefys_chat.cfg</code> 会被自动删除，<code>amefys_autoexec.cfg</code> 会被清空成只有一行注释（保留这个空文件，是为了早期版本加过 <code>+exec amefys_autoexec</code> 启动项的电脑启动游戏时不报错，你不用去改启动项）。其他文件从不动</li>
         <li><strong>代码层</strong>：仓库公开后（beta 阶段后）可逐行审计</li>
       </ul>
       <p>发现问题 → <a href="mailto:amefys@gmail.com?subject=AMEFYS%20安全反馈" class="link">amefys@gmail.com</a> — 我们会公开回应。</p>
