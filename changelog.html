@@ -176,7 +176,6 @@
           <div class="nav-more-panel" role="menu">
             <a href="index.html#faq" role="menuitem">常见问题</a>
             <a href="/blog/" role="menuitem">技术博客</a>
-            <a href="/studio/" role="menuitem">服务</a>
             <a href="about.html" role="menuitem">关于</a>
             <a href="donate.html" role="menuitem">捐助</a>
           </div>
@@ -200,7 +199,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-10-17</div>
+      <div class="updated">最近更新：2026-10-22</div>
     </div>
 
     <!-- 赞助 -->
@@ -225,14 +224,37 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.33.3-beta.2</h3>
-        <p><strong>正式版已经走到 0.33.3，Beta 里的新东西都进了正式版，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.0</h3>
+        <p><strong>选人时不用再手动截图了。</strong>打开 BP 选「融合模式」，进入选人阶段会自动认出双方选了谁、禁了谁，推荐直接标在游戏自己的英雄墙上。另外悬浮窗多了「清透玻璃 / 烟灰玻璃」两种样式，关键时间提醒可以语音播报。想先试新功能的装这个，遇到问题欢迎反馈。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+
+    <!-- ── 0.34.0-beta.0 ── -->
+    <article class="release beta" id="v0-34-0-beta-0">
+      <header><h2>0.34.0-beta.0</h2><span class="tag tag-beta">Beta</span><span class="date">2026-10-22</span></header>
+      <p class="lead">选人时不用再手动截图了，推荐会直接标在游戏的英雄墙上。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>选人自动识别：</strong>打开 BP 后选「融合模式」，进入选人阶段就会自动认出双方选了谁、禁了谁，推荐直接画在游戏自己的英雄墙上，AMEFYS 只留一条小悬浮条，不挡画面。也可以选「自动模式」，在 AMEFYS 面板里看推荐；或者选「点击截图」，自己按截图。选人结束、进入对局后，BP 会自动收起。</li>
+          <li><strong>第一次用有演示：</strong>等待选人时可以点「看一遍演示」，30 秒看懂怎么用。第一次自动填入英雄、第一次出现选人建议时，也会各有一句提示。</li>
+          <li><strong>悬浮窗玻璃样式：</strong>点悬浮窗标题栏的「◐」，可以把悬浮窗换成无色的「清透玻璃」或「烟灰玻璃」，透过它能看到游戏。设置 → DOTA 2 里也能改。</li>
+          <li><strong>关键时间提醒会说话了：</strong>提醒到点时可以语音播报，有中文和英文，俄语界面用系统语音。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>改进</h4>
+        <ul>
+          <li><strong>提醒条固定在屏幕左上角：</strong>不再跟着悬浮窗的位置走，宽度也固定了。</li>
+        </ul>
+      </div>
+
+      <div class="callout">自动识别每 2 秒看一次屏幕，截图只在你的电脑上识别，不保存、不上传；悬浮窗上的小灯每闪一下，就是看了一次。目前只支持中文客户端的默认选人布局。Windows 10 较老的版本（2004 之前）上，截屏的瞬间悬浮窗可能会闪一下。</div>
+    </article>
 
     <!-- ── 0.33.3 ── -->
     <article class="release" id="v0-33-3">
