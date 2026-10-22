@@ -56,3 +56,25 @@ test('--first puts pages ahead of the rotation window without duplicates or over
   ])
   assert.deepEqual(withFirst([], win, 2), win.slice(0, 2))
 })
+
+// 2026-10-22: amefys.cn (mainland mirror on ali-99) takes over Baidu. Same sitemap,
+// other host; the workflow picks the site from the BAIDU_SITE repo variable.
+test('sitemap urls move to the chosen site, and --urls only accepts that site', async () => {
+  const { sitemapUrls, explicitUrls, siteFrom } = await load()
+  const xml = '<url><loc>https://amefys.com/</loc></url><url><loc>https://amefys.com/blog/a.html</loc></url>'
+  assert.deepEqual(sitemapUrls(xml, 'https://amefys.cn'), ['https://amefys.cn/', 'https://amefys.cn/blog/a.html'])
+  assert.deepEqual(sitemapUrls(xml, 'https://amefys.com'), ['https://amefys.com/', 'https://amefys.com/blog/a.html'])
+  assert.deepEqual(explicitUrls('/blog/,https://amefys.com/x.html', 'https://amefys.cn'), ['https://amefys.cn/blog/'])
+  assert.equal(siteFrom({}), 'https://amefys.com')
+  assert.equal(siteFrom({ BAIDU_SITE: 'https://amefys.cn/' }), 'https://amefys.cn')
+  assert.throws(() => siteFrom({ BAIDU_SITE: 'https://evil.example' }), /BAIDU_SITE/)
+})
+
+test('priority pages follow the site too', async () => {
+  const { orderUrls } = await load()
+  const all = ['https://amefys.cn/heroes/axe.html', 'https://amefys.cn/about.html']
+  assert.deepEqual(orderUrls(all, 'https://amefys.cn'), [
+    'https://amefys.cn/', 'https://amefys.cn/about.html', 'https://amefys.cn/heroes/axe.html'
+  ])
+})
+

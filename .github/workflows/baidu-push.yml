@@ -1,9 +1,11 @@
 name: Baidu URL push
 
-# Feeds amefys.com pages into Baidu's crawl queue (普通收录 API). Runs after
+# Feeds site pages into Baidu's crawl queue (普通收录 API). Runs after
 # every content deploy and once a day for the long-tail rotation. A no-op
 # until the BAIDU_PUSH_TOKEN secret exists, so forks and the pre-registration
-# period stay green.
+# period stay green. Which site: the BAIDU_SITE repo variable (unset =
+# https://amefys.com; https://amefys.cn once that mirror is verified in
+# ziyuan.baidu.com — scripts/baidu-push.mjs).
 
 on:
   schedule:
@@ -43,6 +45,7 @@ jobs:
         if: ${{ env.BAIDU_PUSH_TOKEN != '' }}
         env:
           BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+          BAIDU_SITE: ${{ vars.BAIDU_SITE }}
           LIMIT: ${{ github.event.inputs.limit || '10' }}
           URLS: ${{ github.event.inputs.urls || '' }}
           BEFORE: ${{ github.event.before }}
