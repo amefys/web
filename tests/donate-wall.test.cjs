@@ -136,7 +136,7 @@ test('an empty tier or an empty notes list is hidden, not shown as a bare headin
 
 test('English page uses English labels', async () => {
   const ids = await run(WALL, 'en')
-  assert.equal(ids['wall-new'].children[0].textContent, '☕Anonymous friend')
+  assert.equal(ids['wall-new'].children[0].textContent, '☕Anonymous')
   assert.equal(ids['wall-new'].children[1].attrs['data-tip'], 'Since Oct 2026 · Afdian')
   assert.match(ids['wall-posts'].children[1].textContent, /yesterdayWeChat/)
 })
