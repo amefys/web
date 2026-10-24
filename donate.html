@@ -177,6 +177,8 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
+<link rel="stylesheet" href="/assets/donor-wall.css?v=1">
+<script src="/assets/donor-wall.js?v=1" defer></script>
 </head>
 <body>
 
@@ -220,9 +222,9 @@
 
     <div class="page-hero">
       <div class="eyebrow">支持项目</div>
-      <h1>AMEFYS 一直<em>免费</em>。</h1>
-      <p>如果它帮你赢过一局、或者让你在全场骂战里没落下风，可以请开发者喝杯咖啡。</p>
-      <p style="color: var(--text-3); font-size: 13.5px;">但这永远只是心意 —— 不捐助，功能一个都不会少。</p>
+      <h1>请开发者喝杯<em>咖啡</em>。</h1>
+      <p>AMEFYS 是一个人在做的项目。如果它帮你赢过一局，或者让你在全场骂战里没落下风，欢迎支持一下。</p>
+      <p style="color: var(--text-3); font-size: 13.5px;">捐助只是心意，不会解锁任何功能，也不是会员。</p>
     </div>
 
     <!-- 三条承诺 -->
@@ -231,7 +233,7 @@
         <div class="promise">
           <div class="promise-icon">🆓</div>
           <div class="promise-title">核心功能免费</div>
-          <div class="promise-desc">出装推荐、对局记录、悬浮窗、主题都跑在你电脑上，不设付费墙，也不做「捐助版」；云端翻译与语音每天有免费额度</div>
+          <div class="promise-desc">出装推荐、对局记录、悬浮窗和主题都能免费用；云端翻译与语音每天有免费额度。</div>
         </div>
         <div class="promise">
           <div class="promise-icon">🚫</div>
@@ -272,6 +274,16 @@
           <div class="way-foot">App 内购买 Pro 会员的入口即将上线<br><a href="refund.html" class="link">退款政策</a></div>
         </div>
       </div>
+    </section>
+
+    <!-- 捐助墙：assets/donor-wall.js 读 cdn.amefys.com/donors.json 填充；读不到就一直隐藏 -->
+    <section class="s" id="wall" hidden>
+      <h2>谢谢这些朋友</h2>
+      <p class="s-sub">已经有 <strong id="wall-total"></strong> 位朋友支持过 AMEFYS。每个人都一样，按加入的时间排，最新的在前面。</p>
+      <div class="wall-tier" data-wall-block><div class="wall-head">本月新朋友</div><div class="wall-grid" id="wall-new"></div></div>
+      <div class="wall-tier" data-wall-block><div class="wall-head">一路同行</div><div class="wall-grid" id="wall-old"></div></div>
+      <div class="wall-posts" id="wall-posts" data-wall-block><h3 class="wall-posts-title">他们说</h3></div>
+      <p class="wall-foot">爱发电的赞助每小时自动同步，没改过爱发电昵称的朋友显示为「匿名朋友」；微信打赏只能看到昵称，会手动录入。<br>买会员不算捐助，不会出现在这里。名字想改或想撤下来，去<a href="guestbook.html" class="link">留言板</a>说一声。</p>
     </section>
 
     <!-- 钱花在哪 -->

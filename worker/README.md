@@ -143,3 +143,25 @@ tried, so an email failure never loses it.
 
 Read stored inquiries: `wrangler kv key list --namespace-id <KV_ID> --prefix inq:`
 then `wrangler kv key get --namespace-id <KV_ID> <key>`.
+
+## `donor-wall.js` — `cdn.amefys.com/donors.json`, the wall on donate.html (2026-10-24)
+
+Hourly cron (minute 17). Reads afdian (`query-sponsor` + `query-order`, signed with the API
+token) and the WeChat list the ops panel keeps in KV, writes `donors.json` to the `amefys-cdn`
+bucket. `assets/donor-wall.js` on both donate pages reads it; if it fails, the wall stays hidden.
+
+- **Public file has no amounts, plans, payer ids or addresses.** Only donation plans count
+  (`DONATION_PLAN_IDS` + free-amount orders) — membership and goods buyers never agreed to be
+  listed. A new donation tier on afdian has to be added to `DONATION_PLAN_IDS` (the ops panel
+  lists skipped plans, so a missing one shows up there).
+- Default afdian nickname / avatar → anonymous tile; WeChat names masked unless confirmed.
+- KV `donor-wall` (binding `DONORS`) holds `manual`, `hidden`, `afdian-cache`; it is not in the
+  CDN bucket because everything there is public.
+- Admin endpoint on workers.dev (`/admin/state|manual|hide|refresh`, bearer `ADMIN_KEY`, any
+  other request 404s) — used by the ops panel's 捐助墙 card in the `amefys` repo.
+- Cache rule: `donors.json` shares the 5-minute rule with `stats.json`.
+
+```
+CLOUDFLARE_API_TOKEN=… CLOUDFLARE_ACCOUNT_ID=… KV_ID=… \
+  AFDIAN_USER_ID=… AFDIAN_API_TOKEN=… ADMIN_KEY=… worker/deploy-donor-wall.sh
+```
