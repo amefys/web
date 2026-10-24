@@ -320,13 +320,15 @@ async function kvJson(env, key, fallback) {
   return v == null ? fallback : v
 }
 
-async function publish(env, nowMs) {
+/** Build the wall from KV; `write: false` (the panel just looking) leaves the CDN file alone. */
+async function publish(env, nowMs, { write = true } = {}) {
   const [afdian, manual, hidden] = await Promise.all([
     kvJson(env, 'afdian-cache', null),
     kvJson(env, 'manual', []),
     kvJson(env, 'hidden', { donors: [], posts: [] })
   ])
   const wall = buildWall({ afdian, manual, hidden, nowMs })
+  if (!write) return { wall, afdian, manual, hidden }
   await env.CDN.put(PUBLIC_KEY, JSON.stringify(wall), {
     httpMetadata: { contentType: 'application/json', cacheControl: 'public, max-age=300' }
   })
@@ -383,7 +385,7 @@ export async function handleAdmin(request, env, fetchImpl, nowMs) {
   const { pathname } = new URL(request.url)
   try {
     if (request.method === 'GET' && pathname === '/admin/state') {
-      return reply(200, adminView(await publish(env, nowMs)))
+      return reply(200, adminView(await publish(env, nowMs, { write: false })))
     }
     if (request.method !== 'POST') return reply(405, { ok: false, error: 'method_not_allowed' })
     const body = await request.json().catch(() => null)
@@ -395,6 +397,13 @@ export async function handleAdmin(request, env, fetchImpl, nowMs) {
     if (pathname === '/admin/manual') {
       const list = await kvJson(env, 'manual', [])
       await env.DONORS.put('manual', JSON.stringify(editManual(list, body, nowMs, crypto.randomUUID().slice(0, 8))))
+      if (body.op === 'remove') {
+        // A removed entry's hide flags would otherwise linger forever.
+        const key = `wechat:${body.id}`
+        const hidden = await kvJson(env, 'hidden', { donors: [], posts: [] })
+        const drop = (xs) => (xs || []).filter((k) => k !== key)
+        await env.DONORS.put('hidden', JSON.stringify({ ...hidden, donors: drop(hidden.donors), posts: drop(hidden.posts) }))
+      }
       return reply(200, adminView(await publish(env, nowMs)))
     }
     if (pathname === '/admin/hide') {
