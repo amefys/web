@@ -252,3 +252,26 @@ test('admin endpoint: add, hide and refresh all republish the public file', asyn
   assert.equal(res.status, 200)
   assert.equal((await res.json()).error, null)
 })
+
+test('admin GET /admin/state only reads: the public file is not rewritten', async () => {
+  const { handleAdmin } = await load()
+  const { env, r2 } = fakeEnv()
+  const res = await handleAdmin(new Request('https://w/admin/state', { headers: { authorization: `Bearer ${ADMIN_KEY}` } }), env, afdianFetch().f, NOW)
+  assert.equal(res.status, 200)
+  assert.equal((await res.json()).wall.total, 0)
+  assert.equal(r2.has('donors.json'), false)
+})
+
+test('removing a WeChat entry also clears its hide flags', async () => {
+  const { handleAdmin } = await load()
+  const { env, kv } = fakeEnv()
+  const auth = { authorization: `Bearer ${ADMIN_KEY}`, 'content-type': 'application/json' }
+  const post = (path, body) => handleAdmin(new Request(`https://w${path}`, { method: 'POST', headers: auth, body: JSON.stringify(body) }), env, afdianFetch().f, NOW)
+  const { manual } = await (await post('/admin/manual', { op: 'add', name: '柠檬', msg: '加油' })).json()
+  const key = `wechat:${manual[0].id}`
+  await post('/admin/hide', { kind: 'donor', key, hidden: true })
+  await post('/admin/hide', { kind: 'post', key, hidden: true })
+  await post('/admin/hide', { kind: 'donor', key: 'afdian:keep', hidden: true })
+  await post('/admin/manual', { op: 'remove', id: manual[0].id })
+  assert.deepEqual(JSON.parse(kv.get('hidden')), { donors: ['afdian:keep'], posts: [] })
+})
