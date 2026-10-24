@@ -57,20 +57,23 @@
     s.style.background = hue(name)
     return s
   }
+  function anon() {
+    var a = el('span', 'av anon', '☕')
+    a.setAttribute('aria-hidden', 'true')
+    return a
+  }
+  // Name and avatar are judged separately: a custom avatar shows even when the
+  // name is the default (anonymous) one.
+  function fallback(p) { return p.name ? initial(p.name) : anon() }
   function avatar(p) {
-    if (!p.name) {
-      var a = el('span', 'av anon', '☕')
-      a.setAttribute('aria-hidden', 'true')
-      return a
-    }
-    if (!okAvatar(p.avatar)) return initial(p.name)
+    if (!okAvatar(p.avatar)) return fallback(p)
     var wrap = el('span', 'av')
     var img = el('img')
     img.src = p.avatar
     img.alt = ''
     img.loading = 'lazy'
     img.referrerPolicy = 'no-referrer'
-    img.onerror = function () { if (wrap.parentNode) wrap.parentNode.replaceChild(initial(p.name), wrap) }
+    img.onerror = function () { if (wrap.parentNode) wrap.parentNode.replaceChild(fallback(p), wrap) }
     wrap.appendChild(img)
     return wrap
   }
