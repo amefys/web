@@ -160,3 +160,13 @@ test('donate pages make no "always free" promise', () => {
     assert.equal(m, null, `${f}: ${m && m[0]}`)
   }
 })
+
+test('a custom avatar shows even when the name is anonymous; a broken one falls back to the cup', async () => {
+  const ids = await run({ total: 1, donors: [{ name: null, avatar: 'https://pic1.afdiancdn.com/user/b/avatar.jpg', since: '2026-10', via: 'afdian' }], posts: [] })
+  const tile = ids['wall-new'].children[0]
+  const img = tile.all().find((n) => n.tagName === 'img')
+  assert.equal(img.src, 'https://pic1.afdiancdn.com/user/b/avatar.jpg')
+  assert.equal(tile.textContent, '匿名朋友')
+  img.onerror()
+  assert.equal(tile.children[0].textContent, '☕')
+})
