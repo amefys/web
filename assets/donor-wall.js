@@ -17,7 +17,7 @@
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   var T = en
     ? {
-        anon: 'Anonymous friend',
+        anon: 'Anonymous',
         via: { afdian: 'Afdian', wechat: 'WeChat' },
         since: function (y, m) { return 'Since ' + MONTHS[m - 1] + ' ' + y },
         ago: function (d, y, m, day) {
