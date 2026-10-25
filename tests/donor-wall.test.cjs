@@ -111,8 +111,9 @@ test('the public file never carries amounts, plans, payer ids, trade numbers or 
     assert.ok(!text.includes(leak), `public file leaks ${leak}`)
   }
   const wall = JSON.parse(text)
-  assert.deepEqual(wall.donors, [{ name: '晚风', avatar: null, since: '2026-10', via: 'afdian' }])
-  assert.deepEqual(wall.posts, [{ name: '晚风', avatar: null, via: 'afdian', at: '2026-10-23', msg: '翻译救了我好几局' }])
+  assert.deepEqual(wall.donors, [{ name: '晚风', avatar: null, since: '2026-10', via: 'afdian', notes: [{ at: '2026-10-23', msg: '翻译救了我好几局' }] }])
+  assert.equal(wall.schema, 2)
+  assert.equal(wall.posts, undefined, 'notes ride on their donor; no separate list')
   assert.equal(r2.get('donors.json').opts.httpMetadata.cacheControl, 'public, max-age=300')
 })
 
@@ -176,7 +177,7 @@ test('wechat entries: masked by default, full or anonymous on request, newest fi
     ['北方的狼', 'wechat', '2026-09'],
     [null, 'wechat', '2026-08']
   ])
-  assert.deepEqual(wall.posts, [{ name: '柠*', avatar: null, via: 'wechat', at: '2026-10-22', msg: 'BP 推荐好用' }])
+  assert.deepEqual(wall.donors.map((d) => d.notes), [[], [{ at: '2026-10-22', msg: 'BP 推荐好用' }], [], []])
   assert.equal(wall.total, 4)
 })
 
@@ -201,10 +202,23 @@ test('hiding a donor also takes their notes down; hiding a note leaves the donor
   }
   const w1 = buildWall({ afdian, manual: [], hidden: { donors: ['afdian:a'], posts: [] }, nowMs: NOW })
   assert.deepEqual(w1.donors.map((d) => d.name), ['Kael'])
-  assert.deepEqual(w1.posts.map((p) => p.msg), ['二'])
+  assert.deepEqual(w1.donors.map((d) => d.notes.map((n) => n.msg)), [['二']])
   const w2 = buildWall({ afdian, manual: [], hidden: { donors: [], posts: ['afdian:2'] }, nowMs: NOW })
   assert.equal(w2.total, 2)
-  assert.deepEqual(w2.posts.map((p) => p.msg), ['一'])
+  assert.deepEqual(w2.donors.map((d) => d.notes.map((n) => n.msg)), [['一'], []])
+})
+
+test('each donor keeps their own notes, newest first, at most three', async () => {
+  const { buildWall } = await load()
+  const day = (d) => Date.parse(`2026-10-${d}T10:00:00Z`)
+  const note = (n, donor, d) => ({ key: `afdian:${n}`, donor, via: 'afdian', at: day(d), msg: `m${n}`, name: null, avatar: null })
+  const afdian = {
+    donors: [{ key: 'afdian:a', via: 'afdian', first: day(10), name: '晚风', avatar: null }, { key: 'afdian:b', via: 'afdian', first: day(11), name: 'Kael', avatar: null }],
+    posts: [note(1, 'afdian:a', 10), note(2, 'afdian:b', 12), note(3, 'afdian:a', 14), note(4, 'afdian:a', 13), note(5, 'afdian:a', 15)]
+  }
+  const wall = buildWall({ afdian, manual: [], hidden: { donors: [], posts: ['afdian:5'] }, nowMs: NOW })
+  assert.deepEqual(wall.donors.map((d) => [d.name, d.notes.map((n) => n.msg)]), [['Kael', ['m2']], ['晚风', ['m3', 'm4', 'm1']]])
+  assert.deepEqual(wall.donors[1].notes[0], { at: '2026-10-14', msg: 'm3' })
 })
 
 test('a tip just after midnight China time belongs to the new month', async () => {

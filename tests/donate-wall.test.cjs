@@ -50,7 +50,6 @@ function page(lang = 'zh') {
   mk('wall-total', section)
   mk('wall-new', mk('tier-new', section, true))
   mk('wall-old', mk('tier-old', section, true))
-  byId['wall-posts'] = mk('wall-posts', section, true)
   const html = new Node('html')
   html.attrs.lang = lang
   return {
@@ -83,30 +82,30 @@ async function run(reply, lang) {
 const WALL = {
   total: 4,
   donors: [
-    { name: null, avatar: null, since: '2026-10', via: 'afdian' },
-    { name: '晚风', avatar: 'https://pic1.afdiancdn.com/user/a/avatar.jpg', since: '2026-10', via: 'afdian' },
-    { name: '柠*', avatar: null, since: '2026-09', via: 'wechat' },
+    { name: null, avatar: null, since: '2026-10', via: 'afdian', notes: [{ at: '2026-10-24', msg: '加油' }] },
+    { name: '晚风', avatar: 'https://pic1.afdiancdn.com/user/a/avatar.jpg', since: '2026-10', via: 'afdian', notes: [] },
+    { name: '柠*', avatar: null, since: '2026-09', via: 'wechat', notes: [{ at: '2026-10-23', msg: '<script>alert(1)</script>' }, { at: '2026-09-02', msg: '' }] },
     { name: '<img src=x onerror=alert(1)>', avatar: 'https://evil.example/x.png', since: '2026-08', via: 'afdian' }
-  ],
-  posts: [
-    { name: null, avatar: null, via: 'afdian', at: '2026-10-24', msg: '加油' },
-    { name: '柠*', avatar: null, via: 'wechat', at: '2026-10-23', msg: '<script>alert(1)</script>' },
-    { name: 'x', avatar: null, via: 'afdian', at: '2026-10-01', msg: '' }
   ]
 }
 
-test('renders tiles, notes and the count, and only then shows the section', async () => {
+const notesOf = (card) => card.all().filter((n) => n.className === 'donor-note')
+
+test('one card per donor with avatar, name, join line and their own notes; count shown last', async () => {
   const ids = await run(WALL)
   assert.equal(ids.wall.hidden, false)
   assert.equal(ids['wall-total'].textContent, '4')
   assert.equal(ids['wall-new'].children.length, 2)
   assert.equal(ids['wall-old'].children.length, 2)
-  assert.equal(ids['wall-new'].children[0].textContent, '☕匿名朋友')
-  assert.equal(ids['wall-new'].children[1].attrs['data-tip'], '2026 年 10 月起 · 爱发电')
-  const posts = ids['wall-posts'].children
-  assert.equal(posts.length, 2, 'empty notes are skipped')
-  assert.match(posts[0].textContent, /匿名朋友今天爱发电加油/)
-  assert.match(posts[1].textContent, /昨天微信/)
+  const [anon, wanfeng] = ids['wall-new'].children
+  assert.equal(anon.className, 'donor is-anon')
+  assert.equal(anon.textContent, '☕匿名朋友2026 年 10 月起 · 爱发电加油今天')
+  assert.equal(notesOf(wanfeng).length, 0, 'a donor without notes is just the card head')
+  assert.match(wanfeng.textContent, /^晚风2026 年 10 月起 · 爱发电$/)
+  const lemon = ids['wall-old'].children[0]
+  assert.equal(notesOf(lemon).length, 1, 'empty notes are skipped')
+  assert.match(lemon.textContent, /微信<script>alert\(1\)<\/script>昨天$/)
+  assert.equal(notesOf(ids['wall-old'].children[1]).length, 0, 'a schema-1 file (no notes field) still renders')
 })
 
 test('donor-typed text stays text; avatars outside afdian CDN are not loaded', async () => {
@@ -119,33 +118,41 @@ test('donor-typed text stays text; avatars outside afdian CDN are not loaded', a
   assert.ok(nodes.some((n) => n._text === '<script>alert(1)</script>'), 'note rendered as plain text')
 })
 
-for (const [label, reply] of [['network error', new Error('offline')], ['HTTP 404', 404], ['junk', 'oops'], ['null', null], ['nobody yet', { total: 0, donors: [], posts: [] }], ['bad shape', { donors: 'x' }]]) {
+test('a card shows at most three notes, each cut to 60 characters', async () => {
+  const long = '好'.repeat(80)
+  const notes = [1, 2, 3, 4].map((i) => ({ at: '2026-10-2' + i, msg: i === 1 ? long : 'n' + i }))
+  const ids = await run({ total: 1, donors: [{ name: 'Kael', avatar: null, since: '2026-10', via: 'afdian', notes }] })
+  const shown = notesOf(ids['wall-new'].children[0])
+  assert.equal(shown.length, 3)
+  assert.equal(shown[0].children[0].textContent, '好'.repeat(60))
+})
+
+for (const [label, reply] of [['network error', new Error('offline')], ['HTTP 404', 404], ['junk', 'oops'], ['null', null], ['nobody yet', { total: 0, donors: [] }], ['bad shape', { donors: 'x' }]]) {
   test(`stays hidden on ${label}`, async () => {
     const ids = await run(reply)
     assert.equal(ids.wall.hidden, true)
   })
 }
 
-test('an empty tier or an empty notes list is hidden, not shown as a bare heading', async () => {
-  const ids = await run({ total: 1, donors: [{ name: 'Kael', avatar: null, since: '2026-06', via: 'afdian' }], posts: [] })
+test('an empty tier is hidden, not shown as a bare heading', async () => {
+  const ids = await run({ total: 1, donors: [{ name: 'Kael', avatar: null, since: '2026-06', via: 'afdian', notes: [] }] })
   assert.equal(ids.wall.hidden, false)
   assert.equal(ids['tier-new'].hidden, true)
   assert.equal(ids['tier-old'].hidden, false)
-  assert.equal(ids['wall-posts'].hidden, true)
 })
 
 test('English page uses English labels', async () => {
   const ids = await run(WALL, 'en')
-  assert.equal(ids['wall-new'].children[0].textContent, '☕Anonymous')
-  assert.equal(ids['wall-new'].children[1].attrs['data-tip'], 'Since Oct 2026 · Afdian')
-  assert.match(ids['wall-posts'].children[1].textContent, /yesterdayWeChat/)
+  assert.equal(ids['wall-new'].children[0].textContent, '☕AnonymousSince Oct 2026 · Afdian加油today')
+  assert.match(ids['wall-old'].children[0].textContent, /Since Sep 2026 · WeChat.*yesterday$/)
 })
 
 test('both donate pages carry the wall and load the shared script and styles', () => {
   for (const f of ['donate.html', 'en/donate.html']) {
     const html = readFileSync(resolve(ROOT, f), 'utf8')
     assert.match(html, /<section class="s" id="wall" hidden>/, f)
-    for (const id of ['wall-total', 'wall-new', 'wall-old', 'wall-posts']) assert.ok(html.includes(`id="${id}"`), `${f} #${id}`)
+    for (const id of ['wall-total', 'wall-new', 'wall-old']) assert.ok(html.includes(`id="${id}"`), `${f} #${id}`)
+    assert.ok(!html.includes('wall-posts'), `${f}: notes live on each card now, not in a separate list`)
     assert.ok(html.includes('/assets/donor-wall.js'), f)
     assert.ok(html.includes('/assets/donor-wall.css'), f)
   }
@@ -162,11 +169,11 @@ test('donate pages make no "always free" promise', () => {
 })
 
 test('a custom avatar shows even when the name is anonymous; a broken one falls back to the cup', async () => {
-  const ids = await run({ total: 1, donors: [{ name: null, avatar: 'https://pic1.afdiancdn.com/user/b/avatar.jpg', since: '2026-10', via: 'afdian' }], posts: [] })
-  const tile = ids['wall-new'].children[0]
-  const img = tile.all().find((n) => n.tagName === 'img')
+  const ids = await run({ total: 1, donors: [{ name: null, avatar: 'https://pic1.afdiancdn.com/user/b/avatar.jpg', since: '2026-10', via: 'afdian', notes: [] }] })
+  const head = ids['wall-new'].children[0].children[0]
+  const img = head.all().find((n) => n.tagName === 'img')
   assert.equal(img.src, 'https://pic1.afdiancdn.com/user/b/avatar.jpg')
-  assert.equal(tile.textContent, '匿名朋友')
+  assert.match(head.textContent, /^匿名朋友/)
   img.onerror()
-  assert.equal(tile.children[0].textContent, '☕')
+  assert.equal(head.children[0].textContent, '☕')
 })

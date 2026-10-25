@@ -3,31 +3,26 @@
 .wall-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
   font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.4px; }
 .wall-head::after { content: ""; flex: 1; height: 0.5px; background: var(--hairline); }
-.wall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 18px 8px; }
-.donor { display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 0; position: relative; }
-.donor .av, .post .av { border-radius: 50%; display: grid; place-items: center; overflow: hidden;
-  font-weight: 700; color: #1a140c; flex: none; }
-.donor .av { width: 44px; height: 44px; font-size: 17px; }
-.donor .av img, .post .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.donor .av.anon, .post .av.anon { background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); }
-.donor .av.anon { font-size: 18px; }
-.donor .nm { font-size: 12px; color: var(--text-2); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.donor.is-anon .nm { color: var(--text-3); }
-.donor[data-tip]:hover::after { content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 6px);
-  transform: translateX(-50%); white-space: nowrap; padding: 6px 10px; border-radius: 8px;
-  background: #2a2217; border: 0.5px solid var(--hairline-strong); color: var(--text);
-  font-size: 11.5px; z-index: 5; isolation: isolate; pointer-events: none; }
-.wall-posts { display: grid; gap: 10px; margin-top: 30px; }
-.wall-posts-title { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
-.post { display: flex; gap: 12px; padding: 14px 16px; border-radius: var(--r-md);
-  background: var(--surface); border: 0.5px solid var(--hairline); }
-.post .av { width: 32px; height: 32px; font-size: 13px; }
-.post .av.anon { font-size: 15px; }
-.post-top { display: flex; align-items: baseline; gap: 8px; font-size: 13px; flex-wrap: wrap; }
-.post-top b { color: var(--text); }
-.post-top span { font-size: 11px; color: var(--text-3); }
-.post-msg { font-size: 13.5px; color: var(--text-2); margin-top: 3px; line-height: 1.55; overflow-wrap: anywhere; }
+/* One card per donor; cards in a row share a height so the grid stays tidy. */
+.wall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.donor { display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 14px 16px;
+  border-radius: var(--r-md); background: var(--surface); border: 0.5px solid var(--hairline); }
+.donor-head { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.donor-who { min-width: 0; }
+.donor .av { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  font-size: 16px; font-weight: 700; color: #1a140c; flex: none; }
+.donor .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.donor .av.anon { background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); font-size: 18px; }
+.donor .nm { font-size: 14px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.donor.is-anon .nm { color: var(--text-2); }
+.donor .meta { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.donor-note { padding-left: 10px; border-left: 2px solid rgba(232,199,121,0.35); }
+.donor-note-msg { font-size: 13.5px; color: var(--text-2); line-height: 1.55; overflow-wrap: anywhere; }
+.donor-note-at { font-size: 11px; color: var(--text-3); margin-top: 2px; }
 section.s .wall-foot { font-size: 12px; color: var(--text-3); margin: 22px 0 0; line-height: 1.7; }
+@media (max-width: 520px) {
+  .wall-grid { grid-template-columns: 1fr; }
+}
 @media (prefers-reduced-motion: no-preference) {
   #wall:not([hidden]) { animation: wall-in 0.4s ease-out; }
   @keyframes wall-in { from { opacity: 0; } to { opacity: 1; } }
