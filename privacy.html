@@ -190,7 +190,11 @@
       <div class="eyebrow">隐私政策</div>
       <h1>你的数据，你做主</h1>
       <p>用最简单的话说清楚：我们收集了什么、为什么、给谁。</p>
-      <div class="updated">生效日期：2026-10-22（上一版 2026-10-10）</div>
+      <div class="updated">生效日期：2026-10-25（上一版 2026-10-22）</div>
+      <!-- Edition blocks: elements whose data-edition is global show on amefys.com; template elements
+           whose data-edition is cn hold the amefys.cn wording. scripts/cn/mirror-site.ts (amefys repo) unwraps the templates and drops the global
+           blocks when it builds amefys.cn — one source, two editions. Keep ids out of templates. -->
+      <p class="edition-note"><span data-edition="global">本页适用于 AMEFYS <strong>国际版</strong>（amefys.com）。中国大陆用户请看<a href="https://amefys.cn/privacy.html" class="link">国内版隐私政策</a>。</span><template data-edition="cn">本页适用于 AMEFYS <strong>国内版</strong>（amefys.cn）。国内版和国际版是两套独立的账号和数据。</template></p>
     </div>
 
     <!-- 三条原则 -->
@@ -280,7 +284,7 @@
             <td>账号信息</td>
             <td>邮箱 / 密码 hash（可选）</td>
             <td>云端账号 + 跨设备同步</td>
-            <td><span class="tag tag-cloud">Supabase</span>（中国香港区）</td>
+            <td><span data-edition="global"><span class="tag tag-cloud">Supabase</span>（新加坡）</span><template data-edition="cn"><span class="tag tag-cloud">阿里云</span>（中国境内：数据库在杭州，接入服务器在北京）</template></td>
           </tr>
           <tr>
             <td>GSI 实时数据</td>
@@ -298,13 +302,13 @@
             <td>错误上报（可选）</td>
             <td>崩溃栈 / App 版本 / 操作系统</td>
             <td>修 bug</td>
-            <td><span class="tag tag-third">Sentry</span> — 默认开启，设置里可关</td>
+            <td><span class="tag tag-third">Sentry</span>（美国）— <span data-edition="global">默认开启，设置里可关</span><template data-edition="cn">国内版默认关闭，设置里可打开；打开后会发往境外</template></td>
           </tr>
           <tr>
             <td>OCR 诊断（可选，v0.30.0 起）</td>
             <td>每次截屏识别的<strong>计数与类别</strong>：识别出几行、各过滤规则去掉了几行、识别置信度、各文字系统（拉丁 / 西里尔 / 中日韩）的字符数、每行翻译是成功还是失败及失败原因（网络 / 超时 / 服务端 / 额度等）、识别与翻译语言设置、翻译通道（官方代理 / 自备密钥）与识别引擎、App 与系统版本、框选区域的宽和高。<strong>不含识别出的任何文字、截图、框选在屏幕上的位置和玩家名</strong></td>
             <td>排查「识别 / 翻译不对劲」到底是哪一步出了问题</td>
-            <td><span class="tag tag-cloud">Supabase</span> 仅登录用户，<strong>关联你的账号 ID</strong>；其中网络失败、服务端错误等少数类别同时发给 <span class="tag tag-third">Sentry</span>。与错误上报共用同一个开关，默认开启，设置里可关</td>
+            <td><span data-edition="global"><span class="tag tag-cloud">Supabase</span></span><template data-edition="cn"><span class="tag tag-cloud">阿里云</span>（境内）</template> 仅登录用户，<strong>关联你的账号 ID</strong>；其中网络失败、服务端错误等少数类别同时发给 <span class="tag tag-third">Sentry</span>。与错误上报共用同一个开关，<span data-edition="global">默认开启，设置里可关</span><template data-edition="cn">国内版默认关闭，设置里可打开</template></td>
           </tr>
         </tbody>
       </table>
@@ -316,7 +320,7 @@
       <p>聊天翻译功能会把<strong>你输入的原文</strong>（中文回复或粘贴的对方消息）发给翻译引擎。我们支持多个引擎，默认通过 AMEFYS 后端代理调用：</p>
       <h3>默认模式：走 AMEFYS 后端代理</h3>
       <ul class="clean">
-        <li>请求经 AMEFYS Supabase Edge Function 转发到目标引擎（火山 / Azure / Claude / OpenAI 等）</li>
+        <li><span data-edition="global">请求经 AMEFYS 的云函数（Supabase）转发到目标引擎（火山 / Azure / Claude / OpenAI 等）</span><template data-edition="cn">请求经 AMEFYS 在北京的服务器（阿里云）转发到火山引擎，全程在中国境内</template></li>
         <li>引擎方的隐私政策对你适用 — 但因为是 AMEFYS 的 key，引擎方拿到的是 AMEFYS 的标识，不是你个人的</li>
         <li><strong>你输入的原文不会被我们存下来</strong>：代理只保留它的 SHA-256 hash，用来查缓存和记用量</li>
         <li>我们会记一条用量日志：账号 ID、消耗字符数、原文 hash、时间 — 用于额度计算和防滥用，<strong>不含原文</strong>，30 天后自动删除</li>
@@ -339,6 +343,27 @@
       </ul>
     </section>
 
+    <!-- 存放地点与跨境 -->
+    <section class="s">
+      <h2>数据存放在哪里</h2>
+      <div data-edition="global">
+        <p>国际版的账号、云同步数据、OCR 诊断和订单存放在 Supabase 的<strong>新加坡</strong>机房；官网、下载和图片走 Cloudflare 的全球节点。你在哪里使用，请求就会从那里发到这些服务。</p>
+        <p>中国大陆用户建议使用<a href="https://amefys.cn" class="link">国内版</a>：数据存放在中国境内。两个版本的账号互不相通，国际版可以在 App 的「设置 → 账号」里把账号和会员迁到国内版。</p>
+      </div>
+      <template data-edition="cn">
+        <p>国内版的账号、云同步数据、OCR 诊断、用量记录和订单都存放在<strong>中国境内</strong>：数据库在阿里云杭州，App 连接的服务器在阿里云北京。翻译和语音识别使用火山引擎（境内），登录验证码邮件由阿里云邮件推送发出，安装包和更新从阿里云下载。</p>
+        <p>下面这些情况会有数据离开中国境内，都是可选的或不含账号信息：</p>
+        <ul class="clean">
+          <li><strong>错误上报与 OCR 诊断的 Sentry 部分</strong>：国内版默认关闭；你在「设置 → 数据与隐私」里打开后，崩溃信息会发往 Sentry（美国）</li>
+          <li><strong>Steam 战绩查询</strong>：你填写好友代码、查战绩或导入对局时，App 直接从你的电脑访问 OpenDota（境外），只发送你的 Steam 好友代码</li>
+          <li><strong>英雄和装备图片</strong>：部分图片直接从 Valve 的图片服务器（境外）加载，对方只会看到你的网络地址，不涉及账号信息</li>
+          <li><strong>官网留言板、博客评论、Studio 咨询表单</strong>：与国际版共用一套，存放在 Cloudflare（境外）；只在你主动提交时产生</li>
+          <li><strong>自备密钥的翻译或语音服务</strong>：请求从你的电脑直接发给你选择的服务商，所在地由你决定</li>
+        </ul>
+        <p>国内版和国际版是两套独立的账号和数据。从国际版迁过来的账号，国际版那边只留下一个已停用的旧账号（见下方「注销账号」）。</p>
+      </template>
+    </section>
+
     <!-- 从不离开 -->
     <section class="s">
       <h2>哪些数据从不离开你的电脑</h2>
@@ -358,7 +383,7 @@
     <!-- 第三方服务 -->
     <section class="s">
       <h2>使用的第三方服务</h2>
-      <table class="pv-table">
+      <table class="pv-table" data-edition="global">
         <thead><tr><th>服务</th><th>数据</th><th>政策</th></tr></thead>
         <tbody>
           <tr><td>Supabase</td><td>邮箱 + 密码 + 登录用户的对局数据 + OCR 诊断计数（可关）</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener" class="link">supabase.com/privacy</a></td></tr>
@@ -371,6 +396,19 @@
           <tr><td>Cloudflare Workers / D1 / Turnstile</td><td>官网留言板和技术博客评论：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
         </tbody>
       </table>
+      <template data-edition="cn">
+      <table class="pv-table">
+        <thead><tr><th>服务</th><th>数据</th><th>政策</th></tr></thead>
+        <tbody>
+          <tr><td>阿里云（数据库、服务器、文件存储与下载加速、邮件推送）</td><td>邮箱 + 密码 hash + 登录用户的云同步数据、用量记录、OCR 诊断计数（可关）、订单；登录验证码邮件</td><td><a href="https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud201902141711_54837.html" target="_blank" rel="noopener" class="link">阿里云隐私政策</a></td></tr>
+          <tr><td>火山引擎（翻译、语音识别）</td><td>你的翻译原文 + 译文；语音输入 / 语音侦听的音频与转写文本</td><td><a href="https://www.volcengine.com/docs/6291/65568" class="link" target="_blank" rel="noopener">volcengine.com</a></td></tr>
+          <tr><td>爱发电（afdian.com）</td><td>购买 Pro 会员时的付款；我们只收到订单号、金额、付款人的爱发电账号 ID 和你填写的留言，<strong>看不到你的手机号、邮箱和支付信息</strong></td><td><a href="https://afdian.com" target="_blank" rel="noopener" class="link">afdian.com</a></td></tr>
+          <tr><td>OpenDota API（境外，可选）</td><td>读取你的 Steam 公开对局战绩，从你的电脑直接访问</td><td><a href="https://www.opendota.com/api-keys" target="_blank" rel="noopener" class="link">opendota.com</a></td></tr>
+          <tr><td>Sentry（美国，可选，国内版默认关闭）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
+          <tr><td>Cloudflare Workers / D1 / Turnstile（境外）</td><td>官网留言板、博客评论和 Studio 咨询表单：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
+        </tbody>
+      </table>
+      </template>
     </section>
 
     <!-- 你的权利 -->
@@ -386,9 +424,18 @@
       <h3>删除你的数据</h3>
       <ul class="clean">
         <li>本地数据：设置 → 数据与隐私 → 清空对局历史 / 清空翻译缓存</li>
-        <li>云端数据：设置 → 账号 → 注销账号（删除所有 Supabase 端关联数据，48 小时内生效）</li>
+        <li>云端数据：设置 → 账号 → 注销账号（立即删除，详见下方「注销账号」）</li>
         <li>完整卸载：删除 <code>~/Library/Application Support/amefys/</code> 目录即清除全部本地痕迹</li>
         <li>官网留言和博客评论：用留言时填写的邮箱发信到 <a href="mailto:amefys@gmail.com" class="link">amefys@gmail.com</a>，我们会在 7 天内删除该留言及其邮箱、IP 记录</li>
+      </ul>
+      <h3 id="delete-account">注销账号</h3>
+      <ul class="clean">
+        <li><strong>入口</strong>：电脑版 App「设置 → 账号 → 注销账号」，再输入一次密码确认。忘了密码可以先在登录页重设密码再注销</li>
+        <li><strong>会删除</strong>：账号本身（邮箱、密码 hash），以及云端的设置、快捷回复、对局记录、英雄池、会员与额度、用量记录、兑换记录、OCR 诊断和爱发电绑定。确认后立即删除，不能恢复；会员剩余时间随之作废，不退款</li>
+        <li><strong>会保留</strong>：已付款的订单记录（订单号、金额、时间）按电子商务相关法规保留 3 年用于对账，注销后不再和任何账号关联</li>
+        <li><strong>不会动</strong>：你电脑上的本地数据（对局历史、设置等）。需要的话按上面的方法自己清除</li>
+        <li><span data-edition="global">账号已迁到国内版的，注销国际版这边只删除国际版的旧账号；国内版账号要在国内版里另外注销</span><template data-edition="cn">从国际版迁过来的账号，国际版那边还留有一个已停用的旧账号，需要在国际版 App 里另外注销，或发邮件让我们处理</template></li>
+        <li>手机版 BP 和小程序暂时没有注销入口：可以在电脑版里注销，或用注册邮箱发信到 <a href="mailto:amefys@gmail.com?subject=AMEFYS%20注销账号" class="link">amefys@gmail.com</a>，我们会在 15 个工作日内处理</li>
       </ul>
       <h3>关闭可选功能</h3>
       <ul class="clean">
@@ -411,6 +458,7 @@
         <li><strong>速率限制记录</strong>：仅计数窗口，1 小时后自动清除</li>
         <li><strong>Sentry 崩溃报告</strong>：Sentry 默认 30 天，我们不延长</li>
         <li><strong>OCR 诊断记录</strong>：30 天后自动清除；注销账号时一并删除</li>
+        <li><strong>订单记录</strong>：保留 3 年用于对账；注销账号后不再关联账号</li>
       </ul>
     </section>
 
@@ -436,6 +484,7 @@
     <section class="s">
       <h2>问题 / 投诉</h2>
       <p>隐私相关问题、删除请求、数据导出 — 都发到 <a href="mailto:amefys@gmail.com?subject=AMEFYS%20隐私问题" class="link">amefys@gmail.com</a>。我们会在 7 个工作日内回复。</p>
+      <template data-edition="cn"><p>依据《中华人民共和国个人信息保护法》，你有权查阅、复制、更正、补充、删除你的个人信息，有权撤回同意（关闭对应功能即可），有权注销账号，也有权要求我们解释本政策。以上请求都可以发到上面的邮箱；我们在 15 个工作日内处理。对处理结果有异议的，可以向个人信息保护主管部门投诉。</p></template>
       <p>合规说明：<a href="compliance.html" class="link">compliance.html</a> · 致谢：<a href="credits.html" class="link">credits.html</a></p>
     </section>
 
