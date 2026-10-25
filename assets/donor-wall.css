@@ -1,0 +1,61 @@
+/* Donor wall on donate.html / en/donate.html — filled by assets/donor-wall.js. */
+.wall-tier { margin-bottom: 26px; }
+.wall-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.4px; }
+.wall-head::after { content: ""; flex: 1; height: 0.5px; background: var(--hairline); }
+/* One card per donor; cards in a row share a height so the hero lines line up at the bottom. */
+.wall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+
+.donor { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 0 0 14px;
+  overflow: hidden; isolation: isolate; border-radius: var(--r-md); background: var(--surface);
+  border: 0.5px solid var(--hairline); transition: border-color 0.25s ease, box-shadow 0.25s ease; }
+.donor > :not(.donor-art) { margin: 0 16px; }
+.donor:hover { border-color: rgba(232,199,121,0.32); box-shadow: 0 8px 28px rgba(0,0,0,0.35); }
+
+/* Hero banner: the portrait fades into the card so the text below never sits on the picture. */
+.donor-art { position: relative; height: 96px; margin-bottom: -34px; overflow: hidden; }
+.donor-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+  opacity: 0.82; transition: transform 0.6s ease, opacity 0.3s ease; }
+.donor-art.is-empty img { display: none; }
+.donor-art.is-empty { background: linear-gradient(to bottom, rgba(232,199,121,0.08), transparent); }
+.donor:hover .donor-art img { opacity: 1; }
+
+.donor-head { position: relative; z-index: 0; display: flex; align-items: flex-end; gap: 12px; min-width: 0; }
+.donor-who { min-width: 0; padding-bottom: 1px; }
+.donor .av { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  font-size: 18px; font-weight: 700; color: #1a140c; flex: none;
+  box-shadow: 0 0 0 3px #1f1912, 0 0 0 4px rgba(232,199,121,0.45); }
+.donor .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.donor .av.anon { background: #2a2217; font-size: 20px; }
+.donor .nm { font-size: 15px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+.donor.is-anon .nm { color: var(--text-2); }
+.donor .meta { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+
+.donor-note { padding-left: 10px; border-left: 2px solid rgba(232,199,121,0.35); }
+.donor-note-msg { font-size: 13.5px; color: var(--text-2); line-height: 1.55; overflow-wrap: anywhere; }
+.donor-note-at { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+
+/* The hero's thank-you, printed the way the game prints a chat wheel line. */
+.donor-hero { margin-top: auto !important; padding-top: 10px; border-top: 0.5px dashed var(--hairline);
+  display: flex; align-items: baseline; gap: 0; flex-wrap: wrap; font-size: 12.5px; line-height: 1.5; }
+.donor-hero .spk { flex: none; width: 13px; height: 11px; margin-right: 6px; align-self: center; background: var(--gold);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'%3E%3Cpath d='M0 7h5l7-6v20l-7-6H0z'/%3E%3Cpath d='M16 6a7 7 0 0 1 0 10M19.5 2.5a12 12 0 0 1 0 17' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'%3E%3Cpath d='M0 7h5l7-6v20l-7-6H0z'/%3E%3Cpath d='M16 6a7 7 0 0 1 0 10M19.5 2.5a12 12 0 0 1 0 17' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+.donor-hero b { color: var(--gold); font-weight: 700; white-space: nowrap; }
+.donor-hero b::after { content: "："; }
+:lang(en) .donor-hero b::after { content: ":\00a0"; }
+.donor-hero-line { color: var(--text-2); font-style: italic; }
+:lang(zh) .donor-hero-line { font-style: normal; }
+
+section.s .wall-foot { font-size: 12px; color: var(--text-3); margin: 22px 0 0; line-height: 1.7; }
+@media (max-width: 520px) {
+  .wall-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #wall:not([hidden]) { animation: wall-in 0.4s ease-out; }
+  @keyframes wall-in { from { opacity: 0; } to { opacity: 1; } }
+  .donor:hover .donor-art img { transform: scale(1.05); }
+}

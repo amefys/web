@@ -165,6 +165,9 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
+<link rel="stylesheet" href="/assets/donor-wall.css?v=3">
+<script src="/assets/donor-heroes.js?v=1" defer></script>
+<script src="/assets/donor-wall.js?v=5" defer></script>
 </head>
 <body>
 
@@ -205,9 +208,9 @@
 
     <div class="page-hero">
       <div class="eyebrow">Support the project</div>
-      <h1>AMEFYS stays <em>free</em>.</h1>
-      <p>If it ever won you a lane — or kept you from losing an all-chat war — you can buy the developer a coffee.</p>
-      <p style="color: var(--text-3); font-size: 13.5px;">It is only a thank you. Skip it and you still get every single feature.</p>
+      <h1>Buy the developer a <em>coffee</em>.</h1>
+      <p>AMEFYS is built by one person. If it ever won you a lane — or kept you from losing an all-chat war — your support means a lot.</p>
+      <p style="color: var(--text-3); font-size: 13.5px;">It is only a thank you: it does not unlock any features, and it is not a membership.</p>
     </div>
 
     <section class="s">
@@ -215,7 +218,7 @@
         <div class="promise">
           <div class="promise-icon">🆓</div>
           <div class="promise-title">Core features are free</div>
-          <div class="promise-desc">Build advice, match history, the overlay and skins all run on your machine with no paywall and no "supporter edition"; cloud translation and voice come with a daily free allowance</div>
+          <div class="promise-desc">Build advice, match history, the overlay and skins are free to use; cloud translation and voice come with a daily free allowance.</div>
         </div>
         <div class="promise">
           <div class="promise-icon">🚫</div>
@@ -244,6 +247,15 @@
           <div class="way-foot">Leave the feature you want most in the note<br>we try to prioritise it in the next build</div>
         </div>
       </div>
+    </section>
+
+    <!-- Donor wall: assets/donor-wall.js fills it from cdn.amefys.com/donors.json; stays hidden if that fails -->
+    <section class="s" id="wall" hidden>
+      <h2>Thank you, all of you</h2>
+      <p class="s-sub">Supporters so far: <strong id="wall-total"></strong>. Everyone gets the same spot, newest first, and each one is thanked by a hero in that hero's own chat wheel line.</p>
+      <div class="wall-tier" data-wall-block><div class="wall-head">New this month</div><div class="wall-grid" id="wall-new"></div></div>
+      <div class="wall-tier" data-wall-block><div class="wall-head">Along for the ride</div><div class="wall-grid" id="wall-old"></div></div>
+      <p class="wall-foot">Afdian supporters sync every hour; anyone who kept Afdian's default nickname is shown as Anonymous. WeChat tips only show a nickname and are added by hand.<br>Buying a membership is not a donation and never puts you here. Want a different name, or to be taken off? Say so in the <a href="guestbook.html" class="link">guestbook</a>.<br>Hero art, names and lines © Valve; the lines are the heroes' in-game chat wheel thank-yous.</p>
     </section>
 
     <section class="s">
