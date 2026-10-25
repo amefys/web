@@ -129,6 +129,9 @@ test('notes: contact details, ads and abuse are dropped; trash-talk praise and p
   assert.equal(displayMessage('匿名'), null)
   assert.equal(displayMessage('匿名，加油'), '加油')
   assert.equal(displayMessage('AMF-7K3Q9X 谢谢'), '谢谢')
+  // the cn edition's purchase codes (AMC-) are private too
+  assert.equal(displayMessage('AMC-7K3Q9X 谢谢'), '谢谢')
+  assert.equal(displayMessage('谢谢 amc-7k3q9x'), '谢谢')
   assert.equal(displayMessage('a‮b​ c'), 'ab c')
   const long = displayMessage('好'.repeat(80))
   assert.equal(Array.from(long).length, 60)

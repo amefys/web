@@ -80,3 +80,14 @@ test('signing out here leaves the desktop app and other devices signed in', () =
   assert.ok(calls.length > 0, 'signOut call not found')
   for (const c of calls) assert.match(c, /scope: 'local'/, c)
 })
+
+// amefys.cn's copy of this page talks to the cn backend from P2 on (amefys repo,
+// scripts/cn/mirror-site.ts pointAccountAtCn), whose purchase codes start AMC-; a moved
+// account keeps its AMF- one. The page must show either, not report a bad code.
+test('account.js shows purchase codes of both editions', () => {
+  const m = /\/\^(AM[^/]*)\$\/\.test\(r\.data\)/.exec(js)
+  assert.ok(m, 'purchase-code check not found')
+  const re = new RegExp(`^${m[1]}$`)
+  assert.ok(re.test('AMF-7K3Q9X') && re.test('AMC-7K3Q9X'))
+  assert.ok(!re.test('AMX-7K3Q9X'))
+})

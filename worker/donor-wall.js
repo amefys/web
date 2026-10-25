@@ -60,7 +60,8 @@ const TZ_OFFSET_MS = 8 * 3600 * 1000
 
 const DEFAULT_NAME_RE = /^爱发电用户[_\s-]?[0-9a-z]*$/i
 const ANON_RE = /匿名/
-const PURCHASE_REF_RE = /AMF-[0-9A-Z]{6}/gi
+/** Purchase codes of either edition (AMF- global, AMC- cn) never reach the public wall. */
+const PURCHASE_REF_RE = /AM[FC]-[0-9A-Z]{6}/gi
 /** Contact details and ads: long digit runs (phone / QQ), links, handles. */
 const CONTACT_RE = /\d{5,}|https?:|www\.|\.(com|cn|net|org|top|xyz)\b|@|\b(qq|vx|wx|tg)\b|v信|微信号|加我|加群|群号|私聊|telegram|wechat/i
 /** A short floor, not a moderation system: the panel's hide button is the real tool. */

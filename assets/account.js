@@ -161,7 +161,7 @@
     }, function () { show('orders-error', true) })
 
     client.rpc('get_or_create_purchase_ref').then(function (r) {
-      var ok = !r.error && typeof r.data === 'string' && /^AMF-[0-9A-Z]{6}$/.test(r.data)
+      var ok = !r.error && typeof r.data === 'string' && /^AM[FC]-[0-9A-Z]{6}$/.test(r.data)
       if (ok) text('ref-code', r.data)
       show('ref-error', !ok)
       $('ref-copy').disabled = !ok

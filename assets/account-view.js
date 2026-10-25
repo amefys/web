@@ -5,7 +5,7 @@
    Sources (all in the amefys repo, supabase/migrations):
      get_entitlements()        → member card + today's quotas
      get_my_payment_orders()   → order list (last 50, order number tail only)
-     get_or_create_purchase_ref() → the AMF- code to paste into afdian */
+     get_or_create_purchase_ref() → the AMF- (global) / AMC- (cn) code to paste into afdian */
 ;(function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory()
   else root.AccountView = factory()
