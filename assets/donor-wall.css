@@ -3,45 +3,46 @@
 .wall-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
   font-size: 12px; font-weight: 700; color: var(--gold); letter-spacing: 0.4px; }
 .wall-head::after { content: ""; flex: 1; height: 0.5px; background: var(--hairline); }
-/* One card per donor; cards in a row share a height so the hero lines line up at the bottom. */
-.wall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+/* One card per donor, kept small so a long wall stays scannable; past a few rows the rest folds behind a button. */
+.wall-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr)); gap: 10px; }
+#wall [hidden] { display: none !important; }
 
-.donor { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: 0 0 14px;
+.donor { position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 12px 14px;
   overflow: hidden; isolation: isolate; border-radius: var(--r-md); background: var(--surface);
   border: 0.5px solid var(--hairline); transition: border-color 0.25s ease, box-shadow 0.25s ease; }
-.donor > :not(.donor-art) { margin: 0 16px; }
 .donor:hover { border-color: rgba(232,199,121,0.32); box-shadow: 0 8px 28px rgba(0,0,0,0.35); }
 
-/* Hero banner: the portrait fades into the card so the text below never sits on the picture. */
-.donor-art { position: relative; height: 96px; margin-bottom: -34px; overflow: hidden; }
+/* Hero portrait tucked into the top-right corner, fading out before it reaches the text. */
+.donor-art { position: absolute; z-index: -1; top: 0; right: 0; width: 64%; height: 78px; pointer-events: none; }
 .donor-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block;
-  -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
-  opacity: 0.82; transition: transform 0.6s ease, opacity 0.3s ease; }
-.donor-art.is-empty img { display: none; }
-.donor-art.is-empty { background: linear-gradient(to bottom, rgba(232,199,121,0.08), transparent); }
-.donor:hover .donor-art img { opacity: 1; }
+  -webkit-mask-image: radial-gradient(ellipse 100% 100% at 100% 0, #000 30%, transparent 78%);
+          mask-image: radial-gradient(ellipse 100% 100% at 100% 0, #000 30%, transparent 78%);
+  opacity: 0.5; transition: transform 0.6s ease, opacity 0.3s ease; }
+.donor-art.is-empty { display: none; }
+.donor:hover .donor-art img { opacity: 0.75; }
 
-.donor-head { position: relative; z-index: 0; display: flex; align-items: flex-end; gap: 12px; min-width: 0; }
-.donor-who { min-width: 0; padding-bottom: 1px; }
-.donor .av { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
-  font-size: 18px; font-weight: 700; color: #1a140c; flex: none;
-  box-shadow: 0 0 0 3px #1f1912, 0 0 0 4px rgba(232,199,121,0.45); }
+.donor-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.donor-who { min-width: 0; }
+.donor .av { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; overflow: hidden;
+  font-size: 15px; font-weight: 700; color: #1a140c; flex: none;
+  box-shadow: 0 0 0 2px #1f1912, 0 0 0 3px rgba(232,199,121,0.4); }
 .donor .av img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.donor .av.anon { background: #2a2217; font-size: 20px; }
-.donor .nm { font-size: 15px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
+.donor .av.anon { background: #2a2217; font-size: 16px; }
+.donor .nm { font-size: 14px; font-weight: 700; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
 .donor.is-anon .nm { color: var(--text-2); }
-.donor .meta { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.donor .meta { font-size: 11px; color: var(--text-3); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
 
-.donor-note { padding-left: 10px; border-left: 2px solid rgba(232,199,121,0.35); }
-.donor-note-msg { font-size: 13.5px; color: var(--text-2); line-height: 1.55; overflow-wrap: anywhere; }
-.donor-note-at { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.donor-note { padding-left: 9px; border-left: 2px solid rgba(232,199,121,0.35); }
+.donor-note-msg { font-size: 13px; color: var(--text-2); line-height: 1.5; overflow-wrap: anywhere;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.donor-note-at { font-size: 10.5px; color: var(--text-3); margin-top: 1px; }
 
 /* The hero's thank-you, printed the way the game prints a chat wheel line. */
-.donor-hero { margin-top: auto !important; padding-top: 10px; border-top: 0.5px dashed var(--hairline);
-  display: flex; align-items: baseline; gap: 0; flex-wrap: wrap; font-size: 12.5px; line-height: 1.5; }
-.donor-hero .spk { flex: none; width: 13px; height: 11px; margin-right: 6px; align-self: center; background: var(--gold);
+.donor-hero { margin-top: auto; padding-top: 8px; border-top: 0.5px dashed var(--hairline); font-size: 12px; line-height: 1.5;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.donor-hero .spk { display: inline-block; vertical-align: -1px; width: 12px; height: 10px; margin-right: 5px; background: var(--gold);
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'%3E%3Cpath d='M0 7h5l7-6v20l-7-6H0z'/%3E%3Cpath d='M16 6a7 7 0 0 1 0 10M19.5 2.5a12 12 0 0 1 0 17' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 22'%3E%3Cpath d='M0 7h5l7-6v20l-7-6H0z'/%3E%3Cpath d='M16 6a7 7 0 0 1 0 10M19.5 2.5a12 12 0 0 1 0 17' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat; }
 .donor-hero b { color: var(--gold); font-weight: 700; white-space: nowrap; }
@@ -50,9 +51,18 @@
 .donor-hero-line { color: var(--text-2); font-style: italic; }
 :lang(zh) .donor-hero-line { font-style: normal; }
 
+.wall-more { display: block; margin: -8px auto 0; padding: 8px 18px; border-radius: 999px; cursor: pointer;
+  font: inherit; font-size: 13px; color: var(--gold); background: transparent; border: 0.5px solid rgba(232,199,121,0.4);
+  transition: background 0.2s ease; }
+.wall-more:hover { background: rgba(232,199,121,0.08); }
 section.s .wall-foot { font-size: 12px; color: var(--text-3); margin: 22px 0 0; line-height: 1.7; }
 @media (max-width: 520px) {
-  .wall-grid { grid-template-columns: 1fr; }
+  .wall-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .donor { padding: 10px 11px; }
+  .donor-head { gap: 8px; }
+  .donor .av { width: 30px; height: 30px; font-size: 13px; }
+  .donor .av.anon { font-size: 14px; }
+  .donor .nm { font-size: 13px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   #wall:not([hidden]) { animation: wall-in 0.4s ease-out; }
