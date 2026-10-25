@@ -52,6 +52,9 @@ function page(lang = 'zh') {
   mk('wall-total', section)
   mk('wall-new', mk('tier-new', section, true))
   mk('wall-old', mk('tier-old', section, true))
+  const more = new Node('button')
+  more.hidden = true
+  byId['wall-more'] = more
   const html = new Node('html')
   html.attrs.lang = lang
   return {
@@ -64,7 +67,7 @@ function page(lang = 'zh') {
   }
 }
 
-async function run(reply, lang, heroes = null) {
+async function run(reply, lang, heroes = null, narrow = false) {
   const { byId, document } = page(lang)
   const RealDate = Date
   class FakeDate extends RealDate {
@@ -76,7 +79,7 @@ async function run(reply, lang, heroes = null) {
     if (reply === 404) return { ok: false, json: async () => ({}) }
     return { ok: true, json: async () => (typeof reply === 'function' ? reply() : reply) }
   }
-  vm.runInNewContext(SCRIPT, { window: { AMEFYS_DONOR_HEROES: heroes }, document, fetch, Date: FakeDate, location: { hash: '' }, setTimeout, clearTimeout, AbortController, Array, Number, String, Math })
+  vm.runInNewContext(SCRIPT, { window: { AMEFYS_DONOR_HEROES: heroes, matchMedia: (q) => ({ matches: narrow && q === '(max-width: 520px)' }) }, document, fetch, Date: FakeDate, location: { hash: '' }, setTimeout, clearTimeout, AbortController, Array, Number, String, Math })
   for (let i = 0; i < 10; i++) await new Promise((r) => setImmediate(r))
   return byId
 }
@@ -101,9 +104,9 @@ test('one card per donor with avatar, name, join line and their own notes; count
   assert.equal(ids['wall-old'].children.length, 2)
   const [anon, wanfeng] = ids['wall-new'].children
   assert.equal(anon.className, 'donor is-anon')
-  assert.equal(anon.textContent, '☕匿名朋友2026 年 10 月起 · 爱发电加油今天')
+  assert.equal(anon.textContent, '☕匿名朋友10 月加入 · 爱发电加油今天')
   assert.equal(notesOf(wanfeng).length, 0, 'a donor without notes is just the card head')
-  assert.match(wanfeng.textContent, /^晚风2026 年 10 月起 · 爱发电$/)
+  assert.match(wanfeng.textContent, /^晚风10 月加入 · 爱发电$/)
   const lemon = ids['wall-old'].children[0]
   assert.equal(notesOf(lemon).length, 1, 'empty notes are skipped')
   assert.match(lemon.textContent, /微信<script>alert\(1\)<\/script>昨天$/)
@@ -145,8 +148,8 @@ test('an empty tier is hidden, not shown as a bare heading', async () => {
 
 test('English page uses English labels', async () => {
   const ids = await run(WALL, 'en')
-  assert.equal(ids['wall-new'].children[0].textContent, '☕AnonymousSince Oct 2026 · Afdian加油today')
-  assert.match(ids['wall-old'].children[0].textContent, /Since Sep 2026 · WeChat.*yesterday$/)
+  assert.equal(ids['wall-new'].children[0].textContent, '☕AnonymousJoined Oct · Afdian加油today')
+  assert.match(ids['wall-old'].children[0].textContent, /Joined Sep · WeChat.*yesterday$/)
 })
 
 test('both donate pages carry the wall and load the shared script and styles', () => {
@@ -249,4 +252,56 @@ test('both donate pages load the hero list before the wall script and credit Val
     assert.ok(a > 0 && a < b, `${f}: donor-heroes.js must come first`)
     assert.match(html, /© Valve/, f)
   }
+})
+
+const crowd = (n, since = () => '2026-10') => ({ total: n, donors: Array.from({ length: n }, (_, i) => ({ name: 'D' + i, avatar: null, since: since(i), via: 'afdian', seed: i, notes: [] })) })
+const shownCards = (ids) => ['wall-new', 'wall-old'].flatMap((id) => ids[id].children).filter((c) => !c.hidden)
+
+test('a long wall folds after two rows; the button shows the rest', async () => {
+  const ids = await run(crowd(30))
+  assert.equal(shownCards(ids).length, 8)
+  assert.equal(ids['wall-more'].hidden, false)
+  assert.equal(ids['wall-more'].textContent, '展开其余 22 位朋友')
+  ids['wall-more'].onclick()
+  assert.equal(shownCards(ids).length, 30)
+  assert.equal(ids['wall-more'].hidden, true)
+})
+
+test('phones fold sooner', async () => {
+  const ids = await run(crowd(30), 'zh', null, true)
+  assert.equal(shownCards(ids).length, 6)
+  assert.equal(ids['wall-more'].textContent, '展开其余 24 位朋友')
+})
+
+test('no fold for a wall that is only a card or two past the limit', async () => {
+  const ids = await run(crowd(10))
+  assert.equal(shownCards(ids).length, 10)
+  assert.equal(ids['wall-more'].hidden, true)
+})
+
+test('a tier folded away entirely hides its heading until the button is pressed', async () => {
+  const ids = await run(crowd(20, (i) => (i < 12 ? '2026-10' : '2026-08')))
+  assert.equal(ids['tier-old'].hidden, true)
+  assert.equal(ids['wall-more'].textContent, '展开其余 12 位朋友')
+  ids['wall-more'].onclick()
+  assert.equal(ids['tier-old'].hidden, false)
+})
+
+test('English fold button', async () => {
+  const ids = await run(crowd(30), 'en')
+  assert.equal(ids['wall-more'].textContent, 'Show 22 more')
+})
+
+test('both donate pages carry the fold button, and folded cards really disappear', () => {
+  for (const f of ['donate.html', 'en/donate.html']) {
+    assert.match(readFileSync(resolve(ROOT, f), 'utf8'), /<button type="button" class="wall-more" id="wall-more" hidden><\/button>/)
+  }
+  // .donor sets display:flex, which would beat the plain [hidden] attribute.
+  assert.match(readFileSync(resolve(ROOT, 'assets/donor-wall.css'), 'utf8'), /#wall \[hidden\] \{ display: none !important; \}/)
+})
+
+test('the join line drops this year, keeps an earlier one', async () => {
+  const one = (since) => ({ total: 1, donors: [{ name: 'K', avatar: null, since, via: 'wechat', notes: [] }] })
+  assert.match((await run(one('2025-12')))['wall-old'].children[0].textContent, /2025 年 12 月加入 · 微信$/)
+  assert.match((await run(one('2025-12'), 'en'))['wall-old'].children[0].textContent, /Joined Dec 2025 · WeChat$/)
 })
