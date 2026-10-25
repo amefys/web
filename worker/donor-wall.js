@@ -50,7 +50,8 @@ const AFDIAN_API = 'https://afdian.com/api/open'
 const MAX_PAGES = 50
 const NAME_MAX = 20
 const MSG_MAX = 60
-const POSTS_SHOWN = 5
+/** Each donor card shows at most this many of their own notes, newest first. */
+const NOTES_PER_DONOR = 3
 const MANUAL_MAX = 1000
 /** Display dates are China time: a tip at 00:30 on the 1st belongs to that month. */
 const TZ_OFFSET_MS = 8 * 3600 * 1000
@@ -294,15 +295,27 @@ export function buildWall({ afdian, manual, hidden, nowMs }) {
       return msg ? { key: d.key, donor: d.key, via: 'wechat', at: d.first, msg, name: d.name, avatar: null } : null
     })
     .filter(Boolean)
-  const posts = [...((afdian && afdian.posts) || []), ...wechatPosts]
-    .filter((p) => !hidePost.has(p.key) && !hideDonor.has(p.donor))
-    .sort((a, b) => b.at - a.at)
+  const notesOf = new Map()
+  for (const p of [...((afdian && afdian.posts) || []), ...wechatPosts]) {
+    if (hidePost.has(p.key) || hideDonor.has(p.donor)) continue
+    notesOf.set(p.donor, [...(notesOf.get(p.donor) || []), p])
+  }
+  // Schema 2: each donor carries their own notes, so the page draws one card
+  // per person instead of a name grid plus a separate list of notes.
   return {
-    schema: 1,
+    schema: 2,
     asOf: new Date(nowMs).toISOString(),
     total: donors.length,
-    donors: donors.map((d) => ({ name: d.name, avatar: d.avatar, since: cnDate(d.first).slice(0, 7), via: d.via })),
-    posts: posts.slice(0, POSTS_SHOWN).map((p) => ({ name: p.name, avatar: p.avatar, via: p.via, at: cnDate(p.at), msg: p.msg }))
+    donors: donors.map((d) => ({
+      name: d.name,
+      avatar: d.avatar,
+      since: cnDate(d.first).slice(0, 7),
+      via: d.via,
+      notes: (notesOf.get(d.key) || [])
+        .sort((a, b) => b.at - a.at)
+        .slice(0, NOTES_PER_DONOR)
+        .map((p) => ({ at: cnDate(p.at), msg: p.msg }))
+    }))
   }
 }
 

@@ -78,40 +78,49 @@
     return wrap
   }
 
-  function tile(d) {
-    var t = el('div', d.name ? 'donor' : 'donor is-anon')
+  function ago(at) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(at || '')
+    if (!m) return ''
+    var days = Math.round((Date.parse(cnToday()) - Date.parse(at)) / 86400000)
+    return T.ago(days, Number(m[1]), Number(m[2]), Number(m[3]))
+  }
+
+  /** One card per person: avatar, name, when and how they joined, and their own notes. */
+  function card(d) {
+    var c = el('div', d.name ? 'donor' : 'donor is-anon')
+    var head = el('div', 'donor-head')
+    head.appendChild(avatar(d))
+    var who = el('div', 'donor-who')
+    who.appendChild(el('div', 'nm', d.name || T.anon))
     var m = /^(\d{4})-(\d{2})$/.exec(d.since || '')
-    var tip = (m ? T.since(Number(m[1]), Number(m[2])) + ' · ' : '') + (T.via[d.via] || '')
-    if (tip) t.setAttribute('data-tip', tip)
-    t.appendChild(avatar(d))
-    t.appendChild(el('span', 'nm', d.name || T.anon))
-    return t
-  }
-
-  function post(p) {
-    var box = el('div', 'post')
-    box.appendChild(avatar(p))
-    var body = el('div')
-    var top = el('div', 'post-top')
-    top.appendChild(el('b', null, p.name || T.anon))
-    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(p.at || '')
-    if (m) {
-      var days = Math.round((Date.parse(cnToday()) - Date.parse(p.at)) / 86400000)
-      top.appendChild(el('span', null, T.ago(days, Number(m[1]), Number(m[2]), Number(m[3]))))
+    var meta = [m ? T.since(Number(m[1]), Number(m[2])) : '', T.via[d.via] || ''].filter(Boolean).join(' · ')
+    if (meta) who.appendChild(el('div', 'meta', meta))
+    head.appendChild(who)
+    c.appendChild(head)
+    for (var i = 0; i < d.notes.length; i++) {
+      var n = el('div', 'donor-note')
+      n.appendChild(el('div', 'donor-note-msg', d.notes[i].msg))
+      var when = ago(d.notes[i].at)
+      if (when) n.appendChild(el('div', 'donor-note-at', when))
+      c.appendChild(n)
     }
-    if (T.via[p.via]) top.appendChild(el('span', null, T.via[p.via]))
-    body.appendChild(top)
-    body.appendChild(el('div', 'post-msg', p.msg))
-    box.appendChild(body)
-    return box
+    return c
   }
 
-  function clean(list, withMsg) {
+  function notes(list) {
     if (!Array.isArray(list)) return []
     return list
-      .filter(function (x) { return x && typeof x === 'object' && (!withMsg || (typeof x.msg === 'string' && x.msg)) })
+      .filter(function (x) { return x && typeof x === 'object' && typeof x.msg === 'string' && x.msg })
+      .slice(0, 3)
+      .map(function (x) { return { at: x.at, msg: str(x.msg, 60) } })
+  }
+
+  function clean(list) {
+    if (!Array.isArray(list)) return []
+    return list
+      .filter(function (x) { return x && typeof x === 'object' })
       .map(function (x) {
-        return { name: str(x.name, 20) || null, avatar: x.avatar, via: x.via, since: x.since, at: x.at, msg: str(x.msg, 60) }
+        return { name: str(x.name, 20) || null, avatar: x.avatar, via: x.via, since: x.since, notes: notes(x.notes) }
       })
   }
 
@@ -127,15 +136,14 @@
   }
 
   function render(data) {
-    var donors = clean(data && data.donors, false)
+    var donors = clean(data && data.donors)
     if (!donors.length) return false
     var month = cnToday().slice(0, 7)
     var total = Number(data.total)
     var count = document.getElementById('wall-total')
     if (count) count.textContent = String(Number.isFinite(total) && total >= donors.length ? Math.floor(total) : donors.length)
-    fill('wall-new', donors.filter(function (d) { return d.since === month }).map(tile))
-    fill('wall-old', donors.filter(function (d) { return d.since !== month }).map(tile))
-    fill('wall-posts', clean(data.posts, true).slice(0, 5).map(post))
+    fill('wall-new', donors.filter(function (d) { return d.since === month }).map(card))
+    fill('wall-old', donors.filter(function (d) { return d.since !== month }).map(card))
     section.hidden = false
     return true
   }
