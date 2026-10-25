@@ -22,16 +22,18 @@
   var T = en
     ? {
         anon: 'Anonymous',
+        more: function (n) { return 'Show ' + n + ' more' },
         via: { afdian: 'Afdian', wechat: 'WeChat' },
-        since: function (y, m) { return 'Since ' + MONTHS[m - 1] + ' ' + y },
+        since: function (y, m) { return 'Joined ' + MONTHS[m - 1] + (y === nowY() ? '' : ' ' + y) },
         ago: function (d, y, m, day) {
           return d <= 0 ? 'today' : d === 1 ? 'yesterday' : d < 7 ? d + ' days ago' : d < 14 ? 'last week' : MONTHS[m - 1] + ' ' + day + (y === nowY() ? '' : ', ' + y)
         }
       }
     : {
         anon: '匿名朋友',
+        more: function (n) { return '展开其余 ' + n + ' 位朋友' },
         via: { afdian: '爱发电', wechat: '微信' },
-        since: function (y, m) { return y + ' 年 ' + m + ' 月起' },
+        since: function (y, m) { return (y === nowY() ? '' : y + ' 年 ') + m + ' 月加入' },
         ago: function (d, y, m, day) {
           return d <= 0 ? '今天' : d === 1 ? '昨天' : d < 7 ? d + ' 天前' : d < 14 ? '上周' : (y === nowY() ? '' : y + ' 年 ') + m + ' 月 ' + day + ' 日'
         }
@@ -191,6 +193,32 @@
     for (var i = 0; i < nodes.length; i++) host.appendChild(nodes[i])
   }
 
+  /** Two rows of cards (4 across on desktop, 2 on phones); folding just one or two more would only add a button. */
+  function foldLimit() {
+    var narrow = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 520px)').matches
+    return narrow ? 6 : 8
+  }
+
+  /** Past the limit, the rest of the cards wait behind a "show the rest" button. */
+  function fold(cards, oldHost) {
+    var btn = document.getElementById('wall-more')
+    var limit = foldLimit()
+    if (!btn || cards.length <= limit + 2) return
+    var rest = cards.slice(limit)
+    for (var i = 0; i < rest.length; i++) rest[i].hidden = true
+    var oldBlock = oldHost && oldHost.closest ? oldHost.closest('[data-wall-block]') : null
+    // A tier whose every card is folded hides its heading too, until the button is pressed.
+    var oldAllFolded = oldBlock && !oldBlock.hidden && oldHost.children.length > 0 && rest.length >= oldHost.children.length
+    if (oldAllFolded) oldBlock.hidden = true
+    btn.textContent = T.more(rest.length)
+    btn.hidden = false
+    btn.onclick = function () {
+      for (var j = 0; j < rest.length; j++) rest[j].hidden = false
+      if (oldAllFolded) oldBlock.hidden = false
+      btn.hidden = true
+    }
+  }
+
   function render(data) {
     var donors = clean(data && data.donors)
     if (!donors.length) return false
@@ -200,8 +228,11 @@
     var total = Number(data.total)
     var count = document.getElementById('wall-total')
     if (count) count.textContent = String(Number.isFinite(total) && total >= donors.length ? Math.floor(total) : donors.length)
-    fill('wall-new', donors.filter(function (d) { return d.since === month }).map(card))
-    fill('wall-old', donors.filter(function (d) { return d.since !== month }).map(card))
+    var fresh = donors.filter(function (d) { return d.since === month }).map(card)
+    var older = donors.filter(function (d) { return d.since !== month }).map(card)
+    fill('wall-new', fresh)
+    fill('wall-old', older)
+    fold(fresh.concat(older), document.getElementById('wall-old'))
     section.hidden = false
     return true
   }
