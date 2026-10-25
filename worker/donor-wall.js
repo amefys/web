@@ -272,6 +272,10 @@ export function editManual(list, body, nowMs, newId) {
       next.name = name
     }
     if (body.msg !== undefined) next.msg = clean(body.msg).slice(0, 200)
+    if (body.at !== undefined) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(body.at) || Number.isNaN(Date.parse(`${body.at}T00:00:00Z`))) throw new HttpError(400, 'bad_date')
+      next.at = body.at
+    }
     return list.map((e, i) => (i === idx ? next : e))
   }
   throw new HttpError(400, 'bad_op')

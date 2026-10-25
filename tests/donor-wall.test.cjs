@@ -195,6 +195,18 @@ test('editManual never mutates and rejects bad input', async () => {
   assert.equal(editManual(list, { op: 'add', name: '新朋友' }, NOW, 'w2')[1].at, '2026-10-24')
 })
 
+test('a WeChat entry\'s date can be corrected, and the wall reorders by it', async () => {
+  const { buildWall, editManual } = await load()
+  let list = editManual([], { op: 'add', name: '甲', at: '2026-10-08' }, NOW, 'w1')
+  list = editManual(list, { op: 'add', name: '乙', at: '2026-10-20' }, NOW, 'w2')
+  const fixed = editManual(list, { op: 'update', id: 'w2', at: '2026-10-01' }, NOW, 'x')
+  assert.equal(list[1].at, '2026-10-20')
+  assert.equal(fixed[1].at, '2026-10-01')
+  const order = (l) => buildWall({ afdian: null, manual: l, hidden: null, nowMs: NOW }).donors.map((d) => d.seed)
+  assert.deepEqual(order(fixed), [...order(list)].reverse())
+  assert.throws(() => editManual(list, { op: 'update', id: 'w1', at: '10/15' }, NOW, 'x'), /bad_date/)
+})
+
 test('hiding a donor also takes their notes down; hiding a note leaves the donor', async () => {
   const { buildWall } = await load()
   const at = Date.parse('2026-10-23T10:00:00Z')
