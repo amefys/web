@@ -31,6 +31,7 @@
  * bucket is public:
  *   manual        WeChat entries          (written by the panel only)
  *   hidden        hidden donors / notes   (written by the panel only)
+ *   names         afdian name overrides   (written by the panel only)
  *   afdian-cache  last good afdian read   (written by the cron only)
  * Separate keys so a cron run and a panel click never overwrite each other.
  *
@@ -38,6 +39,7 @@
  *   GET  /admin/state      everything the panel shows
  *   POST /admin/manual     {op:'add'|'update'|'remove', ...}
  *   POST /admin/hide       {kind:'donor'|'post', key, hidden}
+ *   POST /admin/name       {key:'afdian:…', name}  ('' clears)
  *   POST /admin/refresh    re-read afdian now
  *
  * Deploy: worker/deploy-donor-wall.sh. Bindings: R2 `amefys-cdn` as CDN,
@@ -270,6 +272,10 @@ export function editManual(list, body, nowMs, newId) {
       next.name = name
     }
     if (body.msg !== undefined) next.msg = clean(body.msg).slice(0, 200)
+    if (body.at !== undefined) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(body.at) || Number.isNaN(Date.parse(`${body.at}T00:00:00Z`))) throw new HttpError(400, 'bad_date')
+      next.at = body.at
+    }
     return list.map((e, i) => (i === idx ? next : e))
   }
   throw new HttpError(400, 'bad_op')
@@ -281,8 +287,9 @@ export function editManual(list, body, nowMs, newId) {
  * Everything → the public wall. Pure. `hidden` holds internal keys; a hidden
  * donor also takes their notes down with them.
  */
-export function buildWall({ afdian, manual, hidden, nowMs }) {
+export function buildWall({ afdian, manual, hidden, names, nowMs }) {
   const hideDonor = new Set((hidden && hidden.donors) || [])
+  const nameOf = names && typeof names === 'object' ? names : {}
   const hidePost = new Set((hidden && hidden.posts) || [])
   const wechat = (manual || []).map(manualDonor)
   const donors = [...((afdian && afdian.donors) || []), ...wechat]
@@ -308,7 +315,8 @@ export function buildWall({ afdian, manual, hidden, nowMs }) {
     asOf: new Date(nowMs).toISOString(),
     total: donors.length,
     donors: donors.map((d) => ({
-      name: d.name,
+      // A name set in the panel (the donor asked for it) beats the automatic one.
+      name: typeof nameOf[d.key] === 'string' && nameOf[d.key] ? nameOf[d.key] : d.name,
       avatar: d.avatar,
       since: cnDate(d.first).slice(0, 7),
       via: d.via,
@@ -347,17 +355,29 @@ async function kvJson(env, key, fallback) {
 
 /** Build the wall from KV; `write: false` (the panel just looking) leaves the CDN file alone. */
 async function publish(env, nowMs, { write = true } = {}) {
-  const [afdian, manual, hidden] = await Promise.all([
+  const [afdian, manual, hidden, names] = await Promise.all([
     kvJson(env, 'afdian-cache', null),
     kvJson(env, 'manual', []),
-    kvJson(env, 'hidden', { donors: [], posts: [] })
+    kvJson(env, 'hidden', { donors: [], posts: [] }),
+    kvJson(env, 'names', {})
   ])
-  const wall = buildWall({ afdian, manual, hidden, nowMs })
-  if (!write) return { wall, afdian, manual, hidden }
+  const wall = buildWall({ afdian, manual, hidden, names, nowMs })
+  if (!write) return { wall, afdian, manual, hidden, names }
   await env.CDN.put(PUBLIC_KEY, JSON.stringify(wall), {
     httpMetadata: { contentType: 'application/json', cacheControl: 'public, max-age=300' }
   })
-  return { wall, afdian, manual, hidden }
+  return { wall, afdian, manual, hidden, names }
+}
+
+/**
+ * Panel override of an afdian donor's public name ('' clears it). Typed by the
+ * operator, not the donor, so only trimmed and capped — no default-name check.
+ */
+export function editNames(names, body) {
+  if (typeof body.key !== 'string' || !/^afdian:[\w-]{1,64}$/.test(body.key)) throw new HttpError(400, 'bad_key')
+  const name = truncate(clean(body.name), NAME_MAX)
+  const { [body.key]: _old, ...rest } = names || {}
+  return name ? { ...rest, [body.key]: name } : rest
 }
 
 /** Re-read afdian (a failure keeps the last good read), then publish. */
@@ -396,6 +416,7 @@ function adminView(state, error) {
     wall: state.wall,
     manual: state.manual,
     hidden: state.hidden,
+    names: state.names || {},
     afdian: state.afdian
       ? { fetchedAt: state.afdian.fetchedAt, donors: state.afdian.donors, posts: state.afdian.posts, skipped: state.afdian.skipped }
       : null
@@ -429,6 +450,11 @@ export async function handleAdmin(request, env, fetchImpl, nowMs) {
         const drop = (xs) => (xs || []).filter((k) => k !== key)
         await env.DONORS.put('hidden', JSON.stringify({ ...hidden, donors: drop(hidden.donors), posts: drop(hidden.posts) }))
       }
+      return reply(200, adminView(await publish(env, nowMs)))
+    }
+    if (pathname === '/admin/name') {
+      const names = editNames(await kvJson(env, 'names', {}), body)
+      await env.DONORS.put('names', JSON.stringify(names))
       return reply(200, adminView(await publish(env, nowMs)))
     }
     if (pathname === '/admin/hide') {

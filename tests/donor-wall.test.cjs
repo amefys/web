@@ -195,6 +195,18 @@ test('editManual never mutates and rejects bad input', async () => {
   assert.equal(editManual(list, { op: 'add', name: '新朋友' }, NOW, 'w2')[1].at, '2026-10-24')
 })
 
+test('a WeChat entry\'s date can be corrected, and the wall reorders by it', async () => {
+  const { buildWall, editManual } = await load()
+  let list = editManual([], { op: 'add', name: '甲', at: '2026-10-08' }, NOW, 'w1')
+  list = editManual(list, { op: 'add', name: '乙', at: '2026-10-20' }, NOW, 'w2')
+  const fixed = editManual(list, { op: 'update', id: 'w2', at: '2026-10-01' }, NOW, 'x')
+  assert.equal(list[1].at, '2026-10-20')
+  assert.equal(fixed[1].at, '2026-10-01')
+  const order = (l) => buildWall({ afdian: null, manual: l, hidden: null, nowMs: NOW }).donors.map((d) => d.seed)
+  assert.deepEqual(order(fixed), [...order(list)].reverse())
+  assert.throws(() => editManual(list, { op: 'update', id: 'w1', at: '10/15' }, NOW, 'x'), /bad_date/)
+})
+
 test('hiding a donor also takes their notes down; hiding a note leaves the donor', async () => {
   const { buildWall } = await load()
   const at = Date.parse('2026-10-23T10:00:00Z')
@@ -303,4 +315,33 @@ test('each donor carries a stable 16-bit seed for the page to pick a hero; it is
   assert.ok(Number.isInteger(a.donors[0].seed) && a.donors[0].seed >= 0 && a.donors[0].seed <= 0xffff)
   assert.notEqual(seedOf('afdian:x'), seedOf('afdian:y'))
   assert.ok(!JSON.stringify(a).includes('payer-secret-id'))
+})
+
+test('a panel-set name replaces an afdian donor\'s automatic one, survives the hourly re-read, and clears', async () => {
+  const { handleAdmin, editNames } = await load()
+  const { env, r2, kv } = fakeEnv()
+  const auth = { authorization: `Bearer ${ADMIN_KEY}`, 'content-type': 'application/json' }
+  const afd = afdianFetch({ sponsors: [user('a', '爱发电用户_3f9a2')], orders: [order({ user_id: 'a', out_trade_no: '1', create_time: sec('2026-10-23T00:00:00Z') })] })
+  const post = (path, body) => handleAdmin(new Request(`https://w${path}`, { method: 'POST', headers: auth, body: JSON.stringify(body) }), env, afd.f, NOW)
+  const names = () => JSON.parse(r2.get('donors.json').v).donors.map((d) => d.name)
+
+  await post('/admin/refresh', {})
+  assert.deepEqual(names(), [null])
+  let res = await post('/admin/name', { key: 'afdian:a', name: '  三联软件林志刚 ' })
+  assert.equal(res.status, 200)
+  assert.deepEqual((await res.json()).names, { 'afdian:a': '三联软件林志刚' })
+  assert.deepEqual(names(), ['三联软件林志刚'])
+  await post('/admin/refresh', {})
+  assert.deepEqual(names(), ['三联软件林志刚'], 'the cron re-read does not undo it')
+
+  assert.equal((await post('/admin/name', { key: 'wechat:x', name: 'n' })).status, 400, 'WeChat names are edited on the entry itself')
+  assert.equal((await post('/admin/name', { key: '../x', name: 'n' })).status, 400)
+
+  await post('/admin/name', { key: 'afdian:a', name: '' })
+  assert.deepEqual(names(), [null])
+  assert.equal(kv.get('names'), '{}')
+
+  const before = { 'afdian:b': 'B' }
+  assert.deepEqual(editNames(before, { key: 'afdian:a', name: '好'.repeat(30) }), { 'afdian:b': 'B', 'afdian:a': '好'.repeat(19) + '…' })
+  assert.deepEqual(before, { 'afdian:b': 'B' }, 'never mutates')
 })
