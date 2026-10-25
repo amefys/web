@@ -34,6 +34,14 @@
  * one instead of 404ing on a Windows-only release, and mac auto-update keeps
  * reading a latest-mac.yml that matches the DMG next to it.
  *
+ * Versioned installer names (from v0.36.0): releases ship
+ * AMEFYS-Setup-<version>.exe and AMEFYS-<version>.dmg so downloaded files are
+ * easy to tell apart. The unversioned names above stay the public URL
+ * contract: /dl/AMEFYS-Setup.exe resolves the channel's tag, then serves
+ * <tag>/AMEFYS-Setup-<version>.exe (or, for older releases, the unversioned
+ * object). Either way the browser saves it under the versioned name.
+ * electron-updater asks for the versioned name directly (latest.yml `path`).
+ *
  * Bindings: R2 bucket bound as `DL` (see README). Without the binding the
  * worker degrades to the GitHub proxy path.
  */
@@ -42,7 +50,20 @@ const GH_OWNER = 'amefys'
 const GH_REPO = 'web'
 const TAG_RE = /^v\d+\.\d+\.\d+(-[\w.]+)?$/
 const POINTER_TTL_S = 60
-const MAC_FILE_RE = /^(AMEFYS\.dmg(\.blockmap)?|latest-mac\.yml)$/
+const MAC_FILE_RE = /^(AMEFYS(-\d[\w.-]*)?\.dmg(\.blockmap)?|latest-mac\.yml)$/
+const ALIAS_RE = /^(AMEFYS-Setup\.exe|AMEFYS\.dmg)$/
+const VERSION_IN_NAME_RE = /-\d+\.\d+\.\d+(-[\w.]+)?(?=\.(exe|dmg)(\.blockmap)?$)/
+
+/** 'AMEFYS-Setup.exe' + 'v0.36.0' -> 'AMEFYS-Setup-0.36.0.exe'; null for any other file. */
+function versionedName(file, tag) {
+  if (!ALIAS_RE.test(file) || !TAG_RE.test(tag || '')) return null
+  return file.replace(/\.(exe|dmg)$/, `-${tag.slice(1)}.$1`)
+}
+
+/** 'AMEFYS-Setup-0.36.0.exe' -> 'AMEFYS-Setup.exe', so telemetry keeps one name per installer. */
+function canonicalName(file) {
+  return file.replace(VERSION_IN_NAME_RE, '')
+}
 
 /** Stable mac files follow their own pointer; everything else its channel's. */
 async function resolveTag(bucket, channel, file) {
@@ -76,8 +97,11 @@ export default {
     if (env.DL) {
       tag = await resolveTag(env.DL, channel, file)
       if (tag) {
-        const r2 = await serveFromR2(env.DL, `${tag}/${file}`, request, channel, file)
-        if (r2) return countDownload(env, request, r2, { tag, channel, file, source: 'r2' })
+        const saveAs = versionedName(file, tag) ?? file
+        for (const name of new Set([saveAs, file])) {
+          const r2 = await serveFromR2(env.DL, `${tag}/${name}`, request, channel, saveAs)
+          if (r2) return countDownload(env, request, r2, { tag, channel, file, source: 'r2' })
+        }
       }
     }
 
@@ -85,6 +109,15 @@ export default {
     // A stable mac file resolved to a pinned tag goes to that tag on GitHub:
     // releases/latest may be a Windows-only release with no DMG.
     const ghChannel = channel === 'latest' && tag && MAC_FILE_RE.test(file) ? tag : channel
+    if (ALIAS_RE.test(file)) {
+      // An unversioned alias needs the release's tag to name the real asset.
+      const ghTag = TAG_RE.test(ghChannel) ? ghChannel : (tag ?? (await channelTag(ghChannel)))
+      const name = versionedName(file, ghTag)
+      if (name) {
+        const gh = await serveFromGitHub(ghTag, name, request, ctx, name)
+        if (gh.ok) return countDownload(env, request, gh, { tag: ghTag, channel, file, source: 'github' })
+      }
+    }
     const gh = await serveFromGitHub(ghChannel, file, request, ctx)
     return countDownload(env, request, gh, { tag: channel, channel, file, source: 'github' })
   }
@@ -105,10 +138,11 @@ function countDownload(env, request, response, { tag, channel, file, source }) {
     const range = request.headers.get('Range')
     const firstChunk = response.status === 200 || (response.status === 206 && /^bytes=0-/.test(range || ''))
     if (!firstChunk) return response
+    const name = canonicalName(file)
     env.DL_STATS.writeDataPoint({
-      blobs: [tag, file, channel, source, (request.cf && request.cf.country) || 'XX'],
+      blobs: [tag, name, channel, source, (request.cf && request.cf.country) || 'XX'],
       doubles: [1],
-      indexes: [file]
+      indexes: [name]
     })
   } catch {
     /* telemetry must never break a download */
@@ -227,7 +261,7 @@ function asVideo(response, file) {
  * never cached at the edge on this plan, so this is slow by nature; it only
  * has to be correct.
  */
-async function serveFromGitHub(channel, file, request, ctx) {
+async function serveFromGitHub(channel, file, request, ctx, saveAs = file) {
   let ghPath, ttl
   if (channel === 'latest') {
     ghPath = `releases/latest/download/${encodeURIComponent(file)}`
@@ -263,7 +297,7 @@ async function serveFromGitHub(channel, file, request, ctx) {
 
   const headers = new Headers(upstream.headers)
   headers.set('Cache-Control', `public, max-age=${ttl}${TAG_RE.test(channel) ? ', immutable' : ''}`)
-  headers.set('Content-Disposition', disposition(file))
+  headers.set('Content-Disposition', disposition(saveAs))
   headers.set('X-Content-Type-Options', 'nosniff')
   headers.set('X-AMEFYS-Source', 'github')
   if (isVideo(file)) headers.set('Content-Type', contentType(file))
@@ -276,6 +310,23 @@ async function serveFromGitHub(channel, file, request, ctx) {
   // plan's object-size limit, which is exactly why R2 exists.
   if (upstream.status === 200) ctx.waitUntil(cache.put(cacheKey, response.clone()))
   return response
+}
+
+// Tag behind the `latest` / `beta` channel on GitHub, or null.
+async function channelTag(channel) {
+  return channel === 'beta' ? latestPrereleaseTag() : latestReleaseTag()
+}
+
+// Newest stable release tag, or null. Same rate-limit budget as below.
+async function latestReleaseTag() {
+  const api = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/releases/latest`
+  const res = await fetch(api, {
+    headers: { 'User-Agent': 'amefys-dl-proxy', Accept: 'application/vnd.github+json' },
+    cf: { cacheTtlByStatus: { '200-299': POINTER_TTL_S * 10, '400-599': 0 }, cacheEverything: true }
+  })
+  if (!res.ok) return null
+  const { tag_name: tag } = await res.json()
+  return TAG_RE.test(tag || '') ? tag : null
 }
 
 // Newest published pre-release tag (drafts excluded), or null. Unauthenticated
