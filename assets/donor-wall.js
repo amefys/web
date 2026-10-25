@@ -7,6 +7,10 @@
  *
  * Names and notes are typed by donors, so everything goes in through
  * textContent — never innerHTML — and avatars are only ever afdian's CDN.
+ *
+ * Each card is greeted by a hero (assets/donor-heroes.js, generated from the
+ * game's own chat wheel "thank" lines). Heroes are handed out oldest donor
+ * first, so a new donor never takes the hero someone already had.
  */
 (function () {
   var URL_ = 'https://cdn.amefys.com/donors.json'
@@ -50,6 +54,50 @@
     if (text != null) e.textContent = text
     return e
   }
+  var HEROES = typeof window !== 'undefined' && Array.isArray(window.AMEFYS_DONOR_HEROES) ? window.AMEFYS_DONOR_HEROES : []
+  var ART = 'https://cdn.amefys.com/hero-art/v2/portraits/'
+
+  /** donors are newest first; walk them oldest first, each takes their seed's hero or the next free one. */
+  function assignHeroes(donors) {
+    var n = HEROES.length
+    if (!n) return donors.map(function () { return null })
+    var used = {}
+    var out = new Array(donors.length)
+    for (var i = donors.length - 1; i >= 0; i--) {
+      var start = donors[i].seed % n
+      var pick = start
+      for (var k = 0; k < n; k++) {
+        if (!used[(start + k) % n]) { pick = (start + k) % n; break }
+      }
+      if (Object.keys(used).length >= n) used = {}
+      used[pick] = true
+      out[i] = HEROES[pick]
+    }
+    return out
+  }
+
+  function heroArt(h) {
+    var box = el('div', 'donor-art')
+    var img = el('img')
+    img.src = ART + h.id + '.webp'
+    img.alt = ''
+    img.loading = 'lazy'
+    img.width = 256
+    img.height = 144
+    img.onerror = function () { box.className = 'donor-art is-empty' }
+    box.appendChild(img)
+    return box
+  }
+
+  /** The hero's chat wheel line, shown the way the game prints it: (Hero): line */
+  function heroLine(h) {
+    var line = el('div', 'donor-hero')
+    line.appendChild(el('span', 'spk'))
+    line.appendChild(el('b', null, en ? h.name.en : h.name.zh))
+    line.appendChild(el('span', 'donor-hero-line', en ? h.line.en : h.line.zh))
+    return line
+  }
+
   function okAvatar(u) { return typeof u === 'string' && /^https:\/\/([a-z0-9-]+\.)*afdiancdn\.com\//.test(u) }
 
   function initial(name) {
@@ -88,6 +136,7 @@
   /** One card per person: avatar, name, when and how they joined, and their own notes. */
   function card(d) {
     var c = el('div', d.name ? 'donor' : 'donor is-anon')
+    if (d.hero) c.appendChild(heroArt(d.hero))
     var head = el('div', 'donor-head')
     head.appendChild(avatar(d))
     var who = el('div', 'donor-who')
@@ -104,6 +153,7 @@
       if (when) n.appendChild(el('div', 'donor-note-at', when))
       c.appendChild(n)
     }
+    if (d.hero) c.appendChild(heroLine(d.hero))
     return c
   }
 
@@ -120,7 +170,13 @@
     return list
       .filter(function (x) { return x && typeof x === 'object' })
       .map(function (x) {
-        return { name: str(x.name, 20) || null, avatar: x.avatar, via: x.via, since: x.since, notes: notes(x.notes) }
+        return { name: str(x.name, 20) || null, avatar: x.avatar, via: x.via, since: x.since, seed: x.seed, notes: notes(x.notes) }
+      })
+      .map(function (d, i, all) {
+        // Older files have no seed; fall back to something stable enough for one page view.
+        var ok = typeof d.seed === 'number' && d.seed >= 0 && d.seed % 1 === 0
+        d.seed = ok ? d.seed : (all.length - i) * 7919
+        return d
       })
   }
 
@@ -138,6 +194,8 @@
   function render(data) {
     var donors = clean(data && data.donors)
     if (!donors.length) return false
+    var heroes = assignHeroes(donors)
+    for (var i = 0; i < donors.length; i++) donors[i].hero = heroes[i]
     var month = cnToday().slice(0, 7)
     var total = Number(data.total)
     var count = document.getElementById('wall-total')

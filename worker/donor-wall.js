@@ -301,7 +301,8 @@ export function buildWall({ afdian, manual, hidden, nowMs }) {
     notesOf.set(p.donor, [...(notesOf.get(p.donor) || []), p])
   }
   // Schema 2: each donor carries their own notes, so the page draws one card
-  // per person instead of a name grid plus a separate list of notes.
+  // per person instead of a name grid plus a separate list of notes. `seed`
+  // picks the hero who thanks them on the page and stays the same every hour.
   return {
     schema: 2,
     asOf: new Date(nowMs).toISOString(),
@@ -311,12 +312,23 @@ export function buildWall({ afdian, manual, hidden, nowMs }) {
       avatar: d.avatar,
       since: cnDate(d.first).slice(0, 7),
       via: d.via,
+      seed: seedOf(d.key),
       notes: (notesOf.get(d.key) || [])
         .sort((a, b) => b.at - a.at)
         .slice(0, NOTES_PER_DONOR)
         .map((p) => ({ at: cnDate(p.at), msg: p.msg }))
     }))
   }
+}
+
+/**
+ * A stable 16-bit number per donor (FNV-1a of the internal key). Too few bits
+ * to say anything about the payer id; enough to spread heroes around.
+ */
+export function seedOf(key) {
+  let h = 0x811c9dc5
+  for (const ch of String(key)) h = Math.imul(h ^ ch.codePointAt(0), 0x01000193) >>> 0
+  return (h ^ (h >>> 16)) & 0xffff
 }
 
 // ── storage + runs ───────────────────────────────────────────────────────
