@@ -111,7 +111,9 @@ test('the public file never carries amounts, plans, payer ids, trade numbers or 
     assert.ok(!text.includes(leak), `public file leaks ${leak}`)
   }
   const wall = JSON.parse(text)
-  assert.deepEqual(wall.donors, [{ name: '晚风', avatar: null, since: '2026-10', via: 'afdian', notes: [{ at: '2026-10-23', msg: '翻译救了我好几局' }] }])
+  const { seed, ...rest } = wall.donors[0]
+  assert.ok(Number.isInteger(seed))
+  assert.deepEqual(rest, { name: '晚风', avatar: null, since: '2026-10', via: 'afdian', notes: [{ at: '2026-10-23', msg: '翻译救了我好几局' }] })
   assert.equal(wall.schema, 2)
   assert.equal(wall.posts, undefined, 'notes ride on their donor; no separate list')
   assert.equal(r2.get('donors.json').opts.httpMetadata.cacheControl, 'public, max-age=300')
@@ -288,4 +290,17 @@ test('removing a WeChat entry also clears its hide flags', async () => {
   await post('/admin/hide', { kind: 'donor', key: 'afdian:keep', hidden: true })
   await post('/admin/manual', { op: 'remove', id: manual[0].id })
   assert.deepEqual(JSON.parse(kv.get('hidden')), { donors: ['afdian:keep'], posts: [] })
+})
+
+test('each donor carries a stable 16-bit seed for the page to pick a hero; it is not the payer id', async () => {
+  const { buildWall, seedOf } = await load()
+  const at = Date.parse('2026-10-23T10:00:00Z')
+  const afdian = { donors: [{ key: 'afdian:payer-secret-id', via: 'afdian', first: at, name: '晚风', avatar: null }], posts: [] }
+  const a = buildWall({ afdian, manual: [], hidden: null, nowMs: NOW })
+  const b = buildWall({ afdian, manual: [], hidden: null, nowMs: NOW + 3600e3 })
+  assert.equal(a.donors[0].seed, seedOf('afdian:payer-secret-id'))
+  assert.equal(a.donors[0].seed, b.donors[0].seed, 'same donor, same seed every hour')
+  assert.ok(Number.isInteger(a.donors[0].seed) && a.donors[0].seed >= 0 && a.donors[0].seed <= 0xffff)
+  assert.notEqual(seedOf('afdian:x'), seedOf('afdian:y'))
+  assert.ok(!JSON.stringify(a).includes('payer-secret-id'))
 })
