@@ -190,7 +190,7 @@
       <div class="eyebrow">隐私政策</div>
       <h1>你的数据，你做主</h1>
       <p>用最简单的话说清楚：我们收集了什么、为什么、给谁。</p>
-      <div class="updated">生效日期：2026-10-25（上一版 2026-10-22）</div>
+      <div class="updated">生效日期：2026-10-28（上一版 2026-10-25）</div>
       <!-- Edition blocks: elements whose data-edition is global show on amefys.com; template elements
            whose data-edition is cn hold the amefys.cn wording. scripts/cn/mirror-site.ts (amefys repo) unwraps the templates and drops the global
            blocks when it builds amefys.cn — one source, two editions. Keep ids out of templates. -->
@@ -278,7 +278,7 @@
             <td>App 设置</td>
             <td>语言 / 主题 / 翻译目标 / 快捷键 / 悬浮窗位置等</td>
             <td>保留你的偏好</td>
-            <td><span class="tag tag-local">仅本地</span></td>
+            <td><span class="tag tag-local">仅本地</span> / 登录后可选 <span class="tag tag-cloud">同步云端</span></td>
           </tr>
           <tr>
             <td>账号信息</td>
@@ -320,7 +320,7 @@
       <p>聊天翻译功能会把<strong>你输入的原文</strong>（中文回复或粘贴的对方消息）发给翻译引擎。我们支持多个引擎，默认通过 AMEFYS 后端代理调用：</p>
       <h3>默认模式：走 AMEFYS 后端代理</h3>
       <ul class="clean">
-        <li><span data-edition="global">请求经 AMEFYS 的云函数（Supabase）转发到目标引擎（火山 / Azure / Claude / OpenAI 等）</span><template data-edition="cn">请求经 AMEFYS 在北京的服务器（阿里云）转发到火山引擎，全程在中国境内</template></li>
+        <li><span data-edition="global">请求经 AMEFYS 的云函数（Supabase）转发到目标引擎（火山 / Azure / Claude / OpenAI 等）</span><template data-edition="cn">请求经 AMEFYS 在北京的服务器（阿里云）优先转发到火山引擎（境内）；火山引擎失败时，可能改由 Azure（境外）完成翻译</template></li>
         <li>引擎方的隐私政策对你适用 — 但因为是 AMEFYS 的 key，引擎方拿到的是 AMEFYS 的标识，不是你个人的</li>
         <li><strong>你输入的原文不会被我们存下来</strong>：代理只保留它的 SHA-256 hash，用来查缓存和记用量</li>
         <li>我们会记一条用量日志：账号 ID、消耗字符数、原文 hash、时间 — 用于额度计算和防滥用，<strong>不含原文</strong>，30 天后自动删除</li>
@@ -351,16 +351,17 @@
         <p>中国大陆用户建议使用<a href="https://amefys.cn" class="link">国内版</a>：数据存放在中国境内。两个版本的账号互不相通，国际版可以在 App 的「设置 → 账号」里把账号和会员迁到国内版。</p>
       </div>
       <template data-edition="cn">
-        <p>国内版的账号、云同步数据、OCR 诊断、用量记录和订单都存放在<strong>中国境内</strong>：数据库在阿里云杭州，App 连接的服务器在阿里云北京。翻译和语音识别使用火山引擎（境内），登录验证码邮件由阿里云邮件推送发出，安装包和更新从阿里云下载。</p>
+        <p>国内版的账号、云同步数据、OCR 诊断、用量记录和订单都存放在<strong>中国境内</strong>：数据库在阿里云杭州，App 连接的服务器在阿里云北京。翻译优先使用火山引擎（境内），登录验证码邮件由阿里云邮件推送发出，安装包和更新从阿里云下载。</p>
         <p>下面这些情况会有数据离开中国境内，都是可选的或不含账号信息：</p>
         <ul class="clean">
           <li><strong>错误上报与 OCR 诊断的 Sentry 部分</strong>：国内版默认关闭；你在「设置 → 数据与隐私」里打开后，崩溃信息会发往 Sentry（美国）</li>
+          <li><strong>Azure 翻译兜底</strong>：火山引擎翻译失败时，原文和译文可能经 Azure（境外）处理；用量日志仍只记 hash，不存原文明文</li>
           <li><strong>Steam 战绩查询</strong>：你填写好友代码、查战绩或导入对局时，App 直接从你的电脑访问 OpenDota（境外），只发送你的 Steam 好友代码</li>
           <li><strong>英雄和装备图片</strong>：部分图片直接从 Valve 的图片服务器（境外）加载，对方只会看到你的网络地址，不涉及账号信息</li>
           <li><strong>官网留言板、博客评论、Studio 咨询表单</strong>：与国际版共用一套，存放在 Cloudflare（境外）；只在你主动提交时产生</li>
           <li><strong>自备密钥的翻译或语音服务</strong>：请求从你的电脑直接发给你选择的服务商，所在地由你决定</li>
         </ul>
-        <p>国内版和国际版是两套独立的账号和数据。从国际版迁过来的账号，国际版那边只留下一个已停用的旧账号（见下方「注销账号」）。</p>
+        <p>国内版和国际版是两套独立的账号和数据。从国际版迁过来的账号，国际版那边只留下一个会员已转出的旧账号（见下方「注销账号」）。</p>
       </template>
     </section>
 
@@ -387,7 +388,7 @@
         <thead><tr><th>服务</th><th>数据</th><th>政策</th></tr></thead>
         <tbody>
           <tr><td>Supabase</td><td>邮箱 + 密码 + 登录用户的对局数据 + OCR 诊断计数（可关）</td><td><a href="https://supabase.com/privacy" target="_blank" rel="noopener" class="link">supabase.com/privacy</a></td></tr>
-          <tr><td>翻译引擎（火山 / Azure / Claude / OpenAI / Gemini）</td><td>你的翻译原文 + 译文</td><td>详见各引擎方政策</td></tr>
+          <tr><td>翻译与 AI 服务（火山引擎及火山方舟 / Azure / Claude / OpenAI / Gemini / DeepSeek）</td><td>你的翻译原文 + 译文；使用自备密钥的 AI 功能时，由你提交的内容</td><td>详见各服务商政策</td></tr>
           <tr><td>语音识别（火山引擎，或你自备密钥的服务商）</td><td>语音输入 / 语音侦听的音频与转写文本</td><td><a href="https://www.volcengine.com/docs/6291/65568" class="link" target="_blank" rel="noopener">volcengine.com</a> / 详见你所选服务商政策</td></tr>
           <tr><td>OpenDota API</td><td>（可选）读取你的 Steam 公开对局战绩</td><td><a href="https://www.opendota.com/api-keys" target="_blank" rel="noopener" class="link">opendota.com</a></td></tr>
           <tr><td>Sentry（可选）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
@@ -402,7 +403,7 @@
         <tbody>
           <tr><td>阿里云（数据库、服务器、文件存储与下载加速、邮件推送）</td><td>邮箱 + 密码 hash + 登录用户的云同步数据、用量记录、OCR 诊断计数（可关）、订单；登录验证码邮件</td><td><a href="https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud201902141711_54837.html" target="_blank" rel="noopener" class="link">阿里云隐私政策</a></td></tr>
           <tr><td>火山引擎（翻译、语音识别）</td><td>你的翻译原文 + 译文；语音输入 / 语音侦听的音频与转写文本</td><td><a href="https://www.volcengine.com/docs/6291/65568" class="link" target="_blank" rel="noopener">volcengine.com</a></td></tr>
-          <tr><td>爱发电（afdian.com）</td><td>购买 Pro 会员时的付款；我们只收到订单号、金额、付款人的爱发电账号 ID 和你填写的留言，<strong>看不到你的手机号、邮箱和支付信息</strong></td><td><a href="https://afdian.com" target="_blank" rel="noopener" class="link">afdian.com</a></td></tr>
+          <tr><td>Azure（境外，翻译兜底）</td><td>火山引擎失败时的翻译原文与译文</td><td><a href="https://privacy.microsoft.com/zh-cn/privacystatement" target="_blank" rel="noopener" class="link">Microsoft 隐私声明</a></td></tr>
           <tr><td>OpenDota API（境外，可选）</td><td>读取你的 Steam 公开对局战绩，从你的电脑直接访问</td><td><a href="https://www.opendota.com/api-keys" target="_blank" rel="noopener" class="link">opendota.com</a></td></tr>
           <tr><td>Sentry（美国，可选，国内版默认关闭）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
           <tr><td>Cloudflare Workers / D1 / Turnstile（境外）</td><td>官网留言板、博客评论和 Studio 咨询表单：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
@@ -432,9 +433,9 @@
       <ul class="clean">
         <li><strong>入口</strong>：电脑版 App「设置 → 账号 → 注销账号」，再输入一次密码确认。忘了密码可以先在登录页重设密码再注销</li>
         <li><strong>会删除</strong>：账号本身（邮箱、密码 hash），以及云端的设置、快捷回复、对局记录、英雄池、会员与额度、用量记录、兑换记录、OCR 诊断和爱发电绑定。确认后立即删除，不能恢复；会员剩余时间随之作废，不退款</li>
-        <li><strong>会保留</strong>：已付款的订单记录（订单号、金额、时间）按电子商务相关法规保留 3 年用于对账，注销后不再和任何账号关联</li>
+        <li><strong>会保留</strong>：已付款的订单记录（订单号、金额、时间）为对账、退款和争议处理保留 3 年，注销后不再和任何账号关联</li>
         <li><strong>不会动</strong>：你电脑上的本地数据（对局历史、设置等）。需要的话按上面的方法自己清除</li>
-        <li><span data-edition="global">账号已迁到国内版的，注销国际版这边只删除国际版的旧账号；国内版账号要在国内版里另外注销</span><template data-edition="cn">从国际版迁过来的账号，国际版那边还留有一个已停用的旧账号，需要在国际版 App 里另外注销，或发邮件让我们处理</template></li>
+        <li><span data-edition="global">账号已迁到国内版的，注销国际版这边只删除国际版的旧账号；国内版账号要在国内版里另外注销</span><template data-edition="cn">从国际版迁过来的账号，国际版那边还留有一个会员已转出的旧账号，需要在国际版 App 里另外注销，或发邮件让我们处理</template></li>
         <li>手机版 BP 和小程序暂时没有注销入口：可以在电脑版里注销，或用注册邮箱发信到 <a href="mailto:amefys@gmail.com?subject=AMEFYS%20注销账号" class="link">amefys@gmail.com</a>，我们会在 15 个工作日内处理</li>
       </ul>
       <h3>关闭可选功能</h3>
@@ -471,13 +472,8 @@
     <!-- 政策变更 -->
     <section class="s">
       <h2>政策变更通知</h2>
-      <p>若本政策实质性修改（新增数据收集类型 / 新第三方服务等），我们会：</p>
-      <ul class="clean">
-        <li>页面顶部"生效日期"更新</li>
-        <li>App 内弹一次提示卡片，要求用户主动确认</li>
-        <li>已登录用户：发邮件通知</li>
-      </ul>
-      <p>纯文字 / 格式 / 错别字修订不视为实质性修改，不会触发通知。</p>
+      <p>若本政策实质性修改（新增数据收集类型 / 新第三方服务 / 新增数据出境情形等），我们会在本页公布变更内容并更新页面顶部的生效日期；变更涉及你的重要权利时，会在本页以显著文字说明。你可以随时在官网查看当前版本。</p>
+      <p>纯文字 / 格式 / 错别字修订不视为实质性修改，仅更新本页，不另行标注。</p>
     </section>
 
     <!-- 联系 -->

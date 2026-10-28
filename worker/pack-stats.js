@@ -75,18 +75,23 @@ const PACKS = [
   'zh-counter-micspam-3'
 ]
 
-const CORS_HEADERS = {
-  'access-control-allow-origin': 'https://amefys.com',
-  'access-control-allow-methods': 'GET, OPTIONS',
-  'access-control-max-age': '86400'
+function corsHeaders(request) {
+  const origin = request.headers.get('origin')
+  return {
+    'access-control-allow-origin': origin === 'https://amefys.cn' ? origin : 'https://amefys.com',
+    'access-control-allow-methods': 'GET, OPTIONS',
+    'access-control-max-age': '86400',
+    vary: 'Origin'
+  }
 }
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url)
+    const cors = corsHeaders(request)
 
     if (request.method === 'OPTIONS') {
-      return new Response(null, { status: 204, headers: CORS_HEADERS })
+      return new Response(null, { status: 204, headers: cors })
     }
 
     // ── /p/stats.json — aggregated counts ────────────────────────────
@@ -101,7 +106,7 @@ export default {
       for (const [slug, n] of pairs) counts[slug] = n
       return new Response(JSON.stringify({ counts, updatedAt: Date.now() }), {
         headers: {
-          ...CORS_HEADERS,
+          ...cors,
           'content-type': 'application/json',
           'cache-control': 'public, max-age=60, stale-while-revalidate=300'
         }
@@ -119,9 +124,9 @@ export default {
           })()
         )
       }
-      return new Response(null, { status: 204, headers: CORS_HEADERS })
+      return new Response(null, { status: 204, headers: cors })
     }
 
-    return new Response('Not found', { status: 404, headers: CORS_HEADERS })
+    return new Response('Not found', { status: 404, headers: cors })
   }
 }

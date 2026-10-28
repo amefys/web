@@ -9,7 +9,7 @@ const path = require('node:path')
 
 const read = (f) => fs.readFileSync(path.join(__dirname, '..', f), 'utf8')
 const note = (html) => {
-  const m = html.match(/<p class="[^"]*" data-edition-note>([\s\S]*?)<\/p>/)
+  const m = html.match(/<p class="[^"]*" data-edition-note[^>]*>([\s\S]*?)<\/p>/)
   assert.ok(m, 'data-edition-note paragraph missing')
   return m[1]
 }
