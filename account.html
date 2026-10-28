@@ -194,8 +194,10 @@
 
   <main class="page">
     <h1>我的账号</h1>
-    <p class="sub">和软件、<a href="bp/">手机版 BP</a> 用的是同一个账号。这里只能查看，购买请看 <a href="pro.html">Pro 会员</a>。</p>
-    <p class="sub" data-edition-note>这是国际版的账号，和<a href="https://amefys.cn/">国内版</a>的账号互不通用。</p>
+    <p class="sub" data-edition="global">和软件、<a href="bp/">手机版 BP</a> 用的是同一个账号。这里只能查看，购买请看 <a href="pro.html">Pro 会员</a>。</p>
+    <template data-edition="cn"><p class="sub">和软件、<a href="bp/">手机版 BP</a> 用的是同一个账号。这里展示会员状态和额度。</p></template>
+    <p class="sub" data-edition-note data-edition="global">这是国际版的账号，和<a href="https://amefys.cn/">国内版</a>的账号互不通用。</p>
+    <template data-edition="cn"><p class="sub" data-edition-note>这是国内版的账号，与国际版的账号互不通用。</p></template>
 
     <p id="state-loading" class="muted">正在读取登录状态…</p>
     <p id="load-error" class="err" hidden>页面没能加载完整，请刷新重试。</p>
@@ -232,12 +234,16 @@
         <ul id="quota-list" class="quotas"></ul>
       </section>
 
-      <section class="card">
+      <section class="card" data-edition="global">
         <h2>购买识别码<small>每个账号固定一个</small></h2>
         <div class="ref"><code id="ref-code">AMF-······</code><button id="ref-copy" class="btn-sm" type="button" disabled>复制</button></div>
         <p id="ref-error" class="err" hidden>识别码没读到，请刷新重试。</p>
         <p class="ref-steps">在爱发电买 Pro 时，把识别码粘贴到「留言」里，付款后一般 1 分钟内自动开通到这个账号。<a class="link" href="pro.html#how">怎么买</a></p>
       </section>
+      <template data-edition="cn"><section class="card" hidden>
+        <div class="ref"><code id="ref-code">AMF-······</code><button id="ref-copy" class="btn-sm" type="button" disabled>复制</button></div>
+        <p id="ref-error" class="err" hidden></p>
+      </section></template>
 
       <section class="card">
         <h2>我的订单<small>最近 50 笔</small></h2>

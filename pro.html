@@ -241,7 +241,7 @@
       <div class="eyebrow">AMEFYS PRO</div>
       <h1>开黑一整晚，额度也够用</h1>
       <p>选人推荐、出装建议、关键时间提醒这些核心功能一直免费。Pro 给的是更多的<strong>聊天翻译</strong>和<strong>语音</strong>额度，适合天天打、经常和外国队友沟通的你。</p>
-      <div class="cta">
+      <div class="cta" data-edition="global">
         <a class="btn gold" href="#plans">看价格</a>
         <a class="btn ghost" href="#how">怎么买</a>
       </div>
@@ -277,7 +277,12 @@
       </div>
     </section>
 
-    <section class="s" id="plans">
+    <template data-edition="cn"><section class="s">
+      <h2>国内版暂未开放购买</h2>
+      <p class="lead">这里仅展示 Pro 会员权益。已有会员的额度、有效期和标识不受影响。</p>
+    </section></template>
+
+    <section class="s" id="plans" data-edition="global">
       <h2>价格</h2>
       <p class="lead">一次性付款，到期就停，不会自动扣费。时间长的更划算。</p>
       <div class="plans">
@@ -292,7 +297,7 @@
       <p class="note" data-edition-note>这里是国际版的会员。在中国大陆玩，建议用<a href="https://amefys.cn/">国内版</a>；两个版本的账号和会员不通用。</p>
     </section>
 
-    <section class="s" id="how">
+    <section class="s" id="how" data-edition="global">
       <h2>怎么买</h2>
       <p class="lead">三步，付款后一般 1 分钟内自动开通。下面都是软件里的真实界面。</p>
       <div class="how">
@@ -324,7 +329,7 @@
       </div>
     </section>
 
-    <section class="s">
+    <section class="s" data-edition="global">
       <h2>想多支持一点</h2>
       <p class="lead">在爱发电主页还有三个赞助方案，同样一次性付款、不自动扣费。</p>
       <div class="sponsor">
@@ -334,7 +339,7 @@
       </div>
     </section>
 
-    <section class="s faq">
+    <section class="s faq" data-edition="global">
       <h2>常见问题</h2>
       <details><summary>付款时忘了填识别码怎么办？</summary><p>把爱发电订单号和你的 AMEFYS 登录邮箱发到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或者在<a href="guestbook.html">留言板</a>留言，我们会尽快帮你开通。</p></details>
       <details><summary>在哪里看我的会员到期时间和订单？</summary><p>软件「设置 → 账号」里能看到会员状态；也可以在官网<a href="account.html">我的账号</a>登录查看，包括今天的额度、购买识别码和最近的订单。账号和软件、手机版 BP 是同一个。</p></details>
@@ -344,6 +349,12 @@
       <details><summary>不满意能退吗？爱发电页面写着「暂不支持退款」</summary><p>首次购买 7 天内、用量不多的可以全额退，具体看<a href="refund.html">退款政策</a>。爱发电付款页上的「暂不支持退款」说的是平台没有自助退款按钮；退款由我们按退款政策处理，钱会通过支付宝转账退给你。</p></details>
       <details><summary>会影响游戏账号安全吗？</summary><p>不会。AMEFYS 只读 Valve 官方的 GSI 接口，不读写游戏内存、不注入游戏、不拦截网络流量。详见<a href="compliance.html">合规说明</a>。</p></details>
     </section>
+    <template data-edition="cn"><section class="s faq">
+      <h2>常见问题</h2>
+      <details><summary>在哪里看会员状态和额度？</summary><p>软件「设置 → 账号」和官网<a href="account.html">我的账号</a>都可以查看。已有会员的权益不受影响。</p></details>
+      <details><summary>用自己的 API Key 还需要 Pro 吗？</summary><p>不需要。用自己的 Key 翻译不占我们的额度，免费版就能用。Pro 主要是给不想自己申请 Key 的玩家。</p></details>
+      <details><summary>会影响游戏账号安全吗？</summary><p>不会。AMEFYS 只读 Valve 官方的 GSI 接口，不读写游戏内存、不注入游戏、不拦截网络流量。详见<a href="compliance.html">合规说明</a>。</p></details>
+    </section></template>
 
   </div>
 
