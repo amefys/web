@@ -79,10 +79,21 @@ for (const [lang, html] of Object.entries(PAGES)) {
   })
 }
 
-test('the nav carries few enough links to fit one line at 1440px', () => {
-  const links = PAGES.zh.match(/<div class="links">([\s\S]*?)<div class="nav-more"/)[1]
-  assert.ok([...links.matchAll(/<a /g)].length <= 8)
-})
+for (const [lang, html] of Object.entries(PAGES)) {
+  test(`${lang}: features share a dropdown and donate is a top-level nav link`, () => {
+    const start = html.indexOf('<div class="links">')
+    const end = html.indexOf('<div class="actions">', start)
+    const nav = html.slice(start, end)
+    const topLevelLinks = nav.match(/^ {8}<a /gm) || []
+    assert.ok(topLevelLinks.length <= 8, 'top-level nav fits one line at 1440px')
+    assert.match(nav, lang === 'zh' ? />功能<svg/ : />Features<svg/)
+    assert.match(nav, lang === 'zh' ? /<a href="donate\.html">捐助<\/a>/ : /<a href="donate\.html">Donate<\/a>/)
+    assert.doesNotMatch(nav, /donate\.html"[^>]*role="menuitem"/)
+    for (const anchor of ['draft', 'trash', 'assist', 'skins']) {
+      assert.match(nav, new RegExp(`href="#${anchor}" role="menuitem"`))
+    }
+  })
+}
 
 test('a branded 404 page exists', () => {
   assert.ok(existsSync(resolve(__dirname, '..', '404.html')))

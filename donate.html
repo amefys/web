@@ -76,59 +76,60 @@
   .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
   .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
 
-  .page { max-width: 880px; margin: 0 auto; padding: 80px 24px 60px; }
-  .page-hero { text-align: center; margin-bottom: 56px; }
+  .page { max-width: 880px; margin: 0 auto; padding: 40px 24px 60px; }
+  .page-hero { text-align: center; margin-bottom: 32px; }
   .page-hero .eyebrow {
-    display: inline-block; padding: 5px 12px; border-radius: 999px;
+    display: inline-block; padding: 4px 11px; border-radius: 999px;
     background: rgba(232,199,121,0.10); border: 0.5px solid rgba(232,199,121,0.30);
     font-size: 11px; color: var(--gold); letter-spacing: 0.5px; text-transform: uppercase;
-    font-weight: 700; margin-bottom: 18px;
+    font-weight: 700; margin-bottom: 12px;
   }
-  .page-hero h1 { font-size: 44px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 14px; }
+  .page-hero h1 { font-size: 40px; letter-spacing: -1.2px; font-weight: 700; margin: 0 0 10px; }
   .page-hero h1 em { font-style: normal; color: var(--gold); }
-  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 12px; line-height: 1.6; max-width: 600px; }
+  .page-hero p { font-size: 15px; color: var(--text-2); margin: 0 auto 8px; line-height: 1.6; max-width: 600px; }
 
-  section.s { margin: 0 0 52px; }
-  section.s h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; }
-  section.s .s-sub { color: var(--text-2); font-size: 14px; margin: 0 0 22px; line-height: 1.6; }
+  section.s { margin: 0 0 32px; }
+  section.s h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 6px; }
+  section.s .s-sub { color: var(--text-2); font-size: 13px; margin: 0 0 16px; line-height: 1.6; }
   section.s p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; margin: 0 0 12px; }
   section.s p strong { color: var(--text); font-weight: 600; }
   section.s a.link { color: var(--gold); border-bottom: 0.5px solid rgba(212,175,106,0.3); }
   section.s a.link:hover { border-bottom-color: var(--gold); }
 
   /* 三条承诺 */
-  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .promise {
-    padding: 24px 22px; border-radius: var(--r-lg);
-    background: var(--surface); border: 0.5px solid var(--hairline); text-align: center;
+    display: grid; grid-template-columns: 26px 1fr; column-gap: 10px; align-items: start;
+    padding: 13px 14px; border-radius: var(--r-md);
+    background: var(--surface); border: 0.5px solid var(--hairline); text-align: left;
   }
-  .promise-icon { font-size: 30px; margin-bottom: 12px; }
-  .promise-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .promise-desc { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+  .promise-icon { grid-row: 1 / 3; font-size: 21px; line-height: 1.2; }
+  .promise-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .promise-desc { font-size: 11.5px; color: var(--text-2); line-height: 1.5; }
 
   /* 捐助渠道 */
-  .ways { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 760px; margin: 0 auto; }
+  .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
   .way {
-    padding: 28px 26px 24px; border-radius: var(--r-xl);
+    padding: 16px; border-radius: var(--r-lg);
     background: linear-gradient(180deg, rgba(232,199,121,0.06), rgba(232,199,121,0.015));
     border: 0.5px solid var(--hairline-strong);
-    display: flex; flex-direction: column; align-items: center; text-align: center;
+    display: flex; gap: 16px; align-items: center; text-align: left;
   }
+  .way-content { flex: 1; min-width: 0; align-self: stretch; display: flex; flex-direction: column; align-items: flex-start; }
   .way-badge {
-    font-size: 10.5px; font-weight: 800; letter-spacing: 0.7px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 10px;
+    font-size: 10px; font-weight: 800; letter-spacing: 0.7px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px;
   }
-  .way h3 { font-size: 19px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 6px; }
-  .way .way-sub { font-size: 13px; color: var(--text-2); line-height: 1.55; margin: 0 0 20px; }
-  .way-qr { background: #fff; padding: 10px; border-radius: 12px; width: 200px; margin: 0 auto 16px; }
+  .way h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin: 0 0 4px; }
+  .way .way-sub { font-size: 12px; color: var(--text-2); line-height: 1.5; margin: 0 0 10px; }
+  .way-qr { flex: none; background: #fff; padding: 6px; border-radius: 9px; width: 120px; margin: 0; }
   .way-qr img { width: 100%; height: auto; display: block; }
-  .way-foot { font-size: 11.5px; color: var(--text-3); line-height: 1.6; margin-top: auto; }
+  .way-foot { font-size: 10.5px; color: var(--text-3); line-height: 1.5; margin-top: auto; }
   .way-cta {
-    display: inline-block; margin: 8px auto 18px; padding: 12px 26px; border-radius: 999px;
-    background: var(--gold); color: var(--bg); font-weight: 700; font-size: 14px; text-decoration: none;
+    display: inline-block; margin: 0 0 10px; padding: 8px 18px; border-radius: 999px;
+    background: var(--gold); color: var(--bg); font-weight: 700; font-size: 12px; text-decoration: none;
   }
   .way-cta:hover { filter: brightness(1.08); }
-  .way-list { font-size: 12.5px; color: var(--text-2); line-height: 1.8; margin: 0 0 18px; padding: 0; list-style: none; }
 
   /* 用途表 */
   .cost-table { width: 100%; border-collapse: collapse;
@@ -167,10 +168,18 @@
 
   @media (max-width: 760px) {
     .promises, .ways, .free-ways { grid-template-columns: 1fr; }
+    .page { padding-top: 28px; }
+    .page-hero { margin-bottom: 24px; }
     .page-hero h1 { font-size: 34px; letter-spacing: -0.8px; }
+    .promise { padding: 10px 12px; }
     .nav .links { display: none; }
     .cost-table { font-size: 12px; }
     .cost-table th, .cost-table td { padding: 9px 10px; }
+  }
+  @media (max-width: 420px) {
+    .way { gap: 12px; padding: 12px; }
+    .way-qr { width: 104px; }
+    .way .way-sub { font-size: 11px; }
   }
 </style>
 <link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
@@ -187,23 +196,28 @@
     <div class="nav-inner">
       <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
       <div class="links">
-        <a href="index.html#pillars">五大特性</a>
-        <a href="index.html#trash">文斗 1v9</a>
-        <a href="index.html#assist">实时助手</a>
-        <a href="index.html#skins">多主题</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">功能<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#draft" role="menuitem">BP 推荐</a>
+            <a href="index.html#trash" role="menuitem">翻译回复</a>
+            <a href="index.html#assist" role="menuitem">实时助手</a>
+            <a href="index.html#skins" role="menuitem">多主题</a>
+          </div>
+        </div>
         <a href="heroes/">英雄</a>
         <a href="items/">装备</a>
         <a href="packs/index.html">回复包</a>
         <a href="changelog.html">更新日志</a>
         <a href="guestbook.html">留言板</a>
-        <div class="nav-more" data-active="true" data-open="false">
+        <a href="donate.html" data-active="true">捐助</a>
+        <div class="nav-more" data-open="false">
           <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="nav-more-panel" role="menu">
             <a href="index.html#faq" role="menuitem">常见问题</a>
             <a href="/blog/" role="menuitem">技术博客</a>
             <a href="/studio/" role="menuitem">服务</a>
             <a href="about.html" role="menuitem">关于</a>
-            <a href="donate.html" data-active="true" role="menuitem">捐助</a>
           </div>
         </div>
       </div>
@@ -255,24 +269,24 @@
       <p class="s-sub">微信打赏不需要注册任何账号；爱发电支持微信和支付宝，付款时会验证一次手机号或邮箱。海外支付渠道还在筹备。</p>
       <div class="ways">
         <div class="way">
-          <div class="way-badge">微信</div>
-          <h3>微信打赏</h3>
-          <p class="way-sub">扫码 → 长按识别 → 输入任意金额</p>
           <div class="way-qr">
-            <img src="assets/qr-tip.png?v=3" alt="AMEFYS 微信打赏二维码" width="200" height="200" loading="lazy">
+            <img src="assets/qr-tip.png?v=3" alt="AMEFYS 微信打赏二维码" width="120" height="120">
           </div>
-          <div class="way-foot">留言写上你最想要的功能<br>下个版本我们尽量优先做</div>
+          <div class="way-content">
+            <div class="way-badge">微信</div>
+            <h3>微信打赏</h3>
+            <p class="way-sub">扫码 → 长按识别 → 输入任意金额</p>
+            <div class="way-foot">留言写上你最想要的功能<br>下个版本我们尽量优先做</div>
+          </div>
         </div>
         <div class="way">
-          <div class="way-badge">爱发电</div>
-          <h3>在爱发电赞助</h3>
-          <p class="way-sub">微信 / 支付宝都能付，电脑上扫码即可</p>
-          <ul class="way-list">
-            <li>「赞助一杯咖啡」—— 纯支持，任意心意</li>
-            <li>AMEFYS 官方爱发电主页：afdian.com/a/amefys</li>
-          </ul>
-          <a class="way-cta" href="https://afdian.com/a/amefys" target="_blank" rel="noopener">去爱发电主页</a>
-          <div class="way-foot">App 内购买 Pro 会员的入口即将上线<br><a href="refund.html" class="link">退款政策</a></div>
+          <div class="way-content">
+            <div class="way-badge">爱发电</div>
+            <h3>在爱发电赞助</h3>
+            <p class="way-sub">微信 / 支付宝都能付；「赞助一杯咖啡」纯支持，任意心意</p>
+            <a class="way-cta" href="https://afdian.com/a/amefys" target="_blank" rel="noopener">去爱发电主页</a>
+            <div class="way-foot">Pro 会员入口即将上线 · <a href="refund.html" class="link">退款政策</a></div>
+          </div>
         </div>
       </div>
     </section>
