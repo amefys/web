@@ -204,7 +204,8 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-10-24</div>
+      <div class="updated" data-edition="global">最近更新：2026-10-24</div>
+      <template data-edition="cn"><div class="updated">最近更新：2026-10-29</div></template>
     </div>
 
     <!-- 赞助 -->
@@ -219,7 +220,7 @@
     </div>
 
     <!-- 两个频道 -->
-    <section class="channels">
+    <section class="channels" data-edition="global">
       <div class="channel">
         <h3><span class="tag tag-stable">稳定版</span> 0.35.0</h3>
         <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>选人时不用再手动截图</strong>：BP 选「融合模式」，进入选人阶段会自动认出双方选了谁、禁了谁，推荐直接标在游戏自己的英雄墙上；这一版起<strong>自己排过的英雄墙也能认</strong>，<strong>单一征召只在你能选的英雄里推荐</strong>。悬浮窗多了「清透玻璃 / 烟灰玻璃」两种样式，关键时间提醒可以语音播报，PRO 会员还能把英雄墙上的标记换成会动的样式。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，右边告诉你选谁、禁谁、为什么。登录就能用。</p>
@@ -237,10 +238,45 @@
         <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
       </div>
     </section>
+    <template data-edition="cn"><section class="channels">
+      <div class="channel">
+        <h3><span class="tag tag-stable">稳定版</span> 0.36.0</h3>
+        <p>国内版账号、云同步、官网和手机 BP 已接入国内服务，Windows 与 macOS 安装包及自动更新都从国内节点下载。这一版也修正了版本标识和账号页的显示。</p>
+        <div class="dl">
+          <a class="primary" href="/dl/AMEFYS-Setup.exe">Windows 安装包</a>
+          <a href="/dl/AMEFYS.dmg">macOS 安装包</a>
+        </div>
+      </div>
+      <div class="channel">
+        <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.2</h3>
+        <p><strong>正式版已经走到 0.36.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走。</p>
+        <p class="channel-note">国内版请使用上面的稳定版，Windows 和 macOS 都有。</p>
+      </div>
+    </section></template>
+
+    <template data-edition="cn"><!-- ── 0.36.0 ── -->
+    <article class="release" id="v0-36-0">
+      <header><h2>0.36.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-29</span></header>
+      <p class="lead">国内版账号、下载和更新全面接入国内服务，并修正了账号界面的几处显示问题。</p>
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>国内版账号：</strong>注册、登录、邮箱验证码、云同步和账号迁移都接入国内服务；国内版与国际版账号互相独立。</li>
+          <li><strong>国内官网和手机 BP：</strong>全中文页面，手机 BP 与桌面版使用同一个国内版账号。</li>
+          <li><strong>国内下载与自动更新：</strong>Windows 和 macOS 安装包、更新清单、皮肤与 BP 数据都通过国内 OSS 和 CDN 分发。</li>
+        </ul>
+      </div>
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>版本标识和按钮样式：</strong>版本标识移到 AMEFYS 名称下方，不再挤成多行；账号迁移按钮和账号页的「国内版」标识也不再逐字换行。</li>
+          <li><strong>手机 BP 注册：</strong>收到注册邮件后可以直接在页面输入验证码，不再需要寻找邮件链接。</li>
+        </ul>
+      </div>
+      <div class="callout">国内版目前暂不开放 PRO 购买，只展示会员权益；已有会员的有效期和权益不受影响。</div>
+    </article></template>
 
     <!-- ── 0.35.0 ── -->
     <article class="release" id="v0-35-0">
-      <header><h2>0.35.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-24</span></header>
+      <header><h2>0.35.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest" data-edition="global">当前稳定版</span><span class="date">2026-10-24</span></header>
       <p class="lead">自己排过的英雄墙也能认了，单一征召只推荐你能选的英雄。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>

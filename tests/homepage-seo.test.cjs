@@ -17,8 +17,14 @@ test('every JSON-LD block parses', () => {
 })
 
 test('softwareVersion is the newest release in the changelog', () => {
-  // Stable releases only: a beta at the top of the changelog is not what the download serves.
-  const latest = read('changelog.html').match(/<article class="release" [^>]*>\s*<header><h2>(\d+\.\d+\.\d+)</)[1]
+  // Stable global releases only: CN-only templates and beta entries are not what this download serves.
+  const globalChangelog = read('changelog.html').replace(
+    /<template data-edition="cn">[\s\S]*?<\/template>/g,
+    ''
+  )
+  const latest = globalChangelog.match(
+    /<article class="release" [^>]*>\s*<header><h2>(\d+\.\d+\.\d+)</
+  )[1]
   assert.equal(byType('SoftwareApplication').softwareVersion, latest)
 })
 
