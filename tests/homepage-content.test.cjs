@@ -80,7 +80,7 @@ for (const [lang, html] of Object.entries(PAGES)) {
 }
 
 for (const [lang, html] of Object.entries(PAGES)) {
-  test(`${lang}: features share a dropdown and donate is a top-level nav link`, () => {
+  test(`${lang}: features share a dropdown and support links are top-level nav entries`, () => {
     const start = html.indexOf('<div class="links">')
     const end = html.indexOf('<div class="actions">', start)
     const nav = html.slice(start, end)
@@ -89,6 +89,13 @@ for (const [lang, html] of Object.entries(PAGES)) {
     assert.match(nav, lang === 'zh' ? />功能<svg/ : />Features<svg/)
     assert.match(nav, lang === 'zh' ? /<a href="donate\.html">捐助<\/a>/ : /<a href="donate\.html">Donate<\/a>/)
     assert.doesNotMatch(nav, /donate\.html"[^>]*role="menuitem"/)
+    const direct = lang === 'zh'
+      ? [['#faq', '常见问题'], ['/blog/', '技术博客'], ['/studio/', '服务']]
+      : [['#faq', 'FAQ']]
+    for (const [href, label] of direct) {
+      assert.match(nav, new RegExp(`<a href="${href.replace('/', '\\/')}">${label}<\\/a>`))
+      assert.doesNotMatch(nav, new RegExp(`href="${href.replace('/', '\\/')}" role="menuitem"`))
+    }
     for (const anchor of ['draft', 'trash', 'assist', 'skins']) {
       assert.match(nav, new RegExp(`href="#${anchor}" role="menuitem"`))
     }
