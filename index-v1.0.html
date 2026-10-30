@@ -1,0 +1,2472 @@
+<!DOCTYPE html><html lang="zh"><head>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AMEFYS — DOTA 2 实时辅助工具：BP 选人推荐（含手机版）、聊天翻译、出装推荐 | 免费</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS 是 DOTA 2 实时辅助：BP 选人推荐（电脑悬浮窗，或手机浏览器打开 amefys.com/bp 语音报英雄）、队友聊天实时翻译、按局势推荐出装、一键发送预制文本。只读 Valve 官方 GSI 接口，不碰游戏内存。Windows / macOS 免费下载。">
+<meta name="keywords" content="AMEFYS,DOTA 2 辅助工具,DOTA2 BP 推荐,DOTA2 选人推荐,DOTA2 克制,DOTA2 聊天翻译,DOTA2 出装推荐,DOTA2 快捷回复,GSI,免费下载">
+<link rel="canonical" href="https://amefys.com/">
+<link rel="alternate" hreflang="zh-CN" href="https://amefys.com/">
+<link rel="alternate" hreflang="en" href="https://amefys.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://amefys.com/">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="AMEFYS — DOTA 2 实时辅助工具：BP 选人推荐（含手机版）、聊天翻译、出装推荐 | 免费">
+<meta property="og:description" content="AMEFYS 是 DOTA 2 实时辅助：BP 选人推荐（电脑悬浮窗，或手机浏览器打开 amefys.com/bp 语音报英雄）、队友聊天实时翻译、按局势推荐出装、一键发送预制文本。只读 Valve 官方 GSI 接口，不碰游戏内存。Windows / macOS 免费下载。">
+<meta property="og:url" content="https://amefys.com/">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AMEFYS — DOTA 2 实时辅助工具：BP 选人推荐（含手机版）、聊天翻译、出装推荐 | 免费">
+<meta name="twitter:description" content="AMEFYS 是 DOTA 2 实时辅助：BP 选人推荐（电脑悬浮窗，或手机浏览器打开 amefys.com/bp 语音报英雄）、队友聊天实时翻译、按局势推荐出装、一键发送预制文本。只读 Valve 官方 GSI 接口，不碰游戏内存。Windows / macOS 免费下载。">
+<meta name="baidu-site-verification" content="codeva-bUYpb3vYJU">
+<meta name="baidu-site-verification" content="codeva-0KLjIQUOOa">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --bg-3: #1c1610;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --radiant: #3DBE8A;
+    --dire: #D9534F;
+    --warn: #F0A23C;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; cursor: pointer; }
+
+  /* ── Top nav (Apple-style) ───────────────────────────────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: 48px;
+    background: rgba(13,10,7,0.72);
+    backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline);
+  }
+  .nav-inner {
+    max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500;
+  }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); display: block; }
+  .nav .links { display: flex; gap: 22px; color: var(--text-2); flex: 1; white-space: nowrap; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; gap: 12px; align-items: center; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4);
+    transition: transform .12s, box-shadow .12s;
+  }
+  .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.25) inset, 0 6px 18px rgba(176,138,69,0.55); }
+
+  /* Language switcher — small text toggle next to the actions */
+  .lang-switch {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3);
+    padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline);
+    border-right: 0.5px solid var(--hairline);
+  }
+  .lang-switch a {
+    color: var(--text-3);
+    transition: color .12s;
+    padding: 0 2px;
+  }
+  .lang-switch a:hover { color: var(--text); }
+  .lang-switch a[aria-current="page"] {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+  /* ── Hero (DOTA2-style dark vignette + atmospheric backdrop) ─── */
+  .hero {
+    position: relative; min-height: 760px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 110%, rgba(176,138,69,0.35), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(217,83,79,0.18), transparent 70%),
+      radial-gradient(ellipse 60% 40% at 0% 0%, rgba(61,190,138,0.16), transparent 70%),
+      linear-gradient(180deg, #0a0805 0%, #100c08 60%, #0a0805 100%);
+    overflow: hidden;
+    text-align: center;
+    padding: 100px 24px 0;
+  }
+  /* Atmospheric backdrop SVG layer */
+  .hero-backdrop {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    opacity: 0.85;
+  }
+  .hero-backdrop svg { width: 100%; height: 100%; display: block; }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 90px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 90px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+  /* Floating particles */
+  @keyframes float-up {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-200px) translateX(20px); opacity: 0; }
+  }
+  .hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .particle { position: absolute; width: 2px; height: 2px; border-radius: 50%;
+    background: var(--gold); box-shadow: 0 0 8px var(--gold);
+    animation: float-up 8s linear infinite; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 11px; border-radius: 999px;
+    background: rgba(212,175,106,0.12); color: var(--gold);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.4px;
+    border: 0.5px solid rgba(212,175,106,0.3);
+    margin-bottom: 22px;
+    position: relative; z-index: 1;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .hero h1 {
+    font-size: 84px; line-height: 0.98; letter-spacing: -2.4px;
+    font-weight: 700; margin: 0 0 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #E5D9B8 70%, #A6987A 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    position: relative; z-index: 1;
+  }
+  .hero h1 em { font-style: normal; background: linear-gradient(135deg, #F0D38A, #9A7B3F); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  /* SEO: keyword line lives inside the H1 but reads as a kicker, not a headline */
+  .hero h1 .h1-kicker { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.22em; color: var(--text-2); margin-bottom: 18px; text-transform: uppercase; }
+  .hero p.lead {
+    max-width: 620px; margin: 0 auto 32px;
+    font-size: 19px; color: var(--text-2); letter-spacing: -0.1px;
+    position: relative; z-index: 1;
+  }
+  .cta-row { display: inline-flex; gap: 12px; position: relative; z-index: 1; }
+  .btn-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 22px; border-radius: 22px;
+    border: 0; font-weight: 600; font-size: 14px; line-height: 1;
+    text-decoration: none; cursor: pointer; white-space: nowrap;
+    transition: transform .12s, box-shadow .12s, background .12s;
+  }
+  .btn-cta.primary {
+    background: linear-gradient(180deg, #D9AE5F 0%, #9A7B3F 100%); color: #fff;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.2) inset, 0 8px 28px rgba(176,138,69,0.45);
+  }
+  .btn-cta.primary:hover { transform: translateY(-1px); box-shadow: 0 0 0 0.5px rgba(255,255,255,0.28) inset, 0 12px 36px rgba(176,138,69,0.6); }
+  .btn-cta.ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 0.5px solid var(--hairline-strong); }
+  .btn-cta.ghost:hover { background: rgba(255,255,255,0.1); }
+  .platforms { margin-top: 18px; font-size: 11.5px; color: var(--text-3); letter-spacing: 0.4px; position: relative; z-index: 1; }
+
+  /* App preview window */
+  .preview-wrap { position: relative; margin: 70px auto 0; max-width: 1080px; padding: 0 24px; z-index: 1; }
+  .preview {
+    position: relative; aspect-ratio: 16 / 10; border-radius: 18px;
+    background: linear-gradient(180deg, #1e1812 0%, #141009 100%);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.1), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(176,138,69,0.18);
+    overflow: hidden;
+  }
+  .preview::before { /* Glow under */
+    content: ''; position: absolute; left: 10%; right: 10%; bottom: -40px; height: 120px;
+    background: radial-gradient(ellipse, rgba(176,138,69,0.55), transparent 70%); filter: blur(30px); z-index: -1;
+  }
+  .titlebar { height: 30px; background: rgba(255,255,255,0.04); border-bottom: 0.5px solid var(--hairline);
+    display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+  .tl { width: 11px; height: 11px; border-radius: 50%; }
+  .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
+  .preview-body { display: grid; grid-template-columns: 200px 1fr 320px; height: calc(100% - 30px); }
+  .pv-side { padding: 16px 12px; border-right: 0.5px solid var(--hairline);
+    background: rgba(255,255,255,0.02); display: flex; flex-direction: column; gap: 4px; }
+  .pv-side .p-row { padding: 7px 10px; border-radius: 8px; font-size: 12px; color: var(--text-2);
+    display: flex; align-items: center; gap: 8px; }
+  .pv-side .p-row.active { background: rgba(212,175,106,0.16); color: #fff; }
+  .pv-side .p-glyph { width: 14px; height: 14px; border-radius: 4px; background: rgba(255,255,255,0.12); }
+  .pv-side .p-row.active .p-glyph { background: var(--gold); }
+  .pv-main { padding: 22px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .pv-h { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; }
+  .pv-sub { font-size: 11px; color: var(--text-3); }
+  .pv-card {
+    background: rgba(255,255,255,0.04); border: 0.5px solid var(--hairline);
+    border-radius: 12px; padding: 14px;
+  }
+  .pv-card.accent { background: linear-gradient(135deg, rgba(212,175,106,0.18), rgba(176,138,69,0.06));
+    border: 0.5px solid rgba(212,175,106,0.3); }
+  .item-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-top: 10px; }
+  .item { aspect-ratio: 1; border-radius: 6px;
+    background: linear-gradient(135deg, rgba(140,125,100,0.4), rgba(46,38,28,0.5));
+    border: 0.5px solid var(--hairline); display: flex; align-items: center; justify-content: center;
+    font-family: ui-monospace, monospace; font-size: 8px; color: var(--text-3); }
+  .item.active { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); border: 1.5px solid var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,175,106,0.2); color: #fff; }
+  .pv-right { padding: 16px; border-left: 0.5px solid var(--hairline); display: flex; flex-direction: column; gap: 10px; background: rgba(0,0,0,0.16); }
+  .chat-bubble { padding: 9px 12px; border-radius: 12px; font-size: 11.5px; }
+  .chat-bubble .raw { color: var(--text); }
+  .chat-bubble .tr { color: var(--text-2); margin-top: 3px; font-size: 11px; }
+  .chat-bubble.them { background: rgba(255,255,255,0.05); border: 0.5px solid var(--hairline); }
+  .chat-bubble.me { background: var(--gold-deep); align-self: flex-end; max-width: 80%; }
+  .chat-bubble.me .tr { color: rgba(255,255,255,0.78); }
+  .who { font-size: 10px; color: var(--text-3); margin-bottom: 3px; font-weight: 600; }
+
+  /* ── Section scaffolding ─────────────────────────────────────── */
+  section { padding: 120px 24px; }
+  .container { max-width: 1080px; margin: 0 auto; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.4px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+  .eyebrow .bar { width: 24px; height: 1px; background: var(--gold); }
+  h2.section-title {
+    font-size: 56px; line-height: 1.04; letter-spacing: -1.4px;
+    font-weight: 700; margin: 0 0 16px; max-width: 720px;
+  }
+  .section-lead { font-size: 19px; color: var(--text-2); max-width: 600px; line-height: 1.5; margin: 0; }
+
+  /* Feature grid (Apple bento style) */
+  .bento {
+    margin-top: 60px;
+    display: grid; grid-template-columns: 1.6fr 1fr; grid-template-rows: auto auto;
+    gap: 16px;
+  }
+  .bento-card {
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 100%);
+    border: 0.5px solid var(--hairline);
+    border-radius: 22px; padding: 32px; min-height: 360px;
+  }
+  .bento-card.span-col { grid-column: 1 / -1; }
+  /* ── Timing reminders, rebuilt from the overlay's own components ── */
+  .tm-demo { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; align-items: flex-start; }
+  .tm-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); font-size: 11.5px; font-family: ui-monospace, monospace; color: var(--text-2); }
+  /* Mirrors TimingToast.module.css: 12px radius, translucent floor, accent
+     hairline, the emoji / title+clock / action layout. */
+  .tm-toast { align-self: stretch; display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: rgba(14,16,22,0.92); border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); box-shadow: 0 14px 40px -14px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.18); }
+  .tm-toast .em { font-size: 20px; line-height: 1; flex-shrink: 0; }
+  .tm-toast .tx { flex: 1; min-width: 0; }
+  .tm-toast .t1 { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+  .tm-toast .t2 { font-size: 11px; color: var(--text-3); font-family: ui-monospace, monospace; margin-top: 1px; }
+  .tm-toast .pill { font-size: 11px; padding: 4px 10px; border-radius: 999px; background: var(--gold); color: #23170a; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+  .tm-toast .auto { font-size: 11px; color: var(--emerald); white-space: nowrap; flex-shrink: 0; }
+
+
+  /* ── OCR demo: the two things a screenshot of text can't show ── */
+  .ocr-demo { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin-top: 26px; }
+  .ocr-pane { background: rgba(0,0,0,0.3); border: 0.5px solid var(--hairline); border-radius: 14px; padding: 14px; text-align: left; }
+  .ocr-pane-t { font-size: 10.5px; letter-spacing: .7px; text-transform: uppercase; font-weight: 700; color: var(--text-3); margin-bottom: 10px; }
+  /* the mock chat ledger being framed */
+  .ocr-chat { position: relative; font-family: ui-monospace, SFMono-Regular, monospace; font-size: 11.5px; line-height: 1.9; }
+  .ocr-chat .line { color: rgba(242,234,216,0.34); white-space: nowrap; }
+  .ocr-chat .line.inside { color: rgba(242,234,216,0.92); }
+  /* the marquee the user drags — dashed, with corner handles and a size read-out */
+  .ocr-marq { position: absolute; left: -6px; right: 4%; border: 1.5px dashed var(--emerald); border-radius: 5px; background: rgba(110,231,183,0.08); pointer-events: none; }
+  .ocr-marq .hd { position: absolute; width: 7px; height: 7px; background: var(--bg-1); border: 1.5px solid var(--emerald); border-radius: 2px; }
+  .ocr-marq .hd.tl { top: -4px; left: -4px; } .ocr-marq .hd.tr { top: -4px; right: -4px; }
+  .ocr-marq .hd.bl { bottom: -4px; left: -4px; } .ocr-marq .hd.br { bottom: -4px; right: -4px; }
+  .ocr-marq .sz { position: absolute; top: -17px; right: -1px; font-size: 9px; font-family: ui-monospace, monospace; color: var(--bg-1); background: var(--emerald); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+  .ocr-out { margin-top: 12px; padding-top: 10px; border-top: 0.5px dashed var(--hairline); font-size: 12px; line-height: 1.7; color: var(--emerald); }
+  .ocr-out .k { color: var(--text-3); font-size: 10.5px; letter-spacing: .6px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  /* the language-component checklist */
+  .ocr-step { display: flex; align-items: center; gap: 9px; padding: 9px 11px; border-radius: 9px; font-size: 12.5px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--hairline); margin-bottom: 7px; }
+  .ocr-step .ic { width: 17px; height: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+  .ocr-step.ok .ic { background: rgba(110,231,183,0.18); color: var(--emerald); }
+  .ocr-step.todo { border-color: rgba(240,162,60,0.4); background: rgba(240,162,60,0.07); }
+  .ocr-step.todo .ic { background: rgba(240,162,60,0.2); color: var(--warn); }
+  .ocr-step .go { margin-left: auto; font-size: 11px; padding: 3px 9px; border-radius: 999px; background: var(--warn); color: #23170a; font-weight: 700; white-space: nowrap; }
+  .ocr-note { font-size: 11.5px; line-height: 1.6; color: var(--text-3); margin-top: 10px; }
+  @media (max-width: 900px) { .ocr-demo { grid-template-columns: 1fr; } }
+
+  .bento-h { font-size: 28px; line-height: 1.1; letter-spacing: -0.6px; font-weight: 700; margin: 0 0 10px; }
+  .bento-h em { font-style: normal; color: var(--gold); }
+  .bento-p { font-size: 14px; color: var(--text-2); margin: 0; max-width: 440px; }
+  .bento-art { position: absolute; right: 28px; bottom: 24px; }
+
+  /* Flow / pipeline strip */
+  .pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 60px; }
+  .pipe-card {
+    background: var(--bg-3); border: 0.5px solid var(--hairline);
+    border-radius: 16px; padding: 22px; min-height: 200px; position: relative;
+  }
+  .pipe-num { font-family: ui-monospace, monospace; font-size: 11px; color: var(--gold); letter-spacing: 1px; }
+  .pipe-h { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin: 14px 0 6px; }
+  .pipe-p { font-size: 12.5px; color: var(--text-2); margin: 0; line-height: 1.55; }
+
+  /* Faction / split section (DOTA2 inspired without copying) */
+  .split {
+    margin-top: 70px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .split-card {
+    border-radius: 22px; padding: 36px;
+    border: 0.5px solid var(--hairline);
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    position: relative; overflow: hidden; min-height: 280px;
+  }
+  .split-card.gold::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 0% 0%, rgba(212,175,106,0.22), transparent 60%);
+  }
+  .split-card.emerald::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 100% 0%, rgba(52,211,153,0.18), transparent 60%);
+  }
+  .split-card .label { position: relative; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--text-3); }
+  .split-card.gold .label { color: var(--gold); }
+  .split-card.emerald .label { color: var(--emerald); }
+  .split-card h3 { position: relative; font-size: 32px; line-height: 1.1; letter-spacing: -0.8px; margin: 12px 0 10px; }
+  .split-card p { position: relative; font-size: 14px; color: var(--text-2); margin: 0; max-width: 360px; }
+  .split-stat { position: relative; margin-top: 28px; display: flex; gap: 28px; }
+  .stat .v { font-size: 36px; font-weight: 700; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
+  .stat .v em { font-style: normal; color: var(--gold); }
+  .stat.em .v em { color: var(--emerald); }
+  .stat .l { font-size: 11px; color: var(--text-3); letter-spacing: 0.6px; }
+
+  /* Spec table */
+  .spec-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 0.5px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+  .spec-cell { padding: 24px; border-right: 0.5px solid var(--hairline); border-bottom: 0.5px solid var(--hairline); }
+  .spec-cell:nth-child(4n) { border-right: 0; }
+  .spec-cell:nth-last-child(-n+4) { border-bottom: 0; }
+  .spec-cell .l { font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); font-weight: 700; }
+  .spec-cell .v { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; margin-top: 8px; }
+  .spec-cell .s { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+
+  /* Translate showcase */
+  .translate-demo {
+    margin-top: 60px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2));
+    border: 0.5px solid var(--hairline);
+    border-radius: 26px; overflow: hidden;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .translate-left { padding: 56px 48px; display: flex; flex-direction: column; justify-content: center; }
+  .translate-right {
+    padding: 40px; background:
+      repeating-linear-gradient(45deg, rgba(217,160,80,0.05) 0 2px, rgba(40,30,20,0.7) 2px 18px),
+      radial-gradient(circle at 30% 40%, rgba(200,100,40,0.18), transparent 50%), #0a0807;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lang-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .lang-tag { padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06);
+    border: 0.5px solid var(--hairline); font-size: 11.5px; color: var(--text-2); font-weight: 500; }
+  .lang-tag.on { background: rgba(212,175,106,0.18); border-color: rgba(212,175,106,0.4); color: var(--gold); }
+
+  .overlay-mock {
+    width: 320px; border-radius: 14px;
+    background: rgba(20,20,26,0.86); backdrop-filter: blur(30px) saturate(180%);
+    border: 0.5px solid var(--hairline-strong);
+    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+  }
+  .om-head { padding: 10px 12px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; gap: 8px; font-size: 11px; }
+  .om-head .mark { width: 12px; height: 12px; border-radius: 4px; background: var(--gold); }
+  .om-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  /* Pricing */
+  .pricing { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .price-card {
+    border: 0.5px solid var(--hairline); border-radius: 22px; padding: 32px;
+    background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); position: relative;
+  }
+  .price-card.feature { border: 0.5px solid rgba(212,175,106,0.5);
+    background: linear-gradient(180deg, rgba(212,175,106,0.08), var(--bg-2)); }
+  .price-card .plan { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); }
+  .price-card.feature .plan { color: var(--gold); }
+  .price-card .amount { font-size: 56px; font-weight: 700; letter-spacing: -1.4px; margin: 14px 0 4px; font-variant-numeric: tabular-nums; }
+  .price-card .amount small { font-size: 14px; color: var(--text-3); font-weight: 500; letter-spacing: 0; }
+  .price-card .note { font-size: 12.5px; color: var(--text-2); margin: 0 0 24px; }
+  .price-card ul { list-style: none; padding: 0; margin: 0 0 28px; }
+  .price-card li { font-size: 13px; padding: 7px 0; color: var(--text-2); display: flex; align-items: center; gap: 10px; }
+  .price-card li::before { content: ''; width: 14px; height: 14px; border-radius: 7px;
+    background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline);
+    background-image: linear-gradient(45deg, transparent 45%, var(--text-2) 45% 55%, transparent 55%),
+                      linear-gradient(-45deg, transparent 45%, var(--text-2) 45% 55%, transparent 55%);
+    background-size: 8px 8px; background-repeat: no-repeat; background-position: center;
+  }
+  .price-card.feature li::before { background-color: rgba(212,175,106,0.16); border-color: rgba(212,175,106,0.4); }
+  .price-card .btn-buy {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 100%; height: 40px; border-radius: 20px; border: 0.5px solid var(--hairline-strong);
+    background: rgba(255,255,255,0.06); color: var(--text); font-size: 13px; font-weight: 600;
+    line-height: 1; text-decoration: none; cursor: pointer;
+  }
+  .price-card.feature .btn-buy { background: var(--gold-deep); border: 0; color: #fff;
+    box-shadow: 0 6px 20px rgba(176,138,69,0.4); }
+
+  /* FAQ */
+  .faq { margin-top: 60px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  details {
+    border-bottom: 0.5px solid var(--hairline); padding: 22px 4px; cursor: pointer;
+  }
+  summary { list-style: none; display: flex; align-items: center; justify-content: space-between;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.2px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; font-size: 22px; color: var(--text-2); transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { font-size: 14px; color: var(--text-2); margin: 14px 0 0; line-height: 1.6; }
+
+  /* Final CTA */
+  .final-cta {
+    text-align: center; padding: 140px 24px;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(176,138,69,0.32), transparent 70%),
+      linear-gradient(180deg, #0a0805, #100c08);
+    border-top: 0.5px solid var(--hairline);
+  }
+  .final-cta h2 { font-size: 72px; line-height: 1; letter-spacing: -1.8px; font-weight: 700; margin: 0 auto 20px; max-width: 800px;
+    background: linear-gradient(180deg, #fff, #F0D38A); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .final-cta p { font-size: 17px; color: var(--text-2); max-width: 560px; margin: 0 auto 32px; }
+
+  /* Footer */
+  footer { padding: 56px 24px 80px; border-top: 0.5px solid var(--hairline); background: var(--bg-2); }
+  .ft-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
+  .ft-col h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); margin: 0 0 14px; }
+  .ft-col a { display: block; font-size: 13px; color: var(--text-2); padding: 4px 0; }
+  .ft-col a:hover { color: var(--text); }
+  .ft-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+  .ft-brand .brand-mark { width: 22px; height: 22px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
+  .ft-tag { font-size: 12px; color: var(--text-3); max-width: 240px; line-height: 1.6; }
+  .ft-bot { max-width: 1080px; margin: 48px auto 0; padding-top: 24px; border-top: 0.5px solid var(--hairline);
+    display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); }
+  .ft-legal a { color: var(--text-3); margin-left: 18px; }
+  .ft-legal a:hover { color: var(--text-2); }
+
+  /* Responsive */
+  /* i18n section */
+  .i18n-hero { margin-top: 60px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 16px; }
+  .i18n-card { background: linear-gradient(180deg, var(--bg-3), var(--bg-2)); border: 0.5px solid var(--hairline); border-radius: 22px; padding: 32px; min-height: 480px; position: relative; overflow: hidden; }
+  .i18n-card.onboard { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(240,162,60,0.16), transparent 60%), linear-gradient(180deg, var(--bg-3), var(--bg-2)); border-color: rgba(240,162,60,0.25); }
+  .lang-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-top: 18px; }
+  .lang-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; font-size: 12.5px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--hairline); }
+  .lang-item .flag { width: 22px; height: 16px; border-radius: 3px; flex-shrink: 0; font-size: 11px; display: flex; align-items: center; justify-content: center; font-family: ui-monospace, monospace; color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline); }
+  .lang-item .name { font-weight: 600; }
+  .lang-item .native { color: var(--text-3); font-size: 11px; margin-left: auto; }
+  .lang-item.selected { background: rgba(240,162,60,0.14); border-color: rgba(240,162,60,0.45); }
+  .lang-item.selected .native { color: var(--warn); }
+  /* Settings mock */
+  .settings-mock { background: rgba(20,22,28,0.92); border: 0.5px solid var(--hairline-strong); border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.5); margin-top: 18px; }
+  .settings-mock .sm-head { height: 28px; border-bottom: 0.5px solid var(--hairline); display: flex; align-items: center; padding: 0 10px; gap: 6px; }
+  .settings-mock .sm-head .tl { width: 9px; height: 9px; border-radius: 50%; }
+  .settings-mock .sm-body { display: grid; grid-template-columns: 130px 1fr; min-height: 280px; }
+  .settings-mock .sm-side { background: rgba(255,255,255,0.02); border-right: 0.5px solid var(--hairline); padding: 10px 6px; display: flex; flex-direction: column; gap: 2px; }
+  .settings-mock .sm-side .row { padding: 6px 10px; border-radius: 6px; font-size: 11px; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
+  .settings-mock .sm-side .row.active { background: rgba(240,162,60,0.14); color: #fff; }
+  .settings-mock .sm-side .glyph { width: 10px; height: 10px; border-radius: 3px; background: rgba(255,255,255,0.12); }
+  .settings-mock .sm-side .row.active .glyph { background: var(--warn); }
+  .settings-mock .sm-main { padding: 18px 18px 14px; }
+  .settings-mock .sm-h { font-size: 13px; font-weight: 700; letter-spacing: -0.2px; margin-bottom: 14px; }
+  .settings-mock .sm-row { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-bottom: 0.5px solid var(--hairline); }
+  .settings-mock .sm-row:last-child { border-bottom: 0; }
+  .settings-mock .sm-label { font-size: 11.5px; color: var(--text-2); }
+  .settings-mock .sm-dropdown { background: rgba(255,255,255,0.06); border: 0.5px solid var(--hairline-strong); border-radius: 6px; padding: 5px 10px; font-size: 11px; color: var(--text); display: flex; align-items: center; gap: 8px; min-width: 160px; }
+  .settings-mock .sm-dropdown.active { background: rgba(240,162,60,0.14); border-color: rgba(240,162,60,0.4); }
+  .settings-mock .sm-dropdown::after { content: '▾'; margin-left: auto; color: var(--text-3); }
+  .settings-mock .sm-toggle { width: 28px; height: 16px; border-radius: 8px; background: var(--warn); position: relative; }
+  .settings-mock .sm-toggle::after { content: ''; position: absolute; top: 2px; left: 14px; width: 12px; height: 12px; background: #fff; border-radius: 50%; }
+  .settings-mock .sm-toggle.off { background: rgba(255,255,255,0.1); }
+  .settings-mock .sm-toggle.off::after { left: 2px; }
+  .lang-coverage-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 60px; }
+  .lang-chip { padding: 14px 16px; border-radius: 12px; background: var(--bg-3); border: 0.5px solid var(--hairline); }
+  .lang-chip .num { font-size: 28px; font-weight: 700; letter-spacing: -0.6px; font-variant-numeric: tabular-nums; color: var(--warn); }
+  .lang-chip .lab { font-size: 11px; color: var(--text-3); letter-spacing: 0.6px; text-transform: uppercase; margin-top: 4px; }
+
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 56px; letter-spacing: -1.4px; }
+    .pillar-grid { grid-template-columns: 1fr 1fr !important; }
+    .i18n-hero { grid-template-columns: 1fr; }
+    .lang-coverage-strip { grid-template-columns: 1fr 1fr; }
+    .hero p.lead { font-size: 16px; }
+    .preview-body { grid-template-columns: 1fr; }
+    .pv-side, .pv-right { display: none; }
+    .bento { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .spec-grid { grid-template-columns: 1fr 1fr; }
+    .spec-cell:nth-child(4n) { border-right: 0.5px solid var(--hairline); }
+    .spec-cell:nth-child(2n) { border-right: 0; }
+    .translate-demo { grid-template-columns: 1fr; }
+    .pricing { grid-template-columns: 1fr; }
+    h2.section-title { font-size: 38px; letter-spacing: -1px; }
+    .final-cta h2 { font-size: 44px; letter-spacing: -1.2px; }
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     Hero carousel — 5 slides, replaces the single static preview.
+     Class names are all prefixed `hc-` to avoid collisions with the
+     existing .preview, .pv-*, .stage, .slide-* class space below.
+     ───────────────────────────────────────────────────────────────── */
+  .hc-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 0.5px solid rgba(232,199,121,0.12);
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.06), 0 60px 140px rgba(0,0,0,0.6), 0 0 80px rgba(176,138,69,0.16);
+    cursor: grab;
+    user-select: none;
+    touch-action: pan-y;
+  }
+  .hc-carousel:active { cursor: grabbing; }
+  .hc-track {
+    display: flex;
+    width: 700%;   /* 7 slides */
+    height: 100%;
+    transition: transform .55s cubic-bezier(.4, 0, .2, 1);
+    will-change: transform;
+  }
+  .hc-track[data-dragging='true'] { transition: none; }
+  .hc-slide {
+    width: 14.2857%;    /* 100% / 7 */
+    height: 100%;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Common slide chrome (eyebrow / title / sub / dots / stage-tag) */
+  .hc-eyebrow {
+    position: absolute; top: 36px; left: 44px; z-index: 5;
+    display: flex; align-items: center; gap: 10px;
+    color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase;
+    text-shadow: 0 0 12px rgba(0,0,0,0.5);
+  }
+  .hc-eyebrow .bar { width: 28px; height: 1.5px; background: var(--gold); }
+  .hc-title {
+    position: absolute; top: 74px; left: 44px; z-index: 5;
+    color: #fff;
+    font-size: 44px; font-weight: 700; letter-spacing: -1.2px;
+    line-height: 1.05; max-width: 540px; margin: 0;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .hc-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hc-sub {
+    position: absolute; top: 240px; left: 44px; z-index: 5;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px; line-height: 1.55; max-width: 460px; margin: 0;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .hc-stage-tag {
+    position: absolute; bottom: 76px; left: 44px; z-index: 5;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 10px; border-radius: 999px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(16px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    font-size: 10.5px; color: rgba(255,255,255,0.85);
+  }
+  .hc-stage-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+
+  /* Carousel arrows */
+  .hc-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    color: #fff;
+    font-size: 22px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background .12s, transform .12s;
+  }
+  .hc-arrow:hover { background: rgba(0,0,0,0.7); transform: translateY(-50%) scale(1.08); }
+  .hc-arrow.prev { left: 16px; }
+  .hc-arrow.next { right: 16px; }
+
+  /* Dots — bottom center */
+  .hc-dots {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 10;
+    display: flex; gap: 8px;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.40);
+    backdrop-filter: blur(12px);
+  }
+  .hc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    border: 0;
+    cursor: pointer;
+    transition: width .25s, background .25s;
+    padding: 0;
+  }
+  .hc-dot[data-active='true'] {
+    width: 24px; border-radius: 4px;
+    background: rgba(255,255,255,0.95);
+  }
+
+  /* Callouts (shared) */
+  .hc-callout { position: absolute; z-index: 4; display: flex; gap: 8px; align-items: flex-start; pointer-events: none; }
+  .hc-callout-card {
+    padding: 9px 12px; border-radius: 11px;
+    background: rgba(0,0,0,0.62);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(255,255,255,0.20);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+    max-width: 200px;
+  }
+  .hc-callout-card .key {
+    color: var(--accent, var(--gold));
+    font-size: 9.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 3px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .hc-callout-card .key .num {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent, var(--gold)); color: #fff;
+    font-size: 9.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hc-callout-card .body { font-size: 11.5px; color: rgba(255,255,255,0.92); line-height: 1.4; }
+  .hc-callout-card .body kbd {
+    display: inline-block; padding: 1px 4px; border-radius: 4px;
+    background: rgba(255,255,255,0.16); border: 0.5px solid rgba(255,255,255,0.25);
+    font-family: ui-monospace, monospace; font-size: 10px; color: #fff; margin: 0 1px;
+  }
+  .hc-callout .arr {
+    flex-shrink: 0; width: 32px; height: 1.5px;
+    background: linear-gradient(90deg, var(--accent, var(--gold)), transparent);
+    position: relative; top: 7px;
+  }
+  .hc-callout .arr::after {
+    content: ''; position: absolute; right: -1px; top: -3.5px;
+    border: 4px solid transparent; border-left-color: var(--accent, var(--gold));
+  }
+  .hc-callout.flip { flex-direction: row-reverse; }
+  .hc-callout.flip .arr { background: linear-gradient(90deg, transparent, var(--accent, var(--gold))); transform: rotate(180deg); }
+
+  /* ──── Slide 1 · main UI basics ──── */
+  .hc-slide-1 {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(212,175,106,0.18), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(96,165,250,0.12), transparent 60%),
+      linear-gradient(180deg, #0c0d12, #0d0a07);
+  }
+  .hc-app {
+    position: absolute; top: 50%; right: 5%; transform: translateY(-50%);
+    width: 50%; max-width: 600px; aspect-ratio: 16/12;
+    border-radius: 14px;
+    background: #1c1610;
+    border: 0.5px solid rgba(255,255,255,0.10);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    overflow: hidden;
+    display: grid; grid-template-rows: 28px 1fr;
+    z-index: 3;
+  }
+  .hc-app-titlebar {
+    display: flex; align-items: center; gap: 7px; padding: 0 12px;
+    background: rgba(0,0,0,0.4);
+    border-bottom: 0.5px solid rgba(232,199,121,0.12);
+  }
+  .hc-app-titlebar i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .hc-app-body { display: grid; grid-template-columns: 130px 1fr; min-height: 0; }
+  .hc-app-side {
+    background: rgba(0,0,0,0.22);
+    border-right: 0.5px solid rgba(255,255,255,0.06);
+    padding: 12px 6px; display: flex; flex-direction: column; gap: 2px;
+    font-size: 11.5px;
+  }
+  .hc-app-side .row { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 7px; color: rgba(255,255,255,0.65); }
+  .hc-app-side .row[data-active='true'] { background: rgba(212,175,106,0.16); color: #fff; }
+  .hc-app-side .glyph { width: 12px; height: 12px; border-radius: 3px; background: rgba(232,199,121,0.20); }
+  .hc-app-side .row[data-active='true'] .glyph { background: var(--gold); }
+  .hc-app-main { padding: 14px; display: flex; flex-direction: column; gap: 11px; }
+  .hc-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+  .hc-tile { padding: 8px 10px; border-radius: 8px; background: rgba(212,175,106,0.08); border: 0.5px solid rgba(212,175,106,0.20); }
+  .hc-tile .l { font-size: 9px; color: rgba(255,255,255,0.5); letter-spacing: .6px; text-transform: uppercase; }
+  .hc-tile .v { font-size: 16px; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+  .hc-card { padding: 11px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(232,199,121,0.12); }
+  .hc-card h5 { margin: 0 0 8px; font-size: 9.5px; letter-spacing: .8px; text-transform: uppercase; color: rgba(255,255,255,0.5); font-weight: 700; }
+  .hc-mrow { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); font-size: 11px; }
+  .hc-mrow:last-child { border-bottom: 0; }
+  .hc-mrow .h { width: 24px; height: 24px; border-radius: 6px; background: linear-gradient(135deg,#4f46e5,#1e1b4b); color: #fff; font-size: 8px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hc-mrow .n { flex: 1; color: #fff; }
+  .hc-mrow .w { color: var(--emerald); font-weight: 700; }
+  .hc-mrow .l { color: var(--dire); font-weight: 700; }
+  .hc-mrow .t { color: rgba(255,255,255,0.4); font-family: ui-monospace, monospace; font-size: 10px; }
+  .hc-slide-1 { --accent: var(--gold); }
+  .hc-slide-1 .hc-eyebrow .bar { background: var(--gold); }
+
+  /* ──── Slide 2 · overlay over game ──── */
+  .hc-slide-2 {
+    background:
+      radial-gradient(60% 50% at 18% 22%, rgba(221,136,102,0.20), transparent 60%),
+      radial-gradient(60% 50% at 78% 32%, rgba(212,175,106,0.20), transparent 60%),
+      radial-gradient(60% 50% at 28% 80%, rgba(96,165,250,0.18), transparent 60%),
+      radial-gradient(60% 50% at 82% 80%, rgba(52,211,153,0.16), transparent 60%),
+      #0a0c14;
+  }
+  .hc-slide-2 .hc-title {
+    font-family: 'Newsreader','Source Han Serif SC','Songti SC',serif;
+    font-style: italic;
+  }
+  .hc-slide-2 .hc-title em { background: linear-gradient(135deg, #fbcfe8, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-2 .hc-eyebrow .bar { background: #DD8866; }
+  .hc-slide-2 { --accent: #DD8866; }
+  .hc-game-bg { position: absolute; inset: 0; z-index: 0; filter: blur(8px) brightness(0.72) saturate(0.85); transform: scale(1.08); }
+  .hc-game-bg svg { width: 100%; height: 100%; display: block; }
+  .hc-game-tint {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(60% 50% at 18% 22%, rgba(221,136,102,0.20), transparent 60%),
+      radial-gradient(60% 50% at 50% 50%, rgba(0,0,0,0.35), transparent 70%),
+      linear-gradient(180deg, rgba(13,10,7,0.25) 0%, rgba(13,10,7,0.5) 100%);
+  }
+  .hc-hud { position: absolute; left: 0; right: 0; bottom: 0; height: 60px; z-index: 1; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85)); pointer-events: none; }
+  .hc-hud .row { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); display: flex; gap: 5px; }
+  .hc-hud .slot { width: 32px; height: 24px; border-radius: 3px; background: linear-gradient(180deg, rgba(212,175,106,0.32), rgba(176,138,69,0.12)); border: 0.5px solid rgba(255,255,255,0.18); }
+  .hc-hud .slot.empty { background: rgba(0,0,0,0.45); border-color: rgba(232,199,121,0.12); }
+  .hc-hud .clock { position: absolute; left: 20px; bottom: 14px; color: rgba(255,255,255,0.8); font-family: ui-monospace, monospace; font-size: 13px; font-weight: 700; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
+  .hc-hud .team { position: absolute; bottom: 16px; font-family: ui-monospace, monospace; font-size: 12px; font-weight: 800; text-shadow: 0 0 8px rgba(0,0,0,0.8); }
+  .hc-hud .team.r { left: 24%; color: #3DBE8A; }
+  .hc-hud .team.d { right: 24%; color: #D9534F; }
+
+  .hc-overlay-win {
+    position: absolute; top: 50%; right: 6%; transform: translateY(-50%);
+    width: 320px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 0.5px solid rgba(255,255,255,0.24);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 18px 60px rgba(0,0,0,0.55);
+    overflow: hidden;
+    z-index: 3;
+  }
+  .hc-overlay-win::before { content: ''; position: absolute; inset: 0 0 50% 0; background: linear-gradient(180deg, rgba(255,255,255,0.18), transparent); pointer-events: none; border-radius: 20px 20px 0 0; }
+  .hc-ow-titlebar {
+    position: relative;
+    height: 34px; padding: 0 10px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 0.5px solid rgba(232,199,121,0.12);
+  }
+  .hc-ow-brand { width: 16px; height: 16px; border-radius: 5px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); box-shadow: 0 0 8px rgba(212,175,106,0.5); }
+  .hc-ow-titlebar strong { font-weight: 700; color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 13.5px; }
+  .hc-ow-titlebar small { margin-left: auto; color: rgba(255,255,255,0.6); font-size: 10px; font-family: ui-monospace, monospace; }
+  .hc-ow-opacity-btn {
+    width: 22px; height: 22px; border-radius: 6px;
+    background: linear-gradient(135deg, #DD8866, var(--gold));
+    border: 0.5px solid #DD8866;
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 2px rgba(221,136,102,0.18);
+  }
+  .hc-ow-opacity-btn svg { width: 11px; height: 11px; }
+  .hc-ow-opacity-panel {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 12px;
+    background: rgba(221,136,102,0.10);
+    border-bottom: 0.5px solid rgba(221,136,102,0.18);
+  }
+  .hc-ow-opacity-panel .lbl { font-size: 9.5px; color: rgba(255,255,255,0.8); letter-spacing: .5px; text-transform: uppercase; font-weight: 700; }
+  .hc-ow-opacity-panel .track { flex: 1; height: 4px; background: rgba(232,199,121,0.20); border-radius: 2px; position: relative; }
+  .hc-ow-opacity-panel .fill { position: absolute; left: 0; top: 0; bottom: 0; width: 76%; background: linear-gradient(90deg, #DD8866, var(--gold)); border-radius: 2px; }
+  .hc-ow-opacity-panel .thumb { position: absolute; left: 76%; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+  .hc-ow-opacity-panel .val { font-size: 10.5px; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; width: 28px; text-align: right; }
+  .hc-ow-opacity-panel .x { width: 18px; height: 18px; border-radius: 50%; background: rgba(0,0,0,0.35); color: rgba(255,255,255,0.85); border: 0; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .hc-ow-tabs { display: flex; padding: 4px 8px 0; gap: 4px; border-bottom: 0.5px solid rgba(232,199,121,0.12); }
+  .hc-ow-tab { flex: 1; height: 24px; border-radius: 7px 7px 0 0; background: transparent; border: 0; color: rgba(255,255,255,0.5); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .hc-ow-tab[data-active='true'] { background: rgba(255,255,255,0.15); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.22); }
+  .hc-ow-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 7px; }
+  .hc-bubble { padding: 6px 9px; border-radius: 10px; font-size: 10.5px; line-height: 1.4; }
+  .hc-bubble.them { background: rgba(255,255,255,0.12); align-self: flex-start; max-width: 92%; }
+  .hc-bubble.me { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); align-self: flex-end; max-width: 92%; color: #fff; box-shadow: 0 4px 10px rgba(176,138,69,0.35); }
+  .hc-bubble .who { font-size: 8.5px; color: rgba(255,255,255,0.65); font-weight: 700; letter-spacing: .3px; margin-bottom: 1px; }
+  .hc-bubble .raw { color: rgba(255,255,255,0.92); }
+  .hc-bubble .tr { color: rgba(255,255,255,0.6); font-size: 9.5px; margin-top: 1px; font-style: italic; font-family: 'Newsreader',serif; }
+  .hc-bubble.me .tr { color: rgba(255,255,255,0.85); }
+  .hc-radial-zone { position: relative; height: 158px; margin-top: 4px; }
+  .hc-radial { position: absolute; right: -8px; top: 0; width: 150px; height: 150px; z-index: 4; pointer-events: none; }
+  .hc-radial svg { width: 100%; height: 100%; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); }
+  .hc-radial .bp { fill: rgba(0,0,0,0.55); stroke: rgba(255,255,255,0.30); stroke-width: 0.5; }
+  .hc-radial .sec { fill: rgba(255,255,255,0.12); stroke: rgba(255,255,255,0.22); stroke-width: 0.5; }
+  .hc-radial .sec[data-active='true'] { fill: rgba(221,136,102,0.50); stroke: #DD8866; stroke-width: 1.2; }
+  .hc-radial .lbl { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; font-size: 12px; font-weight: 700; fill: #fff; text-anchor: middle; dominant-baseline: middle; }
+  .hc-radial .cdot { fill: rgba(255,255,255,0.35); }
+  .hc-radial-tail { position: absolute; right: 56px; bottom: -2px; width: 0; height: 0; border: 6px solid transparent; border-top-color: rgba(255,255,255,0.30); z-index: 4; }
+  .hc-qr-row { display: flex; gap: 4px; flex-wrap: wrap; }
+  .hc-qr-chip { height: 22px; padding: 0 9px; border-radius: 11px; background: rgba(255,255,255,0.12); border: 0.5px solid rgba(255,255,255,0.18); color: #fff; font-size: 10px; font-weight: 600; display: inline-flex; align-items: center; }
+  .hc-qr-chip.hot { background: linear-gradient(135deg, #DD8866, var(--gold)); color: #fff; border-color: #DD8866; box-shadow: 0 0 0 3px rgba(221,136,102,0.22); font-weight: 800; margin-left: auto; }
+  .hc-block-q { margin-top: 2px; padding: 8px 10px; border-radius: 10px; background: rgba(52,211,153,0.10); border: 0.5px solid rgba(52,211,153,0.22); }
+  .hc-block-q h6 { margin: 0 0 5px; font-size: 8.5px; color: var(--emerald); font-weight: 700; letter-spacing: .7px; }
+  .hc-block-q .row { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: rgba(255,255,255,0.88); margin-bottom: 2px; }
+  .hc-block-q .row:last-child { margin-bottom: 0; }
+  .hc-block-q .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--emerald); color: #062; font-size: 7.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hc-block-q .row.pending .dot { background: rgba(52,211,153,0.35); color: #fff; }
+  .hc-block-q .row .t { margin-left: auto; color: rgba(255,255,255,0.5); font-size: 8.5px; font-family: ui-monospace, monospace; }
+  .hc-ow-input { display: flex; align-items: center; gap: 5px; padding: 6px 4px 2px; border-top: 0.5px solid rgba(255,255,255,0.06); margin-top: 3px; }
+  .hc-ow-input .field { flex: 1; height: 26px; padding: 0 10px; border-radius: 13px; background: rgba(0,0,0,0.30); border: 0.5px solid rgba(255,255,255,0.10); color: rgba(255,255,255,0.55); font-size: 10px; display: flex; align-items: center; }
+  .hc-ow-input .send { height: 26px; padding: 0 10px; border-radius: 13px; background: var(--gold-deep); color: #fff; font-size: 10px; font-weight: 700; border: 0; box-shadow: 0 4px 12px rgba(176,138,69,0.4); display: flex; align-items: center; }
+
+  /* ──── Slide 3 · multi-theme ──── */
+  .hc-slide-3 { background: linear-gradient(90deg, #0a0e1a 0%, #0a0e1a 33%, #0c0d12 33%, #0c0d12 66%, #0e1018 66%, #0e1018 100%); }
+  .hc-slide-3 .hc-title em { background: linear-gradient(135deg, #E09A66, #DD8866); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-3 .hc-eyebrow .bar { background: #E09A66; }
+  .hc-slide-3 { --accent: #E09A66; }
+  .hc-3split { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; }
+  .hc-3pane { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hc-3pane.cy {
+    background-image:
+      repeating-linear-gradient(60deg, transparent 0, transparent 19px, rgba(224,154,102,0.08) 19px, rgba(224,154,102,0.08) 20px),
+      repeating-linear-gradient(-60deg, transparent 0, transparent 19px, rgba(221,136,102,0.06) 19px, rgba(221,136,102,0.06) 20px);
+  }
+  .hc-3pane.cy::after { content: ''; position: absolute; left: 0; right: 0; top: 38%; height: 1px; background: linear-gradient(90deg, transparent, #E09A66, transparent); box-shadow: 0 0 8px #E09A66; }
+  .hc-3pane.df { background: radial-gradient(circle at 50% 30%, rgba(212,175,106,0.10), transparent 60%); border-left: 0.5px solid rgba(255,255,255,0.06); border-right: 0.5px solid rgba(255,255,255,0.06); }
+  .hc-3pane.gl { background: radial-gradient(60% 50% at 30% 30%, rgba(221,136,102,0.22), transparent 60%), radial-gradient(60% 50% at 70% 70%, rgba(212,175,106,0.24), transparent 60%); }
+  .hc-3pane .label { position: absolute; top: 24px; left: 24px; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; }
+  .hc-3pane.cy .label { color: #E09A66; font-family: ui-monospace, monospace; }
+  .hc-3pane.df .label { color: var(--gold); }
+  .hc-3pane.gl .label { color: #fff; font-family: 'Newsreader',serif; font-style: italic; font-size: 16px; font-weight: 400; letter-spacing: -0.2px; }
+  .hc-3card { width: 75%; max-width: 220px; padding: 16px; border-radius: 14px; z-index: 3; }
+  .hc-3card.cy {
+    background: linear-gradient(180deg, rgba(224,154,102,0.10), rgba(221,136,102,0.06));
+    border: 1px solid #E09A66;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
+  .hc-3card.cy h4 { font-family: ui-monospace, monospace; color: #E09A66; font-size: 13px; margin: 0 0 4px; letter-spacing: 1.4px; font-weight: 700; }
+  .hc-3card.cy .s { font-family: ui-monospace, monospace; color: #DD8866; font-size: 9px; letter-spacing: .8px; margin-bottom: 12px; }
+  .hc-3card.cy .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.cy .icn { width: 38px; height: 38px; clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); background: linear-gradient(135deg, #E09A66, #DD8866); color: #000; font-family: ui-monospace, monospace; font-weight: 800; font-size: 10px; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.cy .meta strong { display: block; font-family: ui-monospace, monospace; color: #E09A66; font-size: 11px; letter-spacing: .5px; }
+  .hc-3card.cy .meta span { color: #DD8866; font-size: 9.5px; font-family: ui-monospace, monospace; letter-spacing: .7px; }
+  .hc-3card.cy .br { display: flex; gap: 3px; }
+  .hc-3card.cy .br span { flex: 1; height: 7px; }
+  .hc-3card.cy .br span:nth-child(1) { background: linear-gradient(135deg, #E09A66, #DD8866); }
+  .hc-3card.cy .br span:nth-child(2) { background: rgba(224,154,102,0.3); }
+  .hc-3card.cy .br span:nth-child(3) { background: rgba(224,154,102,0.12); }
+  .hc-3card.cy .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
+  .hc-3card.df { background: linear-gradient(180deg, rgba(36,37,46,0.92), rgba(28,28,34,0.92)); border: 0.5px solid rgba(255,255,255,0.10); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+  .hc-3card.df h4 { color: #fff; font-size: 14px; margin: 0 0 4px; font-weight: 700; letter-spacing: -0.2px; }
+  .hc-3card.df .s { color: rgba(242,234,216,0.62); font-size: 10.5px; margin-bottom: 12px; }
+  .hc-3card.df .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.df .icn { width: 38px; height: 38px; border-radius: 9px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #fff; font-size: 9.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 3px rgba(212,175,106,0.18); }
+  .hc-3card.df .meta strong { display: block; color: #fff; font-size: 12px; font-weight: 700; }
+  .hc-3card.df .meta span { color: rgba(242,234,216,0.62); font-size: 10.5px; }
+  .hc-3card.df .br { display: flex; gap: 4px; }
+  .hc-3card.df .br span { flex: 1; height: 7px; border-radius: 3.5px; }
+  .hc-3card.df .br span:nth-child(1) { background: linear-gradient(135deg, var(--gold), var(--gold-deep)); }
+  .hc-3card.df .br span:nth-child(2) { background: rgba(212,175,106,0.28); }
+  .hc-3card.df .br span:nth-child(3) { background: rgba(212,175,106,0.15); }
+  .hc-3card.df .br span:nth-child(4) { background: rgba(255,255,255,0.05); }
+  .hc-3card.gl { background: rgba(232,199,121,0.12); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 0.5px solid rgba(255,255,255,0.20); box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 12px 32px rgba(0,0,0,0.3); }
+  .hc-3card.gl h4 { font-family: 'Newsreader',serif; font-style: italic; font-weight: 400; color: #fff; font-size: 16px; margin: 0 0 5px; letter-spacing: -0.3px; }
+  .hc-3card.gl .s { color: rgba(255,255,255,0.6); font-size: 10.5px; margin-bottom: 12px; }
+  .hc-3card.gl .ir { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+  .hc-3card.gl .icn { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, #DD8866, var(--gold)); border: 0.5px solid rgba(255,255,255,0.3); color: #fff; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .hc-3card.gl .meta strong { display: block; font-family: 'Newsreader',serif; font-style: italic; color: #fff; font-size: 13px; }
+  .hc-3card.gl .meta span { color: rgba(255,255,255,0.65); font-size: 10.5px; }
+  .hc-3card.gl .br { display: flex; gap: 4px; }
+  .hc-3card.gl .br span { flex: 1; height: 8px; border-radius: 4px; }
+  .hc-3card.gl .br span:nth-child(1) { background: linear-gradient(135deg, #DD8866, var(--gold)); }
+  .hc-3card.gl .br span:nth-child(2) { background: rgba(212,175,106,0.3); }
+  .hc-3card.gl .br span:nth-child(3) { background: rgba(212,175,106,0.18); }
+  .hc-3card.gl .br span:nth-child(4) { background: rgba(255,255,255,0.06); }
+  .hc-3arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.7); border: 0.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 4; }
+  .hc-3arrow.a1 { left: calc(33.333% - 14px); }
+  .hc-3arrow.a2 { left: calc(66.666% - 14px); }
+
+  /* ──── Slide 4 · GSI real-time ──── */
+  .hc-slide-4 {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(52,211,153,0.18), transparent 60%),
+      radial-gradient(circle at 80% 70%, rgba(212,175,106,0.15), transparent 60%),
+      linear-gradient(180deg, #0a0d10, #0d0a07);
+  }
+  .hc-slide-4 .hc-title em { background: linear-gradient(135deg, var(--emerald), #10B981); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-4 .hc-eyebrow .bar { background: var(--emerald); }
+  .hc-slide-4 { --accent: var(--emerald); }
+  .hc-gsi { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
+  .hc-gsi-tiles { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+  .hc-gsi-tile { padding: 11px 12px; border-radius: 11px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.10); }
+  .hc-gsi-tile.lvl { background: rgba(212,175,106,0.10); border-color: rgba(212,175,106,0.30); }
+  .hc-gsi-tile.gpm { background: rgba(52,211,153,0.10); border-color: rgba(52,211,153,0.30); }
+  .hc-gsi-tile.xpm { background: rgba(240,162,60,0.10); border-color: rgba(240,162,60,0.30); }
+  .hc-gsi-tile.kda { background: rgba(217,83,79,0.08); border-color: rgba(217,83,79,0.30); }
+  .hc-gsi-tile .l { font-size: 9.5px; color: rgba(255,255,255,0.5); letter-spacing: .7px; text-transform: uppercase; }
+  .hc-gsi-tile .v { font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; margin-top: 2px; }
+  .hc-gsi-tile.gpm .v { color: var(--emerald); }
+  .hc-gsi-tile.xpm .v { color: var(--warn); }
+  .hc-gsi-main { padding: 14px; border-radius: 13px; background: linear-gradient(135deg, rgba(212,175,106,0.12), rgba(176,138,69,0.05)); border: 0.5px solid rgba(212,175,106,0.30); }
+  .hc-gsi-main .head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .hc-gsi-main .av { width: 44px; height: 44px; border-radius: 11px; background: linear-gradient(135deg, #4f46e5, #1e1b4b); color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .hc-gsi-main .head .n { flex: 1; }
+  .hc-gsi-main .head .nm { color: #fff; font-size: 15px; font-weight: 700; letter-spacing: -0.2px; }
+  .hc-gsi-main .head .sb { color: rgba(255,255,255,0.6); font-size: 11px; }
+  .hc-gsi-main .conf { padding: 5px 9px; border-radius: 999px; background: rgba(52,211,153,0.18); color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: .5px; }
+  .hc-gsi-main .rec { display: flex; gap: 11px; align-items: center; padding: 9px 0; border-top: 0.5px solid rgba(255,255,255,0.06); }
+  .hc-gsi-main .rec .ic { width: 40px; height: 40px; border-radius: 9px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+  .hc-gsi-main .rec .nm { color: #fff; font-size: 13px; font-weight: 700; }
+  .hc-gsi-main .rec .ds { color: rgba(255,255,255,0.6); font-size: 10.5px; }
+  .hc-gsi-main .rec .sts { margin-left: auto; text-align: right; }
+  .hc-gsi-main .rec .sts .gp { color: #fff; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hc-gsi-main .rec .sts .tm { color: rgba(255,255,255,0.5); font-size: 9.5px; font-family: ui-monospace, monospace; }
+  .hc-pulse { padding: 10px 12px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(232,199,121,0.12); }
+  .hc-pulse .h { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; }
+  .hc-pulse .h .d { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); box-shadow: 0 0 10px var(--emerald); }
+  .hc-pulse .h .l { color: var(--emerald); font-size: 10px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+  .hc-pulse .h .r { margin-left: auto; color: rgba(255,255,255,0.5); font-size: 9.5px; font-family: ui-monospace, monospace; }
+  .hc-pulse .chart { display: flex; gap: 2.5px; align-items: flex-end; height: 32px; }
+  .hc-pulse .chart span { flex: 1; background: linear-gradient(180deg, var(--emerald), rgba(52,211,153,0.2)); border-radius: 2px; }
+
+  /* ──── Slide 5 · low resource ──── */
+  .hc-slide-5 {
+    background:
+      radial-gradient(circle at 70% 30%, rgba(240,162,60,0.18), transparent 60%),
+      radial-gradient(circle at 30% 70%, rgba(52,211,153,0.12), transparent 60%),
+      linear-gradient(180deg, #0a0d10, #0d0a07);
+  }
+  .hc-slide-5 .hc-title em { background: linear-gradient(135deg, var(--warn), var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-5 .hc-eyebrow .bar { background: var(--warn); }
+  .hc-slide-5 { --accent: var(--warn); }
+  .hc-slide-6 {
+    background: radial-gradient(120% 100% at 15% 20%, #101820 0%, #0a0d12 55%, #070809 100%);
+  }
+  .hc-slide-6 .hc-title em { background: linear-gradient(135deg, #7DD3FC, var(--emerald)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-6 .hc-eyebrow .bar { background: #7DD3FC; }
+  .hc-slide-6 { --accent: #7DD3FC; }
+  /* Fact rows that carry a label and a value but no bar — used where the
+     figure is a statement ("stays on this machine"), not a quantity to
+     compare. The barred .row above keeps its fixed name column. */
+  .hc-res-vs .row.plain .name { width: auto; flex: 1; color: rgba(255,255,255,0.7); }
+  .hc-res-vs .row.plain .val { width: auto; color: #fff; }
+  .hc-res-met .note { font-size: 10.5px; line-height: 1.5; color: rgba(255,255,255,0.55); }
+  .hc-res { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); width: 48%; max-width: 540px; display: flex; flex-direction: column; gap: 12px; z-index: 3; }
+  .hc-res-big { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .hc-res-met { padding: 18px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 0.5px solid rgba(255,255,255,0.12); }
+  .hc-res-met .l { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: .7px; text-transform: uppercase; font-weight: 700; }
+  .hc-res-met .v { display: flex; align-items: baseline; gap: 3px; font-size: 42px; font-weight: 700; line-height: 1.1; letter-spacing: -1px; color: #fff; font-variant-numeric: tabular-nums; margin: 3px 0 5px; }
+  .hc-res-met .v small { font-size: 17px; font-weight: 500; color: rgba(255,255,255,0.6); }
+  .hc-res-met .sp { display: flex; gap: 2px; align-items: flex-end; height: 26px; }
+  .hc-res-met .sp span { flex: 1; border-radius: 1px; background: var(--emerald); opacity: 0.65; }
+  .hc-res-met.cpu .v { color: var(--emerald); }
+  .hc-res-met.mem .v { color: var(--warn); }
+  .hc-res-met.mem .sp span { background: var(--warn); }
+  .hc-res-vs { padding: 12px 14px; border-radius: 11px; background: rgba(0,0,0,0.25); border: 0.5px solid rgba(232,199,121,0.12); }
+  .hc-res-vs h5 { margin: 0 0 8px; font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
+  .hc-res-vs .row { display: flex; align-items: center; gap: 10px; padding: 4px 0; font-size: 11.5px; }
+  .hc-res-vs .name { width: 120px; color: #fff; }
+  .hc-res-vs .bar { flex: 1; height: 7px; border-radius: 3.5px; background: rgba(255,255,255,0.06); overflow: hidden; }
+  .hc-res-vs .bar > span { display: block; height: 100%; border-radius: 3.5px; }
+  .hc-res-vs .val { width: 76px; text-align: right; color: rgba(255,255,255,0.85); font-family: ui-monospace, monospace; font-size: 10.5px; }
+  .hc-res-vs .row.us .name { color: var(--emerald); font-weight: 700; }
+  .hc-res-vs .row.us .bar > span { background: linear-gradient(90deg, var(--emerald), #10B981); width: 12%; }
+  .hc-res-vs .row.them1 .bar > span { background: linear-gradient(90deg, var(--warn), #d97706); width: 36%; }
+  .hc-res-vs .row.them2 .bar > span { background: linear-gradient(90deg, var(--dire), #b91c1c); width: 72%; }
+  .hc-res-vs .row.us .val { color: var(--emerald); }
+
+  /* ──── Slide · BP draft — real app screenshots, desktop + phone ──── */
+  .hc-slide-bp {
+    background:
+      radial-gradient(90% 80% at 78% 40%, rgba(212,175,106,0.18), transparent 62%),
+      linear-gradient(180deg, #0d0b07, #08070a);
+    --accent: var(--gold);
+  }
+  .hc-slide-bp .hc-title em { background: linear-gradient(135deg, #F3D88F, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hc-slide-bp .hc-eyebrow .bar { background: var(--gold); }
+  .hc-slide-bp .hc-sub { max-width: 330px; }
+  .hc-bp-stage { position: absolute; right: 13%; top: 50%; transform: translateY(-50%); width: 50%; z-index: 3; }
+  .hc-bp-desk {
+    position: relative; border-radius: 12px; overflow: hidden;
+    border: 0.5px solid rgba(232,199,121,0.28);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(176,138,69,0.14);
+  }
+  .hc-bp-phone {
+    position: absolute; right: -11%; bottom: -16%; width: 25%;
+    border-radius: 18px; overflow: hidden;
+    border: 3px solid #1d1a14;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 0.5px rgba(232,199,121,0.35);
+  }
+  .hc-bp-desk img, .hc-bp-phone img { display: block; width: 100%; height: auto; }
+  .hc-bp-label {
+    position: absolute; z-index: 4; white-space: nowrap;
+    padding: 4px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.68); backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(232,199,121,0.45);
+    color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .3px;
+  }
+  .hc-bp-label b { color: var(--gold); font-weight: 700; }
+  .hc-bp-label.desk { top: -13px; left: 14px; }
+  .hc-bp-label.phone { right: -11%; bottom: calc(-16% - 30px); }
+
+  /* ──── BP showcase section — real screenshots ──── */
+  .bp-show { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 26px; margin-top: 44px; align-items: start; }
+  .bp-shot { margin: 0; }
+  .bp-shot img {
+    display: block; width: 100%; height: auto; border-radius: 14px;
+    border: 0.5px solid rgba(232,199,121,0.25);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(176,138,69,0.10);
+  }
+  .bp-shot-phone img { border-radius: 24px; border: 3px solid #1d1a14; box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(232,199,121,0.35); }
+  .bp-shot figcaption { margin-top: 14px; font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
+  .bp-shot figcaption b { display: block; margin-bottom: 2px; color: var(--gold); font-size: 14.5px; }
+  .bp-shot figcaption a { color: var(--gold); }
+  .bp-shot kbd { padding: 1px 6px; border-radius: 5px; border: 0.5px solid rgba(232,199,121,0.4); background: rgba(232,199,121,0.08); font: 12px ui-monospace, monospace; color: #fff; }
+  .bp-note { margin-top: 26px; font-size: 12.5px; line-height: 1.6; color: var(--text-3, var(--text-2)); }
+  @media (max-width: 760px) {
+    .bp-show { grid-template-columns: 1fr; gap: 34px; }
+    .bp-shot-phone { max-width: 250px; }
+  }
+
+  /* Mobile — narrower carousel */
+  @media (max-width: 720px) {
+    .hc-title { font-size: 28px; letter-spacing: -0.8px; }
+    .hc-sub { font-size: 12px; max-width: 280px; top: 170px; }
+    .hc-eyebrow { font-size: 10px; }
+    .hc-arrow { width: 32px; height: 32px; font-size: 18px; }
+    .hc-arrow.prev { left: 8px; }
+    .hc-arrow.next { right: 8px; }
+  }
+
+  /* ══════════════ Mobile adaptation ══════════════ */
+  /* Inline grids the base 900px block doesn't reach */
+  @media (max-width: 900px) {
+    .assist-recap { grid-template-columns: 1fr !important; gap: 28px !important; height: auto !important; }
+    .i18n-triplet { grid-template-columns: 1fr !important; }
+  }
+
+  @media (max-width: 760px) {
+    section { padding: 68px 18px; }
+    #pillars { padding: 56px 18px !important; }
+
+    /* Hero header */
+    .hero { padding: 76px 18px 0; min-height: 0; }
+    .hero h1 { font-size: 44px; letter-spacing: -1px; }
+    .hero p.lead { font-size: 15.5px; }
+    .cta-row { flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .preview-wrap { padding: 0 12px; margin-top: 40px; }
+
+    /* Hero carousel → clean vertical text slides on phones.
+       Track/slide widths stay untouched so the JS transform math is intact;
+       we only reflow each slide's inner content and hide the desktop-only
+       product mockups + annotation callouts that can't fit a small screen. */
+    .hc-carousel { aspect-ratio: 4 / 5; }
+    .hc-slide {
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: flex-start; gap: 14px; padding: 34px 22px 58px;
+    }
+    .hc-eyebrow, .hc-title, .hc-sub, .hc-stage-tag {
+      position: static !important; inset: auto !important;
+      top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+      transform: none !important; margin: 0 !important; max-width: none !important;
+      text-align: left !important;
+    }
+    .hc-title { font-size: 30px !important; letter-spacing: -0.6px; line-height: 1.1; }
+    .hc-sub { font-size: 14px !important; color: rgba(255,255,255,0.82); }
+    .hc-stage-tag { margin-top: 4px !important; }
+    .hc-app, .hc-overlay-win, .hc-3split, .hc-gsi, .hc-res,
+    .hc-callout, .hc-hud, .hc-game-tint { display: none !important; }
+    .hc-arrow { display: none; }
+    .hc-dots { bottom: 18px; }
+    .hc-bp-stage { position: relative; inset: auto; transform: none; width: 74%; margin: 4px 0 18px; }
+    /* The screenshots carry their own 桌面版 / 手机版 labels; the stage tag
+       would only collide with the dots on a 4:5 phone carousel. */
+    .hc-slide-bp .hc-stage-tag { display: none !important; }
+    .hc-bp-phone { right: -16%; bottom: -14%; width: 30%; border-width: 2px; border-radius: 12px; }
+    .hc-bp-label { font-size: 10px; padding: 3px 8px; }
+    .hc-bp-label.phone { display: none; }
+    .hc-slide-bp .hc-sub { max-width: none; }
+
+    /* Translate / quick-reply demo panels */
+    .translate-left { padding: 32px 22px; }
+    .translate-right { padding: 24px 18px; }
+    .overlay-mock { width: 100%; max-width: 340px; }
+
+    /* Footer bottom bar */
+    .ft-bot { flex-direction: column; gap: 12px; }
+    .ft-legal { display: flex; flex-wrap: wrap; }
+    .ft-legal a { margin-left: 0; margin-right: 16px; }
+
+    /* Final CTA */
+    .final-cta { padding: 84px 20px; }
+    .final-cta .cta-row { flex-wrap: wrap; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 36px; }
+    h2.section-title { font-size: 30px; letter-spacing: -0.6px; }
+    .final-cta h2 { font-size: 34px; }
+    .hc-title { font-size: 26px !important; }
+    .pillar-grid { grid-template-columns: 1fr !important; }
+    .ft-grid { grid-template-columns: 1fr 1fr; }
+    .btn-cta { font-size: 13px; padding: 0 18px; }
+  }
+
+  /* ──── Live numbers (worker/site-stats.js → cdn.amefys.com/stats.json) ────
+     Hidden until stats.json loads; a failed fetch leaves the page as it was. */
+  .stats-proof { margin-top: 14px; font-size: 13px; color: var(--text-2); display: flex; gap: 6px 14px; justify-content: center; flex-wrap: wrap; }
+  .stats-proof b { color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .stats-proof .sep { opacity: .35; }
+  .stats-proof > .sep:first-child { display: none; }
+  .bp-stat { margin: 18px 0 26px; display: inline-flex; align-items: center; gap: 14px; padding: 12px 18px; border-radius: 14px;
+    background: rgba(212,175,106,.08); border: .5px solid rgba(232,199,121,.28); }
+  .bp-stat .big { font-size: 26px; font-weight: 750; color: var(--gold); letter-spacing: -.5px; font-variant-numeric: tabular-nums; }
+  .bp-stat .txt { font-size: 13px; line-height: 1.55; color: var(--text-2); }
+  .bp-stat .txt small { display: block; color: var(--text-3); font-size: 11.5px; }
+  .final-proof { margin-top: 10px; font-size: 13px; color: var(--text-2); }
+  .final-proof b { color: var(--gold); font-variant-numeric: tabular-nums; }
+  [data-live][hidden] { display: none !important; }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<link rel="stylesheet" href="/assets/home.css?v=4">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AMEFYS","alternateName":"AMEFYS DOTA 2 实时辅助工具","applicationCategory":"GameApplication","applicationSubCategory":"DOTA 2 companion","operatingSystem":"Windows 11, macOS 13+","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"downloadUrl":"https://amefys.com/dl/AMEFYS-Setup.exe","installUrl":"https://amefys.com/dl/AMEFYS-Setup.exe","softwareVersion":"0.35.0","inLanguage":["zh-CN","en","ru"],"description":"DOTA 2 实时辅助：BP 选人推荐（含手机版）、聊天翻译、出装推荐、快捷回复。只读 Valve 官方 GSI 接口，不碰游戏内存。","url":"https://amefys.com/","image":"https://amefys.com/assets/icon-512.png?v=2","featureList":["BP 选人推荐：推荐选、建议禁、克制与搭档，电脑悬浮窗或手机网页 amefys.com/bp","实时聊天翻译与一键回复","按局势推荐出装与关键道具时机","快捷回复与社区语料包","多主题皮肤与悬浮窗"],"publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/","logo":"https://amefys.com/assets/icon-512.png?v=2"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"AMEFYS 是什么？","acceptedAnswer":{"@type":"Answer","text":"AMEFYS 是一款免费的 DOTA 2 实时辅助工具（Windows / macOS）：实时翻译队友和对手的聊天并一键回复、根据对局推荐出装、用快捷回复一键发送预制文本。数据只来自 Valve 官方 GSI 接口，不读游戏内存，对局记录默认只存本机。"}},
+{"@type":"Question","name":"手机上能用 AMEFYS 的 BP 推荐吗？","acceptedAnswer":{"@type":"Answer","text":"能。手机浏览器打开 amefys.com/bp，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。最快的是点「拍照识别」，对着电脑拍一张选人界面，禁用和已选会自动填进去（目前只认中文客户端）；也可以按住「我方选 / 敌方选 / 禁用」说英雄名，俗称也认，或者直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。"}},
+{"@type":"Question","name":"使用 AMEFYS 会被 Valve 封号吗？","acceptedAnswer":{"@type":"Answer","text":"不会。AMEFYS 只使用 Valve 官方的 Game State Integration 接口读取对局状态；发送消息走 DOTA 内置聊天热键加剪贴板粘贴，与手动操作等价。不读取游戏内存、不修改客户端文件、不拦截网络流量，不在 VAC 的检测范围内。"}},
+{"@type":"Question","name":"怎么让 AMEFYS 连上 DOTA 2？","acceptedAnswer":{"@type":"Answer","text":"首次打开有 GSI 配置向导：一键写入配置文件到 DOTA 2 的 cfg/gamestate_integration 目录，再把 -gamestateintegration 粘贴到 Steam 启动选项，进入游戏主菜单即自动连接，约 30 秒。"}},
+{"@type":"Question","name":"正式天梯能看到敌方装备 / 队友经济 / 小地图位置吗？","acceptedAnswer":{"@type":"Answer","text":"不能。正式对局中 GSI 只推送你自己英雄的数据，AMEFYS 不会也无法绕过这一限制，所有建议基于你自己的状态与选人阶段公开的双方阵容。"}},
+{"@type":"Question","name":"翻译能自动发送回游戏吗？","acceptedAnswer":{"@type":"Answer","text":"能，但每一条都由你点击触发：翻译预设短语后写入剪贴板，用 DOTA 默认聊天热键打开聊天框、粘贴、回车，与手动操作完全等价。唯一的例外是「关键时间提醒」的到点自动发送：默认关闭，需要你在设置里主动打开，开启后每个节点只发一条带时间的预制短语。"}},
+{"@type":"Question","name":"对电脑配置有要求吗？","acceptedAnswer":{"@type":"Answer","text":"没有额外要求。AMEFYS 占用资源很低，可与 DOTA 2 同时运行；支持 Windows 11 与 macOS 13 及以上。"}}
+]}
+</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+
+  <!-- Top Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">功能<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="#draft" role="menuitem">BP 推荐</a>
+            <a href="#trash" role="menuitem">翻译回复</a>
+            <a href="#assist" role="menuitem">实时助手</a>
+            <a href="#skins" role="menuitem">多主题</a>
+          </div>
+        </div>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="donate.html">捐助</a>
+        <a href="#faq">常见问题</a>
+        <a href="/blog/">技术博客</a>
+        <a href="/studio/">服务</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="guestbook.html" role="menuitem">留言板</a>
+            <a href="https://afdian.com/a/amefys" target="_blank" rel="noopener" role="menuitem">爱发电</a>
+            <a href="about.html" role="menuitem">关于</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="index.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/index.html">EN</a>
+        </div>
+        <a class="btn-pill js-dl-cta" href="#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="main">
+    <!-- Atmospheric backdrop: silhouetted hero figures + cityscape arena -->
+    <div class="hero-backdrop">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="skyGlow" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#9A7B3F" stop-opacity="0.35"></stop>
+            <stop offset="50%" stop-color="#E8C779" stop-opacity="0.15"></stop>
+            <stop offset="100%" stop-color="#0a0805" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id="radiantGlow" x1="0" x2="1" y1="0.5" y2="0.5">
+            <stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.25"></stop>
+            <stop offset="100%" stop-color="#3DBE8A" stop-opacity="0"></stop>
+          </linearGradient>
+          <linearGradient id="direGlow" x1="1" x2="0" y1="0.5" y2="0.5">
+            <stop offset="0%" stop-color="#D9534F" stop-opacity="0.22"></stop>
+            <stop offset="100%" stop-color="#D9534F" stop-opacity="0"></stop>
+          </linearGradient>
+          <radialGradient id="moonGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stop-color="#E8C779" stop-opacity="0.4"></stop>
+            <stop offset="100%" stop-color="#E8C779" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <!-- Sky atmosphere -->
+        <rect width="1600" height="900" fill="url(#skyGlow)"></rect>
+        <!-- Faction glows on sides -->
+        <rect x="0" y="0" width="700" height="900" fill="url(#radiantGlow)"></rect>
+        <rect x="900" y="0" width="700" height="900" fill="url(#direGlow)"></rect>
+        <!-- Moon -->
+        <circle cx="1280" cy="180" r="120" fill="url(#moonGlow)"></circle>
+        <circle cx="1280" cy="180" r="34" fill="#F0E6C8" opacity="0.65"></circle>
+        <!-- Far mountain ridge (dire side) -->
+        <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0e0a06" opacity="0.85"></path>
+        <!-- Far mountain ridge (radiant side) -->
+        <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.85"></path>
+        <!-- Mid silhouettes: ancient towers / pillars -->
+        <g opacity="0.7">
+          <!-- Radiant ancient (left) -->
+          <polygon points="180,540 230,540 240,420 220,400 220,360 235,360 235,340 175,340 175,360 190,360 190,400 170,420" fill="#0c1814"></polygon>
+          <rect x="195" y="480" width="20" height="60" fill="#0e1c16"></rect>
+          <!-- Smaller pillar -->
+          <polygon points="320,560 360,560 365,470 350,460 350,440 335,440 335,460 320,470" fill="#0c1814"></polygon>
+          <!-- Dire ancient (right) -->
+          <polygon points="1380,540 1450,540 1460,400 1440,380 1455,360 1455,340 1395,340 1395,360 1410,380 1390,400" fill="#140a0c"></polygon>
+          <rect x="1402" y="470" width="26" height="70" fill="#180c10"></rect>
+          <!-- Dire pillar -->
+          <polygon points="1240,560 1280,560 1284,470 1270,460 1270,440 1255,440 1255,460 1240,470" fill="#140a0c"></polygon>
+        </g>
+        <!-- Hero silhouettes - foreground (recognizable DOTA archetypes) -->
+        <g opacity="0.88">
+
+          <!-- HERO 1: AXE-style berserker (far left, Radiant) -->
+          <g transform="translate(160,580)">
+            <!-- Bulky body with shoulders -->
+            <path d="M-44,40 Q-50,30 -40,20 L40,20 Q50,30 44,40 L42,80 L46,150 L36,220 L-36,220 L-46,150 L-42,80 Z" fill="#08120e"></path>
+            <!-- Mohawk head -->
+            <ellipse cx="0" cy="6" rx="14" ry="16" fill="#0a1410"></ellipse>
+            <path d="M-2,-12 L2,-12 L6,-22 L0,-26 L-6,-22 Z" fill="#0a1410"></path>
+            <!-- Two-handed axe (over shoulder) -->
+            <rect x="-3" y="-30" width="3" height="180" fill="#16241c" transform="rotate(18 0 60)"></rect>
+            <path d="M-30,-30 L18,-50 L26,-32 L0,-12 Z" fill="#0c1a14" transform="rotate(18 0 60)"></path>
+            <!-- Emerald rim -->
+            <path d="M-44,40 L-46,150 L-36,220" stroke="#3DBE8A" stroke-width="0.8" fill="none" opacity="0.4"></path>
+            <circle cx="0" cy="6" r="2" fill="#3DBE8A" opacity="0.5"></circle>
+          </g>
+
+          <!-- HERO 2: TEMPLAR-style polearm wielder (left-center, Radiant) -->
+          <g transform="translate(360,560)">
+            <!-- Slim caped figure -->
+            <path d="M-22,30 Q-32,140 -26,220 L0,210 L26,220 Q32,140 22,30 Z" fill="#06100c"></path>
+            <path d="M-16,30 L16,30 L20,140 L14,220 L-14,220 L-20,140 Z" fill="#0a1812"></path>
+            <ellipse cx="0" cy="14" rx="10" ry="13" fill="#0a1410"></ellipse>
+            <!-- Tall halberd / glaive -->
+            <rect x="28" y="-40" width="2.5" height="280" fill="#1a2820"></rect>
+            <path d="M28,-40 L36,-60 L26,-58 L22,-44 Z" fill="#1a2820"></path>
+            <path d="M28,-44 L20,-30 L26,-22 Z" fill="#1a2820"></path>
+            <path d="M-22,30 L-20,140 L-14,220" stroke="#3DBE8A" stroke-width="0.6" fill="none" opacity="0.35"></path>
+          </g>
+
+          <!-- HERO 3: INVOKER-style robed caster (center) -->
+          <g transform="translate(800,560)">
+            <!-- Long robes -->
+            <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"></path>
+            <path d="M-22,40 L22,40 L26,150 L18,230 L-18,230 L-26,150 Z" fill="#0e0a06"></path>
+            <!-- Hood pulled back / pointed cowl -->
+            <path d="M-22,40 Q-30,10 -18,-4 L0,-12 L18,-4 Q30,10 22,40 Z" fill="#06060c"></path>
+            <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"></ellipse>
+            <!-- Three orbs floating around (quas/wex/exort feel) -->
+            <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.7"></circle>
+            <circle cx="-46" cy="60" r="11" fill="#3DBE8A" opacity="0.18"></circle>
+            <circle cx="46" cy="40" r="6" fill="#E8C779" opacity="0.75"></circle>
+            <circle cx="46" cy="40" r="11" fill="#E8C779" opacity="0.2"></circle>
+            <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.7"></circle>
+            <circle cx="0" cy="-30" r="13" fill="#F0A23C" opacity="0.18"></circle>
+            <!-- Robe trim glow -->
+            <path d="M-44,40 Q-58,150 -48,230" stroke="#E8C779" stroke-width="0.6" fill="none" opacity="0.35"></path>
+          </g>
+
+          <!-- HERO 4: JUGGERNAUT-style dual-blade swordsman (right-center, Dire side) -->
+          <g transform="translate(1180,580)">
+            <!-- Crouched stance silhouette -->
+            <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"></path>
+            <!-- Mask head with horns -->
+            <ellipse cx="0" cy="8" rx="13" ry="15" fill="#100c07"></ellipse>
+            <path d="M-12,-2 L-18,-12 L-10,-6 Z M12,-2 L18,-12 L10,-6 Z" fill="#100c07"></path>
+            <!-- Dual curved blades -->
+            <path d="M-30,40 Q-60,80 -70,140 L-66,142 Q-56,84 -28,46 Z" fill="#1a1424"></path>
+            <path d="M30,40 Q60,80 70,140 L66,142 Q56,84 28,46 Z" fill="#1a1424"></path>
+            <!-- Violet rim light along edges -->
+            <path d="M-32,40 L-34,160 L-24,220" stroke="#E8C779" stroke-width="0.8" fill="none" opacity="0.45"></path>
+            <path d="M32,40 L34,160 L24,220" stroke="#E8C779" stroke-width="0.8" fill="none" opacity="0.45"></path>
+          </g>
+
+          <!-- HERO 5: PUDGE-style hooked bruiser (far right, Dire) -->
+          <g transform="translate(1430,600)">
+            <!-- Round belly silhouette -->
+            <path d="M-50,50 Q-60,120 -54,200 Q-30,220 0,220 Q30,220 54,200 Q60,120 50,50 Q40,30 0,28 Q-40,30 -50,50 Z" fill="#100c07"></path>
+            <!-- Small head -->
+            <ellipse cx="0" cy="14" rx="13" ry="14" fill="#0a060e"></ellipse>
+            <!-- Hook (chain extending up-right) -->
+            <path d="M40,30 L70,-20 L96,-44 Q104,-50 100,-58 Q96,-66 86,-62 L80,-56" stroke="#1a1424" stroke-width="3" fill="none" stroke-linecap="round"></path>
+            <circle cx="86" cy="-58" r="4" fill="#1a1424"></circle>
+            <!-- Glow drips / chain shimmer -->
+            <circle cx="60" cy="0" r="1.5" fill="#E8C779" opacity="0.7"></circle>
+            <circle cx="80" cy="-30" r="1.2" fill="#E8C779" opacity="0.6"></circle>
+            <path d="M-50,50 Q-54,200 -30,220" stroke="#E8C779" stroke-width="0.7" fill="none" opacity="0.4"></path>
+            <path d="M50,50 Q54,200 30,220" stroke="#E8C779" stroke-width="0.7" fill="none" opacity="0.4"></path>
+          </g>
+
+          <!-- Faint background creep figures (smaller) -->
+          <g opacity="0.55">
+            <ellipse cx="540" cy="690" rx="14" ry="34" fill="#08120e"></ellipse>
+            <ellipse cx="600" cy="700" rx="12" ry="28" fill="#08120e"></ellipse>
+            <ellipse cx="1000" cy="690" rx="14" ry="34" fill="#100c07"></ellipse>
+            <ellipse cx="1060" cy="700" rx="12" ry="28" fill="#100c07"></ellipse>
+          </g>
+        </g>
+        <!-- Esports arena crowd silhouette / city floor at very bottom -->
+        <g opacity="0.6">
+          <rect x="0" y="780" width="1600" height="120" fill="#02030680"></rect>
+          <!-- Audience pinpricks (esports stage) -->
+          <g fill="#E8C779" opacity="0.6">
+            <circle cx="100" cy="820" r="1.2"></circle><circle cx="160" cy="824" r="1"></circle><circle cx="220" cy="818" r="1.4"></circle>
+            <circle cx="290" cy="826" r="1"></circle><circle cx="360" cy="822" r="1.2"></circle><circle cx="430" cy="828" r="1"></circle>
+            <circle cx="500" cy="820" r="1.4"></circle><circle cx="570" cy="826" r="1"></circle><circle cx="640" cy="822" r="1.2"></circle>
+            <circle cx="710" cy="828" r="1"></circle><circle cx="780" cy="820" r="1.2"></circle><circle cx="860" cy="824" r="1.4"></circle>
+            <circle cx="930" cy="822" r="1"></circle><circle cx="1000" cy="828" r="1.2"></circle><circle cx="1070" cy="820" r="1"></circle>
+            <circle cx="1140" cy="826" r="1.4"></circle><circle cx="1210" cy="822" r="1"></circle><circle cx="1280" cy="828" r="1.2"></circle>
+            <circle cx="1350" cy="820" r="1"></circle><circle cx="1420" cy="826" r="1.4"></circle><circle cx="1490" cy="822" r="1"></circle>
+          </g>
+          <!-- Stage edge glow -->
+          <line x1="0" y1="800" x2="1600" y2="800" stroke="#E8C779" stroke-width="0.5" opacity="0.4"></line>
+        </g>
+        <!-- Dust motes / embers -->
+        <g fill="#E8C779" opacity="0.5">
+          <circle cx="450" cy="280" r="1"></circle><circle cx="620" cy="200" r="0.8"></circle>
+          <circle cx="780" cy="340" r="1.2"></circle><circle cx="920" cy="240" r="0.8"></circle>
+          <circle cx="1100" cy="320" r="1"></circle><circle cx="1180" cy="220" r="0.8"></circle>
+          <circle cx="380" cy="380" r="0.8"></circle><circle cx="540" cy="420" r="1"></circle>
+          <circle cx="700" cy="460" r="0.8"></circle><circle cx="1020" cy="440" r="1"></circle>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-grid"></div>
+    <div class="hero-particles">
+      <span class="particle" style="left:8%;animation-delay:0s;"></span>
+      <span class="particle" style="left:18%;animation-delay:1.2s;background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></span>
+      <span class="particle" style="left:32%;animation-delay:3s;"></span>
+      <span class="particle" style="left:48%;animation-delay:0.6s;"></span>
+      <span class="particle" style="left:62%;animation-delay:2.4s;"></span>
+      <span class="particle" style="left:74%;animation-delay:4s;background:var(--dire);box-shadow:0 0 8px var(--dire);"></span>
+      <span class="particle" style="left:86%;animation-delay:1.8s;"></span>
+      <span class="particle" style="left:94%;animation-delay:5s;"></span>
+    </div>
+    <div class="hero-eyebrow"><span class="dot"></span>核心功能免费 · 不卖广告</div>
+    <h1><span class="h1-kicker">AMEFYS · DOTA 2 实时辅助工具</span>文斗 <em>1v9</em>，<br>全球<em>无敌手</em>！</h1>
+    <p class="lead">堪比官方付费助手的实时出装与时机建议，免费使用。你打中文，对面看俄语；俄罗斯队友怒喷，你看到熟悉的母语——一键回敬，AMEFYS 自动翻译并粘贴到 DOTA 聊天框。选人阶段还有 BP 推荐，电脑和手机都能看。</p>
+    <div class="cta-row">
+      <a class="btn-cta primary js-dl-cta" href="#download" data-mobile-href="/bp/" data-mobile-label="打开手机版 BP">免费下载</a>
+      <a class="btn-cta ghost" href="#demo" data-open-demo rel="noopener">观看 60 秒演示 →</a>
+    </div>
+    <div class="platforms">macOS 13+ · Windows 11 · 核心功能免费 · 无广告</div>
+    <div class="comm-hero" id="community">
+      <!-- QQ / WeChat groups, cloud-drive mirror: generated from
+           assets/community.json by npm run community, never hand-edited -->
+      <!-- community:start -->
+      <div class="comm-chips"><span class="comm-chips-label">加入玩家群</span><button type="button" class="comm-chip" data-comm-open="qq" aria-expanded="false" aria-controls="comm-panel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-3 0-5 2.4-5 5.6 0 1-.3 1.6-.8 2.6-.7 1.3-1.7 3-1.2 4.6.2.6.7.6 1.3-.1.3 1 .9 1.9 1.7 2.6-.9.3-1.6.8-1.6 1.3 0 .8 1.6 1.2 3.4 1.2 1 0 1.8-.1 2.2-.4.4.3 1.2.4 2.2.4 1.8 0 3.4-.4 3.4-1.2 0-.5-.7-1-1.6-1.3.8-.7 1.4-1.6 1.7-2.6.6.7 1.1.7 1.3.1.5-1.6-.5-3.3-1.2-4.6-.5-1-.8-1.6-.8-2.6C17 5.4 15 3 12 3Z"/></svg>QQ 群</button><button type="button" class="comm-chip" data-comm-open="wechat" aria-expanded="false" aria-controls="comm-panel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 4C5.1 4 2 6.6 2 9.8c0 1.8 1 3.4 2.6 4.5L4 16.5l2.6-1.3c.8.2 1.6.3 2.4.3h.4a5.4 5.4 0 0 1-.2-1.4c0-3.2 3-5.7 6.8-5.7h.6C15.7 5.8 12.7 4 9 4Zm6.1 6c-3 0-5.4 2-5.4 4.5S12.1 19 15.1 19c.6 0 1.2-.1 1.8-.3l2.1 1.1-.5-1.8c1.3-.8 2.1-2.1 2.1-3.5 0-2.5-2.5-4.5-5.5-4.5Z"/></svg>微信群</button><button type="button" class="comm-chip" data-comm-open="pan" aria-expanded="false" aria-controls="comm-panel"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm8 3v5m-2.5-2.5L12 15l2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>网盘下载</button></div>
+      <div class="comm-panel" id="comm-panel" hidden>
+      <div class="comm-grid">
+        <div class="comm-card" data-community="qq">
+          <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-3 0-5 2.4-5 5.6 0 1-.3 1.6-.8 2.6-.7 1.3-1.7 3-1.2 4.6.2.6.7.6 1.3-.1.3 1 .9 1.9 1.7 2.6-.9.3-1.6.8-1.6 1.3 0 .8 1.6 1.2 3.4 1.2 1 0 1.8-.1 2.2-.4.4.3 1.2.4 2.2.4 1.8 0 3.4-.4 3.4-1.2 0-.5-.7-1-1.6-1.3.8-.7 1.4-1.6 1.7-2.6.6.7 1.1.7 1.3.1.5-1.6-.5-3.3-1.2-4.6-.5-1-.8-1.6-.8-2.6C17 5.4 15 3 12 3Z"/></svg>QQ 群</h3>
+          <p class="comm-sub">群号 <b>1127219818</b></p>
+          <img class="comm-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAC5CAYAAAB0rZ5cAAAAAklEQVR4AewaftIAAAWBSURBVO3BQW4dCw4EwUxC979yjdecTaPxZOnTFWH+oOqwoeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4oeq4Lz5M5bdIwqayJWFT+QlJeEvliSRsKr9FEj5pqDpuqDpuqDpuqDrui78gCd9N5SckYVPZkvCEypaETWVLwicl4bupfLeh6rih6rih6rih6rgvfojKW0l4KwmbyhNJ2FS2JPwElSeS8JbKW0n4CUPVcUPVcUPVcUPVcV/8Y1S2JGwqn6TyRBKeSMITKv+6oeq4oeq4oeq4oeq4L/4xSdhUnlD5pCRsKk8kYVOp/zdUHTdUHTdUHTdUHffFD0nCb5GETWVLwqayqWxJ2FTeUvkJSfivGaqOG6qOG6qOG6qO++IvUPktVLYkfFISNpUtCZvKloRNZUvCpvKWygVD1XFD1XFD1XFD1XHmD/4hKlsS3lLZkvCEyndLwr9uqDpuqDpuqDpuqDruiw9T2ZKwqTyRhE3lrSS8pfKEypaEJ5KwqWxJ2FQ2lS0Jm8qWhCdUtiRsKk8k4ZOGquOGquOGquOGquO++LAkbCpbEp5QeSIJm8pbKlsSnlDZVP5rVJ5IwhNJ2FS+21B13FB13FB13FB1nPmDA1S2JGwqWxKeUNmSsKlsSXhC5Ykk/GYqTyThuw1Vxw1Vxw1Vxw1Vx33xYSpbEt5SeSIJm8qWhE1lS8JbSfikJLyl8lYS3krCEypbEj5pqDpuqDpuqDpuqDrO/MEHqXxSEjaVT0rCpvJEEp5QeSIJb6lsSdhUtiRsKlsSNpUnkvAThqrjhqrjhqrjhqrjzB98M5UtCZvKloS3VJ5IwhMqTyRhU9mSsKl8tyRsKlsS3lJ5KwmfNFQdN1QdN1QdN1Qd98UPUfkklS0JT6hsSdiSsKlsKlsSNpUnkrCpvKWyJeEJlS0Jv9lQddxQddxQddxQdZz5g2+m8kQSPkllS8Km8klJ2FS2JGwqWxI+SeWtJLylsiXhuw1Vxw1Vxw1Vxw1Vx33xQ5LwhMpVKk+oPJGEt5KwqWwqTyThtxiqjhuqjhuqjhuqjvvih6g8kYS3VDaVJ5KwqWxJeCsJm8qWhLdUtiQ8kYQnVDaV32KoOm6oOm6oOm6oOu6LD1PZkrCpvKXySUnYVLYkbCpvqbylsiXhCZUtCZvKE0nYVLYk/ISh6rih6rih6rih6rgvPiwJTyThCZUnkvDdVD4pCU+oPKGyJWFT2VS2JGwq/zVD1XFD1XFD1XFD1XFf/AUqWxLeSsKm8kQSnkjCprIlYVN5S+WtJGwqb6k8ofKbDVXHDVXHDVXHDVXHmT/4h6hsSdhUtiR8ksoTSXhLZUvCWyrfLQmfNFQdN1QdN1QdN1Qd98WHqfwWSXhC5S2VLQmbyhNJeEvlLZUtCW8lYVPZkvDdhqrjhqrjhqrjhqrjvvgLkvDdVD4pCW+p/Nck4bsl4ScMVccNVccNVccNVcd98UNU3krCW0nYVDaVLQlbEr6byhNJ2FQ2lU9KwqayJWFT2ZLwSUPVcUPVcUPVcUPVcV/8Y1SeSMITKlsSfoLKW0nYVJ5Q2ZKwqWxJ+G5D1XFD1XFD1XFD1XFf1GMqb6lsSXgiCZvKloRNZUvCW0l4QmVLwqayJeGThqrjhqrjhqrjhqrjvvghSfgJSdhUNpUtCZvKprIl4QmVLQnfTeUJlSeSsKlsSfhuQ9VxQ9VxQ9VxQ9VxX/wFKr+FyhNJeCsJm8qWhCdUnlB5QuWtJGwqv9lQddxQddxQddxQdZz5g6rDhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrjhqrj/gfRPyjErUnYdQAAAABJRU5ErkJggg==" width="185" height="185" style="--pad:11px 12px 12px 11px" alt="AMEFYS QQ 群二维码" decoding="async">
+          <div class="comm-actions"><a class="comm-btn" href="https://qm.qq.com/q/w5wG8UAr4W" rel="noopener" target="_blank">打开 QQ 加群</a><button type="button" class="comm-btn ghost" data-copy="1127219818">复制群号</button></div>
+          <p class="comm-note comm-desk">用手机 QQ 扫码，或在 QQ 里搜群号。进群后在<b>群文件</b>里也能下载安装包。</p>
+          <p class="comm-note comm-phone">点「打开 QQ 加群」直接跳到 QQ；也可以复制群号到 QQ 里搜。进群后在<b>群文件</b>里也能下载安装包。</p>
+        </div>
+        <div class="comm-card" data-community="wechat" data-expires="2026-10-23T00:00:00+08:00">
+          <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 4C5.1 4 2 6.6 2 9.8c0 1.8 1 3.4 2.6 4.5L4 16.5l2.6-1.3c.8.2 1.6.3 2.4.3h.4a5.4 5.4 0 0 1-.2-1.4c0-3.2 3-5.7 6.8-5.7h.6C15.7 5.8 12.7 4 9 4Zm6.1 6c-3 0-5.4 2-5.4 4.5S12.1 19 15.1 19c.6 0 1.2-.1 1.8-.3l2.1 1.1-.5-1.8c1.3-.8 2.1-2.1 2.1-3.5 0-2.5-2.5-4.5-5.5-4.5Z"/></svg>微信群</h3>
+          <p class="comm-sub">Amefys 交流群<span class="comm-exp"> · 10 月 23 日前有效</span></p>
+          <img class="comm-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAADECAYAAADApo5rAAAAAklEQVR4AewaftIAAAjZSURBVO3BQY4kxxEAQffE/P/LLkKHQpwSKHTvkJTCzP7CWuu/Dmutx2Gt9TistR6HtdbjsNZ6HNZaj8Na63FYaz0Oa63HYa31OKy1Hoe11uOw1noc1lqPw1rr8cOHVH5TxaRyU3GjMlW8oTJVTCpTxY3KGxWTylRxo3JTcaMyVUwqv6niE4e11uOw1noc1lqPH76s4ptUbio+UXGjclPxhsonKiaVG5WpYqqYVG5Upoo3Kr5J5ZsOa63HYa31OKy1Hj/8YSpvVHxCZaqYVKaKNyomlU9U3KhMKlPFjcobFb9J5Y2KP+mw1noc1lqPw1rr8cO/nMpUcVPxRsUnKm5UbiomlTcqJpWpYlK5qfhfdlhrPQ5rrcdhrfX44f+cylQxqUwV31TxT1IxqUwqU8X/ksNa63FYaz0Oa63HD39YxT9ZxScqJpUblaliUpkqpopJZaq4qZhUbiomlUllqnij4p/ksNZ6HNZaj8Na6/HDl6n8k6hMFZPKVPGGylQxqUwVk8pUMalMFW+oTBU3FZPKVDGpvKHyT3ZYaz0Oa63HYa31sL/wL6YyVUwqb1TcqPymihuVqeITKm9U/C85rLUeh7XW47DWevzwIZWp4g2VqWJSeUPlEyo3Fd+kcqMyVbyhclNxU/GGyjdV3KhMFZ84rLUeh7XW47DWevzwZSpTxaQyVdxUTCo3FZPKTcWkMlXcqEwVk8pU8UbFpDJVTCpvqNyoTBVvVEwq31TxTYe11uOw1noc1lqPH76sYlL5hMpUcaMyVdyovKEyVUwqU8VvqrhRmSomlaniRuWNikllqnhDZar4xGGt9TistR6Htdbjhw9VTCpTxY3KVDFVTCpTxVQxqUwVn6iYVN5QeUNlqphUpopJ5UblDZVPqEwVk8pU8ZsOa63HYa31OKy1Hj98SOUNlaliUrmpuFG5UZkqblSmij+pYlKZVKaKSWWqmFSmikllUpkqJpU3Km4qblSmim86rLUeh7XW47DWevzwZRU3FZPKTcWkclPxCZWpYlKZKj5RcVNxo3KjMlVMKlPFjcpNxRsqb1T8SYe11uOw1noc1lqPHz5UcaPyRsWkclMxqUwVNypvVLyh8k0qNxWTyidUpooblTcqJpWp4kZlqvjEYa31OKy1Hoe11uOHL1OZKj5RMan8SRWTylRxozJVTCqTyicqPlExqUwVNypTxW+q+KbDWutxWGs9Dmutxw8fUnlDZaqYVN5QmSpuVKaKm4pvqrhRuan4hMpUMVXcqHxCZaq4UZkqJpWp4hOHtdbjsNZ6HNZaD/sLH1B5o2JSmSpuVKaKSeWNihuVm4pJ5abi76RyU3GjMlVMKp+omFSmij/psNZ6HNZaj8Na6/HDl1XcqLyhcqNyU3Gj8k0Vk8obKm9UTCpvVEwqU8VUcVNxozJVTCpvqEwVnzistR6HtdbjsNZ6/PBlKt9UMalMFb+pYlKZKqaKG5WbiknljYpJ5Q2VqeINlTcq/k6HtdbjsNZ6HNZajx8+VHGjMlXcqLyhMlVMKlPFTcUbFW+o3FT8nSomlUnljYoblani73RYaz0Oa63HYa31+OFDKjcVk8obFTcq36RyUzGpTBWTylRxo/KGylQxqdyoTBVTxTep3KjcVPxJh7XW47DWehzWWo8fvqxiUrmpmFQmlaliqphUblRuKiaVN1SmihuVqeJG5UbljYpJ5aZiUpkqbireUPlNh7XW47DWehzWWo8fPlQxqdxUTCpTxY3KJyomlZuKT6hMFTcqU8VUMalMFb+p4g2VNyomlT/psNZ6HNZaj8Na6/HDH1ZxU3GjMlXcqEwV36RyU/FNKlPFb6q4UbmpuKm4UZkqJpVvOqy1Hoe11uOw1nr88CGVqWJS+UTFpHJTcaMyVUwqU8VUcaMyVdxUTCpTxaTyCZWbikllqripmFSmikllqvg7HdZaj8Na63FYaz1++MMq3lCZVG4qJpWpYqq4qbhRmSo+oTJVfJPKGyqfULlReaPiNx3WWo/DWutxWGs9fvhQxaQyVUwqU8VNxaTyhspUMal8QuUNlRuVqeKm4k+qmFRuKm5UblSmikllqvimw1rrcVhrPQ5rrYf9hQ+ovFHxhsonKj6hMlX8JpWpYlK5qZhU3qh4Q2WqmFSmik+oTBWfOKy1Hoe11uOw1nr88GUV31TxT6byTRVTxU3FpHJT8QmVqeJG5UbljYo/6bDWehzWWo/DWuvxw4cq3lC5qZhUvqnimyo+ofJNFTcqU8WkMlVMFW9U3KjcVPymw1rrcVhrPQ5rrccPf7OKm4pJ5Z9MZaq4qZhUpooblaliUrlR+YTKJyomlTcqvumw1noc1lqPw1rr8cOHVD6h8omKSWWq+CdRmSpuVN5QmSq+SeUNlU+oTBWTylTxicNa63FYaz0Oa62H/YV/MZWpYlKZKj6hclMxqUwVNyo3FTcqf1LFpDJVvKEyVUwqNxXfdFhrPQ5rrcdhrfX44UMqv6niRuVGZaq4UbmpmFSmijcqblRuKm5UpooblU+oTBU3KjcVk8pU8YnDWutxWGs9Dmutxw9fVvFNKjcVk8pNxY3KGyo3KlPFGypTxRsqU8WkMlVMFZPKGxWfqPhNh7XW47DWehzWWo8f/jCVNyreUJkqJpVJZaq4qbhRmSomlUnlpuINlU9UfJPKN6lMFVPFNx3WWo/DWutxWGs9fviXq3ijYlL5kyreUJkqbiomlaliUvlExaQyVdyoTBVvqEwV33RYaz0Oa63HYa31+OH/XMWkMqlMFW+oTBWTyhsqNxVvVEwqU8WkMlVMKlPFVHGjclMxqUwVnzistR6HtdbjsNZ6/PCHVfybVbyhcqPyTRU3KlPFpHKj8kbFjcpUMVXcqPxJh7XW47DWehzWWo8fvkzlN6lMFVPFpDJVvKFyU3Gj8psqPlFxozJVvKEyVbxR8U2HtdbjsNZ6HNZaD/sLa63/Oqy1Hoe11uOw1noc1lqPw1rrcVhrPQ5rrcdhrfU4rLUeh7XW47DWehzWWo/DWutxWGs9Dmutx38AMX60vtxwRegAAAAASUVORK5CYII=" width="196" height="196" style="--pad:6px 6px 6px 6px" alt="AMEFYS 微信交流群二维码" decoding="async">
+          <p class="comm-expired">这张二维码已过期，新的马上换上。着急的话先加 QQ 群。</p>
+          <p class="comm-note comm-desk">用微信「扫一扫」扫码进群。</p>
+          <p class="comm-note comm-phone">在微信里打开本页：长按二维码识别。在其他浏览器里：长按保存到相册，再到微信「扫一扫」右上角选这张图。</p>
+        </div>
+        <div class="comm-card" data-community="pan">
+          <h3><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 7a2 2 0 0 1 2-2h4l2 2h6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Zm8 3v5m-2.5-2.5L12 15l2.5-2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>网盘下载</h3>
+          <p class="comm-sub">123 云盘 · 备用下载</p>
+          <img class="comm-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAM0AAADNCAYAAAAbvPRpAAAAAklEQVR4AewaftIAAAb+SURBVO3BQZIbSRIEQbcU/P/LtjzHKaOkwO5Zuir+kaq6dlJVKydVtXJSVSsnVbVyUlUrJ1W1clJVKydVtXJSVSsnVbVyUlUrJ1W1clJVKydVtXJSVSsnVbVyUlUrJ1W1clJVK5+8DMhvoWYCckPNDSA31NwAckPNDSA31ExAbqiZgPwWat50UlUrJ1W1clJVKydVtfLJX6Dm24A8peYGkEnNBOQGkEnNDSCTmqeAfJuabwPybSdVtXJSVSsnVbVyUlUrn/wQIE+peUrNBOSGmgnIpOYpIDfUfJuaCcibgDyl5iecVNXKSVWtnFTVyklVrXzyjwEyqZmATEAmNTeAPKXmKTUTkEnNBGRS8687qaqVk6paOamqlZOqWvnkH6NmAnJDzQRkUnNDzQ0gk5obQCY1N9RMQCY1/5KTqlo5qaqVk6paOamqlU9+iJrfQs1Tan4LIJOaCcgNNd+m5r/mpKpWTqpq5aSqVk6qauWTvwDIbwFkUjMBmdRMQCY1TwGZ1ExAJjUTkEnNBOTbgPw/OKmqlZOqWjmpqpWTqlr55GVq/muATGomIJOaN6m5oeY3U/P/6qSqVk6qauWkqlZOqmrlk5cBmdRMQG6omYA8peYGkEnNBGRSM6m5AeRNam6oeROQSc0NIJOaCcgNNW86qaqVk6paOamqlZOqWvnkZWomIDfUTEAmNTeATECeAvIUkEnNDTUTkKeATGomIG8CMqm5AeSGmm87qaqVk6paOamqlZOqWvnkZUBuqJmATGpuAHlKzQRkUvMmIJOaCcik5tvUTEDeBOSGmhtAJjVvOqmqlZOqWjmpqpWTqlr55C9Qc0PNDSCTmqeATGpuAPk2NROQSc0E5AaQSc0NIE+pmYD8ZidVtXJSVSsnVbVyUlUrn/wiQJ4CckPNpGYCMqmZ1DwF5NvUTECeUjMBeQrIm9R820lVrZxU1cpJVa2cVNXKJ38BkBtqbgCZ1ExAvg3IDTWTmgnIt6mZgExAnlIzAXkTkEnNt51U1cpJVa2cVNXKSVWt4B95EZBJzVNAnlIzAZnU3ADyW6iZgExqJiA31DwFZFJzA8gNNT/hpKpWTqpq5aSqVk6qauWT/yA1N4DcADKpmdRMQCY1TwGZ1DwF5Iaap4C8Sc0E5Lc4qaqVk6paOamqlZOqWsE/8mVAJjUTkEnNBOSGmgnIt6mZgLxJzZuA3FBzA8ikZgLylJqfcFJVKydVtXJSVSsnVbXyycuATGomIG9Sc0PNDSCTmgnIBGRScwPIDSA31PwENW9ScwPIpOZNJ1W1clJVKydVtXJSVSv4R14E5Ck1E5B/iZoJyKTmKSDfpmYCckPNBOQpNW86qaqVk6paOamqlZOqWsE/8mVAJjUTkKfU3AByQ80NIJOaCchTam4AmdQ8BWRSMwGZ1NwAMqn5zU6qauWkqlZOqmrlpKpW8I+8CMhTaiYgb1JzA8gNNROQG2qeAvImNd8G5NvUfNtJVa2cVNXKSVWtnFTVyid/gZpvUzMBuQFkUnMDyA01E5BJzVNqbgC5AWRScwPIDTU3gExqJiCTmjedVNXKSVWtnFTVyklVrXzyMjU3gDylZgIyqZmATGpuAHmTmgnIpGZSMwGZ1PwWaiYgk5obQH7CSVWtnFTVyklVrZxU1confwGQSc0E5AaQSc0NNROQSc1vBmRS8xSQSc0E5IaaCchTaiYgk5pvO6mqlZOqWjmpqpWTqlrBP/IiIJOaCcik5gaQp9RMQG6omYC8Sc0E5Iaap4BMaiYgP0HNDSCTmjedVNXKSVWtnFTVyklVrXzyMjU31Dyl5ikgk5o3qfk2NTeATGomNU+peQrIm9R820lVrZxU1cpJVa2cVNXKJy8D8luouQHkKTXfpuYpNROQSc2bgExqbqh5Csik5k0nVbVyUlUrJ1W1clJVK5/8BWq+DchTaiYgk5obQG6omYBMam4A+S3UPAXkhpqfcFJVKydVtXJSVSsnVbXyyQ8B8pSap9RMQCY1N4C8Sc0EZFIzqbkB5E1A3qRmAjIB+QknVbVyUlUrJ1W1clJVK5/8Y4BMam4AmdR8m5oJyKTmhpoJyA01E5BJzQRkUjMBmdRMQCY133ZSVSsnVbVyUlUrJ1W18kkFyA01E5Cn1NwA8hPU3FAzAfk2NT/hpKpWTqpq5aSqVk6qauWTH6LmJ6i5AWQCMql5CsibgExq3gTkTUDeBGRS86aTqlo5qaqVk6paOamqFfwjLwLyW6iZgNxQ8xSQp9RMQCY1E5BvUzMBmdTcADKp+c1OqmrlpKpWTqpq5aSqVvCPVNW1k6paOamqlZOqWjmpqpWTqlo5qaqVk6paOamqlZOqWjmpqpWTqlo5qaqVk6paOamqlZOqWjmpqpWTqlo5qaqVk6pa+R9YmxmTirwwDQAAAABJRU5ErkJggg==" width="205" height="205" style="--pad:1px 2px 2px 1px" alt="AMEFYS 123 云盘下载二维码" decoding="async">
+          <div class="comm-actions"><a class="comm-btn" href="https://4006629783.share.123pan.cn/123pan/vGFEwh-Fbc9d" rel="noopener" target="_blank">打开网盘</a></div>
+          <p class="comm-note comm-desk">官网下载太慢或打不开时，从这里下载安装包。</p>
+          <p class="comm-note comm-phone">官网下载太慢或打不开时，从这里下载安装包。</p>
+        </div>
+      </div>
+      </div>
+      <!-- community:end -->
+    </div>
+    <script>
+      // Player groups under the hero buttons. Mouse: hovering a chip shows its
+    // card (floating, see home.css), leaving the chips + card hides it.
+    // Touch: a tap opens it, the same chip closes it. Keyboard: focus shows,
+    // Esc hides. WeChat group codes expire after 7 days: past the date the
+    // code is hidden instead of shown dead. Also 复制群号.
+    (function () {
+      var root = document.querySelector('.comm-hero')
+      var panel = document.getElementById('comm-panel')
+      if (!root || !panel) return
+      var chips = root.querySelectorAll('[data-comm-open]')
+      var hover = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches
+      var timer = null
+      var show = function (key) {
+        clearTimeout(timer)
+        panel.hidden = !key
+        panel.setAttribute('data-show', key || '')
+        for (var k = 0; k < chips.length; k++)
+          chips[k].setAttribute('aria-expanded', String(chips[k].getAttribute('data-comm-open') === key))
+      }
+      var hideSoon = function () {
+        clearTimeout(timer)
+        timer = setTimeout(function () { show(null) }, 180)
+      }
+      for (var c = 0; c < chips.length; c++) {
+        var chip = chips[c]
+        chip.addEventListener('click', function (e) {
+          var key = e.currentTarget.getAttribute('data-comm-open')
+          if (hover) return show(key)
+          show(panel.hidden || panel.getAttribute('data-show') !== key ? key : null)
+        })
+        // keyboard only: a tap also focuses, and would reopen what the tap closes
+        chip.addEventListener('focus', function (e) {
+          var el = e.currentTarget
+          var kb = true
+          try { kb = el.matches(':focus-visible') } catch (err) { /* old browser: treat as keyboard */ }
+          if (kb) show(el.getAttribute('data-comm-open'))
+        })
+        if (hover)
+          chip.addEventListener('mouseenter', function (e) { show(e.currentTarget.getAttribute('data-comm-open')) })
+      }
+      if (hover) {
+        root.addEventListener('mouseleave', hideSoon)
+        panel.addEventListener('mouseenter', function () { clearTimeout(timer) })
+      }
+      root.addEventListener('focusout', function (e) {
+        if (!root.contains(e.relatedTarget)) hideSoon()
+      })
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !panel.hidden) show(null)
+      })
+      var cards = document.querySelectorAll('[data-expires]')
+      for (var i = 0; i < cards.length; i++) {
+        var t = Date.parse(cards[i].getAttribute('data-expires'))
+        if (t && Date.now() >= t) cards[i].setAttribute('data-expired', '')
+      }
+      // 复制群号
+      var copies = document.querySelectorAll('[data-copy]')
+      for (var j = 0; j < copies.length; j++) {
+        copies[j].addEventListener('click', function (e) {
+          var btn = e.currentTarget
+          var label = btn.textContent
+          var done = function (ok) {
+            btn.textContent = ok ? '已复制' : '群号 ' + btn.getAttribute('data-copy')
+            setTimeout(function () { btn.textContent = label }, 2000)
+          }
+          try {
+            navigator.clipboard.writeText(btn.getAttribute('data-copy')).then(
+              function () { done(true) },
+              function () { done(false) }
+            )
+          } catch (err) { done(false) }
+        })
+      }
+    })()
+    </script>
+    <a class="phone-web-note" href="/bp/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg><span><b>手机版是网页，不是 App</b>，不用下载安装：手机浏览器直接打开 <u>amefys.com/bp</u>，用电脑版账号登录即可 →</span></a>
+    <div class="stats-proof" data-live hidden><span data-part="users"><b data-stat="users"></b> 玩家注册</span><span class="sep" data-part="downloads">·</span><span data-part="downloads">下载 <b data-stat="downloads"></b> 次</span><span class="sep" data-part="releases">·</span><span data-part="releases"><span data-stat="months"></span>个月 <b data-stat="releases"></b> 个版本</span><span class="sep" data-part="updated">·</span><span data-part="updated">最近更新：<b data-stat="updated"></b></span></div>
+
+    <div class="preview-wrap" style="position:relative;">
+      <div class="hc-carousel" data-hc>
+        <div class="hc-track" data-hc-track>
+
+          <!-- ═══════════ SLIDE 1 · 主界面 ═══════════ -->
+          <div class="hc-slide hc-slide-bp" data-slide="0">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 01 · BP 选人推荐</div>
+            <h2 class="hc-title">选人阶段，<br>先看<em>推荐</em>再锁。</h2>
+            <p class="hc-sub">按你的分段统计近 7 天天梯的胜率、克制和配合，告诉你选谁、禁谁、为什么。电脑上开，手机上也能看。</p>
+            <div class="hc-bp-stage">
+              <div class="hc-bp-desk">
+                <img src="assets/screens/bp-desktop.jpg" width="1600" height="950" alt="AMEFYS 桌面版 BP 面板：双方已选英雄、推荐列表、胜率与克制加分" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label desk"><b>桌面版</b> · 选人时 Alt+Shift+B</span>
+              <div class="hc-bp-phone">
+                <img src="assets/screens/bp-mobile.jpg?v=3" width="665" height="1440" alt="AMEFYS 手机版 BP 页：拍照识别后自动填好的双方阵容和 16 个禁用" loading="eager" decoding="async" />
+              </div>
+              <span class="hc-bp-label phone"><b>手机版</b> · amefys.com/bp</span>
+            </div>
+            <div class="hc-stage-tag"><span class="dot"></span>BP 推荐 · 桌面版 + 手机版</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 2 · Glass 悬浮窗（over 游戏画面） ═══════════ -->
+          <div class="hc-slide hc-slide-2" data-slide="1">
+            <div class="hc-game-bg">
+              <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="hcSkyG" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#9A7B3F" stop-opacity="0.35"/><stop offset="50%" stop-color="#E8C779" stop-opacity="0.15"/><stop offset="100%" stop-color="#0a0805" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="hcRadG" x1="0" x2="1" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#3DBE8A" stop-opacity="0.30"/><stop offset="100%" stop-color="#3DBE8A" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="hcDirG" x1="1" x2="0" y1="0.5" y2="0.5"><stop offset="0%" stop-color="#D9534F" stop-opacity="0.28"/><stop offset="100%" stop-color="#D9534F" stop-opacity="0"/></linearGradient>
+                  <radialGradient id="hcMoonG" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#E8C779" stop-opacity="0.45"/><stop offset="100%" stop-color="#E8C779" stop-opacity="0"/></radialGradient>
+                </defs>
+                <rect width="1600" height="900" fill="#0a0c14"/>
+                <rect width="1600" height="900" fill="url(#hcSkyG)"/>
+                <rect x="0" y="0" width="700" height="900" fill="url(#hcRadG)"/>
+                <rect x="900" y="0" width="700" height="900" fill="url(#hcDirG)"/>
+                <circle cx="1280" cy="180" r="120" fill="url(#hcMoonG)"/>
+                <circle cx="1280" cy="180" r="34" fill="#F0E6C8" opacity="0.7"/>
+                <path d="M820,520 L880,440 L940,490 L1000,400 L1080,470 L1160,380 L1240,460 L1320,390 L1400,470 L1500,420 L1600,450 L1600,900 L820,900 Z" fill="#0e0a06" opacity="0.9"/>
+                <path d="M0,500 L80,430 L160,470 L240,400 L320,460 L400,390 L500,470 L580,420 L680,460 L780,420 L820,520 L820,900 L0,900 Z" fill="#0a1410" opacity="0.9"/>
+                <g opacity="0.95">
+                  <g transform="translate(360,580)">
+                    <path d="M-22,30 Q-32,140 -26,220 L0,210 L26,220 Q32,140 22,30 Z" fill="#06100c"/>
+                    <ellipse cx="0" cy="14" rx="10" ry="13" fill="#0a1410"/>
+                    <rect x="28" y="-40" width="2.5" height="280" fill="#1a2820"/>
+                  </g>
+                  <g transform="translate(800,560)">
+                    <path d="M-44,40 Q-58,150 -48,230 L48,230 Q58,150 44,40 Z" fill="#08080e"/>
+                    <ellipse cx="0" cy="14" rx="9" ry="12" fill="#040208"/>
+                    <circle cx="-46" cy="60" r="6" fill="#3DBE8A" opacity="0.85"/>
+                    <circle cx="46" cy="40" r="6" fill="#E8C779" opacity="0.85"/>
+                    <circle cx="0" cy="-30" r="7" fill="#F0A23C" opacity="0.85"/>
+                  </g>
+                  <g transform="translate(1180,580)">
+                    <path d="M-32,40 Q-38,30 -28,22 L28,22 Q38,30 32,40 L30,90 L34,160 L24,220 L-24,220 L-34,160 L-30,90 Z" fill="#100a14"/>
+                    <ellipse cx="0" cy="8" rx="13" ry="15" fill="#100c07"/>
+                  </g>
+                </g>
+                <g opacity="0.65"><circle cx="700" cy="640" r="60" fill="#F0A23C" opacity="0.25"/><circle cx="900" cy="660" r="50" fill="#E8C779" opacity="0.30"/></g>
+              </svg>
+            </div>
+            <div class="hc-game-tint"></div>
+            <div class="hc-hud">
+              <div class="clock">21:28</div>
+              <div class="team r">28</div>
+              <div class="team d">31</div>
+              <div class="row"><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot empty"></div></div>
+            </div>
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 02 · 悬浮窗</div>
+            <h2 class="hc-title">浮在游戏之上，<br>像<em>一层雾玻璃</em>。</h2>
+            <p class="hc-sub">聊天翻译、一键回复、圆盘选频道、透明度调节——所有操作不离开游戏窗口。</p>
+
+            <div class="hc-overlay-win">
+              <div class="hc-ow-titlebar">
+                <span class="hc-ow-brand"></span>
+                <strong>AMEFYS</strong>
+                <small>LIVE · 21:28</small>
+                <button class="hc-ow-opacity-btn" aria-label="透明度">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 A10 10 0 0 1 12 22 Z"/><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                </button>
+              </div>
+              <div class="hc-ow-opacity-panel">
+                <span class="lbl">透明度</span>
+                <div class="track"><span class="fill"></span><span class="thumb"></span></div>
+                <span class="val">76%</span>
+                <button class="x" aria-label="关闭">×</button>
+              </div>
+              <div class="hc-ow-tabs">
+                <button class="hc-ow-tab" data-active="true">聊天 · 翻译</button>
+                <button class="hc-ow-tab">英雄 · 装备</button>
+                <button class="hc-ow-tab">事件</button>
+              </div>
+              <div class="hc-ow-body">
+                <div class="hc-bubble them"><div class="who">队友 · 俄语 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
+                <div class="hc-bubble me"><div class="who">我 · 中 → 英</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
+                <div class="hc-radial-zone">
+                  <div class="hc-radial">
+                    <svg viewBox="-100 -100 200 200">
+                      <circle class="bp" cx="0" cy="0" r="88"></circle>
+                      <path class="sec" data-active="true" d="M -26 -15 L -76.2 -44 A 88 88 0 0 1 76.2 -44 L 26 -15 A 30 30 0 0 0 -26 -15 Z"></path>
+                      <path class="sec" d="M 26 -15 L 76.2 -44 A 88 88 0 0 1 0 88 L 0 30 A 30 30 0 0 0 26 -15 Z"></path>
+                      <path class="sec" d="M 0 30 L 0 88 A 88 88 0 0 1 -76.2 -44 L -26 -15 A 30 30 0 0 0 0 30 Z"></path>
+                      <circle class="cdot" cx="0" cy="0" r="6"></circle>
+                      <text class="lbl" x="0" y="-59">全频道</text>
+                      <text class="lbl" x="-51" y="29.5">队伍</text>
+                      <text class="lbl" x="51" y="29.5">小队</text>
+                    </svg>
+                  </div>
+                  <span class="hc-radial-tail" aria-hidden="true"></span>
+                </div>
+                <div class="hc-qr-row">
+                  <span class="hc-qr-chip">GG</span><span class="hc-qr-chip">GLHF</span><span class="hc-qr-chip">NP</span><span class="hc-qr-chip">WP</span>
+                  <span class="hc-qr-chip hot">默认消息块 ▸</span>
+                </div>
+                <div class="hc-block-q">
+                  <h6>▸ BLOCK · 3 条 · 200ms</h6>
+                  <div class="row"><span class="dot">✓</span><span>amefys = ame + fy + somethings</span><span class="t">已发送</span></div>
+                  <div class="row pending"><span class="dot">▸</span><span>文斗1v9，全球无敌手！</span><span class="t">发送中…</span></div>
+                </div>
+                <div class="hc-ow-input"><div class="field">回复（自动翻译）</div><button class="send">发送</button></div>
+              </div>
+            </div>
+
+            <div class="hc-callout flip" style="top:8%;right:30%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>一键唤起</div><div class="body">按 <kbd>⌥</kbd> <kbd>⇧</kbd> <kbd>D</kbd> 收 / 出。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:9%;right:6%;"><div class="hc-callout-card"><div class="key"><span class="num">5</span>透明度</div><div class="body">标题栏随手调，团战前拨低不挡视野。</div></div><span class="arr"></span></div>
+            <div class="hc-callout" style="top:34%;left:38%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">2</span>6 种语言互译</div><div class="body">中 · 英 · 俄 · 越南语 · 印尼语 · 菲律宾语。</div></div></div>
+            <div class="hc-callout" style="top:54%;left:6%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">4</span>圆盘选频道</div><div class="body">点标签时弹出三个扇区：全频道 / 队伍 / 小队。</div></div></div>
+            <div class="hc-callout" style="bottom:20%;left:6%;"><span class="arr"></span><div class="hc-callout-card"><div class="key"><span class="num">3</span>消息块连发</div><div class="body">「默认消息块」按 100ms–10s 连发 N 条。</div></div></div>
+
+            <div class="hc-stage-tag"><span class="dot"></span>Liquid Glass · 悬浮在游戏画面之上</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 4 · GSI 实时 ═══════════ -->
+          <div class="hc-slide hc-slide-4" data-slide="2">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 03 · 实时助手</div>
+            <h2 class="hc-title">Valve 官方接口，<br><em>实时</em>给出装建议。</h2>
+            <p class="hc-sub">读取你自己英雄的等级、经济和装备，按对局阶段给出下一件该出什么，分主推 / 时间线 / 反制三种视图。</p>
+            <div class="hc-gsi">
+              <div class="hc-gsi-tiles">
+                <div class="hc-gsi-tile lvl"><div class="l">Level</div><div class="v">13</div></div>
+                <div class="hc-gsi-tile gpm"><div class="l">GPM</div><div class="v">642</div></div>
+                <div class="hc-gsi-tile xpm"><div class="l">XPM</div><div class="v">588</div></div>
+                <div class="hc-gsi-tile kda"><div class="l">KDA</div><div class="v">6/1/4</div></div>
+              </div>
+              <div class="hc-gsi-main">
+                <div class="head">
+                  <div class="av">AM</div>
+                  <div class="n"><div class="nm">敌法师 · 21:28</div><div class="sb">对线期 · 天辉中路 · 主推</div></div>
+                  <div class="conf">主推</div>
+                </div>
+                <div class="rec">
+                  <div class="ic">MAN</div>
+                  <div><div class="nm">幻影法袍</div><div class="ds">驱散 + 分身吃伤害</div></div>
+                  <div class="sts"><div class="gp">下一件</div><div class="tm">中期</div></div>
+                </div>
+              </div>
+              <div class="hc-pulse">
+                <div class="h"><span class="d"></span><span class="l">对局数据 · 实时</span><span class="r">最近 30 秒</span></div>
+                <div class="chart">
+                  <span style="height:40%"></span><span style="height:55%"></span><span style="height:48%"></span>
+                  <span style="height:62%"></span><span style="height:58%"></span><span style="height:70%"></span>
+                  <span style="height:65%"></span><span style="height:72%"></span><span style="height:68%"></span>
+                  <span style="height:80%"></span><span style="height:75%"></span><span style="height:78%"></span>
+                  <span style="height:85%"></span><span style="height:82%"></span><span style="height:88%"></span>
+                  <span style="height:84%"></span><span style="height:90%"></span><span style="height:86%"></span>
+                  <span style="height:92%"></span><span style="height:88%"></span><span style="height:95%"></span>
+                  <span style="height:92%"></span><span style="height:98%"></span><span style="height:94%"></span>
+                  <span style="height:100%"></span><span style="height:96%"></span><span style="height:88%"></span>
+                  <span style="height:82%"></span><span style="height:76%"></span><span style="height:70%"></span>
+                </div>
+              </div>
+            </div>
+            <div class="hc-callout flip" style="top:13%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>Valve 官方 GSI</div><div class="body">Steam 启动项加 <kbd>-gamestateintegration</kbd>，不读游戏内存。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:36%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>实时同步</div><div class="body">等级 / GPM / XPM / KDA 跟着对局走。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:30%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>127 位英雄</div><div class="body">主推 / 时间线 / 反制三种视图。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:8%;right:48%;"><div class="hc-callout-card"><div class="key"><span class="num">4</span>按阶段推荐</div><div class="body">前期 / 中期 / 后期各给一套，跟着当前状态切换。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>实时助手 · 示意</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 5 · 聊天识别 ═══════════ -->
+          <div class="hc-slide hc-slide-5" data-slide="3">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 04 · 聊天识别</div>
+            <h2 class="hc-title">他打的那行字，<br>框一下<em>就懂</em>。</h2>
+            <p class="hc-sub">框住聊天框，识别在本机完成。<br>截图不上传，也不碰游戏进程。</p>
+            <div class="hc-res">
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">① 按快捷键，拖一个框</div>
+                <div class="ocr-chat">
+                  <div class="ocr-marq" style="top:26px;height:46px;"><span class="hd tl"></span><span class="hd tr"></span><span class="hd bl"></span><span class="hd br"></span><span class="sz">412 × 46</span></div>
+                  <div class="line">[全部] Хару: где мид</div>
+                  <div class="line inside">[队友] Игрок: иди мид, я лес</div>
+                  <div class="line inside">[队友] Sniper: need smoke</div>
+                  <div class="line">12:34</div>
+                </div>
+                <div class="ocr-out">
+                  <span class="k">框内识别 + 翻译</span>
+                  去中路，我打野　·　需要烟雾
+                </div>
+              </div>
+              <div class="ocr-pane">
+                <div class="ocr-pane-t">② Windows 要单独装识别组件</div>
+                <div class="ocr-step ok"><span class="ic">✓</span>简体中文<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+                <div class="ocr-step todo"><span class="ic">!</span>English<span style="color:var(--text-3);font-size:11.5px;">缺识别组件</span><span class="go">去安装</span></div>
+                <div class="ocr-step ok"><span class="ic">✓</span>Русский<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+                <p class="ocr-note">共 13 种可识别语言。macOS 自带全部语言，不用装。</p>
+              </div>
+            </div>
+            <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>框选即识别</div><div class="body">一个快捷键，拖一个框，只认你框住的那块。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>装语言包 ≠ 装组件</div><div class="body">Windows 要单独装「光学字符识别」，向导带你装完并复检。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>不碰游戏</div><div class="body">读的是屏幕像素，不读游戏内存、不注入、不拦网络流量。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>本机识别</div>
+          </div>
+
+          <!-- ═══════════ SLIDE 6 · 语音 ═══════════ -->
+          <div class="hc-slide hc-slide-6" data-slide="4">
+            <div class="hc-eyebrow"><span class="bar"></span>特性聚焦 05 · 语音</div>
+            <h2 class="hc-title">他开麦三句，<br>你<em>看到</em>三行字。</h2>
+            <p class="hc-sub">按住说话，中文变成他读得懂的话；<br>他开麦，你看到字幕。</p>
+            <div class="hc-res">
+              <div class="hc-res-big">
+                <div class="hc-res-met cpu">
+                  <div class="l">按住说话</div>
+                  <div class="v">1<small>个键</small></div>
+                  <div class="note">松开即转写并翻译，再由你决定发不发</div>
+                </div>
+                <div class="hc-res-met mem">
+                  <div class="l">队友语音</div>
+                  <div class="v">字幕</div>
+                  <div class="note">转写后即丢弃，不留存原始音频</div>
+                </div>
+              </div>
+              <div class="hc-res-vs">
+                <h5>两条链路，各走各的</h5>
+                <div class="row plain"><div class="name">语音输入（你说）</div><div class="val">识别 → 翻译 → 你确认</div></div>
+                <div class="row plain"><div class="name">语音侦听（他说）</div><div class="val">识别 → 字幕，仅本机显示</div></div>
+                <div class="row plain"><div class="name">识别通道</div><div class="val">会员通道 或 自备密钥</div></div>
+              </div>
+            </div>
+            <div class="hc-callout flip" style="top:30%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">1</span>不劫持语音</div><div class="body">不接管麦克风独占，也不改游戏里的语音开关。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="top:52%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">2</span>不标记说话人</div><div class="body">字幕只给内容，不给你"谁在说"的身份判定。</div></div><span class="arr"></span></div>
+            <div class="hc-callout flip" style="bottom:10%;right:53%;"><div class="hc-callout-card"><div class="key"><span class="num">3</span>音频不留存</div><div class="body">转写完即丢弃原始音频，字幕只在你这台机器上。</div></div><span class="arr"></span></div>
+            <div class="hc-stage-tag"><span class="dot"></span>语音 · 按住说话</div>
+          </div>
+
+        </div>
+
+        <!-- Carousel controls -->
+        <button class="hc-arrow prev" data-hc-prev aria-label="上一张">‹</button>
+        <button class="hc-arrow next" data-hc-next aria-label="下一张">›</button>
+        <div class="hc-dots" data-hc-dots>
+          <button class="hc-dot" data-hc-go="0" data-active="true" aria-label="第 1 张"></button>
+          <button class="hc-dot" data-hc-go="1" aria-label="第 2 张"></button>
+          <button class="hc-dot" data-hc-go="2" aria-label="第 3 张"></button>
+          <button class="hc-dot" data-hc-go="3" aria-label="第 4 张"></button>
+          <button class="hc-dot" data-hc-go="4" aria-label="第 5 张"></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BP draft — real app screenshots, desktop + phone -->
+  <section id="draft" style="background: linear-gradient(180deg, transparent, rgba(212,175,106,0.05), transparent);">
+    <div class="container">
+      <div class="eyebrow" style="color:var(--gold);"><span class="bar" style="background:var(--gold);"></span>特性 01 · BP 选人推荐</div>
+      <h2 class="section-title">选谁、禁谁、为什么，<br><em style="color:var(--gold);font-style:normal;">电脑</em>和<em style="color:#F3D88F;font-style:normal;">手机</em>都能看。</h2>
+      <p class="section-lead">按你的分段统计近 7 天<span data-stat-text="ranked">几百万局</span>公开天梯对局，跟着双方已选的英雄实时算推荐选、建议禁和阵容短板，每一条都写明胜率、克制与配合的加减分。登录就能用。</p>
+      <div class="bp-stat" data-live hidden><div class="big" data-stat="bp"></div><div class="txt">近 7 天公开对局，每天重算<small>天梯 <span data-stat="ranked"></span> · 加速 <span data-stat="turbo"></span> · 数据更新于 <span data-stat="bp-built"></span></small></div></div>
+      <div class="bp-show">
+        <figure class="bp-shot bp-shot-desk">
+          <img src="assets/screens/bp-desktop.jpg" width="1600" height="950" alt="AMEFYS 桌面版 BP 面板：双方已选英雄、禁用位、英雄池和右侧推荐列表" loading="lazy" decoding="async" />
+          <figcaption><b>桌面版 · 悬浮窗</b>选人阶段按 <kbd>Alt+Shift+B</kbd> 打开。左键我方选、右键敌方选、Ctrl+点击禁用；右侧分「推荐 / 建议 Ban / 阵容」三页。</figcaption>
+        </figure>
+        <figure class="bp-shot bp-shot-phone">
+          <img src="assets/screens/bp-mobile.jpg?v=3" width="665" height="1440" alt="AMEFYS 手机版 BP 页：拍一张选人界面后，已填好 9 个选人、16 个禁用，下方是推荐选" loading="lazy" decoding="async" />
+          <figcaption><b>手机版 · 浏览器</b>打开 <a href="/bp/">amefys.com/bp</a>，或在桌面版点「手机版」扫码。对着电脑拍一张选人界面，禁用和已选自动填进去；也可以按住按钮说英雄名。不挡游戏画面。</figcaption>
+        </figure>
+      </div>
+      <p class="bp-note">两张都是 AMEFYS 的原生界面截图。推荐基于公开历史对局统计（数据来自 OpenDota）与本地算法，仅供参考；选人需要你手动录入，AMEFYS 不读取游戏内存。</p>
+    </div>
+  </section>
+
+  <!-- Translate showcase / Trash-talk + Quick replies -->
+  <section id="trash" style="background: linear-gradient(180deg, transparent, rgba(212,175,106,0.04), transparent);">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 02 · 聊天翻译 + 一键回复</div>
+      <h2 class="section-title">他骂俄语，<br>你看<em class="em-gold">中文</em>，<br>一键回他一整段。</h2>
+      <p class="section-lead">中、英、俄、越南语、印尼语、菲律宾语之间双向互译。回话只要点一下标签：AMEFYS 翻译好、打开 DOTA 聊天框、粘贴、回车，一气呵成。GG / GLHF / NP / WP 单条直发，<strong class="em-gold">消息块</strong>能按 0.1–10 秒的间隔连发好几条。自己的回复包可以导出成文件分享，也能导入别人的。</p>
+
+      <div class="translate-demo">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>支持的语言</div>
+          <div class="lang-headline">中 · 英 · 俄 · 越南语 · 印尼语 · 菲律宾语</div>
+          <div class="lang-note">「gank」「smoke」「BKB」这类战术口令有本地词典，秒出；整句交给云端模型，连语气一起翻。界面语言是中、英、俄三种，另外三种只用于聊天翻译。</div>
+          <div class="lang-row">
+            <span class="lang-tag on">中 ⇄ 英</span>
+            <span class="lang-tag on">中 ⇄ 俄</span>
+            <span class="lang-tag on">中 ⇄ 越南语</span>
+            <span class="lang-tag on">中 ⇄ 印尼语</span>
+            <span class="lang-tag on">中 ⇄ 菲律宾语</span>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark"></span>
+              <span style="font-weight:700;">AMEFYS</span>
+              <span class="mono-meta">21:28 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div class="chat-bubble them"><div class="who">队友 · 俄语 → 中</div><div class="raw">AM пуш мид сейчас!</div><div class="tr">AM 现在推中路！</div></div>
+              <div class="chat-bubble them"><div class="who">队友 · 英语 → 中</div><div class="raw">on my way, gather mid</div><div class="tr">我马上到，中路集合</div></div>
+              <div class="chat-bubble them"><div class="who">队友 · 印尼语 → 中</div><div class="raw">beli BKB sekarang</div><div class="tr">现在出 BKB</div></div>
+              <div class="chat-bubble me"><div class="who" style="color:rgba(255,255,255,0.6);">我 · 中 → 英</div><div class="raw">我 30s 后到，先撤</div><div class="tr">I'll arrive in 30s, fall back first</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick-reply subsection: presets + block sequence -->
+      <div class="translate-demo" style="margin-top:40px;">
+        <div class="translate-left">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>一键快捷回复</div>
+          <div class="lang-headline">4 个常用短语 + 消息块，随便加</div>
+          <div class="lang-note">自带 GG / GLHF / NP / WP 四个单条标签，外加一个「默认消息块」演示连发。新建标签时选「单条」或「消息块」，消息块里能放好几条。</div>
+          <div class="qr-steps">
+            <div class="qr-step"><span class="n">1</span><div><b>点标签</b>：在悬浮窗里点一下，不用打字。</div></div>
+            <div class="qr-step"><span class="n">2</span><div><b>自动发送</b>：写入剪贴板 → 打开 DOTA 聊天框 → 粘贴 → 回车，和你手动操作一样。</div></div>
+            <div class="qr-step"><span class="n">3</span><div><b>导入 / 导出</b>：回复包是一个文件，换电脑、发给朋友都行。</div></div>
+          </div>
+        </div>
+        <div class="translate-right">
+          <div class="overlay-mock">
+            <div class="om-head">
+              <span class="mark"></span>
+              <span style="font-weight:700;">AMEFYS · 快捷回复</span>
+              <span class="mono-meta">31:08 LIVE</span>
+            </div>
+            <div class="om-body">
+              <div class="qr-chips">
+                <button class="qr-chip" type="button" tabindex="-1">GG</button>
+                <button class="qr-chip" type="button" tabindex="-1">GLHF</button>
+                <button class="qr-chip" type="button" tabindex="-1">NP</button>
+                <button class="qr-chip" type="button" tabindex="-1">WP</button>
+                <button class="qr-chip hot" type="button" tabindex="-1">默认消息块 ▸</button>
+              </div>
+              <div class="qr-queue">
+                <h6>▸ 消息块 · 3 条 · 间隔 0.2 秒</h6>
+                <div class="qr-row"><span class="st">✓</span><span>amefys = ame + fy + somethings</span><span class="when">已发送</span></div>
+                <div class="qr-row"><span class="st">✓</span><span>文斗1v9，全球无敌手！</span><span class="when">已发送</span></div>
+                <div class="qr-row pending"><span class="st">▸</span><span>I can do this all day!</span><span class="when">发送中…</span></div>
+              </div>
+              <div class="qr-files"><span>↓ 导入回复包</span><span>↑ 导出</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community packs CTA -->
+      <div class="packs-cta">
+        <a href="packs/index.html">↓ 浏览社区回复包 · 一键下载</a>
+        <div class="sub">礼貌局 · 战术 · 文斗 · 数字梗 · 时机 · 俄语 · 东南亚</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Assistant feature (renamed) -->
+  <section id="assist">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 03 · 实时助手</div>
+      <h2 class="section-title">官方付费助手能做的，<br>这里 <em class="em-gold">¥0</em> 给你。</h2>
+      <p class="section-lead">通过 Valve 官方 GSI 接口实时读取你自己的对局状态，按阶段推荐下一件装备。出装建议、对局记录、悬浮窗这些跑在你电脑上的功能完全免费；云端翻译与语音识别每天有免费额度，会员只用来提升额度。不卖广告、不卖你的对局数据。</p>
+
+      <div class="bento">
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>装备建议</div>
+          <h3 class="bento-h">主推 · 时间线 · <em>反制</em></h3>
+          <p class="bento-p">「主推」按你现在的阶段给下一件；「时间线」按前期 / 中期 / 后期排好整局出装；「反制」看对面阵容给针对装。开了 AI 推荐，还会多一栏 AI 建议。</p>
+          <div class="bento-art" style="display:flex;gap:10px;align-items:center;">
+            <div class="item active" style="width:64px;height:64px;font-size:11px;">MAN</div>
+            <div class="item" style="width:50px;height:50px;font-size:10px;">BKB</div>
+            <div class="item" style="width:42px;height:42px;font-size:9px;">BFR</div>
+            <div class="item" style="width:36px;height:36px;font-size:8px;">·</div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>悬浮窗</div>
+          <h3 class="bento-h">游戏内浮在<br>所有窗口之上。</h3>
+          <p class="bento-p">Alt+Shift+D 一键收起。透明度在标题栏随手调，团战前拨低就不挡视野——它只是一层窗口，不注入游戏、不参与渲染。</p>
+          <div class="bento-art" style="right: -40px; bottom: -20px;">
+            <div class="overlay-mock" style="transform: scale(0.7); transform-origin: bottom right;">
+              <div class="om-head"><span class="mark"></span>AMEFYS · 21:28</div>
+              <div class="om-body">
+                <div class="chat-bubble them" style="background:rgba(255,255,255,0.04);">
+                  <div class="who">队友 · 英语</div>
+                  <div class="raw">on my way, gather mid</div>
+                  <div class="tr">我马上到，中路集合</div>
+                </div>
+                <div class="chat-bubble me" style="align-self:flex-end;">
+                  <div class="raw">先撤</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card span-col">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>聊天识别</div>
+          <h3 class="bento-h">看不懂的那行字，<em>框一下</em>就行。</h3>
+          <p class="bento-p" style="max-width:680px;">按一次快捷键，屏幕暗下来，拖一个框——只认你框住的那块。识别用系统自带引擎（macOS Vision / Windows OCR）在你这台电脑上完成，截图不上传，只有识别出的文字会去翻译。</p>
+          <div class="ocr-demo">
+            <div class="ocr-pane">
+              <div class="ocr-pane-t">① 拖一个框</div>
+              <div class="ocr-chat">
+                <div class="ocr-marq" style="top:26px;height:46px;"><span class="hd tl"></span><span class="hd tr"></span><span class="hd bl"></span><span class="hd br"></span><span class="sz">412 × 46</span></div>
+                <div class="line">[全部] Хару: где мид</div>
+                <div class="line inside">[队友] Игрок: иди мид, я лес</div>
+                <div class="line inside">[队友] Sniper: need smoke</div>
+                <div class="line">12:34</div>
+              </div>
+              <div class="ocr-out">
+                <span class="k">框内识别 + 翻译</span>
+                去中路，我打野<br>需要烟雾
+              </div>
+            </div>
+            <div class="ocr-pane">
+              <div class="ocr-pane-t">② Windows 要先装识别组件</div>
+              <div class="ocr-step ok"><span class="ic">✓</span>简体中文<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+              <div class="ocr-step todo"><span class="ic">!</span>English<span style="color:var(--text-3);font-size:11.5px;">缺识别组件</span><span class="go">去安装</span></div>
+              <div class="ocr-step ok"><span class="ic">✓</span>Русский<span style="color:var(--text-3);font-size:11.5px;">已可识别</span></div>
+              <p class="ocr-note">装语言包 ≠ 装识别组件。向导会带你走到「语言选项 → 语言功能 → 光学字符识别」，也给一条管理员命令兜底；装完自动复检，确认引擎真能跑起来才算完成。macOS 不用装，系统自带全部语言。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>语音</div>
+          <h3 class="bento-h">按住说话，<br>队友<em>读到</em>你的意思。</h3>
+          <p class="bento-p">松开即转写并翻译，发不发由你点。队友开麦时，也可以把他们的语音转成字幕——转写后立刻丢弃音频，字幕只在你这台机器上显示。</p>
+          <div class="ocr-pane" style="margin-top:22px;">
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;"></span>
+              <span class="ocr-pane-t" style="margin:0;">按住 F10 · 正在听…</span>
+            </div>
+            <div style="font-size:12.5px;color:rgba(242,234,216,0.92);line-height:1.7;">「帮我做个眼，我去抓上路」</div>
+            <div class="ocr-out" style="color:var(--gold);">
+              <span class="k">队友读到</span>
+              ward for me, I'm ganking top
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-card">
+          <div class="eyebrow" style="margin-bottom:8px;"><span class="bar"></span>关键时间</div>
+          <h3 class="bento-h">赏金、莲花、魔方，<br><em>到点提醒</em>。</h3>
+          <p class="bento-p">标题栏常驻下一个节点的倒计时，到点前 8–45 秒滑入提醒，点「喊队友」发一条预制短语。共 10 类：赏金符、水符、莲花、功能符、经验符、天亮天黑、10 分游走窗口、魔方首刷、叠野 :53。短语刻意用将来时（「莲花要刷了」）——提醒总在事件发生之前响，说成「刷了」队友会白跑一趟。也可以让它到点自动发，<strong style="color:var(--warn);">这一项默认关闭</strong>，开启时有明确警告，每个节点只发一条。</p>
+          <div class="tm-demo">
+            <div class="tm-chip">⏱ 莲花 · 01:20</div>
+            <div class="tm-toast">
+              <span class="em">🪷</span>
+              <div class="tx"><div class="t1">20 秒后 · 莲花</div><div class="t2">03:00</div></div>
+              <span class="pill">喊队友 →</span>
+            </div>
+            <div class="tm-toast">
+              <span class="em">🟪</span>
+              <div class="tx"><div class="t1">30 秒后 · 魔方（折磨者）首刷</div><div class="t2">20:00</div></div>
+              <span class="auto">已自动发送</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works pipeline -->
+  <section id="pipeline">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>工作方式</div>
+      <h2 class="section-title">四个步骤，<br>从启动到出装。</h2>
+      <p class="section-lead">无需任何反作弊豁免：AMEFYS 仅使用 Valve 官方公开的 Game State Integration 接口读取对局状态，仅通过 DOTA 内置的聊天框热键（Enter / Shift+Enter + 剪贴板粘贴）回发消息，所有键入与玩家手动操作完全等价。绝不读取游戏进程内存，绝不修改客户端文件，绝不拦截网络流量。</p>
+
+      <div class="pipeline">
+        <div class="pipe-card">
+          <div class="pipe-num">01 / 启动</div>
+          <div class="pipe-h">登录账号</div>
+          <p class="pipe-p">邮箱 + 密码注册登录，30 天免登录，密钥存在系统安全区。对局记录默认只在本机。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">02 / 接入</div>
+          <div class="pipe-h">启用 GSI</div>
+          <p class="pipe-p">AMEFYS 自动检测 Steam / 蒸汽平台安装目录并一键写入 GSI 配置；在 DOTA 2 启动选项加入 <code>-gamestateintegration</code> 即可激活推送（Valve 2022 起的默认要求）。所有数据在本地处理。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">03 / 实时</div>
+          <div class="pipe-h">同步对局</div>
+          <p class="pipe-p">自己英雄的等级、经济、装备、技能实时推给推荐引擎。<strong>聊天内容 GSI 不提供</strong>：想看懂别人说什么，按快捷键框一下，本机识别后再翻译。正式天梯只能拿到你自己视角的数据（Valve 的限制）。</p>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-num">04 / 决策</div>
+          <div class="pipe-h">给出建议</div>
+          <p class="pipe-p">主推 / 时间线 / 反制三种视图随时切换。只给建议，永远不替你做选择。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Multi-skin support -->
+  <section id="skins">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 04 · 多主题皮肤</div>
+      <h2 class="section-title">不只是<em class="em-gold">换个颜色</em>，<br>整套界面换个样子。</h2>
+      <p class="section-lead">内置 5 套皮肤，主界面和悬浮窗一起换：背景、字体、卡片形状、动效都不一样。皮肤设置跟着账号走，换台电脑还是你的样子。系统开了「减少动态效果」时，皮肤动效会自动停下。</p>
+      <div class="skin-strip">
+        <div class="skin-chip dark"><b>深色</b><span>默认主题，低调耐看</span></div>
+        <div class="skin-chip light"><b>浅色</b><span>白天屏幕亮时更清楚</span></div>
+        <div class="skin-chip gold"><b>DOTA 金</b><span>金线描边，和品牌同色</span></div>
+        <div class="skin-chip cyber"><b>Cyberpunk</b><span>霓虹切角、扫描光、六边网格</span></div>
+        <div class="skin-chip glass"><b>Liquid Glass</b><span>流动光斑、雾玻璃卡片</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- i18n / Multi-language -->
+  <section id="i18n">
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>特性 05 · 语言</div>
+      <h2 class="section-title">英雄名、装备名、<br>都跟着<em class="em-gold">语言</em>走。</h2>
+      <p class="section-lead">界面有中文、英文、俄文三种，英雄名、装备名、分路和提示文字跟着一起切换，用的是 DOTA 官方译名。聊天翻译另外还支持越南语、印尼语、菲律宾语。</p>
+
+      <div class="i18n-triplet section-gap-sm" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="i18n-card-sm">
+          <div class="i18n-card-h"><span class="tag">中</span>简体中文</div>
+          <div class="i18n-card-b">
+            <div class="meta"><span>敌法师 · 1 号位 · 优势路</span><span>21:28</span></div>
+            <div class="row"><div class="ic">分身</div><div><div class="nm">幻影斧 · 主推</div><div class="sb">下一件 · 中期</div></div></div>
+          </div>
+        </div>
+        <div class="i18n-card-sm">
+          <div class="i18n-card-h"><span class="tag">EN</span>English</div>
+          <div class="i18n-card-b">
+            <div class="meta"><span>Anti-Mage · Pos 1 · Safe lane</span><span>21:28</span></div>
+            <div class="row"><div class="ic">MAN</div><div><div class="nm">Manta Style · Main</div><div class="sb">Next item · Mid game</div></div></div>
+          </div>
+        </div>
+        <div class="i18n-card-sm">
+          <div class="i18n-card-h"><span class="tag">RU</span>Русский</div>
+          <div class="i18n-card-b">
+            <div class="meta"><span>Anti-Mage · Поз. 1 · Лёгкая</span><span>21:28</span></div>
+            <div class="row"><div class="ic">MAN</div><div><div class="nm">Manta Style · Главное</div><div class="sb">Следующий · Средняя</div></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="footnote">示意。俄语界面里英雄名和装备名保留英文，和 DOTA 官方俄语客户端一致。</p>
+
+      <div class="lang-coverage-strip">
+        <div class="lang-chip"><div class="num">3</div><div class="lab">界面语言</div></div>
+        <div class="lang-chip"><div class="num">6</div><div class="lab">聊天翻译语言</div></div>
+        <div class="lang-chip"><div class="num">127</div><div class="lab">英雄</div></div>
+        <div class="lang-chip"><div class="num">13</div><div class="lab">屏幕识别语言</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spec grid -->
+  <section>
+    <div class="container">
+      <div class="eyebrow"><span class="bar"></span>规格</div>
+      <h2 class="section-title">透明，且<br>值得信任。</h2>
+      <p class="section-lead">所有数据流向公开可查；本地优先；可一键导出或彻底清除。</p>
+      <div class="spec-grid">
+        <div class="spec-cell"><div class="l">数据来源</div><div class="v">Valve 官方 GSI</div><div class="s">只读你自己英雄的状态</div></div>
+        <div class="spec-cell"><div class="l">价格</div><div class="v">本机功能免费</div><div class="s">云端翻译 / 语音每天有免费额度</div></div>
+        <div class="spec-cell"><div class="l">数据驻留</div><div class="v">本地优先</div><div class="s">默认仅本机；云端按需</div></div>
+        <div class="spec-cell"><div class="l">合规</div><div class="v">不碰游戏</div><div class="s">不读内存 · 不注入 · 不拦截网络</div></div>
+        <div class="spec-cell"><div class="l">英雄覆盖</div><div class="v">全 127 位</div><div class="s">BP 数据每天更新</div></div>
+        <div class="spec-cell"><div class="l">语言</div><div class="v">界面 3 · 翻译 6</div><div class="s">界面：中简 · EN · RU &nbsp;·&nbsp; 聊天翻译另加 越南语 · 印尼语 · 菲律宾语</div></div>
+        <div class="spec-cell"><div class="l">体积</div><div class="v">约 100 MB</div><div class="s">macOS Universal · Windows x64 · 以实际安装包为准</div></div>
+        <div class="spec-cell"><div class="l">登录</div><div class="v">邮箱</div><div class="s">邮箱 + 密码 · 30 天免登录 · 密钥存系统安全区</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="eyebrow center"><span class="bar"></span>常见问题</div>
+      <h2 class="section-title center">关于 AMEFYS<br>你想知道的。</h2>
+      <div class="faq">
+        <details open="">
+          <summary>AMEFYS 是什么？</summary>
+          <p>AMEFYS 是一款免费的 <strong>DOTA 2 实时辅助工具</strong>，Windows 与 macOS 桌面端。它做三件事：把队友和对手的<strong>聊天实时翻译</strong>成你的母语，并让你一键回敬一整段翻译好的文字；根据当前对局<strong>推荐出装</strong>与关键道具时机；用<strong>快捷回复</strong>和社区语料包在悬浮窗里一键发送预制文本。所有对局数据只来自 Valve 官方的 Game State Integration（GSI）接口，不读取游戏内存、不注入代码、不拦截网络，对局记录默认只存在你自己的电脑上。跑在本机的功能免费；云端翻译与语音识别每天有免费额度，会员用于提升额度，没有广告。</p>
+        </details>
+        <details>
+          <summary>怎么让 AMEFYS 连上 DOTA 2？</summary>
+          <p>第一次打开会有 GSI 配置向导：一键把配置文件写入 DOTA 2 的 <code>cfg/gamestate_integration/</code> 目录，再把 <code>-gamestateintegration</code> 粘贴进 Steam 的启动选项，进入游戏主菜单即自动连接，全程约 30 秒。</p>
+        </details>
+        <details open="">
+          <summary>AMEFYS 这个名字是怎么来的？</summary>
+          <p>来自 DOTA 圈一个流传已久的梗：<span style="color:var(--gold);">AME</span> + <span style="color:var(--gold);">FY</span> + <span style="color:var(--gold);">Somethings</span>。</p>
+        </details>
+        <details>
+          <summary>手机上能用 AMEFYS 的 BP 推荐吗？</summary>
+          <p>能。手机浏览器打开 <a href="/bp/">amefys.com/bp</a>，用电脑版同一个账号登录即可，不用装 App，游戏电脑上什么都不装。最快的是点「拍照识别」，对着电脑拍一张选人界面，禁用和已选会自动填进去（目前只认中文客户端）；也可以按住「我方选 / 敌方选 / 禁用」说英雄名，俗称也认，或者直接点选；推荐选和建议禁与电脑版是同一套数据，来自几百万局公开天梯对局，每天更新。</p>
+        </details>
+        <details open="">
+          <summary>使用 AMEFYS 会被 Valve 封号吗？</summary>
+          <p>不会。AMEFYS 仅使用 Valve 官方提供的 Game State Integration 公共接口读取对局状态（启动选项需加 <code>-gamestateintegration</code>，Valve 2022 起的默认要求）。回发消息走 DOTA 内置聊天框热键 + 剪贴板粘贴，与玩家手动操作完全等价：不读取游戏内存、不修改客户端文件、不拦截网络流量、不发出任何官方 API 之外的指令。</p>
+        </details>
+        <details>
+          <summary>正式天梯能看到敌方装备 / 队友经济 / 小地图位置吗？</summary>
+          <p>不能。这是 Valve 反作弊设计的限制：正式对局中 GSI 只推送「自己英雄」相关数据。AMEFYS 不会绕过此限制，所有建议均基于你自己的状态 + 选英雄阶段已公开的双方阵容。观战 / 教程 / Demo 模式下可以拿到完整数据。</p>
+        </details>
+        <details>
+          <summary>翻译能自动发送回游戏吗？</summary>
+          <p>能。AMEFYS 的「快捷回复」按钮会自动完成：翻译你预设的中文短语 → 写入系统剪贴板 → 用 DOTA 默认聊天热键（Enter = 队伍 / Shift+Enter = 全频道）打开聊天框 → Ctrl+V 粘贴 → 回车发送。整个过程与玩家手动操作完全等价，单条 ~300ms 完成；批量发送间隔 100ms – 10s 可在设置中调节。唯一会「不经点击」发消息的是「关键时间提醒」的到点自动发送：它<strong>默认关闭</strong>，需要你在设置里主动打开，开启时会有明确警告，开启后每个节点只发一条预制短语（如「莲花要刷了」——用将来时，因为提醒在事件发生前 8–45 秒触发）。</p>
+        </details>
+        <details open="">
+          <summary>翻译是云端处理还是本地？</summary>
+          <p>云端处理，两条路可选：默认走 AMEFYS 的翻译代理（登录即用，每天有免费额度）；也可以在设置里填自己的 API Key，客户端直连你选的厂商，不经过我们。两者都需要联网——目前没有离线翻译。已翻译过的句子会命中本地缓存，不重复计费。</p>
+        </details>
+        <details>
+          <summary>屏幕识别提示语言没装，可我明明装了语言包？</summary>
+          <p>这是 Windows 的设计，不是软件出了问题。Windows 把「界面显示这门语言」和「认得出这门语言的文字」当成<strong>两个独立的组件</strong>：你在「添加语言」里装的是前者，屏幕识别要用的是后者，它默认不装、要单独下载一次。<br><br>更麻烦的是两代系统路径不一样：<strong>Windows 11</strong> 在「设置 → 时间和语言 → 语言和区域 → 该语言的『⋯』→ 语言选项 → 语言功能」里能找到「光学字符识别」的下载按钮；<strong>Windows 10 那一页根本没有这一项</strong>，整个系统界面都没有安装入口。所以别在设置里找了 —— AMEFYS 设置页「识别语言」上方有<strong>「打开安装引导」</strong>，里面的<strong>「一键安装」</strong>两代系统通用，点一下、同意 Windows 的管理员授权框就行。</p>
+        </details>
+        <details>
+          <summary>装识别组件要多久？为什么要管理员权限？装完系统语言列表里却看不到？</summary>
+          <p>组件从 Windows Update 下载，<strong>慢的时候要好几分钟</strong>，期间别关窗口。装的是系统组件，所以必须提权 —— 点「一键安装」会弹出 Windows 自己的管理员授权框（要执行的命令就明明白白写在按钮上方，你是看清楚再授权）。如果 Windows 提示需要重启，那就<strong>重启后才生效</strong>。<br><br>装完请<strong>不要</strong>去系统的「首选语言」列表里找它 —— 那个列表记的是「你希望界面用哪种语言显示」，和装了哪些识别组件<strong>永远不同步</strong>，看不到是正常的。要确认是否装好，回 AMEFYS 的安装引导点一次检测，看「系统报告的识别语言」那一行。<br><br>公司或网吧电脑可能装不上：这类机器的更新来源被管理员改成了内部服务器，上面没有这个组件。没有管理员权限的话，还可以把该语言从「首选语言」里删掉再添加一次，识别组件有时会跟着一起回来，这一步不需要管理员。</p>
+        </details>
+        <details>
+          <summary>为什么某些语言显示「Windows 不支持」或「近似代读」？</summary>
+          <p>Windows 只提供 35 个语言的识别组件，<strong>越南语、泰语、乌克兰语、印尼语都不在里面</strong>（macOS 那边的系统识别能读越南语和泰语，这是两个平台的真实差异）。<br><br>对其中一部分我们做了降级：识别引擎认的是<strong>字母表</strong>而不是词汇，所以越南语用英文识别器代读（声调符号可能丢）、乌克兰语用俄语识别器代读（і ї є ґ 可能认错），读出来的文字送去翻译通常不受影响 —— 界面上会标成<strong>「近似代读」</strong>。泰语有自己的一套文字，任何其它识别器读出来都是乱码，所以标成「Windows 不支持」，我们不会拿一个错的去凑数。</p>
+        </details>
+        <details>
+          <summary>支持中国大陆账号吗？</summary>
+          <p>支持。完美世界国服、Steam 国际服、东南亚服均可使用。默认翻译代理走国内可直连的节点，不需要额外网络工具。</p>
+        </details>
+        <details>
+          <summary>对电脑配置有要求吗？</summary>
+          <p>无额外要求。能跑 DOTA 2 就能跑 AMEFYS：它不注入游戏进程，悬浮窗走系统合成层，不参与游戏渲染。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="download">
+    <h2>文斗 1v9，<br>全球<em>无敌手</em>。</h2>
+    <p>免费下载 AMEFYS，1 分钟完成首次配置，从下一场对局起感受变化。</p>
+    <p class="final-proof" data-live hidden>已有 <b data-stat="users"></b> 玩家注册，安装包下载 <b data-stat="downloads"></b> 次</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a class="btn-cta primary" href="https://amefys.com/dl/AMEFYS.dmg" rel="noopener">macOS 下载</a>
+      <a class="btn-cta ghost" href="https://amefys.com/dl/AMEFYS-Setup.exe" rel="noopener">Windows 下载</a>
+    </div>
+    <div class="platforms" style="margin-top:18px;">macOS 13+ · Windows 11 · 约 100 MB（以实际安装包为准）</div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-col">
+        <div class="ft-brand"><img class="brand-logo" src="assets/icon.svg?v=2" alt="" width="22" height="22" /><div style="font-weight:700;font-size:15px;letter-spacing:-.3px;">AMEFYS</div></div>
+        <div class="ft-tag">文斗 1v9，全球无敌手。<br>DOTA 2 免费实时辅助工具。</div>
+      </div>
+      <div class="ft-col">
+        <h5>产品</h5>
+        <a href="#draft">BP 推荐</a>
+        <a href="/bp/">手机版 BP</a>
+        <a href="#trash">聊天翻译</a>
+        <a href="#assist">实时助手</a>
+        <a href="changelog.html">更新日志</a>
+      </div>
+      <div class="ft-col">
+        <h5>资料</h5>
+        <a href="heroes/">英雄库</a>
+        <a href="items/">装备库</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="guides/vb-cable/">语音教程</a>
+        <a href="blog/">技术博客</a>
+        <a href="studio/">技术咨询 →</a>
+      </div>
+      <div class="ft-col">
+        <h5>支持</h5>
+        <a href="#faq">常见问题</a>
+        <a href="guestbook.html">留言板</a>
+        <a href="https://afdian.com/a/amefys" target="_blank" rel="noopener">爱发电</a>
+        <a href="donate.html">捐助</a>
+        <a href="about.html">关于 / 联系我们</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+      <div class="ft-legal">
+        <a href="privacy.html">隐私政策</a>
+        <a href="compliance.html">合规</a>
+        <a href="licenses.html">许可</a>
+        <a href="credits.html">致谢</a>
+        <a href="en/index.html">English</a>
+      </div>
+    </div>
+  </footer>
+
+<script>
+  // Auto-detect OS and rewrite all .js-dl-cta anchors to the matching
+  // amefys.com/dl/* installer URL, so visitors get a one-click direct
+  // download. The rendered href is #download (the macOS / Windows buttons
+  // at the bottom of the page), never GitHub: it is slow or unreachable from
+  // mainland China, and it is what visitors get when JS has not run yet or
+  // the OS is unknown (Linux/BSD).
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    // iOS / Android: neither installer applies, and players read a
+    // "download" button as "there is an app". The hero button opens the
+    // phone version (a web page) instead.
+    // iPadOS Safari reports itself as a Mac; touch points give it away.
+    var isMobile = /iphone|ipad|ipod|android/.test(ua) || (isMac && navigator.maxTouchPoints > 1)
+    if (isMobile) {
+      var phone = document.querySelectorAll('[data-mobile-href]')
+      for (var j = 0; j < phone.length; j++) {
+        phone[j].setAttribute('href', phone[j].getAttribute('data-mobile-href'))
+        phone[j].textContent = phone[j].getAttribute('data-mobile-label')
+      }
+      return
+    }
+    var target = isMac
+      ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin
+        ? 'https://amefys.com/dl/AMEFYS-Setup.exe'
+        : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })()
+</script>
+
+<!-- Demo video modal -->
+<style>
+  .demo-modal { position: fixed; inset: 0; z-index: 9999; display: none; }
+  .demo-modal[data-open='true'] { display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .demo-modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.86);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: zoom-out;
+  }
+  .demo-modal-card {
+    position: relative;
+    width: min(1080px, 100%);
+    max-height: 88vh;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 0.5px rgba(255,255,255,0.1) inset;
+  }
+  .demo-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 88vh;
+    background: #000;
+  }
+  .demo-modal-close {
+    position: absolute; top: 14px; right: 14px;
+    z-index: 2;
+    width: 36px; height: 36px;
+    border-radius: 50%; border: 0;
+    background: rgba(0,0,0,0.55); color: #fff;
+    font-size: 22px; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .12s;
+  }
+  .demo-modal-close:hover { background: rgba(0,0,0,0.85); }
+</style>
+<div class="demo-modal" id="demo-modal" data-open="false" role="dialog" aria-modal="true" aria-label="演示视频">
+  <div class="demo-modal-backdrop" data-close></div>
+  <div class="demo-modal-card">
+    <button type="button" class="demo-modal-close" data-close aria-label="关闭">×</button>
+    <video class="demo-video" id="demo-video"
+           preload="none" playsinline controls poster="assets/demo-poster-zh.jpg">
+      <source src="https://amefys.com/dl/v0.31.0-demo/amefys-demo-zh.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>
+<script>
+  (function () {
+    var modal = document.getElementById('demo-modal')
+    var video = document.getElementById('demo-video')
+    if (!modal || !video) return
+
+    function open(ev) {
+      if (ev) ev.preventDefault()
+      modal.setAttribute('data-open', 'true')
+      document.body.style.overflow = 'hidden'
+      try { video.currentTime = 0; var p = video.play(); if (p && p.catch) p.catch(function () {}) } catch (_) {}
+    }
+    function close() {
+      modal.setAttribute('data-open', 'false')
+      document.body.style.overflow = ''
+      try { video.pause() } catch (_) {}
+    }
+
+    var triggers = document.querySelectorAll('[data-open-demo]')
+    for (var i = 0; i < triggers.length; i++) triggers[i].addEventListener('click', open)
+    var closers = modal.querySelectorAll('[data-close]')
+    for (var j = 0; j < closers.length; j++) closers[j].addEventListener('click', close)
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.getAttribute('data-open') === 'true') close()
+    })
+  })()
+</script>
+
+<!-- Hero carousel controller -->
+<script>
+  (function () {
+    var root = document.querySelector('[data-hc]')
+    if (!root) return
+    var track = root.querySelector('[data-hc-track]')
+    var slides = track.querySelectorAll('.hc-slide')
+    var dots = root.querySelectorAll('[data-hc-go]')
+    var prev = root.querySelector('[data-hc-prev]')
+    var next = root.querySelector('[data-hc-next]')
+    var total = slides.length
+    if (!total) return
+
+    // Sizes follow the slide count, so removing a slide needs no CSS change.
+    track.style.width = total * 100 + '%'
+    for (var s = 0; s < total; s++) slides[s].style.width = 100 / total + '%'
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    var current = 0
+    var AUTOPLAY = 6000
+    var timer = null
+    var dragging = false
+    var dragStartX = 0
+    var dragDelta = 0
+
+    function goTo(i, suppressAutoplay) {
+      current = ((i % total) + total) % total
+      track.style.transform = 'translateX(-' + (current * (100 / total)) + '%)'
+      for (var k = 0; k < dots.length; k++) {
+        dots[k].setAttribute('data-active', k === current ? 'true' : 'false')
+      }
+      if (!suppressAutoplay) restart()
+    }
+    function step(delta) { goTo(current + delta) }
+    function start() { stop(); if (reduceMotion) return; timer = setInterval(function () { goTo(current + 1, true) }, AUTOPLAY) }
+    function stop() { if (timer) { clearInterval(timer); timer = null } }
+    function restart() { stop(); start() }
+
+    // Click handlers
+    for (var i = 0; i < dots.length; i++) {
+      (function (idx) { dots[idx].addEventListener('click', function () { goTo(idx) }) })(i)
+    }
+    if (prev) prev.addEventListener('click', function () { step(-1) })
+    if (next) next.addEventListener('click', function () { step(1) })
+
+    // Hover pause
+    root.addEventListener('mouseenter', stop)
+    root.addEventListener('mouseleave', start)
+
+    // Keyboard ←/→ when hero is in viewport
+    document.addEventListener('keydown', function (e) {
+      var rect = root.getBoundingClientRect()
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return
+      if (e.key === 'ArrowLeft') { step(-1); e.preventDefault() }
+      else if (e.key === 'ArrowRight') { step(1); e.preventDefault() }
+    })
+
+    // Pointer drag — track follows finger; commit on release past threshold
+    function onPointerDown(e) {
+      if (e.button !== undefined && e.button !== 0) return
+      // Don't capture drags that start on a button — let the click flow.
+      if (e.target && (e.target.closest('button') || e.target.closest('[data-hc-go]'))) return
+      dragging = true
+      dragStartX = e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0)
+      dragDelta = 0
+      track.setAttribute('data-dragging', 'true')
+      stop()
+      try { root.setPointerCapture && e.pointerId != null && root.setPointerCapture(e.pointerId) } catch (_) {}
+    }
+    function onPointerMove(e) {
+      if (!dragging) return
+      var x = e.clientX != null ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0)
+      dragDelta = x - dragStartX
+      var widthPct = (dragDelta / root.clientWidth) * (100 / total)
+      track.style.transform = 'translateX(calc(-' + (current * (100 / total)) + '% + ' + widthPct + '%))'
+    }
+    function onPointerUp() {
+      if (!dragging) return
+      track.setAttribute('data-dragging', 'false')
+      var threshold = root.clientWidth * 0.15
+      if (dragDelta < -threshold) goTo(current + 1)
+      else if (dragDelta > threshold) goTo(current - 1)
+      else goTo(current) // snap back
+      dragging = false
+      dragDelta = 0
+      start()
+    }
+    root.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('pointermove', onPointerMove)
+    document.addEventListener('pointerup', onPointerUp)
+    document.addEventListener('pointercancel', onPointerUp)
+
+    // Init
+    goTo(0, true)
+    start()
+  })()
+</script>
+
+
+<script>
+  // Live numbers from worker/site-stats.js (hourly). Rounded DOWN — 1,764 shows
+  // as 1,700+ — so the page never claims more than is true. Any field the file
+  // lacks stays hidden; a failed fetch changes nothing on the page.
+  ;(function () {
+    function floorPlus(n) { var p = Math.pow(10, Math.max(0, String(Math.floor(n)).length - 2)); return (Math.floor(n / p) * p).toLocaleString('en-US') + '+' }
+    function wan(n) { return Math.floor(n / 10000) + ' 万' }
+    function bjDay(ms) { return new Date(ms + 8 * 3600e3).toISOString().slice(0, 10) }
+    function ago(day) {
+      var d = Math.round((Date.parse(bjDay(Date.now())) - Date.parse(day)) / 864e5)
+      return d <= 0 ? '今天' : d === 1 ? '昨天' : d + ' 天前'
+    }
+    function set(name, text) { document.querySelectorAll('[data-stat="' + name + '"]').forEach(function (el) { el.textContent = text }) }
+    function hidePart(name) { document.querySelectorAll('[data-part="' + name + '"]').forEach(function (el) { el.remove() }) }
+    // Every value is checked before it is used: a partly broken file shows only
+    // the parts that are sound, never "NaN" — and never rewrites the BP copy wrongly.
+    function n(v, min) { return typeof v === 'number' && isFinite(v) && v >= min ? v : 0 }
+    function day(v) { return typeof v === 'string' && !isNaN(Date.parse(v)) ? v : '' }
+    var ctrl = window.AbortController ? new AbortController() : null
+    if (ctrl) setTimeout(function () { ctrl.abort() }, 6000)
+    fetch('https://cdn.amefys.com/stats.json', ctrl ? { signal: ctrl.signal } : {})
+      .then(function (r) { return r.ok ? r.json() : null })
+      .then(function (S) {
+        if (!S || typeof S !== 'object' || S.schema !== 1) return
+        var users = n(S.users, 1), dl = n(S.downloads, 1)
+        var R = S.releases || {}, rCount = n(R.count, 1), rFirst = day(R.first), rLast = day(R.last)
+        var B = S.bp || {}, bp = n(B.matches, 1e4), ranked = n(B.ranked, 1e4), turbo = n(B.turbo, 1e4), built = day(B.builtAt)
+        if (users) set('users', floorPlus(users)); else hidePart('users')
+        if (dl) set('downloads', floorPlus(dl)); else hidePart('downloads')
+        var hasRel = rCount && rFirst && rLast
+        if (hasRel) {
+          set('releases', rCount)
+          set('months', Math.max(1, Math.round((Date.now() - Date.parse(rFirst)) / (30.44 * 864e5))) + ' ')
+          set('updated', ago(rLast))
+        } else { hidePart('releases'); hidePart('updated') }
+        if (users || dl || hasRel) document.querySelector('.stats-proof').hidden = false
+        if (users && dl) document.querySelector('.final-proof').hidden = false
+        if (bp && ranked && turbo && built) {
+          set('bp', wan(bp)); set('ranked', wan(ranked)); set('turbo', wan(turbo))
+          set('bp-built', bjDay(Date.parse(built)).slice(5).replace('-', ' 月 ') + ' 日')
+          document.querySelectorAll('[data-stat-text="ranked"]').forEach(function (el) { el.textContent = ' ' + wan(ranked) + '局' })
+          document.querySelector('.bp-stat').hidden = false
+        }
+      })
+      .catch(function () { /* keep the page as it was */ })
+  })();
+</script>
+</body></html>
