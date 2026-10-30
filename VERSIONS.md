@@ -6,8 +6,8 @@ asset path keeps working.
 
 | Version | File | Date | What changed |
 |---|---|---|---|
-| v1.0 | `index-v1.0.html` | 2026-10-30 | Snapshot before the feature-intro rewrite: hero carousel + separate draft / trash / assist / pipeline / skins / i18n sections. |
-| v2.0 | `index.html` | 2026-10-30 | Feature intro replaced with the software-menu tour (首页 → 游戏中 → 悬浮窗 → 对局记录 → 资料库 → 设置). Hero, trust, FAQ, download and footer stay. |
+| v1.0 | `index-v1.0.html` | 2026-10-30 | Snapshot before the feature-intro rewrite: hero carousel + separate draft / trash / assist / pipeline / skins / i18n sections. The archive copy adds a noindex marker so it never competes with the live page. |
+| v2.0 | `index.html` | 2026-10-30 | Feature intro replaced with the software-menu tour (首页 → 游戏中 → 悬浮窗 → 对局记录 → 资料库 → 设置). Hero, trust, FAQ, download and footer stay. New CSS lives in assets/site-v2.css; screenshots in assets/showcase/. |
 
 ## Restore
 
@@ -35,3 +35,18 @@ git show site-v2.0:index.html > index.html
 - `site-v2.0` — the commit where the software-menu feature intro replaced it.
 
 Push the tags once: `git push origin site-v1.0 site-v2.0`.
+
+## Feature-tour video
+
+The v2.0 modal plays the 3:14 software-menu tour. It is stored per edition:
+
+- Global (R2, served through amefys.com/dl/):
+  https://amefys.com/dl/v0.36.0-demo/feature-tour-menu-194s.mp4
+- Mainland (OSS + CDN):
+  https://dl.amefys.cn/v0.36.0-demo/feature-tour-menu-194s.mp4
+  (amefys.cn/dl/... 302s here)
+- Poster: the same path with -poster.jpg.
+
+The CN mirror rewrites every https://amefys.com/dl/ in index.html to
+https://amefys.cn/dl/, so one source URL covers both editions. Do not add a
+second source tag.
