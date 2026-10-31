@@ -222,8 +222,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.37.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.38.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -231,7 +231,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.2</h3>
-        <p><strong>正式版已经走到 0.37.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.38.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -239,9 +239,23 @@
       </div>
     </section>
 
+    <!-- ── 0.38.0 ── -->
+    <article class="release" id="v0-38-0">
+      <header><h2>0.38.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-31</span></header>
+      <p class="lead">识别聊天和翻译更快，俄文聊天尤其明显。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>翻译不再卡在连网上：</strong>以前每次识别完，翻译都要先查一遍服务器地址，在有些家用路由器上这一步就要 2 秒左右。现在查一次就记住，按下识别键时还会提前准备好连接。测试机上每句译文从 3 秒多降到 1 秒以内。</li>
+          <li><strong>俄文聊天认得更快（离线识别模块）：</strong>以前俄文和泰文两套识别同时跑，互相抢电脑性能；现在先认俄文，认不准的再交给泰文。一屏俄文聊天从约 6 秒降到 3–4 秒。</li>
+          <li><strong>诊断信息更详细：</strong>设置 → 聊天翻译里的「复制诊断信息」会写明截图、识别、翻译各花了多少时间。觉得识别慢，贴给我们就能看出卡在哪一步。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.37.0 ── -->
     <article class="release" id="v0-37-0">
-      <header><h2>0.37.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-31</span></header>
+      <header><h2>0.37.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-10-31</span></header>
       <p class="lead">聊天翻译直接盖在原文上，Windows 上识别聊天不用再装系统语言包。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
