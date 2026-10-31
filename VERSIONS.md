@@ -38,14 +38,14 @@ Push the tags once: `git push origin site-v1.0 site-v2.0`.
 
 ## Feature-tour video
 
-The v2.0 modal plays the 3:14 software-menu tour v2.1 (calibrated focus boxes) in a 720p transcode (7.96 MB, 75.1% smaller than the 31.98 MB 1080p master). It is stored per edition:
+The v2.0 modal plays the 3:14 software-menu tight 2:17 cut (137 s) in a 720p transcode (6.85 MB, 73.9% smaller than the 26.22 MB 1080p master). It is stored per edition:
 
 - Global (R2, served through amefys.com/dl/):
-  https://amefys.com/dl/v0.36.0-demo/feature-tour-menu-v2.1-720p.mp4
+  https://amefys.com/dl/v0.36.0-demo/feature-tour-menu-tight-720p.mp4
 - Mainland (OSS + CDN):
-  https://dl.amefys.cn/v0.36.0-demo/feature-tour-menu-v2.1-720p.mp4
+  https://dl.amefys.cn/v0.36.0-demo/feature-tour-menu-tight-720p.mp4
   (amefys.cn/dl/... 302s here)
-- Legacy: the earlier 194 s cut stays at feature-tour-menu-194s-720p.mp4; the uncalibrated v2 cut stays at feature-tour-menu-v2-720p.mp4.
+- Legacy: the earlier 194 s cut stays at feature-tour-menu-194s-720p.mp4; the calibrated-but-untrimmed v2.1 cut stays at feature-tour-menu-v2.1-720p.mp4.
 - Poster: the same path with -poster.jpg.
 
 The CN mirror rewrites every https://amefys.com/dl/ in index.html to
