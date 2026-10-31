@@ -38,13 +38,14 @@ Push the tags once: `git push origin site-v1.0 site-v2.0`.
 
 ## Feature-tour video
 
-The v2.0 modal plays the 3:14 software-menu tour. It is stored per edition:
+The v2.0 modal plays the 3:14 software-menu tour in a 720p transcode (6.05 MB, 75.6% smaller than the 24.78 MB 1080p master). It is stored per edition:
 
 - Global (R2, served through amefys.com/dl/):
-  https://amefys.com/dl/v0.36.0-demo/feature-tour-menu-194s.mp4
+  https://amefys.com/dl/v0.36.0-demo/feature-tour-menu-194s-720p.mp4
 - Mainland (OSS + CDN):
-  https://dl.amefys.cn/v0.36.0-demo/feature-tour-menu-194s.mp4
+  https://dl.amefys.cn/v0.36.0-demo/feature-tour-menu-194s-720p.mp4
   (amefys.cn/dl/... 302s here)
+- Data saver: the same paths with -720p-lite.mp4 (4.05 MB).
 - Poster: the same path with -poster.jpg.
 
 The CN mirror rewrites every https://amefys.com/dl/ in index.html to
