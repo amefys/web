@@ -102,3 +102,39 @@
     font-size: 14px;
   }
 }
+
+
+/* Edition switch: amefys.com <-> amefys.cn. The CN mirror rewrites the label
+   and target in mirror-site.ts, so the static page always carries one link. */
+.nav .actions .edition-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+  padding: 0 9px;
+  border: 1px solid rgba(232, 199, 121, 0.28);
+  border-radius: 14px;
+  color: var(--gold, #e8c779);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color .12s, background .12s, border-color .12s;
+}
+.nav .actions .edition-switch:hover {
+  color: #fff;
+  background: rgba(232, 199, 121, 0.1);
+  border-color: rgba(232, 199, 121, 0.5);
+}
+.nav .actions .edition-switch span { font-size: 9px; opacity: .7; }
+
+@media (max-width: 1080px) {
+  .nav .nav-inner > .actions .edition-switch {
+    align-self: flex-start;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 13px;
+    order: 0;
+  }
+}
