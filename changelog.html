@@ -222,8 +222,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.38.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.38.1</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -231,7 +231,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.2</h3>
-        <p><strong>正式版已经走到 0.38.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.38.1，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -239,9 +239,21 @@
       </div>
     </section>
 
+    <!-- ── 0.38.1 ── -->
+    <article class="release" id="v0-38-1">
+      <header><h2>0.38.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-01</span></header>
+      <p class="lead">修好 Windows 上升级后聊天翻译没反应的问题。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>升级后按快捷键识别聊天没反应：</strong>从 0.37 起，Windows 上识别聊天要用离线识别模块（约 90 MB）。升级前就开着聊天翻译的玩家，如果还没下载这个模块，按快捷键只会报错，也没说该怎么办。现在打开软件就会提示下载，悬浮窗上也能直接点下载、看进度，装好马上能用。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.38.0 ── -->
     <article class="release" id="v0-38-0">
-      <header><h2>0.38.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-10-31</span></header>
+      <header><h2>0.38.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-10-31</span></header>
       <p class="lead">识别聊天和翻译更快，俄文聊天尤其明显。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
