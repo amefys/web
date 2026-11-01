@@ -5,15 +5,19 @@ const path = require('node:path')
 
 const html = fs.readFileSync(path.join(__dirname, '..', 'changelog.html'), 'utf8')
 
-test('CN changelog carries 0.36.0 without changing the global stable version', () => {
+test('both editions are on 0.38.1; the cn-only 0.36.0 note stays cn-only and is no longer the latest', () => {
   const globalChannels = html.match(/<section class="channels" data-edition="global">[\s\S]*?<\/section>/)?.[0]
+  const cnChannels = html.match(/<template data-edition="cn"><section class="channels">([\s\S]*?)<\/template>/)?.[1]
   const cnRelease = html.match(/<template data-edition="cn"><!-- ── 0\.36\.0 ── -->([\s\S]*?)<\/template>/)?.[1]
   assert.ok(globalChannels)
+  assert.ok(cnChannels)
   assert.ok(cnRelease)
-  assert.match(globalChannels, /稳定版<\/span> 0\.35\.0/)
+  assert.match(globalChannels, /稳定版<\/span> 0\.38\.1/)
+  assert.match(cnChannels, /稳定版<\/span> 0\.38\.1/)
   assert.doesNotMatch(globalChannels, /0\.36\.0/)
   assert.match(cnRelease, /<h2>0\.36\.0<\/h2>/)
-  assert.match(cnRelease, /当前稳定版/)
-  assert.match(cnRelease, /手机 BP 注册/)
-  assert.match(html, /<span class="tag tag-latest" data-edition="global">当前稳定版<\/span>/)
+  assert.doesNotMatch(cnRelease, /当前稳定版/)
+  // One latest badge, on the shared 0.38.1 entry (outside any edition block).
+  assert.equal(html.match(/当前稳定版/g)?.length, 1)
+  assert.match(html, /\n    <!-- ── 0\.38\.1 ── -->\n    <article class="release" id="v0-38-1">\n.*当前稳定版/)
 })
