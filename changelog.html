@@ -222,8 +222,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.38.1</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.39.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>设置页重新分好了组</strong>，按要做的事找功能；<strong>连接 DOTA 2 的向导</strong>会等游戏真的连上才说完成。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -231,7 +231,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.2</h3>
-        <p><strong>正式版已经走到 0.38.1，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.39.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -239,9 +239,30 @@
       </div>
     </section>
 
+    <!-- ── 0.39.0 ── -->
+    <article class="release" id="v0-39-0">
+      <header><h2>0.39.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-04</span></header>
+      <p class="lead">设置页重新整理，连接 DOTA 2 的向导更靠谱。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>设置页按要做的事分组：</strong>原来十几个分散的入口，合并成「外观与启动」「连接 DOTA 2」「翻译与识别」「账号与数据」这样按用途命名的几组，找设置不用来回翻。软件里所有「去设置里打开」的提示也都改成了新位置。</li>
+          <li><strong>连接向导等真的连上才算完成：</strong>以前配置文件一写好，向导就直接说「完成」，其实游戏还没连上。现在要打开 DOTA 2、进到主菜单，收到游戏数据才跳到完成；等了一会儿还没连上，会列出要检查的几项：启动选项有没有粘贴、游戏有没有进主菜单、改完启动选项有没有把游戏完全退出再重开。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>对局详情里的装备显示成英文代码：</strong>像 item_black_king_bar 这样的名字，现在显示成装备的中文名。</li>
+          <li><strong>事件里的「塔被推」不准：</strong>它其实是按击杀比分猜的，不是真的推塔记录，已经去掉。「仅客观」只看肉山这类真正的目标事件。</li>
+          <li><strong>窗口比较矮时，连接向导顶部被挡住：</strong>已修好。皮肤特效的提示也不再中英文混在一起。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.38.1 ── -->
     <article class="release" id="v0-38-1">
-      <header><h2>0.38.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-01</span></header>
+      <header><h2>0.38.1</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-01</span></header>
       <p class="lead">修好 Windows 上升级后聊天翻译没反应的问题。</p>
 
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
