@@ -205,7 +205,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-11-01</div>
+      <div class="updated">最近更新：2026-11-06</div>
     </div>
 
     <!-- 赞助 -->
@@ -222,8 +222,8 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.40.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>停在主菜单没连上不用慌</strong>：Dota 2 在主菜单时可能还不发数据，排一次队就能连上，提示也改成了先让你排队。<strong>设置页重新分好了组</strong>，按要做的事找功能；<strong>连接 DOTA 2 的向导</strong>会等游戏真的连上才说完成。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.41.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>修复了识别聊天时软件闪退的问题。</strong><strong>停在主菜单没连上不用慌</strong>：Dota 2 在主菜单时可能还不发数据，排一次队就能连上，提示也改成了先让你排队。<strong>设置页重新分好了组</strong>，按要做的事找功能；<strong>连接 DOTA 2 的向导</strong>会等游戏真的连上才说完成。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
@@ -231,7 +231,7 @@
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.34.0-beta.2</h3>
-        <p><strong>正式版已经走到 0.40.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
+        <p><strong>正式版已经走到 0.41.0，比 Beta 新，装左边那个就行。</strong>Beta 通道要等下一轮新东西才会再往前走——在那之前这里不比正式版新，没有理由从正式版退回来。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -239,9 +239,21 @@
       </div>
     </section>
 
+    <!-- ── 0.41.0 ── -->
+    <article class="release" id="v0-41-0">
+      <header><h2>0.41.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-06</span></header>
+      <p class="lead">修复识别聊天时的闪退。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>识别聊天不再让软件闪退：</strong>点离线识别的「试一次」或进对局时，个别电脑上软件会直接关掉。现在识别出问题只会弹个提示，软件照常用。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 0.40.0 ── -->
     <article class="release" id="v0-40-0">
-      <header><h2>0.40.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-04</span></header>
+      <header><h2>0.40.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-04</span></header>
       <p class="lead">游戏停在主菜单时，连接提示不再吓人。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
