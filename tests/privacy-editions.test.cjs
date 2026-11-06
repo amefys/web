@@ -26,7 +26,10 @@ test('the global page says where its data lives; the cn wording says mainland an
   assert.match(html, /<span data-edition="global"><span class="tag tag-cloud">Supabase<\/span>（新加坡）/)
   const cn = cnBlocks.join('\n')
   assert.match(cn, /中国境内/)
-  assert.match(cn, /国内版默认关闭/)
+  // From 0.41.0 the cn edition reports crashes by default; the page must say they leave the mainland.
+  assert.match(cn, /国内版默认开启/)
+  assert.doesNotMatch(cn, /崩溃[^<]*默认关闭|Sentry[^<]*默认关闭/)
+  assert.match(cn, /境外（美国）/)
   assert.match(cn, /OpenDota/)
   assert.match(cn, /个人信息保护法/)
 })
