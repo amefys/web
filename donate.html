@@ -299,7 +299,7 @@
       <div class="wall-tier" data-wall-block><div class="wall-head">本月新朋友</div><div class="wall-grid" id="wall-new"></div></div>
       <div class="wall-tier" data-wall-block><div class="wall-head">一路同行</div><div class="wall-grid" id="wall-old"></div></div>
       <button type="button" class="wall-more" id="wall-more" hidden></button>
-      <p class="wall-foot">爱发电的赞助每小时自动同步，没改过爱发电昵称的朋友显示为「匿名朋友」；微信打赏只能看到昵称，会手动录入。<br>买会员不算捐助，不会出现在这里。名字想改或想撤下来，去<a href="guestbook.html" class="link">留言板</a>说一声。<br>英雄形象、名字与台词 © Valve，台词取自游戏内的英雄聊天轮盘。</p>
+      <p class="wall-foot">爱发电的赞助每小时自动同步，没改过爱发电昵称的朋友显示为「匿名朋友」；微信打赏只能看到昵称，会手动录入。<br><span data-edition="global">买会员不算捐助，不会出现在这里。名字想改或想撤下来，去<a href="guestbook.html" class="link">留言板</a>说一声。</span><template data-edition="cn">买会员不算捐助，不会出现在这里。名字想改或想撤下来，发邮件到 <a href="mailto:amefys@gmail.com" class="link">amefys@gmail.com</a> 说一声。</template><br>英雄形象、名字与台词 © Valve，台词取自游戏内的英雄聊天轮盘。</p>
     </section>
 
     <!-- 钱花在哪 -->
@@ -340,10 +340,14 @@
       <h2>不花钱，也能帮上忙</h2>
       <p class="s-sub">说实话，下面这几件事对项目的价值不比打赏低。</p>
       <div class="free-ways">
-        <div class="free-way">
+        <div class="free-way" data-edition="global">
           <h4>💬 去留言板提一条建议</h4>
           <p>想要的功能、遇到的 bug、翻译不准的句子 —— 写在<a href="guestbook.html" class="link">留言板</a>，不用注册。</p>
         </div>
+        <template data-edition="cn"><div class="free-way">
+          <h4>✉️ 发邮件提一条建议</h4>
+          <p>想要的功能、遇到的 bug、翻译不准的句子 —— 发到 <a href="mailto:amefys@gmail.com" class="link">amefys@gmail.com</a>，不用注册。</p>
+        </div></template>
         <div class="free-way">
           <h4>⭐ 在 GitHub 点个 star</h4>
           <p>让更多人搜得到：<a href="https://github.com/amefys" class="link" target="_blank" rel="noopener">github.com/amefys</a></p>
