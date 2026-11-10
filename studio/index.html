@@ -74,7 +74,8 @@
     <h1>把产品从想法做到上线，再让它跑得稳、花得少</h1>
     <p class="sub">AMEFYS 工作室是做 AMEFYS 这款桌面工具的同一个开发者，加上 AI 编程助手。我们把这几个月在成本、国内访问、桌面端工程和 AI 协作开发上踩过的坑整理成了服务：帮你少走一遍同样的路。</p>
     <div class="st-cta">
-      <a class="st-btn primary" href="#contact">预约 30 分钟免费沟通</a>
+      <a class="st-btn primary" href="#contact" data-edition="global">预约 30 分钟免费沟通</a>
+      <template data-edition="cn"><a class="st-btn primary" href="mailto:amefys@gmail.com?subject=AMEFYS%20%E5%B7%A5%E4%BD%9C%E5%AE%A4%E5%92%A8%E8%AF%A2">发邮件聊你的项目</a></template>
       <a class="st-btn ghost" href="/blog/">先看看技术博客</a>
     </div>
     <div class="st-proof">
@@ -205,7 +206,7 @@
   <section>
     <h2>怎么合作</h2>
     <ol class="st-steps">
-      <li><b>留个需求</b>在下面的表单里写清背景和想解决的问题，或者直接发邮件。</li>
+      <li><b>留个需求</b><span data-edition="global">在下面的表单里写清背景和想解决的问题，或者直接发邮件。</span><template data-edition="cn">发邮件写清背景和想解决的问题即可。</template></li>
       <li><b>免费沟通 30 分钟</b>一起确认问题和范围，判断我们能不能帮上忙。帮不上会直接说。</li>
       <li><b>报价和确认</b>按范围给出报价、交付物和时间，你确认后再开始。</li>
       <li><b>交付和跟进</b>交付书面结果；之后一段时间内的追问，邮件里回答。</li>
@@ -228,7 +229,7 @@
     <details><summary>交付内容归谁？</summary><p>为你写的方案和文档归你。我们博客里已经公开的方法和经验不受影响，可以继续写。</p></details>
   </section>
 
-  <section id="contact">
+  <section id="contact" data-edition="global">
     <h2>聊聊你的项目</h2>
     <p class="lead">写清楚背景和问题，我们会在 3 个工作日内回复，约时间做 30 分钟的免费沟通。</p>
     <form class="st-form" id="studio-form">
@@ -259,6 +260,13 @@
       <div class="full st-submit"><button class="st-btn primary" type="submit">提交</button><span class="st-status" id="studio-status" role="status" aria-live="polite"></span></div>
     </form>
   </section>
+
+  <template data-edition="cn"><section id="contact">
+    <h2>聊聊你的项目</h2>
+    <p class="lead">写清楚背景和问题，发邮件到下面这个地址，我们会在 3 个工作日内回复，约时间做 30 分钟的免费沟通。</p>
+    <p><a class="st-btn primary" href="mailto:amefys@gmail.com?subject=AMEFYS%20%E5%B7%A5%E4%BD%9C%E5%AE%A4%E5%92%A8%E8%AF%A2">发邮件到 amefys@gmail.com</a></p>
+    <p class="note">国内站暂时没有在线表单：把项目背景、想解决的问题和预算区间写在邮件里就行。</p>
+  </section></template>
 
 </main>
 
@@ -303,7 +311,7 @@
   })();
 </script>
 
-<script>
+<script data-edition="global">
   // /studio/ contact form → Worker at /api/studio (worker/studio-inquiry.js).
   // Turnstile loads only when the form comes near the screen; a failure at any
   // step offers a pre-filled email instead, so an inquiry is never stuck.
