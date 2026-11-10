@@ -56,6 +56,17 @@ Waline client + a self-hosted worker (`waline.amefys.com`, see the
   takes 15–40s to post from mainland China, because the client only starts the
   challenge after the click.
 
+**The mainland site has no guestbook** (2026-11-10, for the filing review: the
+filing does not cover a public UGC channel). `scripts/cn/mirror-site.ts` in the `amefys` repo leaves
+`guestbook.html` out of amefys.cn, strips the nav / footer rows that point at it, and
+**fails the mirror on any page that still mentions `guestbook.html`** — so a page that
+tells readers to leave a message needs an edition block instead, as `donate.html`,
+`refund.html` and `changelog.html` now do:
+
+```html
+<p><span data-edition="global">…去<a href="guestbook.html">留言板</a>说一声。</span><template data-edition="cn">…发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 说一声。</template></p>
+```
+
 Rules when touching either file:
 
 1. **Bump the `?v=` in both pages.** Cloudflare serves this site with

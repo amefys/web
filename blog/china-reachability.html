@@ -578,7 +578,7 @@ $ curl -s https://api.globalping.io/v1/measurements/&lt;id&gt;
 
   <p>皮肤里引用的 Google Fonts，在国内的 Windows 上大概率连不上，浏览器会静默回落到系统字体，不报任何错，所以日志里也看不到。我们打算随安装包自带字体。</p>
 
-  <p>官网留言板用的是 Cloudflare 的人机验证 Turnstile，国内网络下点了提交要等十几到几十秒：引导脚本 1.2 秒，挑战本身 11 到 15 秒，DevTools 里能看到 5、10、15 秒阶梯式的超时重试。我们改成页面一打开就在屏幕外把挑战跑完，缓存拿到的令牌，用户点提交时直接用，等待时间从 14.7 秒降到了 7 毫秒。</p>
+  <p><span data-edition="global">官网留言板</span><template data-edition="cn">国际版官网的评论组件</template>用的是 Cloudflare 的人机验证 Turnstile，国内网络下点了提交要等十几到几十秒：引导脚本 1.2 秒，挑战本身 11 到 15 秒，DevTools 里能看到 5、10、15 秒阶梯式的超时重试。我们改成页面一打开就在屏幕外把挑战跑完，缓存拿到的令牌，用户点提交时直接用，等待时间从 14.7 秒降到了 7 毫秒。</p>
 
   <h2 id="s9"><span class="no">09</span>监控数据也会骗人</h2>
 
