@@ -140,6 +140,43 @@
   .free-tag { color: var(--emerald); border: 0.5px solid rgba(52,211,153,.45); }
   .note.center { text-align: center; }
   .cmp td.no { color: var(--text-3); }
+  /* Free vs Pro: grey the free column, put the Pro column in gold */
+  .cmp thead th.pro { background: linear-gradient(180deg,#f3d995,#b8924a); color: #1a1206; font-size: 14px; letter-spacing: 1px; }
+  .cmp td:nth-child(2) { color: var(--text-3); }
+  .cmp td.yes { color: var(--text-3); }
+  .cmp td.pro { background: rgba(232,199,121,.11); color: #f6e3b0; box-shadow: inset 1px 0 0 rgba(232,199,121,.35); }
+  .cmp td.pro.yes { color: var(--gold); font-size: 16px; }
+  .cmp .x { font-style: normal; display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 6px; vertical-align: 1px;
+    font-size: 11.5px; font-weight: 800; color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); }
+  /* tier cards (amefys.cn) */
+  .duo { display: grid; grid-template-columns: 1fr 1.3fr; gap: 16px; align-items: stretch; }
+  .tier { border-radius: var(--r-xl); padding: 24px 26px; }
+  .tier-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 16px; }
+  .tier-head b { font-size: 20px; }
+  .tier-head span { font-size: 13px; }
+  .tier.free { background: rgba(255,255,255,.025); border: 0.5px solid rgba(255,255,255,.10); }
+  .tier.free .tier-head b { color: var(--text-2); }
+  .tier.free .tier-head span { color: var(--text-3); }
+  .tier.free ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .tier.free li { font-size: 13.5px; color: var(--text-2); padding-left: 22px; position: relative; line-height: 1.5; }
+  .tier.free li::before { content: "✓"; position: absolute; left: 0; color: var(--text-3); font-weight: 700; }
+  .tier.free li.off { color: var(--text-3); text-decoration: line-through; text-decoration-color: rgba(242,234,216,.25); }
+  .tier.free li.off::before { content: "✕"; color: #c0574b; }
+  .tier.pro { position: relative; background: linear-gradient(160deg, rgba(232,199,121,.20), rgba(232,199,121,.05) 55%, rgba(38,31,22,.8));
+    border: 1px solid rgba(232,199,121,.6); box-shadow: 0 0 60px rgba(232,199,121,.18), inset 0 1px 0 rgba(255,246,220,.15); }
+  .tier.pro .tier-head b { padding: 2px 12px; border-radius: 8px; letter-spacing: 2px; color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); }
+  .tier.pro .tier-head span { color: var(--gold); font-weight: 600; }
+  .gains { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+  .gains div { padding: 14px; border-radius: 14px; background: rgba(13,10,7,.45); border: 0.5px solid rgba(232,199,121,.25); }
+  .gains .wide { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .gains strong { display: block; font-size: 34px; font-weight: 800; line-height: 1.1; letter-spacing: -.5px;
+    background: linear-gradient(180deg,#fff6dc,#E8C779 60%,#b8924a); -webkit-background-clip: text; color: transparent; }
+  .gains .wide strong { display: inline; font-size: 28px; }
+  .gains strong i { font-style: normal; font-size: 15px; margin-left: 2px; }
+  .gains small { display: block; margin-top: 6px; font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+  .gains .wide small { margin: 0; color: #f6e3b0; font-size: 13.5px; }
+  .perk { margin: 14px 0 0; font-size: 13px; color: var(--text-2); }
+  .perk::before { content: "✦ "; color: var(--gold); }
   .cmp tr.group.ai td + td { box-shadow: none; background: rgba(232,199,121,.04); font-size: 18px; line-height: 1; }
   .cmp tr.group.ai td.pro { background: rgba(232,199,121,.12); }
   .why span { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
@@ -215,6 +252,11 @@
   @media (max-width: 760px) {
     .hero h1 { font-size: 34px; }
     .why, .why:has(> :nth-child(4)), .plans, .steps, .sponsor, .how-step, .feats { grid-template-columns: 1fr; }
+    .duo { grid-template-columns: 1fr; }
+    .duo .pro { order: -1; }
+    .gains { grid-template-columns: 1fr 1fr; }
+    .gains strong { font-size: 28px; }
+    .gains div:last-child { grid-column: 1 / -1; }
     .cast { grid-template-columns: repeat(2,1fr); }
     .cast .star { grid-column: span 2; }
     .cast img, .cast .star img { height: 210px; }
@@ -279,6 +321,35 @@
       </div>
     </div>
 
+    <template data-edition="cn"><section class="s" id="tiers">
+      <h2>Pro 多了什么</h2>
+      <p class="lead">核心功能免费版一样都有。Pro 是在这之上，再加一个陪你打的 AI 玩伴和几倍的额度。</p>
+      <div class="duo">
+        <div class="tier free">
+          <div class="tier-head"><b>免费版</b><span>核心功能，一直免费</span></div>
+          <ul>
+            <li>BP 选人推荐、出装建议、关键时间提醒</li>
+            <li>截屏识别聊天、快捷回复、主题皮肤</li>
+            <li>AI 玩伴的对局反应、播报和语音指令</li>
+            <li>聊天翻译 1,000 字 / 天</li>
+            <li>聊天语音、BP 语音各 5 分钟 / 天</li>
+            <li class="off">和 AI 玩伴聊天</li>
+            <li class="off">赛后点评、主动开口</li>
+          </ul>
+        </div>
+        <div class="tier pro">
+          <div class="tier-head"><b>PRO</b><span>免费版的全部，再加上</span></div>
+          <div class="gains">
+            <div class="wide"><strong>AI 玩伴</strong><small>聊天 6,000 字 / 天 · 赛后点评 · 主动开口</small></div>
+            <div><strong>20<i>倍</i></strong><small>聊天翻译<br>20,000 字 / 天</small></div>
+            <div><strong>12<i>倍</i></strong><small>聊天语音、BP 语音<br>各 60 分钟 / 天</small></div>
+            <div><strong>3<i>倍</i></strong><small>翻译请求频率<br>每分钟 60 次</small></div>
+          </div>
+          <p class="perk">头像旁显示金色 PRO 标识</p>
+        </div>
+      </div>
+    </section></template>
+
     <template data-edition="cn"><section class="s" id="companion">
       <div class="kicker"><span>Pro 主打</span></div>
       <h2>AI 玩伴</h2>
@@ -304,7 +375,7 @@
     <section class="s" id="compare">
       <h2>免费版和 Pro 有什么不同</h2>
       <p class="lead" data-edition="global">区别只在每天能用多少。功能本身，免费版一样都不少。</p>
-      <template data-edition="cn"><p class="lead">核心功能免费版一样都不少。不同在两处：AI 玩伴，和每天能用多少。</p></template>
+      <template data-edition="cn"><p class="lead">逐项对比。金色一列是 Pro。</p></template>
       <table class="cmp">
         <thead><tr><th></th><th>免费</th><th class="pro">Pro</th></tr></thead>
         <tbody>
@@ -313,10 +384,10 @@
           <tr><td>赛后点评、主动开口</td><td class="no">—</td><td class="pro yes">✓</td></tr>
           <tr><td>对局里的反应、播报提醒、语音指令<small>登录后就能用</small></td><td class="yes">✓</td><td class="pro yes">✓</td></tr></template>
           <tr class="group daily"><td colspan="3">每天的额度<span>每天重置，当天用完第二天又有</span></td></tr>
-          <tr><td>聊天实时翻译<small>队友、对手的聊天，以及你发出去的话</small></td><td>1,000 字<span class="per-day">/ 天</span></td><td class="pro">20,000 字<span class="per-day">/ 天</span></td></tr>
-          <tr><td>聊天语音输入<small>按住说话，自动转文字并翻译</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span></td></tr>
-          <tr><td>BP 语音录入<small>选人时说英雄名，电脑和手机共用</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span></td></tr>
-          <tr><td>翻译请求频率</td><td>每分钟 20 次</td><td class="pro">每分钟 60 次</td></tr>
+          <tr><td>聊天实时翻译<small>队友、对手的聊天，以及你发出去的话</small></td><td>1,000 字<span class="per-day">/ 天</span></td><td class="pro">20,000 字<span class="per-day">/ 天</span><em class="x">20 倍</em></td></tr>
+          <tr><td>聊天语音输入<small>按住说话，自动转文字并翻译</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span><em class="x">12 倍</em></td></tr>
+          <tr><td>BP 语音录入<small>选人时说英雄名，电脑和手机共用</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span><em class="x">12 倍</em></td></tr>
+          <tr><td>翻译请求频率</td><td>每分钟 20 次</td><td class="pro">每分钟 60 次<em class="x">3 倍</em></td></tr>
           <tr class="group"><td colspan="3">功能（两边都有）</td></tr>
           <tr><td>BP 选人推荐（电脑 + 手机）</td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
           <tr><td>出装建议、关键时间提醒</td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
