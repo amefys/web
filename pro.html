@@ -140,6 +140,8 @@
   .free-tag { color: var(--emerald); border: 0.5px solid rgba(52,211,153,.45); }
   .note.center { text-align: center; }
   .cmp td.no { color: var(--text-3); }
+  .cmp tr.group.ai td + td { box-shadow: none; background: rgba(232,199,121,.04); font-size: 18px; line-height: 1; }
+  .cmp tr.group.ai td.pro { background: rgba(232,199,121,.12); }
   .why span { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
 
   /* plans */
@@ -307,7 +309,7 @@
       <table class="cmp">
         <thead><tr><th></th><th>免费</th><th class="pro">Pro</th></tr></thead>
         <tbody>
-          <template data-edition="cn"><tr class="group daily"><td colspan="3">AI 玩伴<span>Pro 主打</span></td></tr>
+          <template data-edition="cn"><tr class="group daily ai"><td>AI 玩伴<span>Pro 主打</span></td><td aria-label="免费版没有">❌</td><td class="pro" aria-label="Pro 有">✅</td></tr>
           <tr><td>和玩伴聊天<small>打字或说话，她用声音回你；按她回复的字数算</small></td><td>体验 50 条<span class="per-day">/ 每个账号一次</span></td><td class="pro">6,000 字<span class="per-day">/ 天</span></td></tr>
           <tr><td>赛后点评、主动开口</td><td class="no">—</td><td class="pro yes">✓</td></tr>
           <tr><td>对局里的反应、播报提醒、语音指令<small>登录后就能用</small></td><td class="yes">✓</td><td class="pro yes">✓</td></tr></template>
