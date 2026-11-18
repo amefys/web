@@ -115,7 +115,31 @@
   /* why */
   .why { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
   .why div { padding: 22px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); }
+  .why:has(> :nth-child(4)) { grid-template-columns: repeat(2,1fr); }
   .why b { display: block; font-size: 16px; margin-bottom: 8px; }
+  /* AI companion (amefys.cn only): a fixed dark stage — her hologram washes out on light grounds */
+  .kicker { text-align: center; margin-bottom: 10px; }
+  .kicker span { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: 1px;
+    color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); }
+  .cast { display: grid; grid-template-columns: 1.35fr repeat(4,1fr); gap: 12px; margin: 0 0 18px; }
+  .cast figure { margin: 0; border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column;
+    background: radial-gradient(120% 80% at 50% 30%, #2a2014 0%, #0b0805 75%); border: 0.5px solid var(--hairline); }
+  .cast img { display: block; width: 100%; height: 250px; object-fit: contain; object-position: center bottom; padding-top: 12px; }
+  .cast .star { border: 1px solid rgba(232,199,121,.55); box-shadow: 0 0 40px rgba(232,199,121,.18); }
+  .cast .star img { height: 250px; object-position: center top; transform: scale(1.12); transform-origin: center top; }
+  .cast figcaption { padding: 12px 14px 16px; border-top: 0.5px solid var(--hairline); flex: 1; }
+  .cast figcaption b { display: flex; align-items: center; gap: 6px; font-size: 15px; }
+  .cast figcaption em { font-style: normal; font-size: 10.5px; font-weight: 700; color: #1a1206; background: var(--gold); padding: 1px 6px; border-radius: 5px; }
+  .cast figcaption span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--text-2); line-height: 1.6; }
+  .feats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .feats div { padding: 18px 20px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline); }
+  .feats b { display: flex; align-items: center; gap: 8px; font-size: 15.5px; margin-bottom: 6px; }
+  .feats span { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+  .pro-tag, .free-tag { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 5px; }
+  .pro-tag { color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); }
+  .free-tag { color: var(--emerald); border: 0.5px solid rgba(52,211,153,.45); }
+  .note.center { text-align: center; }
+  .cmp td.no { color: var(--text-3); }
   .why span { font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
 
   /* plans */
@@ -188,7 +212,10 @@
 
   @media (max-width: 760px) {
     .hero h1 { font-size: 34px; }
-    .why, .plans, .steps, .sponsor, .how-step { grid-template-columns: 1fr; }
+    .why, .why:has(> :nth-child(4)), .plans, .steps, .sponsor, .how-step, .feats { grid-template-columns: 1fr; }
+    .cast { grid-template-columns: repeat(2,1fr); }
+    .cast .star { grid-column: span 2; }
+    .cast img, .cast .star img { height: 210px; }
     .cmp th, .cmp td { padding: 11px 10px; font-size: 13px; }
     .nav .links { display: none; }
   }
@@ -239,20 +266,50 @@
 
     <div class="hero">
       <div class="eyebrow">AMEFYS PRO</div>
-      <h1>开黑一整晚，额度也够用</h1>
-      <p>选人推荐、出装建议、关键时间提醒这些核心功能一直免费。Pro 给的是更多的<strong>聊天翻译</strong>和<strong>语音</strong>额度，适合天天打、经常和外国队友沟通的你。</p>
+      <h1 data-edition="global">开黑一整晚，额度也够用</h1>
+      <p data-edition="global">选人推荐、出装建议、关键时间提醒这些核心功能一直免费。Pro 给的是更多的<strong>聊天翻译</strong>和<strong>语音</strong>额度，适合天天打、经常和外国队友沟通的你。</p>
+      <template data-edition="cn"><h1>开黑的时候，有她陪着</h1>
+      <p>选人推荐、出装建议、关键时间提醒这些核心功能一直免费。Pro 的重点是 <strong>AI 玩伴</strong>：陪你聊天，打完一局跟你说说这局；聊天翻译和语音的额度也多得多。</p>
+      <div class="cta"><a class="btn gold" href="#companion">认识 AI 玩伴</a><a class="btn ghost" href="#compare">看看有什么不同</a></div></template>
       <div class="cta" data-edition="global">
         <a class="btn gold" href="#plans">看价格</a>
         <a class="btn ghost" href="#how">怎么买</a>
       </div>
     </div>
 
+    <template data-edition="cn"><section class="s" id="companion">
+      <div class="kicker"><span>Pro 主打</span></div>
+      <h2>AI 玩伴</h2>
+      <p class="lead">陪你打 DOTA 2 的伙伴。能聊天，会用自己的声音回你；你打完一局，她会说说这一局。五个角色，性格各不一样，随时能换。</p>
+      <div class="cast">
+        <figure class="star"><img src="assets/pro/companion/amefys.webp" alt="艾美菲斯：金色全息投影的管家形象" loading="lazy" width="420" height="560"><figcaption><b>艾美菲斯<em>推荐</em></b><span>冷静利落的全息管家，话不多，句句有用。</span></figcaption></figure>
+        <figure><img src="assets/pro/companion/mae.webp" alt="凌梅" loading="lazy" width="420" height="560"><figcaption><b>凌梅</b><span>话少、一针见血，越是逆风越稳。</span></figcaption></figure>
+        <figure><img src="assets/pro/companion/fay.webp" alt="菲菲" loading="lazy" width="420" height="560"><figcaption><b>菲菲</b><span>元气满满，输了也三秒满血。</span></figcaption></figure>
+        <figure><img src="assets/pro/companion/ivy.webp" alt="小艾" loading="lazy" width="420" height="560"><figcaption><b>小艾</b><span>温柔细心，会记得你说过的小事。</span></figcaption></figure>
+        <figure><img src="assets/pro/companion/leo.webp" alt="陆屿" loading="lazy" width="420" height="560"><figcaption><b>陆屿</b><span>温和可靠，话不多，但每句都接得住你。</span></figcaption></figure>
+      </div>
+      <div class="feats">
+        <div><b>聊天<i class="pro-tag">会员</i></b><span>打字或者按住说话都行，她用自己的声音回你，还会记得你们聊过的事。免费账号登录后可以先体验 50 条。</span></div>
+        <div><b>赛后点评<i class="pro-tag">会员</i></b><span>一局打完，她看着这局的战绩说两句：哪里打得好，哪波可惜了。</span></div>
+        <div><b>主动开口<i class="pro-tag">会员</i></b><span>过节、你好几天没来、半夜还在打，她会先跟你打招呼。一天最多两次，可以设免打扰时段。</span></div>
+        <div><b>对局里陪着<i class="free-tag">免费</i></b><span>拿人头、被击杀、开局前，她会说两句，只挑你阵亡、等开局这种不打扰的时候，不抢你的注意力。</span></div>
+        <div><b>播报提醒<i class="free-tag">免费</i></b><span>下一件出什么装备、选人推荐、关键时间提醒，都由她用自己的声音来报。</span></div>
+        <div><b>听你指挥<i class="free-tag">免费</i></b><span>说一句「打开主界面」「下一件出什么」，她直接照做。打字和说话都可以。</span></div>
+      </div>
+      <p class="note center">目前只在国内版的 Windows 电脑版里提供，界面语言需为中文，登录后在左侧「AI 玩伴」页打开。聊天和点评内容由人工智能生成。</p>
+    </section></template>
+
     <section class="s" id="compare">
       <h2>免费版和 Pro 有什么不同</h2>
-      <p class="lead">区别只在每天能用多少。功能本身，免费版一样都不少。</p>
+      <p class="lead" data-edition="global">区别只在每天能用多少。功能本身，免费版一样都不少。</p>
+      <template data-edition="cn"><p class="lead">核心功能免费版一样都不少。不同在两处：AI 玩伴，和每天能用多少。</p></template>
       <table class="cmp">
         <thead><tr><th></th><th>免费</th><th class="pro">Pro</th></tr></thead>
         <tbody>
+          <template data-edition="cn"><tr class="group daily"><td colspan="3">AI 玩伴<span>Pro 主打</span></td></tr>
+          <tr><td>和玩伴聊天<small>打字或说话，她用声音回你；按她回复的字数算</small></td><td>体验 50 条<span class="per-day">/ 每个账号一次</span></td><td class="pro">6,000 字<span class="per-day">/ 天</span></td></tr>
+          <tr><td>赛后点评、主动开口</td><td class="no">—</td><td class="pro yes">✓</td></tr>
+          <tr><td>对局里的反应、播报提醒、语音指令<small>登录后就能用</small></td><td class="yes">✓</td><td class="pro yes">✓</td></tr></template>
           <tr class="group daily"><td colspan="3">每天的额度<span>每天重置，当天用完第二天又有</span></td></tr>
           <tr><td>聊天实时翻译<small>队友、对手的聊天，以及你发出去的话</small></td><td>1,000 字<span class="per-day">/ 天</span></td><td class="pro">20,000 字<span class="per-day">/ 天</span></td></tr>
           <tr><td>聊天语音输入<small>按住说话，自动转文字并翻译</small></td><td>5 分钟<span class="per-day">/ 天</span></td><td class="pro">60 分钟<span class="per-day">/ 天</span></td></tr>
@@ -265,12 +322,14 @@
           <tr><td>用自己的翻译 API Key<small>不占用我们的额度，免费版也可以</small></td><td class="yes">✓</td><td class="pro yes">✓</td></tr>
         </tbody>
       </table>
-      <p class="note">额度每天重置（翻译和聊天语音在北京时间早上 8 点，BP 语音在零点）。2026 年 10 月 17 日之前注册的账号保持原来的额度，买 Pro 也一样。你自己账号的实际额度以软件「设置 → 账号」里显示的为准。</p>
+      <p class="note" data-edition="global">额度每天重置（翻译和聊天语音在北京时间早上 8 点，BP 语音在零点）。2026 年 10 月 17 日之前注册的账号保持原来的额度，买 Pro 也一样。你自己账号的实际额度以软件「设置 → 账号」里显示的为准。</p>
+      <template data-edition="cn"><p class="note">额度每天重置（翻译和聊天语音在北京时间早上 8 点，BP 语音和 AI 玩伴在零点）。2026 年 10 月 17 日之前注册的账号保持原来的翻译和语音额度，买 Pro 也一样。你自己账号的实际额度以软件「设置 → 账号」里显示的为准。</p></template>
     </section>
 
     <section class="s">
       <h2>什么样的玩家适合 Pro</h2>
       <div class="why" style="margin-top:22px">
+        <template data-edition="cn"><div><b>想有人陪着打</b><span>一个人排位也有人说话：开局前聊两句，打完听她点评，输了有人接得住。</span></div></template>
         <div><b>天天排位</b><span>一晚上几局下来，免费的翻译额度很快就用完了；Pro 每天的翻译额度是免费版的 20 倍。</span></div>
         <div><b>常和外国队友打</b><span>东南亚服、欧服，聊天来回翻译，说话直接转成英文发出去。</span></div>
         <div><b>想支持开发</b><span>AMEFYS 是独立开发的，翻译和语音都要按量付费给云服务。你的订阅就是它能一直更新下去的原因。</span></div>
@@ -351,8 +410,11 @@
     </section>
     <template data-edition="cn"><section class="s faq">
       <h2>常见问题</h2>
+      <details><summary>AI 玩伴在哪里用？</summary><p>目前只在国内版的 Windows 电脑版里，界面语言需为中文。登录后点左侧的「AI 玩伴」打开她，也可以用快捷键 Alt + Shift + C。Mac 和手机版暂时没有。</p></details>
+      <details><summary>不买会员能先试试 AI 玩伴吗？</summary><p>能。登录后可以免费和她聊 50 条，每个账号一次，用完不会扣费，也不会自动开通会员。对局里的反应、播报提醒和语音指令，免费版一直能用。</p></details>
+      <details><summary>玩伴的 6,000 字是怎么算的？</summary><p>按她回复你的字数算，你说的话不算。一句回复一般几十个字，6,000 字大约够聊上百轮。赛后点评和她主动开口不占这个额度。每天北京时间零点重置。</p></details>
       <details><summary>在哪里看会员状态和额度？</summary><p>软件「设置 → 账号」和官网<a href="account.html">我的账号</a>都可以查看。已有会员的权益不受影响。</p></details>
-      <details><summary>用自己的 API Key 还需要 Pro 吗？</summary><p>不需要。用自己的 Key 翻译不占我们的额度，免费版就能用。Pro 主要是给不想自己申请 Key 的玩家。</p></details>
+      <details><summary>用自己的 API Key 还需要 Pro 吗？</summary><p>只看翻译的话不需要：用自己的 Key 翻译不占我们的额度，免费版就能用。AI 玩伴走我们自己的服务，不能用自己的 Key，聊天要用会员额度。</p></details>
       <details><summary>会影响游戏账号安全吗？</summary><p>不会。AMEFYS 只读 Valve 官方的 GSI 接口，不读写游戏内存、不注入游戏、不拦截网络流量。详见<a href="compliance.html">合规说明</a>。</p></details>
     </section></template>
 
