@@ -153,6 +153,7 @@
   .how-text code { font-family: ui-monospace,"SF Mono",Consolas,monospace; color: var(--gold); background: rgba(232,199,121,.08); padding: 1px 6px; border-radius: 4px; }
   .shot { position: relative; margin: 0; border-radius: 14px; overflow: hidden; border: 0.5px solid var(--hairline-strong); box-shadow: 0 20px 50px rgba(0,0,0,.45); }
   .shot img { display: block; width: 100%; }
+  .shot-img { display: block; }
   .shot .mark { position: absolute; font-style: normal; border: 2.5px solid #F0C75E; border-radius: 10px; box-shadow: 0 0 0 4px rgba(240,199,94,.18), 0 0 24px rgba(240,199,94,.35); }
   .shot .mark u { position: absolute; left: 0; top: 100%; margin-top: 6px; text-decoration: none; white-space: nowrap;
     font-size: 12px; font-weight: 700; color: #1a1206; background: #F0C75E; padding: 2px 8px; border-radius: 6px;
@@ -241,7 +242,7 @@
       <div class="eyebrow">AMEFYS PRO</div>
       <h1>开黑一整晚，额度也够用</h1>
       <p>选人推荐、出装建议、关键时间提醒这些核心功能一直免费。Pro 给的是更多的<strong>聊天翻译</strong>和<strong>语音</strong>额度，适合天天打、经常和外国队友沟通的你。</p>
-      <div class="cta" data-edition="global">
+      <div class="cta">
         <a class="btn gold" href="#plans">看价格</a>
         <a class="btn ghost" href="#how">怎么买</a>
       </div>
@@ -277,12 +278,7 @@
       </div>
     </section>
 
-    <template data-edition="cn"><section class="s">
-      <h2>国内版暂未开放购买</h2>
-      <p class="lead">这里仅展示 Pro 会员权益。已有会员的额度、有效期和标识不受影响。</p>
-    </section></template>
-
-    <section class="s" id="plans" data-edition="global">
+    <section class="s" id="plans">
       <h2>价格</h2>
       <p class="lead">一次性付款，到期就停，不会自动扣费。时间长的更划算。</p>
       <div class="plans">
@@ -294,18 +290,20 @@
           <div class="price">¥188<small>/ 365 天</small></div><div class="per">折合每月 ¥15.67 · 买 10 送 2</div><div class="desc">比按月买省 ¥37.6，最划算</div></div></div>
       </div>
       <p class="note">通过爱发电付款，支持微信和支付宝。提前续费的时长会接在当前有效期后面，不会浪费。</p>
-      <p class="note" data-edition-note>这里是国际版的会员。在中国大陆玩，建议用<a href="https://amefys.cn/">国内版</a>；两个版本的账号和会员不通用。</p>
+      <p class="note" data-edition-note data-edition="global">这里是国际版的会员。在中国大陆玩，建议用<a href="https://amefys.cn/">国内版</a>；两个版本的账号和会员不通用。</p>
+      <template data-edition="cn"><p class="note" data-edition-note>这里是国内版的会员，开通后在国内版软件和 amefys.cn 的手机版 BP 里生效；国内版和国际版的账号、会员不通用。</p></template>
     </section>
 
-    <section class="s" id="how" data-edition="global">
+    <section class="s" id="how">
       <h2>怎么买</h2>
       <p class="lead">三步，付款后一般 1 分钟内自动开通。下面都是软件里的真实界面。</p>
       <div class="how">
         <div class="how-step">
           <div class="how-text"><i>1</i><b>在软件里选时长</b>
             <span>登录 AMEFYS，打开「设置 → 账号」。在会员卡片上点一个时长，<strong>识别码会自动复制</strong>，同时浏览器打开爱发电的购买页。</span>
-            <span class="tip">识别码是 <code>AMF-</code> 开头的 6 位码，每个账号固定一个。</span></div>
-          <figure class="shot"><img src="assets/pro/how-1.jpg" alt="设置 → 账号里的会员卡片：选年付后识别码已复制" loading="lazy">
+            <span class="tip" data-edition="global">识别码是 <code>AMF-</code> 开头的 6 位码，每个账号固定一个。</span>
+            <template data-edition="cn"><span class="tip">识别码是 <code>AMC-</code> 开头的 6 位码，每个账号固定一个。也可以在官网<a href="account.html">我的账号</a>里登录后复制。</span></template></div>
+          <figure class="shot"><span class="shot-img" data-edition="global"><img src="assets/pro/how-1.jpg" alt="设置 → 账号里的会员卡片：选年付后识别码已复制" loading="lazy"></span><template data-edition="cn"><span class="shot-img"><img src="assets/pro/how-1-cn.jpg" alt="设置 → 账号里的会员卡片：选年付后识别码已复制" loading="lazy"></span></template>
             <em class="mark up right" style="left:66%;top:45.6%;width:32.2%;height:19.6%"><u>点一个时长</u></em>
             <em class="mark" style="left:1.6%;top:66.4%;width:33%;height:7.8%"><u>识别码已复制</u></em></figure>
         </div>
@@ -313,7 +311,7 @@
           <div class="how-text"><i>2</i><b>在爱发电付款，识别码粘贴到「留言」</b>
             <span>爱发电会显示你选的时长和价格。<strong>付款前把识别码粘贴到「留言」里</strong>（第 1 步已经自动复制好了，直接粘贴就行），再点「去支付」，微信、支付宝都可以。</span>
             <span class="tip">第一次用爱发电，要用手机号或微信登录一下，这是爱发电自己的账号。</span></div>
-          <figure class="shot"><img src="assets/pro/how-2.jpg" alt="爱发电付款页：识别码粘贴在留言框里" loading="lazy">
+          <figure class="shot"><span class="shot-img" data-edition="global"><img src="assets/pro/how-2.jpg" alt="爱发电付款页：识别码粘贴在留言框里" loading="lazy"></span><template data-edition="cn"><span class="shot-img"><img src="assets/pro/how-2-cn.jpg" alt="爱发电付款页：识别码粘贴在留言框里" loading="lazy"></span></template>
             <em class="mark right" style="left:3.6%;top:7.9%;width:80.4%;height:10.8%"><u>确认是你选的时长</u></em>
             <em class="mark up" style="left:3.6%;top:71.7%;width:80.4%;height:14.6%"><u>识别码粘贴到「留言」</u></em>
             <em class="mark up" style="left:3.6%;top:92.1%;width:19.3%;height:6.5%"><u>最后点去支付</u></em></figure>
@@ -329,7 +327,7 @@
       </div>
     </section>
 
-    <section class="s" data-edition="global">
+    <section class="s">
       <h2>想多支持一点</h2>
       <p class="lead">在爱发电主页还有三个赞助方案，同样一次性付款、不自动扣费。</p>
       <div class="sponsor">
@@ -339,22 +337,17 @@
       </div>
     </section>
 
-    <section class="s faq" data-edition="global">
+    <section class="s faq">
       <h2>常见问题</h2>
-      <details><summary>付款时忘了填识别码怎么办？</summary><p>把爱发电订单号和你的 AMEFYS 登录邮箱发到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或者在<a href="guestbook.html">留言板</a>留言，我们会尽快帮你开通。</p></details>
+      <details data-edition="global"><summary>付款时忘了填识别码怎么办？</summary><p>把爱发电订单号和你的 AMEFYS 登录邮箱发到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或者在<a href="guestbook.html">留言板</a>留言，我们会尽快帮你开通。</p></details>
+      <template data-edition="cn"><details><summary>付款时忘了填识别码怎么办？</summary><p>把爱发电订单号和你的 AMEFYS 登录邮箱发到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，我们会尽快帮你开通。</p></details></template>
       <details><summary>在哪里看我的会员到期时间和订单？</summary><p>软件「设置 → 账号」里能看到会员状态；也可以在官网<a href="account.html">我的账号</a>登录查看，包括今天的额度、购买识别码和最近的订单。账号和软件、手机版 BP 是同一个。</p></details>
       <details><summary>会自动续费吗？</summary><p>不会。爱发电没有任何形式的自动扣费，到期不续就自动变回免费版。</p></details>
       <details><summary>能给朋友买吗？</summary><p>可以。付款时在留言里写「送」加上朋友的识别码，时长会加到朋友的账号上，也不会影响你自己以后续费。</p></details>
       <details><summary>用自己的 API Key 还需要 Pro 吗？</summary><p>不需要。用自己的 Key 翻译不占我们的额度，免费版就能用。Pro 主要是给不想自己申请 Key 的玩家。</p></details>
-      <details><summary>不满意能退吗？爱发电页面写着「暂不支持退款」</summary><p>首次购买 7 天内、用量不多的可以全额退，具体看<a href="refund.html">退款政策</a>。爱发电付款页上的「暂不支持退款」说的是平台没有自助退款按钮；退款由我们按退款政策处理，钱会通过支付宝转账退给你。</p></details>
+      <details><summary>不满意能退吗？爱发电页面写着「暂不支持退款」</summary><p>首次购买 7 天内、用量不多的可以全额退，具体看<a href="refund.html">退款政策</a>。爱发电付款页上的「暂不支持退款」说的是平台没有自助退款按钮；退款由我们按退款政策处理：能通过爱发电原路退回的走原路，不能的转账到你的支付宝。</p></details>
       <details><summary>会影响游戏账号安全吗？</summary><p>不会。AMEFYS 只读 Valve 官方的 GSI 接口，不读写游戏内存、不注入游戏、不拦截网络流量。详见<a href="compliance.html">合规说明</a>。</p></details>
     </section>
-    <template data-edition="cn"><section class="s faq">
-      <h2>常见问题</h2>
-      <details><summary>在哪里看会员状态和额度？</summary><p>软件「设置 → 账号」和官网<a href="account.html">我的账号</a>都可以查看。已有会员的权益不受影响。</p></details>
-      <details><summary>用自己的 API Key 还需要 Pro 吗？</summary><p>不需要。用自己的 Key 翻译不占我们的额度，免费版就能用。Pro 主要是给不想自己申请 Key 的玩家。</p></details>
-      <details><summary>会影响游戏账号安全吗？</summary><p>不会。AMEFYS 只读 Valve 官方的 GSI 接口，不读写游戏内存、不注入游戏、不拦截网络流量。详见<a href="compliance.html">合规说明</a>。</p></details>
-    </section></template>
 
   </div>
 
