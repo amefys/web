@@ -231,8 +231,8 @@
         </div>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.44.0-beta.0</h3>
-        <p><strong>Pro 会员开放购买</strong>：在「设置 → 账号」的会员卡片上直接买或续费，付款后自动开通。其余和稳定版 0.43.0 一样。</p>
+        <h3><span class="tag tag-beta">Beta</span> 0.44.0-beta.1</h3>
+        <p><strong>适配 7.42 的英雄墙</strong>：米波改成全才后，英雄墙和截图识别都按新排列来，不会再把禁用认到隔壁英雄上。<strong>Pro 会员开放购买</strong>：在「设置 → 账号」的会员卡片上直接买或续费，付款后自动开通。其余和稳定版 0.43.0 一样。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
@@ -254,6 +254,21 @@
         <p class="channel-note">国内版请使用上面的稳定版，Windows 和 macOS 都有。</p>
       </div>
     </section></template>
+
+    <!-- ── 0.44.0-beta.1 ── -->
+    <article class="release beta" id="v0-44-0-beta-1">
+      <header><h2>0.44.0-beta.1</h2><span class="tag tag-beta">Beta</span><span class="date">2026-11-22</span></header>
+      <p class="lead">跟上 7.42：米波改成全才，英雄墙重新排了。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>截图识别在 7.42 认错英雄：</strong>7.42 把米波从敏捷挪到了全才，游戏里的英雄墙跟着变了，敏捷里米波后面的英雄和全才里祸乱之源后面的英雄都错开了一格。旧版本照旧按老位置读，就会把禁用、已选认到隔壁英雄身上，比如把米波的禁用当成维萨吉。这一版按 7.42 的排列重新做了识别数据，拿 7.42 的真实选人截图核对过，禁用和已选一个不差。</li>
+          <li><strong>BP 英雄墙和「指出你选的英雄」也按新排列来了</strong>，位置和游戏里一致。</li>
+        </ul>
+      </div>
+
+      <div class="callout">还在用 0.43.0 稳定版、并且开着截图识别或融合模式的话，7.42 里敏捷和全才这两块可能会认错，以 Beta 或下一个稳定版为准。手机 BP 的测试版（<a href="bp-beta/">bp-beta</a>）也已经换成新排列。</div>
+    </article>
 
     <!-- ── 0.44.0-beta.0 ── -->
     <article class="release beta" id="v0-44-0-beta-0">
