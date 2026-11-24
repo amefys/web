@@ -205,7 +205,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-11-23</div>
+      <div class="updated">最近更新：2026-11-25</div>
     </div>
 
     <!-- 赞助 -->
@@ -222,22 +222,45 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.44.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>Pro 会员开放购买</strong>：在「设置 → 账号」的会员卡片上直接买或续费，付款后自动开通。<strong>适配 7.42 的英雄墙</strong>：米波改成全才后，英雄墙和截图识别都按新排列来。<strong>BP 少推冷门英雄</strong>：米波这类很少有人选的英雄，胜率大多是绝活玩家打出来的，现在会打折计算，不再老往前排。<strong>BP 不再推荐禁用</strong>：天梯匹配的禁用是系统自动的，BP 只给选人推荐。<strong>修复了识别聊天时软件闪退的问题。</strong><strong>停在主菜单没连上不用慌</strong>：Dota 2 在主菜单时可能还不发数据，排一次队就能连上，提示也改成了先让你排队。<strong>设置页重新分好了组</strong>，按要做的事找功能；<strong>连接 DOTA 2 的向导</strong>会等游戏真的连上才说完成。Windows 上第一次用聊天翻译，按提示下载一次离线识别模块就行。<strong>识别聊天和翻译更快</strong>，俄文聊天尤其明显。<strong>聊天翻译直接盖在原文上</strong>：按快捷键识别聊天区，译文显示在游戏聊天原来那一行，鼠标移上去看原文；Windows 上可以下载<strong>离线识别模块</strong>，不用再装系统语言包，中英俄混着说也能认。<strong>选人不用手动截图</strong>：BP 选「融合模式」，自动认出双方选了谁、禁了谁，推荐直接标在游戏的英雄墙上，自己排过的英雄墙也能认。<strong>BP 选人推荐</strong>：选人阶段按 Alt+Shift+B 打开，登录就能用。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 0.45.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>7.42 装备数据已补齐</strong>：新增装备、中立宝物、短棍回归以及价格和配方调整都已更新。<strong>出装推荐不再推已移除装备</strong>。国内版账号页的购买识别码占位也修正了。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
         </div>
+        <p class="channel-note">0.45.0 目前只更新 Windows；macOS 安装包仍为 0.44.0。</p>
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 0.45.0-beta.0</h3>
-        <p><strong>BP 推荐和聊天翻译上了主菜单</strong>：软件左侧栏点一下就能打开 BP 面板、进聊天翻译设置，不用再绕去「游戏中」和「设置」里找。<strong>融合模式选完人就退回</strong>：以前融合条要等进了地图才变回悬浮窗，现在选人一结束就变回去。</p>
+        <p><strong>正式版 0.45.0 已发布，优先装左边。</strong>这个 Beta 验证的是主菜单里的 BP 推荐、聊天翻译入口，以及融合模式选完人后退回悬浮窗；<strong>这些改动尚未并入 0.45.0 正式版。</strong></p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
         </div>
-        <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。正式版两个平台都有。</p>
+        <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。本次正式版也先更新 Windows。</p>
       </div>
     </section>
+
+    <!-- ── 0.45.0 ── -->
+    <article class="release" id="v0-45-0">
+      <header><h2>0.45.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-24</span></header>
+      <p class="lead">补齐 7.42 的装备、价格和配方，出装推荐不再出现已经移除的装备。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
+        <ul>
+          <li><strong>7.42 装备数据补齐：</strong>按官方更新日志加入新装备和中立宝物、短棍回归，并更新现有装备的价格与合成配方。资料库、出装建议和手机 BP 共用这套数据。</li>
+          <li><strong>中文名和搜索词同步：</strong>新装备有了中文官方名称，装备别名与搜索词也一起更新。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>不再推荐已移除的装备：</strong>标枪、统御头盔等 7.42 移除的装备会从资料库和推荐结果中过滤，旧对局统计里残留的条目也不会再混进建议。</li>
+          <li><strong>国内版购买识别码占位：</strong>账号页还没生成识别码时，不再把国内版前缀误写进占位文字；实际付款时使用的识别码不受影响。</li>
+        </ul>
+      </div>
+
+      <div class="callout">这一版先更新 Windows，macOS 安装包仍为 0.44.0。</div>
+    </article>
 
     <!-- ── 0.45.0-beta.0 ── -->
     <article class="release beta" id="v0-45-0-beta-0">
@@ -254,7 +277,7 @@
 
     <!-- ── 0.44.0 ── -->
     <article class="release" id="v0-44-0">
-      <header><h2>0.44.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-23</span></header>
+      <header><h2>0.44.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-23</span></header>
       <p class="lead"><strong>Pro 会员开放购买了</strong>，在软件里就能买；英雄墙跟上了 7.42。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
