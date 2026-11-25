@@ -304,6 +304,7 @@ function shell({ title, description, canonical, body, lang = 'zh', note = '', br
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
 ${breadcrumb ? breadcrumbLd(breadcrumb) : ''}
+<script src="/assets/baidu-tongji.js" defer></script>
 ${HEAD_STYLE}
 </head><body>
 ${nav()}

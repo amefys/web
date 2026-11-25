@@ -145,6 +145,7 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
+<script src="/assets/baidu-tongji.js" defer></script>
 </head>
 <body>
 
@@ -196,8 +197,9 @@
       <div class="eyebrow">隐私政策</div>
       <h1>你的数据，你做主</h1>
       <p>用最简单的话说清楚：我们收集了什么、为什么、给谁。</p>
-      <div class="updated" data-edition="global">生效日期：2026-10-28（上一版 2026-10-25）</div>
-      <template data-edition="cn"><div class="updated">生效日期：2026-11-06（上一版 2026-10-28）</div><p class="edition-note"><strong>本次变更：</strong>国内版的崩溃报告从 0.41.0 起默认开启，经我们在北京的服务器转发到 Sentry（美国），不含账号信息；不想发送可以在 App 的设置里关掉。</p></template>
+      <div class="updated" data-edition="global">生效日期：2026-11-26（上一版 2026-10-28）</div>
+      <p class="edition-note" data-edition="global"><strong>本次变更：</strong>官网接入百度统计，用于统计官网页面的访问量与来源（页面 URL、IP、UA、Cookie），不涉及你的 AMEFYS 账号数据；详见下方「使用的第三方服务」。</p>
+      <template data-edition="cn"><div class="updated">生效日期：2026-11-26（上一版 2026-11-06）</div><p class="edition-note"><strong>本次变更：</strong>官网接入百度统计，用于统计官网页面的访问量与来源（页面 URL、IP、UA、Cookie），不涉及你的 AMEFYS 账号数据；详见下方「使用的第三方服务」。</p></template>
       <!-- Edition blocks: elements whose data-edition is global show on amefys.com; template elements
            whose data-edition is cn hold the amefys.cn wording. scripts/cn/mirror-site.ts (amefys repo) unwraps the templates and drops the global
            blocks when it builds amefys.cn — one source, two editions. Keep ids out of templates. -->
@@ -401,6 +403,7 @@
           <tr><td>爱发电（afdian.com）</td><td>购买 Pro 会员时的付款；我们只收到订单号、金额、付款人的爱发电账号 ID 和你填写的留言，<strong>看不到你的手机号、邮箱和支付信息</strong></td><td><a href="https://afdian.com" target="_blank" rel="noopener" class="link">afdian.com</a></td></tr>
           <tr><td>Cloudflare</td><td>主题资源下载（英雄/装备图标已从 Steam CDN 直取，不经 CF）</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
           <tr><td>Cloudflare Workers / D1 / Turnstile</td><td>官网留言板和技术博客评论：留言内容、昵称、邮箱、IP、UA；Turnstile 人机验证会向 Cloudflare 发送浏览器特征</td><td><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="link">cloudflare.com/privacy</a></td></tr>
+          <tr><td>百度统计（官网访问分析）</td><td>官网页面的浏览量、访问来源、页面 URL、IP、UA 和 Cookie 标识符；<strong>不收集你的 AMEFYS 账号信息</strong>，仅用于了解官网访问情况</td><td><a href="https://tongji.baidu.com/web/help/article?id=330&type=0" target="_blank" rel="noopener" class="link">tongji.baidu.com</a></td></tr>
         </tbody>
       </table>
       <template data-edition="cn">
@@ -412,6 +415,7 @@
           <tr><td>Azure（境外，翻译兜底）</td><td>火山引擎失败时的翻译原文与译文</td><td><a href="https://privacy.microsoft.com/zh-cn/privacystatement" target="_blank" rel="noopener" class="link">Microsoft 隐私声明</a></td></tr>
           <tr><td>OpenDota API（境外，可选）</td><td>读取你的 Steam 公开对局战绩，从你的电脑直接访问</td><td><a href="https://www.opendota.com/api-keys" target="_blank" rel="noopener" class="link">opendota.com</a></td></tr>
           <tr><td>Sentry（美国，默认开启，可关）</td><td>崩溃栈 + 设备 OS 版本 + 部分 OCR 失败类别的计数</td><td><a href="https://sentry.io/privacy/" target="_blank" rel="noopener" class="link">sentry.io/privacy</a></td></tr>
+          <tr><td>百度统计（官网访问分析）</td><td>官网页面的浏览量、访问来源、页面 URL、IP、UA 和 Cookie 标识符；<strong>不收集你的 AMEFYS 账号信息</strong>，仅用于了解官网访问情况</td><td><a href="https://tongji.baidu.com/web/help/article?id=330&type=0" target="_blank" rel="noopener" class="link">tongji.baidu.com</a></td></tr>
         </tbody>
       </table>
       </template>
