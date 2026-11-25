@@ -654,6 +654,7 @@ function renderSitemap(heroFiles, itemFiles, prev = new Map()) {
     { loc: `${SITE}/guides/vb-cable/`, priority: '0.7' },
     { loc: `${SITE}/studio/`, priority: '0.6' },
     { loc: `${SITE}/blog/`, priority: '0.7' },
+    { loc: `${SITE}/blog/afdian-payment-integration.html`, priority: '0.6' },
     { loc: `${SITE}/blog/china-reachability.html`, priority: '0.6' },
     { loc: `${SITE}/blog/electron-overlay-pitfalls.html`, priority: '0.6' },
     { loc: `${SITE}/blog/ai-assisted-dev-rules.html`, priority: '0.6' },

@@ -6,7 +6,14 @@
   <atom:link href="https://amefys.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
   <description>一个人借助 AI 把 AMEFYS 从零做到上线：踩过的坑、做过的决定和真实的数据。</description>
   <language>zh-cn</language>
-  <lastBuildDate>Sat, 17 Oct 2026 12:00:00 GMT</lastBuildDate>
+  <lastBuildDate>Wed, 25 Nov 2026 12:00:00 GMT</lastBuildDate>
+  <item>
+    <title>Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天</title>
+    <link>https://amefys.com/blog/afdian-payment-integration.html</link>
+    <guid isPermaLink="true">https://amefys.com/blog/afdian-payment-integration.html</guid>
+    <pubDate>Wed, 25 Nov 2026 12:00:00 GMT</pubDate>
+    <description>把 Webhook 当提醒，把签名查单当事实：查单核验、幂等入账、定时对账、双后端分流，以及 TLS 和跨境网络问题。</description>
+  </item>
   <item>
     <title>一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故</title>
     <link>https://amefys.com/blog/ai-assisted-dev-rules.html</link>

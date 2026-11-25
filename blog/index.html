@@ -25,7 +25,7 @@
 <script src="/assets/mobile-nav.js?v=2" defer></script>
 <link rel="stylesheet" href="/assets/nav-more.css?v=1">
 <script src="/assets/nav-more.js?v=1" defer></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","url":"https://amefys.com/blog/ai-assisted-dev-rules.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃","url":"https://amefys.com/blog/electron-overlay-pitfalls.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测","url":"https://amefys.com/blog/china-reachability.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑","url":"https://amefys.com/blog/cloudflare-o2o-cache.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","url":"https://amefys.com/blog/github-actions-minutes.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"AMEFYS 技术博客","url":"https://amefys.com/blog/","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"blogPost":[{"@type":"BlogPosting","headline":"Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天","url":"https://amefys.com/blog/afdian-payment-integration.html","datePublished":"2026-11-25"},{"@type":"BlogPosting","headline":"一个人和 AI 写了 840 次提交：我给 AI 立的规矩，每条背后都有一次事故","url":"https://amefys.com/blog/ai-assisted-dev-rules.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"用 Electron 做游戏悬浮窗：透明窗口、焦点、全局鼠标钩子和自愈崩溃","url":"https://amefys.com/blog/electron-overlay-pitfalls.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"国内可达性踩坑实录：SNI 阻断、拥塞、劫持，和怎么用家宽节点拨测","url":"https://amefys.com/blog/china-reachability.html","datePublished":"2026-10-17"},{"@type":"BlogPosting","headline":"Worker 前面加了缓存却没生效：Cloudflare 跨账户（O2O）缓存的坑","url":"https://amefys.com/blog/cloudflare-o2o-cache.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"GitHub Actions 额度一个月用完两次：发版里跑得最快的那个 job 最贵","url":"https://amefys.com/blog/github-actions-minutes.html","datePublished":"2026-10-16"},{"@type":"BlogPosting","headline":"一个人 + AI，怎么搭起一款 DOTA 2 桌面工具：AMEFYS 的整体设计与技术架构","url":"https://amefys.com/blog/amefys-architecture.html","datePublished":"2026-10-15"},{"@type":"BlogPosting","headline":"免费额度用到 289%：一次 Supabase 超额排查，和一天之内搬到 Cloudflare R2","url":"https://amefys.com/blog/supabase-egress-to-r2.html","datePublished":"2026-10-14"}]}</script>
 </head>
 <body>
 
@@ -73,6 +73,13 @@
     <p>一个人借助 AI，把 AMEFYS 从一个念头做到上线、运营。这里记录过程中真实发生的事：踩过的坑、做过的取舍、拿得出手的数据。每一篇都来自线上真实发生过的问题。</p>
     <a class="rss" href="/blog/feed.xml"><svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="3" cy="13" r="2" fill="currentColor"/><path d="M1 7a8 8 0 0 1 8 8M1 2a13 13 0 0 1 13 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>RSS 订阅</a>
   </header>
+
+  <a class="post-card" href="/blog/afdian-payment-integration.html">
+    <div class="meta"><span>2026-11-25</span><span>阅读约 12 分钟</span></div>
+    <h2>Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天</h2>
+    <p>个人开发者没有商户号，怎么让扫码付款自动开通会员？把 Webhook 当提醒，把签名查单当事实：订单号负责幂等，每 15 分钟对账补漏；国内国际两套后端用签名转发分流，以及 Deno TLS 握手、跨境超时、异常订单和退款的处理。</p>
+    <div class="tags"><span class="tag">支付集成</span><span class="tag">Webhook</span><span class="tag">Supabase</span><span class="tag">Deno</span><span class="tag">架构设计</span></div>
+  </a>
 
   <a class="post-card" href="/blog/ai-assisted-dev-rules.html">
     <div class="meta"><span>2026-10-17</span><span>阅读约 14 分钟</span></div>

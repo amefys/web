@@ -1,0 +1,517 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天 — AMEFYS 技术博客</title>
+<meta name="description" content="个人开发者接爱发电支付的完整记录：Webhook 没有验签字段，只取订单号再用签名 API 查单；订单号做主键、事务加行锁保证幂等，每 15 分钟对账补漏；一个创作者页对应国内国际两套后端，用签名转发和归属规则分流；以及 Deno TLS 握手、跨境超时、异常订单和退款的处理。">
+<link rel="canonical" href="https://amefys.com/blog/afdian-payment-integration.html">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="applicable-device" content="pc,mobile">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天">
+<meta property="og:description" content="把 Webhook 当提醒，把签名查单当事实：查单核验、幂等入账、定时对账、双后端分流，以及上线前遇到的 TLS 和跨境网络问题。">
+<meta property="og:url" content="https://amefys.com/blog/afdian-payment-integration.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta property="article:published_time" content="2026-11-25">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="application/rss+xml" title="AMEFYS 技术博客" href="https://amefys.com/blog/feed.xml">
+<meta name="color-scheme" content="light dark">
+<script>(function(){var t='light';try{var s=localStorage.getItem('amefys-blog-theme');if(s==='light'||s==='dark')t=s}catch(e){}document.documentElement.setAttribute('data-theme',t)})()</script>
+<link rel="icon" type="image/svg+xml" href="/assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="/assets/icon-512.png?v=2">
+<link rel="stylesheet" href="/assets/blog.css?v=4">
+<link rel="stylesheet" href="/assets/blog-comments.css?v=1">
+<script src="/assets/blog-comments.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天","datePublished":"2026-11-25","dateModified":"2026-11-25","inLanguage":"zh-CN","author":{"@type":"Organization","name":"AMEFYS","url":"https://amefys.com/"},"publisher":{"@type":"Organization","name":"AMEFYS","logo":{"@type":"ImageObject","url":"https://amefys.com/assets/icon-512.png?v=2"}},"mainEntityOfPage":"https://amefys.com/blog/afdian-payment-integration.html","keywords":"爱发电, Webhook, 支付集成, Supabase, Deno, 幂等, 对账, HMAC"}</script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><img class="brand-mark" src="/assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">功能<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#draft" role="menuitem">BP 推荐</a>
+            <a href="/#trash" role="menuitem">翻译回复</a>
+            <a href="/#assist" role="menuitem">实时助手</a>
+            <a href="/#skins" role="menuitem">多主题</a>
+          </div>
+        </div>
+        <a href="/heroes/">英雄</a>
+        <a href="/items/">装备</a>
+        <a href="/packs/index.html">回复包</a>
+        <a href="/changelog.html">更新日志</a>
+        <a href="/guestbook.html">留言板</a>
+        <a href="/donate.html">捐助</a>
+        <div class="nav-more" data-active="true" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="/#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" data-active="true" role="menuitem">技术博客</a>
+            <a href="/studio/" role="menuitem">服务</a>
+            <a href="/about.html" role="menuitem">关于</a>
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4 1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <div class="actions">
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+<article class="post">
+  <div class="crumbs"><a href="/">AMEFYS</a> / <a href="/blog/">技术博客</a></div>
+
+  <header class="post-head">
+    <div class="tags"><span class="tag">支付集成</span><span class="tag">Webhook</span><span class="tag">Supabase</span><span class="tag">Deno</span><span class="tag">架构设计</span></div>
+    <h1>Webhook 没有验签字段，付款怎么自动到账：爱发电支付接入的 55 天</h1>
+    <p class="sub">个人开发者没有商户号，怎么让玩家扫码付款后自动开通会员？AMEFYS 最后接了爱发电。推送只提供订单号，金额和付款人用签名 API 重新查；订单号负责幂等，每 15 分钟对账补漏。后来国内、国际两套后端共用一个创作者页，又加了签名转发。这篇讲完整链路、上线前的网络问题，以及哪些环节仍然要人处理。</p>
+    <div class="meta"><span>2026-11-25</span><span>阅读约 12 分钟</span><span>AMEFYS</span></div>
+  </header>
+
+  <div class="tldr">
+    <div class="label">要点速览</div>
+    <ul>
+      <li>爱发电文档里的 Webhook 示例没有接收方验签字段。服务端只从推送里读订单号，再用带 token 签名的 query-order 查出权威订单，伪造推送不能开通会员。</li>
+      <li>订单号同时是订单表主键和幂等键。重复推送、Webhook 与对账并发，都在数据库事务和行锁里收敛成一次开通。</li>
+      <li>两边各自每 15 分钟拉一次订单列表。公开回调每分钟最多真实查单 20 次，被限流的有效订单也交给对账补，正常对账下可能多等约 15 分钟；连续故障由运行记录告警。</li>
+      <li>一个创作者页对应国内、国际两套后端。核验后按识别码和绑定决定归属，跨端转发用 HMAC-SHA256 签名，转发来的订单绝不再转，避免循环。</li>
+      <li>国内服务器实测跨境转发耗时 1.5–13 秒，10 秒上限偶发超时；Deno 2.7 直连爱发电还遇到 TLS 握手失败，最后用本机 nginx 中转，证书校验和业务签名都保留。</li>
+    </ul>
+  </div>
+
+  <nav class="toc" aria-label="目录">
+    <div class="label">目录</div>
+    <ol>
+      <li><a href="#s1">从手动开会员到自动到账</a></li>
+      <li><a href="#s2">推送只有提醒的资格</a></li>
+      <li><a href="#s3">订单号同时是幂等键</a></li>
+      <li><a href="#s4">对账要补漏，也要避免自己卡死</a></li>
+      <li><a href="#s5">一个创作者页，两个后端</a></li>
+      <li><a href="#s6">上线前遇到的两个网络问题</a></li>
+      <li><a href="#s7">人工处理也是流程的一部分</a></li>
+      <li><a href="#s8">验收：从伪造推送到客户端等待</a></li>
+      <li><a href="#s9">这套方案的代价</a></li>
+      <li><a href="#s10">几点心得</a></li>
+    </ol>
+  </nav>
+
+  <div class="prose">
+
+  <h2 id="s1"><span class="no">01</span>从手动开会员到自动到账</h2>
+
+  <p><a href="/">AMEFYS</a> 的会员原来只有两种开通方式：用户兑换激活码，或者我拿到订单信息后手动执行 SQL。付款和账号之间没有关联，用户付完还要等我处理。整体架构在<a href="/blog/amefys-architecture.html">另一篇</a>里写过，这次要补的是收款到会员权益之间的那段链路。</p>
+
+  <p>当时没有营业执照，域名和服务器条件也走不了微信支付官方商户号。爱发电允许个人实名开通，有订单 Webhook，也有带签名的订单查询 API，能支撑自动开通。目标定得很具体：用户在 App 里复制一个购买识别码，到爱发电付款时粘贴进留言，系统核验订单后开通 Pro；认不出账号、金额不对、推送丢失，都要有后续处理。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 230" role="img" aria-label="支付接入时间线：9 月 29 日核心链路上生产，10 月 17 日安全加固，10 月 25 至 26 日双后端演练，11 月 23 日正式开放购买，共 55 天">
+        <text x="20" y="24" font-size="12" style="fill:var(--d-text3)">从核心链路上生产到开放购买：55 天（按日期差，不代表持续开发工时）</text>
+        <line x1="68" y1="105" x2="660" y2="105" style="stroke:var(--d-border)" stroke-width="2"/>
+        <circle cx="82" cy="105" r="7" style="fill:var(--d-gold)"/>
+        <text x="82" y="77" text-anchor="middle" font-size="12" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">09-29</text>
+        <text x="82" y="135" text-anchor="middle" font-size="13" style="fill:var(--d-text)">核心链路</text>
+        <text x="82" y="155" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">查单、入账、对账</text>
+        <circle cx="272" cy="105" r="7" style="fill:var(--d-red)"/>
+        <text x="272" y="77" text-anchor="middle" font-size="12" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-17</text>
+        <text x="272" y="135" text-anchor="middle" font-size="13" style="fill:var(--d-text)">安全审查</text>
+        <text x="272" y="155" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">原子限流、并发与异常订单</text>
+        <circle cx="462" cy="105" r="7" style="fill:var(--d-blue)"/>
+        <text x="462" y="77" text-anchor="middle" font-size="12" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">10-25 / 26</text>
+        <text x="462" y="135" text-anchor="middle" font-size="13" style="fill:var(--d-text)">双后端</text>
+        <text x="462" y="155" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">签名转发与分流演练</text>
+        <circle cx="652" cy="105" r="7" style="fill:var(--d-green)"/>
+        <text x="652" y="77" text-anchor="middle" font-size="12" font-family="ui-monospace,Menlo,monospace" style="fill:var(--d-text2)">11-23</text>
+        <text x="652" y="135" text-anchor="middle" font-size="13" style="fill:var(--d-text)">开放购买</text>
+        <text x="652" y="155" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">随 0.44.0 两版上线</text>
+        <rect x="20" y="186" width="680" height="28" rx="8" style="fill:var(--d-box)"/>
+        <text x="360" y="205" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">核心链路先跑通，购买入口保持关闭；安全审查和双后端演练完成后才开放</text>
+      </svg>
+    </div>
+    <figcaption>图 1　9 月 29 日到 11 月 23 日相隔 55 天，后半段主要在补安全边界和双后端</figcaption>
+  </figure>
+
+  <p>9 月 29 日核心链路已经部署，但购买入口没有马上打开。10 月 17 日的安全审查又改了一轮并发、限流和异常订单处理；10 月底接入国内版后，还要解决一笔订单该进哪个库的问题。11 月 23 日，国内和国际版的购买、续费入口才一起开放。</p>
+
+  <h2 id="s2"><span class="no">02</span>推送只有提醒的资格</h2>
+
+  <p>爱发电的<a href="https://guide.afdian.com/creator/developer" target="_blank" rel="noopener">官方开发者文档</a>给出了 Webhook 示例，里面有订单号、付款人、方案、金额和支付状态，但没有给接收方验证签名所需的字段和规则。文档同时要求接口返回 <code>{"ec":200}</code>，否则认为回调失败。</p>
+
+  <p>我把整个请求体都划在信任边界外。处理程序只读取 <code>out_trade_no</code>，要求它是 10 到 40 位数字；金额、方案、付款人、支付状态全部丢掉。随后服务端用自己的 token 计算签名，调用文档里的 <code>query-order</code>，按这个订单号重新查一次。查询响应再经过字段类型、金额格式和 <code>status == 2</code> 检查，才允许进入账本。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 340" role="img" aria-label="Webhook 信任边界：真实推送和伪造推送都只提供订单号，系统通过签名查单获取权威订单，伪造订单号查无此单，不能开通会员">
+        <defs><marker id="af-arrow-2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <text x="24" y="26" font-size="13" font-weight="600" style="fill:var(--d-text)">公开 Webhook：任何人都能 POST</text>
+        <rect x="24" y="48" width="188" height="82" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="118" y="76" text-anchor="middle" font-size="14" style="fill:var(--d-text)">真实订单推送</text>
+        <text x="118" y="101" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">只取订单号</text>
+        <rect x="24" y="154" width="188" height="82" rx="12" style="fill:var(--d-box);stroke:var(--d-red)"/>
+        <text x="118" y="182" text-anchor="middle" font-size="14" style="fill:var(--d-text)">伪造订单推送</text>
+        <text x="118" y="207" text-anchor="middle" font-size="12" style="fill:var(--d-red)">金额写得再大也不读</text>
+        <line x1="212" y1="89" x2="302" y2="89" style="stroke:var(--d-gray)" stroke-width="1.5" marker-end="url(#af-arrow-2)"/>
+        <line x1="212" y1="195" x2="302" y2="195" style="stroke:var(--d-gray)" stroke-width="1.5" marker-end="url(#af-arrow-2)"/>
+        <rect x="306" y="70" width="174" height="144" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="393" y="103" text-anchor="middle" font-size="14" style="fill:var(--d-text)">签名调用 query-order</text>
+        <text x="393" y="132" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">token 不参与传输</text>
+        <text x="393" y="155" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">订单号原样查询</text>
+        <text x="393" y="178" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">8 秒超时</text>
+        <line x1="480" y1="112" x2="558" y2="112" style="stroke:var(--d-gray)" stroke-width="1.5" marker-end="url(#af-arrow-2)"/>
+        <line x1="480" y1="180" x2="558" y2="180" style="stroke:var(--d-gray)" stroke-width="1.5" marker-end="url(#af-arrow-2)"/>
+        <rect x="562" y="70" width="136" height="82" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="630" y="99" text-anchor="middle" font-size="14" style="fill:var(--d-green)">查到已支付订单</text>
+        <text x="630" y="124" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">进入统一入账</text>
+        <rect x="562" y="174" width="136" height="82" rx="12" style="fill:var(--d-box);stroke:var(--d-red)"/>
+        <text x="630" y="203" text-anchor="middle" font-size="14" style="fill:var(--d-red)">查无此单</text>
+        <text x="630" y="228" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">忽略，不写会员</text>
+        <text x="24" y="286" font-size="12" style="fill:var(--d-text3)">查到的字段：付款人、方案 / 型号、份数、实付金额、留言、支付状态</text>
+        <text x="24" y="312" font-size="12" style="fill:var(--d-text3)">无效 JSON、缺订单号、查无此单都回 ec=200；自身临时故障才回 500</text>
+      </svg>
+    </div>
+    <figcaption>图 2　推送只负责提醒「有这个订单号」，是否付款由签名查询回答</figcaption>
+  </figure>
+
+  <p>这个设计把伪造请求的影响缩成了一次查单。攻击者可以编一个订单号，但爱发电查不到就不会有任何入账；他也可以回放真实旧订单，幂等逻辑会直接返回原结果。公开接口仍要防刷，所以真实查单有每分钟 20 次的原子预算，查无此单的号码缓存 10 分钟，同一个假号码短期内不会重复消耗额度。被限流时不把表和日志刷大，只返回成功，让对账稍后处理。</p>
+
+  <p>响应码也按责任划分。无效 JSON、缺订单号、查无此单都属于「这件事已经处理完」，返回 <code>ec=200</code>，避免平台反复推送；查单或入账因为自己这边故障而中断，才返回 500。平台文档没有写重试次数和间隔，所以我不把重试当保证，真正的兜底在第四节。</p>
+
+  <h2 id="s3"><span class="no">03</span>订单号同时是幂等键</h2>
+
+  <p>支付系统最常见的重复来源，这里都有：平台重复推送、用户刷新后再次触发、Webhook 和对账同时看到同一笔新订单。订单号因此承担两个角色：对外查单的键，以及数据库订单表的主键。一笔订单在账本里只有一行。</p>
+
+  <p>入账分两步。第一步把核验后的订单写入或更新到账本，已经开通、已退款、纯赞助的订单直接返回；第二步在数据库事务里锁定这一行，再检查开通时间。已经开通就返回旧结果，没开通才核对账号、方案、金额并增加会员时长。并发请求会在行锁前排队，第二个请求拿到锁时已经能看到第一个请求写入的结果。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 350" role="img" aria-label="订单入账状态机：已核验订单先按订单号落一行，未匹配账号、金额不足、未知方案都保留待处理；满足条件后在事务和行锁内开通，重复请求返回原结果">
+        <defs><marker id="af-arrow-3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <rect x="24" y="28" width="152" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="100" y="55" text-anchor="middle" font-size="14" style="fill:var(--d-text)">核验后的订单</text>
+        <text x="100" y="76" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">query-order 响应</text>
+        <line x1="176" y1="59" x2="230" y2="59" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-3)"/>
+        <rect x="234" y="28" width="188" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="328" y="55" text-anchor="middle" font-size="14" style="fill:var(--d-text)">订单号主键：一行</text>
+        <text x="328" y="76" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">重复推送只更新同一条</text>
+        <line x1="422" y1="59" x2="476" y2="59" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-3)"/>
+        <rect x="480" y="28" width="214" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="587" y="55" text-anchor="middle" font-size="14" style="fill:var(--d-text)">检查账号、方案、金额</text>
+        <text x="587" y="76" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">纯赞助单独记账，不开会员</text>
+        <line x1="328" y1="90" x2="328" y2="152" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-3)"/>
+        <rect x="70" y="156" width="170" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-red)"/>
+        <text x="155" y="185" text-anchor="middle" font-size="13" style="fill:var(--d-text)">未匹配账号</text>
+        <text x="155" y="209" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">保留订单，人工关联</text>
+        <rect x="276" y="156" width="170" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-red)"/>
+        <text x="361" y="185" text-anchor="middle" font-size="13" style="fill:var(--d-text)">金额不足 / 未知方案</text>
+        <text x="361" y="209" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">不猜价格，人工复核</text>
+        <rect x="482" y="156" width="170" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="567" y="185" text-anchor="middle" font-size="13" style="fill:var(--d-text)">纯赞助</text>
+        <text x="567" y="209" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">已结清，不开 Pro</text>
+        <line x1="587" y1="90" x2="587" y2="272" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-3)"/>
+        <rect x="430" y="276" width="264" height="56" rx="12" style="fill:var(--d-box);stroke:var(--d-green)" stroke-width="2"/>
+        <text x="562" y="299" text-anchor="middle" font-size="14" style="fill:var(--d-green)">事务 + 行锁：开通一次</text>
+        <text x="562" y="320" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">记录开通时间；后续请求返回旧结果</text>
+        <text x="24" y="286" font-size="12" style="fill:var(--d-text3)">金额门槛 = 价格表中的单份最低价 × 份数</text>
+        <text x="24" y="310" font-size="12" style="fill:var(--d-text3)">会员时长叠加到当前到期日之后，定制版只延长、不降级</text>
+      </svg>
+    </div>
+    <figcaption>图 3　异常订单也进账本；只有账号、方案、金额都通过核验的订单才开通</figcaption>
+  </figure>
+
+  <p>每个后端的价格只在服务端价格表里维护，客户端通过只读接口取上架方案。实付金额低于「单份最低价 × 份数」，或者一单混了多个无法统一定价的型号，系统不会按客户端显示的价格猜着开通。这些订单保留为待处理状态，修好价格表或补齐账号后，可以重新核验。</p>
+
+  <p>这里有个顺序很重要：账号匹配和金额检查都使用查单得到的权威订单，客户端只负责展示价格、复制识别码和查询自己的权益。客户端没有支付 token，也不能直接调用入账函数。</p>
+
+  <h2 id="s4"><span class="no">04</span>对账要补漏，也要避免自己卡死</h2>
+
+  <p>官方文档明确说服务器异常时推送可能不及时，建议结合 API 使用，也提醒可能重复推送。我的对账任务每 15 分钟拉一次订单列表，走和 Webhook 完全相同的入账函数。这样漏推、查单超时、公开接口被限流，都只影响到账时间，不会改变开通规则。</p>
+
+  <p>国际版由数据库定时任务触发；国内数据库没有对应的网络调用扩展，同一周期改由服务器上的 systemd timer 触发。两边调用对账接口都要带独立的服务端密钥，这个接口不暴露给玩家。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 284" role="img" aria-label="Webhook 和对账双通道：正常时推送数秒到账；漏推、限流或跨境超时由每 15 分钟对账补；两条路径共用核验与幂等入账">
+        <defs><marker id="af-arrow-4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <rect x="24" y="30" width="150" height="64" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="99" y="58" text-anchor="middle" font-size="14" style="fill:var(--d-text)">爱发电订单</text>
+        <text x="99" y="79" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">同一笔订单两个入口</text>
+        <line x1="174" y1="51" x2="250" y2="51" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-4)"/>
+        <rect x="254" y="22" width="174" height="58" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="341" y="47" text-anchor="middle" font-size="14" style="fill:var(--d-text)">Webhook</text>
+        <text x="341" y="68" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">收到推送立即查单</text>
+        <line x1="174" y1="77" x2="250" y2="142" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-4)"/>
+        <rect x="254" y="116" width="174" height="74" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="341" y="144" text-anchor="middle" font-size="14" style="fill:var(--d-text)">每 15 分钟对账</text>
+        <text x="341" y="166" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">补漏推、限流、临时失败</text>
+        <line x1="428" y1="51" x2="496" y2="104" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-4)"/>
+        <line x1="428" y1="153" x2="496" y2="121" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-4)"/>
+        <rect x="500" y="76" width="196" height="82" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)" stroke-width="2"/>
+        <text x="598" y="106" text-anchor="middle" font-size="14" style="fill:var(--d-text)">同一个核验与入账函数</text>
+        <text x="598" y="131" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">同一主键、同一把行锁</text>
+        <line x1="598" y1="158" x2="598" y2="202" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-4)"/>
+        <rect x="500" y="206" width="196" height="54" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="598" y="238" text-anchor="middle" font-size="14" style="fill:var(--d-green)">最多开通一次</text>
+        <text x="24" y="224" font-size="12" style="fill:var(--d-text3)">单轮最多翻 5 页；每页原始数量为空才说明列表结束</text>
+        <text x="24" y="248" font-size="12" style="fill:var(--d-text3)">运行记录：扫描数、入账数、开通数、失败数；运维面板据此告警</text>
+      </svg>
+    </div>
+    <figcaption>图 4　两条入口共用一套入账，重复执行安全，漏掉一次也有下一次</figcaption>
+  </figure>
+
+  <p>10 月 17 日审查后，对账循环又补了两条保护措施。第一，一笔字段异常的订单只记一次失败，后面的订单继续处理。早期写法里，一次类型转换异常会让整轮退出，下轮还在同一笔订单上失败。第二，「这一页都没有新东西」只在最近 1 小时有成功对账时才允许提前停止。连续失败一段时间后，最新订单可能已被 Webhook 结清，更老的订单反而漏了，这时要继续往后翻。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>对账时看到的情况</th><th>处理</th><th>原因</th></tr>
+    <tr><td>订单已开通、已退款或是纯赞助</td><td>跳过</td><td>已是最终状态</td></tr>
+    <tr><td>订单待人工关联或金额待复核</td><td>重试入账，但不重复计为新增</td><td>人工刚补的绑定或价格表可能已生效</td></tr>
+    <tr><td>单笔字段异常或入账失败</td><td>记失败，继续下一笔</td><td>一笔坏数据不能堵住整个队列</td></tr>
+    <tr><td>本页无变化，且最近 1 小时有成功对账</td><td>允许提前停止</td><td>少翻旧页，降低 API 调用量</td></tr>
+    <tr><td>本页无变化，但对账刚失败过一段时间</td><td>继续翻页</td><td>新订单可能由 Webhook 结清，旧订单仍可能漏</td></tr>
+  </table></div>
+
+  <h2 id="s5"><span class="no">05</span>一个创作者页，两个后端</h2>
+
+  <p>10 月底国内版有了独立数据库和函数服务，支付随之多了一层归属问题。爱发电这边只有一个创作者页、一个回调地址，玩家却可能属于国内库或国际库。订单进错库，轻则查不到账号，重则给错人开通。</p>
+
+  <p>我把购买识别码分成两种前缀：国际版 <code>AMF-</code>，国内版 <code>AMC-</code>。回调统一先到国内服务，但归属判断仍然等签名查单之后进行。本库认识识别码、付款人绑定或已有账本，就在本库入账；识别码明确属于对方且本库查不到，就转给对方；谁都认不出来，默认由国际版记为未匹配，避免两边各留一笔无主订单。账号从国际搬到国内时，识别码、绑定和订单一起搬，搬家后的旧码订单也能在国内识别。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 390" role="img" aria-label="双后端订单分流：统一回调先到国内，核验后按识别码、绑定和账本判断；AMC 国内入账，AMF 签名转发国际，无法判断的订单也转国际；转发订单不再转发">
+        <defs><marker id="af-arrow-5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <rect x="250" y="22" width="220" height="60" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="360" y="48" text-anchor="middle" font-size="14" style="fill:var(--d-text)">统一回调：国内服务</text>
+        <text x="360" y="69" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">先签名查单，再看归属</text>
+        <line x1="360" y1="82" x2="360" y2="116" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-5)"/>
+        <rect x="214" y="120" width="292" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="360" y="146" text-anchor="middle" font-size="14" style="fill:var(--d-text)">本库识别码 / 绑定 / 账本认识？</text>
+        <text x="360" y="168" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">都查不到时，再看识别码前缀</text>
+        <line x1="250" y1="182" x2="140" y2="240" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-5)"/>
+        <line x1="470" y1="182" x2="580" y2="240" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-5)"/>
+        <rect x="28" y="244" width="224" height="100" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="140" y="273" text-anchor="middle" font-size="14" style="fill:var(--d-green)">国内入账</text>
+        <text x="140" y="299" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">本库认识的订单</text>
+        <text x="140" y="322" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">含搬家用户的旧 AMF- 码</text>
+        <rect x="468" y="244" width="224" height="100" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="580" y="273" text-anchor="middle" font-size="14" style="fill:var(--d-blue)">签名转发给国际</text>
+        <text x="580" y="299" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">对方订单 + 无法判断的订单</text>
+        <text x="580" y="322" text-anchor="middle" font-size="12" style="fill:var(--d-text2)">HMAC-SHA256，5 分钟有效</text>
+        <path d="M580 344 L580 366 L360 366" fill="none" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-5)"/>
+        <rect x="154" y="352" width="206" height="28" rx="8" style="fill:var(--d-box)"/>
+        <text x="257" y="371" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">接收方再次查单，且不再转发</text>
+        <text x="28" y="214" font-size="12" style="fill:var(--d-text3)">本库认识</text>
+        <text x="468" y="214" font-size="12" style="fill:var(--d-text3)">对方订单 / 无法判断</text>
+      </svg>
+    </div>
+    <figcaption>图 5　转发只负责移交提醒，接收方仍自己查单；不再二次转发，判断不一致也不会循环</figcaption>
+  </figure>
+
+  <p>两边之间的转发补上爱发电推送缺少的签名：正文带时间戳，用双方共享密钥计算 HMAC-SHA256，签名带支付用途前缀，5 分钟外拒绝。带转发标记却签名错误的请求直接返回 401，不能降级成普通外部推送。接收方拿到订单号后照样调用 query-order，转发方说的金额和归属都不算证据。</p>
+
+  <p>两边对账也会读到同一份订单列表。归属规则在这里复用：只认领自己的订单，对方的计入跳过，不报成异常。转发失败时国内回调返回 500；国际版对账稍后会从订单列表里认领属于国际或无法判断的订单，所以跨境链路不需要硬撑到成功。</p>
+
+  <h2 id="s6"><span class="no">06</span>上线前遇到的两个网络问题</h2>
+
+  <p>第一个问题出在国内服务器的 Deno 2.7。函数直连爱发电时报签名算法不受支持，错误名是 <code>UnsupportedSignatureAlgorithmFor&#8203;PublicKeyContext</code>。当时实测到的是 TLS 1.2 握手里 P-256 密钥配 SHA-512 签名，Deno 使用的 rustls 拒绝这个组合；同一台机器上的 curl 和 nginx 走 OpenSSL，可以正常完成握手。这个问题和代理规则无关，换成 OpenSSL 出口才绕开。</p>
+
+  <p>最后加了一个只监听 <code>127.0.0.1</code> 的 nginx 中转。函数把签名后的请求发给本机，nginx 再通过 HTTPS 访问爱发电，并显式打开证书链和域名验证。业务层的 token 签名原样保留，TLS 证书也没有关掉检查；改变的只是 TLS 客户端。项目里其他国内网络问题可以参见<a href="/blog/china-reachability.html">国内可达性踩坑实录</a>，这次则是协议栈兼容性，不是目标网站被阻断。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 282" role="img" aria-label="国内函数 TLS 中转：Deno 直连爱发电握手失败，改为函数请求本机 nginx，再由 nginx 通过 HTTPS 访问爱发电，证书校验和业务签名都保留">
+        <defs><marker id="af-arrow-6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <rect x="26" y="28" width="164" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-red)"/>
+        <text x="108" y="54" text-anchor="middle" font-size="14" style="fill:var(--d-text)">Deno 2.7 / rustls</text>
+        <text x="108" y="76" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">直连：握手失败</text>
+        <line x1="190" y1="59" x2="510" y2="59" style="stroke:var(--d-red)" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <line x1="338" y1="46" x2="362" y2="72" style="stroke:var(--d-red)" stroke-width="2"/>
+        <line x1="362" y1="46" x2="338" y2="72" style="stroke:var(--d-red)" stroke-width="2"/>
+        <rect x="514" y="28" width="180" height="62" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="604" y="65" text-anchor="middle" font-size="14" style="fill:var(--d-text)">afdian.com</text>
+        <rect x="26" y="150" width="164" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="108" y="177" text-anchor="middle" font-size="14" style="fill:var(--d-text)">同一个支付函数</text>
+        <text x="108" y="201" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">业务签名不变</text>
+        <line x1="190" y1="188" x2="264" y2="188" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-6)"/>
+        <rect x="268" y="150" width="182" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="359" y="177" text-anchor="middle" font-size="14" style="fill:var(--d-text)">本机 nginx</text>
+        <text x="359" y="201" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">仅监听 127.0.0.1</text>
+        <line x1="450" y1="188" x2="526" y2="188" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-6)"/>
+        <rect x="530" y="150" width="164" height="76" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="612" y="177" text-anchor="middle" font-size="14" style="fill:var(--d-text)">OpenSSL / HTTPS</text>
+        <text x="612" y="201" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">证书链 + 域名都校验</text>
+        <path d="M612 150 L612 90" fill="none" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-6)"/>
+        <text x="26" y="256" font-size="12" style="fill:var(--d-text3)">中转只改变 TLS 客户端；爱发电要求的 query-order 签名仍由函数生成</text>
+      </svg>
+    </div>
+    <figcaption>图 6　本机中转解决 TLS 栈兼容问题，没有牺牲证书校验或订单请求签名</figcaption>
+  </figure>
+
+  <p>第二个问题是跨境耗时。10 月 26 日实测国内服务器到国际接口，单次耗时分布在 1.5 到 13 秒，而转发上限是 10 秒，所以偶发超时。这里不能把超时简单调大：爱发电还在等国内回调，长时间占着请求只会把故障往后拖。转发超过上限就失败返回，让国际版对账补单，正常路径仍尽量在数秒内完成。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>现象</th><th>查到的原因</th><th>处理</th></tr>
+    <tr><td>国内函数直连爱发电失败，curl 正常</td><td>Deno 2.7 的 rustls 不接受当时实测到的握手签名组合</td><td>本机 nginx 用 OpenSSL 发 HTTPS，继续校验证书</td></tr>
+    <tr><td>国内转国际偶发超过 10 秒</td><td>跨境实测耗时 1.5–13 秒</td><td>快速失败，由国际版每 15 分钟对账认领</td></tr>
+    <tr><td>部署函数时下载依赖很慢</td><td>国内服务器访问依赖源单请求约 6 秒</td><td>切换前预缓存，避免部署卡在下载阶段</td></tr>
+  </table></div>
+
+  <h2 id="s7"><span class="no">07</span>人工处理也是流程的一部分</h2>
+
+  <p>自动到账的前提是知道钱给谁。爱发电下单链接没有文档化的留言预填能力，所以 App 生成固定购买识别码，用户点购买时自动复制，再到付款页粘贴。解析留言时会做全角归一化、忽略码内空格，把容易混淆的 O 当成 0、I 和 L 当成 1。识别码优先于付款人绑定，因为留言里明确写了别人的码，可能就是替朋友购买。</p>
+
+  <p>第一次凭识别码付款后，系统通常会记住付款人和账号的关联，下次续费不填码也能识别；留言带送礼含义时不建立这个长期关联，避免以后付款都落到朋友账号。实在认不出来的订单进入未匹配状态，运维面板可以按邮箱试算关联结果，再确认开通。10 月 23 日已经有一笔无识别码赞助订单走过人工处理，本文不涉及买家身份和订单细节。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>订单状态</th><th>系统为什么停下</th><th>后续处理</th></tr>
+    <tr><td>未匹配账号</td><td>没填识别码，付款人也从未绑定</td><td>确认买家账号后关联并开通</td></tr>
+    <tr><td>金额不足</td><td>实付低于价格表门槛，可能用了优惠或两边改价不同步</td><td>核实价格后重查，或走退款</td></tr>
+    <tr><td>未知方案</td><td>新型号没进价格表，或一单混了多个型号</td><td>补价格配置后重新核验</td></tr>
+    <tr><td>纯赞助</td><td>赞助档本来就不是会员商品</td><td>正常结清，不告警、不加会员</td></tr>
+    <tr><td>退款</td><td>平台没有自动退款事件供系统撤销权益</td><td>先退钱，确认后在面板撤销对应天数</td></tr>
+  </table></div>
+
+  <p>退款因此保留两步：先在爱发电后台原路退，或者通过支付宝转账；确认买家收到钱，再在运维面板扣回这笔订单开通的时长。第二步必须填退款方式和流水号，钱走在系统外，这条备注就是两边能对照的记录。退款政策本身随产品调整，这里只讲系统边界。</p>
+
+  <h2 id="s8"><span class="no">08</span>验收：从伪造推送到客户端等待</h2>
+
+  <p>支付验收不能只点一次购买、看到 Pro 就结束。10 月 25 日的双后端演练在国内数据库和本机加载的真实函数入口上跑，爱发电查单和国际回调使用受控替身，覆盖了正常入账、重复推送、跨境失败、搬家账号和伪造签名。测试账号和订单在演练后清理。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>验收场景</th><th>预期结果</th><th>记录</th></tr>
+    <tr><td>国内识别码订单</td><td>国内入账并开通 Pro</td><td>通过</td></tr>
+    <tr><td>同一订单重复推送</td><td>返回原结果，会员天数不增加</td><td>通过</td></tr>
+    <tr><td>国际识别码订单先到国内</td><td>签名转给国际，国内不留订单</td><td>通过</td></tr>
+    <tr><td>国际接口不通</td><td>国内返回 500、不留订单，等待对账</td><td>通过</td></tr>
+    <tr><td>搬家用户使用旧国际识别码</td><td>国内识别并入账</td><td>通过</td></tr>
+    <tr><td>伪造跨端转发签名</td><td>401，不进入入账</td><td>通过</td></tr>
+    <tr><td>对账遇到回调漏掉的国内订单和两笔国际订单</td><td>补国内订单，两笔国际订单计为跳过</td><td>通过</td></tr>
+    <tr><td>伪造 Webhook 查不到订单</td><td>返回处理完成，不开通、不写入会员</td><td>由函数测试覆盖</td></tr>
+  </table></div>
+
+  <p>用户侧另有一条等待链路。点购买后，App 复制识别码并打开付款页；窗口重新获得焦点时立即查一次权益，之后每 5 秒查一次，最长等 10 分钟。玩家从浏览器回来通常不用手动刷新。检测到 Pro 或到期日延长就结束等待，超时只提示稍后查看，不会把一次超时当成付款失败。</p>
+
+  <figure>
+    <div class="fig">
+      <svg viewBox="0 0 720 228" role="img" aria-label="购买后的客户端等待：点击购买复制识别码并打开付款页，窗口聚焦立即查询权益，之后每 5 秒查询，最长 10 分钟；开通或到期日延长即成功">
+        <defs><marker id="af-arrow-8" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--d-gray)"/></marker></defs>
+        <rect x="20" y="48" width="142" height="72" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="91" y="77" text-anchor="middle" font-size="13" style="fill:var(--d-text)">点击购买</text>
+        <text x="91" y="100" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">复制识别码</text>
+        <line x1="162" y1="84" x2="198" y2="84" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-8)"/>
+        <rect x="202" y="48" width="142" height="72" rx="12" style="fill:var(--d-box);stroke:var(--d-blue)"/>
+        <text x="273" y="77" text-anchor="middle" font-size="13" style="fill:var(--d-text)">浏览器付款</text>
+        <text x="273" y="100" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">粘贴进留言</text>
+        <line x1="344" y1="84" x2="380" y2="84" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-8)"/>
+        <rect x="384" y="48" width="142" height="72" rx="12" style="fill:var(--d-box);stroke:var(--d-gold)"/>
+        <text x="455" y="77" text-anchor="middle" font-size="13" style="fill:var(--d-text)">回到 App</text>
+        <text x="455" y="100" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">聚焦立即查权益</text>
+        <line x1="526" y1="84" x2="562" y2="84" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-8)"/>
+        <rect x="566" y="48" width="134" height="72" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="633" y="77" text-anchor="middle" font-size="13" style="fill:var(--d-green)">每 5 秒再查</text>
+        <text x="633" y="100" text-anchor="middle" font-size="11" style="fill:var(--d-text2)">最长 10 分钟</text>
+        <path d="M633 120 L633 164 L455 164" fill="none" style="stroke:var(--d-gray)" marker-end="url(#af-arrow-8)"/>
+        <rect x="269" y="148" width="182" height="52" rx="12" style="fill:var(--d-box);stroke:var(--d-green)"/>
+        <text x="360" y="179" text-anchor="middle" font-size="12" style="fill:var(--d-text)">Pro 或到期日变化 → 完成</text>
+        <text x="20" y="210" font-size="12" style="fill:var(--d-text3)">等待超时 ≠ 付款失败；对账仍可能在后台补单</text>
+      </svg>
+    </div>
+    <figcaption>图 7　客户端轮询的是自己的权益，不接触支付密钥，也不直接决定入账</figcaption>
+  </figure>
+
+  <p>11 月 23 日购买入口正式开放。截至上线记录，「国内收单后签名转发给国际」还没有被真实国际订单走过；那条链路的验收结论是演练通过，兜底是国际版对账。我把这个边界留在发布记录里，避免以后把测试覆盖误记成真实订单覆盖。</p>
+
+  <h2 id="s9"><span class="no">09</span>这套方案的代价</h2>
+
+  <p>这套方案适合个人开发者的小规模数字订阅，不等于通用支付中台。它把平台能力缺失的部分转移到了查单、定时任务和人工面板上，换来了自动开通和不丢单，也留下了明确的运营成本。</p>
+
+  <div class="table-wrap"><table>
+    <tr><th>换来的东西</th><th>付出的代价</th><th>不适合照抄的情况</th></tr>
+    <tr><td>伪造推送不能直接开通</td><td>每笔新订单都依赖一次平台查单，平台 API 不可用时只能延后</td><td>要求支付平台不可用时仍即时到账</td></tr>
+    <tr><td>漏推和临时故障有兜底</td><td>正常对账下可能多等约 15 分钟；对账连续故障还会更久，需要盯运行记录</td><td>业务不能接受分钟级延迟</td></tr>
+    <tr><td>个人也能自动开会员</td><td>用户要复制并粘贴识别码，仍可能忘填</td><td>有官方商户、能直接关联支付用户的产品</td></tr>
+    <tr><td>两套后端共用一个收款页</td><td>归属规则、跨端签名、两边价格表都多了一致性成本</td><td>本来就能统一账号库和支付入口</td></tr>
+    <tr><td>异常订单有账本可查</td><td>未匹配、退款仍要人判断，退款钱和权益分两步</td><td>订单量大到无法人工复核，或需要自动原路退款</td></tr>
+  </table></div>
+
+  <p>价格配置也需要纪律。爱发电后台和两边服务端价格表描述的是同一件商品，改价要先改平台，再同步数据库；客户端只读服务端目录，不再保存第二份价格。两边版本配置对比里加入了价格表检查，防止一边改了、另一边没改。</p>
+
+  <p>如果要复用这套思路，我会先验收四件事：伪造请求不能开通，重复请求不能重复加时长，坏订单不能堵住对账，跨端超时后另一边的对账能认领。它们比购买按钮能否打开更接近支付系统的真实边界。</p>
+
+  <h2 id="s10"><span class="no">10</span>几点心得</h2>
+
+  <p>推送是提醒，查询才是证据。没有验签条件的 Webhook 并非不能用，前提是把它提供的内容压缩到一个可重新查询的键，业务决定全部由权威查询支撑。这个思路也适用于其他通知型接口。</p>
+
+  <p>幂等要落在数据库里。代码里记一个「处理过」的集合，挡不住函数重启、Webhook 与对账并发。订单号主键、事务、行锁和最终状态一起工作，重复请求才会变成便宜的旧结果查询。</p>
+
+  <p>备用通道要复用主通道的规则。对账如果另写一套入账逻辑，早晚会和 Webhook 分叉；现在两条入口只负责拿到订单，后面的核验、归属、幂等完全相同。对账本身也要能忍受单笔坏数据和自己之前的失败。</p>
+
+  <p>验收结论要写明覆盖到哪。伪造签名、重复推送、跨境失败都能用受控环境验证；真实国际订单是否走过转发，是另一件事。支付上线后，我把尚未覆盖的链路留在运维记录里，等真实订单和对账结果来补最后一步。</p>
+
+  </div>
+
+  <div class="post-end">
+    <strong>也在接支付或订阅权益？</strong>如果你碰到 Webhook 无法验签、重复开通、漏单对账、国内国际两套后端分流，或 Deno 与第三方接口的 TLS 兼容问题，欢迎发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a> 交流。也可以先看看<a href="/studio/">工作室能帮你做什么</a>。
+  </div>
+
+  <section class="post-comments" aria-label="评论">
+    <h2 id="comments">评论</h2>
+    <p class="note">评论审核后显示，通常一天内处理；邮箱只用于回复通知，不会公开。提交即表示同意<a href="/privacy.html">隐私政策</a>。</p>
+    <div id="waline" data-path="/blog/afdian-payment-integration.html"></div>
+    <div class="comments-fallback">评论组件没有加载出来。可以直接发邮件到 <a href="mailto:amefys@gmail.com">amefys@gmail.com</a>，或稍后刷新再试。</div>
+  </section>
+
+  <div class="post-nav"><a href="/blog/">← 返回技术博客</a>　·　<a href="/blog/ai-assisted-dev-rules.html">上一篇：一个人和 AI 写了 840 次提交</a></div>
+</article>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="/">首页</a>
+      <a href="/blog/">技术博客</a>
+      <a href="/credits.html">致谢</a>
+      <a href="/compliance.html">合规</a>
+      <a href="/privacy.html">隐私</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  // OS-detect download rewrite — same logic as index.html
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    if (/iphone|ipad|ipod|android/.test(ua)) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg' : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('href', target)
+  })();
+
+  // Theme toggle — remembers the reader's choice; otherwise the system decides.
+  ;(function () {
+    var btn = document.querySelector('.theme-toggle')
+    if (!btn) return
+    btn.addEventListener('click', function () {
+      var root = document.documentElement
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+      var next = cur === 'light' ? 'dark' : 'light'
+      root.setAttribute('data-theme', next)
+      try { localStorage.setItem('amefys-blog-theme', next) } catch (e) {}
+    })
+  })();
+</script>
+</body></html>
