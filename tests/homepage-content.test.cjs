@@ -35,7 +35,8 @@ for (const [lang, html] of Object.entries(PAGES)) {
     // No faction-based theming exists in the renderer.
     assert.doesNotMatch(t, /阵营氛围|随天辉|辉夜紫|faction-aware|follows your side|Radiant sunlight/i)
     // Item cards show no confidence / gold-gap figures; match detail has no gold curve.
-    assert.doesNotMatch(t, /置信|缺口|Conf \d|GOLD ADVANTAGE|建议命中|AI 复盘/)
+    // DashboardPage does ship the weekly suggestion hit rate.
+    assert.doesNotMatch(t, /置信|缺口|Conf \d|GOLD ADVANTAGE|AI 复盘/)
   })
 
   test(`${lang}: sample chat does not use real pro players`, () => {
@@ -68,8 +69,12 @@ for (const [lang, html] of Object.entries(PAGES)) {
     const body = html.slice(html.indexOf('<body'))
     assert.strictEqual((body.match(/<div[\s>]/g) || []).length, (body.match(/<\/div>/g) || []).length)
     const dots = html.match(/<div class="hc-dots" data-hc-dots>([\s\S]*?)<\/div>/)
-    assert.ok(dots, 'hc-dots container missing')
     const slides = (html.match(/class="hc-slide /g) || []).length
+    if (!slides) {
+      assert.strictEqual(dots, null, 'a page without slides must not keep orphaned dots')
+      return
+    }
+    assert.ok(dots, 'hc-dots container missing')
     assert.strictEqual((dots[1].match(/data-hc-go=/g) || []).length, slides)
   })
 

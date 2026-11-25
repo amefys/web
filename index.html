@@ -2123,7 +2123,7 @@
     function set(name, text) { document.querySelectorAll('[data-stat="' + name + '"]').forEach(function (el) { el.textContent = text }) }
     function hidePart(name) { document.querySelectorAll('[data-part="' + name + '"]').forEach(function (el) { el.remove() }) }
     // Every value is checked before it is used: a partly broken file shows only
-    // the parts that are sound, never "NaN" — and never rewrites the BP copy wrongly.
+    // the parts that are sound, never "NaN"; the legacy BP badge is optional.
     function n(v, min) { return typeof v === 'number' && isFinite(v) && v >= min ? v : 0 }
     function day(v) { return typeof v === 'string' && !isNaN(Date.parse(v)) ? v : '' }
     var ctrl = window.AbortController ? new AbortController() : null
@@ -2149,7 +2149,8 @@
           set('bp', wan(bp)); set('ranked', wan(ranked)); set('turbo', wan(turbo))
           set('bp-built', bjDay(Date.parse(built)).slice(5).replace('-', ' 月 ') + ' 日')
           document.querySelectorAll('[data-stat-text="ranked"]').forEach(function (el) { el.textContent = ' ' + wan(ranked) + '局' })
-          document.querySelector('.bp-stat').hidden = false
+          var bpStat = document.querySelector('.bp-stat')
+          if (bpStat) bpStat.hidden = false
         }
       })
       .catch(function () { /* keep the page as it was */ })

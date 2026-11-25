@@ -1,7 +1,7 @@
 // Homepage live numbers (index.html inline script, 2026-10-15). Whatever
 // cdn.amefys.com/stats.json does — fail, time out, return junk — the page must
-// look exactly as it would without the script: live blocks hidden, the BP copy
-// untouched, no "NaN" / "undefined" anywhere.
+// look exactly as it would without the script: live blocks hidden and no
+// "NaN" / "undefined" anywhere.
 const test = require('node:test')
 const assert = require('node:assert/strict')
 const vm = require('node:vm')
@@ -60,8 +60,7 @@ const GOOD = {
 }
 
 function assertUntouched(page) {
-  for (const cls of ['stats-proof', 'bp-stat', 'final-proof']) assert.equal(page.by(cls).hidden, true, cls + ' must stay hidden')
-  assert.equal(page.els.find((e) => e.statText === 'ranked').textContent, '几百万局')
+  for (const cls of ['stats-proof', 'final-proof']) assert.equal(page.by(cls).hidden, true, cls + ' must stay hidden')
 }
 function assertNoJunk(page) {
   for (const e of page.els) if (!e.removed) assert.doesNotMatch(String(e.textContent), /NaN|undefined|null|Invalid/, JSON.stringify(e))
@@ -70,7 +69,7 @@ function assertNoJunk(page) {
 test('the script exists and the markup starts hidden', () => {
   assert.ok(SCRIPT)
   const { els } = fakeDom()
-  for (const cls of ['stats-proof', 'bp-stat', 'final-proof']) assert.equal(els.find((e) => e.cls.includes(cls)).hidden, true, cls)
+  for (const cls of ['stats-proof', 'final-proof']) assert.equal(els.find((e) => e.cls.includes(cls)).hidden, true, cls)
   assert.match(HTML, /\[data-live\]\[hidden\]\s*\{\s*display:\s*none\s*!important/)
 })
 
@@ -89,17 +88,19 @@ for (const [name, f] of [
   })
 }
 
-test('good data fills all three blocks', async () => {
+test('good data fills both live blocks', async () => {
   const page = await run(json(GOOD))
   assert.equal(page.by('stats-proof').hidden, false)
   assert.equal(page.by('final-proof').hidden, false)
-  assert.equal(page.by('bp-stat').hidden, false)
   assert.equal(page.els.find((e) => e.stat === 'users').textContent, '1,700+')
-  assert.equal(page.els.find((e) => e.statText === 'ranked').textContent, ' 368 万局')
   assertNoJunk(page)
 })
 
-test('bp with missing or tiny parts keeps the BP copy and hides the badge — no "NaN 万局"', async () => {
+test('the retired BP badge is optional', () => {
+  assert.match(SCRIPT, /var bpStat = document\.querySelector\('\.bp-stat'\)\s*if \(bpStat\) bpStat\.hidden = false/)
+})
+
+test('bp with missing or tiny parts leaves the other live numbers intact', async () => {
   for (const bp of [
     { matches: 5956315 },
     { matches: 5956315, ranked: 3683479, turbo: 2272836, builtAt: 'garbage' },
@@ -107,8 +108,6 @@ test('bp with missing or tiny parts keeps the BP copy and hides the badge — no
     { matches: '5956315', ranked: '3683479', turbo: '2272836', builtAt: '2026-10-14T09:12:38Z' }
   ]) {
     const page = await run(json({ ...GOOD, bp }))
-    assert.equal(page.by('bp-stat').hidden, true, JSON.stringify(bp))
-    assert.equal(page.els.find((e) => e.statText === 'ranked').textContent, '几百万局', JSON.stringify(bp))
     assert.equal(page.by('stats-proof').hidden, false, 'other numbers still show')
     assertNoJunk(page)
   }

@@ -31,5 +31,5 @@ test('every FAQ question in JSON-LD is also visible on the page', () => {
 
 test('the homepage title and description mention BP and the mobile page', () => {
   assert.match(home.match(/<title>(.*?)<\/title>/)[1], /BP/)
-  assert.match(home, /<meta name="description" content="[^"]*amefys\.com\/bp/)
+  assert.match(home, /<meta name="description" content="[^"]*手机版/)
 })
