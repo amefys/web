@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="zh"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 玩伴可以这样问 — AMEFYS</title>
+<!-- seo:start -->
+<meta name="description" content="AMEFYS AI 玩伴能做什么：每类能力一句示例，直接照着说就行。哪些免费、哪些要会员，哪些她看不到。">
+<link rel="canonical" href="https://amefys.com/companion-guide.html">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta name="applicable-device" content="pc,mobile">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEFYS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="AI 玩伴可以这样问 — AMEFYS">
+<meta property="og:description" content="AMEFYS AI 玩伴能做什么：每类能力一句示例，直接照着说就行。哪些免费、哪些要会员，哪些她看不到。">
+<meta property="og:url" content="https://amefys.com/companion-guide.html">
+<meta property="og:image" content="https://amefys.com/assets/icon-512.png?v=2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI 玩伴可以这样问 — AMEFYS">
+<meta name="twitter:description" content="AMEFYS AI 玩伴能做什么：每类能力一句示例，直接照着说就行。哪些免费、哪些要会员，哪些她看不到。">
+<!-- seo:end -->
+<link rel="icon" type="image/svg+xml" href="assets/icon.svg?v=2">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico?v=2">
+<link rel="apple-touch-icon" href="assets/icon-512.png?v=2">
+<style>
+  :root {
+    --bg: #0d0a07;
+    --bg-2: #141009;
+    --surface: rgba(38,31,22,0.72);
+    --hairline: rgba(232,199,121,0.12);
+    --hairline-strong: rgba(232,199,121,0.20);
+    --text: #f2ead8;
+    --text-2: rgba(242,234,216,0.62);
+    --text-3: rgba(242,234,216,0.40);
+    --gold: #E8C779;
+    --gold-deep: #9A7B3F;
+    --emerald: #34D399;
+    --amber: #fcd34d;
+    --r-md: 12px; --r-lg: 18px; --r-xl: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Source Han Sans SC", sans-serif;
+    -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; text-decoration: none; }
+
+  .nav { position: sticky; top: 0; z-index: 50; height: 48px;
+    background: rgba(13,10,7,0.72); backdrop-filter: saturate(180%) blur(24px);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 0.5px solid var(--hairline); }
+  .nav-inner { max-width: 1080px; margin: 0 auto; height: 100%;
+    display: flex; align-items: center; gap: 28px; padding: 0 24px;
+    font-size: 12.5px; font-weight: 500; }
+  .nav .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: -0.2px; }
+  .nav .brand-mark { width: 20px; height: 20px; border-radius: 6px; display: block;
+    box-shadow: 0 0 12px rgba(212,175,106,0.45); }
+  .nav .links { display: flex; gap: 24px; margin-left: auto; color: var(--text-2); white-space: nowrap; }
+  .nav .links a:hover { color: var(--text); }
+  .nav .actions { display: flex; align-items: center; gap: 14px; }
+  .btn-text { color: var(--text-2); font-size: 12px; }
+  .btn-text:hover { color: var(--text); }
+  .btn-pill { display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 14px; border-radius: 14px;
+    background: var(--gold-deep); color: #fff; border: 0;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.1px; line-height: 1;
+    box-shadow: 0 0 0 0.5px rgba(255,255,255,0.18) inset, 0 4px 14px rgba(176,138,69,0.4); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .lang-switch { display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11.5px; color: var(--text-3); padding: 0 10px; height: 28px;
+    border-left: 0.5px solid var(--hairline); border-right: 0.5px solid var(--hairline); }
+  .lang-switch a { color: var(--text-3); padding: 0 2px; }
+  .lang-switch a[aria-current="page"] { color: var(--text); font-weight: 600; }
+  .lang-switch .sep { color: var(--text-3); opacity: 0.5; }
+
+
+  .page { max-width: 1000px; margin: 0 auto; padding: 72px 24px 60px; }
+  .hero { text-align: center; margin-bottom: 64px; }
+  .eyebrow { display: inline-block; padding: 5px 12px; border-radius: 999px;
+    background: rgba(232,199,121,0.10); border: 0.5px solid rgba(232,199,121,0.35);
+    font-size: 11px; color: var(--gold); letter-spacing: 1px; font-weight: 700; margin-bottom: 18px; }
+  .hero h1 { font-size: 48px; letter-spacing: -1.2px; font-weight: 800; margin: 0 0 14px;
+    background: linear-gradient(180deg,#fff6dc,#E8C779 60%,#b8924a); -webkit-background-clip: text; color: transparent; }
+  .hero p { font-size: 16px; color: var(--text-2); margin: 0 auto; line-height: 1.7; max-width: 620px; }
+  .hero .cta { margin-top: 26px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+  .btn.gold { background: linear-gradient(180deg,#f3d995,#b8924a); color: #1a1206; box-shadow: 0 6px 22px rgba(212,175,106,.35); }
+  .btn.ghost { border: 0.5px solid var(--hairline-strong); color: var(--text); background: rgba(255,255,255,.03); }
+  .btn:hover { transform: translateY(-1px); }
+
+  section.s { margin: 0 0 64px; }
+  section.s > h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; margin: 0 0 8px; text-align: center; }
+  section.s > .lead { color: var(--text-2); font-size: 14.5px; text-align: center; margin: 0 auto 26px; max-width: 640px; line-height: 1.7; }
+
+  section.s > h2 small { display: block; margin-top: 6px; font-size: 13px; font-weight: 500; color: var(--text-3); letter-spacing: 0; }
+
+  .asks { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .ask { padding: 16px 18px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline);
+    display: flex; flex-direction: column; gap: 8px; }
+  .ask b { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-2); font-weight: 600; }
+  .ask q { quotes: "「" "」"; font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+  .ask span { font-size: 12.5px; color: var(--text-3); line-height: 1.6; }
+  .autos { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .auto { padding: 14px 18px; border-radius: var(--r-lg); border: 0.5px dashed var(--hairline-strong); }
+  .auto b { display: block; font-size: 14px; margin-bottom: 4px; }
+  .auto span { font-size: 13px; color: var(--text-2); }
+  .cant { padding: 20px 22px; border-radius: var(--r-lg); background: var(--surface); border: 0.5px solid var(--hairline);
+    font-size: 14px; color: var(--text-2); line-height: 1.75; }
+  .cant q { quotes: "「" "」"; color: var(--text); font-weight: 700; }
+  .tips { margin: 0; padding: 0 0 0 18px; font-size: 14px; color: var(--text-2); line-height: 1.9; }
+  .tips b { color: var(--text); }
+  .pro-tag, .free-tag { font-style: normal; font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 5px; }
+  .pro-tag { color: #1a1206; background: linear-gradient(180deg,#f3d995,#b8924a); }
+  .free-tag { color: var(--emerald); border: 0.5px solid rgba(52,211,153,.45); }
+  .note { font-size: 12.5px; color: var(--text-3); margin-top: 12px; line-height: 1.7; }
+  .note a, .lead a { color: var(--gold); }
+  .note.center { text-align: center; }
+  .elsewhere { max-width: 620px; margin: 0 auto; text-align: center; color: var(--text-2); font-size: 15px; line-height: 1.8; }
+  .elsewhere a { color: var(--gold); }
+
+  footer { max-width: 1080px; margin: 0 auto; padding: 40px 24px;
+    border-top: 0.5px solid var(--hairline);
+    color: var(--text-3); font-size: 11.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px; }
+  footer a { color: var(--text-3); margin-left: 16px; }
+  footer a:hover { color: var(--text-2); }
+
+  @media (max-width: 860px) {
+    .asks, .autos { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 34px; }
+    .asks, .autos { grid-template-columns: 1fr; }
+    .nav .links { display: none; }
+  }
+</style>
+<link rel="stylesheet" href="/assets/mobile-nav.css?v=2">
+<script src="/assets/mobile-nav.js?v=2" defer></script>
+<link rel="stylesheet" href="/assets/nav-more.css?v=1">
+<script src="/assets/nav-more.js?v=1" defer></script>
+<script src="/assets/baidu-tongji.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/icon.svg?v=2" alt="AMEFYS" width="20" height="20" />AMEFYS</a>
+      <div class="links">
+        <a href="index.html#pillars">五大特性</a>
+        <a href="index.html#trash">文斗 1v9</a>
+        <a href="index.html#assist">实时助手</a>
+        <a href="index.html#skins">多主题</a>
+        <a href="heroes/">英雄</a>
+        <a href="items/">装备</a>
+        <a href="packs/index.html">回复包</a>
+        <a href="changelog.html">更新日志</a>
+        <a href="guestbook.html">留言板</a>
+        <div class="nav-more" data-open="false">
+          <button class="nav-more-btn" type="button" aria-expanded="false" aria-haspopup="true">更多<svg viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1.5 5 5l4-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="nav-more-panel" role="menu">
+            <a href="index.html#faq" role="menuitem">常见问题</a>
+            <a href="/blog/" role="menuitem">技术博客</a>
+            <a href="about.html" role="menuitem">关于</a>
+            <a href="donate.html" role="menuitem">捐助</a>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="lang-switch">
+          <a href="companion-guide.html" aria-current="page">中文</a>
+          <span class="sep">·</span>
+          <a href="en/">EN</a>
+        </div>
+        <a class="btn-pill js-dl-cta" href="/#download" rel="noopener">免费下载</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="hero">
+      <div class="eyebrow">AI 玩伴</div>
+      <h1>可以这样问她</h1>
+      <template data-edition="cn"><p>不知道她能做什么？每类能力给一句示例，照着说就行，打字或者按住说话都可以。说法不用一模一样，意思对了她就明白。</p>
+      <div class="cta"><a class="btn gold" href="pro.html#companion">认识 AI 玩伴</a><a class="btn ghost" href="#direct">看示例</a></div></template>
+    </div>
+
+    <p class="elsewhere" data-edition="global">AI 玩伴只在国内版的 Windows 电脑版里提供。想了解她，请前往 <a href="https://amefys.cn/companion-guide.html">amefys.cn</a>。</p>
+
+    <template data-edition="cn"><section class="s" id="direct">
+      <h2>说了就办<small>不扣聊天额度，马上执行</small></h2>
+      <div class="asks">
+          <div class="ask"><b>出装建议<i class="free-tag">免费</i></b><q>下一件出什么</q><span>对局里随时问。</span></div>
+          <div class="ask"><b>选人建议<i class="free-tag">免费</i></b><q>现在选谁</q><span>先打开 BP 识别。</span></div>
+          <div class="ask"><b>时间点<i class="free-tag">免费</i></b><q>下个符什么时候</q></div>
+          <div class="ask"><b>翻译游戏聊天<i class="free-tag">免费</i></b><q>他们在说什么</q><span>识别聊天框，翻译给你听。</span></div>
+          <div class="ask"><b>悬浮窗<i class="free-tag">免费</i></b><q>打开悬浮窗</q><span>也能说「收起悬浮窗」「锁定悬浮窗」。</span></div>
+          <div class="ask"><b>BP 识别<i class="free-tag">免费</i></b><q>打开 BP</q></div>
+          <div class="ask"><b>鼠标穿透<i class="free-tag">免费</i></b><q>别挡我</q><span>点击穿过她，直接点到游戏。</span></div>
+          <div class="ask"><b>声音<i class="free-tag">免费</i></b><q>小声点</q><span>也能说「大声点」「静音」。</span></div>
+          <div class="ask"><b>字幕<i class="free-tag">免费</i></b><q>关掉字幕</q></div>
+          <div class="ask"><b>窗口形态<i class="free-tag">免费</i></b><q>缩成小球</q><span>说「还原」变回来。</span></div>
+          <div class="ask"><b>换角色<i class="free-tag">免费</i></b><q>换成菲菲</q><span>五个角色随时换。</span></div>
+          <div class="ask"><b>重复上一句<i class="free-tag">免费</i></b><q>再说一遍</q></div>
+          <div class="ask"><b>打开软件页面<i class="free-tag">免费</i></b><q>打开设置</q><span>也能说「打开主界面」。</span></div>
+          <div class="ask"><b>对局复盘<i class="free-tag">免费</i></b><q>复盘一下</q><span>打开上一局的复盘页；AI 总结是会员功能，每天 10 次。</span></div>
+      </div>
+    </section>
+
+    <section class="s" id="chat">
+      <h2>和她聊<small>会员每天 6,000 字；免费账号登录后可先体验 50 条</small></h2>
+      <div class="asks">
+          <div class="ask"><b>本局状态<i class="pro-tag">会员</i></b><q>我还有多久复活</q><span>号角响后才有数据，也能问钱、等级、比分。</span></div>
+          <div class="ask"><b>装备和买活差价<i class="pro-tag">会员</i></b><q>BKB 还差多少钱</q><span>已经扣掉身上的部件和现有的钱；也能问「够买活吗」。</span></div>
+          <div class="ask"><b>DOTA 知识<i class="pro-tag">会员</i></b><q>斧王对线要注意什么</q><span>来自模型自己的知识，新版本的改动可能还不知道。</span></div>
+          <div class="ask"><b>情绪陪伴<i class="pro-tag">会员</i></b><q>连跪三把好烦</q></div>
+          <div class="ask"><b>记住你<i class="pro-tag">会员</i></b><q>以后叫我小李</q><span>下次再聊她还记得。</span></div>
+          <div class="ask"><b>闲聊<i class="pro-tag">会员</i></b><q>今天有什么好玩的事吗</q></div>
+      </div>
+    </section>
+
+    <section class="s" id="auto">
+      <h2>不用问，她会说<small>对局里只挑你阵亡、等开局这种不打扰的时候</small></h2>
+      <div class="autos">
+          <div class="auto"><b>阵亡时</b><span>报下一件该出什么</span></div>
+          <div class="auto"><b>大件做好</b><span>提醒你「BKB，做好了」</span></div>
+          <div class="auto"><b>选人阶段</b><span>播报 BP 推荐</span></div>
+          <div class="auto"><b>关键时间</b><span>符、肉山等时间点提醒</span></div>
+          <div class="auto"><b>击杀、团战</b><span>说一两句反应</span></div>
+          <div class="auto"><b>一局打完</b><span>点评一两句（会员）</span></div>
+      </div>
+    </section>
+
+    <section class="s" id="cant">
+      <h2>她看不到的</h2>
+      <div class="cant">问她<q>对面买了 BKB 没</q>，她会直说看不到。敌方的装备、位置和视野，游戏官方数据接口本来就不提供，我们也不读取游戏内存。她知道的只有你自己的数据：你的钱、等级、装备、击杀和死亡。</div>
+    </section>
+
+    <section class="s" id="tips">
+      <h2>小提示</h2>
+      <ul class="tips">
+        <li><b>实时数据要开局后才有</b>：主菜单、选人阶段、赛后和观战时问钱和装备，她会告诉你开局后再问。</li>
+        <li><b>装备俗称大多能认</b>：黑皇、BKB、跳刀、羊刀、A杖都行；大根、紫苑、狂战这几个叫法一词多指，请说全名。</li>
+        <li><b>她只操作 AMEFYS 本身</b>：不会替你在游戏里按键、点击或发消息。</li>
+        <li><b>聊天和点评由人工智能生成</b>，可能出错，请自己判断。</li>
+      </ul>
+      <p class="note center">目前只在国内版的 Windows 电脑版里提供，界面语言需为中文，登录后在左侧「AI 玩伴」页打开，也可以按 Alt + Shift + C。</p>
+    </section></template>
+
+  </div>
+
+  <footer>
+    <div>© 2026 AMEFYS · 与 Valve / DOTA 2 无关联</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="about.html">关于</a>
+      <a href="credits.html">致谢</a>
+      <a href="compliance.html">合规</a>
+      <a href="licenses.html">许可</a>
+      <a href="pro.html">会员</a>
+      <a href="account.html">我的账号</a>
+      <a href="refund.html">退款</a>
+      <a href="mailto:amefys@gmail.com">联系</a>
+    </div>
+  </footer>
+
+<script>
+  (function () {
+    var ua = (navigator.userAgent || '').toLowerCase()
+    var plat = (navigator.platform || '').toLowerCase()
+    var isMac = /mac/.test(plat) || /macintosh/.test(ua)
+    var isWin = /win/.test(plat) || /windows/.test(ua)
+    var isMobile = /iphone|ipad|ipod|android/.test(ua)
+    if (isMobile) return
+    var target = isMac ? 'https://amefys.com/dl/AMEFYS.dmg'
+      : isWin ? 'https://amefys.com/dl/AMEFYS-Setup.exe' : null
+    if (!target) return
+    var nodes = document.querySelectorAll('.js-dl-cta')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('href', target)
+      nodes[i].setAttribute('data-platform', isMac ? 'mac' : 'win')
+    }
+  })();
+</script>
+
+</body></html>
