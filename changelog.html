@@ -223,13 +223,13 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 1.1.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>1.0.0 是正式版</strong>：对局复盘、自动接受比赛、国内版的 AI 玩伴都在这一版里。<strong>1.1.0 修了两处</strong>：关掉 AI 玩伴后彻底安静；AI 出装建议不再推荐你已经买过的装备。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 1.1.1</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>1.0.0 是正式版</strong>：对局复盘、自动接受比赛、国内版的 AI 玩伴都在这一版里。<strong>1.1.0 修了两处</strong>：关掉 AI 玩伴后彻底安静；AI 出装建议不再推荐你已经买过的装备。<strong>1.1.1</strong> 让自动接受的开关一直保持，不再每局自动关。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
         </div>
-        <p class="channel-note">这一版 Windows 和 macOS 都是 1.1.0。</p>
+        <p class="channel-note">这一版 Windows 和 macOS 都是 1.1.1。</p>
       </div>
       <div class="channel">
         <h3><span class="tag tag-beta">Beta</span> 暂无新包</h3>
@@ -241,9 +241,22 @@
       </div>
     </section>
 
+    <!-- ── 1.1.1 ── -->
+    <article class="release" id="v1-1-1">
+      <header><h2>1.1.1</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-28</span></header>
+      <p class="lead">自动接受匹配的开关不再自己关：只要软件还开着，就保持你设的状态。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>开关一直保持：</strong>以前进入下一局、DOTA 退出、或者连续 60 分钟没匹配到，都会把自动接受自动关掉。现在这三个都不会再关它——只有你自己关掉开关，或者退出软件，才会停。新开一局时它只是暂停扫描，不会把设置清掉。</li>
+          <li><strong>设置页的说明同步改了：</strong>写清楚「开着就一直有效，直到手动关掉或退出软件」，和实际行为一致。</li>
+        </ul>
+      </div>
+    </article>
+
     <!-- ── 1.1.0 ── -->
     <article class="release" id="v1-1-0">
-      <header><h2>1.1.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-28</span></header>
+      <header><h2>1.1.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-28</span></header>
       <p class="lead">关掉 AI 玩伴就是真的安静了；AI 出装建议不再推荐你已经买过的装备。</p>
 
       <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
