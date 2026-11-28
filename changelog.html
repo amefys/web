@@ -206,7 +206,7 @@
       <div class="eyebrow">更新日志</div>
       <h1>每个版本，改了什么</h1>
       <p>用大白话记录：新增了什么、修了什么、哪些还在 Beta 里试。稳定版会在应用内自动更新；Beta 版需要手动下载。</p>
-      <div class="updated">最近更新：2026-11-25</div>
+      <div class="updated">最近更新：2026-11-28</div>
     </div>
 
     <!-- 赞助 -->
@@ -223,27 +223,79 @@
     <!-- 两个频道 -->
     <section class="channels">
       <div class="channel">
-        <h3><span class="tag tag-stable">稳定版</span> 0.45.0</h3>
-        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>7.42 装备数据已补齐</strong>：新增装备、中立宝物、短棍回归以及价格和配方调整都已更新。<strong>出装推荐不再推已移除装备</strong>。国内版账号页的购买识别码占位也修正了。</p>
+        <h3><span class="tag tag-stable">稳定版</span> 1.1.0</h3>
+        <p>大多数玩家用这个。装好之后有新版本会自动提示更新，不用回来重新下。<strong>1.0.0 是正式版</strong>：对局复盘、自动接受比赛、国内版的 AI 玩伴都在这一版里。<strong>1.1.0 修了两处</strong>：关掉 AI 玩伴后彻底安静；AI 出装建议不再推荐你已经买过的装备。</p>
         <div class="dl">
           <a class="primary" href="https://amefys.com/dl/AMEFYS-Setup.exe">Windows 安装包</a>
           <a href="https://amefys.com/dl/AMEFYS.dmg">macOS 安装包</a>
         </div>
-        <p class="channel-note">0.45.0 目前只更新 Windows；macOS 安装包仍为 0.44.0。</p>
+        <p class="channel-note">这一版 Windows 和 macOS 都是 1.1.0。</p>
       </div>
       <div class="channel">
-        <h3><span class="tag tag-beta">Beta</span> 0.45.0-beta.0</h3>
-        <p><strong>正式版 0.45.0 已发布，优先装左边。</strong>这个 Beta 验证的是主菜单里的 BP 推荐、聊天翻译入口，以及融合模式选完人后退回悬浮窗；<strong>这些改动尚未并入 0.45.0 正式版。</strong></p>
+        <h3><span class="tag tag-beta">Beta</span> 暂无新包</h3>
+        <p><strong>0.45.0-beta.0 里的主菜单 BP / 聊天翻译入口已经并入 1.0.0</strong>，现在装稳定版就是最新的。Beta 频道下一次有验证版本时会在这里更新。</p>
         <div class="dl">
-          <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta</a>
+          <a class="primary" href="https://amefys.com/dl/beta/AMEFYS-Setup.exe">Windows Beta（旧）</a>
         </div>
-        <p class="channel-note">Beta 只发 Windows 版。macOS 请用上面的稳定版——Beta 主要是拿去实机验证 Windows 上的问题的，而每出一个 macOS 包要花掉十倍的构建额度，攒下来的额度留给正式版更划算。本次正式版也先更新 Windows。</p>
+        <p class="channel-note">Beta 只发 Windows 版；macOS 请用左边的稳定版。</p>
       </div>
     </section>
 
+    <!-- ── 1.1.0 ── -->
+    <article class="release" id="v1-1-0">
+      <header><h2>1.1.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-28</span></header>
+      <p class="lead">关掉 AI 玩伴就是真的安静了；AI 出装建议不再推荐你已经买过的装备。</p>
+
+      <div class="group"><h4><span class="dot dot-fix"></span>修复</h4>
+        <ul>
+          <li><strong>关掉玩伴就彻底安静：</strong>以前关掉 AI 玩伴的窗口后，悬浮窗里的小人会接着替她把击杀、阵亡这些话说出来。现在只要角色是关着的，就没有任何声音；「静音」仍然只控制小人自己的音量，气泡照常显示。</li>
+          <li><strong>AI 出装建议过滤已购：</strong>AI 建议现在会先刨掉你已经拥有的装备——背包里的、在信使身上或掉在地上的（90 秒内）、以及已经合成成装的那些组件。之前只是提示词里请它别推荐，模型偶尔会忽略；这次是在结果上强制过滤。</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- ── 1.0.0 ── -->
+    <article class="release" id="v1-0-0">
+      <header><h2>1.0.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-28</span></header>
+      <p class="lead">正式版：对局复盘、自动接受比赛和 AI 玩伴一起上线。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>对局复盘：</strong>历史页打开一局，能看到分路、装备到手时间、逐分钟补刀和 GPM 曲线，死亡也在时间轴上标出来。</li>
+          <li><strong>自动接受比赛：</strong>找到比赛后显示 3 秒倒计时，自动点「接受」。可以在「设置 → 实验室」随时关掉，关掉后它就是普通的弹窗提醒。</li>
+          <li><strong>AI 玩伴（国内版）：</strong>国内版 Windows 中文界面里的 AI 角色，能聊天、赛后点评、主动开口，语音由她自己的声音播报。Pro 会员每天 1,000 字，免费账号登录后可以先聊 50 条。</li>
+          <li><strong>主菜单的 BP 推荐和聊天翻译入口：</strong>就是 0.45.0-beta.0 里验证的那两个侧边栏入口，现在并进正式版。</li>
+        </ul>
+      </div>
+
+      <div class="group"><h4><span class="dot dot-new"></span>说明</h4>
+        <ul>
+          <li><strong>上线首月优惠：</strong>Pro 月付 ¥15、季付 ¥40.5、年付 ¥150，2026-12-28 起恢复原价 ¥18.8 / ¥50.8 / ¥188；已经买到的时长不受影响。</li>
+          <li><strong>版本号：</strong>这一版从 0.46 直接记为 1.0.0——功能已经齐了，不再按 0.x 发。</li>
+        </ul>
+      </div>
+
+      <div class="callout">同日还有一个 0.46.0 的过渡版本，内容已经并入 1.0.0；装了 0.46.0 的用户会自动升到 1.1.0。</div>
+    </article>
+
+    <!-- ── 0.46.0 ── -->
+    <article class="release" id="v0-46-0">
+      <header><h2>0.46.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-28</span></header>
+      <p class="lead">当天的过渡版本：AI 玩伴、对局复盘、自动接受比赛第一次发布。</p>
+
+      <div class="group"><h4><span class="dot dot-new"></span>新增</h4>
+        <ul>
+          <li><strong>AI 玩伴（国内版 beta）：</strong>聊天、赛后点评、主动开口和语音播报。</li>
+          <li><strong>对局复盘与自动接受比赛：</strong>同上，0.46.0 已经带上。</li>
+        </ul>
+      </div>
+
+      <div class="callout">它的内容已并入 1.0.0；装 0.46.0 的用户会自动升到 1.1.0。</div>
+    </article>
+
     <!-- ── 0.45.0 ── -->
     <article class="release" id="v0-45-0">
-      <header><h2>0.45.0</h2><span class="tag tag-stable">稳定版</span><span class="tag tag-latest">当前稳定版</span><span class="date">2026-11-24</span></header>
+      <header><h2>0.45.0</h2><span class="tag tag-stable">稳定版</span><span class="date">2026-11-24</span></header>
       <p class="lead">补齐 7.42 的装备、价格和配方，出装推荐不再出现已经移除的装备。</p>
 
       <div class="group"><h4><span class="dot dot-new"></span>改进</h4>
